@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "vetwebapi"
+version = "0.1.0"
+description = ""
+authors = ["HubPavKul1 <kulpv@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.105.0"
+sqlalchemy = "^2.0.23"
+uvicorn = "^0.24.0.post1"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.13.0"
+pydantic = "^2.5.2"
+pydantic-settings = "^2.1.0"
+python-dotenv = "^1.0.0"
+asyncpg = "^0.29.0"
+python-multipart = "^0.0.6"
+python-slugify = "^8.0.1"
+werkzeug = "^3.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.1.0"
+pytest = "^7.4.3"
+black = "^23.12.0"
+isort = "^5.13.2"
+factory-boy = "^3.3.0"
+faker = "^21.0.0"
+pytest-asyncio = "^0.23.2"
+flake8-bugbear = "^23.12.2"
+flake8-pie = "^0.16.0"
+mypy = "^1.7.1"
+mypy-extensions = "^1.0.0"
+pytest-dotenv = "^0.5.2"
+pytest-cov = "^4.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.mypy]
+exclude = ".venv, env/, venv/, __pycache__/"
+plugins = ["sqlalchemy.ext.mypy.plugin", "pydantic.mypy" ]
+ignore_missing_imports = true
+
+
+[tool.black]
+exclude = ".venv, env/, venv/, __pycache__/, .toml"
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311"]
+skip-magic-trailing-comma = true

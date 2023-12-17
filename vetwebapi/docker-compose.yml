@@ -1,0 +1,59 @@
+version: '3.3'
+services:
+  # app:
+  #   container_name: "vetwebapi"
+  #   build: .
+  #   stop_signal: SIGKILL
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "8000:8000"
+  #   # volumes:
+  #   #   - ./blog_project/images/:/blog_project/images:rw
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - network
+
+  # nginx:
+  #   container_name: "nginx"
+  #   restart: always
+  #   build: ./blog_project/frontend
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./blog_project/images:/usr/share/nginx/html/images:rw
+
+  #   networks:
+  #     - network
+  #   depends_on:
+  #     - app
+
+  db:
+    image: postgres:15.3-alpine3.18
+    container_name: "db"
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    command: postgres -c log_destination=stderr -c logging_collector=on -c log_directory='logs'
+    # volumes:
+    #   - ./db/:/var/lib/postgresql/data
+    networks:
+      - network
+  
+  # test_db:
+  #   image: postgres:15.3-alpine3.18
+  #   container_name: "test_db"
+  #   restart: always
+  #   env_file:
+  #     - ./blog_project/.test.env
+  #   ports:
+  #     - "5433:5432"
+  #   networks:
+  #     - network
+
+networks:
+  network:
+    driver: bridge
