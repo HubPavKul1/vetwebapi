@@ -6,14 +6,10 @@ from ..base import Base
 
 class City(Base):
     """Класс город"""
+
     __tablename__ = "cities"
-    
+
     name: Mapped[str] = mapped_column(String(100))
-    
+
     def __repr__(self):
         return self.name
-    
-
-
-
-

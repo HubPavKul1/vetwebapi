@@ -1,3 +1,3 @@
-__all__ = ("Base")
+__all__ = "Base"
 
 from .base import Base
