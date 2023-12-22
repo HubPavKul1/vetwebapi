@@ -167,7 +167,11 @@ PS D:\VscodeProjects\vetwebapi\vetwebapi> poetry shell
 (vetwebapi-py3.11) PS D:\VscodeProjects\vetwebapi\vetwebapi> alembic init migrations
 ```
 
-### Настройка проекта и алембик
+* ### Создадим в папке vetwebapi/vetwebapi/ пакеты: api_v1/, core/, utils/
+* ### В пакет core/ добавим пакет models/, файлы: settings.py, database.py
+* ### В пакет models/ добавим папки с моделями проекта: animals/, companies/, drugs/  
+
+## Настройка проекта и алембик
 ```python
 # Файл /vetwebapi/core/settings.py
 
@@ -474,6 +478,181 @@ if context.is_offline_mode():
 else:
     run_migrations_online()
 ```
+
+## Модели проекта
+### models/companies/
+```python
+# models/companies/address.py
+
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from vetwebapi.core.models.base import Base
+
+if TYPE_CHECKING:
+    from .city import City
+    from .company import Company
+    from .street import Street
+
+
+class Address(Base):
+    """Класс Адрес"""
+
+    __tablename__ = "addresses"
+
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    city_id: Mapped[int] = mapped_column(ForeignKey("cities.id", ondelete="CASCADE"))
+    street_id: Mapped[int] = mapped_column(ForeignKey("streets.id", ondelete="CASCADE"))
+    house_number: Mapped[str]
+    phone_number1: Mapped[str]
+    phone_number2: Mapped[str | None]
+
+    company: Mapped["Company"] = relationship(back_populates="addresses")
+    city: Mapped["City"] = relationship(back_populates="addresses")
+    street: Mapped["Street"] = relationship(back_populates="addresses")
+```
+```python
+# models/companies/city.py
+
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
+
+from vetwebapi.core.models.base import Base
+
+
+class City(Base):
+    """Класс город"""
+
+    __tablename__ = "cities"
+
+    name: Mapped[str] = mapped_column(String(100))
+
+    def __repr__(self):
+        return self.name
+```
+```python
+
+# models/companies/company.py
+
+from slugify import slugify
+from sqlalchemy import Boolean
+from sqlalchemy.orm import Mapped, mapped_column
+
+from vetwebapi.core.models.base import Base
+
+
+class Company(Base):
+    """класс Компания"""
+
+    __tablename__ = "companies"
+
+    full_name: Mapped[str]
+    short_name: Mapped[str]
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+
+    @property
+    def company_slug(self):
+        return slugify(self.short_name)
+
+    def __repr__(self) -> str:
+        return self.short_name
+```
+
+```python
+
+# models/companies/employee.py
+
+from typing import TYPE_CHECKING
+
+
+from slugify import slugify
+from sqlalchemy import Boolean, String, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from vetwebapi.core.models.base import Base
+from vetwebapi.utils import utils
+
+if TYPE_CHECKING:
+    from .company import Company
+    from .position import Position
+
+
+class Employee(Base):
+    """класс Работник"""
+
+    __tablename__ = "employees"
+    
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    position_id: Mapped[int] = mapped_column(ForeignKey("positions.id", ondelete="CASCADE"))
+    lastname: Mapped[str] = mapped_column(String(50))
+    firstname: Mapped[str] = mapped_column(String(30))
+    patronymic: Mapped[str] = mapped_column(String(100))
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    
+    company: Mapped["Company"] = relationship(back_populates="employees")
+    position: Mapped["Position"] = relationship(back_populates="employees")
+    
+    @property
+    def fullname(self):
+        return utils.get_full_name(lastname=self.lastname, firstname=self.firstname, patronymic=self.patronymic,)
+    
+    @property
+    def employee_slug(self):
+        return slugify(utils.get_full_name(lastname=self.lastname, firstname=self.firstname, patronymic=self.patronymic,))
+```
+
+```python
+# models/companies/position.py 
+
+
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
+
+from vetwebapi.core.models.base import Base
+
+
+class Position(Base):
+    """Класс должность"""
+
+    __tablename__ = "positions"
+
+    name: Mapped[str] = mapped_column(String(100))
+
+    def __repr__(self):
+        return self.name
+```
+```python
+
+# models/companies/street.py 
+
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from vetwebapi.core.models.base import Base
+
+if TYPE_CHECKING:
+    from .city import City
+
+
+class Street(Base):
+    """Класс улица"""
+
+    __tablename__ = "streets"
+
+    city_id: Mapped[int] = mapped_column(ForeignKey("cities.id", ondelete="CASCADE"))
+    name: Mapped[str] = mapped_column(String(250))
+
+    city: Mapped["City"] = relationship(back_populates="streets")
+
+    def __repr__(self):
+        return self.name
+```
+
+
 
 
 

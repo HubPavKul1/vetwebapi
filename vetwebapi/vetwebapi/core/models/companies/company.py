@@ -1,7 +1,8 @@
 from slugify import slugify
-from sqlalchemy.orm import Mapped
+from sqlalchemy import Boolean
+from sqlalchemy.orm import Mapped, mapped_column
 
-from ..base import Base
+from vetwebapi.core.models.base import Base
 
 
 class Company(Base):
@@ -11,6 +12,7 @@ class Company(Base):
 
     full_name: Mapped[str]
     short_name: Mapped[str]
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     @property
     def company_slug(self):
