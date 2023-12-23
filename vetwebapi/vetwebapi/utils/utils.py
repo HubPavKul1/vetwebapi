@@ -26,7 +26,7 @@ async def add_first_district(session: AsyncSession) -> int:
 
 async def add_first_city(session: AsyncSession) -> int:
     """Добавляем первый город в базу данных"""
-    district_id = add_first_district(session=session)
+    district_id = await add_first_district(session=session)
     first_city = City(district_id=district_id, name="Иваново")
     session.add(first_city)
     await session.commit()

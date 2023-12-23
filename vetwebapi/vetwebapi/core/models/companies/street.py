@@ -7,6 +7,7 @@ from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
     from .city import City
+    from .address import Address
 
 
 class Street(Base):
@@ -18,6 +19,7 @@ class Street(Base):
     name: Mapped[str] = mapped_column(String(250))
 
     city: Mapped["City"] = relationship(back_populates="streets")
+    addresses: Mapped[list["Address"]] = relationship(back_populates="street")
 
     def __repr__(self):
         return self.name
