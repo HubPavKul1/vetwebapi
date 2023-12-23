@@ -23,4 +23,4 @@ app.add_middleware(
 @app.get("/")
 async def start(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
     await utils.fill_street_table(session=session)
-    return {"message": "Hello Dude!"}
+    return {"message": "Аll streets have been added!"}

@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class Employee(Base):
-    """класс Работник"""
+    """Класс Работник"""
 
     __tablename__ = "employees"
     
