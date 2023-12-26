@@ -1,4 +1,4 @@
-__all__ = ("Base", "Address", "City", "Company", "Employee", "Position", "Street", "Region", "District")
+__all__ = ("Base", "Address", "City", "Company", "Employee", "Position", "Street", "Region", "District", "User", "Role")
 
 from .base import Base
 from .companies.address import Address
@@ -9,3 +9,5 @@ from .companies.position import Position
 from .companies.street import Street
 from .companies.region import Region
 from .companies.district import District
+from .users.user import User
+from .users.role import Role
