@@ -1,6 +1,5 @@
 from typing import TYPE_CHECKING
 
-
 from slugify import slugify
 from sqlalchemy import Boolean, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -35,3 +34,6 @@ class Employee(Base):
     @property
     def employee_slug(self):
         return slugify(utils.get_full_name(lastname=self.lastname, firstname=self.firstname, patronymic=self.patronymic,))
+    
+    def __repr__(self) -> str:
+        return self.fullname

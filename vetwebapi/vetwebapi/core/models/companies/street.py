@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Street(Base):
-    """Класс улица"""
+    """Класс Улица"""
 
     __tablename__ = "streets"
 

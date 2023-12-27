@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from .address import Address
 
 class Region(Base):
-    """Класс область"""
+    """Класс Область"""
 
     __tablename__ = "regions"
 

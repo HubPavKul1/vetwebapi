@@ -19,6 +19,7 @@ asyncpg = "^0.29.0"
 python-multipart = "^0.0.6"
 python-slugify = "^8.0.1"
 werkzeug = "^3.0.1"
+fastapi-users = {extras = ["sqlalchemy"], version = "^12.1.2"}
 
 
 [tool.poetry.group.dev.dependencies]
