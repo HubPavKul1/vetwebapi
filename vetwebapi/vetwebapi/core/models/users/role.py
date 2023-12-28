@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 class Role(Base):
     __tablename__ = "roles"
     
-    name: str
+    name: Mapped[str]
     
     users: Mapped[list["User"]] = relationship(back_populates="role")
     

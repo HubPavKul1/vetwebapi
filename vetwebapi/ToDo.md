@@ -768,7 +768,8 @@ from .companies.district import District
 ```
 
 # Аутентификация пользователя
-## Библиотека [FastAPI Users](https://fastapi-users.github.io/fastapi-users/11.0/), [JWT](https://jwt.io/introduction)
+## Библиотека [FastAPI Users](https://fastapi-users.github.io/fastapi-users/11.0/)
+## Сайты [JWT](https://jwt.io/introduction), [Epoch Converter](https://www.epochconverter.com/)
 
 ### Установим библиотеку FastAPI Users через poetry
 ```

@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from vetwebapi.core.database import db_manager
 
 from . import crud
-from .schemas import CompanyIn, CompanyOut, Companies, SuccessMessage
+from .schemas import CompanyIn, CompanyOut, SuccessMessage
 from .dependencies import company_by_id
 
 router = APIRouter(tags=["Companies"])

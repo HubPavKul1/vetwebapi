@@ -3,7 +3,18 @@ from vetwebapi.core.models.companies.region import Region
 from vetwebapi.core.models.companies.district import District
 from vetwebapi.core.models.companies.city import City
 from vetwebapi.core.models.companies.street import Street
+from vetwebapi.core.models.users.role import Role
 
+
+async def add_start_roles(session: AsyncSession):
+    """Добавляем роль пользователь и админ в базу данных"""
+    roles = []
+    user = Role(name="user")
+    admin = Role(name="admin")
+    roles.append(user)
+    roles.append(admin)
+    session.add_all(roles)
+    await session.commit()
 
 async def add_first_region(session: AsyncSession) -> int:
     """Добавляем Ивановскую область в базу данных"""

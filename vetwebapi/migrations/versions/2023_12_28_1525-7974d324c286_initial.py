@@ -1,8 +1,8 @@
-"""first_migration
+"""initial
 
-Revision ID: 7f1e5c3a5712
+Revision ID: 7974d324c286
 Revises: 
-Create Date: 2023-12-23 20:51:25.512728
+Create Date: 2023-12-28 15:25:12.358214
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "7f1e5c3a5712"
+revision: str = "7974d324c286"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -37,6 +37,12 @@ def upgrade() -> None:
     op.create_table(
         "regions",
         sa.Column("name", sa.String(length=100), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "roles",
+        sa.Column("name", sa.String(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -67,6 +73,22 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id"),
     )
+    op.create_table(
+        "users",
+        sa.Column("role_id", sa.Integer(), nullable=False),
+        sa.Column("username", sa.String(length=10), nullable=False),
+        sa.Column("email", sa.String(length=320), nullable=True),
+        sa.Column("hashed_password", sa.String(length=1024), nullable=False),
+        sa.Column("is_active", sa.Boolean(), nullable=False),
+        sa.Column("is_superuser", sa.Boolean(), nullable=False),
+        sa.Column("is_verified", sa.Boolean(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["role_id"], ["roles.id"], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint("hashed_password"),
+        sa.UniqueConstraint("username"),
+    )
+    op.create_index(op.f("ix_users_email"), "users", ["email"], unique=True)
     op.create_table(
         "cities",
         sa.Column("district_id", sa.Integer(), nullable=True),
@@ -123,8 +145,11 @@ def downgrade() -> None:
     op.drop_table("addresses")
     op.drop_table("streets")
     op.drop_table("cities")
+    op.drop_index(op.f("ix_users_email"), table_name="users")
+    op.drop_table("users")
     op.drop_table("employees")
     op.drop_table("districts")
+    op.drop_table("roles")
     op.drop_table("regions")
     op.drop_table("positions")
     op.drop_table("companies")

@@ -12,7 +12,9 @@ if TYPE_CHECKING:
     from .role import Role
 
 class User(Base):
-    role: Mapped[int] = mapped_column(ForeignKey("roles.id", ondelete="CASCADE"))
+    __tablename__ = "users"
+    
+    role_id: Mapped[int] = mapped_column(ForeignKey("roles.id", ondelete="CASCADE"))
     username: Mapped[str] = mapped_column(String(10), unique=True)
     email: Mapped[str | None] = mapped_column(String(320), unique=True, index=True)
     hashed_password: Mapped[str] = mapped_column(String(1024), unique=True)
