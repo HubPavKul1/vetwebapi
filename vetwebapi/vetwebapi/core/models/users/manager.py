@@ -1,7 +1,7 @@
 from typing import Optional
 
 from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, IntegerIDMixin, schemas, models, exceptions
+from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
 from .user import User, get_user_db
 
@@ -24,13 +24,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     #     self, user: User, token: str, request: Optional[Request] = None
     # ):
     #     print(f"Verification requested for user {user.id}. Verification token: {token}")
-    
-    
+
     async def create(
-        self,
-        user_create: schemas.UC,
-        safe: bool = False,
-        request: Optional[Request] = None,
+        self, user_create: schemas.UC, safe: bool = False, request: Optional[Request] = None
     ) -> models.UP:
         """
         Create a user in database.
@@ -52,9 +48,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             raise exceptions.UserAlreadyExists()
 
         user_dict = (
-            user_create.create_update_dict()
-            if safe
-            else user_create.create_update_dict_superuser()
+            user_create.create_update_dict() if safe else user_create.create_update_dict_superuser()
         )
         password = user_dict.pop("password")
         user_dict["hashed_password"] = self.password_helper.hash(password)

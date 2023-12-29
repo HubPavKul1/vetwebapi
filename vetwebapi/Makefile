@@ -12,10 +12,10 @@ test:
 	pytest
 
 lintmain:
-	black --check --diff main.py
-	isort --check-only --profile black main.py
-	flake8 main.py
-	mypy main.py
+	black --check --diff vetwebapi/main.py
+	isort --check-only --profile black vetwebapi/main.py
+	flake8 vetwebapi/main.py
+	mypy vetwebapi/main.py
 
 lintapi:
 	black --check --diff api_v1/
@@ -36,12 +36,12 @@ linttests:
 	mypy tests/
 
 lintfixmain:
-	black main.py
-	isort --profile black main.py
+	black vetwebapi/main.py
+	isort --profile black vetwebapi/main.py
 
 lintfixapi:
-	black api_v1/
-	isort --profile black api_v1/
+	black vetwebapi/api_v1/
+	isort --profile black vetwebapi/api_v1/
 
 lintfixcore:
 	black vetwebapi/core/

@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from vetwebapi.core.models.companies.company import Company
+
 from .schemas import CompanyIn
 
 
@@ -13,3 +14,8 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     await session.commit()
     await session.refresh(new_company)
     return new_company
+
+
+async def read_companies(session: AsyncSession) -> list[Company]:
+    stmt = select(Company)
+    return list(await session.scalars(stmt))

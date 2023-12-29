@@ -6,10 +6,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
-    from .region import Region
-    from .district import District
     from .city import City
     from .company import Company
+    from .district import District
+    from .region import Region
     from .street import Street
 
 
@@ -32,6 +32,6 @@ class Address(Base):
     district: Mapped["District"] = relationship(back_populates="addresses")
     city: Mapped["City"] = relationship(back_populates="addresses")
     street: Mapped["Street"] = relationship(back_populates="addresses")
-    
+
     def __repr__(self) -> str:
         return f"{self.city.name}, {self.street.name}, {self.house_number}"

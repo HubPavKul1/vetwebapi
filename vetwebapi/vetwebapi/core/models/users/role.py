@@ -11,12 +11,10 @@ if TYPE_CHECKING:
 
 class Role(Base):
     __tablename__ = "roles"
-    
+
     name: Mapped[str]
-    
+
     users: Mapped[list["User"]] = relationship(back_populates="role")
-    
+
     def __repr__(self) -> str:
         return self.name
-    
-    
