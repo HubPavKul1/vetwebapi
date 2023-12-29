@@ -4,6 +4,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
+from vetwebapi.api_v1.auth.dependencies import current_user
+from vetwebapi.core.models import User
 
 from . import crud
 from .schemas import CompanyIn, CompanyOut, SuccessMessage
@@ -12,7 +14,7 @@ from .dependencies import company_by_id
 router = APIRouter(tags=["Companies"])
 
 
-@router.post("/", response_model=CompanyOut, status_code=201)
+@router.post("/", response_model=CompanyOut, status_code=201, dependencies=[Depends(current_user)])
 async def create_company_route(
     body: CompanyIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

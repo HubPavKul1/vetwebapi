@@ -1,4 +1,4 @@
-__all__ = ("Base", "Address", "City", "Company", "Employee", "Position", "Street", "Region", "District", "User", "Role")
+__all__ = ("Base", "Address", "City", "Company", "Employee", "Position", "Street", "Region", "District", "User", "Role", "auth_backend", "get_user_manager")
 
 from .base import Base
 from .companies.address import Address
@@ -11,3 +11,5 @@ from .companies.region import Region
 from .companies.district import District
 from .users.user import User
 from .users.role import Role
+from .users.auth import auth_backend
+from .users.manager import get_user_manager

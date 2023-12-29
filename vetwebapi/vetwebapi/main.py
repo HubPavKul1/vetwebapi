@@ -16,10 +16,10 @@ from vetwebapi.api_v1.auth.schemas import UserCreate, UserRead
 
 app = FastAPI()
 
-fastapi_users = FastAPIUsers[User, int](
-    get_user_manager,
-    [auth_backend],
-)
+# fastapi_users = FastAPIUsers[User, int](
+#     get_user_manager,
+#     [auth_backend],
+# )
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,17 +32,17 @@ app.add_middleware(
 
 app.include_router(router_v1, prefix=settings.api_v1_prefix)
 
-app.include_router(
-    fastapi_users.get_auth_router(auth_backend),
-    prefix="/auth/jwt",
-    tags=["auth"],
-)
+# app.include_router(
+#     fastapi_users.get_auth_router(auth_backend),
+#     prefix="/auth/jwt",
+#     tags=["auth"],
+# )
 
-app.include_router(
-    fastapi_users.get_register_router(UserRead, UserCreate),
-    prefix="/auth",
-    tags=["auth"],
-)
+# app.include_router(
+#     fastapi_users.get_register_router(UserRead, UserCreate),
+#     prefix="/auth",
+#     tags=["auth"],
+# )
 
 
 
