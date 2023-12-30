@@ -12,7 +12,7 @@ from . import crud
 async def company_by_id(
     company_id: Annotated[int, Path()],
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Company:
+) -> Company | None:
     """Получаем объект Компании по id"""
 
     company = await crud.read_company_by_id(session=session, company_id=company_id)
