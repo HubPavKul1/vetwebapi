@@ -8,7 +8,15 @@ from vetwebapi.core.models import Company
 
 from . import crud
 from .dependencies import company_by_id
-from .schemas import Companies, CompanyIn, CompanyOut, CompanySchema, SuccessMessage
+from .schemas import (
+    Companies,
+    CompanyIn,
+    CompanyOut,
+    CompanySchema,
+    SuccessMessage,
+    CompanyDetail,
+    AddressSchema,
+)
 
 router = APIRouter(tags=["Companies"])
 
@@ -47,8 +55,39 @@ async def delete_company(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.delete_tweet(session=session, company=company)
+        await crud.delete_company(session=session, company=company)
         return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.post("/{company_id}/address", response_model=SuccessMessage)
+async def create_address_route(
+    body: AddressSchema,
+    company: Company = Depends(company_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.create_address(session=session, body=body, company=company)
+        return SuccessMessage
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/{company_id}", response_model=CompanyDetail)
+async def get_company_detail(
+    company: Company = Depends(company_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, CompanyDetail]:
+    try:
+        address = await crud.read_address(session=session, company=company)
+        return CompanyDetail(company, address=address)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

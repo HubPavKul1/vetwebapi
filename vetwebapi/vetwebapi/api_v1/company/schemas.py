@@ -5,28 +5,27 @@ class BaseIn(BaseModel):
     name: str
 
 
-class RegionIn(BaseIn):
+class RegionSchema(BaseIn):
     pass
 
 
-class DistrictIn(BaseIn):
-    region: RegionIn
+class DistrictSchema(BaseIn):
+    region: RegionSchema
 
 
-class CityIn(BaseIn):
-    district: DistrictIn
+class CitySchema(BaseIn):
+    district: DistrictSchema
 
 
-class StreetIn(BaseIn):
-    city: CityIn
+class StreetSchema(BaseIn):
+    city: CitySchema
 
 
 class AddressSchema(BaseModel):
-    city: CityIn
-    street: StreetIn
+    street: StreetSchema
     house_number: str
     phone_number1: str
-    phone_number2: str | None
+    phone_number2: str | None = ""
 
 
 class CompanyIn(BaseModel):
@@ -36,7 +35,6 @@ class CompanyIn(BaseModel):
 
 class CompanySchema(CompanyIn):
     id: int
-    is_active: bool
 
     model_config = ConfigDict(from_attributes=True)
 
