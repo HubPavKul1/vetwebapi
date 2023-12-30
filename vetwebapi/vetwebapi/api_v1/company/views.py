@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
+from vetwebapi.core.models import Company
 
 from . import crud
 from .dependencies import company_by_id
@@ -40,16 +41,16 @@ async def get_companies(
         )
 
 
-# @router.delete("/{company_id}", response_model=SuccessMessage)
-# async def delete_company(
-#     company: Depends(company_by_id),
-#     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-# ) -> Union[dict, SuccessMessage]:
-#     try:
-#         await crud.delete_tweet(session=session, company=company)
-#         return SuccessMessage()
-#     except Exception:
-#         raise HTTPException(
-#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#             detail={"result": False, "error_message": "Internal Server Error"},
-#         )
+@router.delete("/{company_id}", response_model=SuccessMessage)
+async def delete_company(
+    company: Company = Depends(company_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_tweet(session=session, company=company)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
