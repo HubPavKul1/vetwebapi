@@ -26,7 +26,7 @@ async def create_address(session: AsyncSession, body: AddressSchema, company: Co
     region = body.street.city.district.region.name
     region_obj = await read_region_by_name(session=session, region_name=region)
 
-    print(region_obj, district_obj, city_obj, street)
+    print(region_obj, district_obj, city_obj, street_obj)
 
 
 async def read_companies(session: AsyncSession) -> list[Company]:

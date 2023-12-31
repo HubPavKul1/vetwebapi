@@ -6,7 +6,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
-    from .address import Address
     from .district import District
     from .street import Street
 
@@ -21,7 +20,6 @@ class City(Base):
 
     district: Mapped["District"] = relationship(back_populates="cities")
     streets: Mapped[list["Street"]] = relationship(back_populates="city")
-    addresses: Mapped[list["Address"]] = relationship(back_populates="city")
 
     def __repr__(self):
         return self.name
