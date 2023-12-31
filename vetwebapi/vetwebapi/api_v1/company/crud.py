@@ -43,8 +43,11 @@ async def read_company_by_id(session: AsyncSession, company_id: int) -> Company 
     return await session.get(Company, company_id)
 
 
-async def read_address(session: AsyncSession, company: Company) -> Address:
-    pass
+async def read_address(session: AsyncSession, company: Company) -> Address | None:
+    stmt = select(Address).where(Address.company_id == company.id)
+    address = await session.scalar(stmt)
+    print(address)
+    return address
 
 
 async def read_region_by_name(session: AsyncSession, region_name: str) -> Region | None:

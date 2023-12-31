@@ -40,7 +40,7 @@ class CompanySchema(CompanyIn):
 
 
 class CompanyDetail(CompanySchema):
-    address: AddressSchema
+    address: AddressSchema | None
     
 
 

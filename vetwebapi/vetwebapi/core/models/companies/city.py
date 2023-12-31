@@ -19,7 +19,7 @@ class City(Base):
     name: Mapped[str] = mapped_column(String(100))
 
     district: Mapped["District"] = relationship(back_populates="cities")
-    streets: Mapped[list["Street"]] = relationship(back_populates="city")
+    streets: Mapped[list["Street"]] = relationship(back_populates="city", cascade="all, delete")
 
     def __repr__(self):
         return self.name
