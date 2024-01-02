@@ -9,7 +9,7 @@ from .schemas import CompanyIn, AddressSchema
 
 
 async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
-    new_company = Company(full_name=body.full_name, short_name=body.short_name)
+    new_company = Company(**body.model_dump())
     session.add(new_company)
     await session.commit()
     await session.refresh(new_company)
@@ -65,6 +65,6 @@ async def read_city_by_name(session: AsyncSession, city_name: str) -> City | Non
     return await session.scalar(stmt)
 
 
-async def read_street_by_name(session: AsyncSession, street_name: str) -> Street| None:
+async def read_street_by_name(session: AsyncSession, street_name: str) -> Street | None:
     stmt = select(Street).where(Street.name.ilike(street_name))
     return await session.scalar(stmt)

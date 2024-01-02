@@ -18,7 +18,7 @@ from .schemas import (
     AddressSchema,
 )
 
-router = APIRouter(tags=["Companies"])
+router = APIRouter(prefix="/companies", tags=["Companies"])
 
 
 @router.post("/", response_model=CompanyOut, status_code=201)
@@ -64,7 +64,7 @@ async def delete_company(
         )
 
 
-@router.post("/{company_id}/address", response_model=SuccessMessage)
+@router.post("/{company_id}/address", response_model=SuccessMessage, status_code=201)
 async def create_address_route(
     body: AddressSchema,
     company: Company = Depends(company_by_id),

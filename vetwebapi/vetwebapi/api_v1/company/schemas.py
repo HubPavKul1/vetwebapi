@@ -25,7 +25,7 @@ class AddressSchema(BaseModel):
     street: StreetSchema
     house_number: str
     phone_number1: str
-    phone_number2: str | None = ""
+    phone_number2: str | None = None
 
 
 class CompanyIn(BaseModel):
