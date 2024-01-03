@@ -1,0 +1,45 @@
+{% extends './base.html' %}
+{% block content %}
+<div id="colorlib-services">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+					<h2>Предприятия</h2>
+					<p><a class="btn btn-primary btn-lg" href="">Добавить предприятие</a>
+                                    </p>
+				</div>
+			</div>
+			<div class="row">
+				{% if companies %}
+				{% for company in companies %}
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+						<div class="desc">
+							<h3><a href="">{{company.short_name}}</a></h3>
+							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
+				<div class="col-md-4 animate-box">
+					<div class="services">
+						<span class="icon">
+							<i class="flaticon-healthy-1"></i>
+						</span>
+						<div class="desc">
+							<h3><a href="">No Companies</a></h3>
+							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas</p>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+
+
+			</div>
+		</div>
+</div>
+{% endblock %}

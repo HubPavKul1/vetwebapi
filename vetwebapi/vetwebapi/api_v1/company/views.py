@@ -87,7 +87,12 @@ async def get_company_detail(
 ) -> Union[dict, CompanyDetail]:
     try:
         address = await crud.read_address(session=session, company=company)
-        return CompanyDetail(id=company.id, full_name=company.full_name, short_name=company.short_name, address=address)
+        return CompanyDetail(
+            id=company.id,
+            full_name=company.full_name,
+            short_name=company.short_name,
+            address=address,
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

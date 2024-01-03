@@ -1,4 +1,7 @@
 from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
 
 from pydantic_settings import BaseSettings
 
@@ -7,6 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
+    templates: Jinja2Templates = Jinja2Templates(
+        directory=f"{BASE_DIR}/vetwebapi/frontend/templates"
+    )
+    staticfiles: StaticFiles = StaticFiles(directory=f"{BASE_DIR}/vetwebapi/frontend/static")
 
     db_user: str
     db_pass: str
