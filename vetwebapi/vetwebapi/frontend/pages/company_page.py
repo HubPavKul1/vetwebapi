@@ -11,7 +11,7 @@ router = APIRouter(prefix="/companies")
 
 @router.get("/", response_class=HTMLResponse)
 async def get_companies_page(request: Request, companies: Companies = Depends(get_companies)):
-    print("****" * 20)
-    print("Companies: ", companies.companies)
-
+    
     return settings.templates.TemplateResponse("/companies/companies.html", {"request": request, "companies": companies.companies})
+
+
