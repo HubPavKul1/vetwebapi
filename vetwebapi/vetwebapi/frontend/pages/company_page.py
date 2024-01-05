@@ -25,7 +25,7 @@ async def get_add_company_form(request: Request):
 @router.post("/add_company", response_class=HTMLResponse)
 async def post_add_company_form(request: Request, full_name: Annotated[str, Form(...)], short_name: Annotated[str, Form(...)]):
     new_company_schema = CompanyIn(full_name=full_name, short_name=short_name)
-    result = create_company_route(body=new_company_schema)
+    result = await create_company_route(body=new_company_schema)
     if result["result"] == True:
         return RedirectResponse("/pages/companies")
     
