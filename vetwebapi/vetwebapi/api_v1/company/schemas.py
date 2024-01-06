@@ -35,7 +35,7 @@ class CompanyIn(BaseModel):
 
 class CompanySchema(CompanyIn):
     id: int
-
+ 
     model_config = ConfigDict(from_attributes=True)
 
 
