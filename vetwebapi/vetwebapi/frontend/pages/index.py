@@ -6,6 +6,6 @@ from vetwebapi.core.settings import settings
 router = APIRouter()
 
 
-@router.get("/", response_class=HTMLResponse, name="home")
-async def get_index_page(request: Request):
+@router.get("/home", response_class=HTMLResponse)
+async def home(request: Request):
     return settings.templates.TemplateResponse("index.html", {"request": request})
