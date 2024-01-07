@@ -13,6 +13,8 @@
 							<div class="col-md-12">
 								<div class="blog-desc col-paddingbottom">
 									<h2><a href="#">{{ company.full_name }}</a></h2>
+									<p><a class="btn btn-primary btn-lg" href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес</a>
+									</p>
 									<div class="post-meta">
 										<span><a href="#">Health</a></span>
 										<span>01 Feb. 2017</span>

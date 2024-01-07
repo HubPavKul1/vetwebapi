@@ -68,3 +68,23 @@ async def read_city_by_name(session: AsyncSession, city_name: str) -> City | Non
 async def read_street_by_name(session: AsyncSession, street_name: str) -> Street | None:
     stmt = select(Street).where(Street.name.ilike(street_name))
     return await session.scalar(stmt)
+
+
+async def read_regions(session: AsyncSession) -> list[Region]:
+    stmt = select(Region)
+    return list(await session.scalars(stmt))
+
+
+async def read_districts(session: AsyncSession) -> list[District]:
+    stmt = select(District)
+    return list(await session.scalars(stmt))
+
+
+async def read_cities(session: AsyncSession) -> list[City]:
+    stmt = select(City)
+    return list(await session.scalars(stmt))
+
+
+async def read_streets(session: AsyncSession) -> list[Street]:
+    stmt = select(Street)
+    return list(await session.scalars(stmt))

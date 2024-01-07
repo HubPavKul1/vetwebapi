@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 animate-box">
+            <h3>Добавить адрес</h3>
+                <form class="contact-form" method="post" action="{{url_for('add_address', company_id='company.id')}}">
+                    <div class="form-group">
+                        <label for="name" class="">Выберите регион</label>
+                        <select name="region">
+                            {% for region in regions%}
+                            <option value="{{region.id}}">{{region.name}}</option>
+                            {% endfor %}     
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="">Выберите район</label>
+                        <select name="district">
+                            {% for district in districts%}
+                            <option value="{{district.id}}">{{district.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="">Выберите город</label>
+                        <select id="" name="city">
+                            {% for city in cities%}
+                            <option value="{{city.id}}">{{city.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="">Выберите улицу</label>
+                        <select name="street">
+                            {% for street in streets%}
+                            <option value="{{street.id}}">{{street.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="btn-submit" class="btn btn-primary btn-send-message btn-md" value="Зарегистрировать">
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+<p></p>
+
+{% endblock %}

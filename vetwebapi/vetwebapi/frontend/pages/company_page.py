@@ -44,3 +44,34 @@ async def company_detail(request: Request, company: CompanyDetail = Depends(get_
     return settings.templates.TemplateResponse(
         "/companies/company_detail.html", {"request": request, "company": company}
     )
+
+
+@router.get("/add_address/{company_id}", response_class=HTMLResponse)
+async def add_address(
+    request: Request, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+):
+    regions = await crud.read_regions(session=session)
+    districts = await crud.read_districts(session=session)
+    cities = await crud.read_cities(session=session)
+    streets = await crud.read_streets(session=session)
+    return settings.templates.TemplateResponse(
+        "companies/add_address.html",
+        {
+            "request": request,
+            "regions": regions,
+            "districts": districts,
+            "cities": cities,
+            "streets": streets,
+        },
+    )
+
+
+@router.post("/add_address/{company_id}")
+async def add_address(
+    request: Request, 
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    data = await request.form()
+    print("*****" * 20)
+    print("data", data)
+    return RedirectResponse(url="/pages/companies/company_detail/1", status_code=302)
