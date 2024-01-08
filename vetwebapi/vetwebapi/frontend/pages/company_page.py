@@ -1,12 +1,12 @@
-from fastapi import APIRouter, Request, Depends, Form
+from fastapi import APIRouter, Request, Depends, Form, Path
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
 from vetwebapi.core.settings import settings
 from vetwebapi.core.database import db_manager
-from vetwebapi.api_v1.company import crud
+from vetwebapi.api_v1.company import crud, dependencies
 from vetwebapi.api_v1.company.views import get_companies, get_company_detail
-from vetwebapi.api_v1.company.schemas import Companies, CompanyIn, CompanyDetail
+from vetwebapi.api_v1.company.schemas import Companies, CompanyIn, CompanyDetail, AddressIn
 from vetwebapi.core.models import Company
 
 
@@ -33,8 +33,7 @@ async def add_company(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     new_company_schema = CompanyIn(full_name=full_name, short_name=short_name)
-    new_company = await crud.create_company(session=session, body=new_company_schema)
-    print(new_company)
+    await crud.create_company(session=session, body=new_company_schema)
 
     return RedirectResponse(url="/pages/companies", status_code=302)
 
@@ -48,7 +47,9 @@ async def company_detail(request: Request, company: CompanyDetail = Depends(get_
 
 @router.get("/add_address/{company_id}", response_class=HTMLResponse)
 async def add_address(
-    request: Request, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    request: Request,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    company: CompanyDetail = Depends(get_company_detail),
 ):
     regions = await crud.read_regions(session=session)
     districts = await crud.read_districts(session=session)
@@ -62,16 +63,31 @@ async def add_address(
             "districts": districts,
             "cities": cities,
             "streets": streets,
+            "company": company,
         },
     )
 
 
 @router.post("/add_address/{company_id}")
 async def add_address(
-    request: Request, 
+    request: Request,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    
 ):
-    data = await request.form()
-    print("*****" * 20)
-    print("data", data)
-    return RedirectResponse(url="/pages/companies/company_detail/1", status_code=302)
+    formdata = await request.form()
+    street_id = int(formdata.get("street_id"))
+    house_number = formdata.get("house_number")
+    phone_number1 = formdata.get("phone_number1")
+    phone_number2 = formdata.get("phone_number2")
+    company_id = int(formdata.get("company_id"))
+
+    address_schema = AddressIn(
+        street_id=street_id,
+        house_number=house_number,
+        phone_number1=phone_number1,
+        phone_number2=phone_number2,
+    )
+
+    # решить 500 ошибку
+    await crud.create_address(session=session, body=address_schema, company_id=company_id)
+    return RedirectResponse(url=f"/pages/companies/company_detail/{company_id}", status_code=302)

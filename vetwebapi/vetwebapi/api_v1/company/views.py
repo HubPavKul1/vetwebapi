@@ -16,6 +16,7 @@ from .schemas import (
     SuccessMessage,
     CompanyDetail,
     AddressSchema,
+    AddressIn
 )
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
@@ -66,12 +67,12 @@ async def delete_company(
 
 @router.post("/{company_id}/address", response_model=SuccessMessage, status_code=201)
 async def create_address_route(
-    body: AddressSchema,
+    body: AddressIn,
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.create_address(session=session, body=body, company=company)
+        await crud.create_address(session=session, body=body, company_id=company.id)
         return SuccessMessage
     except Exception:
         raise HTTPException(

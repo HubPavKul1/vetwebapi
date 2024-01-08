@@ -13,8 +13,7 @@
 							<div class="col-md-12">
 								<div class="blog-desc col-paddingbottom">
 									<h2><a href="#">{{ company.full_name }}</a></h2>
-									<p><a class="btn btn-primary btn-lg" href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес</a>
-									</p>
+				
 									<div class="post-meta">
 										<span><a href="#">Health</a></span>
 										<span>01 Feb. 2017</span>
@@ -130,7 +129,7 @@
 						<div class="side">
 							<h2>Categories</h2>
 							<ul class="list">
-								<li><a href="#">Inspirational <i class="icon-check"></i> <span class="badge badge-default badge-pill">7</span></a></li>
+								<li><a href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес <i class="icon-check"></i> <span class="badge badge-default badge-pill">7</span></a></li>
 								<li><a href="#">Medicines <i class="icon-check"></i> <span class="badge badge-default badge-pill">9</span></a></li>
 								<li><a href="#">Operational <i class="icon-check"></i> <span class="badge badge-default badge-pill">10</span></a></li>
 								<li><a href="#">Laboratories <i class="icon-check"></i> <span class="badge badge-default badge-pill">12</span></a></li>

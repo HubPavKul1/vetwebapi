@@ -21,6 +21,13 @@ class StreetSchema(BaseIn):
     city: CitySchema
 
 
+class AddressIn(BaseModel):
+    street_id: int
+    house_number: str
+    phone_number1: str
+    phone_number2: str | None = None
+
+
 class AddressSchema(BaseModel):
     street: StreetSchema
     house_number: str
@@ -35,13 +42,12 @@ class CompanyIn(BaseModel):
 
 class CompanySchema(CompanyIn):
     id: int
- 
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class CompanyDetail(CompanySchema):
     address: AddressSchema | None
-    
 
 
 class SuccessMessage(BaseModel):

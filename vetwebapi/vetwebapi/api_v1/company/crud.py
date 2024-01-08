@@ -5,7 +5,7 @@ from sqlalchemy.orm import selectinload
 
 from vetwebapi.core.models import Company, Address, Region, District, City, Street
 
-from .schemas import CompanyIn, AddressSchema
+from .schemas import CompanyIn, AddressSchema, AddressIn
 
 
 async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
@@ -16,17 +16,14 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     return new_company
 
 
-async def create_address(session: AsyncSession, body: AddressSchema, company: Company) -> None:
-    street = body.street.name
-    street_obj = await read_street_by_name(session=session, street_name=street)
-    city = body.street.city.name
-    city_obj = await read_city_by_name(session=session, city_name=city)
-    district = body.street.city.district.name
-    district_obj = await read_district_by_name(session=session, district_name=district)
-    region = body.street.city.district.region.name
-    region_obj = await read_region_by_name(session=session, region_name=region)
+async def create_address(session: AsyncSession, body: AddressIn, company_id: int) -> None:
+    new_address = Address(**body.model_dump())
+    new_address.company_id = company_id
+    session.add(new_address)
+    await session.commit()
+    await session.refresh(new_address)
+    return new_address
 
-    print(region_obj, district_obj, city_obj, street_obj)
 
 
 async def read_companies(session: AsyncSession) -> list[Company]:
@@ -65,8 +62,8 @@ async def read_city_by_name(session: AsyncSession, city_name: str) -> City | Non
     return await session.scalar(stmt)
 
 
-async def read_street_by_name(session: AsyncSession, street_name: str) -> Street | None:
-    stmt = select(Street).where(Street.name.ilike(street_name))
+async def read_street_by_id(session: AsyncSession, street_id: int) -> Street | None:
+    stmt = select(Street).where(Street.id == street_id)
     return await session.scalar(stmt)
 
 
