@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import selectinload, joinedload
 
 from vetwebapi.core.models import Company, Address, Region, District, City, Street
 
@@ -16,15 +16,11 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     return new_company
 
 
-async def create_address(session: AsyncSession, body: AddressIn, company_id: int) -> None:
+async def create_address(session: AsyncSession, body: AddressIn) -> None:
     new_address = Address(**body.model_dump())
-    new_address.company_id = company_id
     session.add(new_address)
     await session.commit()
-    await session.refresh(new_address)
-    return new_address
-
-
+    
 
 async def read_companies(session: AsyncSession) -> list[Company]:
     stmt = select(Company)
@@ -41,9 +37,8 @@ async def read_company_by_id(session: AsyncSession, company_id: int) -> Company 
 
 
 async def read_address(session: AsyncSession, company: Company) -> Address | None:
-    stmt = select(Address).where(Address.company_id == company.id)
+    stmt = select(Address).where(Address.company_id == company.id).options(joinedload(Address.street))
     address = await session.scalar(stmt)
-    print(address)
     return address
 
 

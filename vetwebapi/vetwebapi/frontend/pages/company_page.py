@@ -34,18 +34,19 @@ async def add_company(
 ):
     new_company_schema = CompanyIn(full_name=full_name, short_name=short_name)
     await crud.create_company(session=session, body=new_company_schema)
+    redirect_url = request.url_for("companies")
 
-    return RedirectResponse(url="/pages/companies", status_code=302)
+    return RedirectResponse(redirect_url, status_code=302)
 
 
-@router.get("/company_detail/{company_id}", response_class=HTMLResponse)
+@router.get("/{company_id}/", response_class=HTMLResponse)
 async def company_detail(request: Request, company: CompanyDetail = Depends(get_company_detail)):
     return settings.templates.TemplateResponse(
         "/companies/company_detail.html", {"request": request, "company": company}
     )
 
 
-@router.get("/add_address/{company_id}", response_class=HTMLResponse)
+@router.get("/{company_id}/add_address", response_class=HTMLResponse)
 async def add_address(
     request: Request,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -68,11 +69,9 @@ async def add_address(
     )
 
 
-@router.post("/add_address/{company_id}")
+@router.post("/{company_id}/add_address")
 async def add_address(
-    request: Request,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-    
+    request: Request, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ):
     formdata = await request.form()
     street_id = int(formdata.get("street_id"))
@@ -83,11 +82,12 @@ async def add_address(
 
     address_schema = AddressIn(
         street_id=street_id,
+        company_id=company_id,
         house_number=house_number,
         phone_number1=phone_number1,
         phone_number2=phone_number2,
     )
 
-    # решить 500 ошибку
-    await crud.create_address(session=session, body=address_schema, company_id=company_id)
-    return RedirectResponse(url=f"/pages/companies/company_detail/{company_id}", status_code=302)
+    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    await crud.create_address(session=session, body=address_schema)
+    return RedirectResponse(redirect_url, status_code=302)

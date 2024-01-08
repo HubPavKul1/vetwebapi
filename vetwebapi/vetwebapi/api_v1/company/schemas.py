@@ -23,13 +23,16 @@ class StreetSchema(BaseIn):
 
 class AddressIn(BaseModel):
     street_id: int
+    company_id: int
     house_number: str
     phone_number1: str
     phone_number2: str | None = None
 
 
 class AddressSchema(BaseModel):
-    street: StreetSchema
+    district: str
+    city: str
+    street: str 
     house_number: str
     phone_number1: str
     phone_number2: str | None = None
@@ -47,7 +50,7 @@ class CompanySchema(CompanyIn):
 
 
 class CompanyDetail(CompanySchema):
-    address: AddressSchema | None
+    address: AddressSchema | None = None
 
 
 class SuccessMessage(BaseModel):

@@ -18,7 +18,7 @@ class Street(Base):
     city_id: Mapped[int] = mapped_column(ForeignKey("cities.id", ondelete="CASCADE"))
     name: Mapped[str] = mapped_column(String(250))
 
-    city: Mapped["City"] = relationship(back_populates="streets")
+    city: Mapped["City"] = relationship(back_populates="streets", lazy="joined")
     addresses: Mapped[list["Address"]] = relationship(back_populates="street")
 
     def __repr__(self):

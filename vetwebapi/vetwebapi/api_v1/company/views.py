@@ -71,8 +71,9 @@ async def create_address_route(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
+    body.company_id = company.id
     try:
-        await crud.create_address(session=session, body=body, company_id=company.id)
+        await crud.create_address(session=session, body=body)
         return SuccessMessage
     except Exception:
         raise HTTPException(
@@ -88,6 +89,15 @@ async def get_company_detail(
 ) -> Union[dict, CompanyDetail]:
     try:
         address = await crud.read_address(session=session, company=company)
+        if address is not None:
+            address = AddressSchema(
+                district=address.street.city.district.name,
+                city=address.street.city.name,
+                street=address.street.name,
+                house_number=address.house_number,
+                phone_number1=address.phone_number1,
+                phone_number2=address.phone_number2
+            )
         return CompanyDetail(
             id=company.id,
             full_name=company.full_name,
