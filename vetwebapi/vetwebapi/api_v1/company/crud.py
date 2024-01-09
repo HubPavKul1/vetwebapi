@@ -3,9 +3,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 
-from vetwebapi.core.models import Company, Address, Region, District, City, Street
+from vetwebapi.core.models import Company, Address, Region, District, City, Street, Employee, Position
 
-from .schemas import CompanyIn, AddressSchema, AddressIn
+from .schemas import CompanyIn, AddressSchema, AddressIn, EmployeeIn, EmployeeSchema
 
 
 async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
@@ -16,9 +16,16 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     return new_company
 
 
-async def create_address(session: AsyncSession, body: AddressIn) -> None:
+async def create_address(session: AsyncSession, body: AddressIn, company_id: int) -> None:
     new_address = Address(**body.model_dump())
+    new_address.company_id = company_id
     session.add(new_address)
+    await session.commit()
+    
+async def create_employee(session: AsyncSession, body: EmployeeIn, company_id: int) -> None:
+    new_employee = Employee(**body.model_dump())
+    new_employee.company_id = company_id
+    session.add(new_employee)
     await session.commit()
     
 
@@ -37,7 +44,7 @@ async def read_company_by_id(session: AsyncSession, company_id: int) -> Company 
 
 
 async def read_address(session: AsyncSession, company: Company) -> Address | None:
-    stmt = select(Address).where(Address.company_id == company.id).options(joinedload(Address.street))
+    stmt = select(Address).where(Address.company_id == company.id)
     address = await session.scalar(stmt)
     return address
 
@@ -80,3 +87,26 @@ async def read_cities(session: AsyncSession) -> list[City]:
 async def read_streets(session: AsyncSession) -> list[Street]:
     stmt = select(Street)
     return list(await session.scalars(stmt))
+
+async def read_company_employees(session: AsyncSession, company: Company) -> list[EmployeeSchema]:
+    stmt = select(Employee).where(Employee.company_id == company.id)
+    employees = await session.scalars(stmt)
+    print(employees)
+    employee_schemas: list[EmployeeSchema] = []
+    if employees:
+        employee_schemas = [
+            EmployeeSchema(
+            position=item.position.name, 
+            lastname=item.lastname, 
+            firstname=item.firstname, 
+            patronymic=item.patronymic
+            ) for item in employees
+            ]
+    return employee_schemas
+        
+async def read_positions(session: AsyncSession) -> list[Position]:
+    stmt = select(Position)
+    return list(await session.scalars(stmt))
+    
+
+

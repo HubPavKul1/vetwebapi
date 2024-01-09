@@ -23,7 +23,6 @@ class StreetSchema(BaseIn):
 
 class AddressIn(BaseModel):
     street_id: int
-    company_id: int
     house_number: str
     phone_number1: str
     phone_number2: str | None = None
@@ -49,10 +48,6 @@ class CompanySchema(CompanyIn):
     model_config = ConfigDict(from_attributes=True)
 
 
-class CompanyDetail(CompanySchema):
-    address: AddressSchema | None = None
-
-
 class SuccessMessage(BaseModel):
     result: bool = True
 
@@ -63,3 +58,19 @@ class CompanyOut(SuccessMessage):
 
 class Companies(SuccessMessage):
     companies: list[CompanySchema]
+    
+class EmployeeIn(BaseModel):
+    position_id: int
+    lastname: str
+    firstname: str
+    patronymic: str
+
+class EmployeeSchema(BaseModel):
+    position: str
+    lastname: str
+    firstname: str
+    patronymic: str
+    
+class CompanyDetail(CompanySchema):
+    address: AddressSchema | None = None
+    employees: list[EmployeeSchema] = []

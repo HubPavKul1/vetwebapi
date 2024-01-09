@@ -25,6 +25,18 @@
 										{% endif %}
 									</div>
 									{% endif %}
+									<h3>Работники</h3>
+									{% if company.employees %}
+									<div class="post-meta">
+										{% for employee in company.employees %}
+										<span>{{employee.position}}</span>
+										<span>{{employee.lastname}}</span>
+										<span>{{employee.firstname}}</span>
+										<span>{{employee.patronymic}}</span>
+										{% endfor %}	
+									</div>
+									{% endif %}
+
 									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 									<p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
 									<blockquote>
@@ -136,7 +148,7 @@
 							<h2>Categories</h2>
 							<ul class="list">
 								<li><a href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес <i class="icon-check"></i> <span class="badge badge-default badge-pill">7</span></a></li>
-								<li><a href="#">Medicines <i class="icon-check"></i> <span class="badge badge-default badge-pill">9</span></a></li>
+								<li><a href="{{url_for('add_employee', company_id=company.id)}}">Добавить работника <i class="icon-check"></i> <span class="badge badge-default badge-pill">9</span></a></li>
 								<li><a href="#">Operational <i class="icon-check"></i> <span class="badge badge-default badge-pill">10</span></a></li>
 								<li><a href="#">Laboratories <i class="icon-check"></i> <span class="badge badge-default badge-pill">12</span></a></li>
 							</ul>

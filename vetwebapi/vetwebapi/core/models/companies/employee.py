@@ -25,7 +25,7 @@ class Employee(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     company: Mapped["Company"] = relationship(back_populates="employees")
-    position: Mapped["Position"] = relationship(back_populates="employees")
+    position: Mapped["Position"] = relationship(back_populates="employees", lazy="joined")
 
     @property
     def fullname(self):

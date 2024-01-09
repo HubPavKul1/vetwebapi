@@ -12,11 +12,12 @@ from .schemas import (
     Companies,
     CompanyIn,
     CompanyOut,
-    CompanySchema,
     SuccessMessage,
     CompanyDetail,
     AddressSchema,
-    AddressIn
+    AddressIn,
+    EmployeeIn,
+    EmployeeSchema
 )
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
@@ -50,7 +51,7 @@ async def get_companies(
         )
 
 
-@router.delete("/{company_id}", response_model=SuccessMessage)
+@router.delete("/{company_id}/", response_model=SuccessMessage)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -71,9 +72,8 @@ async def create_address_route(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
-    body.company_id = company.id
     try:
-        await crud.create_address(session=session, body=body)
+        await crud.create_address(session=session, body=body, company_id=company.id)
         return SuccessMessage
     except Exception:
         raise HTTPException(
@@ -81,14 +81,29 @@ async def create_address_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+@router.post("/{company_id}/employee", response_model=SuccessMessage, status_code=201)
+async def create_employee_route(
+    body: EmployeeIn,
+    company: Company = Depends(company_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.create_employee(session=session, body=body, company_id=company.id)
+        return SuccessMessage
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
 
-@router.get("/{company_id}", response_model=CompanyDetail)
+@router.get("/{company_id}/", response_model=CompanyDetail)
 async def get_company_detail(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, CompanyDetail]:
     try:
         address = await crud.read_address(session=session, company=company)
+        employees = await crud.read_company_employees(session=session, company=company)
         if address is not None:
             address = AddressSchema(
                 district=address.street.city.district.name,
@@ -98,11 +113,13 @@ async def get_company_detail(
                 phone_number1=address.phone_number1,
                 phone_number2=address.phone_number2
             )
+        
         return CompanyDetail(
             id=company.id,
             full_name=company.full_name,
             short_name=company.short_name,
             address=address,
+            employees=employees
         )
     except Exception:
         raise HTTPException(

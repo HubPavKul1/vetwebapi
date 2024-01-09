@@ -6,7 +6,7 @@ from vetwebapi.core.settings import settings
 from vetwebapi.core.database import db_manager
 from vetwebapi.api_v1.company import crud, dependencies
 from vetwebapi.api_v1.company.views import get_companies, get_company_detail
-from vetwebapi.api_v1.company.schemas import Companies, CompanyIn, CompanyDetail, AddressIn
+from vetwebapi.api_v1.company.schemas import Companies, CompanyIn, CompanyDetail, AddressIn, EmployeeIn
 from vetwebapi.core.models import Company
 
 
@@ -71,23 +71,60 @@ async def add_address(
 
 @router.post("/{company_id}/add_address")
 async def add_address(
-    request: Request, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    request: Request, 
+    street_id: Annotated[str, Form(...)],
+    house_number: Annotated[str, Form(...)],
+    phone_number1: Annotated[str, Form(...)],
+    company_id: int,
+    phone_number2: Annotated[str, Form()] = None,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ):
-    formdata = await request.form()
-    street_id = int(formdata.get("street_id"))
-    house_number = formdata.get("house_number")
-    phone_number1 = formdata.get("phone_number1")
-    phone_number2 = formdata.get("phone_number2")
-    company_id = int(formdata.get("company_id"))
-
     address_schema = AddressIn(
-        street_id=street_id,
-        company_id=company_id,
+        street_id=int(street_id),
         house_number=house_number,
         phone_number1=phone_number1,
         phone_number2=phone_number2,
     )
 
     redirect_url = request.url_for("company_detail", **{"company_id": company_id})
-    await crud.create_address(session=session, body=address_schema)
+    await crud.create_address(session=session, body=address_schema, company_id=company_id)
+    return RedirectResponse(redirect_url, status_code=302)
+
+
+@router.get("/{company_id}/add_employee", response_class=HTMLResponse)
+async def add_employee(
+    request: Request,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    company: CompanyDetail = Depends(get_company_detail),
+):
+    positions = await crud.read_positions(session=session)
+    
+    return settings.templates.TemplateResponse(
+        "companies/add_employee.html",
+        {
+            "request": request,
+            "positions": positions,
+            "company": company,
+        },
+    )
+    
+@router.post("/{company_id}/add_employee")
+async def add_employee(
+    request: Request, 
+    position_id: Annotated[str, Form(...)],
+    lastname: Annotated[str, Form(...)],
+    firstname: Annotated[str, Form(...)],
+    company_id: int,
+    patronymic: Annotated[str, Form()] = None,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+):
+    employee_schema = EmployeeIn(
+        position_id=int(position_id),
+        lastname=lastname,
+        firstname=firstname,
+        patronymic=patronymic
+    )
+
+    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    await crud.create_employee(session=session, body=employee_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
