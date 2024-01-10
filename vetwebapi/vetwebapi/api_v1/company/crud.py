@@ -127,21 +127,20 @@ async def read_streets(session: AsyncSession) -> list[Street]:
     stmt = select(Street).order_by(Street.name)
     return list(await session.scalars(stmt))
 
-async def read_company_employees(session: AsyncSession, company: Company) -> list[EmployeeSchema]:
-    """перенести схему во вью"""
-    stmt = select(Employee).where(Employee.company_id == company.id)
-    employees = await session.scalars(stmt)
-    employee_schemas: list[EmployeeSchema] = []
-    if employees:
-        employee_schemas = [
-            EmployeeSchema(
-            position=item.position.name, 
-            lastname=item.lastname, 
-            firstname=item.firstname, 
-            patronymic=item.patronymic
-            ) for item in employees
-            ]
-    return employee_schemas
+async def read_company_employees(session: AsyncSession, company: Company) -> list[Employee]:
+    stmt = select(Employee).where(Employee.company_id == company.id).order_by(Employee.lastname)
+    return list(await session.scalars(stmt))
+    # # employee_schemas: list[EmployeeSchema] = []
+    # # if employees:
+    # #     employee_schemas = [
+    # #         EmployeeSchema(
+    # #         position=item.position.name, 
+    # #         lastname=item.lastname, 
+    # #         firstname=item.firstname, 
+    # #         patronymic=item.patronymic
+    # #         ) for item in employees
+    # #         ]
+    # return employee_schemas
 
         
 async def read_positions(session: AsyncSession) -> list[Position]:

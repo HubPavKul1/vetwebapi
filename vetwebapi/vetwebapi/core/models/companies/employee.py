@@ -46,4 +46,4 @@ class Employee(Base):
 
 
 def get_full_name(lastname: str, firstname: str, patronymic: str) -> str:
-    return f"{lastname.capitalize} {firstname[0].upper}. {patronymic[0].upper}."
+    return f"{lastname.capitalize()} {firstname[0].upper()}. {patronymic[0].upper()}."

@@ -70,6 +70,7 @@ class EmployeeSchema(BaseModel):
     lastname: str
     firstname: str
     patronymic: str
+    fullname: str
     
 class CompanyDetail(CompanySchema):
     address: AddressSchema | None = None

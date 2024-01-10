@@ -1,10 +1,11 @@
-from typing import Union
+from typing import Union, TYPE_CHECKING
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import Company
+from vetwebapi.core.models import Company, Address, Employee
+
 
 from . import crud
 from .dependencies import company_by_id
@@ -19,6 +20,9 @@ from .schemas import (
     EmployeeIn,
     EmployeeSchema
 )
+
+
+    
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 
@@ -102,8 +106,19 @@ async def get_company_detail(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, CompanyDetail]:
     try:
-        address = await crud.read_address(session=session, company=company)
-        employees = await crud.read_company_employees(session=session, company=company)
+        address: Address = await crud.read_address(session=session, company=company)
+        employees: list[Employee] = await crud.read_company_employees(session=session, company=company)
+        employee_schemas: list[EmployeeSchema] = []
+        if employees:
+            employee_schemas = [
+                EmployeeSchema(
+                position=item.position.name, 
+                lastname=item.lastname, 
+                firstname=item.firstname, 
+                patronymic=item.patronymic,
+                fullname=item.fullname
+                ) for item in employees
+                ]
         if address is not None:
             address = AddressSchema(
                 district=address.street.city.district.name,
@@ -119,7 +134,7 @@ async def get_company_detail(
             full_name=company.full_name,
             short_name=company.short_name,
             address=address,
-            employees=employees
+            employees=employee_schemas
         )
     except Exception:
         raise HTTPException(
