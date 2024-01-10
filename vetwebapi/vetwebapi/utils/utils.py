@@ -1,67 +1,46 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from vetwebapi.core.models.companies.region import Region
-from vetwebapi.core.models.companies.district import District
-from vetwebapi.core.models.companies.city import City
-from vetwebapi.core.models.companies.street import Street
-from vetwebapi.core.models.users.role import Role
+from vetwebapi.api_v1.company import crud
 
 
-async def add_start_roles(session: AsyncSession):
-    """Добавляем роль пользователь и админ в базу данных"""
-    roles = []
-    user = Role(name="user")
-    admin = Role(name="admin")
-    roles.append(user)
-    roles.append(admin)
-    session.add_all(roles)
-    await session.commit()
-
-
-async def add_first_region(session: AsyncSession) -> int:
-    """Добавляем Ивановскую область в базу данных"""
-    first_region = Region(name="Ивановская область")
-    session.add(first_region)
-    await session.commit()
-    await session.refresh(first_region)
-    return first_region.id
-
-
-async def add_districts(session: AsyncSession) -> tuple[int]:
+async def add_districts(session: AsyncSession) -> list[int]:
     """Добавляем Иваново и Ивановский район в таблицу районы в базе данных"""
-    region_id = await add_first_region(session=session)
-    first_district = District(region_id=region_id, name="Иваново город")
-    second_district = District(region_id=region_id, name="Ивановский район")
-    session.add_all([first_district, second_district])
-    await session.commit()
-    await session.refresh(first_district)
-    await session.refresh(second_district)
-    return (first_district.id, second_district.id)
-
-
+    region_id: int = await crud.create_region(session=session, name="Ивановская область")
+    names = ["Иваново город", "Ивановский район"]
+    return [await crud.create_district(session=session, region_id=region_id, name=name) for name in names]
+    
+    
 async def add_cities(session: AsyncSession) -> tuple[int]:
     """Добавляем город Иваново и Кохма в базу данных"""
-    district_id = await add_districts(session=session)
-    first_city = City(district_id=district_id[0], name="Иваново")
-    second_city = City(district_id=district_id[1], name="Кохма")
-    session.add_all([first_city, second_city])
-    await session.commit()
-    await session.refresh(first_city)
-    await session.refresh(second_city)
-    return (first_city.id, second_city.id)
+    districts_ids: list[int] = await add_districts(session=session)
+    names = ["Иваново", "Кохма"]
+    city1_id = await crud.create_city(session=session, district_id=districts_ids[0], name=names[0])
+    city2_id = await crud.create_city(session=session, district_id=districts_ids[1], name=names[1])
+    return (city1_id, city2_id)
 
 
 async def fill_street_table(session: AsyncSession) -> None:
     """Заполняем таблицу с улицами"""
-    city_id = await add_cities(session=session)
-    streets = []
+    city_ids: tuple[int] = await add_cities(session=session)
+    await crud.create_street(session=session, city_id=city_ids[1], name="улица Ивановская")
     with open("vetwebapi/streets.txt", encoding="utf16") as f:
         for street in f:
-            # print(street.strip())
-            streets.append(Street(city_id=city_id[0], name=street))
-    streets.append(Street(city_id=city_id[1], name="улица Ивановская"))
-    session.add_all(streets)
-    await session.commit()
+            await crud.create_street(session=session, city_id=city_ids[0], name=street)
+            
+            
+async def add_roles(session: AsyncSession) -> None:
+    """Добавляем роли пользователей в базу данных"""
+    names = ["admin", "user"]
+    [await crud.create_role(session=session, name=name) for name in names]
+    
+    
+async def add_positions(session: AsyncSession) -> None:
+    """Добавляем должности работников в базу данных"""
+    names = ["ветврач", "ИП", "гр"]
+    [await crud.create_position(session=session, name=name) for name in names]
+    
 
-
-def get_full_name(lastname: str, firstname: str, patronymic: str) -> str:
-    return f"{lastname.capitalize} {firstname[0].upper}. {patronymic[0].upper}."
+async def prepare_db(session: AsyncSession) -> None:
+    """Подготовка базы данных при первом запуске"""
+    await fill_street_table(session=session)
+    await add_roles(session=session)
+    await add_positions(session=session)

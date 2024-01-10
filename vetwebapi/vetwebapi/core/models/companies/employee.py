@@ -5,7 +5,6 @@ from sqlalchemy import Boolean, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from vetwebapi.core.models.base import Base
-from vetwebapi.utils import utils
 
 if TYPE_CHECKING:
     from .company import Company
@@ -29,17 +28,22 @@ class Employee(Base):
 
     @property
     def fullname(self):
-        return utils.get_full_name(
+        return get_full_name(
             lastname=self.lastname, firstname=self.firstname, patronymic=self.patronymic
         )
 
     @property
     def employee_slug(self):
         return slugify(
-            utils.get_full_name(
+            get_full_name(
                 lastname=self.lastname, firstname=self.firstname, patronymic=self.patronymic
             )
         )
 
     def __repr__(self) -> str:
         return self.fullname
+
+
+
+def get_full_name(lastname: str, firstname: str, patronymic: str) -> str:
+    return f"{lastname.capitalize} {firstname[0].upper}. {patronymic[0].upper}."

@@ -28,7 +28,6 @@ app.include_router(router_frontend)
 @app.get("/")
 async def start(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
     if not await crud.read_roles(session=session):
-        await utils.fill_street_table(session=session)
-        await utils.add_start_roles(session=session)
-        return {"message": "Аll streets have been added!"}
+        await utils.prepare_db(session=session)
+        return {"message": "Streets, roles and positions have been added!"}
     return {"message": "Hello, Dude!!!"}
