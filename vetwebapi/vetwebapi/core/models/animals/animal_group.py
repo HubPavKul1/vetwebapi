@@ -15,7 +15,7 @@ class AnimalGroup(Base):
 
     __tablename__ = "animal_groups"
 
-    type_of_feeding_id: Mapped[int] = mapped_column(ForeignKey("types_of_feeding.id", on_delete="CASCADE"))
+    type_of_feeding_id: Mapped[int] = mapped_column(ForeignKey("types_of_feeding.id", ondelete="CASCADE"))
     name: Mapped[str] = mapped_column(String(100))
 
     species: Mapped[list["Species"]] = relationship(back_populates="animal_group")
