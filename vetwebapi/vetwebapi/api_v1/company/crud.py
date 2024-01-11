@@ -1,12 +1,12 @@
+from operator import and_
 from typing import TYPE_CHECKING
 from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-# from sqlalchemy.orm import selectinload, joinedload
 
 from vetwebapi.core.models import Company, Address, Region, District, City, Street, Employee, Position, Role
 
-from .schemas import CompanyIn, AddressSchema, AddressIn, EmployeeIn, EmployeeSchema
+from .schemas import CompanyIn, AddressIn, EmployeeIn
 
 # Create Data
 
@@ -69,21 +69,16 @@ async def create_street(session: AsyncSession, name: str, city_id: int) -> None:
 # Read Data
 
 async def read_companies(session: AsyncSession) -> list[Company]:
-    stmt = select(Company).order_by(Company.short_name)
+    stmt = select(Company).where(Company.is_active==True).order_by(Company.short_name)
     return list(await session.scalars(stmt))
-
-
-async def delete_company(session: AsyncSession, company: Company) -> None:
-    await session.delete(company)
-    await session.commit()
 
 
 async def read_company_by_id(session: AsyncSession, company_id: int) -> Company | None:
     return await session.get(Company, company_id)
 
 
-async def read_address(session: AsyncSession, company: Company) -> Address | None:
-    stmt = select(Address).where(Address.company_id == company.id)
+async def read_address(session: AsyncSession, company_id:int) -> Address | None:
+    stmt = select(Address).where(Address.company_id == company_id)
     address = await session.scalar(stmt)
     return address
 
@@ -127,25 +122,19 @@ async def read_streets(session: AsyncSession) -> list[Street]:
     stmt = select(Street).order_by(Street.name)
     return list(await session.scalars(stmt))
 
-async def read_company_employees(session: AsyncSession, company: Company) -> list[Employee]:
-    stmt = select(Employee).where(Employee.company_id == company.id).order_by(Employee.lastname)
+async def read_company_employees(session: AsyncSession, company_id: int) -> list[Employee]:
+    stmt = select(Employee).where(and_(Employee.company_id == company_id, Employee.is_active == True)).order_by(Employee.lastname)
     return list(await session.scalars(stmt))
-    # # employee_schemas: list[EmployeeSchema] = []
-    # # if employees:
-    # #     employee_schemas = [
-    # #         EmployeeSchema(
-    # #         position=item.position.name, 
-    # #         lastname=item.lastname, 
-    # #         firstname=item.firstname, 
-    # #         patronymic=item.patronymic
-    # #         ) for item in employees
-    # #         ]
-    # return employee_schemas
-
-        
+           
 async def read_positions(session: AsyncSession) -> list[Position]:
-    stmt = select(Position)
+    stmt = select(Position).order_by(Position.name)
     return list(await session.scalars(stmt))
-    
 
+# Update Data
+
+# Delete Data
+    
+async def delete_company(session: AsyncSession, company: Company) -> None:
+    await session.delete(company)
+    await session.commit()
 

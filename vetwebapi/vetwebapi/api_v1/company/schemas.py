@@ -29,6 +29,7 @@ class AddressIn(BaseModel):
 
 
 class AddressSchema(BaseModel):
+    id: int
     district: str
     city: str
     street: str 
@@ -66,6 +67,7 @@ class EmployeeIn(BaseModel):
     patronymic: str
 
 class EmployeeSchema(BaseModel):
+    id: int
     position: str
     lastname: str
     firstname: str

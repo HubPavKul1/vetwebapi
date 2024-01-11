@@ -9,6 +9,7 @@ from vetwebapi.core.models.base import Base
 if TYPE_CHECKING:
     from .address import Address
     from .employee import Employee
+    from vetwebapi.core.models import Animal
 
 
 class Company(Base):
@@ -22,6 +23,7 @@ class Company(Base):
 
     addresses: Mapped["Address"] = relationship(back_populates="company")
     employees: Mapped[list["Employee"]] = relationship(back_populates="company")
+    animals: Mapped[list["Animal"]] = relationship(back_populates="company")
 
     @property
     def company_slug(self):

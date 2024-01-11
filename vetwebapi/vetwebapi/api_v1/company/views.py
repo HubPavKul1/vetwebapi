@@ -8,7 +8,7 @@ from vetwebapi.core.models import Company, Address, Employee
 
 
 from . import crud
-from .dependencies import company_by_id
+from .dependencies import company_by_id, company_address, company_employees
 from .schemas import (
     Companies,
     CompanyIn,
@@ -22,12 +22,10 @@ from .schemas import (
 )
 
 
-    
-
 router = APIRouter(prefix="/companies", tags=["Companies"])
 
 
-@router.post("/", response_model=CompanyOut, status_code=201)
+@router.post("/", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_company_route(
     body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[CompanyOut, dict]:
@@ -55,7 +53,7 @@ async def get_companies(
         )
 
 
-@router.delete("/{company_id}/", response_model=SuccessMessage)
+@router.delete("/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -70,7 +68,7 @@ async def delete_company(
         )
 
 
-@router.post("/{company_id}/address", response_model=SuccessMessage, status_code=201)
+@router.post("/{company_id}/address", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_address_route(
     body: AddressIn,
     company: Company = Depends(company_by_id),
@@ -85,7 +83,7 @@ async def create_address_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
-@router.post("/{company_id}/employee", response_model=SuccessMessage, status_code=201)
+@router.post("/{company_id}/employee", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_employee_route(
     body: EmployeeIn,
     company: Company = Depends(company_by_id),
@@ -103,15 +101,16 @@ async def create_employee_route(
 @router.get("/{company_id}/", response_model=CompanyDetail)
 async def get_company_detail(
     company: Company = Depends(company_by_id),
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    address: Address = Depends(company_address),
+    employees: list[Employee | None] = Depends(company_employees),
 ) -> Union[dict, CompanyDetail]:
     try:
-        address: Address = await crud.read_address(session=session, company=company)
-        employees: list[Employee] = await crud.read_company_employees(session=session, company=company)
+        
         employee_schemas: list[EmployeeSchema] = []
         if employees:
             employee_schemas = [
                 EmployeeSchema(
+                id=item.id,
                 position=item.position.name, 
                 lastname=item.lastname, 
                 firstname=item.firstname, 
@@ -121,6 +120,7 @@ async def get_company_detail(
                 ]
         if address is not None:
             address = AddressSchema(
+                id=address.id,
                 district=address.street.city.district.name,
                 city=address.street.city.name,
                 street=address.street.name,

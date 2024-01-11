@@ -8,7 +8,7 @@
 					<div class="blog-wrap">
 						<div class="row">
 							<div class="col-md-12">
-								<img class="img-responsive" src="images/blog-3.jpg" alt=""><br>
+								<img class="img-responsive" src="{{url_for('static', path='images/animals2-2.png')}}" alt="animals2.png"><br>
 							</div>
 							<div class="col-md-12">
 								<div class="blog-desc col-paddingbottom">
@@ -25,18 +25,38 @@
 										{% endif %}
 									</div>
 									{% endif %}
-									<h3>Работники</h3>
-									{% if company.employees %}
-									{% for employee in company.employees %}
-									<div class="post-meta">
-										<span>{{employee.position}}</span>
-										<span>{{employee.lastname}}</span>
-										<span>{{employee.firstname}}</span>
-										<span>{{employee.patronymic}}</span>
-										<span>{{employee.fullname}}</span>		
+									<div>
+										<table class="table">
+											<caption>Работники</caption>
+											<tr>
+												<th>Должность</th>
+												<th>Фамилия</th>
+												<th>Имя</th>
+												<th>Отчество</th>
+											</tr>
+											{% if company.employees %}
+											{% for employee in company.employees %}
+											<tr>
+												<td>{{employee.position}}</td>
+												<td>{{employee.lastname}}</td>
+												<td>{{employee.firstname}}</td>
+												<td>{{employee.patronymic}}</td>
+											</tr>
+											{% endfor %}
+											{% endif %}
+										</table>
 									</div>
-									{% endfor %}
-									{% endif %}
+									<table class="table">
+										<caption>Животные</caption>
+										<tr>
+											<th>Группа животных</th>
+											<th>Вид животных</th>
+											<th>Пол животных</th>
+											<th>Дата рождения</th>
+											<th>Кличка</th>
+											<th>Идентификация</th>
+										</tr>
+									</table>
 
 									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 									<p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
@@ -104,7 +124,6 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="col-md-12">
 								<div class="comment-area">
 									<h2>Leave a comment</h2>
@@ -148,10 +167,10 @@
 						<div class="side">
 							<h2>Categories</h2>
 							<ul class="list">
-								<li><a href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес <i class="icon-check"></i> <span class="badge badge-default badge-pill">7</span></a></li>
-								<li><a href="{{url_for('add_employee', company_id=company.id)}}">Добавить работника <i class="icon-check"></i> <span class="badge badge-default badge-pill">9</span></a></li>
-								<li><a href="#">Operational <i class="icon-check"></i> <span class="badge badge-default badge-pill">10</span></a></li>
-								<li><a href="#">Laboratories <i class="icon-check"></i> <span class="badge badge-default badge-pill">12</span></a></li>
+								<li><a href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес <i class="icon-check"></i> </a></li>
+								<li><a href="{{url_for('add_employee', company_id=company.id)}}">Добавить работника <i class="icon-check"></i> </a></li>
+								<li><a href="#">Operational <i class="icon-check"></i> </a></li>
+								<li><a href="#">Laboratories <i class="icon-check"></i> </a></li>
 							</ul>
 						</div>
 
@@ -159,7 +178,7 @@
 							<h2>Recent Posts</h2>
 							<div class="post">
 								<a href="blog.html">
-									<div class="blog-img" style="background-image: url(images/blog-1.jpg);"></div>
+									<div class="blog-img" style="background-image: url({{url_for('static', path='images/blog-1.jpg')}});"></div>
 									<div class="desc">
 										<span>01 Feb. 2017</span>
 										<h3>Far far away, behind the word mountains, far from the countries</h3>
@@ -167,22 +186,10 @@
 								</a>
 							</div>
 							<div class="post">
-								<a href="blog.html">
-									<div class="blog-img" style="background-image: url(images/blog-2.jpg);"></div>
-									<div class="desc">
-										<span>01 Feb. 2017</span>
-										<h3>Far far away, behind the word mountains, far from the countries</h3>
-									</div>
-								</a>
+								
 							</div>
 							<div class="post">
-								<a href="blog.html">
-									<div class="blog-img" style="background-image: url(images/blog-3.jpg);"></div>
-									<div class="desc">
-										<span>01 Feb. 2017</span>
-										<h3>Far far away, behind the word mountains, far from the countries</h3>
-									</div>
-								</a>
+							
 							</div>
 						</div>
 						<div class="side">

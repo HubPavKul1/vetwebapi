@@ -12,6 +12,10 @@ __all__ = (
     "Role",
     "auth_backend",
     "get_user_manager",
+    "Animal",
+    "AnimalGroup",
+    "Species",
+    "TypeOfFeeding"
 )
 
 from .base import Base
@@ -27,3 +31,7 @@ from .users.auth import auth_backend
 from .users.manager import get_user_manager
 from .users.role import Role
 from .users.user import User
+from .animals.animal import Animal
+from .animals.animal_group import AnimalGroup
+from .animals.species import Species
+from .animals.type_of_feeding import TypeOfFeeding
