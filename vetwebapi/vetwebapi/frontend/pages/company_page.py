@@ -4,7 +4,8 @@ from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
 from vetwebapi.core.settings import settings
 from vetwebapi.core.database import db_manager
-from vetwebapi.api_v1.company import crud, dependencies
+from vetwebapi.api_v1.company.crud import create_address, create_company, create_employee, read_cities, read_districts, read_streets, read_regions, read_positions
+from vetwebapi.api_v1.animal.crud import create_animal, read_genders, read_species, read_usage_types
 from vetwebapi.api_v1.company.views import get_companies, get_company_detail
 from vetwebapi.api_v1.company.schemas import Companies, CompanyIn, CompanyDetail, AddressIn, EmployeeIn
 from vetwebapi.core.models import Company
@@ -33,7 +34,7 @@ async def add_company(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     new_company_schema = CompanyIn(full_name=full_name, short_name=short_name)
-    await crud.create_company(session=session, body=new_company_schema)
+    await create_company(session=session, body=new_company_schema)
     redirect_url = request.url_for("companies")
 
     return RedirectResponse(redirect_url, status_code=302)
@@ -46,16 +47,17 @@ async def company_detail(request: Request, company: CompanyDetail = Depends(get_
     )
 
 
+# Address
 @router.get("/{company_id}/add_address", response_class=HTMLResponse)
 async def add_address(
     request: Request,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     company: CompanyDetail = Depends(get_company_detail),
 ):
-    regions = await crud.read_regions(session=session)
-    districts = await crud.read_districts(session=session)
-    cities = await crud.read_cities(session=session)
-    streets = await crud.read_streets(session=session)
+    regions = await read_regions(session=session)
+    districts = await read_districts(session=session)
+    cities = await read_cities(session=session)
+    streets = await read_streets(session=session)
     return settings.templates.TemplateResponse(
         "companies/add_address.html",
         {
@@ -87,17 +89,18 @@ async def add_address(
     )
 
     redirect_url = request.url_for("company_detail", **{"company_id": company_id})
-    await crud.create_address(session=session, body=address_schema, company_id=company_id)
+    await create_address(session=session, body=address_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
 
 
+# Employees
 @router.get("/{company_id}/add_employee", response_class=HTMLResponse)
 async def add_employee(
     request: Request,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     company: CompanyDetail = Depends(get_company_detail),
 ):
-    positions = await crud.read_positions(session=session)
+    positions = await read_positions(session=session)
     
     return settings.templates.TemplateResponse(
         "companies/add_employee.html",
@@ -126,5 +129,30 @@ async def add_employee(
     )
 
     redirect_url = request.url_for("company_detail", **{"company_id": company_id})
-    await crud.create_employee(session=session, body=employee_schema, company_id=company_id)
+    await create_employee(session=session, body=employee_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
+
+
+# Animals
+@router.get("/{company_id}/add_animal", response_class=HTMLResponse)
+async def add_animal(
+    request: Request,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    company: CompanyDetail = Depends(get_company_detail),
+):
+    species = await read_species(session=session)
+    genders = await read_genders(session=session)
+    usage_types = await read_usage_types(session=session)
+    
+    return settings.templates.TemplateResponse(
+        "companies/add_animal.html",
+        {
+            "request": request,
+            "species": species,
+            "genders": genders,
+            "usage_types": usage_types,
+            "company": company,
+        },
+    )
+    
+## Add create animal

@@ -1,5 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 
+from vetwebapi.api_v1.animal.schemas import AnimalSchema
+
 
 class BaseIn(BaseModel):
     name: str
@@ -77,3 +79,4 @@ class EmployeeSchema(BaseModel):
 class CompanyDetail(CompanySchema):
     address: AddressSchema | None = None
     employees: list[EmployeeSchema] = []
+    animals: list[AnimalSchema] = []

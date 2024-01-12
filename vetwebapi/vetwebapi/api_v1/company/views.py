@@ -4,11 +4,12 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import Company, Address, Employee
+from vetwebapi.core.models import Company, Address, Employee, Animal
+from vetwebapi.api_v1.animal.schemas import AnimalSchema
 
 
 from . import crud
-from .dependencies import company_by_id, company_address, company_employees
+from .dependencies import company_by_id, company_address, company_employees, company_animals
 from .schemas import (
     Companies,
     CompanyIn,
@@ -18,7 +19,7 @@ from .schemas import (
     AddressSchema,
     AddressIn,
     EmployeeIn,
-    EmployeeSchema
+    EmployeeSchema,
 )
 
 
@@ -103,6 +104,7 @@ async def get_company_detail(
     company: Company = Depends(company_by_id),
     address: Address = Depends(company_address),
     employees: list[Employee | None] = Depends(company_employees),
+    animals: list[Animal | None] = Depends(company_animals)
 ) -> Union[dict, CompanyDetail]:
     try:
         
@@ -129,12 +131,28 @@ async def get_company_detail(
                 phone_number2=address.phone_number2
             )
         
+        animal_schemas: list[AnimalSchema] = []    
+        if animals:
+            animal_schemas = [
+                AnimalSchema(
+                    id=animal.id,
+                    species=animal.species.name,
+                    usage_type=animal.usage_type.name,
+                    gender=animal.gender.name,
+                    date_of_birth=animal.date_of_birth,
+                    nickname=animal.nickname,
+                    identification=animal.identification
+                ) for animal in animals
+            ]
+            
+        
         return CompanyDetail(
             id=company.id,
             full_name=company.full_name,
             short_name=company.short_name,
             address=address,
-            employees=employee_schemas
+            employees=employee_schemas,
+            animals=animal_schemas
         )
     except Exception:
         raise HTTPException(

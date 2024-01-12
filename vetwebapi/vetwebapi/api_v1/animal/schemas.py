@@ -16,4 +16,5 @@ class AnimalSchema(BaseModel):
     gender: str
     date_of_birth: str
     nickname: str
-    identification: str
+    identification: str | None = None
+    
