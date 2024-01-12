@@ -12,6 +12,8 @@ from .schemas import CompanyIn, AddressIn, EmployeeIn
 
 async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     new_company = Company(**body.model_dump())
+    new_company.full_name = new_company.full_name.capitalize()
+    new_company.short_name = new_company.short_name.capitalize()
     session.add(new_company)
     await session.commit()
     await session.refresh(new_company)
@@ -35,26 +37,29 @@ async def create_address(session: AsyncSession, body: AddressIn, company_id: int
     
 async def create_employee(session: AsyncSession, body: EmployeeIn, company_id: int) -> None:
     new_employee = Employee(**body.model_dump())
+    new_employee.lastname = new_employee.lastname.capitalize()
+    new_employee.firstname = new_employee.firstname.capitalize()
+    new_employee.patronymic = new_employee.patronymic.capitalize()
     new_employee.company_id = company_id
     session.add(new_employee)
     await session.commit()
     
 async def create_region(session: AsyncSession, name: str) -> int:
-    new_region = Region(name=name)
+    new_region = Region(name=name.capitalize())
     session.add(new_region)
     await session.commit()
     await session.refresh(new_region)
     return new_region.id
     
 async def create_district(session: AsyncSession, name: str, region_id: int) -> int:
-    new_district = District(region_id=region_id, name=name)
+    new_district = District(region_id=region_id, name=name.capitalize())
     session.add(new_district)
     await session.commit()
     await session.refresh(new_district)
     return new_district.id
 
 async def create_city(session: AsyncSession, name: str, district_id: int) -> int:
-    new_city = City(district_id=district_id, name=name)
+    new_city = City(district_id=district_id, name=name.capitalize())
     session.add(new_city)
     await session.commit()
     await session.refresh(new_city)
@@ -69,7 +74,7 @@ async def create_street(session: AsyncSession, name: str, city_id: int) -> None:
 # Read Data
 
 async def read_companies(session: AsyncSession) -> list[Company]:
-    stmt = select(Company).where(Company.is_active==True).order_by(Company.short_name)
+    stmt = select(Company).where(Company.is_active == True).order_by(Company.short_name)
     return list(await session.scalars(stmt))
 
 
@@ -122,7 +127,7 @@ async def read_streets(session: AsyncSession) -> list[Street]:
     stmt = select(Street).order_by(Street.name)
     return list(await session.scalars(stmt))
 
-async def read_company_employees(session: AsyncSession, company_id: int) -> list[Employee]:
+async def read_company_employees(session: AsyncSession, company_id: int) -> list[Employee | None]:
     stmt = select(Employee).where(and_(Employee.company_id == company_id, Employee.is_active == True)).order_by(Employee.lastname)
     return list(await session.scalars(stmt))
            

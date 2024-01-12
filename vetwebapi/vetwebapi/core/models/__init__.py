@@ -15,7 +15,9 @@ __all__ = (
     "Animal",
     "AnimalGroup",
     "Species",
-    "TypeOfFeeding"
+    "TypeOfFeeding",
+    "UsageType",
+    "Gender",
 )
 
 from .base import Base
@@ -35,3 +37,5 @@ from .animals.animal import Animal
 from .animals.animal_group import AnimalGroup
 from .animals.species import Species
 from .animals.type_of_feeding import TypeOfFeeding
+from .animals.usage_type import UsageType
+from .animals.gender import Gender

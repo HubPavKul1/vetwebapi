@@ -5,5 +5,10 @@
         "ondelete",
         "pydantic",
         "vetwebapi"
-    ]
+    ],
+    "emmet.includeLanguages": {
+        "vue-html": "html",
+        "javascript": "javascriptreact",
+        "django-html": "html",
+      },
 }

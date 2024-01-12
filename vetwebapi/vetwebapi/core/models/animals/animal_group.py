@@ -19,7 +19,7 @@ class AnimalGroup(Base):
     name: Mapped[str] = mapped_column(String(100))
 
     species: Mapped[list["Species"]] = relationship(back_populates="animal_group")
-    type_of_feeding: Mapped["TypeOfFeeding"] = relationship(back_populates="animal_groups")
+    type_of_feeding: Mapped["TypeOfFeeding"] = relationship(back_populates="animal_groups", lazy="joined")
 
     def __repr__(self):
         return self.name
