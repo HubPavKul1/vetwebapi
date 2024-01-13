@@ -27,7 +27,7 @@
 									{% endif %}
 									<div>
 										<table class="table">
-											<caption>Работники</caption>
+											<caption class>Работники</caption>
 											<tr>
 												<th>Должность</th>
 												<th>Фамилия</th>
@@ -46,6 +46,7 @@
 											{% endif %}
 										</table>
 									</div>
+					
 									<table class="table">
 										<caption>Животные</caption>
 										<tr>
@@ -55,7 +56,22 @@
 											<th>Дата рождения</th>
 											<th>Кличка</th>
 											<th>Идентификация</th>
+											<th></th>
 										</tr>
+										{% if company.animals %}
+										{% for animal in company.animals %}
+										<tr>
+											<td>{{animal.animal_group}}</td>
+											<td>{{animal.species}}</td>
+											<td>{{animal.gender}}</td>
+											<td>{{animal.date_of_birth}}</td>
+											<td>{{animal.nickname}}</td>
+											<td>{{animal.identification}}</td>	
+											<td><a href="#" class="btn btn-success">Редактировать</a> | <a class="btn btn-danger" href="{{url_for('delete_animal', animal_id=animal.id)}}">Удалить</a></td>
+										</tr>
+										{% endfor %}
+										{% endif %}
+
 									</table>
 
 									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>

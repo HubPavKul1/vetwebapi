@@ -1325,7 +1325,7 @@ async def start(session: AsyncSession = Depends(db_manager.scope_session_depende
     return {"message": "Hello, Dude!!!"}
 ```
 
-
+Доделать страницу компании, таблицу животных
 
 
 

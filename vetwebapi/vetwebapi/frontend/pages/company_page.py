@@ -4,10 +4,26 @@ from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
 from vetwebapi.core.settings import settings
 from vetwebapi.core.database import db_manager
-from vetwebapi.api_v1.company.crud import create_address, create_company, create_employee, read_cities, read_districts, read_streets, read_regions, read_positions
+from vetwebapi.api_v1.company.crud import (
+    create_address,
+    create_company,
+    create_employee,
+    read_cities,
+    read_districts,
+    read_streets,
+    read_regions,
+    read_positions,
+)
 from vetwebapi.api_v1.animal.crud import create_animal, read_genders, read_species, read_usage_types
+from vetwebapi.api_v1.animal.schemas import AnimalIn
 from vetwebapi.api_v1.company.views import get_companies, get_company_detail
-from vetwebapi.api_v1.company.schemas import Companies, CompanyIn, CompanyDetail, AddressIn, EmployeeIn
+from vetwebapi.api_v1.company.schemas import (
+    Companies,
+    CompanyIn,
+    CompanyDetail,
+    AddressIn,
+    EmployeeIn,
+)
 from vetwebapi.core.models import Company
 
 
@@ -73,13 +89,13 @@ async def add_address(
 
 @router.post("/{company_id}/add_address")
 async def add_address(
-    request: Request, 
+    request: Request,
     street_id: Annotated[str, Form(...)],
     house_number: Annotated[str, Form(...)],
     phone_number1: Annotated[str, Form(...)],
     company_id: int,
     phone_number2: Annotated[str, Form()] = None,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     address_schema = AddressIn(
         street_id=int(street_id),
@@ -101,31 +117,25 @@ async def add_employee(
     company: CompanyDetail = Depends(get_company_detail),
 ):
     positions = await read_positions(session=session)
-    
+
     return settings.templates.TemplateResponse(
         "companies/add_employee.html",
-        {
-            "request": request,
-            "positions": positions,
-            "company": company,
-        },
+        {"request": request, "positions": positions, "company": company},
     )
-    
+
+
 @router.post("/{company_id}/add_employee")
 async def add_employee(
-    request: Request, 
+    request: Request,
     position_id: Annotated[str, Form(...)],
     lastname: Annotated[str, Form(...)],
     firstname: Annotated[str, Form(...)],
     company_id: int,
     patronymic: Annotated[str, Form()] = None,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     employee_schema = EmployeeIn(
-        position_id=int(position_id),
-        lastname=lastname,
-        firstname=firstname,
-        patronymic=patronymic
+        position_id=int(position_id), lastname=lastname, firstname=firstname, patronymic=patronymic
     )
 
     redirect_url = request.url_for("company_detail", **{"company_id": company_id})
@@ -143,7 +153,7 @@ async def add_animal(
     species = await read_species(session=session)
     genders = await read_genders(session=session)
     usage_types = await read_usage_types(session=session)
-    
+
     return settings.templates.TemplateResponse(
         "companies/add_animal.html",
         {
@@ -154,5 +164,38 @@ async def add_animal(
             "company": company,
         },
     )
+
+
+@router.post("/{company_id}/add_animal")
+async def add_animal(
+    request: Request,
+    species_id: Annotated[str, Form(...)],
+    gender_id: Annotated[str, Form(...)],
+    usage_type_id: Annotated[str, Form(...)],
+    company_id: int,
+    date_of_birth: Annotated[str, Form(...)],
+    nickname: Annotated[str, Form(...)],
+    identification: Annotated[str, Form(...)],
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    animal_schema = AnimalIn(
+        species_id=int(species_id), 
+        gender_id=int(gender_id), 
+        usage_type_id=int(usage_type_id),
+        date_of_birth=date_of_birth,
+        nickname=nickname,
+        identification=identification
+    )
     
-## Add create animal
+    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    await create_animal(session=session, body=animal_schema, company_id=company_id)
+    return RedirectResponse(redirect_url, status_code=302)
+
+
+@router.put("/edit/{animal_id}")
+async def update_animal(
+    request: Request,
+    animal_id: int,
+    ):
+
+    pass

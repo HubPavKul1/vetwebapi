@@ -1,5 +1,4 @@
-from typing import Union, TYPE_CHECKING
-
+from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -136,6 +135,7 @@ async def get_company_detail(
             animal_schemas = [
                 AnimalSchema(
                     id=animal.id,
+                    animal_group=animal.species.animal_group.name,
                     species=animal.species.name,
                     usage_type=animal.usage_type.name,
                     gender=animal.gender.name,
