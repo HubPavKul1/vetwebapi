@@ -12,7 +12,7 @@ from vetwebapi.api_v1.animal.crud import read_animal_by_id
 async def animal_by_id(
     animal_id: Annotated[int, Path()],
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Animal | None:
+) -> Animal:
     """Получаем объект Животного по id"""
 
     animal = await read_animal_by_id(session=session, animal_id=animal_id)

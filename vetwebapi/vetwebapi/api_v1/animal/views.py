@@ -11,16 +11,33 @@ from vetwebapi.api_v1.animal.schemas import AnimalSchema
 from . import crud
 from .dependencies import animal_by_id
 from vetwebapi.api_v1.company.schemas import SuccessMessage
-from .schemas import AnimalUpdate
-   
+from .schemas import AnimalUpdate, AnimalSchema
 
 
 router = APIRouter(prefix="/animals", tags=["Animals"])
 
 
-@router.get(
-    "/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
-)
+async def serialize_animal(animal: Animal) -> AnimalSchema:
+    return AnimalSchema(
+        id=animal.id,
+        animal_group=animal.species.animal_group.name,
+        species=animal.species.name,
+        usage_type=animal.usage_type.name,
+        gender=animal.gender.name,
+        date_of_birth=animal.date_of_birth,
+        nickname=animal.nickname,
+        identification=animal.identification
+    )
+
+
+@router.get("/{animal_id}/", response_model=AnimalSchema)
+async def get_animal(
+    animal: Animal = Depends(animal_by_id),
+) -> AnimalSchema:
+    return await serialize_animal(animal=animal)
+    
+
+@router.delete("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal(
     request: Request,
     animal: Animal = Depends(animal_by_id),
@@ -29,9 +46,26 @@ async def delete_animal(
     try:
         await crud.delete_animal(session=session, animal=animal)
         redirect_url = request.url_for("companies")
-    
+
         return RedirectResponse(redirect_url, status_code=302)
         # return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.put("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def update_animal(
+    request: Request,
+    body: AnimalUpdate,
+    animal: Animal = Depends(animal_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.update_animal(session=session, animal=animal, animal_update=body)
+        return SuccessMessage()
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

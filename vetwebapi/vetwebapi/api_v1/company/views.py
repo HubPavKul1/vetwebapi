@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Company, Address, Employee, Animal
 from vetwebapi.api_v1.animal.schemas import AnimalSchema
+from vetwebapi.api_v1.animal.views import serialize_animal
 
 
 from . import crud
@@ -53,7 +54,9 @@ async def get_companies(
         )
 
 
-@router.delete("/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete(
+    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -68,7 +71,9 @@ async def delete_company(
         )
 
 
-@router.post("/{company_id}/address", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/{company_id}/address", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED
+)
 async def create_address_route(
     body: AddressIn,
     company: Company = Depends(company_by_id),
@@ -83,7 +88,10 @@ async def create_address_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
-@router.post("/{company_id}/employee", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+
+@router.post(
+    "/{company_id}/employee", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED
+)
 async def create_employee_route(
     body: EmployeeIn,
     company: Company = Depends(company_by_id),
@@ -98,27 +106,28 @@ async def create_employee_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+
 @router.get("/{company_id}/", response_model=CompanyDetail)
 async def get_company_detail(
     company: Company = Depends(company_by_id),
     address: Address = Depends(company_address),
     employees: list[Employee | None] = Depends(company_employees),
-    animals: list[Animal | None] = Depends(company_animals)
+    animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, CompanyDetail]:
     try:
-        
         employee_schemas: list[EmployeeSchema] = []
         if employees:
             employee_schemas = [
                 EmployeeSchema(
-                id=item.id,
-                position=item.position.name, 
-                lastname=item.lastname, 
-                firstname=item.firstname, 
-                patronymic=item.patronymic,
-                fullname=item.fullname
-                ) for item in employees
-                ]
+                    id=item.id,
+                    position=item.position.name,
+                    lastname=item.lastname,
+                    firstname=item.firstname,
+                    patronymic=item.patronymic,
+                    fullname=item.fullname,
+                )
+                for item in employees
+            ]
         if address is not None:
             address = AddressSchema(
                 id=address.id,
@@ -127,32 +136,20 @@ async def get_company_detail(
                 street=address.street.name,
                 house_number=address.house_number,
                 phone_number1=address.phone_number1,
-                phone_number2=address.phone_number2
+                phone_number2=address.phone_number2,
             )
-        
-        animal_schemas: list[AnimalSchema] = []    
+
+        animal_schemas: list[AnimalSchema] = []
         if animals:
-            animal_schemas = [
-                AnimalSchema(
-                    id=animal.id,
-                    animal_group=animal.species.animal_group.name,
-                    species=animal.species.name,
-                    usage_type=animal.usage_type.name,
-                    gender=animal.gender.name,
-                    date_of_birth=animal.date_of_birth,
-                    nickname=animal.nickname,
-                    identification=animal.identification
-                ) for animal in animals
-            ]
-            
-        
+            animal_schemas = [await serialize_animal(animal=animal) for animal in animals]
+
         return CompanyDetail(
             id=company.id,
             full_name=company.full_name,
             short_name=company.short_name,
             address=address,
             employees=employee_schemas,
-            animals=animal_schemas
+            animals=animal_schemas,
         )
     except Exception:
         raise HTTPException(

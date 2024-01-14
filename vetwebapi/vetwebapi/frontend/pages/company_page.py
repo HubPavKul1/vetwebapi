@@ -179,23 +179,41 @@ async def add_animal(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     animal_schema = AnimalIn(
-        species_id=int(species_id), 
-        gender_id=int(gender_id), 
+        species_id=int(species_id),
+        gender_id=int(gender_id),
         usage_type_id=int(usage_type_id),
         date_of_birth=date_of_birth,
         nickname=nickname,
-        identification=identification
+        identification=identification,
     )
-    
+
     redirect_url = request.url_for("company_detail", **{"company_id": company_id})
     await create_animal(session=session, body=animal_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
 
 
-@router.put("/edit/{animal_id}")
+@router.get("/update_animal/{animal_id}", response_class=HTMLResponse)
 async def update_animal(
     request: Request,
-    animal_id: int,
-    ):
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    # animal: Animal = Depends(get_company_detail),
+):
+    species = await read_species(session=session)
+    genders = await read_genders(session=session)
+    usage_types = await read_usage_types(session=session)
 
+    return settings.templates.TemplateResponse(
+        "companies/add_animal.html",
+        {
+            "request": request,
+            "species": species,
+            "genders": genders,
+            "usage_types": usage_types,
+            
+        },
+    )
+
+
+@router.put("/edit/{animal_id}")
+async def update_animal(request: Request, animal_id: int):
     pass
