@@ -11,6 +11,7 @@ from vetwebapi.api_v1.company.employee.schemas import EmployeeIn
 
 from vetwebapi.api_v1.company.animal.crud import create_animal, read_genders, read_species, read_usage_types
 from vetwebapi.api_v1.company.animal.schemas import AnimalIn
+from vetwebapi.api_v1.company.animal.dependencies import animal_by_id
 
 from vetwebapi.api_v1.company.address.crud import read_cities, read_districts, read_regions, read_streets, create_address
 from vetwebapi.api_v1.company.address.schemas import AddressIn
@@ -22,7 +23,7 @@ from vetwebapi.api_v1.company.schemas import (
     CompanyDetail,
 )
 
-from vetwebapi.core.models import Company
+from vetwebapi.core.models import Company, Animal
 
 
 router = APIRouter(prefix="/companies")
@@ -143,7 +144,7 @@ async def add_employee(
 
 # Animals
 @router.get("/{company_id}/add_animal", response_class=HTMLResponse)
-async def add_animal(
+async def add_animal_page(
     request: Request,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     company: CompanyDetail = Depends(get_company_detail),
@@ -190,23 +191,26 @@ async def add_animal(
     return RedirectResponse(redirect_url, status_code=302)
 
 
-@router.get("/update_animal/{animal_id}", response_class=HTMLResponse)
+@router.get("/{company_id}/update_animal/{animal_id}", response_class=HTMLResponse)
 async def update_animal(
     request: Request,
+    company_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-    # animal: Animal = Depends(get_company_detail),
+    animal: Animal = Depends(animal_by_id),
 ):
     species = await read_species(session=session)
     genders = await read_genders(session=session)
     usage_types = await read_usage_types(session=session)
 
     return settings.templates.TemplateResponse(
-        "companies/add_animal.html",
+        "companies/update_animal.html",
         {
             "request": request,
             "species": species,
             "genders": genders,
             "usage_types": usage_types,
+            "animal": animal,
+            "company_id": company_id
             
         },
     )

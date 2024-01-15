@@ -67,7 +67,7 @@
 											<td>{{animal.date_of_birth}}</td>
 											<td>{{animal.nickname}}</td>
 											<td>{{animal.identification}}</td>	
-											<td><a href="#" class="btn btn-success">Ред.</a> | <a class="btn btn-danger" href="{{url_for('delete_animal', animal_id=animal.id)}}">Х</a></td>
+											<td><a href="{{url_for('update_animal', company_id=company.id, animal_id=animal.id)}}" class="btn btn-success">Ред.</a> | <a class="btn btn-danger" href="#">Х</a></td>
 										</tr>
 										{% endfor %}
 										{% endif %}
@@ -185,7 +185,7 @@
 							<ul class="list">
 								<li><a href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес <i class="icon-check"></i> </a></li>
 								<li><a href="{{url_for('add_employee', company_id=company.id)}}">Добавить работника <i class="icon-check"></i> </a></li>
-								<li><a href="{{url_for('add_animal', company_id=company.id)}}">Добавить животное <i class="icon-check"></i> </a></li>
+								<li><a href="{{url_for('add_animal_page', company_id=company.id)}}">Добавить животное <i class="icon-check"></i> </a></li>
 								<li><a href="#">Laboratories <i class="icon-check"></i> </a></li>
 							</ul>
 						</div>

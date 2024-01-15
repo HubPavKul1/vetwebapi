@@ -37,16 +37,12 @@ async def get_animal(
 
 @router.delete("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal(
-    request: Request,
     animal: Animal = Depends(animal_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
         await crud.delete_animal(session=session, animal=animal)
-        redirect_url = request.url_for("companies")
-
-        return RedirectResponse(redirect_url, status_code=302)
-        # return SuccessMessage()
+        return SuccessMessage()
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
