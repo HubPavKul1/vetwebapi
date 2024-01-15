@@ -4,26 +4,35 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Company, Address, Employee, Animal
-from vetwebapi.api_v1.animal.schemas import AnimalSchema
-from vetwebapi.api_v1.animal.views import serialize_animal
+
+from .animal.schemas import AnimalSchema
+from .animal.views import router as animal_router, serialize_animal
+from .animal.dependencies import company_animals
+
+from .employee.schemas import EmployeeSchema
+from .address.views import router as address_router, serialize_address
+from .address.dependencies import company_address
+
+from .employee.views import router as employee_router, serialize_employee
+from .employee.dependencies import company_employees
 
 
 from . import crud
-from .dependencies import company_by_id, company_address, company_employees, company_animals
+
+from .dependencies import company_by_id
 from .schemas import (
     Companies,
     CompanyIn,
     CompanyOut,
     SuccessMessage,
     CompanyDetail,
-    AddressSchema,
-    AddressIn,
-    EmployeeIn,
-    EmployeeSchema,
 )
 
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
+router.include_router(animal_router)
+router.include_router(address_router)
+router.include_router(employee_router)
 
 
 @router.post("/", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
@@ -54,9 +63,7 @@ async def get_companies(
         )
 
 
-@router.delete(
-    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
-)
+@router.delete("/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -64,42 +71,6 @@ async def delete_company(
     try:
         await crud.delete_company(session=session, company=company)
         return SuccessMessage()
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-
-
-@router.post(
-    "/{company_id}/address", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED
-)
-async def create_address_route(
-    body: AddressIn,
-    company: Company = Depends(company_by_id),
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[dict, SuccessMessage]:
-    try:
-        await crud.create_address(session=session, body=body, company_id=company.id)
-        return SuccessMessage
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-
-
-@router.post(
-    "/{company_id}/employee", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED
-)
-async def create_employee_route(
-    body: EmployeeIn,
-    company: Company = Depends(company_by_id),
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[dict, SuccessMessage]:
-    try:
-        await crud.create_employee(session=session, body=body, company_id=company.id)
-        return SuccessMessage
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -117,27 +88,10 @@ async def get_company_detail(
     try:
         employee_schemas: list[EmployeeSchema] = []
         if employees:
-            employee_schemas = [
-                EmployeeSchema(
-                    id=item.id,
-                    position=item.position.name,
-                    lastname=item.lastname,
-                    firstname=item.firstname,
-                    patronymic=item.patronymic,
-                    fullname=item.fullname,
-                )
-                for item in employees
-            ]
+            employee_schemas = [await serialize_employee(employee=employee) for employee in employees]
+            
         if address is not None:
-            address = AddressSchema(
-                id=address.id,
-                district=address.street.city.district.name,
-                city=address.street.city.name,
-                street=address.street.name,
-                house_number=address.house_number,
-                phone_number1=address.phone_number1,
-                phone_number2=address.phone_number2,
-            )
+            address = await serialize_address(address=address)
 
         animal_schemas: list[AnimalSchema] = []
         if animals:

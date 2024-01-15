@@ -1,10 +1,9 @@
 from operator import and_
-from fastapi import HTTPException, status
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.models import (
-    Company,
     Animal,
     TypeOfFeeding,
     Species,

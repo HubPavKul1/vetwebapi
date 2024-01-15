@@ -4,26 +4,24 @@ from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
 from vetwebapi.core.settings import settings
 from vetwebapi.core.database import db_manager
-from vetwebapi.api_v1.company.crud import (
-    create_address,
-    create_company,
-    create_employee,
-    read_cities,
-    read_districts,
-    read_streets,
-    read_regions,
-    read_positions,
-)
-from vetwebapi.api_v1.animal.crud import create_animal, read_genders, read_species, read_usage_types
-from vetwebapi.api_v1.animal.schemas import AnimalIn
+from vetwebapi.api_v1.company.crud import create_company
+
+from vetwebapi.api_v1.company.employee.crud import create_employee, read_positions
+from vetwebapi.api_v1.company.employee.schemas import EmployeeIn
+
+from vetwebapi.api_v1.company.animal.crud import create_animal, read_genders, read_species, read_usage_types
+from vetwebapi.api_v1.company.animal.schemas import AnimalIn
+
+from vetwebapi.api_v1.company.address.crud import read_cities, read_districts, read_regions, read_streets, create_address
+from vetwebapi.api_v1.company.address.schemas import AddressIn
+
 from vetwebapi.api_v1.company.views import get_companies, get_company_detail
 from vetwebapi.api_v1.company.schemas import (
     Companies,
     CompanyIn,
     CompanyDetail,
-    AddressIn,
-    EmployeeIn,
 )
+
 from vetwebapi.core.models import Company
 
 

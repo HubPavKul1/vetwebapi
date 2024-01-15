@@ -1,6 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from vetwebapi.api_v1.company.crud import create_region, create_district, create_city, create_street, create_role, create_position
-from vetwebapi.api_v1.animal.crud import create_type_of_feeding, create_animal_group, create_gender, create_species, create_usage_type
+from vetwebapi.api_v1.company.crud import create_role
+from vetwebapi.api_v1.company.animal.crud import create_type_of_feeding, create_animal_group, create_gender, create_species, create_usage_type
+from vetwebapi.api_v1.company.address.crud import create_region, create_district, create_city, create_street
+from vetwebapi.api_v1.company.employee.crud import create_position
 
 # Address
 async def add_districts(session: AsyncSession) -> list[int]:

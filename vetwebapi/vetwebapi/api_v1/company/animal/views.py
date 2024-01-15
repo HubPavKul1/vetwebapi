@@ -5,16 +5,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Animal
-from vetwebapi.api_v1.animal.schemas import AnimalSchema
-
-
+from .schemas import AnimalSchema, AnimalUpdate
 from . import crud
 from .dependencies import animal_by_id
+
 from vetwebapi.api_v1.company.schemas import SuccessMessage
-from .schemas import AnimalUpdate, AnimalSchema
 
 
-router = APIRouter(prefix="/animals", tags=["Animals"])
+router = APIRouter(prefix="/{company_id}/animals")
 
 
 async def serialize_animal(animal: Animal) -> AnimalSchema:

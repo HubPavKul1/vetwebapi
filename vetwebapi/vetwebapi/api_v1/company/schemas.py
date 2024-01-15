@@ -1,43 +1,12 @@
 from pydantic import BaseModel, ConfigDict
 
-from vetwebapi.api_v1.animal.schemas import AnimalSchema
+from .animal.schemas import AnimalSchema
+from .address.schemas import AddressSchema
+from .employee.schemas import EmployeeSchema
 
 
 class BaseIn(BaseModel):
     name: str
-
-
-class RegionSchema(BaseIn):
-    pass
-
-
-class DistrictSchema(BaseIn):
-    region: RegionSchema
-
-
-class CitySchema(BaseIn):
-    district: DistrictSchema
-
-
-class StreetSchema(BaseIn):
-    city: CitySchema
-
-
-class AddressIn(BaseModel):
-    street_id: int
-    house_number: str
-    phone_number1: str
-    phone_number2: str | None = None
-
-
-class AddressSchema(BaseModel):
-    id: int
-    district: str
-    city: str
-    street: str 
-    house_number: str
-    phone_number1: str
-    phone_number2: str | None = None
 
 
 class CompanyIn(BaseModel):
@@ -62,19 +31,7 @@ class CompanyOut(SuccessMessage):
 class Companies(SuccessMessage):
     companies: list[CompanySchema]
     
-class EmployeeIn(BaseModel):
-    position_id: int
-    lastname: str
-    firstname: str
-    patronymic: str
 
-class EmployeeSchema(BaseModel):
-    id: int
-    position: str
-    lastname: str
-    firstname: str
-    patronymic: str
-    fullname: str
     
 class CompanyDetail(CompanySchema):
     address: AddressSchema | None = None
