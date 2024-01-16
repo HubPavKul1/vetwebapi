@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Animal
-from .schemas import AnimalSchema, AnimalUpdate
+from .schemas import AnimalSchema, AnimalUpdate, AnimalUpdatePartial
 from . import crud
 from .dependencies import animal_by_id
 
@@ -24,7 +24,8 @@ async def serialize_animal(animal: Animal) -> AnimalSchema:
         gender=animal.gender.name,
         date_of_birth=animal.date_of_birth,
         nickname=animal.nickname,
-        identification=animal.identification
+        identification=animal.identification,
+        is_active=animal.is_active
     )
 
 
@@ -50,13 +51,12 @@ async def delete_animal(
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
+            detail={"result": False, "error_message": "Something wrong on backend"},
         )
 
 
-@router.get("/update/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
-async def update_animal(
-    request: Request,
+@router.put("/{animal_id}/", response_model=SuccessMessage , status_code=status.HTTP_202_ACCEPTED)
+async def update_animal_api(
     body: AnimalUpdate,
     animal: Animal = Depends(animal_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -67,5 +67,21 @@ async def update_animal(
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
+            detail={"result": False, "error_message": "Something wrong on backend"},
+        )
+
+
+@router.patch("/{animal_id}/", response_model=SuccessMessage , status_code=status.HTTP_202_ACCEPTED)
+async def update_animal_api_partial(
+    body: AnimalUpdatePartial,
+    animal: Animal = Depends(animal_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.update_animal(session=session, animal=animal, animal_update=body, partial=True)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Something wrong on backend"},
         )

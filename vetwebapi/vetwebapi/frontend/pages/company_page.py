@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends, Form, Path
+from fastapi import APIRouter, Request, Depends, Form
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -9,8 +9,8 @@ from vetwebapi.api_v1.company.crud import create_company
 from vetwebapi.api_v1.company.employee.crud import create_employee, read_positions
 from vetwebapi.api_v1.company.employee.schemas import EmployeeIn
 
-from vetwebapi.api_v1.company.animal.crud import create_animal, read_genders, read_species, read_usage_types
-from vetwebapi.api_v1.company.animal.schemas import AnimalIn
+from vetwebapi.api_v1.company.animal.crud import create_animal, read_genders, read_species, read_usage_types, update_animal
+from vetwebapi.api_v1.company.animal.schemas import AnimalIn, AnimalUpdate
 from vetwebapi.api_v1.company.animal.dependencies import animal_by_id
 
 from vetwebapi.api_v1.company.address.crud import read_cities, read_districts, read_regions, read_streets, create_address
@@ -191,7 +191,7 @@ async def add_animal(
     return RedirectResponse(redirect_url, status_code=302)
 
 
-@router.get("/{company_id}/update_animal/{animal_id}", response_class=HTMLResponse)
+@router.get("/{company_id}/update_animal_form/{animal_id}", response_class=HTMLResponse)
 async def update_animal_page(
     request: Request,
     company_id: int,
@@ -216,6 +216,29 @@ async def update_animal_page(
     )
 
 
-@router.put("/edit/{animal_id}")
-async def update_animal(request: Request, animal_id: int):
-    pass
+@router.post("/{company_id}/update_animal/{animal_id}")
+async def update_animal_request(
+    request: Request, 
+    species_id: Annotated[str, Form(...)],
+    gender_id: Annotated[str, Form(...)],
+    usage_type_id: Annotated[str, Form(...)],
+    company_id: int,
+    date_of_birth: Annotated[str, Form(...)],
+    nickname: Annotated[str, Form(...)],
+    identification: Annotated[str, Form(...)],
+    is_active: Annotated[bool, Form(...)],
+    animal: Animal = Depends(animal_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    ):
+    body = AnimalUpdate(
+        species_id=species_id,
+        usage_type_id=usage_type_id,
+        gender_id=gender_id,
+        date_of_birth=date_of_birth,
+        nickname=nickname,
+        identification=identification,
+        is_active=is_active
+    )
+    await update_animal(session=session, animal=animal, animal_update=body)
+    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    return RedirectResponse(redirect_url, status_code=302)

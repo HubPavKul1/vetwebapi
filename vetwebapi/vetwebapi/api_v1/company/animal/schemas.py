@@ -19,10 +19,11 @@ class AnimalSchema(BaseModel):
     date_of_birth: str
     nickname: str
     identification: str
+    is_active: bool = True
 
 
 class AnimalUpdate(AnimalIn):
-    pass
+    is_active: bool
 
 
 class AnimalUpdatePartial(BaseModel):
@@ -32,3 +33,4 @@ class AnimalUpdatePartial(BaseModel):
     date_of_birth: str | None = None
     nickname: str | None = None
     identification: str | None = None
+    is_active: bool = True
