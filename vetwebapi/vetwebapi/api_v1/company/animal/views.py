@@ -35,14 +35,18 @@ async def get_animal(
     return await serialize_animal(animal=animal)
     
 
-@router.delete("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.get("/delete/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal(
+    request: Request,
+    company_id: int,
     animal: Animal = Depends(animal_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[dict, SuccessMessage]:
+):
     try:
         await crud.delete_animal(session=session, animal=animal)
-        return SuccessMessage()
+        redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+        return RedirectResponse(redirect_url, status_code=302)
+
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -50,7 +54,7 @@ async def delete_animal(
         )
 
 
-@router.put("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.get("/update/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
 async def update_animal(
     request: Request,
     body: AnimalUpdate,

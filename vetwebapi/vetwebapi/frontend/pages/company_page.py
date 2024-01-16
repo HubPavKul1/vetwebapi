@@ -37,7 +37,7 @@ async def companies(request: Request, companies: Companies = Depends(get_compani
 
 
 @router.get("/add_company", response_class=HTMLResponse)
-async def add_company(request: Request):
+async def add_company_page(request: Request):
     return settings.templates.TemplateResponse("companies/add_company.html", {"request": request})
 
 
@@ -192,7 +192,7 @@ async def add_animal(
 
 
 @router.get("/{company_id}/update_animal/{animal_id}", response_class=HTMLResponse)
-async def update_animal(
+async def update_animal_page(
     request: Request,
     company_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
