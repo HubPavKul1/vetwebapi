@@ -1,5 +1,5 @@
 from typing import Union
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Request, UploadFile
 from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -85,3 +85,27 @@ async def update_animal_api_partial(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Something wrong on backend"},
         )
+        
+@router.post("/upload/", status_code=status.HTTP_201_CREATED)
+async def upload_animals(
+    request: Request,
+    company_id: int,
+    file: UploadFile | None = None,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    if file is not None:
+        if file.content_type not in ["text/csv"]:
+            raise HTTPException(status_code=400, detail="Invalid file type")
+    
+        try:
+            await crud.save_animals(session=session, animals_file=file)
+            redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+            return RedirectResponse(redirect_url, status_code=302)
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={"result": False, "error_message": "Internal Server Error"},
+            )
+    
+
+        

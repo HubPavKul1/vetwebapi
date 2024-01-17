@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends, Form
+from fastapi import APIRouter, Request, Depends, Form, UploadFile, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -185,7 +185,7 @@ async def add_animal(
         nickname=nickname,
         identification=identification,
     )
-
+    
     redirect_url = request.url_for("company_detail", **{"company_id": company_id})
     await create_animal(session=session, body=animal_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)

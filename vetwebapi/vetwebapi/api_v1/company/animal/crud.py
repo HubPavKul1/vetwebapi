@@ -1,3 +1,4 @@
+from fastapi import UploadFile, File
 from operator import and_
 
 from sqlalchemy import select
@@ -62,6 +63,10 @@ async def create_animal(session: AsyncSession, company_id: int, body: AnimalIn) 
     new_animal.company_id = company_id
     session.add(new_animal)
     await session.commit()
+    
+async def save_animals(session: AsyncSession, file: UploadFile) -> None:
+    print("***" * 20)
+    print("Hello ", file.filename)
 
 
 # Read

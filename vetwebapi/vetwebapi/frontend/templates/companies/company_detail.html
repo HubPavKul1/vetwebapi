@@ -14,7 +14,7 @@
 								<div class="blog-desc col-paddingbottom">
 									<h2><a href="#">{{ company.full_name }}</a></h2>
 									{% if company.address %}
-									<div class="post-meta">
+									<div class="post-meta" style="color: #6f42c1; ">
 										<span>{{company.address.district}}</span>
 										<span>{{company.address.city}}</span>
 										<span>{{company.address.street}}</span>
@@ -25,9 +25,9 @@
 										{% endif %}
 									</div>
 									{% endif %}
-									<div>
+									<div style="color: #6f42c1; ">
 										<table class="table">
-											<caption class>Работники</caption>
+											<caption style="color: #0d6efd; ">Работники</caption>
 											<tr>
 												<th>Должность</th>
 												<th>Фамилия</th>
@@ -46,35 +46,41 @@
 											{% endif %}
 										</table>
 									</div>
-					
-									<table class="table">
-										<caption>Животные</caption>
-										<tr>
-											<th>Группа животных</th>
-											<th>Вид животных</th>
-											<th>Пол животных</th>
-											<th>Дата рождения</th>
-											<th>Кличка</th>
-											<th>Идентификация</th>
-											<th></th>
-										</tr>
-										{% if company.animals %}
-										{% for animal in company.animals %}
-										<tr>
-											<td>{{animal.animal_group}}</td>
-											<td>{{animal.species}}</td>
-											<td>{{animal.gender}}</td>
-											<td>{{animal.date_of_birth}}</td>
-											<td>{{animal.nickname}}</td>
-											<td>{{animal.identification}}</td>	
-											<td><a href="{{url_for('update_animal_page', company_id=company.id, animal_id=animal.id)}}" class="btn btn-success">Ред.</a> | <a class="btn btn-danger" href="{{ url_for('delete_animal', company_id=company.id, animal_id=animal.id) }}">Х</a></td>
-										</tr>
-										
-										
-										{% endfor %}
-										{% endif %}
 
-									</table>
+									<div style="color: #6f42c1; ">
+										<table class="table">
+											<caption style="color: #0d6efd; ">Животные</caption>
+											<tr>
+												<th>Вид животных</th>
+												<th>Пол животных</th>
+												<th>Дата рождения</th>
+												<th>Кличка</th>
+												<th>Идентификация</th>
+												<th></th>
+											</tr>
+											{% if company.animals %}
+											{% for animal in company.animals %}
+											<tr>
+												<td>{{animal.species}}</td>
+												<td>{{animal.gender}}</td>
+												<td>{{animal.date_of_birth}}</td>
+												<td>{{animal.nickname}}</td>
+												<td>{{animal.identification}}</td>
+												<td>
+													<div class="btn-group btn-group-sm" role="group">
+														<a href="{{url_for('update_animal_page', company_id=company.id, animal_id=animal.id)}}" class="btn btn-warning">ред</a>
+														<a class="btn btn-danger" href="{{ url_for('delete_animal', company_id=company.id, animal_id=animal.id) }}">х</a>
+													</div>
+												</td>	
+												
+											</tr>
+											{% endfor %}
+											{% endif %}
+	
+										</table>
+									</div>
+					
+									
 
 									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 									<p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
@@ -183,7 +189,7 @@
 				<div class="col-md-4">
 					<aside class="sidebar">
 						<div class="side">
-							<h2>Categories</h2>
+							<h2>Меню</h2>
 							<ul class="list">
 								<li><a href="{{url_for('add_address', company_id=company.id)}}">Добавить адрес <i class="icon-check"></i> </a></li>
 								<li><a href="{{url_for('add_employee', company_id=company.id)}}">Добавить работника <i class="icon-check"></i> </a></li>
