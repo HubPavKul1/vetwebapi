@@ -72,7 +72,7 @@ async def create_animal(session: AsyncSession, company_id: int, body: AnimalIn) 
 async def save_animals(session: AsyncSession, company_id: int, file: UploadFile = File(...)) -> None:
     contents = file.file.read()
     buffer = StringIO(contents.decode('utf-8'))
-    csvReader = csv.DictReader(buffer)
+    csvReader = csv.reader(buffer)
     data = []
     for row in csvReader:
         data.append(row)
