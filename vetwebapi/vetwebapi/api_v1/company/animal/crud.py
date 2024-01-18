@@ -1,8 +1,13 @@
+import csv
+import codecs
+import pandas as pd
+
 from fastapi import UploadFile, File
 from operator import and_
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from io import StringIO
 
 from vetwebapi.core.models import (
     Animal,
@@ -64,10 +69,18 @@ async def create_animal(session: AsyncSession, company_id: int, body: AnimalIn) 
     session.add(new_animal)
     await session.commit()
     
-async def save_animals(session: AsyncSession, file: UploadFile) -> None:
-    print("***" * 20)
-    print("Hello ", file.filename)
-
+async def save_animals(session: AsyncSession, company_id: int, file: UploadFile = File(...)) -> None:
+    contents = file.file.read()
+    buffer = StringIO(contents.decode('utf-8'))
+    csvReader = csv.DictReader(buffer)
+    data = []
+    for row in csvReader:
+        data.append(row)
+    
+    buffer.close()
+    file.file.close()
+    print(data)
+    
 
 # Read
 async def read_company_animals(session: AsyncSession, company_id: int) -> list[Animal | None]:
