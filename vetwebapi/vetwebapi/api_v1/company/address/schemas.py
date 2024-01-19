@@ -12,7 +12,7 @@ class AddressSchema(BaseModel):
     id: int
     district: str
     city: str
-    street: str 
+    street: str
     house_number: str
     phone_number1: str
     phone_number2: str | None = None

@@ -1,25 +1,23 @@
 import csv
-
-from fastapi import UploadFile, File
+from io import StringIO
 from operator import and_
 
+from fastapi import File, UploadFile
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from io import StringIO
 
 from vetwebapi.core.models import (
     Animal,
-    TypeOfFeeding,
-    Species,
-    Gender,
-    UsageType,
     AnimalGroup,
+    Gender,
+    Species,
+    TypeOfFeeding,
+    UsageType,
 )
 
 from .schemas import AnimalIn, AnimalUpdate, AnimalUpdatePartial
 
 
-# Create
 async def create_type_of_feeding(session: AsyncSession, name: str) -> int:
     new_type_of_feeding = TypeOfFeeding(name=name.capitalize())
     session.add(new_type_of_feeding)
@@ -66,40 +64,41 @@ async def create_animal(session: AsyncSession, company_id: int, body: AnimalIn) 
     new_animal.company_id = company_id
     session.add(new_animal)
     await session.commit()
-    
-async def save_animals(session: AsyncSession, company_id: int, file: UploadFile = File(...)) -> None:
+
+
+async def save_animals(
+    session: AsyncSession, company_id: int, file: UploadFile = File(...)
+) -> None:
     contents = file.file.read()
-    buffer = StringIO(contents.decode('utf-8'))
+    buffer = StringIO(contents.decode("utf-8"))
     csvReader = csv.reader(buffer)
-        
+
     for row in csvReader:
         data_list = row[0].split(";")
         species = await read_species_by_name(session=session, name=data_list[0])
         gender = await read_gender_by_name(session=session, name=data_list[1])
-        usage_type= await read_usage_type_by_name(session=session, name=data_list[2])
+        usage_type = await read_usage_type_by_name(session=session, name=data_list[2])
         nickname = data_list[3]
         date_of_birth = data_list[4]
-        identification=data_list[5]
+        identification = data_list[5]
         new_animal = AnimalIn(
             species_id=species.id,
             usage_type_id=usage_type.id,
-            gender_id = gender.id,
+            gender_id=gender.id,
             nickname=nickname,
             date_of_birth=date_of_birth,
-            identification=identification
-            )
+            identification=identification,
+        )
         await create_animal(session=session, company_id=company_id, body=new_animal)
 
     buffer.close()
     file.file.close()
-   
-    
 
-# Read
+
 async def read_company_animals(session: AsyncSession, company_id: int) -> list[Animal | None]:
     stmt = (
         select(Animal)
-        .where(and_(Animal.company_id == company_id, Animal.is_active == True))
+        .where(and_(Animal.company_id == company_id, Animal.is_active))
         .order_by(Animal.nickname)
     )
     return list(await session.scalars(stmt))
@@ -112,6 +111,7 @@ async def read_animal_by_id(session: AsyncSession, animal_id: int) -> Animal | N
 async def read_species(session: AsyncSession) -> list[Species]:
     stmt = select(Species).order_by(Species.name)
     return list(await session.scalars(stmt))
+
 
 async def read_species_by_name(session: AsyncSession, name: str) -> Species:
     stmt = select(Species).where(Species.name.ilike(name))
@@ -138,7 +138,6 @@ async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType
     return await session.scalar(stmt)
 
 
-# Update animal
 async def update_animal(
     session: AsyncSession,
     animal: Animal,
@@ -151,7 +150,6 @@ async def update_animal(
     return animal
 
 
-# Delete animal
 async def delete_animal(session: AsyncSession, animal: Animal) -> None:
     await session.delete(animal)
     await session.commit()

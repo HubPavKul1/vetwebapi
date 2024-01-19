@@ -7,6 +7,7 @@ class EmployeeIn(BaseModel):
     firstname: str
     patronymic: str
 
+
 class EmployeeSchema(BaseModel):
     id: int
     position: str

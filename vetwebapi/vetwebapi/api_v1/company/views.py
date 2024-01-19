@@ -1,33 +1,25 @@
 from typing import Union
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import Company, Address, Employee, Animal
-
-from .animal.schemas import AnimalSchema
-from .animal.views import router as animal_router, serialize_animal
-from .animal.dependencies import company_animals
-
-from .employee.schemas import EmployeeSchema
-from .address.views import router as address_router, serialize_address
-from .address.dependencies import company_address
-
-from .employee.views import router as employee_router, serialize_employee
-from .employee.dependencies import company_employees
-
+from vetwebapi.core.models import Address, Animal, Company, Employee
 
 from . import crud
-
+from .address.dependencies import company_address
+from .address.views import router as address_router
+from .address.views import serialize_address
+from .animal.dependencies import company_animals
+from .animal.schemas import AnimalSchema
+from .animal.views import router as animal_router
+from .animal.views import serialize_animal
 from .dependencies import company_by_id
-from .schemas import (
-    Companies,
-    CompanyIn,
-    CompanyOut,
-    SuccessMessage,
-    CompanyDetail,
-)
-
+from .employee.dependencies import company_employees
+from .employee.schemas import EmployeeSchema
+from .employee.views import router as employee_router
+from .employee.views import serialize_employee
+from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 router.include_router(animal_router)
@@ -63,7 +55,9 @@ async def get_companies(
         )
 
 
-@router.delete("/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete(
+    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -88,8 +82,10 @@ async def get_company_detail(
     try:
         employee_schemas: list[EmployeeSchema] = []
         if employees:
-            employee_schemas = [await serialize_employee(employee=employee) for employee in employees]
-            
+            employee_schemas = [
+                await serialize_employee(employee=employee) for employee in employees
+            ]
+
         if address is not None:
             address = await serialize_address(address=address)
 

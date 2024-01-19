@@ -16,7 +16,9 @@ class Region(Base):
 
     name: Mapped[str] = mapped_column(String(100))
 
-    districts: Mapped[list["District"]] = relationship(back_populates="region", cascade="all, delete")
+    districts: Mapped[list["District"]] = relationship(
+        back_populates="region", cascade="all, delete"
+    )
 
     def __repr__(self):
         return self.name

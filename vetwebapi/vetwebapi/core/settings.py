@@ -1,8 +1,7 @@
 from pathlib import Path
+
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
-
 from pydantic_settings import BaseSettings
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent

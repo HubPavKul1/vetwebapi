@@ -103,7 +103,7 @@ async def add_address(
         phone_number2=phone_number2,
     )
 
-    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    redirect_url = request.url_for("company_detail", company_id=company_id)
     await create_address(session=session, body=address_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
 
@@ -137,7 +137,7 @@ async def add_employee(
         position_id=int(position_id), lastname=lastname, firstname=firstname, patronymic=patronymic
     )
 
-    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    redirect_url = request.url_for("company_detail", company_id=company_id)
     await create_employee(session=session, body=employee_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
 
@@ -186,7 +186,7 @@ async def add_animal(
         identification=identification,
     )
     
-    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    redirect_url = request.url_for("company_detail", company_id=company_id)
     await create_animal(session=session, body=animal_schema, company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)
 
@@ -240,5 +240,5 @@ async def update_animal_request(
         is_active=is_active
     )
     await update_animal(session=session, animal=animal, animal_update=body)
-    redirect_url = request.url_for("company_detail", **{"company_id": company_id})
+    redirect_url = request.url_for("company_detail", company_id=company_id)
     return RedirectResponse(redirect_url, status_code=302)

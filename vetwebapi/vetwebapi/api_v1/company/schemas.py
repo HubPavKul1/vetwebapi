@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 
-from .animal.schemas import AnimalSchema
 from .address.schemas import AddressSchema
+from .animal.schemas import AnimalSchema
 from .employee.schemas import EmployeeSchema
 
 
@@ -30,9 +30,8 @@ class CompanyOut(SuccessMessage):
 
 class Companies(SuccessMessage):
     companies: list[CompanySchema]
-    
 
-    
+
 class CompanyDetail(CompanySchema):
     address: AddressSchema | None = None
     employees: list[EmployeeSchema] = []

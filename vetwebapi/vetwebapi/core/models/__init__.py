@@ -20,6 +20,12 @@ __all__ = (
     "Gender",
 )
 
+from .animals.animal import Animal
+from .animals.animal_group import AnimalGroup
+from .animals.gender import Gender
+from .animals.species import Species
+from .animals.type_of_feeding import TypeOfFeeding
+from .animals.usage_type import UsageType
 from .base import Base
 from .companies.address import Address
 from .companies.city import City
@@ -33,9 +39,3 @@ from .users.auth import auth_backend
 from .users.manager import get_user_manager
 from .users.role import Role
 from .users.user import User
-from .animals.animal import Animal
-from .animals.animal_group import AnimalGroup
-from .animals.species import Species
-from .animals.type_of_feeding import TypeOfFeeding
-from .animals.usage_type import UsageType
-from .animals.gender import Gender

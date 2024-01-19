@@ -1,16 +1,15 @@
 from typing import Union
-from fastapi import APIRouter, Depends, HTTPException, status, Request
-from fastapi.responses import RedirectResponse
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from vetwebapi.api_v1.company.schemas import SuccessMessage
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Address
-from .schemas import AddressSchema, AddressIn
-from .dependencies import address_by_id
 
 from . import crud
-from vetwebapi.api_v1.company.schemas import SuccessMessage
-
+from .dependencies import address_by_id
+from .schemas import AddressIn, AddressSchema
 
 router = APIRouter(prefix="/{company_id}/address")
 
@@ -25,8 +24,8 @@ async def serialize_address(address: Address) -> AddressSchema:
         phone_number1=address.phone_number1,
         phone_number2=address.phone_number2,
     )
-    
-    
+
+
 @router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_address_route(
     body: AddressIn,
@@ -42,7 +41,7 @@ async def create_address_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
-    
+
 @router.delete("/{address_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_address(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -56,6 +55,3 @@ async def delete_address(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
-    
-        

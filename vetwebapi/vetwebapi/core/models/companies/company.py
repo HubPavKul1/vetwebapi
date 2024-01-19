@@ -7,9 +7,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
+    from vetwebapi.core.models import Animal
+
     from .address import Address
     from .employee import Employee
-    from vetwebapi.core.models import Animal
 
 
 class Company(Base):

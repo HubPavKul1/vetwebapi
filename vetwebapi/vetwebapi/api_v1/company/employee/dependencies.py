@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Employee
 
-from .crud import read_employee_by_id, read_company_employees
+from .crud import read_company_employees, read_employee_by_id
 
 
 async def employee_by_id(

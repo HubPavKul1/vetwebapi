@@ -17,11 +17,15 @@ lintmain:
 	flake8 vetwebapi/main.py
 	mypy vetwebapi/main.py
 
+lintapi_1:
+	black --check --diff vetwebapi/api_v1/
+	isort --check-only --profile black vetwebapi/api_v1/
+	flake8 vetwebapi/api_v1/
+	mypy vetwebapi/api_v1/
+
 lintapi:
-	black --check --diff api_v1/
-	isort --check-only --profile black api_v1/
-	flake8 api_v1/
-	mypy api_v1/
+	flake8 vetwebapi/api_v1/
+	mypy vetwebapi/api_v1/
 
 lintcore:
 	black --check --diff vetwebapi/core/

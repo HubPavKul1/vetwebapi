@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import Depends, Path, HTTPException, status
+from fastapi import Depends, HTTPException, Path, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
@@ -22,7 +22,7 @@ async def address_by_id(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Address | None:
     """Получаем адрес по его id"""
-    
+
     address = await crud.read_address_by_id(session=session, address_id=address_id)
     if address is None:
         raise HTTPException(
