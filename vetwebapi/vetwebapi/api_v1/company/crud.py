@@ -19,7 +19,7 @@ async def create_role(session: AsyncSession, name: str) -> None:
     new_role = Role(name=name)
     session.add(new_role)
     await session.commit()
-
+    
     
 # Read Data
 async def read_companies(session: AsyncSession) -> list[Company]:
@@ -30,6 +30,9 @@ async def read_companies(session: AsyncSession) -> list[Company]:
 async def read_company_by_id(session: AsyncSession, company_id: int) -> Company | None:
     return await session.get(Company, company_id)
 
+async def is_company_exists(session: AsyncSession, short_name: str) -> bool:
+    stmt = select(Company).where(Company.short_name.ilike(short_name))
+    return bool(await(session.scalar(stmt)))
 
 # Update Data
 

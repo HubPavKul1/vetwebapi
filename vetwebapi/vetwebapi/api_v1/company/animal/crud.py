@@ -1,6 +1,4 @@
 import csv
-import codecs
-import pandas as pd
 
 from fastapi import UploadFile, File
 from operator import and_
@@ -73,13 +71,28 @@ async def save_animals(session: AsyncSession, company_id: int, file: UploadFile 
     contents = file.file.read()
     buffer = StringIO(contents.decode('utf-8'))
     csvReader = csv.reader(buffer)
-    data = []
+        
     for row in csvReader:
-        data.append(row)
-    
+        data_list = row[0].split(";")
+        species = await read_species_by_name(session=session, name=data_list[0])
+        gender = await read_gender_by_name(session=session, name=data_list[1])
+        usage_type= await read_usage_type_by_name(session=session, name=data_list[2])
+        nickname = data_list[3]
+        date_of_birth = data_list[4]
+        identification=data_list[5]
+        new_animal = AnimalIn(
+            species_id=species.id,
+            usage_type_id=usage_type.id,
+            gender_id = gender.id,
+            nickname=nickname,
+            date_of_birth=date_of_birth,
+            identification=identification
+            )
+        await create_animal(session=session, company_id=company_id, body=new_animal)
+
     buffer.close()
     file.file.close()
-    print(data)
+   
     
 
 # Read
@@ -100,15 +113,29 @@ async def read_species(session: AsyncSession) -> list[Species]:
     stmt = select(Species).order_by(Species.name)
     return list(await session.scalars(stmt))
 
+async def read_species_by_name(session: AsyncSession, name: str) -> Species:
+    stmt = select(Species).where(Species.name.ilike(name))
+    return await session.scalar(stmt)
+
 
 async def read_genders(session: AsyncSession) -> list[Gender]:
     stmt = select(Gender).order_by(Gender.name)
     return list(await session.scalars(stmt))
 
 
+async def read_gender_by_name(session: AsyncSession, name: str) -> Gender:
+    stmt = select(Gender).where(Gender.name.ilike(name))
+    return await session.scalar(stmt)
+
+
 async def read_usage_types(session: AsyncSession) -> list[UsageType]:
     stmt = select(UsageType).order_by(UsageType.name)
     return list(await session.scalars(stmt))
+
+
+async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType:
+    stmt = select(UsageType).where(UsageType.name.ilike(name))
+    return await session.scalar(stmt)
 
 
 # Update animal
