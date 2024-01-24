@@ -7,6 +7,8 @@ from vetwebapi.api_v1.company.address.crud import create_region, create_district
 from vetwebapi.api_v1.company.employee.crud import create_position
 from vetwebapi.api_v1.vet_work.crud import create_disease
 
+from vetwebapi.core.models import Budget, Operation, AccountingUnit, DrugManufacturer, Disease, Street
+
 
 # Address
 async def add_districts(session: AsyncSession) -> list[int]:
@@ -32,8 +34,10 @@ async def fill_street_table(session: AsyncSession) -> None:
     
     await create_street(session=session, city_id=city_ids[1], name="улица Ивановская")
     with open(streets_file_path, encoding="utf16") as f:
-        for street in f:
-            await create_street(session=session, city_id=city_ids[0], name=street)
+        session.add_all([Street(city_id=city_ids[0], name=street) for street in f])
+        await session.commit()
+        # for street in f:
+        #     await create_street(session=session, city_id=city_ids[0], name=street)
             
 # Employees            
 async def add_roles(session: AsyncSession) -> None:
@@ -71,22 +75,53 @@ async def add_species(session: AsyncSession) -> None:
     [await create_species(session=session, animal_group_id=animal_group_id, name=name) for name in names]
     
     
+# Drugs
+async def add_budgets(session: AsyncSession) -> None:
+    budgets = ["федеральный", "областной", "коммерческий"]
+    session.add_all([Budget(name=name) for name in budgets])
+    await session.commit()
+    
+async def add_operations(session: AsyncSession) -> None:
+    operations = ["приход", "расход", "утилизация"]
+    session.add_all([Operation(name=name) for name in operations])
+    await session.commit()
+    
+async def add_accounting_units(session: AsyncSession) -> None:
+    units = ["доз", "тыс.доз", "мл", "флакон", "литры", "кг"]
+    session.add_all([AccountingUnit(name=name) for name in units])
+    await session.commit()
+    
+async def add_drug_manufacturers(session: AsyncSession) -> None:
+    file_path = os.path.join(settings.files_dir, "vet_work", "drugs", "drug_manufacturers.txt")
+    with open (file_path, encoding="utf-8") as f:
+        session.add_all([DrugManufacturer(name=name.strip()) for name in f])
+        await session.commit()
+        
+async def add_drugs_data(session: AsyncSession) -> None:
+    await add_budgets(session=session)
+    await add_operations(session=session)
+    await add_accounting_units(session=session)
+    await add_drug_manufacturers(session=session)
+    
+    
 # Vet_work
 async def add_diseases(session: AsyncSession):
     file_path = os.path.join(settings.files_dir, "vet_work", "diseases.txt")
     
     with open (file_path, encoding="utf-8") as f:
-        [await create_disease(session=session, name=name) for name in f]
+        session.add_all([Disease(name=name.strip()) for name in f])
+        await session.commit()
         
             
 async def prepare_db(session: AsyncSession) -> None:
     """Подготовка базы данных при первом запуске"""
     await fill_street_table(session=session)
-    await add_roles(session=session)
     await add_positions(session=session)
     await add_genders(session=session)
     await add_usage_types(session=session)
     await add_species(session=session)
     await add_diseases(session=session)
+    await add_drugs_data(session=session)
+    await add_roles(session=session)
     
     
