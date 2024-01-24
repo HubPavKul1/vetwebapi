@@ -1,8 +1,12 @@
+import os
 from sqlalchemy.ext.asyncio import AsyncSession
+from vetwebapi.core.settings import settings
 from vetwebapi.api_v1.company.crud import create_role
 from vetwebapi.api_v1.company.animal.crud import create_type_of_feeding, create_animal_group, create_gender, create_species, create_usage_type
 from vetwebapi.api_v1.company.address.crud import create_region, create_district, create_city, create_street
 from vetwebapi.api_v1.company.employee.crud import create_position
+from vetwebapi.api_v1.vet_work.crud import create_disease
+
 
 # Address
 async def add_districts(session: AsyncSession) -> list[int]:
@@ -24,8 +28,10 @@ async def add_cities(session: AsyncSession) -> tuple[int]:
 async def fill_street_table(session: AsyncSession) -> None:
     """Заполняем таблицу с улицами"""
     city_ids: tuple[int] = await add_cities(session=session)
+    streets_file_path: str = os.path.join(settings.files_dir, "address", "streets.txt")
+    
     await create_street(session=session, city_id=city_ids[1], name="улица Ивановская")
-    with open("vetwebapi/streets.txt", encoding="utf16") as f:
+    with open(streets_file_path, encoding="utf16") as f:
         for street in f:
             await create_street(session=session, city_id=city_ids[0], name=street)
             
@@ -64,7 +70,15 @@ async def add_species(session: AsyncSession) -> None:
     names = ["Лошади", "Пони"]
     [await create_species(session=session, animal_group_id=animal_group_id, name=name) for name in names]
     
-
+    
+# Vet_work
+async def add_diseases(session: AsyncSession):
+    file_path = os.path.join(settings.files_dir, "vet_work", "diseases.txt")
+    
+    with open (file_path, encoding="utf-8") as f:
+        [await create_disease(session=session, name=name) for name in f]
+        
+            
 async def prepare_db(session: AsyncSession) -> None:
     """Подготовка базы данных при первом запуске"""
     await fill_street_table(session=session)
@@ -73,3 +87,6 @@ async def prepare_db(session: AsyncSession) -> None:
     await add_genders(session=session)
     await add_usage_types(session=session)
     await add_species(session=session)
+    await add_diseases(session=session)
+    
+    

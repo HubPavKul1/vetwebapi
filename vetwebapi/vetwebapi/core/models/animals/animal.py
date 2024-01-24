@@ -1,6 +1,7 @@
+from datetime import date
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, ForeignKey, String
+from sqlalchemy import Boolean, ForeignKey, String, Date
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from vetwebapi.core.models.base import Base
@@ -22,7 +23,7 @@ class Animal(Base):
     company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
     usage_type_id: Mapped[int] = mapped_column(ForeignKey("usage_types.id", ondelete="CASCADE"))
     gender_id: Mapped[int] = mapped_column(ForeignKey("genders.id", ondelete="CASCADE"))
-    date_of_birth: Mapped[str] = mapped_column(String(10))
+    date_of_birth: Mapped[date]
     nickname: Mapped[str] = mapped_column(String(100))
     identification: Mapped[str] = mapped_column(String(15))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)

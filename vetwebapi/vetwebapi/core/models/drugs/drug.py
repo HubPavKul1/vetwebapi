@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from vetwebapi.core.models import Disease
     from .drug_manufacturer import DrugManufacturer
     from .budget import Budget
+    from .drug_movement import DrugMovement
+    from .accounting_unit import AccountingUnit
 
 
 class Drug(Base):
@@ -19,13 +21,16 @@ class Drug(Base):
     disease_id: Mapped[int] = mapped_column(ForeignKey("diseases.id", ondelete="CASCADE"))
     drug_manufacturer_id: Mapped[int] = mapped_column(ForeignKey("drug_manufacturers.id", ondelete="CASCADE"))
     budget_id: Mapped[int] = mapped_column(ForeignKey("budgets.id", ondelete="CASCADE"))
+    accounting_unit_id: Mapped[int] = mapped_column(ForeignKey("accounting_units.id", ondelete="CASCADE"))
     name: Mapped[str] = mapped_column(String(300))
+    instruction: Mapped[str | None]
     
     disease: Mapped["Disease"] = relationship(back_populates="drugs", lazy="joined")
-    drug_manufacturer: Mapped["DrugManufacturer"] = relationship(back_populates="drug_manufacturer", lazy="joined")
-    budget: Mapped["Budget"] = relationship(back_populates="drugs", lazy="joined")
-    instruction: Mapped[str]
+    drug_manufacturer: Mapped["DrugManufacturer"] = relationship(back_populates="drugs", lazy="joined")
+    budget: Mapped["Budget"] = relationship(back_populates="drugs", lazy="joined")  
+    accounting_unit: Mapped["AccountingUnit"] = relationship(back_populates="drugs", lazy="joined")
     
+    drug_movements: Mapped[list["DrugMovement"]] = relationship(back_populates="drugs", secondary="drugs_in_movement")
     
     def __repr__(self):
         return self.name

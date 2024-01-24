@@ -26,6 +26,9 @@ __all__ = (
     "PlaceOfAdministration",
     "Disease",
     "Budget",
+    "Operation",
+    "DrugMovement",
+    "DrugInMovement",
     
 )
 
@@ -63,6 +66,9 @@ from .drugs.administration_method import AdministrationMethod
 from .drugs.dosage import Dosage
 from .drugs.place_of_administration import PlaceOfAdministration
 from .drugs.budget import Budget
+from .drugs.operation import Operation
+from .drugs.drug_movement import DrugMovement
+from .drugs.drug_in_movement import DrugInMovement
 
 # VetWork
 from .vet_work.disease import Disease
