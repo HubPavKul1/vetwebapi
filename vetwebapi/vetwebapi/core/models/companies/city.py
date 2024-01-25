@@ -21,5 +21,5 @@ class City(Base):
     district: Mapped["District"] = relationship(back_populates="cities", lazy="joined")
     streets: Mapped[list["Street"]] = relationship(back_populates="city", cascade="all, delete")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: b337d3d9a693
+Revision ID: 5537ea989283
 Revises: 
-Create Date: 2024-01-24 13:24:10.951249
+Create Date: 2024-01-25 15:57:47.797954
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "b337d3d9a693"
+revision: str = "5537ea989283"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -149,7 +149,13 @@ def upgrade() -> None:
         sa.Column("budget_id", sa.Integer(), nullable=False),
         sa.Column("accounting_unit_id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=300), nullable=False),
+        sa.Column("butch", sa.String(length=10), nullable=False),
+        sa.Column("control", sa.String(length=10), nullable=False),
+        sa.Column("production_date", sa.Date(), nullable=False),
+        sa.Column("expiration_date", sa.Date(), nullable=False),
+        sa.Column("packing", sa.Float(), nullable=False),
         sa.Column("instruction", sa.String(), nullable=True),
+        sa.Column("is_active", sa.Boolean(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
             ["accounting_unit_id"], ["accounting_units.id"], ondelete="CASCADE"
@@ -214,14 +220,8 @@ def upgrade() -> None:
         "drugs_in_movement",
         sa.Column("drug_movement_id", sa.Integer(), nullable=False),
         sa.Column("drug_id", sa.Integer(), nullable=False),
-        sa.Column("butch", sa.String(length=10), nullable=False),
-        sa.Column("control", sa.String(length=10), nullable=False),
-        sa.Column("production_date", sa.Date(), nullable=False),
-        sa.Column("expiration_date", sa.Date(), nullable=False),
-        sa.Column("packing", sa.Float(), nullable=False),
         sa.Column("packs_amount", sa.Integer(), nullable=False),
         sa.Column("units_amount", sa.Float(), nullable=False),
-        sa.Column("is_active", sa.Boolean(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(["drug_id"], ["drugs.id"]),
         sa.ForeignKeyConstraint(["drug_movement_id"], ["drug_movements.id"]),

@@ -1,12 +1,14 @@
-from datetime import date
-
-from sqlalchemy import ForeignKey, String, Boolean, UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import TYPE_CHECKING
+from sqlalchemy import ForeignKey, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from vetwebapi.core.models.base import Base
 
+if TYPE_CHECKING:
+    from .drug import Drug
+    from .drug_movement import DrugMovement
 
-    
+
 class DrugInMovement(Base):
     """Класс Перемещаемый Препарат (Many-To-Many Препарат и Перемещение препарата)"""
     
@@ -22,13 +24,9 @@ class DrugInMovement(Base):
     drug_movement_id: Mapped[int] = mapped_column(ForeignKey("drug_movements.id"))
     drug_id: Mapped[int] = mapped_column(ForeignKey("drugs.id"))
     
-    butch: Mapped[str] = mapped_column(String(10))
-    control: Mapped[str] = mapped_column(String(10))
-    production_date: Mapped[date]
-    expiration_date: Mapped[date]
-    packing: Mapped[float]
+    drug_movement: Mapped["DrugMovement"] = relationship(back_populates="drugs_details")
+    drug: Mapped["Drug"] = relationship(back_populates="drug_movements_details")
+    
     packs_amount: Mapped[int] 
     units_amount: Mapped[float]
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    
     

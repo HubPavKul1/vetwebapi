@@ -20,5 +20,5 @@ class AccountingUnit(Base):
     drugs: Mapped[list["Drug"]] = relationship(back_populates="accounting_unit")
     
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

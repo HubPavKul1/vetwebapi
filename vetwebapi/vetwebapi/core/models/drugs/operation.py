@@ -18,5 +18,5 @@ class Operation(Base):
     
     drug_movement: Mapped[list["DrugMovement"]] = relationship(back_populates="operation")
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

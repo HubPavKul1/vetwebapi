@@ -5,7 +5,6 @@ from vetwebapi.api_v1.company.crud import create_role
 from vetwebapi.api_v1.company.animal.crud import create_type_of_feeding, create_animal_group, create_gender, create_species, create_usage_type
 from vetwebapi.api_v1.company.address.crud import create_region, create_district, create_city, create_street
 from vetwebapi.api_v1.company.employee.crud import create_position
-from vetwebapi.api_v1.vet_work.crud import create_disease
 
 from vetwebapi.core.models import Budget, Operation, AccountingUnit, DrugManufacturer, Disease, Street
 
@@ -36,8 +35,7 @@ async def fill_street_table(session: AsyncSession) -> None:
     with open(streets_file_path, encoding="utf16") as f:
         session.add_all([Street(city_id=city_ids[0], name=street) for street in f])
         await session.commit()
-        # for street in f:
-        #     await create_street(session=session, city_id=city_ids[0], name=street)
+        
             
 # Employees            
 async def add_roles(session: AsyncSession) -> None:
@@ -105,7 +103,7 @@ async def add_drugs_data(session: AsyncSession) -> None:
     
     
 # Vet_work
-async def add_diseases(session: AsyncSession):
+async def add_diseases(session: AsyncSession) -> None:
     file_path = os.path.join(settings.files_dir, "vet_work", "diseases.txt")
     
     with open (file_path, encoding="utf-8") as f:

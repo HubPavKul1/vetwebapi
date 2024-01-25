@@ -33,5 +33,5 @@ class Animal(Base):
     usage_type: Mapped["UsageType"] = relationship(back_populates="animals", lazy="joined")
     gender: Mapped["Gender"] = relationship(back_populates="animals", lazy="joined")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.species.name}: {self.nickname}"

@@ -13,5 +13,5 @@ class Dosage(Base):
     
     name: Mapped[str] = mapped_column(String(300))
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

@@ -13,5 +13,5 @@ class AdministrationMethod(Base):
     
     name: Mapped[str] = mapped_column(String(50))
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

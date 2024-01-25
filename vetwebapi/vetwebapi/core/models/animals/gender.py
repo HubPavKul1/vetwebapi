@@ -18,5 +18,5 @@ class Gender(Base):
 
     animals: Mapped[list["Animal"]] = relationship(back_populates="gender")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

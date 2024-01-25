@@ -20,5 +20,5 @@ class Region(Base):
         back_populates="region", cascade="all, delete"
     )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name

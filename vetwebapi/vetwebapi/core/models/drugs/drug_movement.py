@@ -9,6 +9,7 @@ from vetwebapi.core.models.base import Base
 if TYPE_CHECKING:
     from .operation import Operation
     from .drug import Drug
+    from .drug_in_movement import DrugInMovement
 
 
 class DrugMovement(Base):
@@ -20,9 +21,12 @@ class DrugMovement(Base):
     operation_date: Mapped[date] 
     
     operation: Mapped["Operation"] = relationship(back_populates="drug_movement", lazy="joined")
-    drugs: Mapped[list["Drug"]] = relationship(back_populates="drug_movements", secondary="drugs_in_movement")
     
-    def __repr__(self):
+    # Ассоциация с Drug
+    drugs: Mapped[list["Drug"]] = relationship(back_populates="drug_movements", secondary="drugs_in_movement")
+    drugs_details: Mapped[list["DrugInMovement"]] = relationship(back_populates="drug_movement")
+    
+    def __repr__(self) -> str:
         return f"{self.operation.name}:{self.operation_date}"
     
     

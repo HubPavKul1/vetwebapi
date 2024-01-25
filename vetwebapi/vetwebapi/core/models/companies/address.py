@@ -24,5 +24,5 @@ class Address(Base):
     company: Mapped["Company"] = relationship(back_populates="addresses")
     street: Mapped["Street"] = relationship(back_populates="addresses", lazy="joined")
 
-    # def __repr__(self) -> str:
-    #     return f"{self.street.city.name}, {self.street.name}, {self.house_number}"
+    def __repr__(self) -> str:
+        return f"{self.street.city.name}, {self.street.name}, {self.house_number}"

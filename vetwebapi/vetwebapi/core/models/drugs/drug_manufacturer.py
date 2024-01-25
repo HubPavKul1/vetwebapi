@@ -18,5 +18,5 @@ class DrugManufacturer(Base):
     
     drugs: Mapped[list["Drug"]] = relationship(back_populates="drug_manufacturer") 
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name
