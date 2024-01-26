@@ -25,7 +25,7 @@ class Drug(Base):
     budget_id: Mapped[int] = mapped_column(ForeignKey("budgets.id", ondelete="CASCADE"))
     accounting_unit_id: Mapped[int] = mapped_column(ForeignKey("accounting_units.id", ondelete="CASCADE"))
     name: Mapped[str] = mapped_column(String(300))
-    butch: Mapped[str] = mapped_column(String(10))
+    batch: Mapped[str] = mapped_column(String(10))
     control: Mapped[str] = mapped_column(String(10))
     production_date: Mapped[date]
     expiration_date: Mapped[date]

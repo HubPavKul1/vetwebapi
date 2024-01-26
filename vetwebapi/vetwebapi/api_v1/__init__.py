@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from .auth.dependencies import current_active_user
 from .auth.views import router as auth_router
 from .company.views import router as company_router
-from .drugs.views import router as drug_router
+from .drug.views import router as drug_router
 
 router = APIRouter()
 router.include_router(

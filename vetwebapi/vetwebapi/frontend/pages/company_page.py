@@ -36,7 +36,7 @@ async def companies(request: Request, companies: Companies = Depends(get_compani
     )
 
 
-@router.get("/add_company", response_class=HTMLResponse)
+@router.get("/add_company/", response_class=HTMLResponse)
 async def add_company_page(request: Request):
     return settings.templates.TemplateResponse("companies/add_company.html", {"request": request})
 

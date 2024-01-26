@@ -402,3 +402,16 @@
 
 
 }());
+
+// addCompany.onsubmit = async (e) => {
+//     e.preventDefault();
+
+//     let response = await fetch('/add_company', {
+//       method: 'POST',
+//       body: new FormData(addCompany)
+//     });
+
+//     let result = await response.json();
+
+//     alert(result.message);
+//   };

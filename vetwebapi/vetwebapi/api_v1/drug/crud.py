@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.models import Drug, DrugMovement, DrugInMovement, Operation
@@ -37,3 +37,7 @@ async def read_operation_by_id(session: AsyncSession, operation_id: int) -> Oper
 
 async def read_drug_movement_by_id(session: AsyncSession, drug_movement_id: int) -> DrugMovement | None:
     return await session.get(DrugMovement, drug_movement_id)
+
+async def read_receipts(session: AsyncSession) -> list[DrugMovement]:
+    stmt = select(DrugMovement).where(DrugMovement.operation_id == 1).order_by(desc(DrugMovement.operation_date))
+    return list(await session.scalars(stmt))

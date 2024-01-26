@@ -8,7 +8,7 @@ class DrugIn(BaseModel):
     drug_manufacturer_id: int
     accounting_unit_id: int
     name: str
-    butch: str
+    batch: str
     control: str
     production_date: date
     expiration_date: date
@@ -17,7 +17,7 @@ class DrugIn(BaseModel):
     
 class DrugSchema(BaseModel):
     name: str
-    butch: str
+    batch: str
     control: str
     production_date: date
     expiration_date: date
@@ -36,4 +36,18 @@ class DrugInMovementIn(BaseModel):
     drug_id: int
     packs_amount: int
     units_amount: float
+    
+    
+class DrugInMovementSchema(BaseModel):
+    drug: DrugSchema
+    packs_amount: int
+    units_amount: float
+    
+    
+class DrugMovementDetail(DrugMovementOut):
+    drugs: list[DrugInMovementSchema]
+    
+class DrugMovements(BaseModel):
+    drug_movements: list[DrugMovementOut]
+    
     
