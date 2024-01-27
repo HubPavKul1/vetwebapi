@@ -1,10 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+// import "./assets/css/style.css";
+// import "./assets/css/bootstrap.css";
+// import "./assets/css/owl.carousel.min.css";
+// import "./assets/css/owl.theme.default.min.css";
+// import "./assets/css/flexslider.css";
+// import "./assets/fonts/flaticon/font/flaticon.css";
+    
+   
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+import App from './App';
+
+
+ReactDOM.createRoot(document.getElementById('root')).render( <App />)
