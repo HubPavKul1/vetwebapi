@@ -1,4 +1,10 @@
 import { useState } from "react";
+import "./Header.css";
+import { Link } from "react-router-dom";
+
+import HomeLink from "./HomeLink";
+import CompaniesLink from "./CompaniesLink";
+
 
 
 export default function Header() {
@@ -31,12 +37,12 @@ export default function Header() {
                                 <div className="col-xs-8">
                                     <div className="menu-1">
                                         <ul>
-                                            <li className="active">
-                                                <a href="#">Home</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Предприятия</a>
-                                            </li>
+                                            <HomeLink />
+                                            <CompaniesLink />
+                                           
+                                            {/* <li>
+                                                <a href="">Предприятия</a>
+                                            </li> */}
                                             <li className="has-dropdown">
                                                 <a href="#">Биопрепараты</a>
                                                 <ul className="dropdown">
@@ -72,7 +78,6 @@ export default function Header() {
                                         <a href="">
                                             <span>
                                                 Выйти
-                                                <i className="icon-calendar3" />
                                             </span>
                                         </a>
                                     </p>
@@ -82,6 +87,8 @@ export default function Header() {
                     </div>
                 </div>
             </nav>
+
+
 
     )
 }
