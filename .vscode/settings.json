@@ -1,9 +1,15 @@
 {
     "cSpell.words": [
         "asyncpg",
+        "colorlib",
         "fastapi",
+        "flaticon",
+        "Flaticons",
+        "Flexslider",
+        "Modernizr",
         "ondelete",
         "pydantic",
+        "Vetcare",
         "vetwebapi"
     ],
     "emmet.includeLanguages": {

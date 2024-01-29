@@ -12,12 +12,13 @@ import { BrowserRouter } from 'react-router-dom';
    
 
 import App from './App';
+import Header from './components/header/Header';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render( 
     <React.StrictMode>
         <BrowserRouter>
-            <App />
+             <App />
         </BrowserRouter>
     </React.StrictMode>
        

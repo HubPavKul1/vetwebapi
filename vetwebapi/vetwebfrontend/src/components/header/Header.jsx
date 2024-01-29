@@ -1,10 +1,7 @@
-import { useState } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
 
 import HomeLink from "./HomeLink";
 import CompaniesLink from "./CompaniesLink";
-
 
 
 export default function Header() {
@@ -40,9 +37,7 @@ export default function Header() {
                                             <HomeLink />
                                             <CompaniesLink />
                                            
-                                            {/* <li>
-                                                <a href="">Предприятия</a>
-                                            </li> */}
+                                
                                             <li className="has-dropdown">
                                                 <a href="#">Биопрепараты</a>
                                                 <ul className="dropdown">

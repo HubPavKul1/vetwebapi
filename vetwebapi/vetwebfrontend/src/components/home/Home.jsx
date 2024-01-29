@@ -1,15 +1,13 @@
 
 export default function Home() {
     return (  
-        <>
-            <div className="colorlib-loader" />
-            <div id="page">
-                <aside id="colorlib-hero">
-                    <div className="flexslider">
-                        <ul className="slides">
-                            <li
-                                style={{ backgroundImage: 'url("/animals.png")' }}
-                            >
+    
+           
+                <div id="page">
+                    <aside id="colorlib-hero">
+                        <div className="flexslider">
+                            <ul className="slides">
+                                <li style={{ backgroundImage: 'url("/animals.png")' }}>
                                 <div className="overlay" />
                                 <div className="container">
                                     <div className="row">
@@ -24,7 +22,7 @@ export default function Home() {
                                                 <p>
                                                     <a
                                                         className="btn btn-primary btn-lg"
-                                                        href="{{url_for('companies')}}"
+                                                        href="#"
                                                     >
                                                         Перейти
                                                     </a>
@@ -179,7 +177,7 @@ export default function Home() {
                             <div className="col-md-4">
                                 <img
                                     className="img-responsive about-img"
-                                    src="{{url_for('static', path='/images/about.jpg')}}"
+                                    src="#"
                                     alt=""
                                 />
                             </div>
@@ -862,8 +860,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-        </>
-
                
        )
 }

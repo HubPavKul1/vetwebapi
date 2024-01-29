@@ -8,12 +8,13 @@ import { Routes, Route } from "react-router-dom";
 
 export default function App() {
     return (
+        
         <>
         <Header />
         {/* <Home />   */}
         <Routes>
             <Route path="/"  element={<Home />}  />
-            <Route path="/companies/" element={<Companies />} />
+            <Route path="/companies" element={<Companies />} />
             <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
