@@ -1,13 +1,12 @@
 
 export default function Home() {
     return (  
-    
-           
+
                 <div id="page">
-                    <aside id="colorlib-hero">
-                        <div className="flexslider">
-                            <ul className="slides">
-                                <li style={{ backgroundImage: 'url("/animals.png")' }}>
+                    {/* <aside id="colorlib-hero"> */}
+                        {/* <div className="flexslider"> */}
+                            {/* <ul> */}
+                                {/* <li style={{ backgroundImage: 'url("/animals.png")' }}>
                                 <div className="overlay" />
                                 <div className="container">
                                     <div className="row">
@@ -31,8 +30,8 @@ export default function Home() {
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li
+                            </li> */}
+                            {/* <li
                                 style={{ backgroundImage: 'url("/img_bg_1.jpg")' }}
                             >
                                 <div className="overlay" />
@@ -113,11 +112,11 @@ export default function Home() {
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-                <div id="colorlib-intro">
+                            </li> */}
+                        {/* </ul> */}
+                    {/* </div> */}
+                {/* </aside> */}
+                {/* <div id="colorlib-intro">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
@@ -306,8 +305,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="colorlib-appointment">
+                </div> */}
+                {/* <div id="colorlib-appointment">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-8 col-md-offset-2 text-center">
@@ -320,8 +319,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="colorlib-services">
+                </div> */}
+                {/* <div id="colorlib-services">
                     <div className="container">
                         <div className="row animate-box">
                             <div className="col-md-6 col-md-offset-3 text-center colorlib-heading">
@@ -439,8 +438,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="colorlib-choose">
+                </div> */}
+                {/* <div id="colorlib-choose">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="choose">
@@ -512,8 +511,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="colorlib-doctor">
+                </div> */}
+                {/* <div id="colorlib-doctor">
                     <div className="container">
                         <div className="row animate-box">
                             <div className="col-md-6 col-md-offset-3 text-center colorlib-heading">
@@ -679,8 +678,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div
+                </div> */}
+                {/* <div
                     id="colorlib-counter"
                     className="colorlib-counters"
                     style={{ backgroundImage: 'url("../static/images/img_bg_2.jpg")' }}
@@ -749,7 +748,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div id="colorlib-blog">
                     <div className="container">
                         <div className="row animate-box">
