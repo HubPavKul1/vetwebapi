@@ -1,4 +1,23 @@
+import axios from "axios"
+import { useState, useEffect } from "react"
+import classes from "./company_card/CompanyCard.module.css"
+import CompanyCard from "./company_card/CompanyCard"
+
 export default function Companies() {
+    const [companies, setCompanies] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+          const response = await axios.get(
+            "http://localhost:8000/api/companies"
+          )
+          
+          setCompanies(response.data)
+        }
+        fetchData()
+      }, [])
+
+
     return (
         <div id="colorlib-services">
             <div className="container">
@@ -16,6 +35,11 @@ export default function Companies() {
                     </div>
                 </div>
                 <div className="row">
+                    {companies.length ? companies.map(company =>(
+                        <CompanyCard key={company.id} company={company} />
+                    ))
+                    : <p>There are no cars</p>
+                    }
                     {/* {"{"}% if companies %{"}"}
                     {"{"}% for company in companies %{"}"} */}
                     {/* <div className="col-md-4 animate-box">
@@ -37,7 +61,7 @@ export default function Companies() {
                         </div>
                     </div> */}
                     
-                    <div className="col-md-4 animate-box">
+                    {/* <div className="col-md-4 animate-box">
                         <div className="services">
                             <span className="icon">
                                 <i className="flaticon-healthy-1" />
@@ -52,7 +76,7 @@ export default function Companies() {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

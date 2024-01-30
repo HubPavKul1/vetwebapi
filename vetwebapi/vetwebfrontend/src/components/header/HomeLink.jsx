@@ -5,7 +5,7 @@ export default function HomeLink() {
     
 
     return (
-        <li>
+        <li className="active">
             <Link to="/">Home</Link>
         </li>
         
