@@ -14,7 +14,6 @@ export default function CompanyDetail() {
 
       const fetchData = async () => {
         const data = await CompanyService.getById(id)
-        console.log("дата: ", data)
         setCompany(data)
       }
       fetchData()
@@ -31,7 +30,7 @@ export default function CompanyDetail() {
             <div className="col-md-12">
               <img
                 className="img-responsive"
-                src="./animals2.png"
+                src="/animals2-2.png"
                 
                 alt="animals2.png"
               />
@@ -47,12 +46,11 @@ export default function CompanyDetail() {
                 <div className="post-meta" style={{ color: "#6f42c1" }}>
                   {company.address ? 
                   <div> 
-                  <span>{company.address}</span>
                   <span>{company.address.city}</span>
                   <span>{company.address.street}</span>
                   <span>{company.address.house_number}</span>
-                  <span>{company.address.phone_number1}</span>
-                  <span>тел. {company.address.phone_number2}</span>
+                  <span>тел 1: {company.address.phone_number1}</span>
+                  <span>тел 2: {company.address.phone_number2}</span>
                   </div>
                   : <p>Адрес</p>
                   }
@@ -71,8 +69,8 @@ export default function CompanyDetail() {
                         <th>Отчество</th>
                       </tr>
                       {company.employees.length ? company.employees.map(employee =>(
-                        <tr>
-                        <td>{employee.position.name}</td>
+                        <tr key={employee.id}>
+                        <td>{employee.position}</td>
                         <td>{employee.lastname}</td>
                         <td>{employee.firstname}</td>
                         <td>{employee.patronymic}</td>
@@ -99,10 +97,10 @@ export default function CompanyDetail() {
                         <th />
                       </tr>
                       {company.animals.length ? company.animals.map(animal =>(
-                      <tr>
-                        <td>{animal.species.name}</td>
-                        <td>{animal.gender.name}</td>
-                        <td>{animal.birthday}</td>
+                      <tr key={animal.id}>
+                        <td>{animal.species}</td>
+                        <td>{animal.gender}</td>
+                        <td>{animal.date_of_birth}</td>
                         <td>{animal.nickname}</td>
                         <td>{animal.identification}</td>
                         <td>

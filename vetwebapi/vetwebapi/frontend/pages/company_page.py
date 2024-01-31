@@ -1,3 +1,4 @@
+from datetime import date
 from fastapi import APIRouter, Request, Depends, Form, UploadFile, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Annotated
@@ -172,7 +173,7 @@ async def add_animal(
     gender_id: Annotated[str, Form(...)],
     usage_type_id: Annotated[str, Form(...)],
     company_id: int,
-    date_of_birth: Annotated[str, Form(...)],
+    date_of_birth: Annotated[date, Form(...)],
     nickname: Annotated[str, Form(...)],
     identification: Annotated[str, Form(...)],
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

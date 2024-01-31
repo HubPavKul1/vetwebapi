@@ -1,11 +1,12 @@
 from pydantic import BaseModel
+from datetime import date
 
 
 class AnimalIn(BaseModel):
     species_id: int
     usage_type_id: int
     gender_id: int
-    date_of_birth: str
+    date_of_birth: date
     nickname: str
     identification: str
 
@@ -16,7 +17,7 @@ class AnimalSchema(BaseModel):
     species: str
     usage_type: str
     gender: str
-    date_of_birth: str
+    date_of_birth: date
     nickname: str
     identification: str
     is_active: bool = True

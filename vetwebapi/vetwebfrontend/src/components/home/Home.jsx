@@ -753,6 +753,12 @@ export default function Home() {
                     <div className="container">
                         <div className="row animate-box">
                             <div className="col-md-6 col-md-offset-3 text-center colorlib-heading">
+                            <img
+                                className="img-responsive"
+                                src="/animals.png"
+
+                                alt="animals.png"
+                            />
                                 <h2>Recent blog</h2>
                                 <p>
                                     Dignissimos asperiores vitae velit veniam totam fuga molestias
