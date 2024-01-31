@@ -1,10 +1,26 @@
-import { useParams } from "react-router-dom"
-
+import { useParams } from "react-router-dom";
+import { CompanyService } from "../company.service";
+import React from "react";
+import { useEffect, useState } from "react";
 
 
 
 export default function CompanyDetail() {
     const {id} = useParams();
+    const [company, setCompany] = useState({})
+
+    useEffect(() => {
+      if(!id) return
+
+      const fetchData = async () => {
+        const data = await CompanyService.getById(id)
+        console.log("дата: ", data)
+        setCompany(data)
+      }
+      fetchData()
+    }, [id])
+    if (!company.full_name) return <p>Loading...</p>  
+
     return (
         <div id="colorlib-blog">
   <div className="container">
@@ -15,6 +31,7 @@ export default function CompanyDetail() {
             <div className="col-md-12">
               <img
                 className="img-responsive"
+                src="./animals2.png"
                 
                 alt="animals2.png"
               />
@@ -24,43 +41,21 @@ export default function CompanyDetail() {
               <div className="blog-desc col-paddingbottom">
                 <h2>
                   <a href="#">
-                    
-                    {id} 
-                 
+                    {company.full_name} 
                   </a>
                 </h2>
                 <div className="post-meta" style={{ color: "#6f42c1" }}>
-                  <span>
-                   
-                    company.address.district
-            
-                  </span>
-                  <span>
-                 
-                    company.address.city
-        
-                  </span>
-                  <span>
-        
-                    company.address.street
-       
-                  </span>
-                  <span>
-                   
-                    company.address.house_number
-              
-                  </span>
-                  <span>
-                
-                  company.address.phone_number1
-                  
-                  </span>
-             
-                  <span>
-                    тел. 
-                   company.address.phone_number2
-              
-                  </span>
+                  {company.address ? 
+                  <div> 
+                  <span>{company.address}</span>
+                  <span>{company.address.city}</span>
+                  <span>{company.address.street}</span>
+                  <span>{company.address.house_number}</span>
+                  <span>{company.address.phone_number1}</span>
+                  <span>тел. {company.address.phone_number2}</span>
+                  </div>
+                  : <p>Адрес</p>
+                  }
                  
                 </div>
                 
@@ -75,33 +70,23 @@ export default function CompanyDetail() {
                         <th>Имя</th>
                         <th>Отчество</th>
                       </tr>
-                      <tr>
-                        <td>
-                  
-                          employee.position
-              
-                        </td>
-                        <td>
-               
-                          employee.lastname
-               
-                        </td>
-                        <td>
-          
-                          employee.firstname
-               
-                        </td>
-                        <td>
-                  
-                          employee.patronymic
-                
-                        </td>
+                      {company.employees.length ? company.employees.map(employee =>(
+                        <tr>
+                        <td>{employee.position.name}</td>
+                        <td>{employee.lastname}</td>
+                        <td>{employee.firstname}</td>
+                        <td>{employee.patronymic}</td>
                       </tr>
+                      ))
+                      : <tr>
+                          <td>Работники</td>
+                        </tr>
+                      }
+                      
                     </tbody>
                   </table>
                 </div>
                 <div style={{ color: "#6f42c1" }}>
-                 
                   <table className="table">
                     <caption style={{ color: "#0d6efd" }}>Животные</caption>
                     <tbody>
@@ -113,22 +98,13 @@ export default function CompanyDetail() {
                         <th>Идентификация</th>
                         <th />
                       </tr>
+                      {company.animals.length ? company.animals.map(animal =>(
                       <tr>
-                        <td>
-                          
-                        </td>
-                        <td>
-                         
-                        </td>
-                        <td>
-                          
-                        </td>
-                        <td>
-                         
-                        </td>
-                        <td>
-                          
-                        </td>
+                        <td>{animal.species.name}</td>
+                        <td>{animal.gender.name}</td>
+                        <td>{animal.birthday}</td>
+                        <td>{animal.nickname}</td>
+                        <td>{animal.identification}</td>
                         <td>
                           <div className="btn-group btn-group-sm" role="group">
                             <a
@@ -145,7 +121,15 @@ export default function CompanyDetail() {
                             </a>
                           </div>
                         </td>
-                      </tr>
+                       </tr>
+                      ))
+                      
+                      : <tr>
+                          <td>Животные</td>
+                         </tr>
+                      
+                      }
+                        
                     </tbody>
                   </table>
                 </div>
