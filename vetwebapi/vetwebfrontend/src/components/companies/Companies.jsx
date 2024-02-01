@@ -1,11 +1,15 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import classes from "./company_card/CompanyCard.module.css"
-import CompanyCard from "./company_card/CompanyCard"
+import classes from "./company-card/CompanyCard.module.css"
+import CompanyCard from "./company-card/CompanyCard"
 import { CompanyService } from "./company.service"
+import CreateCompanyForm from "./create-company-form/CreateCompanyForm"
+import { Link } from "react-router-dom"
+
 
 export default function Companies() {
     const [companies, setCompanies] = useState([])
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,19 +21,23 @@ export default function Companies() {
 
     
     return (
-        <div id="colorlib-services">
+  
+            <div id="colorlib-services">
             <div className="container">
                 <div className="row animate-box">
                     <div className="col-md-6 col-md-offset-3 text-center colorlib-heading">
                         <h2>Предприятия</h2>
                         <p>
+                            {/* <Link className="btn btn-primary btn-lg" to="/companies/add">Добавить предприятие</Link> */}
                             <a
                                 className="btn btn-primary btn-lg"
                                 href="#"
+                              
                             >
                                 Добавить предприятие
                             </a>
                         </p>
+                       
                     </div>
                 </div>
                 <div className="row">
@@ -41,6 +49,6 @@ export default function Companies() {
                 </div>
             </div>
         </div>
-
+        
     )
 }
