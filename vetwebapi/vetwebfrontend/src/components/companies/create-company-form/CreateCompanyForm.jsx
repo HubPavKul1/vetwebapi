@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
 import styles from "./CreateCompanyForm.module.css"
-// import { Form, redirect } from "react-router-dom"
-import axios from "axios";
+import { CompanyService } from "../company.service";
 
-export default function CreateCompanyForm({ submitting }) {
+export default function CreateCompanyForm({submitting}) {
     const [full_name, setFullName] = useState("")
     const [short_name, setShortName] = useState("")
 
-    const createCompany = (e) => {
+    const createCompany = async (e) => {
         e.preventDefault()
-    }    
-        
+
+        await CompanyService.createCompany(full_name, short_name)
+  
+    }   
+     
 
     return (
 
         <form action="companies/new"  method="post">
             <div className="form-group">
-                <label for="name" className="sr-only">Полное наименование</label>
+                <label htmlFor="full_name" className="sr-only">Полное наименование</label>
                 <input 
                     type="text"  
                     name="full_name"  
@@ -28,7 +30,7 @@ export default function CreateCompanyForm({ submitting }) {
             </div>
           
             <div className="form-group">
-                <label for="name" className="sr-only">Сокращенное наименование</label>
+                <label htmlFor="short_name" className="sr-only">Сокращенное наименование</label>
                 <input 
                     type="text" 
                     name="short_name" 
