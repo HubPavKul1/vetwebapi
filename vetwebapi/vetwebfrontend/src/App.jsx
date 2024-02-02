@@ -4,10 +4,11 @@ import Layout from "./components/Layout";
 import Home from "./components/home/Home";
 import Companies from "./components/companies/Companies";
 import CompanyDetail from "./components/companies/company-detail/CompanyDetail";
-import CreateCompanyForm from "./components/companies/create-company-form/CreateCompanyForm";
-
+import CreateCompany from "./components/companies/CreateCompany";
+import { createCompanyAction } from "./components/companies/CreateCompany";
 
 import { Routes, Route } from "react-router-dom";
+
 
 export default function App() {
     return (
@@ -17,7 +18,7 @@ export default function App() {
                 <Route index element={<Home />}  />
                 <Route path="companies" element={<Companies />} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
-                <Route path="companies/add" element={<CreateCompanyForm />} />
+                {/* <Route path="companies/new" element={<CreateCompany />} action={createCompanyAction}/> */}
                 <Route path="*" element={<div>Not Found</div>} />
             </Route>
         </Routes>

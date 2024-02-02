@@ -12,3 +12,6 @@ export const CompanyService = {
         return response.data
       },
 }
+
+
+
