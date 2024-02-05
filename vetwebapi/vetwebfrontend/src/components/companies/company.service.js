@@ -17,6 +17,7 @@ export const CompanyService = {
         await axios.post("/api/companies/", { "full_name": full_name, "short_name": short_name }, headers)
           .then(response => console.log(response))
           .catch(err => console.log(err))
+
     }
 }
 
