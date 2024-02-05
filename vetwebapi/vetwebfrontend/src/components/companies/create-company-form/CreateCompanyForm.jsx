@@ -1,22 +1,39 @@
-import { useState, useEffect } from "react";
-import styles from "./CreateCompanyForm.module.css"
 import { CompanyService } from "../company.service";
+import { useForm } from "react-hook-form"
+import { useMutation, useQueryClient } from "react-query";
 
-export default function CreateCompanyForm({submitting}) {
-    const [full_name, setFullName] = useState("")
-    const [short_name, setShortName] = useState("")
+export default function CreateCompanyForm() {
+   
 
-    const createCompany = async (e) => {
-        e.preventDefault()
+    const { register, reset, handleSubmit, formState: {errors} } = useForm({
+        mode: "onChange",
+    })
 
-        await CompanyService.createCompany(full_name, short_name)
-  
+    const queryClient = useQueryClient()
+
+    const {mutate} = useMutation(["create company"], (data) => CompanyService.createCompany(data.full_name, data.short_name), {
+        onSuccess: () => {
+            queryClient.invalidateQueries("companies")
+            reset()
+        }
+    })
+
+    const createCompany = data => {
+        
+        mutate(data)
+
+      
+
+       
+        
     }   
+
+    
      
 
     return (
 
-        <form action="companies/new"  method="post">
+        <form action="companies/new"  method="post" onSubmit={handleSubmit(createCompany)}>
             <div className="form-group">
                 <label htmlFor="full_name" className="sr-only">Полное наименование</label>
                 <input 
@@ -25,8 +42,11 @@ export default function CreateCompanyForm({submitting}) {
                     className="form-control" 
                     id="full_name" 
                     placeholder="Полное наименование"
-                    onChange={e => setFullName(e.target.value)} value={full_name}
+                    {...register("full_name", {required: "Full_name is required!"})}
+
+                    
                 />
+                {errors?.full_name?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
             </div>
           
             <div className="form-group">
@@ -37,8 +57,10 @@ export default function CreateCompanyForm({submitting}) {
                     className="form-control" 
                     id="short_name" 
                     placeholder="Сокращенное наименование" 
-                    onChange={e => setShortName(e.target.value)} value={short_name}
+                    {...register("short_name", { required: "Short_name is required" })}
+                    
                 />
+                {errors?.short_name?.message && <p style={{color: "red"}}>Поле должно быть заполнено!</p>}
             </div>
 
             <div className="form-group">
@@ -47,8 +69,7 @@ export default function CreateCompanyForm({submitting}) {
                     id="btn-submit" 
                     className="btn btn-primary btn-send-message btn-md" 
                     value="Зарегистрировать" 
-                    disabled={submitting}
-                    onClick={e => createCompany(e)}
+                   
                 />
             </div>
         </form>               

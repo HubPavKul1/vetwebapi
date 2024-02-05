@@ -6,21 +6,22 @@ import { CompanyService } from "./company.service"
 
 import { Link } from "react-router-dom"
 import CreateCompany from "./CreateCompany"
+import { useQuery } from "react-query"
 
 
 export default function Companies() {
-    const [companies, setCompanies] = useState([])
+    // const [companies, setCompanies] = useState([])
+    const { data, isLoading, error } = useQuery(['companies'], () => CompanyService.getAll()
+    )
     
-    
-
-    useEffect(() => {
-        const fetchData = async () => {
-        const data = await CompanyService.getAll()
-          setCompanies(data)
-        }
-        fetchData()
-      }, [])
-
+    if(isLoading) return <p>Загрузка ...</p>
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //     const data = await CompanyService.getAll()
+    //       setCompanies(data)
+    //     }
+    //     fetchData()
+    //   }, [])
     
     return (
   
@@ -30,7 +31,7 @@ export default function Companies() {
                     <CreateCompany />
                 </div>
                 <div className="row">
-                    {companies.length ? companies.map(company =>(
+                    {data.length ? data.map(company =>(
                         <CompanyCard key={company.id} company={company} />
                     ))
                     : <p>There are no companies</p>
