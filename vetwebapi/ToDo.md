@@ -2344,8 +2344,7 @@ export default function CreateCompanyForm() {
 
     const {mutate} = useMutation(["create company"], (data) => CompanyService.createCompany(data.full_name, data.short_name), {
         onSuccess: () => {
-            queryClient.invalidateQueries("companies")
-            reset()
+            queryClient.invalidateQueries(["companies"])
         }
     })
 

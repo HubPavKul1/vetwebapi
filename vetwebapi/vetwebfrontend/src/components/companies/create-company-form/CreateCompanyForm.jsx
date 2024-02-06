@@ -13,7 +13,7 @@ export default function CreateCompanyForm() {
 
     const {mutate} = useMutation(["create company"], (data) => CompanyService.createCompany(data.full_name, data.short_name), {
         onSuccess: () => {
-            queryClient.invalidateQueries("companies")
+            queryClient.invalidateQueries(["companies"])
             reset()
         }
     })
@@ -21,16 +21,10 @@ export default function CreateCompanyForm() {
     const createCompany = data => {
         
         mutate(data)
-
-      
-
-       
         
     }   
 
     
-     
-
     return (
 
         <form action="companies/new"  method="post" onSubmit={handleSubmit(createCompany)}>

@@ -55,3 +55,4 @@ async def delete_address(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+

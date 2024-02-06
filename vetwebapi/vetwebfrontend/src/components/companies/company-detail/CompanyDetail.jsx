@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { CompanyService } from "../company.service";
 import React from "react";
 import { useEffect, useState } from "react";
+import AddAddress from "../address/AddAddress";
 
 
 
@@ -321,11 +322,7 @@ export default function CompanyDetail() {
           <div className="side">
             <h2>Меню</h2>
             <ul className="list">
-              <li>
-                <a href="#">
-                  Добавить адрес <i className="icon-check" />{" "}
-                </a>
-              </li>
+              <AddAddress />
               <li>
                 <a href="#">
                   Добавить работника <i className="icon-check" />{" "}

@@ -21,5 +21,11 @@ export const CompanyService = {
     }
 }
 
+export const AddressService = {
+  async getRegions() {
+    const response = await axios.get("/api/companies/regions")
+    return response.data
+  }
+}
 
 

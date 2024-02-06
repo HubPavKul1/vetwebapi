@@ -70,10 +70,7 @@ async def add_address(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     company: CompanyDetail = Depends(get_company_detail),
 ):
-    regions = await read_regions(session=session)
-    districts = await read_districts(session=session)
-    cities = await read_cities(session=session)
-    streets = await read_streets(session=session)
+    
     return settings.templates.TemplateResponse(
         "companies/add_address.html",
         {
