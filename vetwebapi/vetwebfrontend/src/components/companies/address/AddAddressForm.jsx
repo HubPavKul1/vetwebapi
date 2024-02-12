@@ -1,20 +1,20 @@
-import { AddressService } from "../company.service";
 import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient, useQueries } from "react-query";
+import RegionsSelect from "./RegionsSelect";
 
 export default function AddAddressForm() {
    
-    const result = useQueries([
-      {queryKey: ["regions"], queryFn: () => AddressService.getRegions()},
-      {queryKey: ["districts"], queryFn: () => AddressService.getDistricts()},
-      {queryKey: ["cities"], queryFn: () => AddressService.getCities()},
-      {queryKey: ["streets"], queryFn: () => AddressService.getStreets()},
+    // const result = useQueries([
+    //   {queryKey: ["regions"], queryFn: () => AddressService.getRegions()},
+    //   {queryKey: ["districts"], queryFn: () => AddressService.getDistricts()},
+    //   {queryKey: ["cities"], queryFn: () => AddressService.getCities()},
+    //   {queryKey: ["streets"], queryFn: () => AddressService.getStreets()},
 
-    ]
+    // ]
       
-    )
+    // )
 
-    console.log("data", result)
+    // console.log("data", result)
 
 
     const { register, reset, handleSubmit, formState: {errors} } = useForm({
@@ -49,14 +49,7 @@ export default function AddAddressForm() {
       <label htmlFor="name" className="">
         Выберите регион *
       </label>
-      <select name="region_id" style={{ width: 350 }}>
-        {/* { data.length? data.map(region =>(
-            <option value={region.id} label={region.name} />
-                    ))
-                    : <option value="">There are no regions </option>
-                    } */}
-        
-      </select>
+      <RegionsSelect />
     </div>
     <div className="form-group">
       <label htmlFor="name" className="">

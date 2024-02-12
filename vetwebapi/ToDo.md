@@ -2402,3 +2402,8 @@ export default function CreateCompanyForm() {
 
 ```
 
+# React Select https://react-select.com/home
+
+```
+yarn add react-select
+```

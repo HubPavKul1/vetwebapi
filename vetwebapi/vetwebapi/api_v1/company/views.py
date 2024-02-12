@@ -137,7 +137,7 @@ async def get_districts_route(
         )
         
 @router.get("/cities", response_model=CitySchemas)
-async def get_districts_route(
+async def get_cities_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[CitySchemas, dict]:
     try:
@@ -151,7 +151,7 @@ async def get_districts_route(
         
 
 @router.get("/streets", response_model=StreetSchemas)
-async def get_districts_route(
+async def get_streets_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[StreetSchemas, dict]:
     try:
