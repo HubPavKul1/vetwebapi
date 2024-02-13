@@ -7,7 +7,7 @@ from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Address, Animal, Company, Employee
 
 from . import crud
-from .address.crud import read_regions, read_districts, read_cities, read_streets
+from .address.crud import read_regions, read_districts, read_cities, read_streets, read_city_streets
 from .address.dependencies import company_address
 from .address.schemas import RegionSchemas, DistrictSchemas, CitySchemas, StreetSchemas
 from .address.views import router as address_router
@@ -156,6 +156,21 @@ async def get_streets_route(
 ) -> Union[StreetSchemas, dict]:
     try:
         streets = await read_streets(session=session)
+        return StreetSchemas(streets=streets)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+        
+@router.get("/cities/{city_id}/streets", response_model=StreetSchemas)
+async def get_city_streets_route(
+    city_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[StreetSchemas, dict]:
+    try:
+        streets = await read_city_streets(session=session, city_id=city_id)
         return StreetSchemas(streets=streets)
     except Exception:
         raise HTTPException(

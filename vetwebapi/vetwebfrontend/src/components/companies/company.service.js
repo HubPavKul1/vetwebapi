@@ -43,6 +43,11 @@ export const AddressService = {
       return response.data.streets
   },
 
+  async getCityStreets(id) {
+    const response = await axios.get(`/api/companies/cities/${id}/streets`)
+    return response.data.streets
+  },
+
 
     async createAddress(id, data) {
       const headers = { "Content-Type": "application/json" }

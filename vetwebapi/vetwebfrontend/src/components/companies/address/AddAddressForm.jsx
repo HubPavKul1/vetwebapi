@@ -1,37 +1,34 @@
-import { useForm } from "react-hook-form"
+import { useParams } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form"
 import { useMutation, useQueryClient, useQueries } from "react-query";
 import RegionsSelect from "./RegionsSelect";
+import DistrictsSelect from "./DistrictsSelect";
+import CitiesSelect from "./CitiesSelect";
+import StreetsSelect from "./StreetsSelect";
+import { CompanyService } from "../company.service";
+
 
 export default function AddAddressForm() {
+
+    const {id} = useParams();
    
-    // const result = useQueries([
-    //   {queryKey: ["regions"], queryFn: () => AddressService.getRegions()},
-    //   {queryKey: ["districts"], queryFn: () => AddressService.getDistricts()},
-    //   {queryKey: ["cities"], queryFn: () => AddressService.getCities()},
-    //   {queryKey: ["streets"], queryFn: () => AddressService.getStreets()},
-
-    // ]
-      
-    // )
-
-    // console.log("data", result)
-
-
-    const { register, reset, handleSubmit, formState: {errors} } = useForm({
+    const { register, reset, handleSubmit, formState: {errors}, control } = useForm({
         mode: "onChange",
     })
 
     const queryClient = useQueryClient()
 
-    const {mutate} = useMutation(["create address"], (data) => CompanyService.createAddress(data), {
+    const {mutate} = useMutation(["create address"], (id, data) => CompanyService.createAddress(id, data), {
         onSuccess: () => {
             queryClient.invalidateQueries(["address"])
             reset()
         }
     })
 
-    const createAddress = data => {
-        
+    
+
+    const createAddress = (data) => {
+        console.log("address_data", data)
         mutate(data)
         
     }   
@@ -43,44 +40,38 @@ export default function AddAddressForm() {
   <form
     className="contact-form"
     method="post"
-    action="#"
+    action=""
+    onSubmit={handleSubmit(createAddress)}
   >
-    <div className="form-group">
-      <label htmlFor="name" className="">
-        Выберите регион *
-      </label>
-      <RegionsSelect />
-    </div>
-    <div className="form-group">
-      <label htmlFor="name" className="">
-        Выберите район *
-      </label>
-      <select name="district_id" style={{ width: 350 }}>
+    
+      <div className="form-group">
+        <label htmlFor="name" className="">
+          Выберите регион *
+        </label>
+          <RegionsSelect />
+      </div>
+      <div className="form-group">
+        <label htmlFor="name" className="">
+          Выберите район *
+        </label>
+          <DistrictsSelect />
+      </div>
+      <div className="form-group">
+        <label htmlFor="name" className="">
+          Выберите город *
+        </label>
+        <CitiesSelect />
+      </div>
+  
       
-        <option value="">
-        </option>
-      </select>
-    </div>
-    <div className="form-group">
-      <label htmlFor="name" className="">
-        Выберите город *
-      </label>
-      <select id="" name="city_id" style={{ width: 350 }}>
-        <option value="">
-        </option>
-       
-      </select>
-    </div>
-    <div className="form-group">
-      <label htmlFor="name" className="">
-        Выберите улицу *
-      </label>
-      <select name="street_id" style={{ width: 350 }}>
-        <option value="">
-        
-        </option>
-      </select>
-    </div>
+      <div className="form-group">
+          <label htmlFor="name" className="">
+            Выберите улицу *
+          </label>
+          <StreetsSelect 
+          />
+      </div>
+ 
     <div className="form-group">
       <input
         type="text"
@@ -89,7 +80,9 @@ export default function AddAddressForm() {
         id="house_number"
         placeholder="Номер дома *"
         style={{ width: 200, height: 30 }}
+        {...register("house_number", {required: "House_number is required!"})}
       />
+      {errors?.house_number?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
     </div>
     <div className="form-group">
       <input
@@ -99,7 +92,9 @@ export default function AddAddressForm() {
         id="phone_number1"
         placeholder="Телефон1 *"
         style={{ width: 200, height: 30 }}
+        {...register("phone_number1", {required: "Phone_number1 is required!"})}
       />
+      {errors?.phone_number1?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
     </div>
     <div className="form-group">
       <input

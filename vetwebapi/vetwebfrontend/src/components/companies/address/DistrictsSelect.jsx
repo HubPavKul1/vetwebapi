@@ -3,23 +3,19 @@ import { AddressService } from '../company.service'
 import { useQueryClient, useQuery } from "react-query";
 
 
-export default function RegionsSelect() {
-    const { data, isLoading, error } = useQuery(['regions'], () => AddressService.getRegions())
+export default function DistrictsSelect() {
+    const { data, isLoading, error } = useQuery(['districts'], () => AddressService.getDistricts())
     
     // if(isLoading) return <p>Загрузка ...</p>
-
-    // console.log(data)
     
-    const options = data?.map(reg=>({value: reg.id, label: reg.name}))
+    const options = data?.map(distr=>({value: distr.id, label: distr.name}))
     
-                    
+                   
     return (
         <Select 
-        isSearchable 
+        isSearchable
         isClearable
         options={options}
         />
-        
     )
 }
-

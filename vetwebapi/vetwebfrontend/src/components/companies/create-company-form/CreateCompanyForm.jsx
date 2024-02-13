@@ -18,7 +18,7 @@ export default function CreateCompanyForm() {
         }
     })
 
-    const createCompany = data => {
+    const createCompany = (data) => {
         
         mutate(data)
         
@@ -27,7 +27,7 @@ export default function CreateCompanyForm() {
     
     return (
 
-        <form action="companies/new"  method="post" onSubmit={handleSubmit(createCompany)}>
+        <form action=""  method="post" onSubmit={handleSubmit(createCompany)}>
             <div className="form-group">
                 <label htmlFor="full_name" className="sr-only">Полное наименование</label>
                 <input 
