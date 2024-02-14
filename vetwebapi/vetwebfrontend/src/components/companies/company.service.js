@@ -43,9 +43,9 @@ export const AddressService = {
       return response.data.streets
   },
 
-  async getCityStreets(id) {
-    const response = await axios.get(`/api/companies/cities/${id}/streets`)
-    return response.data.streets
+    async getCityStreets(id) {
+      const response = await axios.get(`/api/companies/cities/${id}/streets`)
+      return response.data.streets
   },
 
 

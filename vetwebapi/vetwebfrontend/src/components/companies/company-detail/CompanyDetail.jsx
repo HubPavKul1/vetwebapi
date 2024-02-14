@@ -3,23 +3,27 @@ import { CompanyService } from "../company.service";
 import React from "react";
 import { useEffect, useState } from "react";
 import AddAddress from "../address/AddAddress";
+import { useQuery } from "react-query"
 
 
 
 export default function CompanyDetail() {
     const {id} = useParams();
-    const [company, setCompany] = useState({})
+    const [company, setCompany] = useState({});
 
-    useEffect(() => {
-      if(!id) return
+    const { data, isLoading, error } = useQuery(['company'], () => CompanyService.getById(id)
+    );
 
-      const fetchData = async () => {
-        const data = await CompanyService.getById(id)
-        setCompany(data)
-      }
-      fetchData()
-    }, [id])
-    if (!company.full_name) return <p>Loading...</p>  
+    // useEffect(() => {
+    //   if(!id) return
+
+    //   const fetchData = async () => {
+    //     const data = await CompanyService.getById(id)
+    //     setCompany(data)
+    //   }
+    //   fetchData()
+    // }, [id])
+    if(isLoading) return <p>Загрузка ...</p>
 
     return (
         <div id="colorlib-blog">
@@ -41,17 +45,17 @@ export default function CompanyDetail() {
               <div className="blog-desc col-paddingbottom">
                 <h2>
                   <a href="#">
-                    {company.full_name} 
+                    {data.full_name} 
                   </a>
                 </h2>
                 <div className="post-meta" style={{ color: "#6f42c1" }}>
-                  {company.address ? 
+                  {data.address ? 
                   <div> 
-                  <span>{company.address.city}</span>
-                  <span>{company.address.street}</span>
-                  <span>{company.address.house_number}</span>
-                  <span>тел 1: {company.address.phone_number1}</span>
-                  <span>тел 2: {company.address.phone_number2}</span>
+                  <span>{data.address.city}</span>
+                  <span>{data.address.street}</span>
+                  <span>{data.address.house_number}</span>
+                  <span>тел 1: {data.address.phone_number1}</span>
+                  <span>тел 2: {data.address.phone_number2}</span>
                   </div>
                   : <p>Адрес</p>
                   }
@@ -69,7 +73,7 @@ export default function CompanyDetail() {
                         <th>Имя</th>
                         <th>Отчество</th>
                       </tr>
-                      {company.employees.length ? company.employees.map(employee =>(
+                      {data.employees.length ? data.employees.map(employee =>(
                         <tr key={employee.id}>
                         <td>{employee.position}</td>
                         <td>{employee.lastname}</td>
@@ -97,7 +101,7 @@ export default function CompanyDetail() {
                         <th>Идентификация</th>
                         <th />
                       </tr>
-                      {company.animals.length ? company.animals.map(animal =>(
+                      {data.animals.length ? data.animals.map(animal =>(
                       <tr key={animal.id}>
                         <td>{animal.species}</td>
                         <td>{animal.gender}</td>
@@ -322,7 +326,7 @@ export default function CompanyDetail() {
           <div className="side">
             <h2>Меню</h2>
             <ul className="list">
-              <AddAddress />
+              <AddAddress companyId={id}/>
               <li>
                 <a href="#">
                   Добавить работника <i className="icon-check" />{" "}

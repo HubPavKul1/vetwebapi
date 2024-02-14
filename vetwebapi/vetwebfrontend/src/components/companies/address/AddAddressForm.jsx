@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form"
-import { useMutation, useQueryClient, useQueries } from "react-query";
+import { useForm, Controller, FormProvider } from "react-hook-form"
+import { useMutation, useQueryClient } from "react-query";
 import RegionsSelect from "./RegionsSelect";
 import DistrictsSelect from "./DistrictsSelect";
 import CitiesSelect from "./CitiesSelect";
@@ -8,28 +8,29 @@ import StreetsSelect from "./StreetsSelect";
 import { CompanyService } from "../company.service";
 
 
-export default function AddAddressForm() {
+export default function AddAddressForm({companyId}) {
 
-    const {id} = useParams();
+    
+
+    // const {companyid} = useParams();
+
+    const methods = useForm()
+  
    
-    const { register, reset, handleSubmit, formState: {errors}, control } = useForm({
-        mode: "onChange",
-    })
-
+    const { register, reset, handleSubmit, formState: {errors} } = methods
     const queryClient = useQueryClient()
 
-    const {mutate} = useMutation(["create address"], (id, data) => CompanyService.createAddress(id, data), {
+    const {mutate} = useMutation(["create address"], (data) => CompanyService.createAddress(companyId, data), {
         onSuccess: () => {
-            queryClient.invalidateQueries(["address"])
+            queryClient.invalidateQueries(["company", companyId])
             reset()
         }
     })
 
     
-
     const createAddress = (data) => {
         console.log("address_data", data)
-        mutate(data)
+        mutate(companyId, data)
         
     }   
 
@@ -37,14 +38,14 @@ export default function AddAddressForm() {
     return (
 
        
-  <form
-    className="contact-form"
-    method="post"
-    action=""
-    onSubmit={handleSubmit(createAddress)}
-  >
-    
-      <div className="form-group">
+  // <form
+  //   className="contact-form"
+  //   method="post"
+  //   action=""
+  //   onSubmit={handleSubmit(createAddress)}
+  // >
+  <FormProvider {...methods}>
+    <div className="form-group">
         <label htmlFor="name" className="">
           Выберите регион *
         </label>
@@ -112,9 +113,14 @@ export default function AddAddressForm() {
         id="btn-submit"
         className="btn btn-primary btn-send-message btn-md"
         defaultValue="Зарегистрировать"
+        onClick={handleSubmit(createAddress)}
       />
     </div>
-  </form>
+
+  </FormProvider>
+    
+      
+  // </form>
 
 
 )}

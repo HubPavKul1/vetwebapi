@@ -2,7 +2,7 @@ import AddAddressForm from "./AddAddressForm";
 import Modal from "../../modal/Modal";
 import { useState } from "react";
 
-export default function AddAddress() {
+export default function AddAddress({companyId}) {
 
     const [modalActive, setModalActive] = useState(false)
     return (
@@ -11,7 +11,7 @@ export default function AddAddress() {
                 Добавить адрес <i className="icon-check" />{" "}
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
-                <AddAddressForm />
+                <AddAddressForm companyId={companyId}/>
             </Modal>     
         </li>     
     )

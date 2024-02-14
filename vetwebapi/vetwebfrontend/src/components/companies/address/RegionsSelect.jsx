@@ -14,6 +14,7 @@ export default function RegionsSelect() {
     
                     
     return (
+        
         <Select 
         isSearchable 
         isClearable

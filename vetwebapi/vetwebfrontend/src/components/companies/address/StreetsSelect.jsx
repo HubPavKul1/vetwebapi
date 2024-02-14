@@ -2,16 +2,15 @@ import AsyncSelect from "react-select/async"
 import { AddressService } from '../company.service'
 import { useQueryClient, useQuery } from "react-query";
 import { useParams } from 'react-router-dom';
-import { useForm, Controller } from "react-hook-form"
+import { useFormContext, Controller } from "react-hook-form"
 
 
 export default function StreetsSelect() {
     const {id} = useParams()
     const { data, isLoading, error } = useQuery(['streets'], () => AddressService.getStreets())
 
-    const { register, reset, handleSubmit, formState: {errors}, control } = useForm({
-        mode: "onChange",
-    })
+    const { control } = useFormContext()
+ 
     
     // if(isLoading) return <p>Загрузка ...</p>
     
