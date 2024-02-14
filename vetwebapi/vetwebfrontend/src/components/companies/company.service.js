@@ -13,8 +13,8 @@ export const CompanyService = {
     },
 
     async createCompany(full_name, short_name) {
-      const headers = { "Content-Type": "application/json" }
-      await axios.post("/api/companies/", { "full_name": full_name, "short_name": short_name }, headers)
+      // const headers = { "Content-Type": "application/json" }
+      await axios.post("/api/companies/", { "full_name": full_name, "short_name": short_name })
       .then(response => console.log(response))
       .catch(err => console.log(err))
 
@@ -24,7 +24,6 @@ export const CompanyService = {
 export const AddressService = {
     async getRegions() {
       const response = await axios.get("/api/companies/regions")
-      // console.log(response.data.regions)
       return response.data.regions
   },
 
@@ -50,8 +49,8 @@ export const AddressService = {
 
 
     async createAddress(id, data) {
-      const headers = { "Content-Type": "application/json" }
-      await axios.post(`/api/companies/${id}/address`, data, headers)
+      // const headers = { "Content-Type": "application/json" }
+      await axios.post(`/api/companies/${id}/address`, data)
       .then(response => console.log(response))
       .catch(err => console.log(err))
 

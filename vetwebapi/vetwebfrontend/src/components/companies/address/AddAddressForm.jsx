@@ -1,18 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useForm, Controller, FormProvider } from "react-hook-form"
+import { useForm, FormProvider } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import RegionsSelect from "./RegionsSelect";
 import DistrictsSelect from "./DistrictsSelect";
 import CitiesSelect from "./CitiesSelect";
 import StreetsSelect from "./StreetsSelect";
-import { CompanyService } from "../company.service";
+import { AddressService } from "../company.service";
+
 
 
 export default function AddAddressForm({companyId}) {
 
-    
-
-    // const {companyid} = useParams();
 
     const methods = useForm()
   
@@ -20,30 +17,25 @@ export default function AddAddressForm({companyId}) {
     const { register, reset, handleSubmit, formState: {errors} } = methods
     const queryClient = useQueryClient()
 
-    const {mutate} = useMutation(["create address"], (data) => CompanyService.createAddress(companyId, data), {
+    const {mutate} = useMutation(["create address"], {
+        mutationFn: (data) => AddressService.createAddress(companyId, data), 
         onSuccess: () => {
             queryClient.invalidateQueries(["company", companyId])
             reset()
         }
-    })
+    },
+    )
 
     
-    const createAddress = (data) => {
-        console.log("address_data", data)
-        mutate(companyId, data)
+    const createAddress = data => {
+        mutate(data)
         
     }   
 
     
     return (
 
-       
-  // <form
-  //   className="contact-form"
-  //   method="post"
-  //   action=""
-  //   onSubmit={handleSubmit(createAddress)}
-  // >
+  
   <FormProvider {...methods}>
     <div className="form-group">
         <label htmlFor="name" className="">
@@ -63,7 +55,6 @@ export default function AddAddressForm({companyId}) {
         </label>
         <CitiesSelect />
       </div>
-  
       
       <div className="form-group">
           <label htmlFor="name" className="">
@@ -119,8 +110,5 @@ export default function AddAddressForm({companyId}) {
 
   </FormProvider>
     
-      
-  // </form>
-
 
 )}

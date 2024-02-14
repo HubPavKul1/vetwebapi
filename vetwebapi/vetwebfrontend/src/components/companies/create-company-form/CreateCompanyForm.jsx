@@ -11,7 +11,8 @@ export default function CreateCompanyForm() {
 
     const queryClient = useQueryClient()
 
-    const {mutate} = useMutation(["create company"], (data) => CompanyService.createCompany(data.full_name, data.short_name), {
+    const {mutate} = useMutation(["create company"], 
+        (data) => CompanyService.createCompany(data.full_name, data.short_name), {
         onSuccess: () => {
             queryClient.invalidateQueries(["companies"])
             reset()
