@@ -1,18 +1,16 @@
 import AsyncSelect from "react-select/async"
 import { AddressService } from '../company.service'
-import { useQueryClient, useQuery } from "react-query";
-import { useParams } from 'react-router-dom';
-import { useFormContext, Controller } from "react-hook-form"
+import { useQuery } from "react-query";
+import { useFormContext, Controller } from "react-hook-form";
 
 
-export default function StreetsSelect() {
-    const {id} = useParams()
-    const { data, isLoading, error } = useQuery(['streets'], () => AddressService.getStreets())
+
+
+export default function StreetsSelect({city_id}) {
+
+    const { data, isLoading, error } = useQuery(['cityStreets'], () => AddressService.getCityStreets(city_id))
 
     const { control } = useFormContext()
- 
-    
-    // if(isLoading) return <p>Загрузка ...</p>
     
     const options = data?.map(street=>({value: street.id, label: street.name}))
     
@@ -40,7 +38,7 @@ export default function StreetsSelect() {
             isClearable
             loadOptions={loadOptions}
             value={getValue(value)}
-            onChange={newValue => onChange((newValue).value)}
+            onChange={newValue => onChange((newValue)?.value)}
         />
         )
     

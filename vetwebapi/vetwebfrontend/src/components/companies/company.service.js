@@ -37,6 +37,8 @@ export const AddressService = {
       return response.data.cities
   },
 
+
+
     async getStreets() {
       const response = await axios.get("/api/companies/streets")
       return response.data.streets
@@ -45,6 +47,16 @@ export const AddressService = {
     async getCityStreets(id) {
       const response = await axios.get(`/api/companies/cities/${id}/streets`)
       return response.data.streets
+  },
+
+    async getDistrictCities(id) {
+      const response = await axios.get(`/api/companies/districts/${id}/cities`)
+      return response.data.cities
+  },
+
+    async getRegionDistricts(id) {
+      const response = await axios.get(`/api/companies/regions/${id}/districts`)
+      return response.data.districts
   },
 
 

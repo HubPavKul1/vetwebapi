@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "react-query";
 
 export default function CreateCompanyForm() {
    
-
     const { register, reset, handleSubmit, formState: {errors} } = useForm({
         mode: "onChange",
     })
@@ -14,6 +13,7 @@ export default function CreateCompanyForm() {
     const {mutate} = useMutation(["create company"], 
         (data) => CompanyService.createCompany(data.full_name, data.short_name), {
         onSuccess: () => {
+            alert('Предприятие успешно добавлено!')
             queryClient.invalidateQueries(["companies"])
             reset()
         }

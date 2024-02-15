@@ -69,8 +69,18 @@ async def read_districts(session: AsyncSession) -> list[District]:
     return list(await session.scalars(stmt))
 
 
+async def read_region_districts(session: AsyncSession, region_id: int) -> list[District]:
+    stmt = select(District).where(District.region_id == region_id).order_by(District.name)
+    return list(await session.scalars(stmt))
+
+
 async def read_cities(session: AsyncSession) -> list[City]:
     stmt = select(City).order_by(City.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_district_cities(session: AsyncSession, district_id: int) -> list[City]:
+    stmt = select(City).where(City.district_id == district_id).order_by(City.name)
     return list(await session.scalars(stmt))
 
 

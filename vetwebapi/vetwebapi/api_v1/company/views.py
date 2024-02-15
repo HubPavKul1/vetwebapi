@@ -7,7 +7,7 @@ from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Address, Animal, Company, Employee
 
 from . import crud
-from .address.crud import read_regions, read_districts, read_cities, read_streets, read_city_streets
+from .address.crud import read_regions, read_districts, read_cities, read_streets, read_city_streets, read_region_districts, read_district_cities
 from .address.dependencies import company_address
 from .address.schemas import RegionSchemas, DistrictSchemas, CitySchemas, StreetSchemas
 from .address.views import router as address_router
@@ -172,6 +172,36 @@ async def get_city_streets_route(
     try:
         streets = await read_city_streets(session=session, city_id=city_id)
         return StreetSchemas(streets=streets)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+
+@router.get("/districts/{district_id}/cities", response_model=CitySchemas)
+async def get_city_streets_route(
+    district_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[StreetSchemas, dict]:
+    try:
+        cities = await read_district_cities(session=session, district_id=district_id)
+        return CitySchemas(cities=cities)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+
+@router.get("/regions/{region_id}/districts", response_model=DistrictSchemas)
+async def get_city_streets_route(
+    region_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[StreetSchemas, dict]:
+    try:
+        districts = await read_region_districts(session=session, region_id=region_id)
+        return DistrictSchemas(districts=districts)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

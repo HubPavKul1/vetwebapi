@@ -1,9 +1,6 @@
 import { useForm, FormProvider } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import RegionsSelect from "./RegionsSelect";
-import DistrictsSelect from "./DistrictsSelect";
-import CitiesSelect from "./CitiesSelect";
-import StreetsSelect from "./StreetsSelect";
 import { AddressService } from "../company.service";
 
 
@@ -13,20 +10,19 @@ export default function AddAddressForm({companyId}) {
 
     const methods = useForm()
   
-   
     const { register, reset, handleSubmit, formState: {errors} } = methods
     const queryClient = useQueryClient()
 
     const {mutate} = useMutation(["create address"], {
         mutationFn: (data) => AddressService.createAddress(companyId, data), 
         onSuccess: () => {
+            alert("Адрес успешно добавлен!")
             queryClient.invalidateQueries(["company", companyId])
             reset()
         }
     },
     )
 
-    
     const createAddress = data => {
         mutate(data)
         
@@ -43,27 +39,7 @@ export default function AddAddressForm({companyId}) {
         </label>
           <RegionsSelect />
       </div>
-      <div className="form-group">
-        <label htmlFor="name" className="">
-          Выберите район *
-        </label>
-          <DistrictsSelect />
-      </div>
-      <div className="form-group">
-        <label htmlFor="name" className="">
-          Выберите город *
-        </label>
-        <CitiesSelect />
-      </div>
       
-      <div className="form-group">
-          <label htmlFor="name" className="">
-            Выберите улицу *
-          </label>
-          <StreetsSelect 
-          />
-      </div>
- 
     <div className="form-group">
       <input
         type="text"
