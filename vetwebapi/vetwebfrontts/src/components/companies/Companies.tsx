@@ -2,13 +2,12 @@ import CompanyCard from "./company-card/CompanyCard"
 import { CompanyService } from "./company.service"
 import CreateCompany from "./CreateCompany"
 import { useQuery } from "react-query"
-import ICompanies from "../../interfaces/CompanyInterfaces"
+
 
 
 export default function Companies() {
     
-    const { data, isLoading, error } = useQuery<ICompanies>(['companies'], () => CompanyService.getAll()
-    )
+    const { data, isLoading, error } = useQuery(['companies'], () => CompanyService.getAll())
     
     if(isLoading) return <p>Загрузка ...</p>
     

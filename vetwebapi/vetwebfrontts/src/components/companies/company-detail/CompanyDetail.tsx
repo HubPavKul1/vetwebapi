@@ -1,28 +1,18 @@
 import { useParams } from "react-router-dom";
 import { CompanyService } from "../company.service";
-import React from "react";
-import { useEffect, useState } from "react";
 import AddAddress from "../address/AddAddress";
 import { useQuery } from "react-query"
+import ICompanyDetail from "../../../interfaces/CompanyInterfaces"
 
 
 
 export default function CompanyDetail() {
     const {id} = useParams();
-    const [company, setCompany] = useState({});
 
-    const { data, isLoading, error } = useQuery(['company'], () => CompanyService.getById(id)
+    const { data, isLoading, error } = useQuery<ICompanyDetail>(['company'], () => CompanyService.getById(id)
     );
 
-    // useEffect(() => {
-    //   if(!id) return
-
-    //   const fetchData = async () => {
-    //     const data = await CompanyService.getById(id)
-    //     setCompany(data)
-    //   }
-    //   fetchData()
-    // }, [id])
+   
     if(isLoading) return <p>Загрузка ...</p>
 
     return (
@@ -45,11 +35,11 @@ export default function CompanyDetail() {
               <div className="blog-desc col-paddingbottom">
                 <h2>
                   <a href="#">
-                    {data.full_name} 
+                    {data?.full_name} 
                   </a>
                 </h2>
                 <div className="post-meta" style={{ color: "#6f42c1" }}>
-                  {data.address ? 
+                  {data?.address ? 
                   <div> 
                   <span>{data.address.city}</span>
                   <span>{data.address.street}</span>
@@ -73,7 +63,7 @@ export default function CompanyDetail() {
                         <th>Имя</th>
                         <th>Отчество</th>
                       </tr>
-                      {data.employees.length ? data.employees.map(employee =>(
+                      {data?.employees?.length ? data.employees.map(employee =>(
                         <tr key={employee.id}>
                         <td>{employee.position}</td>
                         <td>{employee.lastname}</td>
@@ -101,7 +91,7 @@ export default function CompanyDetail() {
                         <th>Идентификация</th>
                         <th />
                       </tr>
-                      {data.animals.length ? data.animals.map(animal =>(
+                      {data?.animals?.length ? data.animals.map(animal =>(
                       <tr key={animal.id}>
                         <td>{animal.species}</td>
                         <td>{animal.gender}</td>

@@ -1,5 +1,5 @@
 import { CompanyService } from "../company.service";
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import ICompanyCreate from "../../../interfaces/CompanyInterfaces";
 
@@ -7,14 +7,14 @@ import ICompanyCreate from "../../../interfaces/CompanyInterfaces";
 
 export default function CreateCompanyForm() {
    
-    const { register, reset, handleSubmit, formState: {errors} } = useForm({
+    const { register, reset, handleSubmit, formState: {errors} } = useForm<ICompanyCreate>({
         mode: "onChange",
     })
 
     const queryClient = useQueryClient()
 
     const {mutate} = useMutation(["create company"], 
-        (data: ICompanyCreate) => CompanyService.createCompany(data.full_name, data.short_name), {
+        (data: ICompanyCreate) => CompanyService.createCompany(data), {
         onSuccess: () => {
             queryClient.invalidateQueries(["companies"])
             alert('Предприятие успешно добавлено!')
@@ -22,8 +22,8 @@ export default function CreateCompanyForm() {
         }
     })
 
-    const createCompany = (data) => {
-        console.log(data, typeof(data))
+    const createCompany: SubmitHandler<ICompanyCreate> = (data) => {
+        console.log(data)
         mutate(data)
         
     }   
@@ -35,8 +35,7 @@ export default function CreateCompanyForm() {
             <div className="form-group">
                 <label htmlFor="full_name" className="sr-only">Полное наименование</label>
                 <input 
-                    type="text"  
-                    name="full_name"  
+                    type="text"    
                     className="form-control" 
                     id="full_name" 
                     placeholder="Полное наименование"
@@ -51,7 +50,6 @@ export default function CreateCompanyForm() {
                 <label htmlFor="short_name" className="sr-only">Сокращенное наименование</label>
                 <input 
                     type="text" 
-                    name="short_name" 
                     className="form-control" 
                     id="short_name" 
                     placeholder="Сокращенное наименование" 

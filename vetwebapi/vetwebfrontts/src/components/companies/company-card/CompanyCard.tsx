@@ -1,9 +1,13 @@
 
-import classes from "./CompanyCard.module.css"
 import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom"
+import ICompany from "../../../interfaces/CompanyInterfaces"
 
-export default function CompanyCard({company}) {
+
+interface CompanyCard {
+    company: ICompany;
+}
+
+export default function CompanyCard({company}: CompanyCard) {
     return (
         <div className="col-md-4 animate-box">
                         <div className="services">
