@@ -9,7 +9,9 @@ import ICompanyDetail from "../../../interfaces/CompanyInterfaces"
 export default function CompanyDetail() {
     const {id} = useParams();
 
-    const { data, isLoading, error } = useQuery<ICompanyDetail>(['company'], () => CompanyService.getById(id)
+    const { data, isLoading, error } = useQuery<ICompanyDetail>(['company'], () => CompanyService.getById(id), {
+      enabled: !!id
+    }
     );
 
    
