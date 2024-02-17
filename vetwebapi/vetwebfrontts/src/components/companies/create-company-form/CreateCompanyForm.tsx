@@ -1,7 +1,7 @@
 import { CompanyService } from "../company.service";
 import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
-import ICreateCompany from "../../../interfaces/CompanyInterfaces";
+import ICompanyCreate from "../../../interfaces/CompanyInterfaces";
 
 
 
@@ -14,16 +14,16 @@ export default function CreateCompanyForm() {
     const queryClient = useQueryClient()
 
     const {mutate} = useMutation(["create company"], 
-        (data: ICompany) => CompanyService.createCompany(data.full_name, data.short_name), {
+        (data: ICompanyCreate) => CompanyService.createCompany(data.full_name, data.short_name), {
         onSuccess: () => {
-            alert('Предприятие успешно добавлено!')
             queryClient.invalidateQueries(["companies"])
+            alert('Предприятие успешно добавлено!')
             reset()
         }
     })
 
-    const createCompany = (data: CompanyIn) => {
-        
+    const createCompany = (data) => {
+        console.log(data, typeof(data))
         mutate(data)
         
     }   

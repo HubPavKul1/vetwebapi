@@ -2,6 +2,7 @@ import axios from "axios"
 import AddressIn from "../../interfaces/CompanyInterfaces"
 import ICompany from "../../interfaces/CompanyInterfaces"
 import ICompanyCreate from "../../interfaces/CompanyInterfaces"
+import ICompanies from "../../interfaces/CompanyInterfaces"
 
 
 
@@ -10,7 +11,8 @@ export const CompanyService = {
     
 
     async getAll() {
-      const response = await axios.get("/api/companies/")
+      const response = await axios.get<ICompanies>("/api/companies/")
+      console.log("response_comp: ", response)
       return response.data.companies
     },
 

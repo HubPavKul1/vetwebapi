@@ -5,6 +5,11 @@ export default interface ICompany {
 }
 
 
+export default interface ICompanies {
+    companies: ICompany[];
+}
+
+
 export default interface ICompanyCreate extends Omit<ICompany, "id" > {
 
 }
