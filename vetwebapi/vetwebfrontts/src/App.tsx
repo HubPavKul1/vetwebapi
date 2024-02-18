@@ -13,7 +13,6 @@ export default function App() {
                 <Route index element={<Home />}  />
                 <Route path="companies" element={<Companies />} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
-                {/* <Route path="companies/new" element={<CreateCompany />} action={createCompanyAction}/> */}
                 <Route path="*" element={<div>Not Found</div>} />
             </Route>
         </Routes>
