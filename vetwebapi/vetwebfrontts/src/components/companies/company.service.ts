@@ -10,8 +10,7 @@ export const CompanyService = {
 
 
   async getAll() {
-    const response = await axios.get<ICompanies>("/api/companies/")
-    return response.data.companies
+    return await axios.get<ICompanies>("/api/companies/")
   },
 
   async getById(id: string) {

@@ -7,7 +7,11 @@ import { useQuery } from "react-query"
 
 export default function Companies() {
     
-    const { data, isLoading, error } = useQuery(['companies'], () => CompanyService.getAll())
+    const { data, isLoading, error } = useQuery(['companies'], () => CompanyService.getAll(),
+        {
+            select: ({data}) => data?.companies
+        }
+    )
     
     if(isLoading) return <p>Загрузка ...</p>
     

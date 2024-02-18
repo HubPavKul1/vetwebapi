@@ -2,14 +2,13 @@ import { useParams } from "react-router-dom";
 import { CompanyService } from "../company.service";
 import AddAddress from "../address/AddAddress";
 import { useQuery } from "react-query"
-import ICompanyDetail from "../../../interfaces/CompanyInterfaces"
 
 
 
 export default function CompanyDetail() {
     const {id} = useParams();
 
-    const { data, isLoading, error } = useQuery<ICompanyDetail>(['company'], () => CompanyService.getById(id), {
+    const { data, isLoading, error } = useQuery(['company', id], () => CompanyService.getById(id), {
       enabled: !!id
     }
     );
