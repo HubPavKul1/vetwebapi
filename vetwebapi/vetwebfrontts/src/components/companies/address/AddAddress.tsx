@@ -1,8 +1,12 @@
 import AddAddressForm from "./AddAddressForm";
 import Modal from "../../modal/Modal";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function AddAddress({companyId}) {
+
+export default function AddAddress() {
+    // const {id} = useParams()
+    // if (!id) return;
 
     const [modalActive, setModalActive] = useState(false)
     return (
@@ -11,7 +15,7 @@ export default function AddAddress({companyId}) {
                 Добавить адрес <i className="icon-check" />{" "}
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
-                <AddAddressForm companyId={companyId}/>
+                <AddAddressForm/>
             </Modal>     
         </li>     
     )

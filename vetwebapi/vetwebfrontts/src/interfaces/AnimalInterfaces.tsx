@@ -1,4 +1,4 @@
-export default interface IAnimal {
+export interface IAnimal {
     id: number;
     animal_group: string;
     species: string;

@@ -4,7 +4,6 @@ import AddAddress from "../address/AddAddress";
 import { useQuery } from "react-query"
 
 
-
 export default function CompanyDetail() {
     const {id} = useParams();
 
@@ -317,7 +316,7 @@ export default function CompanyDetail() {
           <div className="side">
             <h2>Меню</h2>
             <ul className="list">
-              <AddAddress companyId={id}/>
+              <AddAddress />
               <li>
                 <a href="#">
                   Добавить работника <i className="icon-check" />{" "}

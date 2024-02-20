@@ -1,17 +1,24 @@
-import Select from 'react-select'
+import Select, { SingleValue } from 'react-select'
 import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
 import CitiesSelect from './CitiesSelect';
+import { IRegion } from '../../../interfaces/AddressInterfaces'
+import { IOption } from '../../../interfaces/FormInterface';
 
 
-export default function DistrictsSelect({region_id}) {
-    const [district, setDistrict] = useState({})
-    const { data, isLoading, error } = useQuery(['regionDistricts'], () => AddressService.getRegionDistricts(region_id))
+
+interface DistrictsSelectProps {
+    regionId: string;
+}
+
+export function DistrictsSelect({regionId}: DistrictsSelectProps) {
+    const [district, setDistrict] = useState()
+    const { data, isLoading, error } = useQuery(['regionDistricts'], () => AddressService.getRegionDistricts(regionId))
     
-    const options = data?.map(distr=>({value: distr.id, label: distr.name}))
+    const options = data?.data?.districts?.map(distr=>({value: distr.id, label: distr.name}))
     
-    function handleSelect(data) {
+    function handleSelect(data: SingleValue<IOption>) {
         setDistrict(data);
       }
                    

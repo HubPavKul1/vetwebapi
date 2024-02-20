@@ -1,10 +1,10 @@
-import IAddress from './AddressInterfaces';
-import IEmployee from './EmployeeInterfaces';
-import IAnimal from './AnimalInterfaces';
+import { IAddress } from './AddressInterfaces';
+import { IEmployee } from './EmployeeInterfaces';
+import { IAnimal } from './AnimalInterfaces';
 
 
 
-export default interface ICompany {
+export interface ICompany {
     id: number;
     full_name: string;
     short_name: string;
@@ -12,16 +12,16 @@ export default interface ICompany {
 
 
 
-export default interface ICompanies {
+export interface ICompanies {
     companies?: ICompany[];
 }
 
 
-export default interface ICompanyCreate extends Omit<ICompany, "id"> {
+export interface ICompanyCreate extends Omit<ICompany, "id"> {
 
 }
 
-export default interface ICompanyDetail extends ICompany {
+export interface ICompanyDetail extends ICompany {
     address?: IAddress;
     employees?: IEmployee[];
     animals?: IAnimal[];

@@ -1,17 +1,21 @@
-import Select from 'react-select'
+import Select, { SingleValue } from 'react-select'
 import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
-import DistrictsSelect from './DistrictsSelect';
+import { DistrictsSelect } from './DistrictsSelect';
 import { useState } from 'react';
+import { IOption } from '../../../interfaces/FormInterface';
+
+
 
 export default function RegionsSelect() {
-    const [region, setRegion] = useState({})
+    const [regionId, setRegion] = useState<string | undefined>()
     const { data, isLoading, error } = useQuery(['regions'], () => AddressService.getRegions())
     
-    const options = data?.map(reg=>({value: reg.id, label: reg.name}))
+    const options = data?.data?.regions?.map(reg=>({value: reg.id, label: reg.name}))
     
-    function handleSelect(data) {
-        setRegion(data);
+    function handleSelect(data: SingleValue<IOption>) {
+        console.log("data changed: ", data?.value, typeof(data?.value))
+        setRegion(data?.value.toString());
       }
                     
     return (
@@ -22,12 +26,12 @@ export default function RegionsSelect() {
             options={options}
             onChange={handleSelect}
             />
-            {region?.value ?
+            {regionId ?
                 <div className="form-group">
                 <label htmlFor="name" className="">
                     Выберите район *
                 </label>
-                <DistrictsSelect region_id={region?.value}/>
+                <DistrictsSelect regionId={regionId}/>
                 </div> : <p></p>
                 }
         </>

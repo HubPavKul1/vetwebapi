@@ -1,9 +1,7 @@
 import axios from "axios"
-import AddressIn from "../../interfaces/CompanyInterfaces"
-import ICompanyDetail from "../../interfaces/CompanyInterfaces"
-import ICompanyCreate from "../../interfaces/CompanyInterfaces"
-import ICompanies from "../../interfaces/CompanyInterfaces"
-import IAddressIn from "../../interfaces/AddressInterfaces"
+import { ICompanyDetail, ICompanyCreate, ICompanies } from "../../interfaces/CompanyInterfaces"
+import { IAddressIn, ICities, IRegions, IDistricts } from "../../interfaces/AddressInterfaces"
+
 
 
 export const CompanyService = {
@@ -13,7 +11,7 @@ export const CompanyService = {
     return await axios.get<ICompanies>("/api/companies/")
   },
 
-  async getById(id: string) {
+  async getById(id?: string) {
     const response = await axios.get<ICompanyDetail>(`/api/companies/${id}`)
     return response.data
   },
@@ -30,13 +28,11 @@ export const CompanyService = {
 export const AddressService = {
 
   async getRegions() {
-    const response = await axios.get("/api/companies/regions")
-    return response.data.regions
+    return await axios.get<IRegions>("/api/companies/regions")
   },
 
   async getDistricts() {
-    const response = await axios.get("/api/companies/districts")
-    return response.data.districts
+    return await axios.get<IDistricts>("/api/companies/districts")
   },
 
   async getCities() {
@@ -57,17 +53,16 @@ export const AddressService = {
   },
 
   async getDistrictCities(id: string) {
-    const response = await axios.get(`/api/companies/districts/${id}/cities`)
+    const response = await axios.get<ICities>(`/api/companies/districts/${id}/cities`)
     return response.data.cities
   },
 
   async getRegionDistricts(id: string) {
-    const response = await axios.get(`/api/companies/regions/${id}/districts`)
-    return response.data.districts
+    return await axios.get<IDistricts>(`/api/companies/regions/${id}/districts`)
   },
 
 
-  async createAddress(id: string, data: AddressIn) {
+  async createAddress(data: IAddressIn, id: string) {
     // const headers = { "Content-Type": "application/json" }
     await axios.post<IAddressIn>(`/api/companies/${id}/address`, data)
       .then(response => console.log(response))

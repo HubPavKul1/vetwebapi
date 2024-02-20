@@ -1,29 +1,33 @@
-import { useForm, FormProvider } from "react-hook-form"
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import RegionsSelect from "./RegionsSelect";
 import { AddressService } from "../company.service";
+import { useParams } from "react-router-dom";
+import IAddressIn from "../../../interfaces/AddressInterfaces";
 
 
 
-export default function AddAddressForm({companyId}) {
+export default function AddAddressForm() {
 
+    const {id} = useParams()
+    if (!id) return;
 
-    const methods = useForm()
+    const methods = useForm<IAddressIn>()
   
     const { register, reset, handleSubmit, formState: {errors} } = methods
     const queryClient = useQueryClient()
 
     const {mutate} = useMutation(["create address"], {
-        mutationFn: (data) => AddressService.createAddress(companyId, data), 
+        mutationFn: (data: IAddressIn) => AddressService.createAddress(data, id),
         onSuccess: () => {
             alert("Адрес успешно добавлен!")
-            queryClient.invalidateQueries(["company", companyId])
+            queryClient.invalidateQueries(["company", id])
             reset()
         }
     },
     )
 
-    const createAddress = data => {
+    const createAddress: SubmitHandler<IAddressIn> = data => {
         mutate(data)
         
     }   
@@ -43,7 +47,6 @@ export default function AddAddressForm({companyId}) {
     <div className="form-group">
       <input
         type="text"
-        name="house_number"
         className="form-control"
         id="house_number"
         placeholder="Номер дома *"
@@ -55,7 +58,6 @@ export default function AddAddressForm({companyId}) {
     <div className="form-group">
       <input
         type="tel"
-        name="phone_number1"
         className="form-control"
         id="phone_number1"
         placeholder="Телефон1 *"

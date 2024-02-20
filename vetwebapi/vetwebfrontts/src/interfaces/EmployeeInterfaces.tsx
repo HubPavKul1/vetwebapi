@@ -1,9 +1,9 @@
-export default interface IEmployee {
+export interface IEmployee {
    
     id: number;
     position: string;
-    lastname: string;
-    firstname: string;
+    lastName: string;
+    firstName: string;
     patronymic: string;
-    fullname: string;
+    fullName: string;
 }
