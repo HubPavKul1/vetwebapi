@@ -8,14 +8,13 @@ import { IOption } from '../../../interfaces/FormInterface';
 
 
 export default function RegionsSelect() {
-    const [regionId, setRegion] = useState<string | undefined>()
+    const [regionId, setRegionId] = useState<string | undefined>()
     const { data, isLoading, error } = useQuery(['regions'], () => AddressService.getRegions())
     
     const options = data?.data?.regions?.map(reg=>({value: reg.id, label: reg.name}))
     
     function handleSelect(data: SingleValue<IOption>) {
-        console.log("data changed: ", data?.value, typeof(data?.value))
-        setRegion(data?.value.toString());
+        setRegionId(data?.value.toString());
       }
                     
     return (

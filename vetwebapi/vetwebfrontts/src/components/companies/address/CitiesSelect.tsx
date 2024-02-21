@@ -1,18 +1,22 @@
-import Select from 'react-select'
+import Select, { SingleValue } from 'react-select'
 import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
 import StreetsSelect from './StreetsSelect';
+import { IOption } from '../../../interfaces/FormInterface';
 
+interface CitiesSelectProps {
+    districtId: string;
+}
 
-export default function CitiesSelect({district_id}) {
-    const [city, setCity] = useState({});
-    const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(district_id));
+export default function CitiesSelect({districtId}: CitiesSelectProps) {
+    const [cityId, setCityId] = useState<string | undefined>();
+    const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(districtId));
     
     const options = data?.map(city=>({value: city.id, label: city.name}));
     
-    function handleSelect(data) {
-        setCity(data);
+    function handleSelect(data: SingleValue<IOption>) {
+        setCityId(data?.value?.toString());
       }
                    
     return (
@@ -21,15 +25,14 @@ export default function CitiesSelect({district_id}) {
                 isSearchable
                 isClearable
                 options={options}
-                value={city}
                 onChange={handleSelect}
             />
-            {city?.value ?
+            {cityId ?
                 <div className="form-group">
                 <label htmlFor="name" className="">
                     Выберите улицу *
                 </label>
-                <StreetsSelect city_id={city?.value}/>
+                <StreetsSelect cityId={cityId}/>
                 </div> : <p></p>
                 }
         </>

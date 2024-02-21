@@ -3,7 +3,6 @@ import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
 import CitiesSelect from './CitiesSelect';
-import { IRegion } from '../../../interfaces/AddressInterfaces'
 import { IOption } from '../../../interfaces/FormInterface';
 
 
@@ -13,13 +12,13 @@ interface DistrictsSelectProps {
 }
 
 export function DistrictsSelect({regionId}: DistrictsSelectProps) {
-    const [district, setDistrict] = useState()
+    const [districtId, setDistrictId] = useState<string | undefined>()
     const { data, isLoading, error } = useQuery(['regionDistricts'], () => AddressService.getRegionDistricts(regionId))
     
     const options = data?.data?.districts?.map(distr=>({value: distr.id, label: distr.name}))
     
     function handleSelect(data: SingleValue<IOption>) {
-        setDistrict(data);
+        setDistrictId(data?.value?.toString());
       }
                    
     return (
@@ -30,12 +29,12 @@ export function DistrictsSelect({regionId}: DistrictsSelectProps) {
             options={options}
             onChange={handleSelect}
             />
-            {district?.value ?
+            {districtId ?
                 <div className="form-group">
                 <label htmlFor="name" className="">
                     Выберите город *
                 </label>
-                <CitiesSelect district_id={district?.value}/>
+                <CitiesSelect districtId={districtId}/>
                 </div> : <p></p>
                 }
 

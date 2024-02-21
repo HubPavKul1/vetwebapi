@@ -1,6 +1,6 @@
 import axios from "axios"
 import { ICompanyDetail, ICompanyCreate, ICompanies } from "../../interfaces/CompanyInterfaces"
-import { IAddressIn, ICities, IRegions, IDistricts } from "../../interfaces/AddressInterfaces"
+import { IAddressIn, ICities, IRegions, IDistricts, IStreets } from "../../interfaces/AddressInterfaces"
 
 
 
@@ -48,8 +48,7 @@ export const AddressService = {
   },
 
   async getCityStreets(id: string) {
-    const response = await axios.get(`/api/companies/cities/${id}/streets`)
-    return response.data.streets
+    return await axios.get<IStreets>(`/api/companies/cities/${id}/streets`)
   },
 
   async getDistrictCities(id: string) {

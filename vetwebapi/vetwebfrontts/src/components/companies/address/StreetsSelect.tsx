@@ -2,27 +2,30 @@ import AsyncSelect from "react-select/async"
 import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
+import { IOption } from "../../../interfaces/FormInterface";
 
 
+interface StreetsSelectProps {
+    cityId: string;
+}
 
+export default function StreetsSelect({cityId}: StreetsSelectProps) {
 
-export default function StreetsSelect({city_id}) {
-
-    const { data, isLoading, error } = useQuery(['cityStreets'], () => AddressService.getCityStreets(city_id))
+    const { data, isLoading, error } = useQuery(['cityStreets'], () => AddressService.getCityStreets(cityId))
 
     const { control } = useFormContext()
     
-    const options = data?.map(street=>({value: street.id, label: street.name}))
+    const options = data?.data?.streets?.map(street=>({value: street.id, label: street.name}))
     
-    const loadOptions = (searchValue, callback) => {
+    const loadOptions = (searchValue: string, callback: CallableFunction) => {
         setTimeout(() => {
-            const filteredOptions = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+            const filteredOptions = options?.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
             callback(filteredOptions)
         }, 2000)
     }
 
-    const getValue = (value) => 
-        value ? options.find((option) => option.value === value) : ""
+    const getValue = (value: number) => 
+        value ? options?.find((option) => option.value === value) : ""
     
 
     return (
@@ -38,7 +41,7 @@ export default function StreetsSelect({city_id}) {
             isClearable
             loadOptions={loadOptions}
             value={getValue(value)}
-            onChange={newValue => onChange((newValue)?.value)}
+            onChange={newValue => onChange((newValue as IOption).value)}
         />
         )
     

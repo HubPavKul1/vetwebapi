@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import RegionsSelect from "./RegionsSelect";
 import { AddressService } from "../company.service";
 import { useParams } from "react-router-dom";
-import IAddressIn from "../../../interfaces/AddressInterfaces";
+import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 
 
 
@@ -11,6 +11,7 @@ export default function AddAddressForm() {
 
     const {id} = useParams()
     if (!id) return;
+
 
     const methods = useForm<IAddressIn>()
   
@@ -28,6 +29,7 @@ export default function AddAddressForm() {
     )
 
     const createAddress: SubmitHandler<IAddressIn> = data => {
+        console.log("address: ", data)
         mutate(data)
         
     }   
