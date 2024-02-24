@@ -3,6 +3,8 @@ import { CompanyService } from "../company.service";
 import { AddAddress }from "../address/AddAddress";
 import { AddEmployee } from "../employee/AddEmployee";
 import { useQuery } from "react-query"
+import { CompanyAddress } from "../address/CompanyAddress";
+import { CompanyEmployees } from "../employee/CompanyEmployees";
 
 
 export default function CompanyDetail() {
@@ -41,13 +43,7 @@ export default function CompanyDetail() {
                 </h2>
                 <div className="post-meta" style={{ color: "#6f42c1" }}>
                   {data?.address ? 
-                  <div> 
-                  <span>{data.address.city}</span>
-                  <span>{data.address.street}</span>
-                  <span>{data.address.house_number}</span>
-                  <span>тел 1: {data.address.phone_number1}</span>
-                  <span>тел 2: {data.address.phone_number2}</span>
-                  </div>
+                  <CompanyAddress address={data.address}/>
                   : <p>Адрес</p>
                   }
                  
@@ -64,14 +60,9 @@ export default function CompanyDetail() {
                         <th>Имя</th>
                         <th>Отчество</th>
                       </tr>
-                      {data?.employees?.length ? data.employees.map(employee =>(
-                        <tr key={employee.id}>
-                        <td>{employee.position}</td>
-                        <td>{employee.lastname}</td>
-                        <td>{employee.firstname}</td>
-                        <td>{employee.patronymic}</td>
-                      </tr>
-                      ))
+    
+                      {data?.employees?.length ? 
+                      <CompanyEmployees employees={data.employees}/>
                       : <tr>
                           <td>Работники</td>
                         </tr>
