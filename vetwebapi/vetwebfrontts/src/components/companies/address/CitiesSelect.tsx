@@ -13,7 +13,7 @@ export default function CitiesSelect({districtId}: CitiesSelectProps) {
     const [cityId, setCityId] = useState<string | undefined>();
     const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(districtId));
     
-    const options = data?.map(city=>({value: city.id, label: city.name}));
+    const options = data?.data?.cities?.map(city=>({value: city.id, label: city.name}));
     
     function handleSelect(data: SingleValue<IOption>) {
         setCityId(data?.value?.toString());

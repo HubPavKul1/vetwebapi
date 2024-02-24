@@ -12,13 +12,16 @@ from .address.dependencies import company_address
 from .address.schemas import RegionSchemas, DistrictSchemas, CitySchemas, StreetSchemas
 from .address.views import router as address_router
 from .address.views import serialize_address
+
 from .animal.dependencies import company_animals
 from .animal.schemas import AnimalSchema
 from .animal.views import router as animal_router
 from .animal.views import serialize_animal
 from .dependencies import company_by_id
+
+from .employee.crud import read_positions
 from .employee.dependencies import company_employees
-from .employee.schemas import EmployeeSchema
+from .employee.schemas import EmployeeSchema, PositionSchemas
 from .employee.views import router as employee_router
 from .employee.views import serialize_employee
 from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
@@ -108,8 +111,8 @@ async def get_company_detail(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
-# Получаем данные для формы адрес        
+
+# Получаем данные для формы адрес
 @router.get("/regions", response_model=RegionSchemas)
 async def get_regions_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -123,47 +126,37 @@ async def get_regions_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
-@router.get("/districts", response_model=DistrictSchemas)
-async def get_districts_route(
+
+@router.get("/regions/{region_id}/districts", response_model=DistrictSchemas)
+async def get_region_districts_route(
+    region_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DistrictSchemas, dict]:
     try:
-        districts = await read_districts(session=session)
+        districts = await read_region_districts(session=session, region_id=region_id)
         return DistrictSchemas(districts=districts)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
-@router.get("/cities", response_model=CitySchemas)
-async def get_cities_route(
+
+
+@router.get("/districts/{district_id}/cities", response_model=CitySchemas)
+async def get_district_cities_route(
+    district_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[CitySchemas, dict]:
     try:
-        cities = await read_cities(session=session)
+        cities = await read_district_cities(session=session, district_id=district_id)
         return CitySchemas(cities=cities)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
 
-@router.get("/streets", response_model=StreetSchemas)
-async def get_streets_route(
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[StreetSchemas, dict]:
-    try:
-        streets = await read_streets(session=session)
-        return StreetSchemas(streets=streets)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-        
-        
+
 @router.get("/cities/{city_id}/streets", response_model=StreetSchemas)
 async def get_city_streets_route(
     city_id: int,
@@ -177,31 +170,15 @@ async def get_city_streets_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
 
-@router.get("/districts/{district_id}/cities", response_model=CitySchemas)
-async def get_city_streets_route(
-    district_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[StreetSchemas, dict]:
-    try:
-        cities = await read_district_cities(session=session, district_id=district_id)
-        return CitySchemas(cities=cities)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-        
 
-@router.get("/regions/{region_id}/districts", response_model=DistrictSchemas)
-async def get_city_streets_route(
-    region_id: int,
+@router.get("/positions", response_model=PositionSchemas)
+async def get_positions_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[StreetSchemas, dict]:
+) -> Union[PositionSchemas, dict]:
     try:
-        districts = await read_region_districts(session=session, region_id=region_id)
-        return DistrictSchemas(districts=districts)
+        positions = await read_positions(session=session)
+        return PositionSchemas(positions=positions)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

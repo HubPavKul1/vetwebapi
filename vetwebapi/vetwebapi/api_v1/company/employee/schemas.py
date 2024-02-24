@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class EmployeeIn(BaseModel):
@@ -15,3 +15,13 @@ class EmployeeSchema(BaseModel):
     firstname: str
     patronymic: str
     fullname: str
+
+
+class PositionSchema(BaseModel):
+    id: int
+    name: str
+    model_config = ConfigDict(from_attributes=True)
+
+
+class PositionSchemas(BaseModel):
+    positions: list[PositionSchema]

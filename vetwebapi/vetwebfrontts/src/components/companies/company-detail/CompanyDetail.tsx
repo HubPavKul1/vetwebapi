@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { CompanyService } from "../company.service";
-import AddAddress from "../address/AddAddress";
+import { AddAddress }from "../address/AddAddress";
+import { AddEmployee } from "../employee/AddEmployee";
 import { useQuery } from "react-query"
 
 
@@ -317,11 +318,7 @@ export default function CompanyDetail() {
             <h2>Меню</h2>
             <ul className="list">
               <AddAddress />
-              <li>
-                <a href="#">
-                  Добавить работника <i className="icon-check" />{" "}
-                </a>
-              </li>
+              <AddEmployee />
               <li>
                 <a href="#">
                   Добавить животное <i className="icon-check" />{" "}

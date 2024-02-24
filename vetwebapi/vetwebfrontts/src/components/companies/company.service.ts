@@ -1,6 +1,7 @@
 import axios from "axios"
 import { ICompanyDetail, ICompanyCreate, ICompanies } from "../../interfaces/CompanyInterfaces"
 import { IAddressIn, ICities, IRegions, IDistricts, IStreets } from "../../interfaces/AddressInterfaces"
+import { IPositions, IEmployeeCreate } from "../../interfaces/EmployeeInterfaces"
 
 
 
@@ -52,8 +53,7 @@ export const AddressService = {
   },
 
   async getDistrictCities(id: string) {
-    const response = await axios.get<ICities>(`/api/companies/districts/${id}/cities`)
-    return response.data.cities
+    return await axios.get<ICities>(`/api/companies/districts/${id}/cities`)
   },
 
   async getRegionDistricts(id: string) {
@@ -68,6 +68,23 @@ export const AddressService = {
       .catch(err => console.log(err))
 
   }
+}
+
+
+export const EmployeeService = {
+
+    async getPositions() {
+      return await axios.get<IPositions>("/api/companies/positions")
+    },
+
+
+    async createEmployee(data: IEmployeeCreate, id: string) {
+      await axios.post<IEmployeeCreate>(`/api/companies/${id}/employees/`, data)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+
+    }
+
 }
 
 

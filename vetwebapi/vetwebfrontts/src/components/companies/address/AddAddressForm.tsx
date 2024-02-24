@@ -29,7 +29,6 @@ export default function AddAddressForm() {
     )
 
     const createAddress: SubmitHandler<IAddressIn> = data => {
-        console.log("address: ", data)
         mutate(data)
         
     }   
@@ -71,11 +70,11 @@ export default function AddAddressForm() {
     <div className="form-group">
       <input
         type="tel"
-        name="phone_number2"
         className="form-control"
         id="phone_number1"
         placeholder="Телефон2"
         style={{ width: 200, height: 30 }}
+        {...register("phone_number2")}
       />
     </div>
     <div className="form-group">
