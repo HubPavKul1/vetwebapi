@@ -2,6 +2,7 @@ import axios from "axios"
 import { ICompanyDetail, ICompanyCreate, ICompanies } from "../../interfaces/CompanyInterfaces"
 import { IAddressIn, ICities, IRegions, IDistricts, IStreets } from "../../interfaces/AddressInterfaces"
 import { IPositions, IEmployeeCreate } from "../../interfaces/EmployeeInterfaces"
+import { ITypesOfFeeding, IAnimalCreate, IAnimalGroups, ISpeciesList, IGenders, IUsageTypes } from "../../interfaces/AnimalInterfaces"
 
 
 
@@ -84,6 +85,44 @@ export const EmployeeService = {
         .catch(err => console.log(err))
 
     }
+
+}
+
+
+export const AnimalService = {
+
+  async getTypeOfFeeding() {
+    return await axios.get<ITypesOfFeeding>("/api/companies/types_of_feeding")
+
+  },
+
+
+  async getAnimalGroups(id: string) {
+    return await axios.get<IAnimalGroups>(`/api/companies/${id}/animal_groups`)
+  },
+
+
+  async getSpecies(id: string) {
+    return await axios.get<ISpeciesList>(`/api/companies/${id}/spesies`)
+  },
+
+
+  async getGengers(id:string) {
+    return await axios.get<IGenders>(`/api/companies/${id}/genders`)
+  },
+
+
+  async getUsageTypes() {
+    return await axios.get<IUsageTypes>("/api/companies/usage_types")
+  },
+
+
+  async createAnimal(data: IAnimalCreate, id: string) {
+    await axios.post<IAnimalCreate>(`/api/companies/${id}/animals/`, data)
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+  }
+
 
 }
 

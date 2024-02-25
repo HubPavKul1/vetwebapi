@@ -1,3 +1,6 @@
+import { IBase } from "./BaseInterface";
+
+
 interface IEmployeeBase {
     lastname: string;
     firstname: string;
@@ -18,10 +21,7 @@ export interface IEmployeeCreate extends IEmployeeBase {
 }
 
 
-export interface IPosition {
-    id: number;
-    name: string;
-}
+export interface IPosition extends IBase {}
 
 export interface IPositions {
     positions?: IPosition[];

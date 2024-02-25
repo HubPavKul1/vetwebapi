@@ -4,7 +4,8 @@ import { AddAddress }from "../address/AddAddress";
 import { AddEmployee } from "../employee/AddEmployee";
 import { useQuery } from "react-query"
 import { CompanyAddress } from "../address/CompanyAddress";
-import { CompanyEmployees } from "../employee/CompanyEmployees";
+import { CompanyEmployee } from "../employee/CompanyEmployee";
+import { AddAnimal } from "../animal/AddAnimal";
 
 
 export default function CompanyDetail() {
@@ -62,7 +63,8 @@ export default function CompanyDetail() {
                       </tr>
     
                       {data?.employees?.length ? 
-                      <CompanyEmployees employees={data.employees}/>
+                        data.employees.map(empoloyee => <CompanyEmployee key={empoloyee.id} employee={empoloyee} />)
+                      
                       : <tr>
                           <td>Работники</td>
                         </tr>
@@ -310,11 +312,7 @@ export default function CompanyDetail() {
             <ul className="list">
               <AddAddress />
               <AddEmployee />
-              <li>
-                <a href="#">
-                  Добавить животное <i className="icon-check" />{" "}
-                </a>
-              </li>
+              <AddAnimal />
               <li>
                 <a href="#">
                   Laboratories <i className="icon-check" />{" "}
