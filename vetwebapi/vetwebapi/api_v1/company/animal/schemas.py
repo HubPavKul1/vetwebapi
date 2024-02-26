@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import date
 
 
@@ -35,3 +35,27 @@ class AnimalUpdatePartial(BaseModel):
     nickname: str | None = None
     identification: str | None = None
     is_active: bool = True
+
+
+class BaseAnimalSchema(BaseModel):
+    id: int
+    name: str
+    model_config = ConfigDict(from_attributes=True)    
+
+
+    
+class TypeOfFeedingSchemas(BaseModel):
+    types_of_feeding: list[BaseAnimalSchema]
+    
+class AnimalGroupSchemas(BaseModel):
+    animal_groups: list[BaseAnimalSchema]
+    
+class SpeciesSchemas(BaseModel):
+    species: list[BaseAnimalSchema]
+    
+class GenderSchemas(BaseModel):
+    genders: list[BaseAnimalSchema]
+    
+class UsageTypeSchemas(BaseModel):
+    usage_types: list[BaseAnimalSchema]
+    

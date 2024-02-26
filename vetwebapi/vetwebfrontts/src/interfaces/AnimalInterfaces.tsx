@@ -21,32 +21,23 @@ export interface IAnimalCreate {
     identification: string;
 }
 
-export interface ITypeOfFeeding extends IBase {}
-
-export interface IAnymalGroup extends IBase {}
-
-export interface ISpecies extends IBase {}
-
-export interface IGender extends IBase {}
-
-export interface IUsageType extends IBase {}
 
 export interface ITypesOfFeeding {
-    types_of_feeding?: ITypeOfFeeding[];
+    types_of_feeding?: IBase[];
 }
 
 export interface IAnimalGroups {
-    animal_groups?: IAnymalGroup[];
+    animal_groups?: IBase[];
 }
 
 export interface ISpeciesList {
-    species?: ISpecies[];
+    species?: IBase[];
 }
 
 export interface IGenders {
-    genders?: IGender[];
+    genders?: IBase[];
 }
 
 export interface IUsageTypes {
-    usage_types?: IUsageType[]; 
+    usage_types?: IBase[]; 
 }

@@ -17,7 +17,7 @@ from vetwebapi.core.models import (
 
 from .schemas import AnimalIn, AnimalUpdate, AnimalUpdatePartial
 
-
+# Create
 async def create_type_of_feeding(session: AsyncSession, name: str) -> int:
     new_type_of_feeding = TypeOfFeeding(name=name.capitalize())
     session.add(new_type_of_feeding)
@@ -34,8 +34,8 @@ async def create_usage_type(session: AsyncSession, name: str) -> int:
     return new_usage_type.id
 
 
-async def create_gender(session: AsyncSession, name: str) -> int:
-    new_gender = Gender(name=name)
+async def create_gender(session: AsyncSession, species_id: int, name: str) -> int:
+    new_gender = Gender(species_id=species_id, name=name)
     session.add(new_gender)
     await session.commit()
     await session.refresh(new_gender)
@@ -93,8 +93,9 @@ async def save_animals(
 
     buffer.close()
     file.file.close()
-
-
+    
+    
+# Read
 async def read_company_animals(session: AsyncSession, company_id: int) -> list[Animal | None]:
     stmt = (
         select(Animal)
@@ -108,9 +109,33 @@ async def read_animal_by_id(session: AsyncSession, animal_id: int) -> Animal | N
     return await session.get(Animal, animal_id)
 
 
-async def read_species(session: AsyncSession) -> list[Species]:
-    stmt = select(Species).order_by(Species.name)
+# Data for create animal form
+async def read_types_of_feeding(session: AsyncSession) -> list[TypeOfFeeding]:
+    stmt = select(TypeOfFeeding).order_by(TypeOfFeeding.name)
     return list(await session.scalars(stmt))
+
+
+async def read_animal_groups(session: AsyncSession, type_of_feeding_id: int) -> list[AnimalGroup]:
+    stmt = select(AnimalGroup).where(AnimalGroup.type_of_feeding_id == type_of_feeding_id).order_by(AnimalGroup.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_species(session: AsyncSession, animal_group_id: int) -> list[Species]:
+    stmt = select(Species).where(Species.animal_group_id == animal_group_id).order_by(Species.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_genders(session: AsyncSession, species_id: int) -> list[Gender]:
+    stmt = select(Gender).where(Gender.species_id == species_id).order_by(Gender.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_usage_types(session: AsyncSession) -> list[UsageType]:
+    stmt = select(UsageType).order_by(UsageType.name)
+    return list(await session.scalars(stmt))
+
+##################################################################
+
 
 
 async def read_species_by_name(session: AsyncSession, name: str) -> Species:
@@ -118,19 +143,9 @@ async def read_species_by_name(session: AsyncSession, name: str) -> Species:
     return await session.scalar(stmt)
 
 
-async def read_genders(session: AsyncSession) -> list[Gender]:
-    stmt = select(Gender).order_by(Gender.name)
-    return list(await session.scalars(stmt))
-
-
 async def read_gender_by_name(session: AsyncSession, name: str) -> Gender:
     stmt = select(Gender).where(Gender.name.ilike(name))
     return await session.scalar(stmt)
-
-
-async def read_usage_types(session: AsyncSession) -> list[UsageType]:
-    stmt = select(UsageType).order_by(UsageType.name)
-    return list(await session.scalars(stmt))
 
 
 async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType:
@@ -138,6 +153,7 @@ async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType
     return await session.scalar(stmt)
 
 
+# Update
 async def update_animal(
     session: AsyncSession,
     animal: Animal,
@@ -150,6 +166,7 @@ async def update_animal(
     return animal
 
 
+# Delete
 async def delete_animal(session: AsyncSession, animal: Animal) -> None:
     await session.delete(animal)
     await session.commit()

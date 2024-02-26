@@ -5,6 +5,7 @@ import { AddEmployee } from "../employee/AddEmployee";
 import { useQuery } from "react-query"
 import { CompanyAddress } from "../address/CompanyAddress";
 import { CompanyEmployee } from "../employee/CompanyEmployee";
+import { CompanyAnimal } from "../animal/CompanyAnimal";
 import { AddAnimal } from "../animal/AddAnimal";
 
 
@@ -85,31 +86,7 @@ export default function CompanyDetail() {
                         <th>Идентификация</th>
                         <th />
                       </tr>
-                      {data?.animals?.length ? data.animals.map(animal =>(
-                      <tr key={animal.id}>
-                        <td>{animal.species}</td>
-                        <td>{animal.gender}</td>
-                        <td>{animal.date_of_birth}</td>
-                        <td>{animal.nickname}</td>
-                        <td>{animal.identification}</td>
-                        <td>
-                          <div className="btn-group btn-group-sm" role="group">
-                            <a
-                              href="#"
-                              className="btn btn-warning btn-sm"
-                            >
-                              ред
-                            </a>
-                            <a
-                              className="btn btn-danger btn-sm"
-                              href="#"
-                            >
-                              х
-                            </a>
-                          </div>
-                        </td>
-                       </tr>
-                      ))
+                      {data?.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
                       
                       : <tr>
                           <td>Животные</td>

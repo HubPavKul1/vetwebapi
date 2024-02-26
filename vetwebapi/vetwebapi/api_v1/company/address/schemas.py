@@ -17,31 +17,20 @@ class AddressSchema(BaseModel):
     phone_number1: str
     phone_number2: str | None = None
     
-class BaseSchema(BaseModel):
+class BaseAddressSchema(BaseModel):
     id: int
     name: str
-    
-class RegionSchema(BaseSchema):
-    model_config = ConfigDict(from_attributes=True)
-
-class DistrictSchema(BaseSchema):
     model_config = ConfigDict(from_attributes=True)
     
-
-class CitySchema(BaseSchema):
-    model_config = ConfigDict(from_attributes=True)
-
-class StreetSchema(BaseSchema):
-    model_config = ConfigDict(from_attributes=True)
 
 class RegionSchemas(BaseModel):
-    regions: list[RegionSchema]
+    regions: list[BaseAddressSchema]
     
 class DistrictSchemas(BaseModel):
-    districts: list[DistrictSchema]
+    districts: list[BaseAddressSchema]
 
 class CitySchemas(BaseModel):
-    cities: list[CitySchema]
+    cities: list[BaseAddressSchema]
     
 class StreetSchemas(BaseModel):
-    streets: list[StreetSchema]
+    streets: list[BaseAddressSchema]

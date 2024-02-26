@@ -10,7 +10,7 @@ from vetwebapi.core.models import Animal
 
 from . import crud
 from .dependencies import animal_by_id
-from .schemas import AnimalSchema, AnimalUpdate, AnimalUpdatePartial
+from .schemas import AnimalSchema, AnimalIn, AnimalUpdate, AnimalUpdatePartial
 
 router = APIRouter(prefix="/{company_id}/animals")
 
@@ -27,6 +27,23 @@ async def serialize_animal(animal: Animal) -> AnimalSchema:
         identification=animal.identification,
         is_active=animal.is_active,
     )
+
+
+
+@router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+async def create_animal_route(
+    body: AnimalIn,
+    company_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.create_animal(session=session, body=body, company_id=company_id)
+        return SuccessMessage
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
 
 
 @router.get("/{animal_id}/", response_model=AnimalSchema)
@@ -50,6 +67,21 @@ async def delete_animal(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Something wrong on backend"},
+        )
+        
+
+@router.delete("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def delete_animal_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    animal: Animal = Depends(animal_by_id),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_animal(session=session, animal=animal)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
         )
 
 

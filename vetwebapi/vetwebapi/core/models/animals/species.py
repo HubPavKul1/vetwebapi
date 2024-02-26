@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
-    from .animal import Animal
+    from .animal import Animal, Gender
     from .animal_group import AnimalGroup
 
 
@@ -20,6 +20,7 @@ class Species(Base):
 
     animals: Mapped[list["Animal"]] = relationship(back_populates="species")
     animal_group: Mapped["AnimalGroup"] = relationship(back_populates="species", lazy="joined")
+    genders: Mapped[list["Gender"]] = relationship(back_populates="species")
 
     def __repr__(self) -> str:
         return self.name

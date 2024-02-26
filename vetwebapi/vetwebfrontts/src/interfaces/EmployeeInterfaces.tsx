@@ -21,8 +21,7 @@ export interface IEmployeeCreate extends IEmployeeBase {
 }
 
 
-export interface IPosition extends IBase {}
 
 export interface IPositions {
-    positions?: IPosition[];
+    positions?: IBase[];
 }

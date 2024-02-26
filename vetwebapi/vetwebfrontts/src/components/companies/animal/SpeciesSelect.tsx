@@ -1,8 +1,10 @@
 import Select from 'react-select'
+import { useState } from 'react';
 import { AnimalService } from '../company.service'
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
+import { GendersSelect } from './GendersSelect';
 
 
 interface SpeciesSelectProps {
@@ -11,18 +13,25 @@ interface SpeciesSelectProps {
 
 export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
 
+    const [ speciesId , setSpeciesId ] = useState<string | undefined>()
+
     const { data, isLoading, error } = useQuery(['species'], () => AnimalService.getSpecies(animalGroupId))
 
     const { control } = useFormContext()
+
+    console.log("control", control)
 
     const options = data?.data?.species?.map(spec => ({ value: spec.id, label: spec.name }))
 
 
     const getValue = (value: number) =>
-        value ? options?.find((option) => option.value === value) : ""
+        value ? options?.find((option) => option.value === value, setSpeciesId(value.toString())) : ""
+        
+
 
 
     return (
+       <>
         <Controller
             control={control}
             name="species_id"
@@ -39,6 +48,17 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
                 />
             )
 
-            } />
+            } /> 
+            {speciesId ?
+                <div className="form-group">
+                    <label htmlFor="name" className="">
+                        Выберите пол животного *
+                    </label>
+                    <GendersSelect speciesId={speciesId} />
+                </div> : <p></p>
+            }      
+       </>
+             
+       
     )
 }

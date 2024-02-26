@@ -5,10 +5,11 @@ from .animal.schemas import AnimalSchema
 from .employee.schemas import EmployeeSchema
 
 
+
 class BaseIn(BaseModel):
     name: str
-
-
+    
+    
 class CompanyIn(BaseModel):
     full_name: str
     short_name: str

@@ -103,17 +103,21 @@ export const AnimalService = {
 
 
   async getSpecies(id: string) {
-    return await axios.get<ISpeciesList>(`/api/companies/${id}/spesies`)
+    return await axios.get<ISpeciesList>(`/api/companies/${id}/species`)
   },
 
 
-  async getGengers(id:string) {
+  async getGenders(id:string) {
     return await axios.get<IGenders>(`/api/companies/${id}/genders`)
   },
 
 
   async getUsageTypes() {
     return await axios.get<IUsageTypes>("/api/companies/usage_types")
+  },
+
+  async deleteAnimal(id: string, animal_id: number) {
+    await axios.delete(`/api/companies/${id}/animals/${animal_id}`)
   },
 
 

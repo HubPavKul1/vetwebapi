@@ -21,29 +21,23 @@ export interface IAddress {
 
 
 
-export interface IRegion extends IBase {}
-
 export interface IRegions {
-    regions?: IRegion[]
+    regions?: IBase[]
 }
 
-
-export interface IDistrict extends IBase {}
 
 export interface IDistricts {
-    districts?: IDistrict[]
+    districts?: IBase[]
 }
 
-export interface ICity extends IBase {}
 
 export interface ICities {
-    cities?: ICity[]
+    cities?: IBase[]
 }
 
-export interface IStreet extends IBase {}
 
 export interface IStreets {
-    streets?: IStreet[]
+    streets?: IBase[]
 }
 
 

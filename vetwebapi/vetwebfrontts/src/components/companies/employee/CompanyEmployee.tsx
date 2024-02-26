@@ -15,10 +15,6 @@ export function CompanyEmployee({employee}: CompanyEmployeeProps) {
                 <td>{employee.firstname}</td>
                 <td>{employee.patronymic}</td>
             </tr>
-        )
-    
-    
-
-                       
+        )                
 
 }
