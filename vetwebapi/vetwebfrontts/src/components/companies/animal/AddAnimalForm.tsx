@@ -31,7 +31,6 @@ export function AddAnimalForm() {
     )
 
     const createAnimal: SubmitHandler<IAnimalCreate> = data => {
-        console.log("newAnimal", data)
         mutate(data)
 
     }

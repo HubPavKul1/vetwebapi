@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 
-export default function CompaniesLink() {
+export function CompaniesLink() {
     return (
         <li>
             <Link to="/companies/">Предприятия</Link>

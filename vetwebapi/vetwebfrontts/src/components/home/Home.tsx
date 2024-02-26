@@ -1,5 +1,5 @@
 
-export default function Home() {
+export function Home() {
     return (  
 
                 <div id="page">

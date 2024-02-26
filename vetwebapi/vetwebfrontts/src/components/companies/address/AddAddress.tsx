@@ -1,5 +1,5 @@
-import AddAddressForm from "./AddAddressForm";
-import Modal from "../../modal/Modal";
+import { AddAddressForm } from "./AddAddressForm";
+import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 
 

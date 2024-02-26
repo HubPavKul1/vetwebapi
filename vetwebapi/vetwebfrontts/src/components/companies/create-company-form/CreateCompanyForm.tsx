@@ -1,11 +1,11 @@
 import { CompanyService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
-import ICompanyCreate from "../../../interfaces/CompanyInterfaces";
+import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 
 
 
-export default function CreateCompanyForm() {
+export function CreateCompanyForm() {
    
     const { register, reset, handleSubmit, formState: {errors} } = useForm<ICompanyCreate>({
         mode: "onChange",

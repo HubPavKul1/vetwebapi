@@ -15,7 +15,7 @@ import "./assets/css/bootstrap.css";
 
 
 
-import App from './App';
+import { App } from './App';
 
 const queryClient = new QueryClient()
 

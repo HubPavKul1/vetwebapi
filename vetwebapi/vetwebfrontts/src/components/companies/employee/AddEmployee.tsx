@@ -1,4 +1,4 @@
-import Modal from "../../modal/Modal";
+import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 import { AddEmployeeForm } from "./AddEmployeeForm";
 

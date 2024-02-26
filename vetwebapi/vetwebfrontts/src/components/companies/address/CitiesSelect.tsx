@@ -2,14 +2,14 @@ import Select, { SingleValue } from 'react-select'
 import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
-import StreetsSelect from './StreetsSelect';
+import { StreetsSelect } from './StreetsSelect';
 import { IOption } from '../../../interfaces/FormInterface';
 
 interface CitiesSelectProps {
     districtId: string;
 }
 
-export default function CitiesSelect({districtId}: CitiesSelectProps) {
+export function CitiesSelect({districtId}: CitiesSelectProps) {
     const [cityId, setCityId] = useState<string | undefined>();
     const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(districtId));
     

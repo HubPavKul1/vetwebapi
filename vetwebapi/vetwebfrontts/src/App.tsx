@@ -1,11 +1,11 @@
-import Layout from "./components/Layout";
-import Home from "./components/home/Home";
-import Companies from "./components/companies/Companies";
-import CompanyDetail from "./components/companies/company-detail/CompanyDetail";
+import { Layout } from "./components/Layout";
+import { Home } from "./components/home/Home";
+import { Companies } from "./components/companies/Companies";
+import { CompanyDetail } from "./components/companies/company-detail/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
 
 
-export default function App() {
+export function App() {
     return (
         <>
         <Routes>

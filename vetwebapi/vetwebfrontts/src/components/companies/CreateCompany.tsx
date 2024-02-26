@@ -1,8 +1,8 @@
-import CreateCompanyForm from "./create-company-form/CreateCompanyForm";
-import Modal from "../modal/Modal"
+import { CreateCompanyForm } from "./create-company-form/CreateCompanyForm";
+import { Modal } from "../modal/Modal"
 import { useState } from "react";
 
-export default function CreateCompany() {
+export function CreateCompany() {
 
     const [modalActive, setModalActive] = useState(false)
     return (

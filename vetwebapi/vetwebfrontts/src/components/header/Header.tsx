@@ -1,10 +1,10 @@
 import "./Header.css";
 
-import HomeLink from "./HomeLink";
-import CompaniesLink from "./CompaniesLink";
+import { HomeLink } from "./HomeLink";
+import { CompaniesLink } from "./CompaniesLink";
 
 
-export default function Header() {
+export function Header() {
     return (
             <nav className="colorlib-nav" role="navigation">
                 <div className="top-menu">

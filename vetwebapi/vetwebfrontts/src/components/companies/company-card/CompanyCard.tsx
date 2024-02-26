@@ -1,13 +1,13 @@
 
 import { Link } from "react-router-dom"
-import ICompany from "../../../interfaces/CompanyInterfaces"
+import { ICompany } from "../../../interfaces/CompanyInterfaces"
 
 
 interface CompanyCard {
     company: ICompany;
 }
 
-export default function CompanyCard({company}: CompanyCard) {
+export function CompanyCard({company}: CompanyCard) {
     return (
         <div className="col-md-4 animate-box">
                         <div className="services">

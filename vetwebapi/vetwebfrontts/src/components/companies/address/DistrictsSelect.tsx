@@ -2,7 +2,7 @@ import Select, { SingleValue } from 'react-select'
 import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
-import CitiesSelect from './CitiesSelect';
+import { CitiesSelect } from './CitiesSelect';
 import { IOption } from '../../../interfaces/FormInterface';
 
 

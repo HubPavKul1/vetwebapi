@@ -9,7 +9,7 @@ interface StreetsSelectProps {
     cityId: string;
 }
 
-export default function StreetsSelect({cityId}: StreetsSelectProps) {
+export function StreetsSelect({cityId}: StreetsSelectProps) {
 
     const { data, isLoading, error } = useQuery(['cityStreets'], () => AddressService.getCityStreets(cityId))
 

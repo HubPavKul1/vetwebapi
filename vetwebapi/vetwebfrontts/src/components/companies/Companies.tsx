@@ -1,11 +1,11 @@
-import CompanyCard from "./company-card/CompanyCard"
+import { CompanyCard } from "./company-card/CompanyCard"
 import { CompanyService } from "./company.service"
-import CreateCompany from "./CreateCompany"
+import { CreateCompany } from "./CreateCompany"
 import { useQuery } from "react-query"
 
 
 
-export default function Companies() {
+export function Companies() {
     
     const { data, isLoading, error } = useQuery(['companies'], () => CompanyService.getAll(),
         {

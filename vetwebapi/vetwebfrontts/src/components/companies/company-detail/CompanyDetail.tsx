@@ -9,7 +9,7 @@ import { CompanyAnimal } from "../animal/CompanyAnimal";
 import { AddAnimal } from "../animal/AddAnimal";
 
 
-export default function CompanyDetail() {
+export function CompanyDetail() {
     const {id} = useParams();
 
     const { data, isLoading, error } = useQuery(['company', id], () => CompanyService.getById(id), {

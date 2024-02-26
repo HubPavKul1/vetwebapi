@@ -7,7 +7,7 @@ import { IOption } from '../../../interfaces/FormInterface';
 
 
 
-export default function RegionsSelect() {
+export function RegionsSelect() {
     const [regionId, setRegionId] = useState<string | undefined>()
     const { data, isLoading, error } = useQuery(['regions'], () => AddressService.getRegions())
     

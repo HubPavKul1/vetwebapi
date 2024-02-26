@@ -9,7 +9,7 @@ interface ModalProps {
 
 
 
-export default function Modal({active , setActive, children}: ModalProps) {
+export function Modal({active , setActive, children}: ModalProps) {
 
     return (
         <div className={ active ? "modal active" : "modal" } onClick={() => setActive(false)}>

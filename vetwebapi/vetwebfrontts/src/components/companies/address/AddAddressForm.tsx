@@ -1,13 +1,13 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
-import RegionsSelect from "./RegionsSelect";
+import { RegionsSelect } from "./RegionsSelect";
 import { AddressService } from "../company.service";
 import { useParams } from "react-router-dom";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 
 
 
-export default function AddAddressForm() {
+export function AddAddressForm() {
 
     const {id} = useParams()
     if (!id) return;
