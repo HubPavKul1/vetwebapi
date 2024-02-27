@@ -117,22 +117,33 @@ async def update_animal_api_partial(
         )
 
 
+# @router.post("/upload/", status_code=status.HTTP_201_CREATED)
+# async def upload_animals(
+#     request: Request,
+#     company_id: int,
+#     file: UploadFile,
+#     session: AsyncSession = Depends(db_manager.scope_session_dependency),
+# ):
+#     if file.content_type not in ["text/csv"]:
+#         raise HTTPException(status_code=400, detail="Invalid file type")
+
+#     # try:
+#     await crud.save_animals(session=session, company_id=company_id, file=file)
+#     redirect_url = request.url_for("company_detail", company_id=company_id)
+#     return RedirectResponse(redirect_url, status_code=302)
+    # except Exception:
+    #     raise HTTPException(
+    #         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+    #         detail={"result": False, "error_message": "Internal Server Error"},
+    #     )
+    
 @router.post("/upload/", status_code=status.HTTP_201_CREATED)
 async def upload_animals(
-    request: Request,
     company_id: int,
     file: UploadFile,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     if file.content_type not in ["text/csv"]:
         raise HTTPException(status_code=400, detail="Invalid file type")
-
-    # try:
     await crud.save_animals(session=session, company_id=company_id, file=file)
-    redirect_url = request.url_for("company_detail", company_id=company_id)
-    return RedirectResponse(redirect_url, status_code=302)
-    # except Exception:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    #         detail={"result": False, "error_message": "Internal Server Error"},
-    #     )
+    

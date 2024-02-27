@@ -125,6 +125,12 @@ export const AnimalService = {
     await axios.post<IAnimalCreate>(`/api/companies/${id}/animals/`, data)
     .then(response => console.log(response))
     .catch(err => console.log(err))
+  },
+
+  async uploadAnimals(id: string, file: File | null) {
+    await axios.post(`/api/companies/${id}/animals/upload`, file)
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
   }
 
 

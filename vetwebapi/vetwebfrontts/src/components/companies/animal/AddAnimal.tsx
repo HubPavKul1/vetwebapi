@@ -1,6 +1,7 @@
 import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 import { AddAnimalForm } from "./AddAnimalForm";
+import { UploadAnimalForm } from "./UploadAnimalForm";
 
 
 export function AddAnimal() {
@@ -13,6 +14,7 @@ export function AddAnimal() {
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
                 <AddAnimalForm />
+                <UploadAnimalForm />
             </Modal>
         </li>
     )
