@@ -15,20 +15,15 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
 
     const [ speciesId , setSpeciesId ] = useState<string | undefined>()
 
-    const { data, isLoading, error } = useQuery(['species'], () => AnimalService.getSpecies(animalGroupId))
+    const { data } = useQuery(['species'], () => AnimalService.getSpecies(animalGroupId))
 
     const { control } = useFormContext()
 
-    console.log("control", control)
-
     const options = data?.data?.species?.map(spec => ({ value: spec.id, label: spec.name }))
 
-
     const getValue = (value: number) =>
-        value ? options?.find((option) => option.value === value, setSpeciesId(value.toString())) : ""
-        
-
-
+        value ? options?.find((option) => option.value === value): ""
+    
 
     return (
        <>
@@ -44,7 +39,10 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
                     isClearable
                     options={options}
                     value={getValue(value)}
-                    onChange={newValue => onChange((newValue as IOption).value)}
+                    onChange={
+                        newValue => {onChange((newValue as IOption).value);
+                        setSpeciesId((newValue as IOption).value.toString())}
+                    }
                 />
             )
 

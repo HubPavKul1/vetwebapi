@@ -35,6 +35,7 @@ export function CreateCompanyForm() {
             <div className="form-group">
                 <label htmlFor="full_name" className="sr-only">Полное наименование</label>
                 <input 
+                    style={{textAlign: "center"}}
                     type="text"    
                     className="form-control" 
                     id="full_name" 
@@ -49,6 +50,7 @@ export function CreateCompanyForm() {
             <div className="form-group">
                 <label htmlFor="short_name" className="sr-only">Сокращенное наименование</label>
                 <input 
+                    style={{textAlign: "center"}}
                     type="text" 
                     className="form-control" 
                     id="short_name" 

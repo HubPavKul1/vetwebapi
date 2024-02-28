@@ -37,7 +37,6 @@ export function AddEmployeeForm() {
 
     return (
 
-
         <FormProvider {...methods}>
             <div className="form-group">
                 <label htmlFor="name" className="">
@@ -90,7 +89,5 @@ export function AddEmployeeForm() {
             </div>
 
         </FormProvider>
-
-
     )
 }

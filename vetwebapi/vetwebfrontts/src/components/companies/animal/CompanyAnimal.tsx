@@ -1,6 +1,6 @@
 import { IAnimal } from "../../../interfaces/AnimalInterfaces";
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { AnimalService } from "../company.service";
 
 
@@ -9,18 +9,28 @@ interface CompanyAnimalProps {
 }
 
 
+
+
 export function CompanyAnimal({animal}: CompanyAnimalProps) {
     const { id } = useParams()
     if (!id) return;
 
-    
-    
-    
-    const { error } = useQuery(['animal_delete'], () => AnimalService.deleteAnimal(id, animal.id), {
-        enabled: !!id
-      }
-      );
+    const queryClient = useQueryClient()
 
+    const { mutate } = useMutation(["delete animal"], {
+        mutationFn: () => AnimalService.deleteAnimal(id, animal.id),
+        onSuccess: () => {
+            alert("Животное успешно удалено!")
+            queryClient.invalidateQueries(["company", id])
+        }
+    },
+    )
+
+    const deleteAnimal = () => {
+        mutate()
+    }
+
+ 
     return(
         
             <tr key={animal.id}>
@@ -41,6 +51,7 @@ export function CompanyAnimal({animal}: CompanyAnimalProps) {
                         <a
                             className="btn btn-danger btn-sm"
                             href="#"
+                            onClick={deleteAnimal}
                         >
                             х
                         </a>

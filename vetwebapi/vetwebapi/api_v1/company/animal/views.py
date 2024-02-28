@@ -51,26 +51,8 @@ async def get_animal(animal: Animal = Depends(animal_by_id)) -> AnimalSchema:
     return await serialize_animal(animal=animal)
 
 
-@router.get("/delete/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
-async def delete_animal(
-    request: Request,
-    company_id: int,
-    animal: Animal = Depends(animal_by_id),
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-):
-    try:
-        await crud.delete_animal(session=session, animal=animal)
-        redirect_url = request.url_for("company_detail", company_id=company_id)
-        return RedirectResponse(redirect_url, status_code=302)
 
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Something wrong on backend"},
-        )
-        
-
-@router.delete("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete("/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     animal: Animal = Depends(animal_by_id),

@@ -13,7 +13,7 @@ interface AnimalGroupsSelectProps {
 
 export function AnimalGroupsSelect({ typeOfFeedingId }: AnimalGroupsSelectProps) {
     const [animalGroupId, setAnymalGroupId] = useState<string | undefined>()
-    const { data, isLoading, error } = useQuery(['animal_groups'], () => AnimalService.getAnimalGroups(typeOfFeedingId))
+    const { data } = useQuery(['animal_groups'], () => AnimalService.getAnimalGroups(typeOfFeedingId))
 
     const options = data?.data?.animal_groups?.map(group => ({ value: group.id, label: group.name }))
 

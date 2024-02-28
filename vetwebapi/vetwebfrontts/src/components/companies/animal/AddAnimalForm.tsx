@@ -20,7 +20,7 @@ export function AddAnimalForm() {
     const { register, reset, handleSubmit, formState: { errors } } = methods
     const queryClient = useQueryClient()
 
-    const { mutate } = useMutation(["create address"], {
+    const { mutate } = useMutation(["create animal"], {
         mutationFn: (data: IAnimalCreate) => AnimalService.createAnimal(data, id),
         onSuccess: () => {
             alert("Животное успешно добавлено!")
@@ -50,7 +50,6 @@ export function AddAnimalForm() {
                 </label>
                 <UsageTypesSelect />
             </div>
-
 
             <div className="form-group">
                 <label htmlFor="date_of_birth" className="">
