@@ -28,7 +28,7 @@ export function TypesOfFeedingSelect() {
             />
             {typeOfFeedingId ?
                 <div className="form-group">
-                    <label htmlFor="name" className="">
+                    <label>
                         Выберите группу животных *
                     </label>
                     <AnimalGroupsSelect typeOfFeedingId={typeOfFeedingId} />

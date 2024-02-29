@@ -27,7 +27,7 @@ export function RegionsSelect() {
             />
             {regionId ?
                 <div className="form-group">
-                <label htmlFor="name" className="">
+                <label>
                     Выберите район *
                 </label>
                 <DistrictsSelect regionId={regionId}/>

@@ -39,13 +39,13 @@ export function AddAnimalForm() {
     return (
         <FormProvider {...methods}>
             <div className="form-group">
-                <label htmlFor="name" className="">
+                <label>
                     Выберите Тип Кормления *
                 </label>
                 <TypesOfFeedingSelect />
             </div>
             <div className="form-group">
-                <label htmlFor="name" className="">
+                <label>
                     Выберите Тип Использования *
                 </label>
                 <UsageTypesSelect />

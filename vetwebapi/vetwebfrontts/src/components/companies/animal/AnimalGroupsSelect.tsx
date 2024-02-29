@@ -31,7 +31,7 @@ export function AnimalGroupsSelect({ typeOfFeedingId }: AnimalGroupsSelectProps)
             />
             {animalGroupId ?
                 <div className="form-group">
-                    <label htmlFor="name" className="">
+                    <label>
                         Выберите вид животного *
                     </label>
                     <SpeciesSelect animalGroupId={animalGroupId} />

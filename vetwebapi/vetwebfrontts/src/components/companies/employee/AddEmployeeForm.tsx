@@ -39,7 +39,7 @@ export function AddEmployeeForm() {
 
         <FormProvider {...methods}>
             <div className="form-group">
-                <label htmlFor="name" className="">
+                <label>
                     Выберите должность *
                 </label>
                 <PositionsSelect />

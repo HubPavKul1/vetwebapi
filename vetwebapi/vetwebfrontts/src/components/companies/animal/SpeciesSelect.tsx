@@ -49,7 +49,7 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
             } /> 
             {speciesId ?
                 <div className="form-group">
-                    <label htmlFor="name" className="">
+                    <label>
                         Выберите пол животного *
                     </label>
                     <GendersSelect speciesId={speciesId} />

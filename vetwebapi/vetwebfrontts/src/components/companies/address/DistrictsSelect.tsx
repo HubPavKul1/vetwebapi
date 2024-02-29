@@ -31,7 +31,7 @@ export function DistrictsSelect({regionId}: DistrictsSelectProps) {
             />
             {districtId ?
                 <div className="form-group">
-                <label htmlFor="name" className="">
+                <label>
                     Выберите город *
                 </label>
                 <CitiesSelect districtId={districtId}/>

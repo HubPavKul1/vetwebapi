@@ -39,7 +39,7 @@ export function AddAddressForm() {
   
   <FormProvider {...methods}>
     <div className="form-group">
-        <label htmlFor="name" className="">
+        <label>
           Выберите регион *
         </label>
           <RegionsSelect />
@@ -71,7 +71,7 @@ export function AddAddressForm() {
       <input
         type="tel"
         className="form-control"
-        id="phone_number1"
+        id="phone_number2"
         placeholder="Телефон2"
         style={{ width: 200, height: 30 }}
         {...register("phone_number2")}
