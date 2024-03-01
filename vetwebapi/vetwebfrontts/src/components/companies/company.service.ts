@@ -127,11 +127,11 @@ export const AnimalService = {
     .catch(err => console.log(err))
   },
 
-  async uploadAnimals(file: File, id: string) {
-    // const headers = { "Content-Type": "multipart/form-data" }
+  async uploadAnimals(file: FormData, id: string) {
+
     await axios.post(`/api/companies/${id}/animals/upload`, 
-    file 
-    // {headers: headers}
+    file,
+    // {headers: { 'content-type': 'multipart/form-data' }}
     )
     .then(response => console.log(response))
     .catch(err => console.log(err))
