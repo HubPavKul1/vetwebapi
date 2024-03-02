@@ -74,8 +74,7 @@ export function CompanyDetail() {
                 </div>
                 <div style={{ color: "#6f42c1" }}>
                   <table className="table">
-                    <caption style={{ color: "#0d6efd" }}>Животные</caption>
-                    <caption style={{ color: "#0d6efd" }}>Всего голов: {data?.animals?.length}</caption>
+                          <caption style={{ color: "#0d6efd" }}>Животные <br />Всего голов: {data?.animals?.length}</caption>
 
                     <tbody>
                       <tr>
