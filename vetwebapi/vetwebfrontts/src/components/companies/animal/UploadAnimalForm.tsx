@@ -1,8 +1,8 @@
+import { MouseEventHandler, useState } from "react";
 import { AnimalService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
-
 
 
 export function UploadAnimalForm() {
@@ -10,8 +10,8 @@ export function UploadAnimalForm() {
     const {id} = useParams()
     if (!id) return;
     
-  
-    const { register, handleSubmit, reset } = useForm<FileList>({});
+    const [currentFile, setCurrentFile] = useState<File>();
+    const { reset } = useForm<FileList>();
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["upload animals"], {
@@ -24,27 +24,41 @@ export function UploadAnimalForm() {
     },
     )
 
-    const onSubmit: SubmitHandler<FileList> = async (data) => {
+    const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { files } = event.target;
+        const selectedFiles = files as FileList;
+        setCurrentFile(selectedFiles?.[0]);
+
+    } 
+
+    const upload: MouseEventHandler<HTMLButtonElement> = async () => {
+        if (!currentFile) return;
         const formData = new FormData();
-        formData.append("file", data.item[0])
-
-
+        formData.append("file", currentFile)
         mutate(formData)
     }
         
 
     return (
-            
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input 
-                accept="text/csv"
-                type="file" 
-                {...register("item")} />
-               
-                <input type="submit"/>
-            </form>
-  
-    );
+        <div className="row">
+            <div className="col-8">
+                <label className="btn btn-default p-0">
+                <input type="file" onChange={selectFile} />
+                </label>
+            </div>
+    
+            <div className="col-4">
+                <button
+                className="btn btn-success btn-sm"
+                disabled={!currentFile}
+                onClick={upload}
+                >
+                Загрузить
+                </button>
+            </div>
+        </div>
+
+    )
 
 }
