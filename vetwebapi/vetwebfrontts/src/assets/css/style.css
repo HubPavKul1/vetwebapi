@@ -1818,4 +1818,26 @@ h1, h2, h3, h4, h5, h6, figure {
     padding-top: 30px; } }
 
 
+.delete-icon {
+  color: red;
+  font-size: larger;
+  cursor: pointer;
+  transition: color, transform 500ms ease;
+}
 
+.delete-icon:hover {
+  transform: scale(1.5);
+  color: rgb(243, 139, 139);
+}
+
+.edit-icon {
+  color: rgb(7, 99, 42);
+  font-size: larger;
+  cursor: pointer;
+  transition: color, transform 500ms ease;
+}
+
+.edit-icon:hover {
+  transform: scale(1.5);
+  color: rgb(54, 134, 7);
+}
