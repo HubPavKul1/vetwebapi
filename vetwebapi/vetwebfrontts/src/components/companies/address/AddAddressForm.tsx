@@ -4,7 +4,7 @@ import { RegionsSelect } from "./RegionsSelect";
 import { AddressService } from "../company.service";
 import { useParams } from "react-router-dom";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
-
+import { Button } from "../../Button";
 
 
 export function AddAddressForm() {
@@ -78,13 +78,13 @@ export function AddAddressForm() {
       />
     </div>
     <div className="form-group">
-      <input
-        type="submit"
-        id="btn-submit"
-        className="btn btn-primary btn-send-message btn-md"
-        defaultValue="Зарегистрировать"
-        onClick={handleSubmit(createAddress)}
+      <Button 
+          className="btn btn-primary btn-send-message btn-md"
+          disabled={false}
+          onClick={handleSubmit(createAddress)}
+          name="Зарегистрировать"
       />
+      
     </div>
 
   </FormProvider>

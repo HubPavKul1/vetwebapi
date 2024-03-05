@@ -5,6 +5,7 @@ import { AnimalService } from "../company.service";
 import { useParams } from "react-router-dom";
 import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
+import { Button } from "../../Button";
 
 
 
@@ -87,12 +88,11 @@ export function AddAnimalForm() {
                 {errors?.identification?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
             </div>
             <div className="form-group">
-                <input
-                    type="submit"
-                    id="btn-submit"
+                <Button 
                     className="btn btn-primary btn-send-message btn-md"
-                    defaultValue="Зарегистрировать"
+                    disabled={false}
                     onClick={handleSubmit(createAnimal)}
+                    name="Зарегистрировать"
                 />
             </div>
 

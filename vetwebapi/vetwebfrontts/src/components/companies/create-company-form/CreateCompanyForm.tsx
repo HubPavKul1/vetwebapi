@@ -2,6 +2,8 @@ import { CompanyService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
+import { Input } from "../../Input";
+import { Button } from "../../Button";
 
 
 
@@ -23,7 +25,6 @@ export function CreateCompanyForm() {
     })
 
     const createCompany: SubmitHandler<ICompanyCreate> = (data) => {
-        console.log(data)
         mutate(data)
         
     }   
@@ -31,8 +32,30 @@ export function CreateCompanyForm() {
     
     return (
 
-        <form action=""  method="post" onSubmit={handleSubmit(createCompany)}>
-            <div className="form-group">
+        <form onSubmit={handleSubmit(createCompany)}>
+            < Input 
+                className="form-control"
+                style={{textAlign: "center"}}
+                placeholder="Полное наименование"
+                register={register}
+                name="full_name"
+                type="text"
+                errors={errors}
+
+            />
+
+            < Input 
+                className="form-control"
+                style={{textAlign: "center"}}
+                placeholder="Краткое наименование"
+                register={register}
+                name="short_name"
+                type="text"
+                errors={errors}
+
+            />
+
+            {/* <div className="form-group">
                 <label htmlFor="full_name" className="sr-only">Полное наименование</label>
                 <input 
                     style={{textAlign: "center"}}
@@ -45,9 +68,9 @@ export function CreateCompanyForm() {
                     
                 />
                 {errors?.full_name?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
+            </div> */}
           
-            <div className="form-group">
+            {/* <div className="form-group">
                 <label htmlFor="short_name" className="sr-only">Сокращенное наименование</label>
                 <input 
                     style={{textAlign: "center"}}
@@ -59,17 +82,12 @@ export function CreateCompanyForm() {
                     
                 />
                 {errors?.short_name?.message && <p style={{color: "red"}}>Поле должно быть заполнено!</p>}
-            </div>
-
-            <div className="form-group">
-                <input 
-                    type="submit" 
-                    id="btn-submit" 
-                    className="btn btn-primary btn-send-message btn-md" 
-                    value="Зарегистрировать" 
-                   
-                />
-            </div>
+            </div> */}
+            <Button 
+                className="btn btn-primary btn-send-message btn-md"
+                disabled={false}
+                name="Зарегистрировать"
+            />
         </form>               
         
     )
