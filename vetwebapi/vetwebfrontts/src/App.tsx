@@ -3,6 +3,7 @@ import { Home } from "./components/home/Home";
 import { Companies } from "./components/companies/Companies";
 import { CompanyDetail } from "./components/companies/company-detail/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
+import { DrugMovements } from "./components/drugs/DrugMovements";
 
 
 export function App() {
@@ -12,6 +13,7 @@ export function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />}  />
                 <Route path="companies" element={<Companies />} />
+                <Route path="drugs" element={<DrugMovements />} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
                 <Route path="*" element={<div>Not Found</div>} />
             </Route>

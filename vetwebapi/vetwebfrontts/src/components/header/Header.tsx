@@ -2,6 +2,7 @@ import "./Header.css";
 
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
+import { DrugsLink } from "./DrugsLink";
 
 
 export function Header() {
@@ -36,24 +37,10 @@ export function Header() {
                                         <ul>
                                             <HomeLink />
                                             <CompaniesLink />
+                                            <DrugsLink />
+                                            
                                            
-                                
-                                            <li className="has-dropdown">
-                                                <a href="#">Биопрепараты</a>
-                                                <ul className="dropdown">
-                                                    <li>
-                                                        <a href="#">Поступление</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="departments-single.html">Dental Department</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="departments-single.html">
-                                                            Psychological Department
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                
                                             <li className="has-dropdown">
                                                 <a href="blog.html">Blog</a>
                                                 <ul className="dropdown">
