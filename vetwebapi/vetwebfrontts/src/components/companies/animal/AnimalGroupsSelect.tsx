@@ -24,6 +24,7 @@ export function AnimalGroupsSelect({ typeOfFeedingId }: AnimalGroupsSelectProps)
     return (
         <>
             <Select
+                id="animalGroup"
                 isSearchable
                 isClearable
                 options={options}

@@ -19,7 +19,7 @@ export function TypesOfFeedingSelect() {
     }
 
     return (
-        <>
+        <>  
             <Select
                 isSearchable
                 isClearable

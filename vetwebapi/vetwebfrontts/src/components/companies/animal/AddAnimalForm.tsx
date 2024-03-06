@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
 import { Button } from "../../Button";
+import { Input } from "../../Input";
 
 
 
@@ -52,41 +53,50 @@ export function AddAnimalForm() {
                 <UsageTypesSelect />
             </div>
 
-            <div className="form-group">
                 <label htmlFor="date_of_birth" className="">
                     Дата рождения *
                 </label>
-                <input
-                    type="date"
+                <Input 
                     className="form-control"
+                    style={{ width: 200, height: 30}}
                     id="date_of_birth"
-                    style={{ width: 200, height: 30 }}
-                    {...register("date_of_birth", { required: "Date of Birth is required!" })}
+                    register={register}
+                    fieldName="date_of_birth"
+                    type="date"
+                    errors={errors}
+                    isRequired={true}
+                    maximLength={20}
+                    minimLength={5}
                 />
-                {errors?.date_of_birth?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
-            <div className="form-group">
-                <input
-                    type="text"
+
+                <Input 
                     className="form-control"
+                    style={{ width: 200, height: 30}}
                     id="nickname"
-                    placeholder="Кличка животного *"
-                    style={{ width: 200, height: 30 }}
-                    {...register("nickname", { required: "Nickname is required!" })}
-                />
-                {errors?.nickname?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
-            <div className="form-group">
-                <input
+                    register={register}
+                    placeHolder="Кличка животного *"
+                    fieldName="nickname"
                     type="text"
-                    className="form-control"
-                    id="identification"
-                    placeholder="Идентификация *"
-                    style={{ width: 200, height: 30 }}
-                    {...register("identification", { required: "Identification is required!" })}
+                    errors={errors}
+                    isRequired={true}
+                    maximLength={20}
+                    minimLength={3}
                 />
-                {errors?.identification?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
+
+                <Input 
+                    className="form-control"
+                    style={{ width: 200, height: 30}}
+                    id="identification"
+                    register={register}
+                    placeHolder="Идентификация *"
+                    fieldName="identification"
+                    type="text"
+                    errors={errors}
+                    isRequired={true}
+                    maximLength={20}
+                    minimLength={2}
+                />
+
             <div className="form-group">
                 <Button 
                     className="btn btn-primary btn-send-message btn-md"

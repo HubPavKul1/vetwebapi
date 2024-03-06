@@ -36,53 +36,30 @@ export function CreateCompanyForm() {
             < Input 
                 className="form-control"
                 style={{textAlign: "center"}}
-                placeholder="Полное наименование"
+                placeHolder="Полное наименование *"
                 register={register}
-                name="full_name"
+                fieldName="full_name"
                 type="text"
                 errors={errors}
-
+                isRequired={true}
+                maximLength={255}
+                minimLength={5}
             />
 
             < Input 
                 className="form-control"
                 style={{textAlign: "center"}}
-                placeholder="Краткое наименование"
+                placeHolder="Краткое наименование *"
                 register={register}
-                name="short_name"
+                fieldName="short_name"
                 type="text"
                 errors={errors}
+                isRequired={true}
+                maximLength={255}
+                minimLength={5}
 
             />
 
-            {/* <div className="form-group">
-                <label htmlFor="full_name" className="sr-only">Полное наименование</label>
-                <input 
-                    style={{textAlign: "center"}}
-                    type="text"    
-                    className="form-control" 
-                    id="full_name" 
-                    placeholder="Полное наименование"
-                    {...register("full_name", {required: "Full_name is required!"})}
-
-                    
-                />
-                {errors?.full_name?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div> */}
-          
-            {/* <div className="form-group">
-                <label htmlFor="short_name" className="sr-only">Сокращенное наименование</label>
-                <input 
-                    style={{textAlign: "center"}}
-                    type="text" 
-                    className="form-control" 
-                    id="short_name" 
-                    placeholder="Сокращенное наименование" 
-                    {...register("short_name", { required: "Short_name is required" })}
-                    
-                />
-                {errors?.short_name?.message && <p style={{color: "red"}}>Поле должно быть заполнено!</p>}
-            </div> */}
             <Button 
                 className="btn btn-primary btn-send-message btn-md"
                 disabled={false}

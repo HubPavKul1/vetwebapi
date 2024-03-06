@@ -1,33 +1,46 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { ErrorMessage } from "./ErrorMessage";
 
 
 interface InputProps {
+    id?: string;
     className: string;
     type: string;
-    name: string;
-    style: React.CSSProperties;
-    placeholder: string;
+    fieldName: string;
+    style?: React.CSSProperties;
+    placeHolder?: string;
     errors: FieldErrors;
     register: UseFormRegister<any>;
+    isRequired: boolean;
+    maximLength: number;
+    minimLength: number;
 }
 
-export function Input({type, name, style, placeholder, errors, register} : InputProps) {
-    console.log(errors.name)
+export function Input({id, type, fieldName, style, placeHolder, errors, register, isRequired, maximLength, minimLength} : InputProps) {
     return (
         <div className="form-group">
-            <label htmlFor={name} className="sr-only">Полное наименование</label>
             <input 
                 className="form-control" 
                 type={type}
                 style={style}
-                id="full_name" 
-                placeholder={placeholder}
-                {...register(name, {required: `Field ${name} is required!`})}
-
-                    
+                id={id}
+                placeholder={placeHolder}
+                {...register(fieldName, 
+                    {required: {
+                        value: isRequired,
+                        message: `Поле ${fieldName} должно быть заполнено!`
+                    },
+                    maxLength: {
+                        value: maximLength,
+                        message: `Максимальная длина ${maximLength} символов`
+                        }, 
+                    minLength: {
+                        value: minimLength,
+                        message: `Минимальная длина ${minimLength} символов`
+                        },
+                    })}      
             />
-            {/* {errors?.name?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>} */}
-            {errors ? <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p> : <></>}
+            {errors[fieldName]?.message && <ErrorMessage error={errors[fieldName]?.message?.toString()}/>}
         </div>
     )
 }

@@ -5,6 +5,7 @@ import { AddressService } from "../company.service";
 import { useParams } from "react-router-dom";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 import { Button } from "../../Button";
+import { Input } from "../../Input";
 
 
 export function AddAddressForm() {
@@ -33,10 +34,8 @@ export function AddAddressForm() {
         
     }   
 
-    
     return (
 
-  
   <FormProvider {...methods}>
     <div className="form-group">
         <label>
@@ -44,39 +43,46 @@ export function AddAddressForm() {
         </label>
           <RegionsSelect />
       </div>
-      
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        id="house_number"
-        placeholder="Номер дома *"
-        style={{ width: 200, height: 30 }}
-        {...register("house_number", {required: "House_number is required!"})}
-      />
-      {errors?.house_number?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-    </div>
-    <div className="form-group">
-      <input
-        type="tel"
-        className="form-control"
-        id="phone_number1"
-        placeholder="Телефон1 *"
-        style={{ width: 200, height: 30 }}
-        {...register("phone_number1", {required: "Phone_number1 is required!"})}
-      />
-      {errors?.phone_number1?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-    </div>
-    <div className="form-group">
-      <input
-        type="tel"
-        className="form-control"
-        id="phone_number2"
-        placeholder="Телефон2"
-        style={{ width: 200, height: 30 }}
-        {...register("phone_number2")}
-      />
-    </div>
+
+    <Input
+      className="form-control"
+      style={{ width: 200, height: 30}}
+      placeHolder="Номер дома *"
+      register={register}
+      fieldName="house_number"
+      type="text"
+      errors={errors}
+      isRequired={true}
+      maximLength={5}
+      minimLength={1}
+     />
+
+    <Input
+      className="form-control"
+      style={{ width: 200, height: 30}}
+      placeHolder="Телефон1 *"
+      register={register}
+      fieldName="phone_number1"
+      type="tel"
+      errors={errors}
+      isRequired={true}
+      maximLength={20}
+      minimLength={6}
+     />
+
+    <Input
+      className="form-control"
+      style={{ width: 200, height: 30}}
+      placeHolder="Телефон2"
+      register={register}
+      fieldName="phone_number2"
+      type="tel"
+      errors={errors}
+      isRequired={false}
+      maximLength={20}
+      minimLength={6}
+     />
+
     <div className="form-group">
       <Button 
           className="btn btn-primary btn-send-message btn-md"
@@ -89,5 +95,4 @@ export function AddAddressForm() {
 
   </FormProvider>
     
-
 )}

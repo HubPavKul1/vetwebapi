@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
 import { Button } from "../../Button";
+import { Input } from "../../Input";
 
 
 
@@ -35,7 +36,6 @@ export function AddEmployeeForm() {
 
     }
 
-
     return (
 
         <FormProvider {...methods}>
@@ -45,40 +45,45 @@ export function AddEmployeeForm() {
                 </label>
                 <PositionsSelect />
             </div>
-
-            <div className="form-group">
-                <input
+                <Input 
+                    className="form-control"
+                    style={{ width: 200, height: 30}}
+                    placeHolder="Фамилия *"
+                    register={register}
+                    fieldName="lastname"
                     type="text"
-                    className="form-control"
-                    id="lastname"
-                    placeholder="Фамилия *"
-                    style={{ width: 200, height: 30 }}
-                    {...register("lastname", { required: "Last Name is required!" })}
+                    errors={errors}
+                    isRequired={true}
+                    maximLength={50}
+                    minimLength={1}
                 />
-                {errors?.lastname?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
-            <div className="form-group">
-                <input
-                    type="tel"
+
+                <Input 
                     className="form-control"
-                    id="firstname"
-                    placeholder="Имя *"
-                    style={{ width: 200, height: 30 }}
-                    {...register("firstname", { required: "First Name is required!" })}
+                    style={{ width: 200, height: 30}}
+                    placeHolder="Имя *"
+                    register={register}
+                    fieldName="firstname"
+                    type="text"
+                    errors={errors}
+                    isRequired={true}
+                    maximLength={30}
+                    minimLength={1}
                 />
-                {errors?.firstname?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
-            <div className="form-group">
-                <input
-                    type="tel"
+
+                <Input 
                     className="form-control"
-                    id="patronymic"
-                    placeholder="Отчество"
-                    style={{ width: 200, height: 30 }}
-                    {...register("patronymic", { required: "Patronymic is required!" })}
+                    style={{ width: 200, height: 30}}
+                    placeHolder="Отчество *"
+                    register={register}
+                    fieldName="patronymic"
+                    type="text"
+                    errors={errors}
+                    isRequired={true}
+                    maximLength={50}
+                    minimLength={5}
                 />
-                {errors?.patronymic?.message && <p style={{ color: "red" }}>"Поле должно быть заполнено!"</p>}
-            </div>
+
             <div className="form-group">
                 <Button 
                     className="btn btn-primary btn-send-message btn-md"
