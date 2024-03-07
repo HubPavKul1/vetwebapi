@@ -1,5 +1,6 @@
 import "./Header.css";
 
+
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
 import { DrugsLink } from "./DrugsLink";
@@ -37,9 +38,7 @@ export function Header() {
                                         <ul>
                                             <HomeLink />
                                             <CompaniesLink />
-                                            <DrugsLink />
-                                            
-                                           
+                                            <DrugsLink />    
                 
                                             <li className="has-dropdown">
                                                 <a href="blog.html">Blog</a>
