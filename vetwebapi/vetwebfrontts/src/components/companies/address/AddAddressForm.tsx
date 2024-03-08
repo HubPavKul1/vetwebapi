@@ -2,24 +2,21 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { RegionsSelect } from "./RegionsSelect";
 import { AddressService } from "../company.service";
-import { useParams } from "react-router-dom";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
 import { IInput } from "../../../interfaces/FormInterface";
+import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 
 
 
 interface InputItem extends IInput {
   isRequired: boolean;
- 
 }
 
-export function AddAddressForm() {
 
-   
-    const {id} = useParams()
-    if (!id) return;
+export function AddAddressForm({compId}: CompanyPageProps) {
+
 
     const inputItems: InputItem[] = [
       {fieldName: "house_number", placeHolder: "Номер дома *", type: "text", isRequired: true, maximLength: 5, minimLength: 1},
@@ -35,11 +32,13 @@ export function AddAddressForm() {
     const { register, reset, handleSubmit, formState: {errors} } = methods
     const queryClient = useQueryClient()
 
+    
+
     const {mutate} = useMutation(["create address"], {
-        mutationFn: (data: IAddressIn) => AddressService.createAddress(data, id),
+        mutationFn: (data: IAddressIn) => AddressService.createAddress(data, compId.toString()),
         onSuccess: () => {
             alert("Адрес успешно добавлен!")
-            queryClient.invalidateQueries(["company", id])
+            queryClient.invalidateQueries(["company", compId])
             reset()
         }
     },

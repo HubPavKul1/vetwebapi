@@ -1,9 +1,11 @@
 import { AddAddressForm } from "./AddAddressForm";
 import { Modal } from "../../modal/Modal";
 import { useState } from "react";
+import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 
 
-export function AddAddress() {
+
+export function AddAddress({compId}: CompanyPageProps) {
   
     const [modalActive, setModalActive] = useState(false)
     return (
@@ -12,7 +14,7 @@ export function AddAddress() {
                 Добавить адрес <i className="icon-check" />{" "}
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
-                <AddAddressForm/>
+                <AddAddressForm compId={compId}/>
             </Modal>     
         </li>     
     )

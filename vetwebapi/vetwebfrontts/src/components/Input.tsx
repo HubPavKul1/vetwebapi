@@ -1,22 +1,17 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { ErrorMessage } from "./ErrorMessage";
 import { IInput } from "../interfaces/FormInterface";
+import { ErrorMessage } from "./ErrorMessage";
 
 
-interface InputProps extends IInput {
-    className: string;
-    style?: React.CSSProperties;
-    errors: FieldErrors;
-    register: UseFormRegister<any>;
-    isRequired: boolean;
-    
+
+interface InputProps extends IInput<T> {
+
 }
 
-export function Input({id, type, fieldName, style, placeHolder, errors, register, isRequired, maximLength, minimLength} : InputProps) {
+export function Input({id, type, fieldName, className, style, placeHolder, errors, register, isRequired, maximLength, minimLength} : InputProps) {
     return (
         <div className="form-group">
             <input 
-                className="form-control" 
+                className={className}
                 type={type}
                 style={style}
                 id={id}

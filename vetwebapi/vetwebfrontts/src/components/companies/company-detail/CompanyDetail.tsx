@@ -10,7 +10,7 @@ import { CompanyPageMenu } from "./CompanyPageMenu";
 export function CompanyDetail() {
     const {id} = useParams();
 
-    const { data, isLoading, error } = useQuery(['company', id], () => CompanyService.getById(id), {
+    const { data, isLoading } = useQuery(['company', id], () => CompanyService.getById(id), {
       enabled: !!id
     }
     );
@@ -102,7 +102,7 @@ export function CompanyDetail() {
         </div>
       </div>
       <div className="col-md-4">
-        <CompanyPageMenu />
+        <CompanyPageMenu compId={data?.id}/>
       </div>
     </div>
   </div>

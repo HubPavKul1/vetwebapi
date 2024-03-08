@@ -2,9 +2,10 @@ import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 import { AddAnimalForm } from "./AddAnimalForm";
 import { UploadAnimalForm } from "./UploadAnimalForm";
+import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 
 
-export function AddAnimal() {
+export function AddAnimal({compId}: CompanyPageProps) {
 
     const [modalActive, setModalActive] = useState(false)
     return (
@@ -13,7 +14,7 @@ export function AddAnimal() {
                 Добавить животное <i className="icon-check" />{" "}
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
-                <AddAnimalForm />
+                <AddAnimalForm compId={compId}/>
                 <UploadAnimalForm />
             </Modal>
         </li>

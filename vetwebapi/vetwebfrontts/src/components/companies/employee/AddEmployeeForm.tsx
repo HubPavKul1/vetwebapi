@@ -1,19 +1,18 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { EmployeeService } from "../company.service";
-import { useParams } from "react-router-dom";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
 import { IInput } from "../../../interfaces/FormInterface";
+import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 
 
 
-export function AddEmployeeForm() {
+export function AddEmployeeForm({compId}: CompanyPageProps) {
 
-    const { id } = useParams()
-    if (!id) return;
+
 
     const inputItems: IInput[] = [
         {fieldName: "lastname", placeHolder: "Фамилия *", maximLength: 50, minimLength: 1},
@@ -30,10 +29,10 @@ export function AddEmployeeForm() {
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["create employee"], {
-        mutationFn: (data: IEmployeeCreate) => EmployeeService.createEmployee(data, id),
+        mutationFn: (data: IEmployeeCreate) => EmployeeService.createEmployee(data, compId.toString()),
         onSuccess: () => {
             alert("Работник успешно добавлен!")
-            queryClient.invalidateQueries(["company", id])
+            queryClient.invalidateQueries(["company", compId])
             reset()
         }
     },
@@ -70,44 +69,6 @@ export function AddEmployeeForm() {
                     />
                 ))
             }
-                {/* <Input 
-                    className="form-control"
-                    style={{ width: 200, height: 30}}
-                    placeHolder="Фамилия *"
-                    register={register}
-                    fieldName="lastname"
-                    type="text"
-                    errors={errors}
-                    isRequired={true}
-                    maximLength={50}
-                    minimLength={1}
-                />
-
-                <Input 
-                    className="form-control"
-                    style={{ width: 200, height: 30}}
-                    placeHolder="Имя *"
-                    register={register}
-                    fieldName="firstname"
-                    type="text"
-                    errors={errors}
-                    isRequired={true}
-                    maximLength={30}
-                    minimLength={1}
-                />
-
-                <Input 
-                    className="form-control"
-                    style={{ width: 200, height: 30}}
-                    placeHolder="Отчество *"
-                    register={register}
-                    fieldName="patronymic"
-                    type="text"
-                    errors={errors}
-                    isRequired={true}
-                    maximLength={50}
-                    minimLength={5}
-                /> */}
 
             <div className="form-group">
                 <Button 

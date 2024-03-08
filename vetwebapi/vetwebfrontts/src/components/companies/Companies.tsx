@@ -7,7 +7,7 @@ import { useQuery } from "react-query"
 
 export function Companies() {
     
-    const { data, isLoading, error } = useQuery(['companies'], () => CompanyService.getAll(),
+    const { data, isLoading } = useQuery(['companies'], () => CompanyService.getAll(),
         {
             select: ({data}) => data?.companies
         }

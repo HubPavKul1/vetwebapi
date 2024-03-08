@@ -1,9 +1,10 @@
 import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 import { AddEmployeeForm } from "./AddEmployeeForm";
+import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 
 
-export function AddEmployee() {
+export function AddEmployee({compId}: CompanyPageProps) {
 
     const [modalActive, setModalActive] = useState(false)
     return (
@@ -12,7 +13,7 @@ export function AddEmployee() {
                 Добавить работника <i className="icon-check" />{" "}
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
-                <AddEmployeeForm />
+                <AddEmployeeForm compId={compId}/>
             </Modal>
         </li>
     )
