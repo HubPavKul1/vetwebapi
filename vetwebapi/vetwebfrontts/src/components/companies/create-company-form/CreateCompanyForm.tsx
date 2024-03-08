@@ -4,11 +4,18 @@ import { useMutation, useQueryClient } from "react-query";
 import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 import { Input } from "../../Input";
 import { Button } from "../../Button";
+import { IInput } from "../../../interfaces/FormInterface";
 
 
 
 export function CreateCompanyForm() {
+
+    const inputItems: IInput[] = [
+        {fieldName: "full_name", placeHolder: "Полное наименование *", maximLength: 255, minimLength: 5},
+        {fieldName: "short_name", placeHolder: "Краткое наименование *", maximLength: 255, minimLength: 5},
+    ];
    
+
     const { register, reset, handleSubmit, formState: {errors} } = useForm<ICompanyCreate>({
         mode: "onChange",
     })
@@ -33,33 +40,21 @@ export function CreateCompanyForm() {
     return (
 
         <form onSubmit={handleSubmit(createCompany)}>
-            < Input 
+            
+        {inputItems.map(item => (
+            <Input key={item.fieldName} 
                 className="form-control"
                 style={{textAlign: "center"}}
-                placeHolder="Полное наименование *"
+                placeHolder={item.placeHolder}
                 register={register}
-                fieldName="full_name"
+                fieldName={item.fieldName}
                 type="text"
                 errors={errors}
                 isRequired={true}
-                maximLength={255}
-                minimLength={5}
-            />
-
-            < Input 
-                className="form-control"
-                style={{textAlign: "center"}}
-                placeHolder="Краткое наименование *"
-                register={register}
-                fieldName="short_name"
-                type="text"
-                errors={errors}
-                isRequired={true}
-                maximLength={255}
-                minimLength={5}
-
-            />
-
+                maximLength={item.maximLength}
+                minimLength={item.minimLength}
+            />))}
+           
             <Button 
                 className="btn btn-primary btn-send-message btn-md"
                 disabled={false}

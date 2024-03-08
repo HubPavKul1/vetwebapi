@@ -6,15 +6,31 @@ import { useParams } from "react-router-dom";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
+import { IInput } from "../../../interfaces/FormInterface";
 
+
+
+interface InputItem extends IInput {
+  isRequired: boolean;
+ 
+}
 
 export function AddAddressForm() {
 
+   
     const {id} = useParams()
     if (!id) return;
 
+    const inputItems: InputItem[] = [
+      {fieldName: "house_number", placeHolder: "Номер дома *", type: "text", isRequired: true, maximLength: 5, minimLength: 1},
+      {fieldName: "phone_number1", placeHolder: "Телефон1 *", type: "tel", isRequired: true, maximLength: 20, minimLength: 6},
+      {fieldName: "phone_number2", placeHolder: "Телефон2", type: "tel", isRequired: false, maximLength: 20, minimLength: 6},
+    ]
 
-    const methods = useForm<IAddressIn>()
+
+    const methods = useForm<IAddressIn>(
+      {mode: "onChange",}
+    )
   
     const { register, reset, handleSubmit, formState: {errors} } = methods
     const queryClient = useQueryClient()
@@ -43,45 +59,22 @@ export function AddAddressForm() {
         </label>
           <RegionsSelect />
       </div>
-
-    <Input
-      className="form-control"
-      style={{ width: 200, height: 30}}
-      placeHolder="Номер дома *"
-      register={register}
-      fieldName="house_number"
-      type="text"
-      errors={errors}
-      isRequired={true}
-      maximLength={5}
-      minimLength={1}
-     />
-
-    <Input
-      className="form-control"
-      style={{ width: 200, height: 30}}
-      placeHolder="Телефон1 *"
-      register={register}
-      fieldName="phone_number1"
-      type="tel"
-      errors={errors}
-      isRequired={true}
-      maximLength={20}
-      minimLength={6}
-     />
-
-    <Input
-      className="form-control"
-      style={{ width: 200, height: 30}}
-      placeHolder="Телефон2"
-      register={register}
-      fieldName="phone_number2"
-      type="tel"
-      errors={errors}
-      isRequired={false}
-      maximLength={20}
-      minimLength={6}
-     />
+    {
+      inputItems.map(item =>(
+      <Input key={item.fieldName}
+        className="form-control"
+        style={{ width: 200, height: 30}}
+        placeHolder={item.placeHolder}
+        register={register}
+        fieldName={item.fieldName}
+        type={item.type}
+        errors={errors}
+        isRequired={item.isRequired}
+        maximLength={item.maximLength}
+        minimLength={item.minimLength}
+      />
+      ))
+    }
 
     <div className="form-group">
       <Button 

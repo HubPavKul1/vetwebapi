@@ -7,7 +7,7 @@ import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
-
+import { IInput } from "../../../interfaces/FormInterface";
 
 
 
@@ -16,8 +16,16 @@ export function AddAnimalForm() {
     const { id } = useParams()
     if (!id) return;
 
+    const inputItems: IInput[] = [
+        {fieldName: "date_of_birth", id: "date_of_birth", type: "date", maximLength: 20, minimLength: 5},
+        {fieldName: "nickname", placeHolder: "Кличка животного *", type: "text", maximLength: 20, minimLength: 3},
+        {fieldName: "identification", placeHolder: "Идентификация *", type: "tel", maximLength: 20, minimLength: 2},
+      ]
 
-    const methods = useForm<IAnimalCreate>()
+
+    const methods = useForm<IAnimalCreate>({
+        mode: "onChange",
+    })
 
     const { register, reset, handleSubmit, formState: { errors } } = methods
     const queryClient = useQueryClient()
@@ -56,47 +64,24 @@ export function AddAnimalForm() {
                 <label htmlFor="date_of_birth" className="">
                     Дата рождения *
                 </label>
-                <Input 
-                    className="form-control"
-                    style={{ width: 200, height: 30}}
-                    id="date_of_birth"
-                    register={register}
-                    fieldName="date_of_birth"
-                    type="date"
-                    errors={errors}
-                    isRequired={true}
-                    maximLength={20}
-                    minimLength={5}
-                />
-
-                <Input 
-                    className="form-control"
-                    style={{ width: 200, height: 30}}
-                    id="nickname"
-                    register={register}
-                    placeHolder="Кличка животного *"
-                    fieldName="nickname"
-                    type="text"
-                    errors={errors}
-                    isRequired={true}
-                    maximLength={20}
-                    minimLength={3}
-                />
-
-                <Input 
-                    className="form-control"
-                    style={{ width: 200, height: 30}}
-                    id="identification"
-                    register={register}
-                    placeHolder="Идентификация *"
-                    fieldName="identification"
-                    type="text"
-                    errors={errors}
-                    isRequired={true}
-                    maximLength={20}
-                    minimLength={2}
-                />
-
+                {
+                    inputItems.map(item =>(
+                        <Input key={item.fieldName}
+                            className="form-control"
+                            style={{ width: 200, height: 30}}
+                            id={item.id}
+                            register={register}
+                            fieldName={item.fieldName}
+                            type={item.type}
+                            errors={errors}
+                            isRequired={true}
+                            maximLength={item.maximLength}
+                            minimLength={item.minimLength}
+                            placeHolder={item.placeHolder}
+                        />
+                    ))
+                }
+              
             <div className="form-group">
                 <Button 
                     className="btn btn-primary btn-send-message btn-md"

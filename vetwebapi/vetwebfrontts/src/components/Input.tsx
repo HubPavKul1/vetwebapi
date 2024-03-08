@@ -1,19 +1,15 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ErrorMessage } from "./ErrorMessage";
+import { IInput } from "../interfaces/FormInterface";
 
 
-interface InputProps {
-    id?: string;
+interface InputProps extends IInput {
     className: string;
-    type: string;
-    fieldName: string;
     style?: React.CSSProperties;
-    placeHolder?: string;
     errors: FieldErrors;
     register: UseFormRegister<any>;
     isRequired: boolean;
-    maximLength: number;
-    minimLength: number;
+    
 }
 
 export function Input({id, type, fieldName, style, placeHolder, errors, register, isRequired, maximLength, minimLength} : InputProps) {
