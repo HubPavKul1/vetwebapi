@@ -11,7 +11,7 @@ interface StreetsSelectProps {
 
 export function StreetsSelect({cityId}: StreetsSelectProps) {
 
-    const { data, isLoading, error } = useQuery(['cityStreets'], () => AddressService.getCityStreets(cityId))
+    const { data } = useQuery(['cityStreets'], () => AddressService.getCityStreets(cityId))
 
     const { control } = useFormContext()
     

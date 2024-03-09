@@ -1,27 +1,28 @@
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
+import { useForm, FormProvider, SubmitHandler, RegisterOptions } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { RegionsSelect } from "./RegionsSelect";
 import { AddressService } from "../company.service";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
-import { IInput } from "../../../interfaces/FormInterface";
+import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
+import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
 
-
-
-interface InputItem extends IInput {
-  isRequired: boolean;
-}
 
 
 export function AddAddressForm({compId}: CompanyPageProps) {
 
+    const rulesOptions: RegisterOptions = {
+      required: {value: true, message: fieldRequiredMessage,}, 
+      maxLength: {value: 20, message: maxLenErrorMessage+" 20 символов!"},
+      minLength: {value: 1, message: minLenErrorMessage+" 1 символ!"}
+    }
 
-    const inputItems: InputItem[] = [
-      {fieldName: "house_number", placeHolder: "Номер дома *", type: "text", isRequired: true, maximLength: 5, minimLength: 1},
-      {fieldName: "phone_number1", placeHolder: "Телефон1 *", type: "tel", isRequired: true, maximLength: 20, minimLength: 6},
-      {fieldName: "phone_number2", placeHolder: "Телефон2", type: "tel", isRequired: false, maximLength: 20, minimLength: 6},
+    const inputItems: FormInputProps<IAddressIn>[] = [
+      {fieldName: "house_number", placeholder: "Номер дома *", type: "text", rules: rulesOptions},
+      {fieldName: "phone_number1", placeholder: "Телефон1 *", type: "tel", rules: rulesOptions},
+      {fieldName: "phone_number2", placeholder: "Телефон2", type: "tel", rules: {required: false}},
     ]
 
 
@@ -63,14 +64,12 @@ export function AddAddressForm({compId}: CompanyPageProps) {
       <Input key={item.fieldName}
         className="form-control"
         style={{ width: 200, height: 30}}
-        placeHolder={item.placeHolder}
+        placeholder={item.placeholder}
         register={register}
         fieldName={item.fieldName}
         type={item.type}
         errors={errors}
-        isRequired={item.isRequired}
-        maximLength={item.maximLength}
-        minimLength={item.minimLength}
+        rules={item.rules}
       />
       ))
     }

@@ -5,19 +5,19 @@ import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
-import { IInput } from "../../../interfaces/FormInterface";
+import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
+import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
 
 
 
 export function AddEmployeeForm({compId}: CompanyPageProps) {
 
 
-
-    const inputItems: IInput[] = [
-        {fieldName: "lastname", placeHolder: "Фамилия *", maximLength: 50, minimLength: 1},
-        {fieldName: "firstname", placeHolder: "Имя *", maximLength: 30, minimLength: 1},
-        {fieldName: "patronymic", placeHolder: "Отчество *", maximLength: 50, minimLength: 5},
+    const inputItems: FormInputProps<IEmployeeCreate>[] = [
+        {fieldName: "lastname", placeholder: "Фамилия *"},
+        {fieldName: "firstname", placeholder: "Имя *"},
+        {fieldName: "patronymic", placeholder: "Отчество *"},
     ];
 
 
@@ -58,14 +58,23 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
                     <Input key={item.fieldName}
                         className="form-control"
                         style={{ width: 200, height: 30}}
-                        placeHolder={item.placeHolder}
+                        placeholder={item.placeholder}
                         register={register}
                         fieldName={item.fieldName}
                         type="text"
                         errors={errors}
-                        isRequired={true}
-                        maximLength={item.maximLength}
-                        minimLength={item.minimLength}
+                        rules={{
+                            required: fieldRequiredMessage, 
+                            maxLength: {
+                                value: 50,
+                                message: maxLenErrorMessage+" 50 символов!"
+                                }, 
+                            minLength: {
+                                value: 3,
+                                message: minLenErrorMessage+" 3 символа!"
+                                },
+                            
+                        }}
                     />
                 ))
             }

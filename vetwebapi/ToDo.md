@@ -2407,3 +2407,11 @@ export default function CreateCompanyForm() {
 ```
 yarn add react-select
 ```
+
+```
+yarn add @hookform/error-message
+```
+
+```
+yarn add react-icons
+```

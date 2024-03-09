@@ -4,15 +4,16 @@ import { useMutation, useQueryClient } from "react-query";
 import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 import { Input } from "../../Input";
 import { Button } from "../../Button";
-import { IInput } from "../../../interfaces/FormInterface";
+import { FormInputProps } from "../../../interfaces/FormInterface";
+import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
 
 
 
 export function CreateCompanyForm() {
 
-    const inputItems: IInput[] = [
-        {fieldName: "full_name", placeHolder: "Полное наименование *", maximLength: 255, minimLength: 5},
-        {fieldName: "short_name", placeHolder: "Краткое наименование *", maximLength: 255, minimLength: 5},
+    const inputItems: FormInputProps<ICompanyCreate>[] = [
+        {fieldName: "full_name", placeholder: "Полное наименование *"},
+        {fieldName: "short_name", placeholder: "Краткое наименование *"},
     ];
    
 
@@ -45,14 +46,23 @@ export function CreateCompanyForm() {
             <Input key={item.fieldName} 
                 className="form-control"
                 style={{textAlign: "center"}}
-                placeHolder={item.placeHolder}
+                placeholder={item.placeholder}
                 register={register}
                 fieldName={item.fieldName}
                 type="text"
                 errors={errors}
-                isRequired={true}
-                maximLength={item.maximLength}
-                minimLength={item.minimLength}
+                rules={{
+                    required: fieldRequiredMessage, 
+                    maxLength: {
+                        value: 200,
+                        message: maxLenErrorMessage+"200 символов!",
+                        }, 
+                    minLength: {
+                        value: 3,
+                        message: minLenErrorMessage+"3 символа!"
+                        },
+                    
+                }}
             />))}
            
             <Button 

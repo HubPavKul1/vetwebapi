@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { DeepMap, FieldError, Path, RegisterOptions, FieldValues, UseFormRegister } from "react-hook-form";
 
 
 export interface IOption {
@@ -6,17 +6,22 @@ export interface IOption {
     value: number;
 }
 
-export interface IInput <T extends FieldValues> {
+
+export interface InputProps {
     id?: string;
-    fieldName: string;
     type?: string;
-    placeHolder?: string;
-    maximLength: number;
-    minimLength: number;
-    register: UseFormRegister<T>;
-    className: string;
+    placeholder?: string;
+    className?: string;
     style?: React.CSSProperties;
-    errors: FieldErrors;
-    isRequired: boolean;
 }
+
+
+export interface FormInputProps<TFormValues extends FieldValues> extends InputProps {
+    fieldName: Path<TFormValues>;
+    rules?: RegisterOptions;
+    register?: UseFormRegister<TFormValues>;
+    errors?: Partial<DeepMap<TFormValues, FieldError>>;
+}
+
+
 

@@ -6,18 +6,19 @@ import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
 import { Button } from "../../Button";
 import { Input } from "../../Input";
-import { IInput } from "../../../interfaces/FormInterface";
+import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
+import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
 
 
 
 export function AddAnimalForm({compId}: CompanyPageProps) {
 
-   
-    const inputItems: IInput[] = [
-        {fieldName: "date_of_birth", id: "date_of_birth", type: "date", maximLength: 20, minimLength: 5},
-        {fieldName: "nickname", placeHolder: "Кличка животного *", type: "text", maximLength: 20, minimLength: 3},
-        {fieldName: "identification", placeHolder: "Идентификация *", type: "tel", maximLength: 20, minimLength: 2},
+
+    const inputItems: FormInputProps<IAnimalCreate>[] = [
+        {fieldName: "date_of_birth", id: "date_of_birth", type: "date"},
+        {fieldName: "nickname", placeholder: "Кличка животного *", type: "text"},
+        {fieldName: "identification", placeholder: "Идентификация *", type: "text"},
       ]
 
 
@@ -69,13 +70,21 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
                             style={{ width: 200, height: 30}}
                             id={item.id}
                             register={register}
+                            rules={{
+                                required: fieldRequiredMessage, 
+                                maxLength: {
+                                    value: 50,
+                                    message: maxLenErrorMessage+" 50 символов!"
+                                    }, 
+                                minLength: {
+                                    value: 3,
+                                    message: minLenErrorMessage+" 3 символа!"
+                                    },   
+                            }}
                             fieldName={item.fieldName}
                             type={item.type}
                             errors={errors}
-                            isRequired={true}
-                            maximLength={item.maximLength}
-                            minimLength={item.minimLength}
-                            placeHolder={item.placeHolder}
+                            placeholder={item.placeholder}
                         />
                     ))
                 }

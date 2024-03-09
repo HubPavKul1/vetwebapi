@@ -1,37 +1,23 @@
-import { IInput } from "../interfaces/FormInterface";
-import { ErrorMessage } from "./ErrorMessage";
+import { FormInputProps } from "../interfaces/FormInterface";
+import { ErrorMessage } from "@hookform/error-message";
 
 
 
-interface InputProps extends IInput<T> {
-
-}
-
-export function Input({id, type, fieldName, className, style, placeHolder, errors, register, isRequired, maximLength, minimLength} : InputProps) {
+export function Input({fieldName, rules, register, errors, ...props} : FormInputProps<TFormValues>) {
     return (
         <div className="form-group">
-            <input 
-                className={className}
-                type={type}
-                style={style}
-                id={id}
-                placeholder={placeHolder}
-                {...register(fieldName, 
-                    {required: {
-                        value: isRequired,
-                        message: `Поле ${fieldName} должно быть заполнено!`
-                    },
-                    maxLength: {
-                        value: maximLength,
-                        message: `Максимальная длина ${maximLength} символов`
-                        }, 
-                    minLength: {
-                        value: minimLength,
-                        message: `Минимальная длина ${minimLength} символов`
-                        },
-                    })}      
+            <input
+                {...props}
+                {...(register && register(fieldName, rules))}
             />
-            {errors[fieldName]?.message && <ErrorMessage error={errors[fieldName]?.message?.toString()}/>}
+            <ErrorMessage
+                errors={errors}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                name={fieldName as any}
+                render={({ message }) => (
+                <p style={{ color: "red" }}>{message}</p>
+                )}
+            />
         </div>
     )
 }
