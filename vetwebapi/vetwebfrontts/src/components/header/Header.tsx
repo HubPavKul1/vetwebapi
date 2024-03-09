@@ -1,12 +1,16 @@
 import "./Header.css";
+import "../dropdown/Dropdown.css"
 
-
+import { useState } from "react";
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
 import { DrugsLink } from "./DrugsLink";
+import { Dropdown } from "../dropdown/Dropdown";
 
 
 export function Header() {
+    const [active, setActive] = useState(false)
+
     return (
             <nav className="colorlib-nav" role="navigation">
                 <div className="top-menu">
@@ -38,7 +42,8 @@ export function Header() {
                                         <ul>
                                             <HomeLink />
                                             <CompaniesLink />
-                                            <DrugsLink />    
+                                            {/* <DrugsLink />    */}
+                                            <Dropdown active={active} setActive={setActive} title="Биопрепараты" /> 
                 
                                             <li className="has-dropdown">
                                                 <a href="blog.html">Blog</a>
