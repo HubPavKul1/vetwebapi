@@ -42,20 +42,9 @@ export function Header() {
                                         <ul>
                                             <HomeLink />
                                             <CompaniesLink />
-                                            {/* <DrugsLink />    */}
-                                            <Dropdown active={active} setActive={setActive} title="Биопрепараты" /> 
+                                            <DrugsLink />   
+                                            <li><a href="#">Админка</a></li>
                 
-                                            <li className="has-dropdown">
-                                                <a href="blog.html">Blog</a>
-                                                <ul className="dropdown">
-                                                    <li>
-                                                        <a href="blog-single.html">Single Blog</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="">Админка</a>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>

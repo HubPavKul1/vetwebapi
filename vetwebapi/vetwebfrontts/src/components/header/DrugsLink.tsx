@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom"
+// import "../dropdown/Dropdown.css"
+import { Dropdown } from "../dropdown/Dropdown"
+import { useState } from "react"
 
 
 export function DrugsLink() {
+    const[active, setActive] = useState(false)
+
     return (
-        <li className="has-dropdown">
-            <Link to="/drugs/">Биопрепараты</Link>
-            <ul className="dropdown">
-                <li>
-                    <a href="#">Поступление</a>
-                </li>
-                <li>
-                    <a href="departments-single.html">Dental Department</a>
-                </li>                                      
-            </ul>
-        </li>          
+        <Dropdown active={active} setActive={setActive} title="Биопрепараты">
+            <Link to="/drugs">Поступление</Link>
+            <a>Препараты на складе</a>
+            <a>Отчеты</a>
+        </Dropdown>
+        
   
     )
 }
