@@ -6,10 +6,10 @@ export function Home() {
                  
                 <div id="colorlib-blog">
                     <div className="container">
-                        <div className="row animate-box">
+                        {/* <div className="row animate-box"> */}
                             <div className="col-md-6 col-md-offset-3 text-center colorlib-heading">
                             <img
-                                className="img-responsive"
+                                className="img-responsive" style={{margin: 10 }}
                                 src="/animals.png"
 
                                 alt="animals.png"
@@ -20,7 +20,7 @@ export function Home() {
                                     accusamus alias autem provident. Odit ab aliquam dolor eius.
                                 </p>
                             </div>
-                        </div>
+                        {/* </div> */}
                         <div className="row">
                             <div className="col-md-4">
                                 <div className="blog-entry">

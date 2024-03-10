@@ -1,4 +1,5 @@
 .dropdown {
+  position: relative;
   display: inline-block;
   cursor: pointer;
 }
@@ -12,7 +13,7 @@
   background-color: azure;
   min-width: 200px;
   box-shadow: 2px 2px 5px black;
-  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
   border-radius: .25rem;
 }
 
@@ -27,14 +28,14 @@
 
 .dropdown .content-active {
   opacity: 1;
-  display: block;
+  display: flexbox;
+  position: absolute;
   top: 4rem;
   left: .5rem;
-  position: absolute;
   background-color: azure;
   min-width: 200px;
   box-shadow: 2px 2px 5px black;
-  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
   border-radius: .25rem;
 }
 
@@ -45,4 +46,9 @@
   color: blue;
   font-size: 12px;
   font-weight: bold;
+}
+
+.dropdown .content-active a:hover {
+  background: rgb(240, 243, 245);
+  transition: color 150ms ease-in-out;
 }
