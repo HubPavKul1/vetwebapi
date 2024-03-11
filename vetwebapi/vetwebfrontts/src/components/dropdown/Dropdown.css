@@ -1,54 +1,57 @@
-.dropdown {
+.my-dropdown {
   position: relative;
-  display: inline-block;
   cursor: pointer;
 }
 
-.dropdown .content {
-  display: block;
+.my-dropdown .content {
+  display: none;
   position: absolute;
   opacity: 0;
   top: 4rem;
-  left: .5rem;
+  left: 1rem;
   background-color: azure;
   min-width: 200px;
   box-shadow: 2px 2px 5px black;
   transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
   border-radius: .25rem;
+  cursor: pointer;
 }
 
-.dropdown .content a {
+.my-dropdown .content li a  {
   text-align: left;
-  padding: 10px 15px;
+  padding: 5px 15px;
   display: block;
-  color: blue;
+  color: blueviolet;
   font-size: 12px;
   font-weight: bold;
+  pointer-events: none;
 }
 
-.dropdown .content-active {
+.my-dropdown .content-active {
   opacity: 1;
-  display: flexbox;
+  display: block;
   position: absolute;
   top: 4rem;
-  left: .5rem;
+  left: 1rem;
   background-color: azure;
   min-width: 200px;
   box-shadow: 2px 2px 5px black;
   transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
   border-radius: .25rem;
+  cursor: pointer;
 }
 
-.dropdown .content-active a {
+.my-dropdown .content-active li a {
   text-align: left;
-  padding: 10px 15px;
+  padding: 5px 15px;
   display: block;
-  color: blue;
+  color: blueviolet;
   font-size: 12px;
   font-weight: bold;
+  pointer-events: all;
 }
 
-.dropdown .content-active a:hover {
+.my-dropdown .content-active a:hover {
   background: rgb(240, 243, 245);
   transition: color 150ms ease-in-out;
 }

@@ -10,7 +10,7 @@ interface DropdownProps {
 
 export function Dropdown({active, setActive, children, title}: DropdownProps) {
     return (
-        <li className="dropdown">
+        <li className="my-dropdown">
              <a onClick={() => setActive(!active)}>{title}</a>
             <ul className={active ? "content-active": "content"}>
                 {children}

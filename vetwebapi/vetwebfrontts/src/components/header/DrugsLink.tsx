@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-// import "../dropdown/Dropdown.css"
 import { Dropdown } from "../dropdown/Dropdown"
 import { useState } from "react"
 
@@ -9,9 +8,9 @@ export function DrugsLink() {
 
     return (
         <Dropdown active={active} setActive={setActive} title="Биопрепараты">
-            <Link to="/drugs">Поступление</Link>
-            <a>Препараты на складе</a>
-            <a>Отчеты</a>
+            <li><Link to="/drugs">Поступление</Link></li>
+            <li><a href="#">Препараты на складе</a></li>
+            <li><a href="#">Отчеты</a></li>
         </Dropdown>
         
   

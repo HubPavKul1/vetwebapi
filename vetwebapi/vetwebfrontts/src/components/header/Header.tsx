@@ -42,7 +42,7 @@ export function Header() {
                                         <ul>
                                             <HomeLink />
                                             <CompaniesLink />
-                                            <DrugsLink />   
+                                            <DrugsLink />  
                                             <li><a href="#">Админка</a></li>
                 
                                         </ul>
