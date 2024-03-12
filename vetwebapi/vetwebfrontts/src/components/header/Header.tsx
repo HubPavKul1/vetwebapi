@@ -5,7 +5,6 @@ import { useState } from "react";
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
 import { DrugsLink } from "./DrugsLink";
-import { Dropdown } from "../dropdown/Dropdown";
 
 
 export function Header() {

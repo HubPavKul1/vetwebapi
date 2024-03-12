@@ -16,8 +16,7 @@ export function Companies() {
     if(isLoading) return <p>Загрузка ...</p>
     
     return (
-  
-            <div id="colorlib-services">
+
             <div className="container">
                 <div className="row animate-box">
                     <CreateCompany />
@@ -30,7 +29,6 @@ export function Companies() {
                     }
                 </div>
             </div>
-        </div>
         
     )
 }

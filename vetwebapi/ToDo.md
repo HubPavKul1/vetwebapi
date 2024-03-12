@@ -2415,3 +2415,29 @@ yarn add @hookform/error-message
 ```
 yarn add react-icons
 ```
+
+
+# SASS установка: 
+```
+npm install -g sass
+```
+## файл .vscode/settings.json
+```
+{
+    ...
+
+    "tasks": [
+        {
+            "label": "Compile SCCS to CSS",
+            "type": "shell",
+            "command": "sass styles.scss styles.css ",
+            "group": "build",
+        }
+    ]
+}
+```
+
+## Установим плагин на VS Code
+    Live Sass Compiler
+
+

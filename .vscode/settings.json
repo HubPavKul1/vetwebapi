@@ -17,4 +17,13 @@
         "javascript": "javascriptreact",
         "django-html": "html",
       },
+
+    "tasks": [
+        {
+            "label": "Compile SCCS to CSS",
+            "type": "shell",
+            "command": "sass styles.scss styles.css ",
+            "group": "build",
+        }
+    ]
 }

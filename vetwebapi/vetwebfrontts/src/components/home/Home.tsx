@@ -2,9 +2,6 @@
 export function Home() {
     return (  
 
-                <div id="page">
-                 
-                <div id="colorlib-blog">
                     <div className="container">
                         <div className="row animate-box">
                             <div className="col-md-6 col-md-offset-3 text-center colorlib-heading">
@@ -118,8 +115,6 @@ export function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
                
        )
 }
