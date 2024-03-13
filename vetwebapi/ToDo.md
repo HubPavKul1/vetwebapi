@@ -2441,3 +2441,39 @@ npm install -g sass
     Live Sass Compiler
 
 
+# React bootstrap https://react-bootstrap.github.io/docs/getting-started/introduction
+
+```
+yarn add react-bootstrap bootstrap
+```
+
+``` tsx
+
+//файл main.tsx
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { BrowserRouter } from 'react-router-dom';
+
+// подключаем bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { App } from './App';
+
+const queryClient = new QueryClient()
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render( 
+    <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </QueryClientProvider>
+        
+    </React.StrictMode>
+       
+)
+
+```
+
