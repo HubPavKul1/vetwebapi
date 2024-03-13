@@ -1,3 +1,4 @@
+import { NavLink } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 
@@ -5,9 +6,9 @@ export function HomeLink() {
     
 
     return (
-        <li >
+        <NavLink>
             <Link to="/">Home</Link>
-        </li>
+        </NavLink>
         
     )
 }

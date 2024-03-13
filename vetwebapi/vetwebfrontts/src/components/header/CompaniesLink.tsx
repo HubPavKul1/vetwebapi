@@ -1,10 +1,11 @@
+import { NavLink } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 
 export function CompaniesLink() {
     return (
-        <li>
+        <NavLink>
             <Link to="/companies/">Предприятия</Link>
-        </li>
+        </NavLink>
     )
 }

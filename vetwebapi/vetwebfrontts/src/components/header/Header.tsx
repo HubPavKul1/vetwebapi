@@ -1,83 +1,31 @@
 
-import vetLogo from "./vetLogo.png"
-import { useState } from "react";
+
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
 import { DrugsLink } from "./DrugsLink";
-import { Container, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Navbar, Nav } from "react-bootstrap";
+import { LogoLink } from "./LogoLink";
 
 
 export function Header() {
-    const [active, setActive] = useState(false)
 
     return (
-                <Navbar>
-                    <Container>
-                        <Navbar.Brand>
-                            <Link to="/" >
-                                <img src={vetLogo}
-                                    height="30"
-                                    width="30"
-                                    className="d-inline-block align-top"
-                                    alt="Logo"
-                                />
-                            </Link>
-                        </Navbar.Brand>
-                    </Container>
-                </Navbar>
+            <Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top">
+                <Container>
+                    <LogoLink/>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                            <HomeLink />
+                            <CompaniesLink />
+                        </Nav>
+                    </Navbar.Collapse>
+                       
+                        
+                        {/* <DrugsLink />   */}
+                </Container>
+            </Navbar>
 
-
-            // <nav className="colorlib-nav" role="navigation">
-            //     <div className="top-menu">
-            //         <div className="container">
-            //             <div className="row">
-            //                 <div className="col-xs-12">
-            //                     <div className="top">
-            //                         <div className="row">
-            //                             <div className="col-md-6">
-            //                                 <div id="colorlib-logo">
-            //                                     <a href="">
-            //                                         <i className="flaticon-stethoscope" />
-            //                                         Vet<span>care</span>
-            //                                     </a>
-            //                                 </div>
-            //                             </div>
-            //                             <div className="col-md-3"></div>
-            //                             <div className="col-md-3"></div>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //         </div>
-            //         <div className="menu-wrap">
-            //             <div className="container">
-            //                 <div className="row">
-            //                     <div className="col-xs-8">
-            //                         <div className="menu-1">
-            //                             <ul>
-            //                                 <HomeLink />
-            //                                 <CompaniesLink />
-            //                                 <DrugsLink />  
-            //                                 <li><a href="#">Админка</a></li>
-                
-            //                             </ul>
-            //                         </div>
-            //                     </div>
-            //                     <div className="col-md-4">
-            //                         <p className="btn-cta">
-            //                             <a href="">
-            //                                 <span>
-            //                                     Выйти
-            //                                 </span>
-            //                             </a>
-            //                         </p>
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </nav>
 
     )
 }
