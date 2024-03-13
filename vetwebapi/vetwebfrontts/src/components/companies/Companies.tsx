@@ -20,6 +20,7 @@ export function Companies() {
     return (
             <Container>
                 <h2 className="text-center m-4">Предприятия</h2>
+                <CreateCompany />
                 <CardGroup>
                     {data?.length ? data.map(company =>(
                         <CompanyCard key={company.id} company={company} />

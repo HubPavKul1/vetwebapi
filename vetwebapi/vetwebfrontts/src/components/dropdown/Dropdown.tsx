@@ -1,20 +1,19 @@
-import "./Dropdown.css"
+// import "./Dropdown.css"
+import { NavDropdown } from "react-bootstrap";
 
 
 interface DropdownProps {
     title: string,
-    active: boolean;
-    setActive: CallableFunction;
+    id?: string,
+    // active: boolean;
+    // setActive: CallableFunction;
     children?: React.ReactElement | React.ReactNode;
 }
 
-export function Dropdown({active, setActive, children, title}: DropdownProps) {
+export function DropdownWrapper({children, title}: DropdownProps) {
     return (
-        <li className="my-dropdown">
-             <a onClick={() => setActive(!active)}>{title}</a>
-            <ul className={active ? "content-active": "content"}>
-                {children}
-            </ul>
-        </li>
+        <NavDropdown title={title} id="basic-nav-dropdown">
+              {children}
+        </NavDropdown>
     )
 }
