@@ -1,9 +1,8 @@
 
-
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
 import { DrugsLink } from "./DrugsLink";
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Button, ButtonGroup, Row, Col } from "react-bootstrap";
 import { LogoLink } from "./LogoLink";
 
 import styled from "styled-components";
@@ -15,12 +14,16 @@ a {
 } 
 
 a, .navbar-nav, .nav-link {
-    color: blue;
-    font-size: 20px;
+    color: #4d5d96;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 2em;
+}
+
+a:hover {
+    color: #7b93e8;
 }
 `
-
-
 
 export function Header() {
 
@@ -29,19 +32,20 @@ export function Header() {
         <Styles>
             <Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top">
                 <Container>
-                    <LogoLink/>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            <HomeLink />
-                            <CompaniesLink />
-                            <DrugsLink />  
-                        </Nav>
-                        <Nav className="justify-content-center">  
-                            <Button variant="secondary">Войти</Button>
-                            <Button variant="primary">Регистрация</Button>    
-                        </Nav>
-                    </Navbar.Collapse>
+                   
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav>
+                                <LogoLink/>
+                                <HomeLink />
+                                <CompaniesLink />
+                                <DrugsLink />  
+                                <ButtonGroup>
+                                    <Button variant="primary">Войти</Button>
+                                    <Button variant="primary">Регистрация</Button>   
+                                </ButtonGroup>
+                            </Nav>
+                        </Navbar.Collapse>
                             
                 </Container>
             </Navbar>
@@ -49,8 +53,6 @@ export function Header() {
         </Styles>
          
         </>
-           
-
 
     )
 }

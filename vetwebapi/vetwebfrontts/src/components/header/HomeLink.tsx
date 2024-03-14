@@ -8,7 +8,7 @@ export function HomeLink() {
     return (
   
         <Nav.Link>
-             <Link to="/">Home</Link>
+             <Link to="/">Главная</Link>
         </Nav.Link>   
     )
 }

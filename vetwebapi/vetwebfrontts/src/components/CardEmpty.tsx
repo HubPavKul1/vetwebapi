@@ -1,13 +1,18 @@
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 
-
+import farmImg from "/farm.jpg"
 
 
 
 export function CardEmpty() {
     return (
-        <Card>
-            <Card.Img variant="top"/>
+        <Col md="3">
+            <Card>
+            <Card.Img variant="top"
+                src={farmImg}
+                alt="Farm"
+            />
+
             <Card.Body>
                 <Card.Title>
                     Название предприятия
@@ -20,5 +25,7 @@ export function CardEmpty() {
                 </Button>
             </Card.Body>
         </Card>
+        </Col>
+        
         )
     }

@@ -1,8 +1,8 @@
 
 import { Link } from "react-router-dom"
 import { ICompany } from "../../../interfaces/CompanyInterfaces"
-import { Button, Card } from "react-bootstrap";
-
+import { Button, Card, Col } from "react-bootstrap";
+import farmImg from "/farm.jpg"
 
 
 interface CompanyCard {
@@ -11,8 +11,13 @@ interface CompanyCard {
 
 export function CompanyCard({company}: CompanyCard) {
     return (
+        <Col md="3">
         <Card>
-            <Card.Img variant="top"/>
+            <Card.Img variant="top"
+                src={farmImg}
+                alt="Farm"
+            />
+        
             <Card.Body>
                 <Card.Title>
                     <Link to={`/companies/${company.id}`} >{company.full_name}</Link>
@@ -23,25 +28,9 @@ export function CompanyCard({company}: CompanyCard) {
                 <Button variant="primary">
 
                 </Button>
-            </Card.Body>
-            
+            </Card.Body>    
         </Card>
-
-        // <div className="col-md-4 animate-box">
-        //                 <div className="services">
-        //                     <span className="icon">
-        //                         <i className="flaticon-healthy-1" />
-        //                     </span>
-        //                     <div className="desc">
-        //                         <h3>
-        //                             <Link to={`/companies/${company.id}`} >{company.full_name}</Link>
-        //                         </h3>
-        //                         <p>
-        //                             The Big Oxmox advised her not to do so, because there were
-        //                             thousands of bad Commas
-        //                         </p>
-        //                     </div>
-        //                 </div>
-        //             </div>
+        </Col>
+        
     )
 }
