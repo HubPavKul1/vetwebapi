@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 import { DropdownWrapper } from "../dropdown/Dropdown"
-import { useState } from "react"
+
 import { NavDropdown } from "react-bootstrap"
 
 
 export function DrugsLink() {
-    // const[active, setActive] = useState(false)
+
 
     return (
 

@@ -2,10 +2,13 @@
 import { HomeLink } from "./HomeLink";
 import { CompaniesLink } from "./CompaniesLink";
 import { DrugsLink } from "./DrugsLink";
-import { Container, Navbar, Nav, Button, ButtonGroup, Row, Col } from "react-bootstrap";
+import { Container, Navbar, Nav, Button, ButtonGroup } from "react-bootstrap";
 import { LogoLink } from "./LogoLink";
 
+
 import styled from "styled-components";
+import { VetWorkLink } from "./VetWorkLink";
+import { AdminLink } from "./AdminLink";
 
 
 const Styles = styled.div `
@@ -32,14 +35,17 @@ export function Header() {
         <Styles>
             <Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top">
                 <Container>
-                   
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav>
-                                <LogoLink/>
+                            <LogoLink/>
+                            <Nav> 
                                 <HomeLink />
                                 <CompaniesLink />
                                 <DrugsLink />  
+                                <VetWorkLink />
+                                <AdminLink/>
+                            </Nav>
+                            <Nav>
                                 <ButtonGroup>
                                     <Button variant="primary">Войти</Button>
                                     <Button variant="primary">Регистрация</Button>   

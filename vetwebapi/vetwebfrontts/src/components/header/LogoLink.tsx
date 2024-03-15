@@ -11,7 +11,7 @@ export function LogoLink() {
                     height="50"
                     width="70"
                     className="d-inline-block align-top"
-                    alt="Logo"                           
+                    alt="Logo"                          
                 />
             </Link>
         </Navbar.Brand>
