@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter } from 'react-router-dom';
 
+import './assets/css/normalize.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { App } from './App';
