@@ -19,6 +19,7 @@ export function CompanyDetail() {
     if(isLoading) return <p>Загрузка ...</p>
 
     return (
+      
         <div id="colorlib-blog">
   <div className="container">
     <div className="row">

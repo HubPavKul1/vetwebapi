@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { CarouselBox } from "../../CarouselBox";
+import { CarouselBox } from "../../carousel/CarouselBox";
 
 export function Home() {
     return (  
