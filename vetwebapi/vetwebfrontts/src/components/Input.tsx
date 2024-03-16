@@ -1,11 +1,12 @@
 import { FormInputProps } from "../interfaces/FormInterface";
 import { ErrorMessage } from "@hookform/error-message";
+import { Container } from "react-bootstrap";
 
 
 
 export function Input({fieldName, rules, register, errors, ...props} : FormInputProps<TFormValues>) {
     return (
-        <div className="form-group">
+        <Container className="mb-3">
             <input
                 {...props}
                 {...(register && register(fieldName, rules))}
@@ -18,6 +19,6 @@ export function Input({fieldName, rules, register, errors, ...props} : FormInput
                 <p style={{ color: "red" }}>{message}</p>
                 )}
             />
-        </div>
+        </Container>
     )
 }

@@ -11,7 +11,6 @@ interface CompanyCard {
 
 export function CompanyCard({company}: CompanyCard) {
     return (
-        <Col md="3">
         <Card>
             <Card.Img variant="top"
                 src={farmImg}
@@ -23,14 +22,13 @@ export function CompanyCard({company}: CompanyCard) {
                     <Link to={`/companies/${company.id}`} >{company.full_name}</Link>
                 </Card.Title>
                 <Card.Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati porro doloribus, nihil unde maxime, fugit distinctio fugiat inventore quos pariatur quibusdam suscipit facilis quia possimus, quo incidunt provident laudantium architecto?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati porro doloribus, nihil unde maxime, fugit distinctio fugiat inventore quos pariatur quibusdam suscipit facilis
                 </Card.Text>
-                <Button variant="primary">
+            </Card.Body> 
+            <Card.Footer>
 
-                </Button>
-            </Card.Body>    
+            </Card.Footer>   
         </Card>
-        </Col>
         
     )
 }

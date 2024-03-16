@@ -1,4 +1,4 @@
-import { Container, CardGroup, Row, Pagination } from "react-bootstrap";
+import { Container, Col, Row, Pagination } from "react-bootstrap";
 import { CardEmpty } from "../CardEmpty"
 import { CompanyCard } from "./company-card/CompanyCard"
 import { CompanyService } from "./company.service"
@@ -26,18 +26,18 @@ export function Companies() {
     
     return (
         <>
-        <Container>
-                <Row>
-                    <h2 className="text-center m-4">Предприятия</h2>
-                    <CreateCompany />
-                    <CardGroup>
-                        {data?.length ? data.map(company =>(
-                            <CompanyCard key={company.id} company={company} />
+        <Container fluid className="pd-4">
+                <CreateCompany />
+                <Row className="g-4">
+                    {data?.length ? data.map(company =>(
+                        <Col key={company.id} md={3} sm={1}>
+                            <CompanyCard company={company} />
+                        </Col>
+                            
                         ))
                         :  <CardEmpty/>
                         
                         }
-                    </CardGroup>
                 </Row>
                 <Pagination>
                 <Pagination.First />

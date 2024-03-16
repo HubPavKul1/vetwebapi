@@ -1,15 +1,17 @@
 import { CreateCompanyForm } from "./create-company-form/CreateCompanyForm";
 import { Modal } from "../modal/Modal"
 import { useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 
 export function CreateCompany() {
 
     const [modalActive, setModalActive] = useState(false)
     return (
-        <Container className="col-md-6 col-md-offset-3 text-center colorlib-heading">
-            <h2>Предприятия</h2>
-                <p>
+        <Row fluid>
+            <Col md={4} />
+            <Col className="m-5" md={4}>
+                <h2 className="text-center m-5">Предприятия</h2>
+                <p className="text-center">
                     <Button className="btn-primary btn-lg" onClick={() => setModalActive(true)}>
                         Добавить предприятие
                     </Button>
@@ -17,7 +19,10 @@ export function CreateCompany() {
                     <Modal active={modalActive} setActive={setModalActive}>
                         <CreateCompanyForm />
                     </Modal>           
-        </Container>
+
+            </Col>
+                
+        </Row>
     )
 }
 

@@ -7,8 +7,7 @@ export function AdminLink() {
 
     return (
   
-        <Nav.Link>
-             <Link to="/">Админка</Link>
-        </Nav.Link>   
+        <Nav.Link as={Link} to="/">Админка</Nav.Link>
+        
     )
 }

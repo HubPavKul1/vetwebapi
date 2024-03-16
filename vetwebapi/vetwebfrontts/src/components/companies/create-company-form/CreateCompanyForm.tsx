@@ -3,10 +3,9 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 import { Input } from "../../Input";
-import { Button } from "../../Button";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
-
+import { Button } from "../../Button";
 
 
 export function CreateCompanyForm() {
@@ -40,6 +39,7 @@ export function CreateCompanyForm() {
     
     return (
 
+       
         <form onSubmit={handleSubmit(createCompany)}>
             
         {inputItems.map(item => (

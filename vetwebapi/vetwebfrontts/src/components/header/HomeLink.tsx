@@ -6,10 +6,10 @@ export function HomeLink() {
     
 
     return (
+
+        <Nav.Link as={Link} id="RouterNavLink" to="/">Главная</Nav.Link>
   
-        <Nav.Link>
-             <Link to="/">Главная</Link>
-        </Nav.Link>   
+           
     )
 }
 

@@ -9,7 +9,7 @@ export function VetWorkLink() {
     return (
 
         <DropdownWrapper title="Работа" id="basic-nav-dropdown">
-              <NavDropdown.Item><Link to="/">Вакцинация</Link></NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/">Вакцинация</NavDropdown.Item>
               <NavDropdown.Item>Диагностика</NavDropdown.Item>
               <NavDropdown.Item>Обработка</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Отчеты</NavDropdown.Item>

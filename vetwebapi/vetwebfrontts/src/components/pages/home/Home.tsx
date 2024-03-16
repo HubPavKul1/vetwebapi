@@ -2,6 +2,7 @@
 import { CarouselBox } from "../../carousel/CarouselBox";
 import { SectionContent } from "./SectionContent";
 
+
 export function Home() {
     return (  
         <>
