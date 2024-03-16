@@ -9,12 +9,13 @@ export function CarouselBox() {
     return (
         <Carousel>
             {carouselItems.map(item => (
-                <Carousel.Item key={item.id} style={{"height": "660px"}}>
+                <Carousel.Item key={item.id} style={{"height": "690px"}}>
                     <Link to={item.url}>
                         <img 
                         className="d-block w-100"
                         src={item.imgSrc}
                         alt={item.imgAlt}
+                        height="690px"
                     />
                     </Link>
                 

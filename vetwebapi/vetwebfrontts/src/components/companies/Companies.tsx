@@ -4,8 +4,6 @@ import { CompanyCard } from "./company-card/CompanyCard"
 import { CompanyService } from "./company.service"
 import { CreateCompany } from "./CreateCompany"
 import { useQuery } from "react-query"
-import { LoadingSpinner } from "../Spinner";
-
 
 
 export function Companies() {

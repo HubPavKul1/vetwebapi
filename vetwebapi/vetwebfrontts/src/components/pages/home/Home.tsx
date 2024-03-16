@@ -1,16 +1,17 @@
-import { Container } from "react-bootstrap";
+
 import { CarouselBox } from "../../carousel/CarouselBox";
+import { SectionContent } from "./SectionContent";
 
 export function Home() {
     return (  
         <>
-        <CarouselBox />
-        <Container>
-                <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, cum quae veniam iste neque facere dolore alias rem officiis sequi pariatur delectus harum, error aspernatur! Commodi ea quia repudiandae dolorum.
-                </p>
-
-        </Container>
+        <section id="#carousel">
+          <CarouselBox />
+        </section>
+        <section id="#homepageContent">
+          <SectionContent />
+        </section>
+        
         </>
             
 
