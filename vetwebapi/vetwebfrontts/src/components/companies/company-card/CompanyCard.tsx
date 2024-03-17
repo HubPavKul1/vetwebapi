@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom"
 import { ICompany } from "../../../interfaces/CompanyInterfaces"
-import { Button, Card, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import farmImg from "/farm.jpg"
 
 

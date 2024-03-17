@@ -3,7 +3,7 @@ import { AddEmployee } from "../employee/AddEmployee"
 import { AddAnimal } from "../animal/AddAnimal"
 
 export interface CompanyPageProps {
-  compId: number;
+  compId?: number;
 }
 
 export function CompanyPageMenu({compId}: CompanyPageProps) {
