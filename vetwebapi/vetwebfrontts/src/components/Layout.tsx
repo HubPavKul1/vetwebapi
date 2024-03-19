@@ -1,21 +1,20 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./header/Header";
 import { Footer } from "./Footer";
-import {BreadCrumbs} from "./BreadCrumbs";
+
 
 
 export function Layout() {
     
     return (
         <>
-        <header>
+        <header className="header">
             <Header />
         </header>
-        <BreadCrumbs />
-        <main>
+        <main className="main">
             <Outlet />
         </main>
-        <footer>
+        <footer className="footer">
             <Footer />
         </footer>      
         </>

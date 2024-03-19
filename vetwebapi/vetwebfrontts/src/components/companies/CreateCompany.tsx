@@ -7,15 +7,14 @@ export function CreateCompany() {
 
     const [modalActive, setModalActive] = useState(false)
     return (
-        <Row fluid>
+        <Row>
             <Col md={4} />
             <Col className="m-5" md={4}>
-                <h2 className="text-center m-5">Предприятия</h2>
-                <p className="text-center">
-                    <Button className="btn-primary btn-lg" onClick={() => setModalActive(true)}>
+                <h2 className="section-title">Предприятия</h2>
+                    <Button className="createCompany-button" onClick={() => setModalActive(true)}>
                         Добавить предприятие
                     </Button>
-                </p>
+                
                     <Modal active={modalActive} setActive={setModalActive}>
                         <CreateCompanyForm />
                     </Modal>           

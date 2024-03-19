@@ -7,7 +7,7 @@ export function HomeLink() {
 
     return (
 
-        <Nav.Link as={Link} id="RouterNavLink" to="/">Главная</Nav.Link>
+        <Nav.Link className="header-list-item" as={Link} id="RouterNavLink" to="/">Главная</Nav.Link>
   
            
     )

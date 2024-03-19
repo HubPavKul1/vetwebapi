@@ -26,7 +26,7 @@ export function Companies() {
     
     return (
         <>
-        <Container fluid className="pd-4">
+        <Container>
                 <CreateCompany />
                 <Row className="g-4">
                     {data?.length ? data.map(company =>(

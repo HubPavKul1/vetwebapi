@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export function CarouselBox() {
     return (
-        <Carousel>
+        <Carousel className="homepageCarousel">
             {carouselItems.map(item => (
                 <Carousel.Item key={item.id} style={{"height": "690px"}}>
                     <Link to={item.url}>
@@ -19,9 +19,9 @@ export function CarouselBox() {
                     />
                     </Link>
                 
-                <Carousel.Caption>
-                    <h1>{item.title}</h1>
-                    <p>{item.description}</p>
+                <Carousel.Caption className="homepageCarousel-caption">
+                    <h1 className="homepageCarousel-caption-title">{item.title}</h1>
+                    <p className="homepageCarousel-caption-description">{item.description}</p>
                 </Carousel.Caption>
             </Carousel.Item>
             ))}

@@ -6,6 +6,6 @@ export function CompaniesLink() {
     return (
        
             // <NavLink.Link to="/companies/">Предприятия</NavLink.Link>
-            <Nav.Link as={Link} id="RouterNavLink" to="/companies/">Предприятия</Nav.Link>
+            <Nav.Link className="header-list-item" as={Link} id="RouterNavLink" to="/companies/">Предприятия</Nav.Link>
     )
 }

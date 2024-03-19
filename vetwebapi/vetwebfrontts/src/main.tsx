@@ -4,8 +4,8 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter } from 'react-router-dom';
 
 import './assets/css/normalize.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/bootstrap.min.css';
+import './assets/css/style.css';
 
 
 import { App } from './App';

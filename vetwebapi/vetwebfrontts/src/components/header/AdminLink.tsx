@@ -7,7 +7,7 @@ export function AdminLink() {
 
     return (
   
-        <Nav.Link as={Link} to="/">Админка</Nav.Link>
+        <Nav.Link className="header-list-item" as={Link} to="/">Админка</Nav.Link>
         
     )
 }

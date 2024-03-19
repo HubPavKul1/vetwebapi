@@ -6,11 +6,12 @@ import { Link } from "react-router-dom"
 export function LogoLink() {
     return (
         <Navbar.Brand >
-            <Link to="/">
+            <Link to="/" className="header-logo">
                 <img src={vetLogo}
                     height="50"
                     width="70"
-                    className="d-inline-block align-top"
+                    // className="d-inline-block align-top"
+                    className="header-logo"
                     alt="Logo"                          
                 />
             </Link>
