@@ -28,18 +28,24 @@ export function Companies() {
         <>
         <Container>
                 <CreateCompany />
-                <Row className="g-4">
+                {/* <Row className="g-4"> */}
+                <ul className="company-items list-reset">
+                    <li className="company-item">
                     {data?.length ? data.map(company =>(
-                        <Col key={company.id} md={3} sm={1}>
+                        // <Col key={company.id} md={3} sm={1}>
                             <CompanyCard company={company} />
-                        </Col>
+                        // </Col>
                             
                         ))
                         :  <CardEmpty/>
                         
                         }
-                </Row>
-                <Pagination>
+                    </li>
+
+                </ul>
+              
+                {/* </Row> */}
+                {/* <Pagination>
                 <Pagination.First />
                 <Pagination.Prev />
                 <Pagination.Item>{1}</Pagination.Item>
@@ -55,7 +61,7 @@ export function Companies() {
                 <Pagination.Item>{20}</Pagination.Item>
                 <Pagination.Next />
                 <Pagination.Last />
-                </Pagination>
+                </Pagination> */}
                 
             </Container>
         </>

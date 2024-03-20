@@ -11,6 +11,7 @@ html {
 a {
 	color: inherit;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 img {
@@ -18,5 +19,107 @@ img {
 }
 
 body {
-	font-family: 'Helvetica', 'Arial', sans-serif;
+	min-width: 1200px;
+	font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+
+/* global */
+
+.list-reset {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.btn-reset {
+	padding: 0;
+	border: none;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+.container {
+	width: 1200px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.section-title {
+	margin: 0;
+	margin-bottom: 40px;
+}
+
+.section-offset {
+	padding-top: 87px;
+	padding-bottom: 160px;
+}
+
+
+/* header */
+
+.header {
+	padding: 36px 0;
+}
+
+.header-container {
+	align-items: center;
+}
+
+.navbar-brand {
+	margin-right: auto;
+}
+
+.header-nav {
+	margin-right: 52px;
+}
+
+.header-list-item:not(:last-child) {
+	margin-right: 52px;
+}
+
+
+/* carousel */
+
+.home-carousel-item {
+	height: 690px;
+	
+}
+
+.home-carousel-image {
+	opacity: 0.9;
+	
+}
+
+.home-carousel-caption-title {
+	margin: 0;
+	margin-bottom: 25px;
+	font-size: 70px;
+	font-weight: 700;
+	line-height: 1.3;
+	color:rgb(0, 0, 0);
+}
+
+.home-carousel-caption-desc {
+	margin: 0;
+	margin-bottom: 20px;
+	font-size: 30px;
+	font-weight: 300;
+	line-height: 1.3;
+	color:rgb(0, 0, 0);
+}
+
+
+.carousel-control-next-icon {
+	background-image : url("/arrow-right.svg");
+	
+}
+
+.carousel-control-prev-icon {
+  background-image : url("/arrow-left.svg");
 }

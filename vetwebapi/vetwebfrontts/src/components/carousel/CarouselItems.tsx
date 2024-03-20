@@ -34,7 +34,7 @@ export const carouselItems: ICarouselItem[] = [
         imgSrc: "/vetWork1.jpg",
         imgAlt: "VetWork",
         title: "Противоэпизоотическая работа",
-        description: "Информация о противоэпизоотических мероприяиях, их учет и отчетность",
+        description: "Информация о противоэпизоотических мероприятиях, их учет и отчетность",
         url: "/"
     },
 

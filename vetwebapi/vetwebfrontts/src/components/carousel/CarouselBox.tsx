@@ -2,28 +2,30 @@ import { Carousel } from "react-bootstrap";
 
 import { carouselItems } from "./CarouselItems";
 import { Link } from "react-router-dom";
-
+import { MdKeyboardDoubleArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 
 export function CarouselBox() {
+    const myPrevIcon = <span style={{height: "32px", width: "32px"}}><MdKeyboardDoubleArrowLeft/></span>
+    const myNextIcon = <span><MdKeyboardDoubleArrowRight/></span>
+
     return (
-        <Carousel className="homepageCarousel">
+        <Carousel className="home-carousel flex" variant="dark">
             {carouselItems.map(item => (
-                <Carousel.Item key={item.id} style={{"height": "690px"}}>
+                <Carousel.Item key={item.id} className="home-carousel-item">
                     <Link to={item.url}>
                         <img 
-                        className="d-block w-100"
+                        className="home-carousel-image"
                         src={item.imgSrc}
                         alt={item.imgAlt}
-                        height="690px"
                     />
                     </Link>
                 
-                <Carousel.Caption className="homepageCarousel-caption">
-                    <h1 className="homepageCarousel-caption-title">{item.title}</h1>
-                    <p className="homepageCarousel-caption-description">{item.description}</p>
-                </Carousel.Caption>
-            </Carousel.Item>
+                    <Carousel.Caption className="home-carousel-caption">
+                        <h1 className="home-carousel-caption-title">{item.title}</h1>
+                        <p className="home-carousel-caption-desc">{item.description}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
             ))}
 
         </Carousel>

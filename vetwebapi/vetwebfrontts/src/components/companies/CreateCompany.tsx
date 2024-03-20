@@ -11,7 +11,7 @@ export function CreateCompany() {
             <Col md={4} />
             <Col className="m-5" md={4}>
                 <h2 className="section-title">Предприятия</h2>
-                    <Button className="createCompany-button" onClick={() => setModalActive(true)}>
+                    <Button className="create-company-button btn-reset" onClick={() => setModalActive(true)}>
                         Добавить предприятие
                     </Button>
                 

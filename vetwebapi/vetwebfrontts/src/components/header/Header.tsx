@@ -14,26 +14,25 @@ export function Header() {
 
     return (
         <>
-        <Container>
-            <Navbar collapseOnSelect bg="light" variant="light" fixed="top">
-                <Container>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                        <Navbar.Collapse id="responsive-navbar-nav">
+            {/* <Navbar collapseOnSelect bg="light" variant="light" fixed="top"> */}
+                <Container className="flex header-container">
+                        {/* <Navbar.Toggle aria-controls="responsive-navbar-nav"/> */}
+                        {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
                             <LogoLink/>
-                            <Nav className="header-list"> 
+                        <nav className="header-nav">
+                            <ul className="header-list list-reset flex"> 
                                 <HomeLink />
                                 <CompaniesLink />
                                 <DrugsLink />  
                                 <VetWorkLink />
                                 <AdminLink/>
-                            </Nav>
-                            <Button className="header-button">Войти</Button>
-                        </Navbar.Collapse>      
+                            </ul>
+                        </nav>
+                            
+                            <Button className="header-button btn-reset">Войти</Button>
+                        {/* </Navbar.Collapse>       */}
                 </Container>
-            </Navbar>
-        </Container>
-            
-
+            {/* </Navbar> */}
         </>
 
     )

@@ -8,11 +8,9 @@ export function Home() {
     return (  
         <>
         <section id="#carousel" className="carousel">
-          <Container>
-              <CarouselBox />
-          </Container>
+          <CarouselBox />
         </section>
-        <section id="#homepageContent" className="homepageContent">
+        <section id="#homepageContent" className="home-content section-offset">
           <SectionContent />
         </section>
         

@@ -66,7 +66,7 @@ export function CreateCompanyForm() {
             />))}
            
             <Button 
-                className="btn btn-primary btn-send-message btn-md"
+                className="btn btn-reset"
                 disabled={false}
                 name="Зарегистрировать"
             />
