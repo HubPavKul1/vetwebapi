@@ -7,16 +7,15 @@ export function SectionContent() {
 
         <Container>
            <h2 className="section-title home-content-title">Полезная информация</h2>
-           <ul className="home-content-items list-reset">
+           <ul className="home-content-items list-reset flex">
            {contentData.map(item => (
                    
               <li className="home-content-item" key={item.id}>
-                    <Card className="home-content-card" border="secondary" style={{ width: "20rem", minHeight: "35rem"}}>
+                    <Card className="home-content-card flex" border="secondary">
                             <a href={item.url}>
                                 <Card.Img variant="top"
                                     src={item.imgSrc}
                                     alt={item.imgAlt}
-                                    height={250}
                                     className="home-content-card-image"
                                 />
                             </a>

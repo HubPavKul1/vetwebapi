@@ -6,19 +6,17 @@ import { MdKeyboardDoubleArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowR
 
 
 export function CarouselBox() {
-    const myPrevIcon = <span style={{height: "32px", width: "32px"}}><MdKeyboardDoubleArrowLeft/></span>
-    const myNextIcon = <span><MdKeyboardDoubleArrowRight/></span>
-
+    
     return (
         <Carousel className="home-carousel flex" variant="dark">
             {carouselItems.map(item => (
                 <Carousel.Item key={item.id} className="home-carousel-item">
                     <Link to={item.url}>
                         <img 
-                        className="home-carousel-image"
-                        src={item.imgSrc}
-                        alt={item.imgAlt}
-                    />
+                            className="home-carousel-image"
+                            src={item.imgSrc}
+                            alt={item.imgAlt}
+                         />
                     </Link>
                 
                     <Carousel.Caption className="home-carousel-caption">

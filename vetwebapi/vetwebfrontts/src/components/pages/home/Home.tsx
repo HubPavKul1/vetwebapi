@@ -10,7 +10,7 @@ export function Home() {
         <section id="#carousel" className="carousel">
           <CarouselBox />
         </section>
-        <section id="#homepageContent" className="home-content section-offset">
+        <section id="#home-сontent" className="home-content section-offset">
           <SectionContent />
         </section>
         
