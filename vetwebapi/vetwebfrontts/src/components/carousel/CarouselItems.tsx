@@ -13,7 +13,7 @@ interface ICarouselItem {
 export const carouselItems: ICarouselItem[] = [
     {
         id: 1,
-        imgSrc: "/animalsBg2.jpg",
+        imgSrc: "/animalsBg1.jpg",
         imgAlt: "Animals",
         title: "Владельцы Животных",
         description: "Информация о хозяйствах и регистрация владельцев животных",

@@ -29,7 +29,7 @@ export function Header() {
                             </ul>
                         </nav>
                             
-                            <Button className="header-button btn-reset">Войти</Button>
+                            <Button className="btn header-button btn-reset">Войти</Button>
                         {/* </Navbar.Collapse>       */}
                 </Container>
             {/* </Navbar> */}
