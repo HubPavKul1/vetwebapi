@@ -5,13 +5,13 @@ import { contentData } from "./HomeContent";
 export function SectionContent() {
     return (  
 
-        <Container>
-           <h2 className="section-title home-content-title">Полезная информация</h2>
+        <div className="container content-container">
+            <h2 className="section-title home-content-title">Полезная информация</h2>
            <ul className="home-content-items list-reset flex">
            {contentData.map(item => (
                    
               <li className="home-content-item" key={item.id}>
-                    <Card className="home-content-card flex" border="secondary">
+                    <Card className="home-content-card" border="secondary">
                             <a href={item.url}>
                                 <Card.Img variant="top"
                                     src={item.imgSrc}
@@ -46,8 +46,10 @@ export function SectionContent() {
                 ))}
 
            </ul>
+        </div>
            
-        </Container>
+           
+
           
     )
 }
