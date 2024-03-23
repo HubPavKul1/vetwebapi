@@ -26,7 +26,7 @@ export function Companies() {
     
     return (
         <>
-        <Container>
+        <Container className="companies-container flex">
                 <CreateCompany />
                 {/* <Row className="g-4"> */}
                 <ul className="company-items list-reset">

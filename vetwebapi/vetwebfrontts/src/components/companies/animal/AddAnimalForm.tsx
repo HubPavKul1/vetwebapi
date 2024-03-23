@@ -91,7 +91,7 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
               
             <div className="form-group">
                 <Button 
-                    className="btn btn-primary btn-send-message btn-md"
+                    className="btn btn-send-message btn-md"
                     disabled={false}
                     onClick={handleSubmit(createAnimal)}
                     name="Зарегистрировать"

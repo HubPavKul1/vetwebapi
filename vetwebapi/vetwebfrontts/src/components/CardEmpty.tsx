@@ -20,7 +20,7 @@ export function CardEmpty() {
                 <Card.Text>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati porro doloribus, nihil unde maxime, fugit distinctio fugiat inventore quos pariatur quibusdam suscipit facilis quia possimus, quo incidunt provident laudantium architecto?
                 </Card.Text>
-                <Button variant="primary">
+                <Button className="btn btn-reset">
                     Подробнее
                 </Button>
             </Card.Body>
