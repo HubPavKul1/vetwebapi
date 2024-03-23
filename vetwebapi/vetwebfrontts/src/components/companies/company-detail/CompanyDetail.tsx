@@ -20,22 +20,29 @@ export function CompanyDetail() {
     if(isLoading) return <p>Загрузка ...</p>
 
     return (
-      <Container fluid>
-        <Row>
-          <Col className="m-4" md={8}>
-            <Container className="m-5" >
-              <Row>
-                <Col md={12}>
-                <img
-                  className="img-responsive"
-                  src="/animals2-2.png"
-                  
-                  alt="animals2.png"
-                />
 
-                </Col>
-                <Col md={12}>
-                <Container className="blog-desc col-paddingbottom">
+      <>
+      <Container className="company-detail-container">
+        <Container className="company-detail-top flex">
+          <div className="container company-detail-image-wrap">
+            <img
+                className="company-detail-image"
+                src="/animals2-2.png"
+                alt="animals2.png"
+              />
+
+          </div>
+          
+          <div className="container company-menu-wrap">
+            <CompanyPageMenu compId={data?.id}/>
+          </div>
+            
+          
+
+        </Container>
+
+               
+        <Container className="company-detail-title-wrap flex">
                   <h2>
                   <a href="#">
                     {data?.full_name} 
@@ -46,20 +53,27 @@ export function CompanyDetail() {
                     : <p>Адрес</p>
                     }
                  
-                </Container>
-                </Col>
+        </Container>
+
+        <Container className="company-detail-menu flex">
+            
+        </Container>
+         
                 
-              </Row>
-            </Container>
+       
+  </Container>
 
-          </Col>
-          <Col md={4}>
-              <CompanyPageMenu compId={data?.id}/>
-          </Col>
+    
+          
+              
+     
 
-        </Row>
 
-      </Container>
+
+      {/* </Container> */}
+
+      </>
+      
       
 //         <div id="colorlib-blog">
 //   <div className="container">

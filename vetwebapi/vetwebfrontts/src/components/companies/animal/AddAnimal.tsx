@@ -9,7 +9,7 @@ export function AddAnimal({compId}: CompanyPageProps) {
 
     const [modalActive, setModalActive] = useState(false)
     return (
-        <li>
+        <li className="company-page-menu-item">
             <a href="#" onClick={() => setModalActive(true)}>
                 Добавить животное <i className="icon-check" />{" "}
             </a>

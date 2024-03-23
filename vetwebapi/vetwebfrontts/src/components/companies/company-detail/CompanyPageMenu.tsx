@@ -8,15 +8,13 @@ export interface CompanyPageProps {
 
 export function CompanyPageMenu({compId}: CompanyPageProps) {
     return(
-        <aside className="sidebar">
-          <div className="side">
-            <h2>Меню</h2>
-            <ul className="list">
+          <div className="company-page-menu flex">
+            <h2 className="company-page-menu-title">Меню</h2>
+            <ul className="company-page-menu-items flex">
               <AddAddress compId={compId}/>
               <AddEmployee compId={compId}/>
               <AddAnimal compId={compId}/>
             </ul>
           </div>
-        </aside>
     )
 }

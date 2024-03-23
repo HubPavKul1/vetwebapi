@@ -1,4 +1,5 @@
-import { Button, Card, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import farmImg from "/farm.jpg"
 
@@ -6,26 +7,28 @@ import farmImg from "/farm.jpg"
 
 export function CardEmpty() {
     return (
-        <Col md="3">
-            <Card>
-            <Card.Img variant="top"
-                src={farmImg}
-                alt="Farm"
-            />
+            <Card className="company-card">
+                <Link to={`/`} >
+                    <Card.Img className="company-card-image"
+                    variant="top"
+                    src={farmImg}
+                    alt="Farm"
+                />
+                </Link>
+            
 
             <Card.Body>
-                <Card.Title>
-                    Название предприятия
+                <Card.Title className="company-card-title">
+                    <Link to={`/`} >
+                        Название предприятия
+                    </Link>
+                   
                 </Card.Title>
-                <Card.Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati porro doloribus, nihil unde maxime, fugit distinctio fugiat inventore quos pariatur quibusdam suscipit facilis quia possimus, quo incidunt provident laudantium architecto?
+                <Card.Text className="company-card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati porro doloribus, nihil unde maxime, fugit distinctio fugiat inventore quos pariatu
                 </Card.Text>
-                <Button className="btn btn-reset">
-                    Подробнее
-                </Button>
             </Card.Body>
         </Card>
-        </Col>
         
         )
     }

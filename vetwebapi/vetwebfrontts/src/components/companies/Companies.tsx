@@ -26,25 +26,40 @@ export function Companies() {
     
     return (
         <>
-        <Container className="companies-container flex">
+        <Container className="companies-container">
                 <CreateCompany />
-                {/* <Row className="g-4"> */}
-                <ul className="company-items list-reset">
-                    <li className="company-item">
+
+                <ul className="company-items list-reset flex">
+                    
                     {data?.length ? data.map(company =>(
-                        // <Col key={company.id} md={3} sm={1}>
-                            <CompanyCard company={company} />
-                        // </Col>
+                        <li className="company-item flex" key={company.id}>
+                             <CompanyCard company={company} />
+                        </li>
                             
                         ))
-                        :  <CardEmpty/>
+                        : <>
+                             <li className="company-item flex">
+                                 <CardEmpty/>
+                            </li>
+                            <li className="company-item flex">
+                                 <CardEmpty/>
+                            </li>
+                            <li className="company-item flex">
+                                 <CardEmpty/>
+                            </li>
+                            <li className="company-item flex">
+                                 <CardEmpty/>
+                            </li>
+                           
+                        </>      
+                        
+                        
                         
                         }
-                    </li>
+                
 
                 </ul>
               
-                {/* </Row> */}
                 {/* <Pagination>
                 <Pagination.First />
                 <Pagination.Prev />

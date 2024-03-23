@@ -8,7 +8,7 @@ export function AddEmployee({compId}: CompanyPageProps) {
 
     const [modalActive, setModalActive] = useState(false)
     return (
-        <li>
+        <li className="company-page-menu-item">
             <a href="#" onClick={() => setModalActive(true)}>
                 Добавить работника <i className="icon-check" />{" "}
             </a>

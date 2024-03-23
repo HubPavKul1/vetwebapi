@@ -40,7 +40,7 @@ export function CreateCompanyForm() {
     return (
 
        
-        <form onSubmit={handleSubmit(createCompany)}>
+        <form className="create-company-form" onSubmit={handleSubmit(createCompany)}>
             
         {inputItems.map(item => (
             <Input key={item.fieldName} 
@@ -66,7 +66,7 @@ export function CreateCompanyForm() {
             />))}
            
             <Button 
-                className="btn btn-reset"
+                className="btn btn-reset create-company-submit-btn"
                 disabled={false}
                 name="Зарегистрировать"
             />
