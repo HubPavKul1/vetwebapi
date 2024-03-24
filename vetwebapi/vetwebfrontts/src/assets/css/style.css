@@ -402,23 +402,18 @@ body {
 	align-items: center;
 	padding: 10px;
 	width: calc((100% - (var(--gap) * var(--offsets))) / (var(--offsets) + 1));
+	transition: transform .3s ease-in-out;
 }
 
-.company-card-image:hover {
-	opacity: .5;
-	transition: opacity .3s ease-in-out;
+.company-item:hover {
+	transform: scale(1.1);
+	
 }
 
 .company-card-title {
 	font-weight: 700;
 	text-align: center;
 }
-
-.company-card-title:hover {
-	color: blueviolet;
-	transition: color .3s ease-in-out;
-}
-
 
 
 /* create company form */
@@ -451,12 +446,15 @@ body {
 .company-menu-wrap {
 	max-width: 30%;
 	text-align: left;
+	padding: 15px;
+	border: 1px solid grey;
 }
 
 .company-page-menu {
 	width: 100%;
 	flex-direction: column;
 	align-items: center;
+	
 	
 }
 
@@ -467,14 +465,16 @@ body {
 }
 
 .company-page-menu-items {
+	padding: 0;
 	flex-direction: column;
-	text-align: left;
 }
 
 .company-page-menu-item {
 	margin: 0;
 	margin-bottom: 15px;
 	font-size: 1.5em;
+	border-bottom: 1px solid grey;
+	
 }
 
 

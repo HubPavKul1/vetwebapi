@@ -2,7 +2,6 @@ import { Carousel } from "react-bootstrap";
 
 import { carouselItems } from "./CarouselItems";
 import { Link } from "react-router-dom";
-import { MdKeyboardDoubleArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 
 export function CarouselBox() {

@@ -11,18 +11,19 @@ interface CompanyCard {
 
 export function CompanyCard({company}: CompanyCard) {
     return (
+        <Link to={`/companies/${company.id}`} >
         <Card className="company-card"> 
-            <Link to={`/companies/${company.id}`} >
+            
                 <Card.Img className="company-card-image"
                         variant="top"
                         src={farmImg}
                         alt="Farm"
                     />
-            </Link>
+            
            
             <Card.Body>
                 <Card.Title className="company-card-title">
-                    <Link to={`/companies/${company.id}`} >{company.full_name}</Link>
+                    {company.full_name}
                 </Card.Title>
                 <Card.Text className="company-card-text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati porro doloribus, nihil unde maxime, fugit distinctio fugiat inventore quos pariatur quibusdam suscipit facilis
@@ -32,6 +33,7 @@ export function CompanyCard({company}: CompanyCard) {
 
             </Card.Footer>   
         </Card>
+        </Link>
         
     )
 }
