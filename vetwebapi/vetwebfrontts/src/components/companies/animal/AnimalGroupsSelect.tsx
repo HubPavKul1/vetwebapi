@@ -23,7 +23,7 @@ export function AnimalGroupsSelect({ typeOfFeedingId }: AnimalGroupsSelectProps)
 
     return (
         <>
-            <Select
+            <Select className='custom-select'
                 id="animalGroup"
                 isSearchable
                 isClearable

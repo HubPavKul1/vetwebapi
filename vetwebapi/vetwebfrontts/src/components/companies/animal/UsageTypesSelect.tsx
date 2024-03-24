@@ -27,7 +27,7 @@ export function UsageTypesSelect() {
                 { required: "Usage Type is required!" }
             }
             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <Select
+                <Select className='custom-select'
                     isSearchable
                     isClearable
                     options={options}

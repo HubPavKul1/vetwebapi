@@ -35,9 +35,7 @@ export function CompanyDetail() {
           
           <div className="container company-menu-wrap">
             <CompanyPageMenu compId={data?.id}/>
-          </div>
-            
-          
+          </div>  
 
         </Container>
 
@@ -55,114 +53,61 @@ export function CompanyDetail() {
                  
         </Container>
 
-        <Container className="company-detail-menu flex">
+        <Container className="company-detail-employee">
+          <h5 className="section-title">Работники</h5>
+            <table className="table">
+                    <tbody>
+                      <tr>
+                        <th>Должность</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                      </tr>
+    
+                      {data?.employees?.length ? 
+                        data.employees.map(empoloyee => <CompanyEmployee key={empoloyee.id} employee={empoloyee} />)
+                      
+                      : <tr>
+                          <td>Работники</td>
+                        </tr>
+                      }
+                      
+                    </tbody>
+                  </table>
             
         </Container>
-         
-                
+        <Container className="company-detail-animals">
+          <h5 className="section-title">Животные </h5>
+          <p className="animal-counter">Всего голов: {data?.animals?.length}</p>
+            <table className="table">
+              
+
+                    <tbody className="animals-rows">
+                      <tr>
+                        <th>Вид животных</th>
+                        <th>Пол животных</th>
+                        <th>Дата рождения</th>
+                        <th>Кличка</th>
+                        <th>Идентификация</th>
+                        <th />
+                      </tr>
+                      {data?.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
+                      
+                      
+                      : <tr>
+                          <td>Животные</td>
+                         </tr>
+                      
+                      }
+                    </tbody>
+                  </table>
+
+        </Container>
        
   </Container>
 
-    
-          
-              
-     
-
-
-
-      {/* </Container> */}
 
       </>
-      
-      
-//         <div id="colorlib-blog">
-//   <div className="container">
-//     <div className="row">
-//       <div className="col-md-8">
-//         <div className="blog-wrap">
-//           <div className="row">
-//             <div className="col-md-12">
-//               <img
-//                 className="img-responsive"
-//                 src="/animals2-2.png"
-                
-//                 alt="animals2.png"
-//               />
-//               <br />
-//             </div>
-//             <div className="col-md-12">
-//               <div className="blog-desc col-paddingbottom">
-//                 <h2>
-//                   <a href="#">
-//                     {data?.full_name} 
-//                   </a>
-//                 </h2>
-//                 <div className="post-meta" style={{ color: "#6f42c1" }}>
-//                   {data?.address ? 
-//                   <CompanyAddress address={data.address}/>
-//                   : <p>Адрес</p>
-//                   }
-                 
-//                 </div>
-                
-//                 <div style={{ color: "#6f42c1" }}>
-                
-//                   <table className="table">
-//                     <caption style={{ color: "#0d6efd" }}>Работники</caption>
-//                     <tbody>
-//                       <tr>
-//                         <th>Должность</th>
-//                         <th>Фамилия</th>
-//                         <th>Имя</th>
-//                         <th>Отчество</th>
-//                       </tr>
-    
-//                       {data?.employees?.length ? 
-//                         data.employees.map(empoloyee => <CompanyEmployee key={empoloyee.id} employee={empoloyee} />)
-                      
-//                       : <tr>
-//                           <td>Работники</td>
-//                         </tr>
-//                       }
-                      
-//                     </tbody>
-//                   </table>
-//                 </div>
-//                 <div style={{ color: "#6f42c1" }}>
-//                   <table className="table">
-//                           <caption style={{ color: "#0d6efd" }}>Животные <br />Всего голов: {data?.animals?.length}</caption>
-
-//                     <tbody>
-//                       <tr>
-//                         <th>Вид животных</th>
-//                         <th>Пол животных</th>
-//                         <th>Дата рождения</th>
-//                         <th>Кличка</th>
-//                         <th>Идентификация</th>
-//                         <th />
-//                       </tr>
-//                       {data?.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
-                      
-                      
-//                       : <tr>
-//                           <td>Животные</td>
-//                          </tr>
-                      
-//                       }
-//                     </tbody>
-//                   </table>
-//                 </div>   
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       <div className="col-md-4">
-//         <CompanyPageMenu compId={data?.id}/>
-//       </div>
-//     </div>
-//   </div>
-// </div>
 
     )
 }

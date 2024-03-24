@@ -36,7 +36,7 @@ export function StreetsSelect({cityId}: StreetsSelectProps) {
           {required: "Street is required!"}
         }
         render={({field: {onChange, value}, fieldState: { error }}) => (
-        <AsyncSelect 
+        <AsyncSelect className='custom-select'
             isSearchable
             isClearable
             loadOptions={loadOptions}

@@ -42,16 +42,16 @@ export function UploadAnimalForm() {
 
     return (
 
-        <div className="row">
-            <div className="col-8">
-                <label className="btn btn-default p-0">
+        <div className="container">
+            <div className="container">
+                <label className="btn btn-default">
                 <input type="file" onChange={selectFile} />
                 </label>
             </div>
     
-            <div className="col-4">
+            <div className="container">
                 <Button 
-                    className="btn btn-success btn-sm"
+                    className="btn btn-reset btn-upload"
                     disabled={!currentFile}
                     onClick={upload}
                     name="Загрузить"

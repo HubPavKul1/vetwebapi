@@ -20,9 +20,9 @@ export function AddAddressForm({compId}: CompanyPageProps) {
     }
 
     const inputItems: FormInputProps<IAddressIn>[] = [
-      {fieldName: "house_number", placeholder: "Номер дома *", type: "text", rules: rulesOptions},
-      {fieldName: "phone_number1", placeholder: "Телефон1 *", type: "tel", rules: rulesOptions},
-      {fieldName: "phone_number2", placeholder: "Телефон2", type: "tel", rules: {required: false}},
+      {fieldName: "house_number", placeholder: "Введите номер дома *", type: "text", rules: rulesOptions},
+      {fieldName: "phone_number1", placeholder: "Введите номер телефона1 *", type: "tel", rules: rulesOptions},
+      {fieldName: "phone_number2", placeholder: "Введите номер телефона2", type: "tel", rules: {required: false}},
     ]
 
 
@@ -63,7 +63,6 @@ export function AddAddressForm({compId}: CompanyPageProps) {
       inputItems.map(item =>(
       <Input key={item.fieldName}
         className="form-control"
-        style={{ width: 200, height: 30}}
         placeholder={item.placeholder}
         register={register}
         fieldName={item.fieldName}
@@ -76,7 +75,7 @@ export function AddAddressForm({compId}: CompanyPageProps) {
 
     <div className="form-group">
       <Button 
-          className="btn btn-primary btn-send-message btn-md"
+          className="btn btn-reset btn-submit"
           disabled={false}
           onClick={handleSubmit(createAddress)}
           name="Зарегистрировать"

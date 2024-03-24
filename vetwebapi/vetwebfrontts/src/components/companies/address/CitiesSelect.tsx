@@ -21,7 +21,8 @@ export function CitiesSelect({districtId}: CitiesSelectProps) {
                    
     return (
             <>
-            <Select 
+            <Select className='custom-select'
+
                 isSearchable
                 isClearable
                 options={options}

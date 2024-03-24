@@ -20,6 +20,7 @@ export function RegionsSelect() {
     return (
         <>
             <Select 
+            className='custom-select'
             isSearchable 
             isClearable
             options={options}

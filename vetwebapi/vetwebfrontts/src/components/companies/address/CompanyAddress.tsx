@@ -7,12 +7,16 @@ interface CompanyAddressProps {
 export function CompanyAddress({address}: CompanyAddressProps) {
     return (
         
-            <div>
-                <span>{address.city}</span>
-                <span>{address.street}</span>
-                <span>{address.house_number}</span>
-                <span>тел 1: {address.phone_number1}</span>
-                <span>тел 2: {address.phone_number2}</span>
+            <div className="container address-wrap flex">
+                <span className="address-item">г.{address.city}</span>
+                <span className="address-item">{address.street}</span>
+                <span className="address-item">{address.house_number}</span>
+                <span className="address-item">тел 1: {address.phone_number1}</span>
+                {
+                    address.phone_number2 ? 
+                    <span className="address-item">тел 2: {address.phone_number2}</span>: ""
+                }
+                
             </div>
 
     )

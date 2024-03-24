@@ -30,7 +30,7 @@ export function GendersSelect({ speciesId }: GendersSelectProps) {
                 { required: "Gender is required!" }
             }
             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <Select
+                <Select className='custom-select'
                     isSearchable
                     isClearable
                     options={options}

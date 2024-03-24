@@ -17,8 +17,8 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
 
     const inputItems: FormInputProps<IAnimalCreate>[] = [
         {fieldName: "date_of_birth", id: "date_of_birth", type: "date"},
-        {fieldName: "nickname", placeholder: "Кличка животного *", type: "text"},
-        {fieldName: "identification", placeholder: "Идентификация *", type: "text"},
+        {fieldName: "nickname", placeholder: "Введите кличку животного *", type: "text"},
+        {fieldName: "identification", placeholder: "Введите номер микрочипа *", type: "text"},
       ]
 
 
@@ -60,14 +60,13 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
                 <UsageTypesSelect />
             </div>
 
-                <label htmlFor="date_of_birth" className="">
+                <label htmlFor="date_of_birth" className="form-group">
                     Дата рождения *
                 </label>
                 {
                     inputItems.map(item =>(
                         <Input key={item.fieldName}
                             className="form-control"
-                            style={{ width: 200, height: 30}}
                             id={item.id}
                             register={register}
                             rules={{
@@ -91,7 +90,7 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
               
             <div className="form-group">
                 <Button 
-                    className="btn btn-send-message btn-md"
+                    className="btn btn-reset btn-submit"
                     disabled={false}
                     onClick={handleSubmit(createAnimal)}
                     name="Зарегистрировать"

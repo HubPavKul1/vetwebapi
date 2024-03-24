@@ -34,7 +34,7 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
                 { required: "Species is required!" }
             }
             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <Select
+                <Select className='custom-select'
                     isSearchable
                     isClearable
                     options={options}

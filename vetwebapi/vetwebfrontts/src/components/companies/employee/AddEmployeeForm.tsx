@@ -15,9 +15,9 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
 
 
     const inputItems: FormInputProps<IEmployeeCreate>[] = [
-        {fieldName: "lastname", placeholder: "Фамилия *"},
-        {fieldName: "firstname", placeholder: "Имя *"},
-        {fieldName: "patronymic", placeholder: "Отчество *"},
+        {fieldName: "lastname", placeholder: "Введите фамилию *"},
+        {fieldName: "firstname", placeholder: "Введите имя *"},
+        {fieldName: "patronymic", placeholder: "Введите отчество *"},
     ];
 
 
@@ -57,7 +57,7 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
                 inputItems.map(item =>(
                     <Input key={item.fieldName}
                         className="form-control"
-                        style={{ width: 200, height: 30}}
+                        // style={{ width: 200, height: 30}}
                         placeholder={item.placeholder}
                         register={register}
                         fieldName={item.fieldName}
@@ -81,7 +81,7 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
 
             <div className="form-group">
                 <Button 
-                    className="btn btn-primary btn-send-message btn-md"
+                    className="btn btn-reset btn-submit"
                     disabled={false}
                     onClick={handleSubmit(createEmployee)}
                     name="Зарегистрировать"

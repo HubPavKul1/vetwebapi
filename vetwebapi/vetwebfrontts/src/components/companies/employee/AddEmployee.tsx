@@ -2,6 +2,7 @@ import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 import { AddEmployeeForm } from "./AddEmployeeForm";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
+import { FaCheck } from "react-icons/fa";
 
 
 export function AddEmployee({compId}: CompanyPageProps) {
@@ -10,7 +11,7 @@ export function AddEmployee({compId}: CompanyPageProps) {
     return (
         <li className="company-page-menu-item">
             <a href="#" onClick={() => setModalActive(true)}>
-                Добавить работника <i className="icon-check" />{" "}
+                Добавить работника <i className="icon-check"><FaCheck /></i>
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
                 <AddEmployeeForm compId={compId}/>

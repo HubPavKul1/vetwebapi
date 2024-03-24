@@ -11,8 +11,8 @@ import { Button } from "../../Button";
 export function CreateCompanyForm() {
 
     const inputItems: FormInputProps<ICompanyCreate>[] = [
-        {fieldName: "full_name", placeholder: "Полное наименование *"},
-        {fieldName: "short_name", placeholder: "Краткое наименование *"},
+        {fieldName: "full_name", placeholder: "Введите полное наименование *"},
+        {fieldName: "short_name", placeholder: "Введите краткое наименование *"},
     ];
    
 
@@ -66,7 +66,7 @@ export function CreateCompanyForm() {
             />))}
            
             <Button 
-                className="btn btn-reset create-company-submit-btn"
+                className="btn btn-reset btn-submit"
                 disabled={false}
                 name="Зарегистрировать"
             />

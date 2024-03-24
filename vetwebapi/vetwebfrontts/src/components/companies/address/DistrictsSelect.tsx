@@ -23,7 +23,7 @@ export function DistrictsSelect({regionId}: DistrictsSelectProps) {
                    
     return (
         <>
-            <Select 
+            <Select className='custom-select'
             isSearchable
             isClearable
             options={options}

@@ -27,7 +27,7 @@ export function PositionsSelect() {
                 { required: "Position is required!" }
             }
             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <Select
+                <Select className='custom-select'
                     isSearchable
                     isClearable
                     options={options}
