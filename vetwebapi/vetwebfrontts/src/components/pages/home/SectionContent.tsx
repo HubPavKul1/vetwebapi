@@ -11,21 +11,19 @@ export function SectionContent() {
            {contentData.map(item => (
                    
               <li className="home-content-item" key={item.id}>
+                 <a href={item.url}>
                     <Card className="home-content-card" border="secondary">
-                            <a href={item.url}>
+                           
                                 <Card.Img variant="top"
                                     src={item.imgSrc}
                                     alt={item.imgAlt}
                                     className="home-content-card-image"
                                 />
-                            </a>
                                     
                             <Card.Body className="home-content-card-body">
-                                <a href={item.url}>
                                     <Card.Title className="home-content-card-body-title">
                                         <h3>{item.cardTitle}</h3>
                                     </Card.Title>
-                                </a>
                                 <Card.Text className="home-content-card-body-text">
                                     {item.cardText}
                                 </Card.Text>
@@ -40,6 +38,8 @@ export function SectionContent() {
                             }
                             
                         </Card>
+                        </a>
+
               </li>
                         
                                
