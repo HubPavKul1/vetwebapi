@@ -16,8 +16,7 @@ export function Header() {
         <>
             {/* <Navbar collapseOnSelect bg="light" variant="light" fixed="top"> */}
                 <Container className="flex header-container">
-                        {/* <Navbar.Toggle aria-controls="responsive-navbar-nav"/> */}
-                        {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
+            
                             <LogoLink/>
                         <nav className="header-nav">
                             <ul className="header-list list-reset flex"> 
@@ -29,10 +28,9 @@ export function Header() {
                             </ul>
                         </nav>
                             
-                            <Button className="btn header-button btn-reset">Войти</Button>
-                        {/* </Navbar.Collapse>       */}
+                            <Button className="btn header-button btn-reset">Войти</Button>     
                 </Container>
-            {/* </Navbar> */}
+         
         </>
 
     )
