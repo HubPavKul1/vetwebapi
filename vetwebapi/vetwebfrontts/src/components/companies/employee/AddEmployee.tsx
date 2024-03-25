@@ -11,7 +11,7 @@ export function AddEmployee({compId}: CompanyPageProps) {
     return (
         <li className="company-page-menu-item">
             <a href="#" onClick={() => setModalActive(true)}>
-                Добавить работника <i className="icon-check"><FaCheck /></i>
+            <i className="icon-check"><FaCheck /></i> Добавить работника 
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
                 <AddEmployeeForm compId={compId}/>

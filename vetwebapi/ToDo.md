@@ -3809,3 +3809,82 @@ body {
 	text-align: center;
 }
 ```
+
+
+# Работа со шрифтами
+
+## подключение локальных шрифтов
+```css
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: local('HelveticaNeueCyr-Light'),
+		url('../fonts/HelveticaNeueCyr-Light.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: local('HelveticaNeueCyr-Medium'), 
+		url('../fonts/HelveticaNeueCyr-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: local('HelveticaNeueCyr-Bold'),
+		url('../fonts/HelveticaNeueCyr-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+body {
+	min-width: 320px;
+	font-family: 'HelveticaNeueCyr', sans-serif;
+	font-weight: 300;
+}
+```
+
+## Конвертация шрифтов 
+https://everythingfonts.com/font-face
+
+```css
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: local('HelveticaNeueCyr-Light'),
+		url('../fonts/HelveticaNeueCyrLight.woff2') format('woff2'),
+		url('../fonts/HelveticaNeueCyrLight.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: local('HelveticaNeueCyr-Medium'), 
+		url('../fonts/HelveticaNeueCyrMedium.woff2') format('woff2'),
+		url('../fonts/HelveticaNeueCyrMedium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: local('HelveticaNeueCyr-Bold'),
+		url('../fonts/HelveticaNeueCyrBold.woff2') format('woff2'),
+		url('../fonts/HelveticaNeueCyrBold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+```
+# Типограф https://www.artlebedev.ru/typograf/
+## обработка текста перед вставкой в верстку
+

@@ -12,7 +12,7 @@ export function AddAddress({compId}: CompanyPageProps) {
     return (
         <li className="company-page-menu-item">
             <a href="#" onClick={() => setModalActive(true)}>
-                Добавить адрес <i className="icon-check"><FaCheck /></i>
+            <i className="icon-check"><FaCheck /></i> Добавить адрес
             </a>
             <Modal active={modalActive} setActive={setModalActive}>
                 <AddAddressForm compId={compId}/>

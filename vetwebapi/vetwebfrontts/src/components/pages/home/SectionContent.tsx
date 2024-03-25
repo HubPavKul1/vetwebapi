@@ -3,6 +3,7 @@ import { contentData } from "./HomeContent";
 
 
 export function SectionContent() {
+
     return (  
 
         <div className="container content-container">
