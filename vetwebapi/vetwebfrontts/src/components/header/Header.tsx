@@ -1,12 +1,14 @@
 
-import { HomeLink } from "./HomeLink";
-import { CompaniesLink } from "./CompaniesLink";
-import { DrugsLink } from "./DrugsLink";
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
-import { LogoLink } from "./LogoLink";
+import { HomeLink } from "./navLink/HomeLink";
+import { CompaniesLink } from "./navLink/CompaniesLink";
+import { DrugsLink } from "./navLink/DrugsLink";
+import { Container, Navbar, Button } from "react-bootstrap";
+import { LogoLink } from "./logo/Logo";
 
-import { VetWorkLink } from "./VetWorkLink";
-import { AdminLink } from "./AdminLink";
+import { VetWorkLink } from "./navLink/VetWorkLink";
+import { AdminLink } from "./navLink/AdminLink";
+import styles from "./Header.module.css"
+import { NavList } from "./navList/NavList";
 
 
 
@@ -14,22 +16,17 @@ export function Header() {
 
     return (
         <>
-            {/* <Navbar collapseOnSelect bg="light" variant="light" fixed="top"> */}
-                <Container className="flex header-container">
-            
-                            <LogoLink/>
-                        <nav className="header-nav">
-                            <ul className="header-list list-reset flex"> 
-                                <HomeLink />
-                                <CompaniesLink />
-                                <DrugsLink />  
-                                <VetWorkLink />
-                                <AdminLink/>
-                            </ul>
-                        </nav>
-                            
-                            <Button className="btn header-button btn-reset">Войти</Button>     
+            <header className={styles.header}>
+                <Container className={styles.wrap}>
+                
+                <LogoLink/>
+                <NavList />
+                
+                <Button className="btn header-button btn-reset">Войти</Button>     
                 </Container>
+
+            </header>
+                
          
         </>
 

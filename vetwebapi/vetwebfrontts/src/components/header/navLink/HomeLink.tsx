@@ -1,5 +1,6 @@
 import { Nav } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import styles from "./NavLink.module.css"
 
 
 export function HomeLink() {
@@ -7,7 +8,7 @@ export function HomeLink() {
 
     return (
 
-        <Nav.Link className="header-list-item" as={Link} id="RouterNavLink" to="/">Главная</Nav.Link>
+        <Nav.Link className={styles.navLink} as={Link} id="RouterNavLink" to="/">Главная</Nav.Link>
   
            
     )

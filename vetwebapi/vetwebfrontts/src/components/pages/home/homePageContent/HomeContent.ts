@@ -1,4 +1,4 @@
-import { ICardProps } from "../../../interfaces/CardProps"
+import { ICardProps } from "../../../../interfaces/CardProps"
 
 
 

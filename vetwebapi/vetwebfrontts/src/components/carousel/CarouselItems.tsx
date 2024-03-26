@@ -1,5 +1,5 @@
 
-interface ICarouselItem {
+export interface ICarouselItem {
     id: number;
     imgSrc: string;
     imgAlt: string;

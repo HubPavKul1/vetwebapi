@@ -1,0 +1,12 @@
+.footerWrap {
+	padding: 30px;
+	background-color: #fff;
+	border-top: 1px solid grey;
+    max-width: 100%;
+}
+
+.footerContainer {
+    display: flex;
+	justify-content: flex-end;
+	background-color: #fff;
+}

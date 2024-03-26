@@ -1,7 +1,6 @@
 
 import { CarouselBox } from "../../carousel/CarouselBox";
-import { SectionContent } from "./SectionContent";
-import { Container } from "react-bootstrap";
+import { SectionContent } from "./homePageContent/SectionContent";
 
 
 export function Home() {
@@ -15,10 +14,6 @@ export function Home() {
         </section>
         
         </>
-            
-
-
-        
                
        )
 }
