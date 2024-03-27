@@ -1,6 +1,6 @@
 import { Layout } from "./components/Layout";
 import { Home } from "./components/pages/home/Home";
-import { Companies } from "./components/companies/Companies";
+import { Companies } from "./components/pages/companyPages/Companies";
 import { CompanyDetail } from "./components/companies/company-detail/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
 import { DrugMovements } from "./components/drugs/DrugMovements";
