@@ -38,7 +38,6 @@ export function HomePageCard({item}: HomePageCardProps) {
                                     
                     </Card>
                 </a>
-
             </li>
   )
 }

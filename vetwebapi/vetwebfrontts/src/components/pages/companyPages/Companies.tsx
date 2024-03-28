@@ -1,9 +1,13 @@
-import { Container, Col, Row, Pagination } from "react-bootstrap";
-import { CardEmpty } from "../CardEmpty"
+import { Row } from "react-bootstrap";
+
 import { CompanyService } from "../../companies/company.service";
 import { CreateCompany } from "../../companies/createCompany/CreateCompany";
 import { useQuery } from "react-query"
 import { Catalog } from "../../catalog/Catalog";
+import { CompanyCards } from "../../companies/CompanyCards";
+import { catalogItemData } from "../../catalogItem/CatalogItemData";
+import { CatalogItem } from "../../catalogItem/CatalogItem";
+
 
 
 export function Companies() {
@@ -13,64 +17,21 @@ export function Companies() {
             select: ({data}) => data?.companies
         }
     )
-
-    if (!data?.length) return (
+                           
+    return (
         <Catalog>
             <CreateCompany/>
-            <h2>Хозяйства отсутствуют</h2>
+
+            <Row xs={1} md={2} lg={2}>
+                {data?.length ? <CompanyCards companies={data}/>:
+                    catalogItemData.map(item => (  
+                    <CatalogItem key={item.id} {...item}/> 
+                ))}
+            </Row>
+                
         </Catalog>
     )
-    
-       
-    return (
-            <Catalog items={data}>
-                <CreateCompany/>
-            </Catalog>
-           
-    )
-
-        
-  
+      
 }
 
 
-// return (
-//     <>
-//     <Container className="companies-container">
-//             <CreateCompany />
-
-//             <ul className="company-items list-reset flex">
-                
-//                 {data?.length ? data.map(company =>(
-//                     <li className="company-item flex" key={company.id}>
-//                          <CompanyCard company={company} />
-//                     </li>
-                        
-//                     ))
-//                     : <>
-//                          <li className="company-item flex">
-//                              <CardEmpty/>
-//                         </li>
-//                         <li className="company-item flex">
-//                              <CardEmpty/>
-//                         </li>
-//                         <li className="company-item flex">
-//                              <CardEmpty/>
-//                         </li>
-//                         <li className="company-item flex">
-//                              <CardEmpty/>
-//                         </li>
-                       
-//                     </>      
-                    
-                    
-                    
-//                     }
-            
-
-//             </ul>
-            
-//         </Container>
-//     </>
-        
-// )

@@ -13,7 +13,7 @@ export interface ICompany {
 
 
 export interface ICompanies {
-    companies?: ICompany[];
+    companies: ICompany[];
 }
 
 

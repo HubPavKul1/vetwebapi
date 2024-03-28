@@ -1,9 +1,6 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import farmImg from "/farm.jpg"
-
-
 
 export function CardEmpty() {
     return (
@@ -11,7 +8,7 @@ export function CardEmpty() {
                 <Link to={`/`} >
                     <Card.Img className="company-card-image"
                     variant="top"
-                    src={farmImg}
+                    src="/farm.jpg"
                     alt="Farm"
                 />
                 </Link>
