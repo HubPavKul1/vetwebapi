@@ -1,0 +1,51 @@
+.addObjBtn {
+	padding: 0;
+	border: none;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+    position: relative;
+	outline: none;
+	border-radius: 5px;
+	font-weight: 600;
+	font-size: 15px;
+	text-transform: uppercase;
+	padding: 10px 20px;
+	background-color: rgb(219, 212, 212);
+	color:rgba(0, 0, 0, .8);
+	transition: color 0.3s ease-in-out;
+}
+
+
+.addObjBtn::after {
+    content: "";
+	position: absolute;
+	left: -3px;
+	right: -3px;
+	top: -3px;
+	bottom: -3px;
+	border-radius: inherit;
+	border: 1px solid rgba(0, 0, 0, .8);
+	outline: none;
+	opacity: 0;
+}
+
+
+.addObjBtn:focus::after {
+	opacity: 1;
+
+}
+
+.addObjBtn:hover {
+	background-color: rgba(0, 0, 0, .5);
+	transition: background-color .3s ease-in-out;
+}
+
+.addObjBtn:active {
+	background-color: rgba(0, 0, 0, .5);
+	transition: background-color .3s ease-in-out;
+}
+
+.addObjBtn:active::after {
+	opacity: 0;
+}

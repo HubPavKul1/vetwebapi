@@ -1,23 +1,14 @@
-import { MouseEventHandler } from "react";
+import { IButtonProps } from "../interfaces/ButtonInterface"
 
 
 
-interface IButtonProps {
-    className?: string;
-    disabled?: boolean;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
-    name: string;
-}
-
-
-
-export function Button ({className, disabled, onClick, name}: IButtonProps) {
+export function Button ({className, disabled, onClick, title}: IButtonProps) {
     return (
         <button 
         className={className}
         disabled={disabled}
         onClick={onClick}
-        >{name}
+        >{title}
         </button>
     )
 }
