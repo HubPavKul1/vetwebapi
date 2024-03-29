@@ -1,5 +1,8 @@
 # Vetwebapi
 ## Приложение на [FastAPI](https://fastapi.tiangolo.com/) для ветеринарной работы
+
+
+
 * ### Создадим папку для проекта vetwebapi
 * ### Создадим проект с помощью [poetry](https://python-poetry.org/)
 > poetry new vetwebapi
@@ -3888,3 +3891,5 @@ https://everythingfonts.com/font-face
 # Типограф https://www.artlebedev.ru/typograf/
 ## обработка текста перед вставкой в верстку
 
+# SASS <https://sass-scss.ru/>
+## Установить расширение Live Sass Compiler для VSCode
