@@ -5,7 +5,8 @@ import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
-import { Button } from "../../Button";
+import { Button, CustomButton } from "../../Button/CustomButton";
+import { SubmitButton } from "../../Button/SubmitButton";
 
 
 export function CreateCompanyForm() {
@@ -65,10 +66,9 @@ export function CreateCompanyForm() {
                 }}
             />))}
            
-            <Button 
-                className="btn btn-reset btn-submit"
+            <SubmitButton
                 disabled={false}
-                name="Зарегистрировать"
+                title="Зарегистрировать"
             />
         </form>               
         

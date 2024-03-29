@@ -3,7 +3,7 @@ import { AnimalService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
-import { Button } from "../../Button";
+import { SubmitButton } from "../../Button/SubmitButton";
 
 
 export function UploadAnimalForm() {
@@ -50,11 +50,10 @@ export function UploadAnimalForm() {
             </div>
     
             <div className="container">
-                <Button 
-                    className="btn btn-reset btn-upload"
+                <SubmitButton 
                     disabled={!currentFile}
                     onClick={upload}
-                    name="Загрузить"
+                    title="Загрузить"
                 />
                 
             </div>

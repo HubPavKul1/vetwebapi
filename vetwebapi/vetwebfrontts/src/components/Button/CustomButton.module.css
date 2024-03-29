@@ -1,4 +1,4 @@
-.addObjBtn {
+.btn {
 	padding: 0;
 	border: none;
 	color: inherit;
@@ -17,7 +17,7 @@
 }
 
 
-.addObjBtn::after {
+.btn::after {
     content: "";
 	position: absolute;
 	left: -3px;
@@ -31,21 +31,21 @@
 }
 
 
-.addObjBtn:focus::after {
+.btn:focus::after {
 	opacity: 1;
 
 }
 
-.addObjBtn:hover {
+.btn:hover {
 	background-color: rgba(0, 0, 0, .5);
 	transition: background-color .3s ease-in-out;
 }
 
-.addObjBtn:active {
+.btn:active {
 	background-color: rgba(0, 0, 0, .5);
 	transition: background-color .3s ease-in-out;
 }
 
-.addObjBtn:active::after {
+.btn:active::after {
 	opacity: 0;
 }

@@ -3,11 +3,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { EmployeeService } from "../company.service";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
-import { Button } from "../../Button";
+import { CustomButton } from "../../Button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import { SubmitButton } from "../../Button/SubmitButton";
 
 
 
@@ -57,7 +58,6 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
                 inputItems.map(item =>(
                     <Input key={item.fieldName}
                         className="form-control"
-                        // style={{ width: 200, height: 30}}
                         placeholder={item.placeholder}
                         register={register}
                         fieldName={item.fieldName}
@@ -80,11 +80,10 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
             }
 
             <div className="form-group">
-                <Button 
-                    className="btn btn-reset btn-submit"
+                <SubmitButton 
                     disabled={false}
                     onClick={handleSubmit(createEmployee)}
-                    name="Зарегистрировать"
+                    title="Зарегистрировать"
                 />
                
             </div>

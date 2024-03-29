@@ -3,11 +3,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { RegionsSelect } from "./RegionsSelect";
 import { AddressService } from "../company.service";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
-import { Button } from "../../Button";
+import { CustomButton } from "../../Button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import { SubmitButton } from "../../Button/SubmitButton";
 
 
 
@@ -74,11 +75,10 @@ export function AddAddressForm({compId}: CompanyPageProps) {
     }
 
     <div className="form-group">
-      <Button 
-          className="btn btn-reset btn-submit"
+      <SubmitButton
           disabled={false}
           onClick={handleSubmit(createAddress)}
-          name="Зарегистрировать"
+          title="Зарегистрировать"
       />
       
     </div>

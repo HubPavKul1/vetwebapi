@@ -4,11 +4,12 @@ import { TypesOfFeedingSelect } from "./TypeOfFeedingSelect";
 import { AnimalService } from "../company.service";
 import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
-import { Button } from "../../Button";
+import { CustomButton } from "../../Button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import { SubmitButton } from "../../Button/SubmitButton";
 
 
 
@@ -89,11 +90,10 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
                 }
               
             <div className="form-group">
-                <Button 
-                    className="btn btn-reset btn-submit"
+                <SubmitButton
                     disabled={false}
                     onClick={handleSubmit(createAnimal)}
-                    name="Зарегистрировать"
+                    title="Зарегистрировать"
                 />
             </div>
 
