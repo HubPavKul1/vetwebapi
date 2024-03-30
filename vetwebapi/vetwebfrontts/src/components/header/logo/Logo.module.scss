@@ -1,0 +1,13 @@
+.wrap {
+    margin-right: auto;
+}
+
+.logo {
+	border-radius: 50%;
+	overflow: hidden;
+	transition: transform .3s ease-in-out;
+}
+
+.logo:hover {
+	transform: $transform()
+}

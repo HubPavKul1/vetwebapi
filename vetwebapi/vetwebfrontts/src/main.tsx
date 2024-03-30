@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './assets/css/normalize.css';
 import './assets/css/bootstrap.min.css';
 import './assets/css/style.css';
+import './assets/sass/index.css';
 
 
 import { App } from './App';

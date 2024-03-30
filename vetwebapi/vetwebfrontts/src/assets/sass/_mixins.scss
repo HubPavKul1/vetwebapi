@@ -1,0 +1,7 @@
+@mixin transition($style) {
+    transition: $style .3s ease-in-out;
+}
+
+@mixin transform() {
+    transform: scale(1.2);
+}
