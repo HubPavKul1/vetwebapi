@@ -5,7 +5,7 @@ import { CreateCompany } from "../../companies/createCompany/CreateCompany";
 import { useQuery } from "react-query"
 import { Catalog } from "../../catalog/Catalog";
 import { CompanyCards } from "../../companies/CompanyCards";
-import { catalogItemData } from "../../catalogItem/CatalogItemData";
+import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 
 

@@ -5,3 +5,22 @@
 @mixin transform() {
     transform: scale(1.2);
 }
+
+@mixin btn-reset() {
+    padding: 0;
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+@mixin list_reset() {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@mixin flex() {
+	display: flex;
+}

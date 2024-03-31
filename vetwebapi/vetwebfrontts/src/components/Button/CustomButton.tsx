@@ -1,6 +1,6 @@
 import { IButtonProps } from "../../interfaces/ButtonInterface"
 
-import styles from "./CustomButton.module.css"
+import styles from "./CustomButton.module.scss"
 
 export function CustomButton ({disabled, onClick, title}: IButtonProps) {
     return (
