@@ -5,10 +5,10 @@ import styles from "./CustomButton.module.scss"
 export function CustomButton ({disabled, onClick, title}: IButtonProps) {
     return (
         <button 
-            className={styles.btn}
+            className={`${styles.btn} ${styles.btnLarge}`}
             disabled={disabled}
             onClick={onClick}
-        >{title}
+        ><span className={styles.btnTitle}>{title}</span>
         </button>
     )
 }

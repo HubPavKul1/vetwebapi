@@ -1,14 +1,14 @@
 import { IButtonProps } from "../../interfaces/ButtonInterface"
 
-import styles from "./SubmitButton.module.css"
+import styles from "./CustomButton.module.scss"
 
 export function SubmitButton ({disabled, onClick, title}: IButtonProps) {
     return (
         <button 
-            className={styles.submitBtn}
+            className={`${styles.btn} ${styles.btnSubmit}`}
             disabled={disabled}
             onClick={onClick}
-        >{title}
+        ><span className={styles.btnTitle}>{title}</span>
         </button>
     )
 }
