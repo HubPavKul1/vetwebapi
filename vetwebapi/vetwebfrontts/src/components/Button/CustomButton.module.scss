@@ -1,86 +1,26 @@
-$btn-color: #dedef0;
-$btn-color2: rgba(164, 164, 242, .9);
-$title-color: rgba(120, 24, 238, 0.6);
+@import "./../../assets/sass/mixins";
+@import "./../../assets/sass/variables";
+@import "./../../assets/sass/templates";
 
-
-
-@mixin btn-reset() {
-    padding: 0;
-    border: none;
-    color: inherit;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-@mixin btn-size($padding-X, $padding-Y, $border-radius, $font-size) {
-	padding: $padding-X $padding-Y;
-	border-radius: $border-radius;
-	> .btnTitle {
-		font-size: $font-size;
-	}
-}
-
-@mixin btn-color($color1, $color2) {
-	background-color: $color1;
-	background: linear-gradient($color1, $color2);
-}
-
-
-
-.btn {
-	@include btn-reset();
-    position: relative;
-	outline: none;
-	border-radius: 5px;
-	font-weight: 600;
-	text-transform: uppercase;
-	@include btn-color($btn-color, $btn-color2);
-	color: $title-color;
-	transition: transform 0.3s ease-in-out;
-
-	&::after {
-		content: "";
-		position: absolute;
-		left: -3px;
-		right: -3px;
-		top: -3px;
-		bottom: -3px;
-		border-radius: inherit;
-		border: 1px solid rgba(0, 0, 0, .8);
-		outline: none;
-		opacity: 0;
-	}
-
-	&:focus::after {
-		opacity: 1;
-	
-	}
-
-	&:hover {
-		transform: scale(1.1);
-	}
-
-	&:active {
-		background-color: rgba(0, 0, 0, .5);
-		transition: background-color .3s ease-in-out;
-	}
-	
-	&:active::after {
-		opacity: 1;
-	}
-
-
-}
 
 
 .btnLarge {
+	@extend %btn;
 	@include btn-size(15px, 30px, 5px, 1em)
 }
 
 .btnSubmit {
+	@extend %btn;
 	@include btn-size(10px, 20px, 5px, 1em);
 	width: 100%;
 }
+
+.btnNav {
+	@extend %btn;
+	@include btn-size(5px, 10px, 5px, 1em);
+}
+
+
 
 
 

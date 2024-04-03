@@ -3,7 +3,7 @@ import { CompaniesLink } from "../navLink/CompaniesLink";
 import { DrugsLink } from "../navLink/DrugsLink";
 import { VetWorkLink } from "../navLink/VetWorkLink";
 import { AdminLink } from "../navLink/AdminLink";
-import styles from "./NavList.module.css"
+import styles from "./NavList.module.scss"
 
 
 

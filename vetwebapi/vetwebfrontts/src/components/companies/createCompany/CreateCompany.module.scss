@@ -1,0 +1,17 @@
+@import "../../../assets/sass/mixins";
+
+
+.createCompanyWrap {
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 30px;
+
+	&h2 {
+		@include pageTitle;
+	}
+}
+
+.createCompanyBtn {
+	width: 300px;
+}

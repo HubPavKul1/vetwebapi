@@ -3,7 +3,7 @@ import { Carousel, CarouselItem, CarouselCaption } from "react-bootstrap";
 import { carouselItems } from "./CarouselItems";
 import { Link } from "react-router-dom";
 
-import styles from "./Carousel.module.css"
+import styles from "./Carousel.module.scss"
 
 export function CarouselBox() {
 

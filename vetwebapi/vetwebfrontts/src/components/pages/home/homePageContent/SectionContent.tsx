@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { contentData } from "../../../data/HomeContent";
 import { HomePageCard } from "../homePageCard/HomePageCard";
 
-import styles from "./SectionContent.module.css"
+import styles from "./SectionContent.module.scss"
 
 
 export function SectionContent() {

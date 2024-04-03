@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap";
 import { ICardProps } from "../../../../interfaces/CardProps";
 
-import styles from "./HomePageCard.module.css"
+import styles from "./HomePageCard.module.scss"
 
 
 interface HomePageCardProps {

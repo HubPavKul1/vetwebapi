@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { DropdownWrapper } from "../../dropdown/Dropdown"
 
 import { NavDropdown } from "react-bootstrap"
-import styles from "./NavLink.module.css"
+import styles from "./NavLink.module.scss"
 
 
 export function VetWorkLink() {

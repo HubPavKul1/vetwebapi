@@ -1,7 +1,5 @@
-@import "_variables.scss";
-@import "_mixins.scss";
-
-
+@import "./variables";
+@import "./mixins";
 
 
 
@@ -29,7 +27,7 @@ img {
 
 body {
 	min-width: 320px;
-	font-family: 'HelveticaNeueCyr', sans-serif;
+	font-family: $fontFamily;
 	font-weight: 500;
 }
 
@@ -47,82 +45,7 @@ body {
 	list-style: none;
 }
 
-.btn-reset {
-	padding: 0;
-	border: none;
-	color: inherit;
-	background-color: transparent;
-	cursor: pointer;
-}
 
-.flex {
-	display: flex;
-}
-
-.container {
-	max-width: 1200px;	
-}
-
-.section-title {
-	margin: 0;
-	margin-bottom: 40px;
-}
-
-.section-offset {
-	padding-top: 87px;
-	padding-bottom: 160px;
-}
-
-.btn {
-	position: relative;
-	outline: none;
-	border-radius: 3px;
-	font-weight: 600;
-	font-size: 15px;
-	text-transform: uppercase;
-	padding: 10px 20px;
-	outline-color: grey;
-	background-color: rgb(219, 212, 212);
-	color:rgba(0, 0, 0, .8);
-	transition: color 0.3s ease-in-out;
-}
-
-.btn::after {
-	content: "";
-	position: absolute;
-	left: -3px;
-	right: -3px;
-	top: -3px;
-	bottom: -3px;
-	border-radius: inherit;
-	border: 1px solid rgba(0, 0, 0, .8);
-	outline: none;
-	opacity: 0;
-
-}
-
-.btn:focus::after {
-	opacity: 1;
-
-}
-
-.btn:hover {
-	background-color: rgba(0, 0, 0, .5);
-	transition: background-color .3s ease-in-out;
-}
-
-.btn:active {
-	background-color: rgba(0, 0, 0, .5);
-	transition: background-color .3s ease-in-out;
-}
-
-.btn:active::after {
-	opacity: 0;
-}
-
-.btn-submit {
-	width: 100%;
-}
 
 .form-group {
 	margin-bottom: 15px;

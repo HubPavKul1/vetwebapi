@@ -1,9 +1,12 @@
+@import "./variables";
+
+
 @mixin transition($style) {
     transition: $style .3s ease-in-out;
 }
 
 @mixin transform() {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 @mixin btn-reset() {
@@ -12,6 +15,19 @@
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+}
+
+@mixin btn-size($padding-X, $padding-Y, $border-radius, $font-size) {
+	padding: $padding-X $padding-Y;
+	border-radius: $border-radius;
+	> .btnTitle {
+		font-size: $font-size;
+	}
+}
+
+@mixin btn-color($color1, $color2) {
+	background-color: $color1;
+	background: linear-gradient($color1, $color2);
 }
 
 
@@ -23,4 +39,11 @@
 
 @mixin flex() {
 	display: flex;
+}
+
+@mixin pageTitle($color: $fontColor) {
+	text-align: center;
+	font-weight: 600;
+    margin-bottom: 30px;
+	color: $color;
 }

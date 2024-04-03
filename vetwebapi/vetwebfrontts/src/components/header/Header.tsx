@@ -1,14 +1,11 @@
 
-import { HomeLink } from "./navLink/HomeLink";
-import { CompaniesLink } from "./navLink/CompaniesLink";
-import { DrugsLink } from "./navLink/DrugsLink";
-import { Container, Navbar, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { LogoLink } from "./logo/Logo";
 
-import { VetWorkLink } from "./navLink/VetWorkLink";
-import { AdminLink } from "./navLink/AdminLink";
-import styles from "./Header.module.css"
+import styles from "./Header.module.scss";
+
 import { NavList } from "./navList/NavList";
+import { ButtonNav } from "../Button/ButtonNav";
 
 
 
@@ -22,7 +19,7 @@ export function Header() {
                 <LogoLink/>
                 <NavList />
                 
-                <Button className="btn header-button btn-reset">Войти</Button>     
+                <ButtonNav title="Войти" />     
                 </Container>
 
             </header>

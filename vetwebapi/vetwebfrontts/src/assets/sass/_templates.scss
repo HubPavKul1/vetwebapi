@@ -1,0 +1,66 @@
+@import "./variables";
+@import "./mixins";
+
+
+
+%titleBase {
+    margin: 0;
+	margin-bottom: 15px;
+	text-align: center;
+	font-size: 1em;
+	font-weight: 700;
+    color: $fontColor;
+}
+
+
+
+%textBase {
+    margin: 0;
+	margin-bottom: 25px;
+	text-align: center;
+	font-size: .8em;
+    color: $fontColor;
+}
+
+%btn {
+	@include btn-reset;
+    position: relative;
+	outline: none;
+	font-weight: 600;
+	text-transform: uppercase;
+	@include btn-color($btnColor, $btnColor2);
+	color: $btnTitleColor;
+	@include transition(transform);
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: -3px;
+		right: -3px;
+		top: -3px;
+		bottom: -3px;
+		border-radius: inherit;
+		border: 1px solid rgba(0, 0, 0, .8);
+		outline: none;
+		opacity: 0;
+	}
+
+	&:focus::after {
+		opacity: 1;
+	
+	}
+
+	&:hover {
+		transform: scale(1.05);
+	}
+
+	&:active {
+		background-color: rgba(0, 0, 0, .5);
+		@include transition(background-color);
+	}
+	
+	&:active::after {
+		opacity: 1;
+	}
+
+}

@@ -1,6 +1,6 @@
 import { Nav } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import styles from "./NavLink.module.css"
+import styles from "./NavLink.module.scss"
 
 
 export function CompaniesLink() {
