@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { ICardProps } from "../../../../interfaces/CardProps";
 
 import styles from "./HomePageCard.module.scss"
@@ -10,7 +10,7 @@ interface HomePageCardProps {
 
 export function HomePageCard({item}: HomePageCardProps) {
   return (
-            <li className={styles.cardItem}>
+            <Col className={styles.cardItem}>
                 <a href={item.url}>
                     <Card className={styles.card} border="secondary">
                         <Card.Img variant="top"
@@ -20,8 +20,8 @@ export function HomePageCard({item}: HomePageCardProps) {
                         />
                                             
                         <Card.Body>
-                            <Card.Title className={styles.cardTitle}>
-                                <h5>{item.cardTitle}</h5>
+                            <Card.Title>
+                                <h5 className={styles.cardTitle}>{item.cardTitle}</h5>
                             </Card.Title>
                             <Card.Text className={styles.cardText}>
                                 {item.cardText}
@@ -38,6 +38,6 @@ export function HomePageCard({item}: HomePageCardProps) {
                                     
                     </Card>
                 </a>
-            </li>
+            </Col>
   )
 }

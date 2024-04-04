@@ -1,0 +1,26 @@
+.companyMenuWrap {
+	text-align: left;
+	padding: 15px;
+	border: 1px solid grey;
+	border-radius: 5px;
+	box-shadow: 5px 5px grey;
+}
+
+
+.companyPageMenu {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+
+	>h2 {
+		margin: 0;
+		margin-bottom: 15px;
+		font-weight: 700;
+	}
+
+	>ul {
+		padding: 0;
+		flex-direction: column;
+	}
+}

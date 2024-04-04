@@ -2,7 +2,7 @@
 
 
 @mixin transition($style) {
-    transition: $style .3s ease-in-out;
+    transition: $style .5s ease-in-out;
 }
 
 @mixin transform() {

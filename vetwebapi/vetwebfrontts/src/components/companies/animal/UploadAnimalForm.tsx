@@ -3,7 +3,8 @@ import { AnimalService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
-import { SubmitButton } from "../../Button/SubmitButton";
+import { SubmitButton } from "../../button/SubmitButton";
+import { ButtonNav } from "../../button/ButtonNav";
 
 
 export function UploadAnimalForm() {
@@ -50,7 +51,7 @@ export function UploadAnimalForm() {
             </div>
     
             <div className="container">
-                <SubmitButton 
+                <ButtonNav 
                     disabled={!currentFile}
                     onClick={upload}
                     title="Загрузить"

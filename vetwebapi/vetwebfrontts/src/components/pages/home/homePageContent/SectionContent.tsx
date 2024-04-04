@@ -11,11 +11,11 @@ export function SectionContent() {
 
         <Container>
             <h2 className={styles.sectionTitle}>Полезная информация</h2>
-            <ul className={styles.cardsList}>
+            <Row xs={2} md={4} lg={4}>
                 {contentData.map(item => (
                     <HomePageCard key={item.id} item={item}/>                  
                 ))}
-           </ul>
+            </Row>   
         </Container>     
     )
 }

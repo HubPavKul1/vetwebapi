@@ -1,16 +1,22 @@
+@import "../../assets/sass/mixins";
+@import "../../assets/sass/templates";
+
+
 .catalogItem {
     display: flex;
 	padding: 10px;
 	margin-bottom: 20px;
-	transition: transform .3s ease-in-out;
 	border: 1px solid grey;
+	box-shadow: 3px 3px grey;
 	border-radius: 5px;
-}
+	cursor: pointer;
+	@include transition(transform);
 
+	&:hover {
+		transform: scale(1.05);
+		@include transition(transform);
+	}
 
-.catalogItem:hover {
-	transform: scale(1.05);
-	
 }
 
 .card {
@@ -19,14 +25,13 @@
 	width: 100%;
 }
 
+
 .cardTitle {
-	text-align: center;
-	font-weight: 700;
-	text-align: center;
+	@extend %titleBase;
 }
 
 .cardText {
-	text-align: center;
+	@extend %textBase;
 }
 
 .cardImage {

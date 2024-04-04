@@ -201,51 +201,6 @@ body {
 
 /* company detail */
 
-.company-detail-top {
-	align-items: center;
-	margin-bottom: 30px;
-}
-
-.company-detail-image-wrap {
-	margin: 0;
-	width: 80%;
-	margin-right: 30px;
-
-}
-
-.company-detail-image {
-	width: 100%;
-
-}
-
-
-.company-menu-wrap {
-	max-width: 30%;
-	margin-left: auto;
-	text-align: left;
-	padding: 15px;
-	border: 1px solid grey;
-	border-radius: 5px;
-}
-
-.company-page-menu {
-	width: 100%;
-	flex-direction: column;
-	align-items: center;
-	
-	
-}
-
-.company-page-menu-title {
-	margin: 0;
-	margin-bottom: 15px;
-	font-weight: 700;
-}
-
-.company-page-menu-items {
-	padding: 0;
-	flex-direction: column;
-}
 
 .company-page-menu-item {
 	margin: 0;
@@ -260,14 +215,7 @@ body {
 }
 
 
-.company-detail-title-wrap {
-	flex-direction: column;
-	align-items: center;
-}
 
-.company-detail-title-wrap h2 {
-	font-weight: 700;
-}
 
 
 

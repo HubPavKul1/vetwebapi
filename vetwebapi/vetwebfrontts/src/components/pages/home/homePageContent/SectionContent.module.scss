@@ -7,21 +7,21 @@
 }
 
 
-.cardsList {
-    display: flex;
-	--offsets: 3;
-	gap: var(--gap);
-	flex-wrap: wrap;
-}
+// .cardsList {
+//     display: flex;
+// 	--offsets: 3;
+// 	gap: var(--gap);
+// 	flex-wrap: wrap;
+// }
 
-@media (max-width: 1024px) {
-	.cardsList {
-		--offsets: 2;
-	}
-}
+// @media (max-width: 1024px) {
+// 	.cardsList {
+// 		--offsets: 2;
+// 	}
+// }
 
-@media (max-width: 768px) {
-	.cardsList {
-		--offsets: 1;
-	}
-}
+// @media (max-width: 768px) {
+// 	.cardsList {
+// 		--offsets: 1;
+// 	}
+// }

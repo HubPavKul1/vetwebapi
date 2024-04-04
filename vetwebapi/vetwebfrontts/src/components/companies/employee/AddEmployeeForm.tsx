@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { EmployeeService } from "../company.service";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
-import { CustomButton } from "../../Button/CustomButton";
+import { CustomButton } from "../../button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
-import { CompanyPageProps } from "../company-detail/CompanyPageMenu";
+import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
-import { SubmitButton } from "../../Button/SubmitButton";
+import { SubmitButton } from "../../button/SubmitButton";
 
 
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 
 import styles from "./CreateCompany.module.scss";
-import { CustomButton } from "../../Button/CustomButton";
+import { CustomButton } from "../../button/CustomButton";
 
 export function CreateCompany() {
 

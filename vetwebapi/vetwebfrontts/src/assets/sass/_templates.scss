@@ -8,18 +8,18 @@
 	margin-bottom: 15px;
 	text-align: center;
 	font-size: 1em;
-	font-weight: 700;
+	font-weight: bold;
     color: $fontColor;
 }
 
 
-
 %textBase {
     margin: 0;
-	margin-bottom: 25px;
+	margin-bottom: 10px;
 	text-align: center;
 	font-size: .8em;
     color: $fontColor;
+
 }
 
 %btn {
@@ -64,3 +64,6 @@
 	}
 
 }
+
+
+

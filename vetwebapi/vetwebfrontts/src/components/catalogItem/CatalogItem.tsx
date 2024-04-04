@@ -1,6 +1,6 @@
 import { ICardProps } from "../../interfaces/CardProps";
 
-import styles from "./CatalogItem.module.css"
+import styles from "./CatalogItem.module.scss"
 import { Col, Container } from "react-bootstrap";
 
 

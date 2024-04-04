@@ -5,7 +5,7 @@ import { LogoLink } from "./logo/Logo";
 import styles from "./Header.module.scss";
 
 import { NavList } from "./navList/NavList";
-import { ButtonNav } from "../Button/ButtonNav";
+import { ButtonNav } from "../button/ButtonNav";
 
 
 

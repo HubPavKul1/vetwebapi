@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 
-import styles from "./Catalog.module.css"
+import styles from "./Catalog.module.scss"
 
 
 interface CatalogProps {

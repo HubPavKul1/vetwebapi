@@ -4,8 +4,10 @@ import { useQuery } from "react-query"
 import { CompanyAddress } from "../address/CompanyAddress";
 import { CompanyEmployee } from "../employee/CompanyEmployee";
 import { CompanyAnimal } from "../animal/CompanyAnimal";
-import { CompanyPageMenu } from "./CompanyPageMenu";
+import { CompanyPageMenu } from "./menu/CompanyPageMenu";
 import { Container, Row, Col } from "react-bootstrap";
+
+import styles from "./CompanyDetail.module.scss"
 
 
 export function CompanyDetail() {
@@ -22,30 +24,27 @@ export function CompanyDetail() {
     return (
 
       <>
-      <Container className="company-detail-container">
-        <Container className="company-detail-top flex">
-          <div className="container company-detail-image-wrap">
-            <img
-                className="company-detail-image"
+      <Container className={styles.companyDetailWrap}>
+        <Row className={styles.rowTop}>
+          <Col sm={8} className={styles.colImg}>
+              <img
                 src="/animals2-2.png"
                 alt="animals2.png"
               />
+          </Col>
+         
+          <Col>
+              <CompanyPageMenu compId={data?.id}/>
+          </Col>
 
-          </div>
-          
-          <div className="container company-menu-wrap">
-            <CompanyPageMenu compId={data?.id}/>
-          </div>  
+        </Row>
 
-        </Container>
-
-               
-        <Container className="company-detail-title-wrap flex">
-                  <h2>
+        <Container className={styles.titleWrap}>
+                  <h1>
                   <a href="#">
                     {data?.full_name} 
                   </a>
-                  </h2>
+                  </h1>
                     {data?.address ? 
                     <CompanyAddress address={data.address}/>
                     : <p>Адрес</p>
