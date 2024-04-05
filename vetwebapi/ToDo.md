@@ -3893,3 +3893,5 @@ https://everythingfonts.com/font-face
 
 # SASS <https://sass-scss.ru/>
 ## Установить расширение Live Sass Compiler для VSCode
+
+# Сжатие изображений для сайта https://squoosh.app/

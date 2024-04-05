@@ -5,7 +5,7 @@ import { ICardProps } from "../../interfaces/CardProps"
 export const contentData: ICardProps[] = [
     {
         id: 1,
-        imgSrc: "/vetis2.jpg",
+        imgSrc: "/vetis.jpg",
         imgAlt: "Mercury",
         cardTitle: "Ветис",
         url: "https://mercury.vetrf.ru/",

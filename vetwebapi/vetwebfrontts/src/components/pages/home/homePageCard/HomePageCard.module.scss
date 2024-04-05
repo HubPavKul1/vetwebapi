@@ -1,21 +1,19 @@
 @import "../../../../assets/sass/templates";
 @import "../../../../assets/sass/mixins";
 
-.cardItem {
+
+
+.card {
+	display: flex;
 	flex-direction: column;
-	align-items: center;
 	padding: 10px;
 	@include transition(transform);
-	min-height: 500px;
+	height: 100%;
+	box-shadow: 5px 5px grey;
 
 	&:hover {
 		transform: scale(1.05);
 	}
-
-}
-
-.card {
-	height: 100%;
 	
 }
 

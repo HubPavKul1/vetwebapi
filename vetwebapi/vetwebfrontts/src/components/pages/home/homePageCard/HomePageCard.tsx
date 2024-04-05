@@ -10,9 +10,9 @@ interface HomePageCardProps {
 
 export function HomePageCard({item}: HomePageCardProps) {
   return (
-            <Col className={styles.cardItem}>
+            <Col>
                 <a href={item.url}>
-                    <Card className={styles.card} border="secondary">
+                    <Card className={styles.card}>
                         <Card.Img variant="top"
                             src={item.imgSrc}
                             alt={item.imgAlt}

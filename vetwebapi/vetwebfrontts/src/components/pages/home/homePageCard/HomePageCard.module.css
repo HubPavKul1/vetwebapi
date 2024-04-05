@@ -15,19 +15,16 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
-.cardItem {
+.card {
+  display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 10px;
   transition: transform 0.5s ease-in-out;
-  min-height: 500px;
-}
-.cardItem:hover {
-  transform: scale(1.05);
-}
-
-.card {
   height: 100%;
+  box-shadow: 5px 5px grey;
+}
+.card:hover {
+  transform: scale(1.05);
 }
 
 .cardImage {

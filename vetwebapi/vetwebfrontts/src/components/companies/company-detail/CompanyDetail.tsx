@@ -28,9 +28,9 @@ export function CompanyDetail() {
         <Row className={styles.rowTop}>
           <Col sm={8} className={styles.colImg}>
               <img
-                src="/animals2-2.png"
-                alt="animals2.png"
-              />
+                src="/animals.jpg"
+                alt="animals.jpg"
+                />
           </Col>
          
           <Col>
