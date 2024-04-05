@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react";
+
 export interface ICardProps {
     id?: number;
     imgSrc?: string;
@@ -11,4 +13,5 @@ export interface ICardProps {
     buttonVariant?: string;
     address?: string;
     hasContacts?: boolean;
+    onClick?: MouseEventHandler;
 }

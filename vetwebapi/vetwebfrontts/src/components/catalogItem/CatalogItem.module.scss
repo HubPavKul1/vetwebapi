@@ -5,7 +5,7 @@
 .catalogItem {
     display: flex;
 	padding: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	border: 1px solid grey;
 	box-shadow: 3px 3px grey;
 	border-radius: 5px;
@@ -37,4 +37,10 @@
 .cardImage {
 	margin-right: 20px;
     width: 25%;
+}
+
+.deleteItem {
+	display: flex;
+	justify-content: end;
+	margin-bottom: 20px;
 }

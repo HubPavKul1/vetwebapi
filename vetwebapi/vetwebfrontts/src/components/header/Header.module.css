@@ -1,0 +1,10 @@
+.header {
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background-color: white;
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+}/*# sourceMappingURL=Header.module.css.map */

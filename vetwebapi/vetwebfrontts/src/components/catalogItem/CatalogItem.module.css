@@ -1,0 +1,48 @@
+.cardTitle {
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.cardText {
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.catalogItem {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+  box-shadow: 3px 3px grey;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+}
+.catalogItem:hover {
+  transform: scale(1.05);
+  transition: transform 0.5s ease-in-out;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cardImage {
+  margin-right: 20px;
+  width: 25%;
+}
+
+.deleteItem {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}/*# sourceMappingURL=CatalogItem.module.css.map */

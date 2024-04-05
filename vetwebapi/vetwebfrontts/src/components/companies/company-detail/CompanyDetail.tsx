@@ -47,13 +47,13 @@ export function CompanyDetail() {
                   </h1>
                     {data?.address ? 
                     <CompanyAddress address={data.address}/>
-                    : <p>Адрес</p>
+                    : <p>Адрес отсутствует!</p>
                     }
                  
         </Container>
 
-        <Container className="company-detail-employee">
-          <h5 className="section-title">Работники</h5>
+        <Container className={styles.companyEmployee}>
+          <h5>Работники</h5>
             <table className="table">
                     <tbody>
                       <tr>
@@ -66,18 +66,16 @@ export function CompanyDetail() {
                       {data?.employees?.length ? 
                         data.employees.map(empoloyee => <CompanyEmployee key={empoloyee.id} employee={empoloyee} />)
                       
-                      : <tr>
-                          <td>Работники</td>
-                        </tr>
+                      : ""
                       }
                       
                     </tbody>
                   </table>
             
         </Container>
-        <Container className="company-detail-animals">
-          <h5 className="section-title">Животные </h5>
-          <p className="animal-counter">Всего голов: {data?.animals?.length}</p>
+        <Container className={styles.companyAnimals}>
+          <h5>Животные </h5>
+          <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p>
             <table className="table">
               
 
@@ -93,9 +91,7 @@ export function CompanyDetail() {
                       {data?.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
                       
                       
-                      : <tr>
-                          <td>Животные</td>
-                         </tr>
+                      : ""
                       
                       }
                     </tbody>

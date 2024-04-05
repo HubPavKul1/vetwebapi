@@ -66,7 +66,8 @@ export function CreateCompanyForm() {
                 }}
             />))}
            
-            <SubmitButton
+            <CustomButton
+                className="btn-submit"
                 disabled={false}
                 title="Зарегистрировать"
             />

@@ -24,6 +24,10 @@ export const CompanyService = {
       .then(response => console.log(response))
       .catch(err => console.log(err))
 
+  },
+
+  async deleteCompany(id?: string) {
+    await axios.delete(`/api/companies/${id}`)
   }
 }
 

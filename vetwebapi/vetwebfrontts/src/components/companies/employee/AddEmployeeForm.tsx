@@ -8,7 +8,6 @@ import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
-import { SubmitButton } from "../../button/SubmitButton";
 
 
 
@@ -80,7 +79,8 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
             }
 
             <div className="form-group">
-                <SubmitButton 
+                <CustomButton
+                    className="btn-submit" 
                     disabled={false}
                     onClick={handleSubmit(createEmployee)}
                     title="Зарегистрировать"

@@ -1,11 +1,10 @@
-
 import { Container } from "react-bootstrap";
 import { LogoLink } from "./logo/Logo";
 
 import styles from "./Header.module.scss";
 
 import { NavList } from "./navList/NavList";
-import { ButtonNav } from "../button/ButtonNav";
+import { CustomButton } from "../button/CustomButton";
 
 
 
@@ -19,7 +18,7 @@ export function Header() {
                 <LogoLink/>
                 <NavList />
                 
-                <ButtonNav title="Войти" />     
+                <CustomButton className="btn-nav" title="Войти" />     
                 </Container>
 
             </header>

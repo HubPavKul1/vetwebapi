@@ -20,7 +20,7 @@
 @mixin btn-size($padding-X, $padding-Y, $border-radius, $font-size) {
 	padding: $padding-X $padding-Y;
 	border-radius: $border-radius;
-	> .btnTitle {
+	> span {
 		font-size: $font-size;
 	}
 }

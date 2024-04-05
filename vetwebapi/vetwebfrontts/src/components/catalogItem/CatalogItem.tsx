@@ -1,14 +1,19 @@
 import { ICardProps } from "../../interfaces/CardProps";
+import { Link } from "react-router-dom"
 
 import styles from "./CatalogItem.module.scss"
 import { Col, Container } from "react-bootstrap";
+import { BsFillTrash3Fill } from "react-icons/bs";
 
 
 
 export function CatalogItem({...props}: ICardProps) {
+    let url = "";
+    props.url ? url = props.url : url = "/";
     return (
        
             <Col >
+            <Link to={url}>
                 <Container className={styles.catalogItem}>
                     {props.imgSrc ? 
                         <img 
@@ -29,7 +34,12 @@ export function CatalogItem({...props}: ICardProps) {
                         }
                         
                     </div>
+                   
                 </Container>
+            </Link>
+                    <div className={styles.deleteItem}>
+                        <BsFillTrash3Fill className="delete-icon" onClick={props.onClick}/>
+                    </div>
                 
             </Col>
         

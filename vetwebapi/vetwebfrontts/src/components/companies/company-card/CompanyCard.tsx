@@ -1,7 +1,9 @@
 
-import { Link } from "react-router-dom"
-import { ICompany } from "../../../interfaces/CompanyInterfaces"
+import { Link } from "react-router-dom";
+import { ICompany } from "../../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
+import { useMutation, useQueryClient } from "react-query";
+import { CompanyService } from "../company.service";
 
 
 interface CompanyCard {
@@ -9,12 +11,29 @@ interface CompanyCard {
 }
 
 export function CompanyCard({company}: CompanyCard) {
+
+    const queryClient = useQueryClient()
+
+    const { mutate } = useMutation(["delete company"], {
+        mutationFn: () => CompanyService.deleteCompany(company.id.toString()),
+        onSuccess: () => {
+            alert("Предприятие успешно удалено!")
+            queryClient.invalidateQueries(["companies"])
+        }
+    },
+    )
+
+    const deleteCompany = () => {
+        mutate()
+    }
+
     return (
 
-        <Link to={`/companies/${company.id}`} >
-            <CatalogItem id={company.id} cardTitle={company.full_name}/>
-        </Link>
-
-        
+            <CatalogItem 
+                id={company.id} 
+                cardTitle={company.full_name} 
+                onClick={deleteCompany} 
+                url={`/companies/${company.id}`}
+            />
     )
 }

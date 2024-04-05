@@ -3,8 +3,9 @@ import { AnimalService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
-import { SubmitButton } from "../../button/SubmitButton";
-import { ButtonNav } from "../../button/ButtonNav";
+
+import { CustomButton } from "../../button/CustomButton";
+
 
 
 export function UploadAnimalForm() {
@@ -45,13 +46,14 @@ export function UploadAnimalForm() {
 
         <div className="container">
             <div className="container">
-                <label className="btn btn-default">
+                <label className="btn-default">
                 <input type="file" onChange={selectFile} />
                 </label>
             </div>
     
             <div className="container">
-                <ButtonNav 
+                <CustomButton
+                    className="btn-upload" 
                     disabled={!currentFile}
                     onClick={upload}
                     title="Загрузить"

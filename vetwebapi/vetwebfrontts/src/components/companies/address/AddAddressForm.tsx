@@ -75,7 +75,8 @@ export function AddAddressForm({compId}: CompanyPageProps) {
     }
 
     <div className="form-group">
-      <SubmitButton
+      <CustomButton
+          className="btn-submit"
           disabled={false}
           onClick={handleSubmit(createAddress)}
           title="Зарегистрировать"

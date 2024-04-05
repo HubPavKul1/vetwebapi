@@ -12,7 +12,10 @@ export function CreateCompany() {
     return (
         <Container className={styles.createCompanyWrap}>
             <h2 className="section-title">Предприятия</h2>
-                <CustomButton title="Добавить предприятие" onClick={() => setModalActive(true)}/>
+                <CustomButton 
+                    className="btn-large"
+                    title="Добавить предприятие" 
+                    onClick={() => setModalActive(true)}/>
 
                 <Modal active={modalActive} setActive={setModalActive}>
                     <CreateCompanyForm />

@@ -1,0 +1,13 @@
+.menuItem {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  border-bottom: 1px solid grey;
+  transition: color 0.5s ease-in-out;
+}
+.menuItem:hover {
+  color: blueviolet;
+}/*# sourceMappingURL=MenuItem.module.css.map */
