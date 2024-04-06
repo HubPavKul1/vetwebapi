@@ -5,15 +5,21 @@
 .catalogItem {
     display: flex;
 	padding: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	border: 1px solid grey;
 	box-shadow: 3px 3px grey;
 	border-radius: 5px;
-	cursor: pointer;
+	min-height: 150px;
 	@include transition(transform);
+	
+
+	>a {
+		max-width: 27%;;
+	}
 
 	&:hover {
 		transform: scale(1.05);
+		box-shadow: 5px 5px grey;
 		@include transition(transform);
 	}
 
@@ -27,7 +33,13 @@
 
 
 .cardTitle {
-	@extend %titleBase;
+	@extend %cardTitle;
+	cursor: pointer;
+	@include transition(color);
+
+	&:hover {
+		color: blueviolet;
+	}
 }
 
 .cardText {
@@ -35,12 +47,17 @@
 }
 
 .cardImage {
-	margin-right: 20px;
-    width: 25%;
+    width: 100%;
+	@include transition(transform);
+	
+	&:hover {
+		@include transform;
+	}
 }
 
 .deleteItem {
 	display: flex;
 	justify-content: end;
-	margin-bottom: 20px;
+	align-items: end;
+	margin-bottom: 10px;
 }

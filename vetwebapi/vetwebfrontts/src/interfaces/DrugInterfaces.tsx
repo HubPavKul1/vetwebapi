@@ -9,5 +9,5 @@ export interface IDrugMovement extends IDrugMovementCreate {
 }
 
 export interface IDrugMovements {
-    drug_movements?: IDrugMovement[]
+    drugMovements?: IDrugMovement[]
 }

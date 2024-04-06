@@ -1,5 +1,4 @@
 
-import { Link } from "react-router-dom";
 import { ICompany } from "../../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";

@@ -11,7 +11,6 @@ export function CreateCompany() {
     const [modalActive, setModalActive] = useState(false)
     return (
         <Container className={styles.createCompanyWrap}>
-            <h2 className="section-title">Предприятия</h2>
                 <CustomButton 
                     className="btn-large"
                     title="Добавить предприятие" 

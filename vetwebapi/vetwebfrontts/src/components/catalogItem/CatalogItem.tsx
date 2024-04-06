@@ -13,8 +13,9 @@ export function CatalogItem({...props}: ICardProps) {
     return (
        
             <Col >
-            <Link to={url}>
+            
                 <Container className={styles.catalogItem}>
+                <Link to={url}>
                     {props.imgSrc ? 
                         <img 
                             className={styles.cardImage} 
@@ -26,20 +27,24 @@ export function CatalogItem({...props}: ICardProps) {
                             alt={props.cardTitle}
                     />
                     }
+                </Link>
                     <div className={styles.card}>
+                    <Link to={url}>
                         <h5 className={styles.cardTitle}>{props.cardTitle}</h5>
+                    </Link>
                         {
                             props.cardText ? 
                             <p className={styles.cardText}>{props.cardText}</p>: ""
                         }
                         
                     </div>
-                   
-                </Container>
-            </Link>
                     <div className={styles.deleteItem}>
                         <BsFillTrash3Fill className="delete-icon" onClick={props.onClick}/>
                     </div>
+                   
+                </Container>
+           
+                    
                 
             </Col>
         

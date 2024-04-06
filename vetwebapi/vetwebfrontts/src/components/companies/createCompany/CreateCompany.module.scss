@@ -7,9 +7,6 @@
 	align-items: center;
 	margin-bottom: 30px;
 
-	&h2 {
-		@include pageTitle;
-	}
 }
 
 .createCompanyBtn {
