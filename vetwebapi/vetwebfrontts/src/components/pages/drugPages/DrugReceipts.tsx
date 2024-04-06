@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
-import { DrugMovementCards } from "../../drugs/drugMovementCard/DrugMovementCards";
+import { DrugMovementCard } from "../../drugs/drugMovementCard/DrugMovementCard";
 
 
 
@@ -20,10 +20,12 @@ export function DrugReceipts() {
                            
     return (
         <Catalog title="Поступление биопрепаратов">
-            {/* <CreateCompany/> */}
+            {/* <CreateReceipt/> */}
 
             <Row xs={1} md={3} lg={3}>
-                {data?.length ? <DrugMovementCards drugMovements={data}/>:
+                {data?.length ? data.map(drugMovement => (
+                    <DrugMovementCard key={drugMovement.id} drugMovement={drugMovement}/>
+                )):
                     catalogItemData.map(item => (  
                     <CatalogItem key={item.id} {...item}/> 
                 ))}

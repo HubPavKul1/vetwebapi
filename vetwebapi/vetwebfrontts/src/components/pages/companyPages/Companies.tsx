@@ -4,9 +4,9 @@ import { CompanyService } from "../../companies/company.service";
 import { CreateCompany } from "../../companies/createCompany/CreateCompany";
 import { useQuery } from "react-query"
 import { Catalog } from "../../catalog/Catalog";
-import { CompanyCards } from "../../companies/CompanyCards";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
+import { CompanyCard } from "../../companies/company-card/CompanyCard";
 
 
 
@@ -23,7 +23,9 @@ export function Companies() {
             <CreateCompany/>
 
             <Row xs={1} md={3} lg={3}>
-                {data?.length ? <CompanyCards companies={data}/>:
+                {data?.length ? data.map(company => (
+                    <CompanyCard key={company.id} company={company}/>
+                )):
                     catalogItemData.map(item => (  
                     <CatalogItem key={item.id} {...item}/> 
                 ))}

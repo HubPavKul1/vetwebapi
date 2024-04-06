@@ -29,7 +29,7 @@ class Animal(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     species: Mapped["Species"] = relationship(back_populates="animals", lazy="joined")
-    company: Mapped["Company"] = relationship(back_populates="animals")
+    company: Mapped["Company"] = relationship(back_populates="animals", lazy="joined")
     usage_type: Mapped["UsageType"] = relationship(back_populates="animals", lazy="joined")
     gender: Mapped["Gender"] = relationship(back_populates="animals", lazy="joined")
 

@@ -22,9 +22,9 @@ class Company(Base):
     short_name: Mapped[str]
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
-    addresses: Mapped["Address"] = relationship(back_populates="company")
-    employees: Mapped[list["Employee"]] = relationship(back_populates="company")
-    animals: Mapped[list["Animal"]] = relationship(back_populates="company")
+    addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete")
+    employees: Mapped[list["Employee"]] = relationship(back_populates="company", cascade="all, delete")
+    animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
 
     @property
     def company_slug(self):
