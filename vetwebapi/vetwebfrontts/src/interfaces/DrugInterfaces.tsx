@@ -1,6 +1,6 @@
 export interface IDrugMovementCreate {
     operation_date: string;
-    operation: string;
+    operation?: string;
 }
 
 
@@ -9,5 +9,5 @@ export interface IDrugMovement extends IDrugMovementCreate {
 }
 
 export interface IDrugMovements {
-    drugMovements?: IDrugMovement[]
+    drug_movements?: IDrugMovement[]
 }

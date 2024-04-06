@@ -30,7 +30,7 @@ export function CompanyCard({company}: CompanyCard) {
 
             <CatalogItem 
                 id={company.id} 
-                cardTitle={company.full_name} 
+                cardTitle={company.short_name} 
                 onClick={deleteCompany} 
                 url={`/companies/${company.id}`}
             />

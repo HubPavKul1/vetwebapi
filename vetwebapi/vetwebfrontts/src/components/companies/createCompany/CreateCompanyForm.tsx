@@ -5,8 +5,7 @@ import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
-import { Button, CustomButton } from "../../button/CustomButton";
-import { SubmitButton } from "../../button/SubmitButton";
+import { CustomButton } from "../../button/CustomButton";
 
 
 export function CreateCompanyForm() {

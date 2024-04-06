@@ -7,6 +7,7 @@ import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { DrugMovementCard } from "../../drugs/drugMovementCard/DrugMovementCard";
+import { CreateDrugMovement } from "../../drugs/createDrugMovement/CreateDrugMovement";
 
 
 
@@ -14,13 +15,13 @@ export function DrugReceipts() {
     
     const { data, error } = useQuery(['drugReceipts'], () => DrugService.getDrugMovements(),
         {
-            select: ({data}) => data?.drugMovements
+            select: ({data}) => data?.drug_movements
         }
     )
                            
     return (
         <Catalog title="Поступление биопрепаратов">
-            {/* <CreateReceipt/> */}
+            <CreateDrugMovement />
 
             <Row xs={1} md={3} lg={3}>
                 {data?.length ? data.map(drugMovement => (

@@ -53,7 +53,7 @@ async def add_drug_to_movement_route(
     drug_in_movement = await crud.add_drug_to_movement(session=session, body=body, drug_movement=drug_movement)
 
 
-@router.get("/", response_model=DrugMovements)
+@router.get("/1", response_model=DrugMovements)
 async def get_receipts(
     session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[DrugMovements, dict]:

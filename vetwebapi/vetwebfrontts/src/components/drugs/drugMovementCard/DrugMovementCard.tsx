@@ -30,6 +30,7 @@ export function DrugMovementCard({drugMovement}: DrugMovementCardProps) {
             <CatalogItem 
                 id={drugMovement.id} 
                 cardTitle={drugMovement.operation_date} 
+                imgSrc="/drugsCard.jpg"
                 // onClick={deleteCompany} 
                 // url={`/companies/${company.id}`}
             />

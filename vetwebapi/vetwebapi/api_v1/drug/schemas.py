@@ -1,5 +1,5 @@
 from datetime import date
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class DrugIn(BaseModel):
@@ -29,8 +29,9 @@ class DrugMovementIn(BaseModel):
     
 class DrugMovementOut(DrugMovementIn):
     id: int
-    operation: str
-    
+
+    model_config = ConfigDict(from_attributes=True)
+
       
 class DrugInMovementIn(BaseModel):
     drug_id: int
@@ -49,5 +50,6 @@ class DrugMovementDetail(DrugMovementOut):
     
 class DrugMovements(BaseModel):
     drug_movements: list[DrugMovementOut]
+
     
     
