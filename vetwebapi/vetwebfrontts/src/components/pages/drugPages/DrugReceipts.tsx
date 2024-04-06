@@ -8,6 +8,8 @@ import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { DrugMovementCard } from "../../drugs/drugMovementCard/DrugMovementCard";
 import { CreateDrugMovement } from "../../drugs/createDrugMovement/CreateDrugMovement";
+import { CreateItem } from "../../createItem/CreateItem";
+import { CreateDrugReceiptForm } from "../../drugs/createDrugMovement/CreateDrugReceiptForm";
 
 
 
@@ -21,7 +23,11 @@ export function DrugReceipts() {
                            
     return (
         <Catalog title="Поступление биопрепаратов">
-            <CreateDrugMovement />
+
+            <CreateItem btnTitle="Добавить поступление препарата">
+                <CreateDrugReceiptForm/>
+            </CreateItem>
+          
 
             <Row xs={1} md={3} lg={3}>
                 {data?.length ? data.map(drugMovement => (

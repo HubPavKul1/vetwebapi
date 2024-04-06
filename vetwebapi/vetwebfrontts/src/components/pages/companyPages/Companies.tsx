@@ -7,6 +7,8 @@ import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { CompanyCard } from "../../companies/company-card/CompanyCard";
+import { CreateCompanyForm } from "../../companies/createCompany/CreateCompanyForm";
+import { CreateItem } from "../../createItem/CreateItem";
 
 
 
@@ -20,7 +22,10 @@ export function Companies() {
                            
     return (
         <Catalog title="Предприятия">
-            <CreateCompany/>
+            <CreateItem btnTitle="Добавить предприятие">
+                <CreateCompanyForm/>
+            </CreateItem>
+            
 
             <Row xs={1} md={3} lg={3}>
                 {data?.length ? data.map(company => (
