@@ -8,15 +8,24 @@ class DrugIn(BaseModel):
     drug_manufacturer_id: int
     accounting_unit_id: int
     name: str
-    batch: str
-    control: str
-    production_date: date
-    expiration_date: date
     packing: float
+    image: str | None
+    instruction: str | None
     
     
-class DrugSchema(BaseModel):
+class DrugOut(BaseModel):
+    id: int
     name: str
+    image: str | None
+    instruction: str | None
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+    
+
+class CatalogDrugSchema(DrugIn):
+    id: int
     batch: str
     control: str
     production_date: date
@@ -34,13 +43,13 @@ class DrugMovementOut(DrugMovementIn):
 
       
 class DrugInMovementIn(BaseModel):
-    drug_id: int
+    catalog_drug_id: int
     packs_amount: int
     units_amount: float
     
     
 class DrugInMovementSchema(BaseModel):
-    drug: DrugSchema
+    drug: CatalogDrugSchema
     packs_amount: int
     units_amount: float
     

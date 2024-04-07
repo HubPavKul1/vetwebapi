@@ -1,5 +1,10 @@
+import os
+import shutil
+
+from vetwebapi.utils import utils
 from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import File, UploadFile
 
 from vetwebapi.core.models import Drug, DrugMovement, DrugInMovement, Operation
 from .schemas import DrugInMovementIn, DrugMovementIn, DrugIn
@@ -26,6 +31,34 @@ async def add_drug_to_movement(
     drug_movement: DrugMovement
     ) -> None:
     pass
+
+
+# Save Files
+
+async def save_file(session: AsyncSession, drug_id: int, file: UploadFile = File(...)) -> None:
+    filename = await utils.prepare_filename(str(file.filename))
+    drug = read_drug_by_id(drug_id=drug_id)
+
+    if file.content_type in ["text/csv"]:
+
+    # get the destination path
+        dest = os.path.join("files", filename)
+        drug.instruction = dest
+
+    else:
+        dest = os.path.join("images", filename)
+        drug.image = dest
+
+    with open(dest, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+        
+    session.add(drug)
+    await session.commit()
+    await session.refresh(drug)
+
+
+
     
     
 
@@ -41,3 +74,6 @@ async def read_drug_movement_by_id(session: AsyncSession, drug_movement_id: int)
 async def read_receipts(session: AsyncSession) -> list[DrugMovement]:
     stmt = select(DrugMovement).where(DrugMovement.operation_id == 1).order_by(desc(DrugMovement.operation_date))
     return list(await session.scalars(stmt))
+
+async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
+    return await session.get(Drug, drug_id)

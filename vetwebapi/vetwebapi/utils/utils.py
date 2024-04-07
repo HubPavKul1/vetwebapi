@@ -1,3 +1,6 @@
+import uuid
+from werkzeug.utils import secure_filename
+
 import os
 from sqlalchemy.ext.asyncio import AsyncSession
 from vetwebapi.core.settings import settings
@@ -124,4 +127,13 @@ async def prepare_db(session: AsyncSession) -> None:
     await add_drugs_data(session=session)
     await add_roles(session=session)
     
+
+
+
+async def prepare_filename(filename: str) -> str:
+    """Change filename to secure unique filename"""
+    filename_splitted = filename.split(".")
+    name, extension = str(uuid.uuid4()), filename_splitted[1]
+    return secure_filename(name + "." + extension)
+
     

@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 45992d45c164
+Revision ID: d2eec2967ca0
 Revises: 
-Create Date: 2024-02-26 08:32:41.334172
+Create Date: 2024-04-07 14:06:54.593604
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "45992d45c164"
+revision: str = "d2eec2967ca0"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -143,12 +143,9 @@ def upgrade() -> None:
         sa.Column("budget_id", sa.Integer(), nullable=False),
         sa.Column("accounting_unit_id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=300), nullable=False),
-        sa.Column("batch", sa.String(length=10), nullable=False),
-        sa.Column("control", sa.String(length=10), nullable=False),
-        sa.Column("production_date", sa.Date(), nullable=False),
-        sa.Column("expiration_date", sa.Date(), nullable=False),
         sa.Column("packing", sa.Float(), nullable=False),
         sa.Column("instruction", sa.String(), nullable=True),
+        sa.Column("image", sa.String(), nullable=True),
         sa.Column("is_active", sa.Boolean(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
@@ -201,6 +198,18 @@ def upgrade() -> None:
     )
     op.create_index(op.f("ix_users_email"), "users", ["email"], unique=True)
     op.create_table(
+        "catalog_drugs",
+        sa.Column("drug_id", sa.Integer(), nullable=False),
+        sa.Column("batch", sa.String(length=10), nullable=False),
+        sa.Column("control", sa.String(length=10), nullable=False),
+        sa.Column("production_date", sa.Date(), nullable=False),
+        sa.Column("expiration_date", sa.Date(), nullable=False),
+        sa.Column("is_active", sa.Boolean(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["drug_id"], ["drugs.id"], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
         "cities",
         sa.Column("district_id", sa.Integer(), nullable=True),
         sa.Column("name", sa.String(length=100), nullable=False),
@@ -211,20 +220,6 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
-        "drugs_in_movement",
-        sa.Column("drug_movement_id", sa.Integer(), nullable=False),
-        sa.Column("drug_id", sa.Integer(), nullable=False),
-        sa.Column("packs_amount", sa.Integer(), nullable=False),
-        sa.Column("units_amount", sa.Float(), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(["drug_id"], ["drugs.id"]),
-        sa.ForeignKeyConstraint(["drug_movement_id"], ["drug_movements.id"]),
-        sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint(
-            "drug_movement_id", "drug_id", name="idx_unique_drug_in_movement"
-        ),
-    )
-    op.create_table(
         "species",
         sa.Column("animal_group_id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=100), nullable=False),
@@ -233,6 +228,22 @@ def upgrade() -> None:
             ["animal_group_id"], ["animal_groups.id"], ondelete="CASCADE"
         ),
         sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "drugs_in_movement",
+        sa.Column("drug_movement_id", sa.Integer(), nullable=False),
+        sa.Column("catalog_drug_id", sa.Integer(), nullable=False),
+        sa.Column("packs_amount", sa.Integer(), nullable=False),
+        sa.Column("units_amount", sa.Float(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["catalog_drug_id"], ["catalog_drugs.id"]),
+        sa.ForeignKeyConstraint(["drug_movement_id"], ["drug_movements.id"]),
+        sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint(
+            "drug_movement_id",
+            "catalog_drug_id",
+            name="idx_unique_drug_in_movement",
+        ),
     )
     op.create_table(
         "genders",
@@ -304,9 +315,10 @@ def downgrade() -> None:
     op.drop_table("addresses")
     op.drop_table("streets")
     op.drop_table("genders")
-    op.drop_table("species")
     op.drop_table("drugs_in_movement")
+    op.drop_table("species")
     op.drop_table("cities")
+    op.drop_table("catalog_drugs")
     op.drop_index(op.f("ix_users_email"), table_name="users")
     op.drop_table("users")
     op.drop_table("employees")

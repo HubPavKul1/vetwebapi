@@ -285,3 +285,6 @@ from .companies.street import Street
 from .companies.region import Region
 from .companies.district import District
 ```
+$ alembic revision --autogenerate -m 'initial'
+
+Предварительно запустить базу данных!!!

@@ -27,8 +27,10 @@ __all__ = (
     "Disease",
     "Budget",
     "Operation",
+    "CatalogDrug",
     "DrugMovement",
     "DrugInMovement",
+    
     
 )
 
@@ -67,8 +69,10 @@ from .drugs.dosage import Dosage
 from .drugs.place_of_administration import PlaceOfAdministration
 from .drugs.budget import Budget
 from .drugs.operation import Operation
+from .drugs.catalog_drug import CatalogDrug
 from .drugs.drug_movement import DrugMovement
 from .drugs.drug_in_movement import DrugInMovement
+
 
 # VetWork
 from .vet_work.disease import Disease

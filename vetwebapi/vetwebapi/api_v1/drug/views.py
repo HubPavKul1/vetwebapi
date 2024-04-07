@@ -1,10 +1,10 @@
 from typing import Union
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut, DrugInMovementIn, DrugSchema, DrugIn, DrugMovements
+from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut, DrugInMovementIn, DrugOut, DrugIn, DrugMovements
 from vetwebapi.api_v1.drug.dependencies import operation_by_id, drug_movement_by_id
 
 from vetwebapi.core.database import db_manager
@@ -29,19 +29,26 @@ async def create_drug_movement_route(
         operation=drug_movement.operation.name
         )
     
-@router.post("/", response_model=DrugSchema, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=DrugOut, status_code=status.HTTP_201_CREATED)
 async def create_drug_route(
     body: DrugIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> DrugSchema:
+) -> DrugOut:
     drug = await crud.create_drug(session=session, body=body)
-    return DrugSchema(
-        name=drug.name,
-        batch=drug.batch,
-        control=drug.control,
-        production_date=drug.production_date,
-        expiration_date=drug.expiration_date, 
+    return DrugOut(
+        id=drug.id,
+        name=drug.name, 
     )
+
+@router.post("/upload/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+async def upload_drug_file_route(
+    drug_id: int,
+    file: UploadFile,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    if file.content_type not in ["text/csv", "image/jpeg", "image/png", "image/jpg"]:
+        raise HTTPException(status_code=400, detail="Invalid file type")
+    await crud.save_file(session=session, drug_id=drug_id, file=file)
     
     
 @router.post("/{drug_movement_id}", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
