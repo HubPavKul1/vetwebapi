@@ -8,6 +8,7 @@ from pydantic_settings import BaseSettings
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
+
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
     templates: Jinja2Templates = Jinja2Templates(

@@ -70,8 +70,7 @@ async def get_companies(
 
 
 @router.delete(
-    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
-)
+    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

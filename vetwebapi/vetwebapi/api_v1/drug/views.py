@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut, DrugInMovementIn, DrugOut, DrugIn, DrugMovements
+from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut, DrugInMovementIn, DrugOut, DrugIn, Drugs, DrugMovements
 from vetwebapi.api_v1.drug.dependencies import operation_by_id, drug_movement_by_id
 
 from vetwebapi.core.database import db_manager
@@ -35,18 +35,22 @@ async def create_drug_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> DrugOut:
     drug = await crud.create_drug(session=session, body=body)
-    return DrugOut(
-        id=drug.id,
-        name=drug.name, 
-    )
+    return DrugOut(id=drug.id)
 
-@router.post("/upload/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post("/upload/", status_code=status.HTTP_201_CREATED)
 async def upload_drug_file_route(
     drug_id: int,
     file: UploadFile,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    if file.content_type not in ["text/csv", "image/jpeg", "image/png", "image/jpg"]:
+    if file.content_type not in [
+        "text/plain", 
+        "application/pdf", 
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "image/jpeg", 
+        "image/png", 
+        "image/jpg"
+        ]:
         raise HTTPException(status_code=400, detail="Invalid file type")
     await crud.save_file(session=session, drug_id=drug_id, file=file)
     
@@ -67,6 +71,34 @@ async def get_receipts(
     try:
         receipts = await crud.read_receipts(session=session)
         return DrugMovements(drug_movements=receipts)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+@router.get("/", response_model=Drugs)
+async def get_drugs_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> Union[Drugs, dict]:
+    try:
+        drugs = await crud.read_drugs(session=session)
+        return Drugs(drugs=drugs)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+@router.delete("/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def delete_drug_route(
+    drug_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_drug(session=session, drug_id=drug_id)
+        return SuccessMessage()
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

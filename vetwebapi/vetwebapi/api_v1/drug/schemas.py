@@ -13,13 +13,14 @@ class DrugIn(BaseModel):
     instruction: str | None
     
     
-class DrugOut(BaseModel):
+class DrugOut(DrugIn):
     id: int
-    name: str
-    image: str | None
-    instruction: str | None
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class Drugs(BaseModel):
+    drugs: list[DrugOut]
 
 
     

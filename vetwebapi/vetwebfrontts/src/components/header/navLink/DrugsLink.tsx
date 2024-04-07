@@ -13,8 +13,8 @@ export function DrugsLink() {
 <>      <li className={styles.navLink}>
             <DropdownWrapper title="Биопрепараты" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} id="RouterNavLink" to="/drugs/1">Поступление</NavDropdown.Item>
-                <NavDropdown.Item>
-                    Препараты на складе
+                <NavDropdown.Item as={Link} id="RouterNavLink" to="/drugs">
+                    Справочник препаратов
                 </NavDropdown.Item>
                 <NavDropdown.Item >Отчеты</NavDropdown.Item>
                 <NavDropdown.Divider />
