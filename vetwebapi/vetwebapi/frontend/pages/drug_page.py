@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi.responses import HTMLResponse, RedirectResponse
 from vetwebapi.core.settings import settings
 from vetwebapi.core.database import db_manager
-from vetwebapi.api_v1.drug.crud import create_drug_movement, create_drug
+from vetwebapi.api_v1.drug.crud import create_receipt, create_drug
 from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementDetail, DrugMovements
 from vetwebapi.api_v1.drug.dependencies import drug_movement_by_id, operation_by_id
 

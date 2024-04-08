@@ -1,3 +1,7 @@
+import { IBase } from "./BaseInterface";
+
+
+
 export interface IDrugMovementCreate {
     operation_date: string;
     operation?: string;
@@ -19,15 +23,27 @@ export interface IDrugCreate {
     accounting_unit_id: number;
     name: string;
     packing: number;
+    image?: string;
 }
 
 export interface IDrug extends IDrugCreate {
     id: number;
-    instruction?: string;
-    image?: string;
 
+   
 }
 
 export interface IDrugs {
     drugs?: IDrug[];
+}
+
+export interface IBudgets {
+    budgets: IBase[];
+}
+
+export interface IDrugManufacturers {
+    drug_manufacturers: IBase[];
+}
+
+export interface IAccountingUnits {
+    accounting_units: IBase[];
 }

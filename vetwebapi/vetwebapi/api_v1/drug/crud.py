@@ -11,14 +11,14 @@ from fastapi import File, UploadFile
 
 from vetwebapi.core.settings import BASE_DIR
 
-from vetwebapi.core.models import Drug, DrugMovement, DrugInMovement, Operation
+from vetwebapi.core.models import Drug, DrugMovement, DrugInMovement, Operation, DrugManufacturer, AccountingUnit, Budget
 from .schemas import DrugInMovementIn, DrugMovementIn, DrugIn
 
 
 # Create
-async def create_drug_movement(session: AsyncSession, body: DrugMovementIn, operation_id: int) -> DrugMovement:
+async def create_receipt(session: AsyncSession, body: DrugMovementIn) -> DrugMovement:
     new_drug_movement = DrugMovement(**body.model_dump())
-    new_drug_movement.operation_id = operation_id
+    new_drug_movement.operation_id = 1
     session.add(new_drug_movement)
     await session.commit()
     await session.refresh(new_drug_movement)
@@ -26,7 +26,6 @@ async def create_drug_movement(session: AsyncSession, body: DrugMovementIn, oper
 
 async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
     new_drug = Drug(**body.model_dump())
-   
     session.add(new_drug)
     await session.commit()
     await session.refresh(new_drug)
@@ -94,8 +93,22 @@ async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
     return await session.get(Drug, drug_id)
 
 async def read_drugs(session: AsyncSession) -> list[Drug]:
-    stmt = select(Drug).where(Drug.is_active).order_by(desc(Drug.name))
+    stmt = select(Drug).where(Drug.is_active).order_by(Drug.name)
     return list(await session.scalars(stmt))
+
+async def read_drug_manufacturers(session: AsyncSession) -> list[DrugManufacturer]:
+    stmt = select(DrugManufacturer).order_by(DrugManufacturer.name)
+    return list(await session.scalars(stmt))
+
+async def read_accounting_units(session: AsyncSession) -> list[AccountingUnit]:
+    stmt = select(AccountingUnit).order_by(AccountingUnit.name)
+    return list(await session.scalars(stmt))
+
+async def read_budgets(session: AsyncSession) -> list[Budget]:
+    stmt = select(Budget).order_by(Budget.name)
+    return list(await session.scalars(stmt))
+
+
 
 
 

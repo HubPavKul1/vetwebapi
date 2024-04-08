@@ -14,7 +14,7 @@ export function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />}  />
                 <Route path="companies" element={<Companies />} />
-                <Route path="drugs/1" element={<DrugReceipts />} />
+                <Route path="drugs/receipts" element={<DrugReceipts />} />
                 <Route path="drugs" element={<Drugs/>} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
                 <Route path="*" element={<div>Not Found</div>} />

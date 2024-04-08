@@ -1,12 +1,8 @@
-export interface IDiseaseIn {
-    name: string;
-}
+import { IBase } from "./BaseInterface";
 
-export interface IDiseaseOut extends IDiseaseIn {
-    id: number;
-}
+
 
 export interface IDiseases {
-    diseases?: IDiseaseOut[];
+    diseases?: IBase[];
 }
 

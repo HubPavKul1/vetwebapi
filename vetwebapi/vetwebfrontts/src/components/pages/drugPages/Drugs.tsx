@@ -23,9 +23,9 @@ export function Drugs() {
     return (
         <Catalog title="Справочник биопрепаратов">
 
-            {/* <CreateItem btnTitle="Добавить препарат">
+            <CreateItem btnTitle="Добавить препарат">
                 <CreateDrugForm/>
-            </CreateItem> */}
+            </CreateItem>
           
 
             <Row xs={1} md={3} lg={3}>

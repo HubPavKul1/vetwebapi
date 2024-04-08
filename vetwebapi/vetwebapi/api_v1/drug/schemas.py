@@ -8,9 +8,22 @@ class DrugIn(BaseModel):
     drug_manufacturer_id: int
     accounting_unit_id: int
     name: str
-    packing: float
+    packing: int
+    image: str | None = None
+    instruction: str | None = None
+    
+    
+class DrugSchema(BaseModel):
+    id: int
+    disease: str
+    budget: str
+    drug_manufacturer: str
+    accounting_unit: str
+    name: str
+    packing: int
     image: str | None
     instruction: str | None
+    
     
     
 class DrugOut(DrugIn):
@@ -60,6 +73,23 @@ class DrugMovementDetail(DrugMovementOut):
     
 class DrugMovements(BaseModel):
     drug_movements: list[DrugMovementOut]
+    
+    
+    
+class BaseDrugSchema(BaseModel):
+    id: int
+    name: str
+    model_config = ConfigDict(from_attributes=True)
+    
+class Budgets(BaseModel):
+    budgets: list[BaseDrugSchema]
+    
+class AccountingUnits(BaseModel):
+    accounting_units: list[BaseDrugSchema]
+    
+class DrugManufacturers(BaseModel):
+    drug_manufacturers: list[BaseDrugSchema]
+
 
     
     

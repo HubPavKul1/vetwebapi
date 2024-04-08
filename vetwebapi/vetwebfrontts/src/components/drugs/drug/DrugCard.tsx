@@ -12,7 +12,7 @@ export function DrugCard({drug}: DrugCardProps) {
 
     const queryClient = useQueryClient()
 
-    const { mutate } = useMutation(["delete company"], {
+    const { mutate } = useMutation(["delete drug"], {
         mutationFn: () => DrugService.deleteDrug(drug.id.toString()),
         onSuccess: () => {
             alert("Препарат успешно удален!")
