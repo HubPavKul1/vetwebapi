@@ -5,7 +5,7 @@ import { AddAnimal } from "../../animal/AddAnimal";
 import styles from "./CompanyPageMenu.module.scss";
 
 export interface CompanyPageProps {
-  compId?: number;
+  compId: number;
 }
 
 export function CompanyPageMenu({compId}: CompanyPageProps) {

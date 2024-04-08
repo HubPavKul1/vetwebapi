@@ -47,10 +47,10 @@ async def save_file(session: AsyncSession, drug_id: int, file: UploadFile = File
     drug = await read_drug_by_id(drug_id=drug_id, session=session)
 
     # curdir = os.getcwd()
-    insructions_dir = os.path.join("Vetwebapi", "vetwebapi", "vetwebapi", "media", "instructions")
+    insructions_dir = os.path.join(BASE_DIR, "vetwebfrontts", "public", "instructions")
     if not os.path.exists(insructions_dir):
         os.makedirs(insructions_dir)
-    images_dir = os.path.join("Vetwebapi", "vetwebapi", "vetwebapi", "media", "images")
+    images_dir = os.path.join(BASE_DIR, "vetwebfrontts", "public", "images")
     if not os.path.exists(images_dir):
         os.makedirs(images_dir)
 
@@ -114,7 +114,6 @@ async def read_budgets(session: AsyncSession) -> list[Budget]:
 
 # Delete
 
-async def delete_drug(session: AsyncSession, drug_id: int) -> None:
-    drug = await read_drug_by_id(session=session, drug_id=drug_id)
+async def delete_drug(session: AsyncSession, drug: Drug) -> None:
     await session.delete(drug)
     await session.commit()

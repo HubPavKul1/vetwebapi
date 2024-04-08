@@ -32,7 +32,7 @@ export const DrugService = {
     },
 
     async getAccountingUnits() {
-      return await axios.get<IAccountingUnits>("/api/drugs/accounting")
+      return await axios.get<IAccountingUnits>("/api/drugs/accounting_units")
     },
 
 

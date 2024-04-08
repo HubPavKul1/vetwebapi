@@ -19,6 +19,8 @@ export function Drugs() {
             select: ({data}) => data?.drugs
         }
     )
+
+    console.log("drug_list>>>>>>>>", data)
                            
     return (
         <Catalog title="Справочник биопрепаратов">

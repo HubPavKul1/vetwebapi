@@ -13,6 +13,8 @@ export function AccountingUnitSelect() {
 
     const { control } = useFormContext()
 
+    console.log("units>>>>", data)
+
     const options = data?.data?.accounting_units?.map(unit => ({ value: unit.id, label: unit.name }))
 
 

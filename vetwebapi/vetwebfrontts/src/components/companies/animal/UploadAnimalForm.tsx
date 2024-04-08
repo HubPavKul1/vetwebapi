@@ -1,24 +1,23 @@
 import { MouseEventHandler, useState } from "react";
 import { AnimalService } from "../company.service";
-import { SubmitHandler, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { CustomButton } from "../../button/CustomButton";
+import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 
 
 
-export function UploadAnimalForm() {
+export function UploadAnimalForm({compId}: CompanyPageProps) {
 
-    const {id} = useParams()
-    if (!id) return;
     
     const [currentFile, setCurrentFile] = useState<File>();
     const { reset } = useForm<FileList>();
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["upload animals"], {
-        mutationFn: (data: FormData) => AnimalService.uploadAnimals(data, id),
+        mutationFn: (data: FormData) => AnimalService.uploadAnimals(data, compId?.toString()),
         onSuccess: () => {
             alert("Животные успешно добавлены!")
             queryClient.invalidateQueries(["company", id])

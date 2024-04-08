@@ -42,8 +42,6 @@ export function CreateDrugForm() {
 
     const createDrug: SubmitHandler<IDrugCreate> = data => {
         console.log("drug: ", data)
-        console.log(data.packing)
-        console.log(Number(data.packing))
         mutate(data)
 
     }

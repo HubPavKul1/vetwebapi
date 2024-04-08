@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
 from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut,DrugSchema, DrugInMovementIn, DrugOut, DrugIn, Drugs, DrugMovements, Budgets, AccountingUnits, DrugManufacturers
-from vetwebapi.api_v1.drug.dependencies import operation_by_id, drug_movement_by_id
+from vetwebapi.api_v1.drug.dependencies import operation_by_id, drug_movement_by_id, drug_by_id
 
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Drug, DrugMovement, Operation
@@ -105,13 +105,13 @@ async def get_drugs_route(
         )
     
 
-@router.delete("/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete("/{drug_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_drug_route(
-    drug_id: int,
+    drug: Drug = Depends(drug_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.delete_drug(session=session, drug_id=drug_id)
+        await crud.delete_drug(session=session, drug=drug)
         return SuccessMessage()
     except Exception:
         raise HTTPException(

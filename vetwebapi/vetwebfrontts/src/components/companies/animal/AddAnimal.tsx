@@ -10,7 +10,7 @@ export function AddAnimal({compId}: CompanyPageProps) {
     return (
         <MenuItem title="Добавить животное">
             <AddAnimalForm compId={compId}/>
-            <UploadAnimalForm />
+            <UploadAnimalForm compId={compId}/>
         </MenuItem>
 
     )

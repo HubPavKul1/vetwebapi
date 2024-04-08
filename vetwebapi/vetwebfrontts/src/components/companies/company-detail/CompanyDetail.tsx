@@ -34,7 +34,7 @@ export function CompanyDetail() {
           </Col>
          
           <Col>
-              <CompanyPageMenu compId={data?.id}/>
+              <CompanyPageMenu compId={data.id}/>
           </Col>
 
         </Row>
