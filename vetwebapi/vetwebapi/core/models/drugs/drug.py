@@ -1,4 +1,6 @@
+import os
 from typing import TYPE_CHECKING
+
 
 from sqlalchemy import ForeignKey, String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -35,6 +37,15 @@ class Drug(Base):
     budget: Mapped["Budget"] = relationship(back_populates="drugs", lazy="joined")  
     accounting_unit: Mapped["AccountingUnit"] = relationship(back_populates="drugs", lazy="joined")
     catalog_drugs: Mapped[list["CatalogDrug"]] = relationship(back_populates="drug")
+    
+    
+    def image_path(self, filename: str) -> str:
+        """Create relative path for drug_image"""
+        return os.path.join("drugs", "images", filename)
+    
+    def instruction_path(self, filename: str) -> str:
+        """Create relative path for drug_instruction"""
+        return os.path.join("drugs", "instr", filename)
     
     
     def __repr__(self) -> str:

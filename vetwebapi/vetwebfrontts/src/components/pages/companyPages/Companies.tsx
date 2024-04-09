@@ -1,8 +1,7 @@
 import { Row } from "react-bootstrap";
 
 import { CompanyService } from "../../companies/company.service";
-import { CreateCompany } from "../../companies/createCompany/CreateCompany";
-import { useQuery } from "react-query"
+import { useQuery } from "react-query";
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
@@ -32,7 +31,7 @@ export function Companies() {
                     <CompanyCard key={company.id} company={company}/>
                 )):
                     catalogItemData.map(item => (  
-                    <CatalogItem key={item.id} {...item}/> 
+                    <CatalogItem key={item.id} {...item }/> 
                 ))}
             </Row>
                 

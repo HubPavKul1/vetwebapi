@@ -2,7 +2,7 @@ import { Row } from "react-bootstrap";
 import { DrugService } from "../../drugs/drugs.service";
 
 
-import { useQuery } from "react-query"
+import { useQuery } from "react-query";
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
@@ -33,7 +33,7 @@ export function DrugReceipts() {
                     <DrugMovementCard key={drugMovement.id} drugMovement={drugMovement}/>
                 )):
                     catalogItemData.map(item => (  
-                    <CatalogItem key={item.id} {...item}/> 
+                    <CatalogItem key={item.id} {...item} /> 
                 ))}
             </Row>
                 

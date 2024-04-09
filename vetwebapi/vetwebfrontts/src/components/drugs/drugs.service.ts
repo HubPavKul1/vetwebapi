@@ -41,8 +41,27 @@ export const DrugService = {
       await axios.post<IDrugCreate>("/api/drugs", data)
         .then(response => console.log(response))
         .catch(err => console.log(err))
+    },
+
+
+    async uploadFile(file: FormData) {
+
+      await axios.post(`/api/drugs/upload`, file)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+    },
+
+
+      
+    async createReceipt(data: IDrugMovementCreate) {
+      // const headers = { "Content-Type": "application/json" }
+      await axios.post<IDrugMovementCreate>("/api/drugs/receipts", data)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
   
     },
+  
+  }
 
 
 
@@ -51,14 +70,6 @@ export const DrugService = {
     //   const response = await axios.get<ICompanyDetail>(`/api/companies/${id}`)
     //   return response.data
     // },
-  
-    async createReceipt(data: IDrugMovementCreate) {
-      // const headers = { "Content-Type": "application/json" }
-      await axios.post<IDrugMovementCreate>("/api/drugs/receipts", data)
-        .then(response => console.log(response))
-        .catch(err => console.log(err))
-  
-    },
 
 
-}
+

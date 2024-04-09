@@ -58,9 +58,7 @@ async def upload_drug_file_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     if file.content_type not in [
-        "text/plain", 
         "application/pdf", 
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "image/jpeg", 
         "image/png", 
         "image/jpg"

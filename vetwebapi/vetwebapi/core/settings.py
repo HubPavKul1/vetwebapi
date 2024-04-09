@@ -18,6 +18,8 @@ class Settings(BaseSettings):
         directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "static")
         )
     files_dir: str =os.path.join(BASE_DIR, "vetwebapi", "files")
+    
+    media_dir: str = os.path.join(BASE_DIR, "vetwebfrontts", "public") # директория для статики react app
 
     db_user: str
     db_pass: str

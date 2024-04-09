@@ -1,18 +1,16 @@
 import os
 import shutil
 
-from pathlib import Path
-
-
 from vetwebapi.utils import utils
 from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import File, UploadFile
 
-from vetwebapi.core.settings import BASE_DIR
+from vetwebapi.core.settings import settings
 
 from vetwebapi.core.models import Drug, DrugMovement, DrugInMovement, Operation, DrugManufacturer, AccountingUnit, Budget
 from .schemas import DrugInMovementIn, DrugMovementIn, DrugIn
+
 
 
 # Create
@@ -40,35 +38,23 @@ async def add_drug_to_movement(
 
 
 # Save Files
-
 async def save_file(session: AsyncSession, drug_id: int, file: UploadFile = File(...)) -> None:
    
     filename = await utils.prepare_filename(str(file.filename))
     drug = await read_drug_by_id(drug_id=drug_id, session=session)
 
-    # curdir = os.getcwd()
-    insructions_dir = os.path.join(BASE_DIR, "vetwebfrontts", "public", "instructions")
-    if not os.path.exists(insructions_dir):
-        os.makedirs(insructions_dir)
-    images_dir = os.path.join(BASE_DIR, "vetwebfrontts", "public", "images")
-    if not os.path.exists(images_dir):
-        os.makedirs(images_dir)
-
-
     dest = ""
 
     if file.content_type in [ 
-        "text/plain", 
         "application/pdf", 
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        ]:     
-        dest = os.path.join(insructions_dir, filename)
-        drug.instruction = dest
-  
+        ]: 
+        drug.instruction = drug.instruction_path(filename=filename)    
+        dest = os.path.join(settings.media_dir, drug.instruction)
+        
     else:
-        dest = os.path.join(images_dir, filename)
-        drug.image = dest
-
+        drug.image = drug.image_path(filename=filename)
+        dest = os.path.join(settings.media_dir, drug.image)
+        
     with open(dest, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
@@ -114,6 +100,18 @@ async def read_budgets(session: AsyncSession) -> list[Budget]:
 
 # Delete
 
+async def remove_drug_image(filepath: str) -> None:
+    image_to_remove = os.path.join(settings.media_dir, filepath)
+    os.remove(image_to_remove)
+    
+async def remove_drug_instruction(filepath: str) -> None:
+    file_to_remove = os.path.join(settings.media_dir, filepath)
+    os.remove(file_to_remove)
+
 async def delete_drug(session: AsyncSession, drug: Drug) -> None:
+    if drug.image is not None:
+        await remove_drug_image(filepath=drug.image)
+    if drug.instruction is not None:
+        await remove_drug_instruction(filepath=drug.instruction)
     await session.delete(drug)
     await session.commit()

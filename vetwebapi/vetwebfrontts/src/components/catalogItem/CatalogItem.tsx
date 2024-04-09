@@ -1,7 +1,7 @@
 import { ICardProps } from "../../interfaces/CardProps";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-import styles from "./CatalogItem.module.scss"
+import styles from "./CatalogItem.module.scss";
 import { Col, Container } from "react-bootstrap";
 import { BsFillTrash3Fill } from "react-icons/bs";
 
@@ -23,7 +23,7 @@ export function CatalogItem({...props}: ICardProps) {
                             alt={props.cardTitle}
                     />: <img
                             className={styles.cardImage} 
-                            src="/farm.jpg"
+                            src="/drugs/images/vetLogo2.png"
                             alt={props.cardTitle}
                     />
                     }
