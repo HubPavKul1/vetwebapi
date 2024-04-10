@@ -20,7 +20,6 @@ export function Drugs() {
         }
     )
 
-    console.log("drug_list>>>>>>>>", data)
                            
     return (
         <Catalog title="Справочник биопрепаратов">

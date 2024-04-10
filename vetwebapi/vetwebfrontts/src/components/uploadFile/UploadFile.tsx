@@ -23,9 +23,9 @@ export function UploadFile({imgSrc, children}: IUploadFileProps) {
                     src={imgSrc}
                     onClick={() => setModalActive(true)}/>
             
-            <Modal active={modalActive} setActive={setModalActive}>
+            {/* <Modal active={modalActive} setActive={setModalActive}>
                {children}
-            </Modal> 
+            </Modal>  */}
             </Container>
         </>
         

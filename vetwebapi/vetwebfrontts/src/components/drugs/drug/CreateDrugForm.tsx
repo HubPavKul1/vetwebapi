@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { CustomButton } from "../../button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
-import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import { fieldRequiredMessage } from "../../ErrorMessages";
 import { IDrugCreate } from "../../../interfaces/DrugInterfaces";
 import { DrugService } from "../drugs.service";
 import { DiseaseSelect } from "./DiseaseSelect";
@@ -41,7 +41,6 @@ export function CreateDrugForm() {
     )
 
     const createDrug: SubmitHandler<IDrugCreate> = data => {
-        console.log("drug: ", data)
         mutate(data)
 
     }
