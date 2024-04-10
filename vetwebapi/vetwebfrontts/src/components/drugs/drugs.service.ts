@@ -1,5 +1,5 @@
 import axios from "axios"
-import { IDrugMovements,  IDrugMovementCreate, IDrugs, IDrugCreate, IBudgets, IDrugManufacturers, IAccountingUnits } from "../../interfaces/DrugInterfaces"
+import { IDrugMovements, IDrug, IDrugMovementCreate, IDrugs, IDrugCreate, IBudgets, IDrugManufacturers, IAccountingUnits } from "../../interfaces/DrugInterfaces"
 import { IDiseases } from "../../interfaces/VetWorkInterfaces"
 
 
@@ -15,7 +15,7 @@ export const DrugService = {
       return await axios.get<IDrugs>("/api/drugs")
     },
 
-    async deleteDrug(id?: string) {
+    async deleteDrug(id: string) {
       await axios.delete(`/api/drugs/${id}`)
     },
 
@@ -44,9 +44,9 @@ export const DrugService = {
     },
 
 
-    async uploadFile(file: FormData) {
+    async uploadFile(file: FormData, id: string) {
+      await axios.post(`/api/drugs/${id}/upload/`, file)
 
-      await axios.post(`/api/drugs/upload`, file)
         .then(response => console.log(response))
         .catch(err => console.log(err))
     },

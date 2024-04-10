@@ -1,5 +1,7 @@
 // import styles from "./Modal.module.css"
-import "./Modal.css"
+
+
+import styles from "./Modal.module.scss"
 
 interface ModalProps {
     active: boolean;
@@ -12,8 +14,8 @@ interface ModalProps {
 export function Modal({active , setActive, children}: ModalProps) {
 
     return (
-        <div className={ active ? "modal active" : "modal" } onClick={() => setActive(false)}>
-            <div className={ active ? "modal__content active" : "modal__content" } onClick={e => e.stopPropagation()}>
+        <div className={ active ? `${styles.active}` : `${styles.modal}` } onClick={() => setActive(false)}>
+            <div className={ active ? `${styles.contentActive}` : `${styles.content}` } onClick={e => e.stopPropagation()}>
                 {children}
             </div>
         </div>

@@ -38,10 +38,9 @@ async def add_drug_to_movement(
 
 
 # Save Files
-async def save_file(session: AsyncSession, drug_id: int, file: UploadFile = File(...)) -> None:
+async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(...)) -> None:
    
     filename = await utils.prepare_filename(str(file.filename))
-    drug = await read_drug_by_id(drug_id=drug_id, session=session)
 
     dest = ""
 

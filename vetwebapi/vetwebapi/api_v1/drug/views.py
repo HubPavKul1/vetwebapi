@@ -51,10 +51,10 @@ async def create_drug_route(
     
     return await serialize_drug(drug=drug)
 
-@router.post("/upload/", status_code=status.HTTP_201_CREATED)
+@router.post("/{drug_id}/upload/", status_code=status.HTTP_201_CREATED)
 async def upload_drug_file_route(
-    drug_id: int,
     file: UploadFile,
+    drug: Drug = Depends(drug_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     if file.content_type not in [
@@ -64,7 +64,7 @@ async def upload_drug_file_route(
         "image/jpg"
         ]:
         raise HTTPException(status_code=400, detail="Invalid file type")
-    await crud.save_file(session=session, drug_id=drug_id, file=file)
+    await crud.save_file(session=session, drug=drug, file=file)
     
     
 @router.post("/{drug_movement_id}", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)

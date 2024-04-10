@@ -20,7 +20,7 @@ export function UploadAnimalForm({compId}: CompanyPageProps) {
         mutationFn: (data: FormData) => AnimalService.uploadAnimals(data, compId?.toString()),
         onSuccess: () => {
             alert("Животные успешно добавлены!")
-            queryClient.invalidateQueries(["company", id])
+            queryClient.invalidateQueries(["company", compId])
             reset()
         }
     },

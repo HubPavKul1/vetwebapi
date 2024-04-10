@@ -55,6 +55,15 @@
 	}
 }
 
+.cardImageEmpty {
+	width: 25%;
+	@include transition(transform);
+	
+	&:hover {
+		@include transform;
+	}
+}
+
 .deleteItem {
 	display: flex;
 	justify-content: end;

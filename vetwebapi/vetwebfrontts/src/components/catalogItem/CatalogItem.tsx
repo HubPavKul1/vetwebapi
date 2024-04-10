@@ -8,6 +8,7 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 
 
 export function CatalogItem({...props}: ICardProps) {
+
     let url = "";
     props.url ? url = props.url : url = "/";
     return (
@@ -15,19 +16,20 @@ export function CatalogItem({...props}: ICardProps) {
             <Col >
             
                 <Container className={styles.catalogItem}>
-                <Link to={url}>
+                
                     {props.imgSrc ? 
+                    <Link to={url}>
                         <img 
                             className={styles.cardImage} 
                             src={props.imgSrc}
-                            alt={props.cardTitle}
-                    />: <img
-                            className={styles.cardImage} 
-                            src="/drugs/images/vetLogo2.png"
-                            alt={props.cardTitle}
-                    />
+                            alt={props.cardTitle}/> 
+                    </Link>: 
+                    <>
+                        {props.children}
+                    </>
+                        
                     }
-                </Link>
+                
                     <div className={styles.card}>
                     <Link to={url}>
                         <h5 className={styles.cardTitle}>{props.cardTitle}</h5>

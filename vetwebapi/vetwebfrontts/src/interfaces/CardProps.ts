@@ -14,4 +14,5 @@ export interface ICardProps {
     address?: string;
     hasContacts?: boolean;
     onClick?: MouseEventHandler;
+    children?: React.ReactElement | React.ReactNode;
 }

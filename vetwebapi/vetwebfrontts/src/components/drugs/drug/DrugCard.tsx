@@ -2,6 +2,8 @@ import { IDrug } from "../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { DrugService } from "../drugs.service";
+import { UploadDrugFileForm } from "./UploadFileForm";
+import { UploadFile } from "../../uploadFile/UploadFile";
 
 
 interface DrugCardProps {
@@ -10,6 +12,7 @@ interface DrugCardProps {
 
 export function DrugCard({drug}: DrugCardProps) {
 
+    
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["delete drug"], {
@@ -26,13 +29,19 @@ export function DrugCard({drug}: DrugCardProps) {
     }
 
     return (
-
-            <CatalogItem 
+            <>
+                <CatalogItem 
                 id={drug.id} 
                 cardTitle={drug.name} 
                 imgSrc={drug.image}
-                onClick={deleteDrug} 
-                // url={`/companies/${company.id}`}
-            />
+                onClick={deleteDrug}    
+            >
+                <UploadFile imgSrc="/drugsCard.jpg">
+                    <UploadDrugFileForm drug={drug}/>
+                </UploadFile>
+                
+            </CatalogItem>
+            </>
+           
     )
 }
