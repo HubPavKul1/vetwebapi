@@ -1,9 +1,10 @@
-@import "../../../assets/sass/mixins";
+@import "../../assets/sass/mixins";
 
 .root {
     position: relative;
     font-size: 0;
     z-index: 0;
+    
 
     &:hover {
         .label {
@@ -11,6 +12,8 @@
         }
     }
 }
+
+
 
 .label {
     pointer-events: none;

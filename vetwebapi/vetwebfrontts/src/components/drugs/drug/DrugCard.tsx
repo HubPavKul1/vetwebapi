@@ -2,8 +2,7 @@ import { IDrug } from "../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { DrugService } from "../drugs.service";
-import { UploadDrugFileForm, UploadFileForm } from "./UploadFileForm";
-import { UploadFile } from "../../uploadFile/UploadFile";
+import { UploadFileForm } from "../../uploadFile/UploadFileForm";
 
 
 interface DrugCardProps {
@@ -30,13 +29,13 @@ export function DrugCard({drug}: DrugCardProps) {
 
     return (
             <>
-                <CatalogItem 
+            <CatalogItem 
                 id={drug.id} 
                 cardTitle={drug.name} 
                 imgSrc={drug.image}
                 onClick={deleteDrug}    
             >
-                <UploadFileForm drug={drug}>
+                <UploadFileForm itemId={drug.id.toString()}>
                     <img src="/drugsCard.jpg"/>
                 </UploadFileForm>
              

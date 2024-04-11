@@ -1,28 +1,25 @@
-import { useId, useState } from "react";
-import { useForm } from "react-hook-form"
+import { useId } from "react";
+import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 
-import { IDrug } from "../../../interfaces/DrugInterfaces";
-import { DrugService } from "../drugs.service";
+import { DrugService } from "../drugs/drugs.service";
 
 
 import styles from "./UploadFileForm.module.scss"
 
-interface UploadDrugFileFormProps {
-    drug: IDrug;
+interface UploadFileFormProps {
+    itemId: string;
     children?: React.ReactElement | React.ReactNode;
 }
 
-export function UploadFileForm({drug, children}: UploadDrugFileFormProps) {
+export function UploadFileForm({itemId, children}: UploadFileFormProps) {
 
-    
-    const [currentFile, setCurrentFile] = useState<File>();
     const id = useId()
     const { reset } = useForm<FileList>();
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["upload drugFile"], {
-        mutationFn: (data: FormData) => DrugService.uploadFile(data, drug.id?.toString()),
+        mutationFn: (data: FormData) => DrugService.uploadFile(data, itemId),
         onSuccess: () => {
             alert("Файл успешно загружен!")
             queryClient.invalidateQueries(["drugs"])
@@ -31,33 +28,25 @@ export function UploadFileForm({drug, children}: UploadDrugFileFormProps) {
     },
     )
 
-    const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { files } = event.target;
-        const selectedFiles = files as FileList;
-        setCurrentFile(selectedFiles?.[0]);
-
-    } 
-
-    const upload = () => {
+    const upload = async(currentFile: File) => {
         if (!currentFile) return;
         const formData = new FormData();
         formData.append("file", currentFile)
         mutate(formData)
     }
 
-    // upload()
+    const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { files } = event.target;
+        const selectedFiles = files as FileList;
+        upload(selectedFiles?.[0])
 
-    
+    } 
 
     
 
     return (
-
-        // <div className="container">
             <div className={styles.root}>
-                
                 <label 
-                // className={styles.label} 
                 htmlFor={id}>
                     {children}
                     <input 
