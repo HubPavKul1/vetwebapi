@@ -20,9 +20,9 @@ export function Companies() {
     )
                            
     return (
-        <Catalog title="Предприятия">
-            <CreateItem btnTitle="Добавить предприятие">
-                <CreateCompanyForm/>
+            <Catalog title="Предприятия">
+                <CreateItem btnTitle="Добавить предприятие">
+                    <CreateCompanyForm/>
             </CreateItem>
             
 

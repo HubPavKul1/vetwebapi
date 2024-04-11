@@ -5,7 +5,7 @@ import { ICardProps } from "../../interfaces/CardProps";
 export const catalogItemData: ICardProps[] = [
     {
         id: 1,
-        imgSrc: "/farm.jpg",
+        // imgSrc: "/farm.jpg",
         imgAlt: "farm",
         cardTitle: "Название1",
         url: "/",
@@ -16,7 +16,7 @@ export const catalogItemData: ICardProps[] = [
 
     {
         id: 2,
-        imgSrc: "/farm.jpg",
+        // imgSrc: "/farm.jpg",
         imgAlt: "farm",
         cardTitle: "Название2",
         url: "/",
@@ -27,7 +27,7 @@ export const catalogItemData: ICardProps[] = [
 
     {
         id: 3,
-        imgSrc: "/farm.jpg",
+        // imgSrc: "/farm.jpg",
         imgAlt: "farm",
         cardTitle: "Название3",
         url: "/",
@@ -38,7 +38,7 @@ export const catalogItemData: ICardProps[] = [
 
     {
         id: 4,
-        imgSrc: "/farm.jpg",
+        // imgSrc: "/farm.jpg",
         imgAlt: "farm",
         cardTitle: "Название4",
         url: "/",
