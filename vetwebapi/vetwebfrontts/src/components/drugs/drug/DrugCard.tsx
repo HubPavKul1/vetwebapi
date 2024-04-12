@@ -27,6 +27,8 @@ export function DrugCard({drug}: DrugCardProps) {
         mutate()
     }
 
+
+
     return (
             <>
             <CatalogItem 

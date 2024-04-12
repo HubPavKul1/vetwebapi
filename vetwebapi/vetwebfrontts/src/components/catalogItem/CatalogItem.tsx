@@ -26,7 +26,7 @@ export function CatalogItem({...props}: ICardProps) {
                             alt={props.cardTitle}/> 
                     </Link>: 
                     <><div className={styles.cardImageEmpty}>
-                        <FileUpload />
+                        {props.children}
                     </div>
                         
                     </>
