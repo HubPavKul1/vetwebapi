@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import styles from "./CatalogItem.module.scss";
 import { Col, Container } from "react-bootstrap";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import { FileUpload } from "../fileUpload/FileUpload";
-
 
 
 export function CatalogItem({...props}: ICardProps) {
@@ -26,6 +24,7 @@ export function CatalogItem({...props}: ICardProps) {
                             alt={props.cardTitle}/> 
                     </Link>: 
                     <><div className={styles.cardImageEmpty}>
+                        {/* File Upload component */}
                         {props.children}
                     </div>
                         

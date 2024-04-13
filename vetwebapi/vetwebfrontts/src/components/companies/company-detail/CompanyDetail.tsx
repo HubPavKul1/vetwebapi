@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { CompanyService } from "../company.service";
 import { useQuery } from "react-query"
 import { CompanyAddress } from "../address/CompanyAddress";
 import { CompanyEmployee } from "../employee/CompanyEmployee";
@@ -8,19 +7,34 @@ import { CompanyPageMenu } from "./menu/CompanyPageMenu";
 import { Container, Row, Col } from "react-bootstrap";
 
 import styles from "./CompanyDetail.module.scss"
+import { AppService } from "../../../app.service";
+import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
+
 
 
 export function CompanyDetail() {
-    const {id} = useParams();
 
-    const { data, isLoading } = useQuery(['company', id], () => CompanyService.getById(id), {
+    interface CompanyData {
+      data?: ICompanyDetail;
+      isLoading: boolean;
+    }
+
+    const {id} = useParams();
+    const url = `/api/companies/${id}`
+
+    // const { data, isLoading } = useQuery(['company', id], () => CompanyService.getById(id), {
+    //   enabled: !!id
+    // }
+    // );
+
+    const { isLoading, data }: CompanyData = useQuery(['company', id], () => AppService.get(url), {
       enabled: !!id
     }
     );
 
    
     if(isLoading) return <p>Загрузка ...</p>
-
+    
     return (
 
       <>
@@ -34,7 +48,7 @@ export function CompanyDetail() {
           </Col>
          
           <Col>
-              <CompanyPageMenu compId={data.id}/>
+              <CompanyPageMenu/>
           </Col>
 
         </Row>
@@ -63,10 +77,9 @@ export function CompanyDetail() {
                         <th>Отчество</th>
                       </tr>
     
-                      {data?.employees?.length ? 
+                      {data?.employees &&
                         data.employees.map(empoloyee => <CompanyEmployee key={empoloyee.id} employee={empoloyee} />)
                       
-                      : ""
                       }
                       
                     </tbody>

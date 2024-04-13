@@ -10,6 +10,7 @@ export function AddAddress({compId}: CompanyPageProps) {
     return (
             <MenuItem title="Добавить адрес">
                 <AddAddressForm compId={compId}/>
+                
             </MenuItem>
     )
 }

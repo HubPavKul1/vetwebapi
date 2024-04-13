@@ -2,7 +2,7 @@ import { IDrug } from "../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { DrugService } from "../drugs.service";
-import { UploadFileForm } from "../../uploadFile/UploadFileForm";
+import { FileUpload } from "../../fileUpload/FileUpload";
 
 
 interface DrugCardProps {
@@ -27,6 +27,8 @@ export function DrugCard({drug}: DrugCardProps) {
         mutate()
     }
 
+    const fileUploadUrl = `/api/drugs/${drug.id}/upload/`
+
 
 
     return (
@@ -37,10 +39,13 @@ export function DrugCard({drug}: DrugCardProps) {
                 imgSrc={drug.image}
                 onClick={deleteDrug}    
             >
-                <UploadFileForm itemId={drug.id.toString()}>
-                    <img src="/drugsCard.jpg"/>
-                </UploadFileForm>
-             
+
+                <FileUpload
+                    uploadUrl={fileUploadUrl}
+                    accept="image/*"
+                    mutationName="drugImage upload"
+                    invQueryName="drugs"
+                />
                 
             </CatalogItem>
             </>

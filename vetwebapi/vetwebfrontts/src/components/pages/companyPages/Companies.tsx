@@ -8,16 +8,26 @@ import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { CompanyCard } from "../../companies/company-card/CompanyCard";
 import { CreateCompanyForm } from "../../companies/createCompany/CreateCompanyForm";
 import { CreateItem } from "../../createItem/CreateItem";
+import { AppService } from "../../../app.service";
+import { ICompany } from "../../../interfaces/CompanyInterfaces";
+
 
 
 
 export function Companies() {
+
+    const url = "/api/companies/"
+
+    interface CompaniesProps {
+        data?: ICompany[];
+    }
+
     
-    const { data } = useQuery(['companies'], () => CompanyService.getAll(),
-        {
-            select: ({data}) => data?.companies
-        }
-    )
+    const { data }: CompaniesProps = useQuery(['companies'], () => AppService.get(url),
+    {
+        select: ({data}) => data?.companies
+    }
+)
                            
     return (
             <Catalog title="Предприятия">

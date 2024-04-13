@@ -1,14 +1,13 @@
 import { AddEmployeeForm } from "./AddEmployeeForm";
-import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
-
 import { MenuItem } from "../../menuItem/MenuItem";
 
 
-export function AddEmployee({compId}: CompanyPageProps) {
+
+export function AddEmployee() {
 
     return (
         <MenuItem title="Добавить работника">
-            <AddEmployeeForm compId={compId}/>
+            <AddEmployeeForm />
         </MenuItem>
     )
 }

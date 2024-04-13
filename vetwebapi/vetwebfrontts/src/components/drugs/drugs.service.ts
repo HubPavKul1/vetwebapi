@@ -1,5 +1,5 @@
 import axios from "axios"
-import { IDrugMovements, IDrug, IDrugMovementCreate, IDrugs, IDrugCreate, IBudgets, IDrugManufacturers, IAccountingUnits } from "../../interfaces/DrugInterfaces"
+import { IDrugMovements, IDrugMovementCreate, IDrugs, IDrugCreate, IBudgets, IDrugManufacturers, IAccountingUnits } from "../../interfaces/DrugInterfaces"
 import { IDiseases } from "../../interfaces/VetWorkInterfaces"
 
 

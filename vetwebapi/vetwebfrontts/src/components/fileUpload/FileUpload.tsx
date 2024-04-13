@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { useQueryClient, useMutation } from "react-query";
 import axios from "axios";
@@ -7,26 +7,25 @@ import styles from "./FileUpload.module.scss";
 
 
 interface FileUploadProps {
-    itemId: number;
+    accept: string;
     uploadUrl: string;
     mutationName: string;
     invQueryName: string;
 }
 
-export function FileUpload({itemId, uploadUrl}: FileUploadProps) {
+export function FileUpload({uploadUrl, accept, mutationName, invQueryName}: FileUploadProps) {
     const id = useId()
-    const [image, setImage] = useState<File>()
-
+    
     const { reset } = useForm<FileList>();
     const queryClient = useQueryClient()
 
-    const { mutate } = useMutation(["upload drugFile"], {
+    const { mutate } = useMutation([{mutationName}], {
         mutationFn: async (data: FormData) => await axios.post(uploadUrl, data) 
         .then(response => console.log(response))
         .catch(err => console.log(err)),
         onSuccess: () => {
             alert("Файл успешно загружен!")
-            queryClient.invalidateQueries(["drugs"])
+            queryClient.invalidateQueries([{invQueryName}])
             reset()
         }
     },
@@ -42,10 +41,10 @@ export function FileUpload({itemId, uploadUrl}: FileUploadProps) {
     const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { files } = event.target;
         const selectedFiles = files as FileList;
-        setImage(selectedFiles?.[0])
+        upload(selectedFiles?.[0]);
 
     } 
-    // console.log("newFile>>>", image)
+   
 
     return (
         <label 
@@ -55,7 +54,7 @@ export function FileUpload({itemId, uploadUrl}: FileUploadProps) {
                 type="file" 
                 id={id}
                 hidden
-                accept="image/*"
+                accept={accept}
                 onChange={selectFile}
             />
             <img src="/emptyImage.jpg"/>

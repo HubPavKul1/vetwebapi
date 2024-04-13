@@ -6,12 +6,20 @@ import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
 import { CustomButton } from "../../button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
-import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import { useParams } from "react-router-dom";
+import { AppService } from "../../../app.service";
 
 
 
-export function AddEmployeeForm({compId}: CompanyPageProps) {
+export function AddEmployeeForm() {
+
+    
+    const {id} = useParams()
+
+    const url = `/api/companies/${id}/employees/`
+    
+   
 
 
     const inputItems: FormInputProps<IEmployeeCreate>[] = [
@@ -29,14 +37,24 @@ export function AddEmployeeForm({compId}: CompanyPageProps) {
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["create employee"], {
-        mutationFn: (data: IEmployeeCreate) => EmployeeService.createEmployee(data, compId.toString()),
+        mutationFn: (data: IEmployeeCreate) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Работник успешно добавлен!")
-            queryClient.invalidateQueries(["company", compId])
+            queryClient.invalidateQueries(["company", id])
             reset()
         }
     },
-    )
+)
+
+    // const { mutate } = useMutation(["create employee"], {
+    //     mutationFn: (data: IEmployeeCreate) => EmployeeService.createEmployee(data, id),
+    //     onSuccess: () => {
+    //         alert("Работник успешно добавлен!")
+    //         queryClient.invalidateQueries(["company", compId])
+    //         reset()
+    //     }
+    // },
+    // )
 
     const createEmployee: SubmitHandler<IEmployeeCreate> = data => {
         console.log("employee: ", data)
