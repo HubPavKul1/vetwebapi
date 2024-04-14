@@ -1,18 +1,33 @@
 import Select from 'react-select'
-import { EmployeeService } from '../company.service'
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../../interfaces/FormInterface';
+import { AppService } from '../../../app.service';
+import { IBase } from '../../../interfaces/BaseInterface';
 
 
+
+interface PositionData {
+    data?: IBase[];
+    isLoading: boolean;
+    
+}
 
 export function PositionsSelect() {
- 
-    const { data, isLoading, error } = useQuery(['positions'], () => EmployeeService.getPositions())
+
+    const url = "/api/companies/positions"
+
+    const { data, isLoading }: PositionData = useQuery(['positions'], () => AppService.getAll(url), 
+    {
+        select: ({data}) => data?.positions
+    }
+)
+    console.log("Positions", data)   
+   
 
     const { control } = useFormContext()
 
-    const options = data?.data?.positions?.map(position => ({ value: position.id, label: position.name }))
+    const options = data?.map(position => ({ value: position.id, label: position.name }))
 
 
     const getValue = (value: number) =>
@@ -26,7 +41,9 @@ export function PositionsSelect() {
             rules={
                 { required: "Position is required!" }
             }
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value },
+                    // fieldState: { error }
+                }) => (
                 <Select className='custom-select'
                     isSearchable
                     isClearable

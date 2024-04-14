@@ -3,8 +3,12 @@ import axios from "axios";
 
 export const AppService = {
 
+    async getAll(url: string) {
+        return (await axios.get(url)); 
+    },
+
     async get(url: string) {
-        return await axios.get(url)
+        return (await axios.get(url)).data; 
     },
 
     async createItem(url: string, data: object) {

@@ -1,6 +1,5 @@
 import { Row } from "react-bootstrap";
 
-import { CompanyService } from "../../companies/company.service";
 import { useQuery } from "react-query";
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
@@ -12,23 +11,24 @@ import { AppService } from "../../../app.service";
 import { ICompany } from "../../../interfaces/CompanyInterfaces";
 
 
+interface CompaniesProps {
+    data?: ICompany[];
+}
 
 
 export function Companies() {
 
     const url = "/api/companies/"
 
-    interface CompaniesProps {
-        data?: ICompany[];
-    }
-
-    
-    const { data }: CompaniesProps = useQuery(['companies'], () => AppService.get(url),
+    const { data }: CompaniesProps = useQuery(['companies'], () => AppService.getAll(url),
     {
         select: ({data}) => data?.companies
     }
 )
-                           
+
+    if(!data) return <p>Загрузка ...</p>;
+
+            
     return (
             <Catalog title="Предприятия">
                 <CreateItem btnTitle="Добавить предприятие">

@@ -4,16 +4,28 @@ import { useQuery } from "react-query";
 import { useState } from 'react';
 import { StreetsSelect } from './StreetsSelect';
 import { IOption } from '../../../interfaces/FormInterface';
+import { AppService } from '../../../app.service';
+import { ICities } from '../../../interfaces/AddressInterfaces';
 
 interface CitiesSelectProps {
     districtId: string;
 }
 
+interface CityData {
+    data?: ICities;
+}
+
 export function CitiesSelect({districtId}: CitiesSelectProps) {
     const [cityId, setCityId] = useState<string | undefined>();
-    const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(districtId));
+    const url = `/api/companies/districts/${districtId}/cities`
+    const { data, isLoading, error }: CityData = useQuery(['cities'], () => AppService.get(url),
+    {
+        select: ({data}) => data?.cities
+    }
+);
+    // const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(districtId));
     
-    const options = data?.data?.cities?.map(city=>({value: city.id, label: city.name}));
+    const options = data?.cities?.map(city=>({value: city.id, label: city.name}));
     
     function handleSelect(data: SingleValue<IOption>) {
         setCityId(data?.value?.toString());

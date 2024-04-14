@@ -12,20 +12,19 @@ import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
 
 
 
+
+interface CompanyData {
+  data?: ICompanyDetail;
+  isLoading: boolean;
+}
+
 export function CompanyDetail() {
 
-    interface CompanyData {
-      data?: ICompanyDetail;
-      isLoading: boolean;
-    }
+   
 
     const {id} = useParams();
-    const url = `/api/companies/${id}`
+    const url = `/api/companies/${id}`;
 
-    // const { data, isLoading } = useQuery(['company', id], () => CompanyService.getById(id), {
-    //   enabled: !!id
-    // }
-    // );
 
     const { isLoading, data }: CompanyData = useQuery(['company', id], () => AppService.get(url), {
       enabled: !!id
@@ -33,7 +32,7 @@ export function CompanyDetail() {
     );
 
    
-    if(isLoading) return <p>Загрузка ...</p>
+    if(isLoading || !data) return <p>Загрузка ...</p>;
     
     return (
 
@@ -56,10 +55,10 @@ export function CompanyDetail() {
         <Container className={styles.titleWrap}>
                   <h1>
                   <a href="#">
-                    {data?.full_name} 
+                    {data.full_name} 
                   </a>
                   </h1>
-                    {data?.address ? 
+                    {data.address ? 
                     <CompanyAddress address={data.address}/>
                     : <p>Адрес отсутствует!</p>
                     }
@@ -77,7 +76,7 @@ export function CompanyDetail() {
                         <th>Отчество</th>
                       </tr>
     
-                      {data?.employees &&
+                      {data.employees &&
                         data.employees.map(empoloyee => <CompanyEmployee key={empoloyee.id} employee={empoloyee} />)
                       
                       }
@@ -101,7 +100,7 @@ export function CompanyDetail() {
                         <th>Идентификация</th>
                         <th />
                       </tr>
-                      {data?.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
+                      {data.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
                       
                       
                       : ""
