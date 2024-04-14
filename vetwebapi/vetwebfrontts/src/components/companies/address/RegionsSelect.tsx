@@ -1,17 +1,29 @@
-import Select, { SingleValue } from 'react-select'
-import { AddressService } from '../company.service'
+import Select, { SingleValue } from 'react-select';
 import { useQuery } from "react-query";
 import { DistrictsSelect } from './DistrictsSelect';
 import { useState } from 'react';
 import { IOption } from '../../../interfaces/FormInterface';
+import { AppService } from '../../../app.service';
+import { IBase } from '../../../interfaces/BaseInterface';
 
 
+interface RegionData {
+    data?: IBase[];
+    isLoading: boolean;
+}
 
 export function RegionsSelect() {
     const [regionId, setRegionId] = useState<string | undefined>()
-    const { data, isLoading, error } = useQuery(['regions'], () => AddressService.getRegions())
-    
-    const options = data?.data?.regions?.map(reg=>({value: reg.id, label: reg.name}))
+
+    const url = "/api/companies/regions"
+    const { data, isLoading }: RegionData = useQuery(['regions'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.regions
+    }
+);
+
+    if(isLoading || !data) return <p>Загрузка ...</p>;
+    const options = data.map(reg=>({value: reg.id, label: reg.name}))
     
     function handleSelect(data: SingleValue<IOption>) {
         setRegionId(data?.value.toString());

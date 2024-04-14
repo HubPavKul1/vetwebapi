@@ -1,31 +1,32 @@
 import Select, { SingleValue } from 'react-select'
-import { AddressService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
 import { StreetsSelect } from './StreetsSelect';
 import { IOption } from '../../../interfaces/FormInterface';
 import { AppService } from '../../../app.service';
-import { ICities } from '../../../interfaces/AddressInterfaces';
+import { IBase } from '../../../interfaces/BaseInterface';
 
 interface CitiesSelectProps {
     districtId: string;
 }
 
 interface CityData {
-    data?: ICities;
+    data?: IBase[];
+    isLoading?: boolean;
+    
 }
 
 export function CitiesSelect({districtId}: CitiesSelectProps) {
     const [cityId, setCityId] = useState<string | undefined>();
     const url = `/api/companies/districts/${districtId}/cities`
-    const { data, isLoading, error }: CityData = useQuery(['cities'], () => AppService.get(url),
+    const { data, isLoading }: CityData = useQuery(['cities'], () => AppService.getAll(url),
     {
         select: ({data}) => data?.cities
     }
 );
-    // const { data, isLoading, error } = useQuery(['cities'], () => AddressService.getDistrictCities(districtId));
-    
-    const options = data?.cities?.map(city=>({value: city.id, label: city.name}));
+   
+    if(isLoading || !data) return <p>Загрузка ...</p>;
+    const options = data.map(city=>({value: city.id, label: city.name}));
     
     function handleSelect(data: SingleValue<IOption>) {
         setCityId(data?.value?.toString());

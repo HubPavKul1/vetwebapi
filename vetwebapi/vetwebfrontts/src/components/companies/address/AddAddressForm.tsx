@@ -1,18 +1,20 @@
 import { useForm, FormProvider, SubmitHandler, RegisterOptions } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { RegionsSelect } from "./RegionsSelect";
-import { AddressService } from "../company.service";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 import { CustomButton } from "../../button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
-import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
-import { SubmitButton } from "../../button/SubmitButton";
+import { useParams } from "react-router-dom";
+import { AppService } from "../../../app.service";
 
 
 
-export function AddAddressForm({compId}: CompanyPageProps) {
+export function AddAddressForm() {
+
+    const {id} = useParams()
+    const url = `/api/companies/${id}/address`
 
     const rulesOptions: RegisterOptions = {
       required: {value: true, message: fieldRequiredMessage,}, 
@@ -37,10 +39,10 @@ export function AddAddressForm({compId}: CompanyPageProps) {
     
 
     const {mutate} = useMutation(["create address"], {
-        mutationFn: (data: IAddressIn) => AddressService.createAddress(data, compId.toString()),
+        mutationFn: (data: IAddressIn) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Адрес успешно добавлен!")
-            queryClient.invalidateQueries(["company", compId])
+            queryClient.invalidateQueries(["company", id])
             reset()
         }
     },

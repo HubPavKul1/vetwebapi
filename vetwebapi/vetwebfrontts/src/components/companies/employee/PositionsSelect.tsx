@@ -22,12 +22,14 @@ export function PositionsSelect() {
         select: ({data}) => data?.positions
     }
 )
-    console.log("Positions", data)   
+    
    
 
     const { control } = useFormContext()
 
-    const options = data?.map(position => ({ value: position.id, label: position.name }))
+    if(isLoading || !data) return <p>Загрузка ...</p>;
+
+    const options = data.map(position => ({ value: position.id, label: position.name }))
 
 
     const getValue = (value: number) =>

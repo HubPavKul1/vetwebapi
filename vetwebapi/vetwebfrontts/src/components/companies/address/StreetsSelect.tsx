@@ -1,21 +1,35 @@
-import AsyncSelect from "react-select/async"
-import { AddressService } from '../company.service'
+import AsyncSelect from "react-select/async";
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
+import { AppService } from "../../../app.service";
+import { IBase } from "../../../interfaces/BaseInterface";
 
 
 interface StreetsSelectProps {
     cityId: string;
 }
 
+interface StreetData {
+    data?: IBase[];
+    isLoading: boolean;
+}
+
 export function StreetsSelect({cityId}: StreetsSelectProps) {
 
-    const { data } = useQuery(['cityStreets'], () => AddressService.getCityStreets(cityId))
+    const url = `/api/companies/cities/${cityId}/streets`
+
+    const { data, isLoading}: StreetData = useQuery(['cityStreets'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.streets
+    }
+)
 
     const { control } = useFormContext()
+
+    if(isLoading || !data) return <p>Загрузка ...</p>;
     
-    const options = data?.data?.streets?.map(street=>({value: street.id, label: street.name}))
+    const options = data.map(street=>({value: street.id, label: street.name}))
     
     const loadOptions = (searchValue: string, callback: CallableFunction) => {
         setTimeout(() => {
@@ -35,7 +49,7 @@ export function StreetsSelect({cityId}: StreetsSelectProps) {
         rules={
           {required: "Street is required!"}
         }
-        render={({field: {onChange, value}, fieldState: { error }}) => (
+        render={({field: {onChange, value}}) => (
         <AsyncSelect className='custom-select'
             isSearchable
             isClearable

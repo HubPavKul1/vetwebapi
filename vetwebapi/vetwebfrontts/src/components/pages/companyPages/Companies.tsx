@@ -37,7 +37,7 @@ export function Companies() {
             
 
             <Row xs={1} md={3} lg={3}>
-                {data?.length ? data.map(company => (
+                {data.length ? data.map(company => (
                     <CompanyCard key={company.id} company={company}/>
                 )):
                     catalogItemData.map(item => (  
