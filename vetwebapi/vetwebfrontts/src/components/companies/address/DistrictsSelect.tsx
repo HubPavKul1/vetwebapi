@@ -1,11 +1,10 @@
-import Select, { SingleValue } from 'react-select'
-import { AddressService } from '../company.service'
+import Select, { SingleValue } from 'react-select';
 import { useQuery } from "react-query";
 import { useState } from 'react';
 import { CitiesSelect } from './CitiesSelect';
 import { IOption } from '../../../interfaces/FormInterface';
 import { AppService } from '../../../app.service';
-import { IBase } from '../../../interfaces/BaseInterface';
+import { IQueryData } from '../../../interfaces/BaseInterface';
 
 
 
@@ -13,15 +12,12 @@ interface DistrictsSelectProps {
     regionId: string;
 }
 
-interface DistrictData {
-    data?: IBase[];
-    isLoading: boolean;
-}
+
 
 export function DistrictsSelect({regionId}: DistrictsSelectProps) {
     const [districtId, setDistrictId] = useState<string | undefined>()
     const url = `/api/companies/regions/${regionId}/districts`
-    const { data, isLoading }: DistrictData = useQuery(['regionDistricts'], () => AppService.getAll(url),
+    const { data, isLoading }: IQueryData = useQuery(['regionDistricts'], () => AppService.getAll(url),
     {
         select: ({data}) => data?.districts
     }

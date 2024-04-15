@@ -4,19 +4,16 @@ import { DistrictsSelect } from './DistrictsSelect';
 import { useState } from 'react';
 import { IOption } from '../../../interfaces/FormInterface';
 import { AppService } from '../../../app.service';
-import { IBase } from '../../../interfaces/BaseInterface';
+import { IQueryData } from '../../../interfaces/BaseInterface';
 
 
-interface RegionData {
-    data?: IBase[];
-    isLoading: boolean;
-}
+
 
 export function RegionsSelect() {
     const [regionId, setRegionId] = useState<string | undefined>()
 
     const url = "/api/companies/regions"
-    const { data, isLoading }: RegionData = useQuery(['regions'], () => AppService.getAll(url),
+    const { data, isLoading }: IQueryData = useQuery(['regions'], () => AppService.getAll(url),
     {
         select: ({data}) => data?.regions
     }

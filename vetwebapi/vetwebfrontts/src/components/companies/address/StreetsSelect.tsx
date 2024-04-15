@@ -3,23 +3,20 @@ import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { AppService } from "../../../app.service";
-import { IBase } from "../../../interfaces/BaseInterface";
+import { IQueryData } from "../../../interfaces/BaseInterface";
 
 
 interface StreetsSelectProps {
     cityId: string;
 }
 
-interface StreetData {
-    data?: IBase[];
-    isLoading: boolean;
-}
+
 
 export function StreetsSelect({cityId}: StreetsSelectProps) {
 
     const url = `/api/companies/cities/${cityId}/streets`
 
-    const { data, isLoading}: StreetData = useQuery(['cityStreets'], () => AppService.getAll(url),
+    const { data, isLoading}: IQueryData = useQuery(['cityStreets'], () => AppService.getAll(url),
     {
         select: ({data}) => data?.streets
     }

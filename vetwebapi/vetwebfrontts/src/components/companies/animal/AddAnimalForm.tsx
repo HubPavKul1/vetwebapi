@@ -1,19 +1,21 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { TypesOfFeedingSelect } from "./TypeOfFeedingSelect";
-import { AnimalService } from "../company.service";
 import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
 import { CustomButton } from "../../button/CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
-import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import { useParams } from "react-router-dom";
+import { AppService } from "../../../app.service";
 
 
 
-export function AddAnimalForm({compId}: CompanyPageProps) {
+export function AddAnimalForm() {
 
+    const {id} = useParams()
+    const url = `/api/companies/${id}/animals/`
 
     const inputItems: FormInputProps<IAnimalCreate>[] = [
         {fieldName: "date_of_birth", id: "date_of_birth", type: "date"},
@@ -30,10 +32,10 @@ export function AddAnimalForm({compId}: CompanyPageProps) {
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["create animal"], {
-        mutationFn: (data: IAnimalCreate) => AnimalService.createAnimal(data, compId.toString()),
+        mutationFn: (data: IAnimalCreate) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Животное успешно добавлено!")
-            queryClient.invalidateQueries(["company", compId])
+            queryClient.invalidateQueries(["company", id])
             reset()
         }
     },

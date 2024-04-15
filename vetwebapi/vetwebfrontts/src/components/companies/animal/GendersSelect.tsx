@@ -1,8 +1,9 @@
-import Select from 'react-select'
-import { AnimalService } from '../company.service'
+import Select from 'react-select';
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
+import { IQueryData } from '../../../interfaces/BaseInterface';
+import { AppService } from '../../../app.service';
 
 
 interface GendersSelectProps {
@@ -11,11 +12,19 @@ interface GendersSelectProps {
 
 export function GendersSelect({ speciesId }: GendersSelectProps) {
 
-    const { data, isLoading, error } = useQuery(['genders'], () => AnimalService.getGenders(speciesId))
+    const url = `/api/companies/${speciesId}/genders`
+
+    const { data, isLoading }: IQueryData = useQuery(['genders'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.genders
+    }
+)
 
     const { control } = useFormContext()
 
-    const options = data?.data?.genders?.map(gender => ({ value: gender.id, label: gender.name }))
+    if(isLoading || !data) return <p>Загрузка ...</p>;
+
+    const options = data.map(gender => ({ value: gender.id, label: gender.name }))
 
 
     const getValue = (value: number) =>
@@ -29,7 +38,7 @@ export function GendersSelect({ speciesId }: GendersSelectProps) {
             rules={
                 { required: "Gender is required!" }
             }
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value }}) => (
                 <Select className='custom-select'
                     isSearchable
                     isClearable

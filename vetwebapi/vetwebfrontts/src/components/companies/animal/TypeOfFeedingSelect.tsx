@@ -4,15 +4,24 @@ import { useQuery } from "react-query";
 import { AnimalGroupsSelect } from './AnimalGroupsSelect';
 import { useState } from 'react';
 import { IOption } from '../../../interfaces/FormInterface';
-import { AnimalService } from '../company.service';
+import { IQueryData } from '../../../interfaces/BaseInterface';
+import { AppService } from '../../../app.service';
 
 
 
 export function TypesOfFeedingSelect() {
     const [typeOfFeedingId, setTypeOfFeedingId] = useState<string | undefined>()
-    const { data, isLoading, error } = useQuery(['types_of_feeding'], () => AnimalService.getTypeOfFeeding())
 
-    const options = data?.data?.types_of_feeding?.map(item => ({ value: item.id, label: item.name }))
+    const url = "/api/companies/types_of_feeding"
+    const { data, isLoading }: IQueryData = useQuery(['types_of_feeding'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.types_of_feeding
+    }
+);
+
+    if(isLoading || !data) return <p>Загрузка ...</p>;
+
+    const options = data.map(item => ({ value: item.id, label: item.name }))
 
     function handleSelect(data: SingleValue<IOption>) {
         setTypeOfFeedingId(data?.value.toString());

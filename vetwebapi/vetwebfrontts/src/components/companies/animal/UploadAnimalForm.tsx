@@ -1,15 +1,17 @@
 import { MouseEventHandler, useState } from "react";
-import { AnimalService } from "../company.service";
 import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { CustomButton } from "../../button/CustomButton";
-import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
+import { AppService } from "../../../app.service";
 
 
 
-export function UploadAnimalForm({compId}: CompanyPageProps) {
+export function UploadAnimalForm() {
+
+    const {id} = useParams();
+    const url = `/api/companies/${id}/animals/upload`;
 
     
     const [currentFile, setCurrentFile] = useState<File>();
@@ -17,10 +19,10 @@ export function UploadAnimalForm({compId}: CompanyPageProps) {
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["upload animals"], {
-        mutationFn: (data: FormData) => AnimalService.uploadAnimals(data, compId?.toString()),
+        mutationFn: (data: FormData) => AppService.uploadFile(url, data),
         onSuccess: () => {
             alert("Животные успешно добавлены!")
-            queryClient.invalidateQueries(["company", compId])
+            queryClient.invalidateQueries(["company", id])
             reset()
         }
     },

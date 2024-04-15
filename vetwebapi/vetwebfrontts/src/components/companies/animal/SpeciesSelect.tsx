@@ -1,10 +1,11 @@
 import Select from 'react-select'
 import { useState } from 'react';
-import { AnimalService } from '../company.service'
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { GendersSelect } from './GendersSelect';
+import { IQueryData } from '../../../interfaces/BaseInterface';
+import { AppService } from '../../../app.service';
 
 
 interface SpeciesSelectProps {
@@ -14,12 +15,20 @@ interface SpeciesSelectProps {
 export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
 
     const [ speciesId , setSpeciesId ] = useState<string | undefined>()
-
-    const { data } = useQuery(['species'], () => AnimalService.getSpecies(animalGroupId))
-
     const { control } = useFormContext()
 
-    const options = data?.data?.species?.map(spec => ({ value: spec.id, label: spec.name }))
+    const url = `/api/companies/${animalGroupId}/species`
+
+    const { data, isLoading }: IQueryData = useQuery(['species'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.species
+    }
+);
+
+    if (isLoading || !data) return <p>Загрузка ...</p>;
+
+
+    const options = data.map(spec => ({ value: spec.id, label: spec.name }))
 
     const getValue = (value: number) =>
         value ? options?.find((option) => option.value === value): ""
@@ -33,7 +42,7 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
             rules={
                 { required: "Species is required!" }
             }
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value }}) => (
                 <Select className='custom-select'
                     isSearchable
                     isClearable

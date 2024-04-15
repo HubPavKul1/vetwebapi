@@ -1,16 +1,15 @@
 import { AddAnimalForm } from "./AddAnimalForm";
 import { UploadAnimalForm } from "./UploadAnimalForm";
-import { CompanyPageProps } from "../company-detail/menu/CompanyPageMenu";
 
 import { MenuItem } from "../../menuItem/MenuItem";
 
 
-export function AddAnimal({compId}: CompanyPageProps) {
+export function AddAnimal() {
 
     return (
         <MenuItem title="Добавить животное">
-            <AddAnimalForm compId={compId}/>
-            <UploadAnimalForm compId={compId}/>
+            <AddAnimalForm />
+            <UploadAnimalForm />
         </MenuItem>
 
     )

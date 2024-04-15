@@ -1,29 +1,24 @@
-import Select from 'react-select'
+import Select from 'react-select';
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../../interfaces/FormInterface';
 import { AppService } from '../../../app.service';
-import { IBase } from '../../../interfaces/BaseInterface';
+import { IQueryData } from '../../../interfaces/BaseInterface';
 
 
 
-interface PositionData {
-    data?: IBase[];
-    isLoading: boolean;
-    
-}
+
 
 export function PositionsSelect() {
 
     const url = "/api/companies/positions"
 
-    const { data, isLoading }: PositionData = useQuery(['positions'], () => AppService.getAll(url), 
+    const { data, isLoading }: IQueryData = useQuery(['positions'], () => AppService.getAll(url), 
     {
         select: ({data}) => data?.positions
     }
-)
+);
     
-   
 
     const { control } = useFormContext()
 
