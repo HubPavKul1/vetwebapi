@@ -33,12 +33,30 @@ from .employee.dependencies import company_employees
 from .employee.schemas import EmployeeSchema, PositionSchemas
 from .employee.views import router as employee_router
 from .employee.views import serialize_employee
-from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
+from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage, CompanyCard
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 router.include_router(animal_router)
 router.include_router(address_router)
 router.include_router(employee_router)
+
+
+async def serialize_company(company: Company) -> CompanyCard:
+    address = company.addresses
+    employees = company.employees
+    employee: Employee = None
+    if address:
+        address = await serialize_address(address=address)
+    if employees:
+        employee = await serialize_employee(employee=employees[0])
+        
+    return CompanyCard(
+        id=company.id,
+        full_name=company.full_name,
+        short_name=company.short_name,
+        address=address,
+        employee=employee
+    )
 
 
 @router.post("/", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
@@ -60,8 +78,9 @@ async def get_companies(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Companies, dict]:
     try:
-        companies = await crud.read_companies(session=session)
-        return Companies(companies=companies)
+        companies = await crud.read_companies_with_options(session=session)
+        comp_schemas = [await serialize_company(company) for company in companies]
+        return Companies(companies=comp_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

@@ -1,5 +1,5 @@
 
-import { ICompany } from "../../../interfaces/CompanyInterfaces";
+import { ICompany, ICompanyCard } from "../../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { AppService } from "../../../app.service";
@@ -7,7 +7,7 @@ import { AppService } from "../../../app.service";
 
 
 interface CompanyCard {
-    company: ICompany;
+    company: ICompanyCard;
 }
 
 export function CompanyCard({company}: CompanyCard) {
@@ -29,15 +29,19 @@ export function CompanyCard({company}: CompanyCard) {
         mutate()
     }
 
+   
 
     return (
 
+            
             <CatalogItem 
                 id={company.id} 
                 cardTitle={company.short_name} 
+                imgSrc="/animals.jpg"
                 onClick={deleteCompany} 
-                url={`/companies/${company.id}`}
-              
+                url={`/companies/${company.id}`} 
+                cardText={ `${company.address?.street}, ${company.address?.house_number}`}
+                                 
 
             />
     )

@@ -13,6 +13,9 @@ export function RegionsSelect() {
     const [regionId, setRegionId] = useState<string | undefined>()
 
     const url = "/api/companies/regions"
+
+    // const {data}: ISelectData = UseSelectData(url, "regions")
+
     const { data, isLoading }: IQueryData = useQuery(['regions'], () => AppService.getAll(url),
     {
         select: ({data}) => data?.regions

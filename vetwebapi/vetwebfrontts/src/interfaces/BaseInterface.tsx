@@ -8,3 +8,8 @@ export interface IQueryData {
     data?: IBase[];
     isLoading: boolean;
 }
+
+
+export interface ISelectData {
+    data: IBase[];
+}

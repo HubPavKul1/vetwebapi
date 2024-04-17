@@ -13,7 +13,14 @@ class BaseIn(BaseModel):
 class CompanyIn(BaseModel):
     full_name: str
     short_name: str
-
+    
+    
+class CompanyCard(CompanyIn):
+    id: int
+    address: AddressSchema | None = None
+    employee: EmployeeSchema | None = None
+    # model_config = ConfigDict(from_attributes=True)
+    
 
 class CompanySchema(CompanyIn):
     id: int
@@ -29,8 +36,9 @@ class CompanyOut(SuccessMessage):
     company_id: int
 
 
-class Companies(SuccessMessage):
-    companies: list[CompanySchema]
+class Companies(BaseModel):
+    companies: list[CompanyCard]
+    
 
 
 class CompanyDetail(CompanySchema):

@@ -10,10 +10,15 @@ export interface ICompany {
     short_name: string;
 }
 
+export interface ICompanyCard extends ICompany {
+    address?: IAddress;
+    employee?: IEmployee;
+}
+
 
 
 export interface ICompanies {
-    companies: ICompany[];
+    companies: ICompanyCard[];
 }
 
 
