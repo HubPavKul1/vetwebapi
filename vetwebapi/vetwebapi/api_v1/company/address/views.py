@@ -9,21 +9,10 @@ from vetwebapi.core.models import Address
 
 from . import crud
 from .dependencies import address_by_id
-from .schemas import AddressIn, AddressSchema
+from .schemas import AddressIn
 
 router = APIRouter(prefix="/{company_id}/address")
 
-
-async def serialize_address(address: Address) -> AddressSchema:
-    return AddressSchema(
-        id=address.id,
-        district=address.street.city.district.name,
-        city=address.street.city.name,
-        street=address.street.name,
-        house_number=address.house_number,
-        phone_number1=address.phone_number1,
-        phone_number2=address.phone_number2,
-    )
 
 
 @router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)

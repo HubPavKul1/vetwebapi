@@ -24,6 +24,7 @@ export interface IDrugCreate {
     name: string;
     packing: number;
     image?: string;
+    instruction?: string;
 }
 
 export interface IDrug extends IDrugCreate {

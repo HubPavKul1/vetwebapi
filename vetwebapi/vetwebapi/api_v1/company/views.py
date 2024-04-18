@@ -11,12 +11,10 @@ from .address.crud import read_regions, read_city_streets, read_region_districts
 from .address.dependencies import company_address
 from .address.schemas import RegionSchemas, DistrictSchemas, CitySchemas, StreetSchemas
 from .address.views import router as address_router
-from .address.views import serialize_address
 
 from .animal.crud import read_types_of_feeding, read_animal_groups, read_species, read_genders, read_usage_types
 from .animal.dependencies import company_animals
 from .animal.schemas import (
-    AnimalSchema, 
     TypeOfFeedingSchemas, 
     AnimalGroupSchemas, 
     SpeciesSchemas, 
@@ -25,38 +23,19 @@ from .animal.schemas import (
 )
 
 from .animal.views import router as animal_router
-from .animal.views import serialize_animal
 from .dependencies import company_by_id
 
 from .employee.crud import read_positions
 from .employee.dependencies import company_employees
-from .employee.schemas import EmployeeSchema, PositionSchemas
+from .employee.schemas import PositionSchemas
 from .employee.views import router as employee_router
-from .employee.views import serialize_employee
-from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage, CompanyCard
+from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
+from .serializers import serialize_company_card, serialize_company_detail
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 router.include_router(animal_router)
 router.include_router(address_router)
 router.include_router(employee_router)
-
-
-async def serialize_company(company: Company) -> CompanyCard:
-    address = company.addresses
-    employees = company.employees
-    employee: Employee = None
-    if address:
-        address = await serialize_address(address=address)
-    if employees:
-        employee = await serialize_employee(employee=employees[0])
-        
-    return CompanyCard(
-        id=company.id,
-        full_name=company.full_name,
-        short_name=company.short_name,
-        address=address,
-        employee=employee
-    )
 
 
 @router.post("/", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
@@ -79,7 +58,7 @@ async def get_companies(
 ) -> Union[Companies, dict]:
     try:
         companies = await crud.read_companies_with_options(session=session)
-        comp_schemas = [await serialize_company(company) for company in companies]
+        comp_schemas = [await serialize_company_card(company) for company in companies]
         return Companies(companies=comp_schemas)
     except Exception:
         raise HTTPException(
@@ -112,27 +91,13 @@ async def get_company_detail(
     animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, CompanyDetail]:
     try:
-        employee_schemas: list[EmployeeSchema] = []
-        if employees:
-            employee_schemas = [
-                await serialize_employee(employee=employee) for employee in employees
-            ]
-
-        if address is not None:
-            address = await serialize_address(address=address)
-
-        animal_schemas: list[AnimalSchema] = []
-        if animals:
-            animal_schemas = [await serialize_animal(animal=animal) for animal in animals]
-
-        return CompanyDetail(
-            id=company.id,
-            full_name=company.full_name,
-            short_name=company.short_name,
+        return await serialize_company_detail(
+            company=company,
             address=address,
-            employees=employee_schemas,
-            animals=animal_schemas,
+            employees=employees,
+            animals=animals,
         )
+        
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

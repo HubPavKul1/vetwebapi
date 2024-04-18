@@ -3,18 +3,27 @@ import Select from 'react-select';
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../../interfaces/FormInterface';
-import { DrugService } from '../drugs.service';
+
+import { IQueryData } from '../../../interfaces/BaseInterface';
+import { AppService } from '../../../app.service';
 
 
 
 export function BudgetSelect() {
+
+    const url = "/api/drugs/budgets"
  
-    const { data, isLoading, error } = useQuery(['budgets'], () => DrugService.getBudgets())
+    const { data, isLoading}: IQueryData = useQuery(['budgets'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.budgets,
+    }
+)
 
     const { control } = useFormContext()
 
-    const options = data?.data?.budgets?.map(budget => ({ value: budget.id, label: budget.name }))
+    if (isLoading || !data) return <p>...Загрузка</p>;
 
+    const options = data.map(budget => ({ value: budget.id, label: budget.name }))
 
     const getValue = (value: number) =>
         value ? options?.find((option) => option.value === value) : ""
@@ -27,7 +36,7 @@ export function BudgetSelect() {
             rules={
                 { required: "Budget is required!" }
             }
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value }}) => (
                 <Select className='custom-select'
                     isSearchable
                     isClearable

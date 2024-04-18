@@ -1,5 +1,5 @@
 
-import { ICompany, ICompanyCard } from "../../../interfaces/CompanyInterfaces";
+import { ICompanyCard } from "../../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { AppService } from "../../../app.service";
@@ -40,9 +40,16 @@ export function CompanyCard({company}: CompanyCard) {
                 imgSrc="/animals.jpg"
                 onClick={deleteCompany} 
                 url={`/companies/${company.id}`} 
-                cardText={ `${company.address?.street}, ${company.address?.house_number}`}
+                address={ company.address &&
+                    `${company.address?.street}, ${company.address?.house_number}`
+                }
+                phone={ company.address &&
+                    `${company.address?.phone_number1}`
+                }
+                employee={ company.employee &&
+                    `${company.employee?.position} ${company.employee?.fullname}` 
+                }
                                  
-
             />
     )
 }

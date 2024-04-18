@@ -2,18 +2,28 @@ import AsyncSelect from "react-select/async"
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { DrugService } from "../drugs.service";
+import { AppService } from "../../../app.service";
+import { IQueryData } from "../../../interfaces/BaseInterface";
+
 
 
 
 
 export function DiseaseSelect() {
 
-    const { data } = useQuery(['diseases'], () => DrugService.getDiseases())
+    const url = "/api/vet_work/diseases"
+
+    const { data, isLoading }: IQueryData = useQuery(['diseases'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.diseases,
+    }
+);
 
     const { control } = useFormContext()
+
+    if (isLoading || !data) return <p>...Загрузка</p>;
     
-    const options = data?.data?.diseases?.map(disease=>({value: disease.id, label: disease.name}))
+    const options = data.map(disease=>({value: disease.id, label: disease.name}))
     
     const loadOptions = (searchValue: string, callback: CallableFunction) => {
         setTimeout(() => {
@@ -33,7 +43,7 @@ export function DiseaseSelect() {
         rules={
           {required: "Disease is required!"}
         }
-        render={({field: {onChange, value}, fieldState: { error }}) => (
+        render={({field: {onChange, value}}) => (
         <AsyncSelect className='custom-select'
             isSearchable
             isClearable

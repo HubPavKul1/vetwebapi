@@ -3,17 +3,25 @@ import Select from 'react-select';
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../../interfaces/FormInterface';
-import { DrugService } from '../drugs.service';
+import { IQueryData } from '../../../interfaces/BaseInterface';
+import { AppService } from '../../../app.service';
 
 
 
 export function AccountingUnitSelect() {
+
+    const url = "/api/drugs/accounting_units"
  
-    const { data, isLoading, error } = useQuery(['accountingUnits'], () => DrugService.getAccountingUnits())
+    const { data, isLoading}: IQueryData = useQuery(['accountingUnits'], () => AppService.getAll(url),
+    {
+        select: ({data}) => data?.accounting_units,
+    }
+);
 
     const { control } = useFormContext()
+    if (isLoading || !data) return <p>...Загрузка</p>;
 
-    const options = data?.data?.accounting_units?.map(unit => ({ value: unit.id, label: unit.name }))
+    const options = data.map(unit => ({ value: unit.id, label: unit.name }))
 
 
     const getValue = (value: number) =>
@@ -27,7 +35,7 @@ export function AccountingUnitSelect() {
             rules={
                 { required: "Field is required!" }
             }
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value }}) => (
                 <Select className='custom-select'
                     isSearchable
                     isClearable

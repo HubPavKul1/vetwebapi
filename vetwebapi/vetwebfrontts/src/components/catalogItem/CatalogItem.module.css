@@ -22,7 +22,7 @@
   border: 1px solid grey;
   box-shadow: 3px 3px grey;
   border-radius: 5px;
-  min-height: 50px;
+  min-height: 150px;
   transition: transform 0.5s ease-in-out;
 }
 .catalogItem > a {
@@ -37,6 +37,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
@@ -48,6 +49,10 @@
   color: blueviolet;
 }
 
+.cardImageLink {
+  height: 50px;
+}
+
 .cardImage {
   width: 100%;
   transition: transform 0.5s ease-in-out;
@@ -56,9 +61,25 @@
   transform: scale(1.1);
 }
 
-.deleteItem {
+.cardImageEmpty {
+  display: flex;
+  width: 30%;
+  transition: transform 0.5s ease-in-out;
+}
+.cardImageEmpty:hover {
+  transform: scale(1.1);
+}
+
+.services {
   display: flex;
   justify-content: end;
   align-items: end;
   margin-bottom: 10px;
+}
+
+.fileUpload {
+  display: flex;
+  margin-right: 50px;
+  width: 30px;
+  height: 30px;
 }/*# sourceMappingURL=CatalogItem.module.css.map */

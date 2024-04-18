@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import styles from "./CatalogItem.module.scss";
 import { Col, Container } from "react-bootstrap";
 import { BsFillTrash3Fill } from "react-icons/bs";
+import { FaRegFilePdf } from "react-icons/fa6";
+import { FileUpload } from "../fileUpload/FileUpload";
 
 
 export function CatalogItem({...props}: ICardProps) {
@@ -17,17 +19,15 @@ export function CatalogItem({...props}: ICardProps) {
                 <Container className={styles.catalogItem}>
                 
                     {props.imgSrc ? 
-                    <Link to={url}>
+                    <Link className={styles.cardImageLink} to={url}>
                         <img 
                             className={styles.cardImage} 
                             src={props.imgSrc}
                             alt={props.cardTitle}/> 
                     </Link>: 
-                    <><div className={styles.cardImageEmpty}>
+                    <div className={styles.cardImageEmpty}>
                         {props.children}
                     </div>
-                        
-                    </>
                         
                     }
                 
@@ -35,19 +35,50 @@ export function CatalogItem({...props}: ICardProps) {
                     <Link to={url}>
                         <h5 className={styles.cardTitle}>{props.cardTitle}</h5>
                     </Link>
-                        {
+                  
+                    {
                             props.cardText ? 
                             <p className={styles.cardText}>{props.cardText}</p>: ""
                         }
+
+                        {
+                            props.address &&
+                            <p className={styles.cardText}>{props.address}</p>
+                        }
+
+                        {
+                            props.employee &&
+                            <h6>{props.employee}</h6>
+                        }
                         
+                        {
+                            props.phone &&
+                            <p className={styles.cardText}>{props.phone}</p>
+                        }
+
                     </div>
-                    <div className={styles.deleteItem}>
-                        <BsFillTrash3Fill className="delete-icon" onClick={props.onClick}/>
+                        
+                    <div className={styles.services}>
+                        { 
+                            props.hasFile && props.fileUploadUrl &&
+                            <div className={styles.fileUpload}>
+                                {/* <FaRegFilePdf className="pdf-icon"/> */}
+                                <FileUpload
+                                    uploadUrl={props.fileUploadUrl}
+                                    accept="media_type"
+                                    mutationName="drugInstr upload"
+                                    invQueryName="drugs"
+                                    imgSrc="/pdf.jpg"
+                                />
+                            </div>
+                            
+                        }
+                        
+                        <BsFillTrash3Fill className="delete-icon" onClick={props.onClick}/> 
                     </div>
                    
                 </Container>
-           
-                    
+             
                 
             </Col>
         
