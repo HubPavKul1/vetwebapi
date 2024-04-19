@@ -26,7 +26,17 @@ export function CatalogItem({...props}: ICardProps) {
                             alt={props.cardTitle}/> 
                     </Link>: 
                     <div className={styles.cardImageEmpty}>
-                        {props.children}
+                        {props.fileUploadUrl && 
+                        <FileUpload
+                            uploadUrl={props.fileUploadUrl}
+                            accept="image/*"
+                            mutationName="drugImage upload"
+                            invQueryName="drugs"
+                            imgSrc="/emptyImage.jpg"
+                        />
+                        }
+                        
+                        {/* {props.children} */}
                     </div>
                         
                     }
@@ -40,7 +50,7 @@ export function CatalogItem({...props}: ICardProps) {
                             props.cardText ? 
                             <p className={styles.cardText}>{props.cardText}</p>: ""
                         }
-
+                            
                         {
                             props.address &&
                             <p className={styles.cardText}>{props.address}</p>
@@ -60,7 +70,7 @@ export function CatalogItem({...props}: ICardProps) {
                         
                     <div className={styles.services}>
                         { 
-                            props.hasFile && props.fileUploadUrl &&
+                            props.hasFile && props.fileUploadUrl && !props.fileSrc &&
                             <div className={styles.fileUpload}>
                                 {/* <FaRegFilePdf className="pdf-icon"/> */}
                                 <FileUpload

@@ -48,3 +48,16 @@ export interface IDrugManufacturers {
 export interface IAccountingUnits {
     accounting_units: IBase[];
 }
+
+export interface IDrugDetail {
+    id: number;
+    name: string;
+    disease: string;
+    budget: string;
+    drug_manufacturer: string;
+    accounting_unit: string;
+    packing: string;
+    image?: string;
+    instruction?: string;
+
+}

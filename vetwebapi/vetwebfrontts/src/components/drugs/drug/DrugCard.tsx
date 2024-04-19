@@ -28,7 +28,7 @@ export function DrugCard({drug}: DrugCardProps) {
     }
 
     const fileUploadUrl = `/api/drugs/${drug.id}/upload/`
-   
+    const url = `/drugs/${drug.id}/`
 
 
 
@@ -41,16 +41,17 @@ export function DrugCard({drug}: DrugCardProps) {
                 onClick={deleteDrug}  
                 hasFile={true}
                 fileUploadUrl={fileUploadUrl} 
-                fileSrc={drug.instruction}
+                fileSrc={drug.instruction && drug.instruction}
+                url={url}
             >
 
-                <FileUpload
+                {/* <FileUpload
                     uploadUrl={fileUploadUrl}
                     accept="image/*"
                     mutationName="drugImage upload"
                     invQueryName="drugs"
                     imgSrc="/emptyImage.jpg"
-                />
+                /> */}
                 
             </CatalogItem>
             </>

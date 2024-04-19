@@ -67,7 +67,7 @@ async def upload_drug_file_route(
     await crud.save_file(session=session, drug=drug, file=file)
     
     
-@router.post("/{drug_movement_id}", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post("/{drug_movement_id}/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def add_drug_to_movement_route(
     body: DrugInMovementIn,
     drug_movement: DrugMovement = Depends(drug_movement_by_id),
@@ -101,9 +101,24 @@ async def get_drugs_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+        
+        
+@router.get("/{drug_id}/", response_model=DrugSchema)
+async def get_drug_route(
+    drug: Drug = Depends(drug_by_id),
+    # session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> Union[Drugs, dict]:
+    try:
+        return await serialize_drug(drug=drug)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )       
+
     
 
-@router.delete("/{drug_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete("/{drug_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_drug_route(
     drug: Drug = Depends(drug_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
