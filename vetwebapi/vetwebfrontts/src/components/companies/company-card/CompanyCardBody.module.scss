@@ -1,0 +1,21 @@
+.cardAddress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.cardEmployee {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cardPhone {
+    display: flex;
+    > span {
+        margin-right: 5px;
+        font-size: .8rem;
+    }
+}

@@ -33,6 +33,8 @@
 }
 
 
+
+
 .cardTitle {
 	@extend %cardTitle;
 	cursor: pointer;
@@ -52,7 +54,7 @@
 }
 
 .cardImage {
-    width: 100%;
+    width: 100px;
 	@include transition(transform);
 	
 	&:hover {
@@ -60,7 +62,7 @@
 	}
 }
 
-.cardImageEmpty {
+.cardImageWrap {
 	display: flex;
 	width: 30%;
 	@include transition(transform);
@@ -68,6 +70,12 @@
 	&:hover {
 		@include transform;
 	}
+}
+
+.cardBody {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .services {
