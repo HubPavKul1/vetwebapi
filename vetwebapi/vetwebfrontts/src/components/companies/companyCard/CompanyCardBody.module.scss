@@ -14,8 +14,10 @@
 
 .cardPhone {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     > span {
-        margin-right: 5px;
         font-size: .8rem;
     }
 }

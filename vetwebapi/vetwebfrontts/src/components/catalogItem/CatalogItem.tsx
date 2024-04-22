@@ -18,13 +18,16 @@ export function CatalogItem({...props}: ICardProps) {
                 <Container className={styles.catalogItem}>
                 
                     {props.imgSrc ? 
-                    <Link className={styles.cardImageLink} to={url}>
-                        <img 
-                            className={styles.cardImage} 
-                            src={props.imgSrc}
-                            alt={props.cardTitle}/> 
-                    </Link>: 
-                    <div className={styles.cardImageEmpty}>
+                    <div className={styles.cardImageWrap}>
+                        <Link className={styles.cardImageLink} to={url}>
+                            <img 
+                                className={styles.cardImage} 
+                                src={props.imgSrc}
+                                alt={props.cardTitle}/> 
+                        </Link>
+                    </div>
+                    : 
+                    <div className={styles.cardImageWrap}>
                         {props.fileUploadUrl && 
                             <FileUpload
                                 uploadUrl={props.fileUploadUrl}

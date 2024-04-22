@@ -55,29 +55,6 @@ export function DrugDetail() {
             // height="200%"
             ></object>
           }
-          
-          {/* <h5>{data.name}</h5> */}
-          {/* <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p> */}
-            {/* <table className="table">
-              
-
-                    <tbody className="animals-rows">
-                      <tr>
-                        <th>Наименование препарата</th>
-                        <th>Пол животных</th>
-                        <th>Дата рождения</th>
-                        <th>Кличка</th>
-                        <th>Идентификация</th>
-                        <th />
-                      </tr>
-                      {data.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
-                      
-                      
-                      : ""
-                      
-                      }
-                    </tbody>
-                  </table> */}
 
         </Row>
        

@@ -22,8 +22,8 @@ export function CompanyCardBody({address, phone, phone2, employee}: CompanyCardB
                 <h6>{employee}</h6>
             </Container>
             <Container className={styles.cardPhone}>
-                <span>тел.:{phone}</span>
-                <span>тел2.:{phone2}</span>
+                <span>тел.: {phone}</span>
+                <span>тел2.: {phone2}</span>
             </Container>
         </>
         

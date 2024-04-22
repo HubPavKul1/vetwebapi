@@ -33,8 +33,18 @@ export interface IDrug extends IDrugCreate {
    
 }
 
+
+export interface IDrugCard {
+    id: number;
+    name: string;
+    drug_manufacturer: string;
+    image?: string;
+    instruction?: string;
+
+}
+
 export interface IDrugs {
-    drugs?: IDrug[];
+    drugs?: IDrugCard[];
 }
 
 export interface IBudgets {

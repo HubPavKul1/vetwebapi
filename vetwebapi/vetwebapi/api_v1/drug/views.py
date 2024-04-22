@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from vetwebapi.api_v1.company.schemas import SuccessMessage
 from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut,DrugSchema, DrugInMovementIn, DrugOut, DrugIn, Drugs, DrugMovements, Budgets, AccountingUnits, DrugManufacturers
 from vetwebapi.api_v1.drug.dependencies import operation_by_id, drug_movement_by_id, drug_by_id
+from .serializers import serialize_drug, serialize_drug_card
 
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Drug, DrugMovement, Operation
@@ -15,19 +16,6 @@ from . import crud
 
 router = APIRouter(prefix="/drugs", tags=["Drugs"])
 
-
-async def serialize_drug(drug: Drug) -> DrugSchema:
-    return DrugSchema(
-        id=drug.id,
-        disease=drug.disease.name,
-        budget=drug.budget.name,
-        drug_manufacturer=drug.drug_manufacturer.name,
-        accounting_unit=drug.accounting_unit.name,
-        name=drug.name,
-        packing=drug.packing,
-        image=drug.image,
-        instruction=drug.instruction
-    )
 
 
 @router.post("/receipts", response_model=DrugMovementOut, status_code=status.HTTP_201_CREATED)
@@ -50,6 +38,7 @@ async def create_drug_route(
     drug = await crud.create_drug(session=session, body=body)
     
     return await serialize_drug(drug=drug)
+
 
 @router.post("/{drug_id}/upload/", status_code=status.HTTP_201_CREATED)
 async def upload_drug_file_route(
@@ -95,7 +84,8 @@ async def get_drugs_route(
 ) -> Union[Drugs, dict]:
     try:
         drugs = await crud.read_drugs(session=session)
-        return Drugs(drugs=drugs)
+        drug_schemas = [await serialize_drug_card(drug) for drug in drugs]
+        return Drugs(drugs=drug_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
-import { DrugCard } from "../../drugs/drug/DrugCard";
+import { DrugCard } from "../../drugs/drug/drugCard/DrugCard";
 import { CreateItem } from "../../createItem/CreateItem";
 import { CreateDrugForm } from "../../drugs/drug/CreateDrugForm";
 

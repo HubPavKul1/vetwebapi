@@ -3,6 +3,7 @@ import shutil
 
 from vetwebapi.utils import utils
 from sqlalchemy import select, desc
+from sqlalchemy.orm import joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import File, UploadFile
 
@@ -78,7 +79,7 @@ async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
     return await session.get(Drug, drug_id)
 
 async def read_drugs(session: AsyncSession) -> list[Drug]:
-    stmt = select(Drug).where(Drug.is_active).order_by(Drug.name)
+    stmt = select(Drug).options(joinedload(Drug.drug_manufacturer)).where(Drug.is_active).order_by(Drug.name)
     return list(await session.scalars(stmt))
 
 async def read_drug_manufacturers(session: AsyncSession) -> list[DrugManufacturer]:

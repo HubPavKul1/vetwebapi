@@ -1,11 +1,11 @@
 import { Layout } from "./components/Layout";
 import { Home } from "./components/pages/home/Home";
 import { Companies } from "./components/pages/companyPages/Companies";
-import { CompanyDetail } from "./components/companies/company-detail/CompanyDetail";
+import { CompanyDetail } from "./components/pages/companyPages/company-detail/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
 import { DrugReceipts } from "./components/pages/drugPages/DrugReceipts";
 import { Drugs } from "./components/pages/drugPages/Drugs";
-import { DrugDetail } from "./components/drugs/drug/drugDetail/DrugDetail";
+import { DrugDetail } from "./components/pages/drugPages/drugDetail/DrugDetail";
 
 
 export function App() {

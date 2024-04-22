@@ -1,6 +1,6 @@
-import { AddAddress } from "../../address/AddAddress";
-import { AddEmployee } from "../../employee/AddEmployee";
-import { AddAnimal } from "../../animal/AddAnimal";
+import { AddAddress } from "../companies/address/AddAddress";
+import { AddEmployee } from "../companies/employee/AddEmployee";
+import { AddAnimal } from "../companies/animal/AddAnimal";
 
 import styles from "./CompanyPageMenu.module.scss";
 

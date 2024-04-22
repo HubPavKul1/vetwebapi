@@ -21,8 +21,8 @@ class DrugSchema(BaseModel):
     accounting_unit: str
     name: str
     packing: int
-    image: str | None
-    instruction: str | None
+    image: str | None = None
+    instruction: str | None = None
     
     
     
@@ -30,10 +30,17 @@ class DrugOut(DrugIn):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
+    
+class DrugCard(BaseModel):
+    id: int
+    name: str
+    drug_manufacturer: str
+    image: str | None = None
+    instruction: str | None = None
 
 
 class Drugs(BaseModel):
-    drugs: list[DrugOut]
+    drugs: list[DrugCard]
 
 
     

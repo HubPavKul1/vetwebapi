@@ -1,12 +1,13 @@
-import { IDrug } from "../../../interfaces/DrugInterfaces";
-import { CatalogItem } from "../../catalogItem/CatalogItem";
+import { IDrugCard } from "../../../../interfaces/DrugInterfaces";
+import { CatalogItem } from "../../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
-import { DrugService } from "../drugs.service";
-import { FileUpload } from "../../fileUpload/FileUpload";
+import { DrugService } from "../../drugs.service";
+import { FileUpload } from "../../../fileUpload/FileUpload";
+import { DrugCardBody } from "./drugCardBody/DrugCardBody";
 
 
 interface DrugCardProps {
-    drug: IDrug;
+    drug: IDrugCard;
 }
 
 export function DrugCard({drug}: DrugCardProps) {
@@ -39,19 +40,15 @@ export function DrugCard({drug}: DrugCardProps) {
                 cardTitle={drug.name} 
                 imgSrc={drug.image}
                 onClick={deleteDrug}  
-                hasFile={true}
                 fileUploadUrl={fileUploadUrl} 
-                fileSrc={drug.instruction && drug.instruction}
                 url={url}
             >
 
-                {/* <FileUpload
-                    uploadUrl={fileUploadUrl}
-                    accept="image/*"
-                    mutationName="drugImage upload"
-                    invQueryName="drugs"
-                    imgSrc="/emptyImage.jpg"
-                /> */}
+                <DrugCardBody
+                    drugManufacturer={drug.drug_manufacturer}
+                    fileUploadUrl={fileUploadUrl}
+                    drugInstr={drug.instruction}
+                />
                 
             </CatalogItem>
             </>

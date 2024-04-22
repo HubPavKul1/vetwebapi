@@ -1,0 +1,26 @@
+@import "../../../../../assets/sass/mixins";
+
+
+.drugManufacturer {
+    display: flex;
+    >h6 {
+        text-align: center;
+    }
+}
+
+
+
+.fileUploadWrap {
+    margin: 0;
+    margin-left: auto;
+    padding-top: 15px;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    @include transition(transform);
+
+    &:hover {
+        @include transform;
+    }
+}

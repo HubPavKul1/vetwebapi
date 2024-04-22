@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
-import { CompanyCard } from "../../companies/company-card/CompanyCard";
+import { CompanyCard } from "../../companies/companyCard/CompanyCard";
 import { CreateCompanyForm } from "../../companies/createCompany/CreateCompanyForm";
 import { CreateItem } from "../../createItem/CreateItem";
 import { AppService } from "../../../app.service";
