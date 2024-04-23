@@ -1,7 +1,7 @@
 from datetime import date
 from pydantic import BaseModel, ConfigDict
 
-
+# Drug
 class DrugIn(BaseModel):
     disease_id: int
     budget_id: int
@@ -11,7 +11,6 @@ class DrugIn(BaseModel):
     packing: int
     image: str | None = None
     instruction: str | None = None
-    
     
 class DrugSchema(BaseModel):
     id: int
@@ -24,8 +23,6 @@ class DrugSchema(BaseModel):
     image: str | None = None
     instruction: str | None = None
     
-    
-    
 class DrugOut(DrugIn):
     id: int
 
@@ -37,52 +34,55 @@ class DrugCard(BaseModel):
     drug_manufacturer: str
     image: str | None = None
     instruction: str | None = None
-
-
+    
 class Drugs(BaseModel):
     drugs: list[DrugCard]
-
-
     
-
-class CatalogDrugSchema(DrugIn):
-    id: int
+    
+# CATALOG
+class CatalogDrugIn(BaseModel):
+    drug_id: int
     batch: str
     control: str
     production_date: date
     expiration_date: date
     
+class CatalogDrugSchema(CatalogDrugIn):
+    id: int
+    name: str
+    image: str | None = None
     
+class Catalog(BaseModel):
+    catalog_drugs: list[CatalogDrugSchema]
+    
+ 
+# Drug Movement
 class DrugMovementIn(BaseModel):
     operation_date: date
-    
     
 class DrugMovementOut(DrugMovementIn):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
+    
+class DrugMovements(BaseModel):
+    drug_movements: list[DrugMovementOut]
 
-      
 class DrugInMovementIn(BaseModel):
     catalog_drug_id: int
     packs_amount: int
     units_amount: float
-    
     
 class DrugInMovementSchema(BaseModel):
     drug: CatalogDrugSchema
     packs_amount: int
     units_amount: float
     
-    
 class DrugMovementDetail(DrugMovementOut):
     drugs: list[DrugInMovementSchema]
     
-class DrugMovements(BaseModel):
-    drug_movements: list[DrugMovementOut]
     
-    
-    
+# Drug Select  
 class BaseDrugSchema(BaseModel):
     id: int
     name: str
@@ -96,6 +96,14 @@ class AccountingUnits(BaseModel):
     
 class DrugManufacturers(BaseModel):
     drug_manufacturers: list[BaseDrugSchema]
+    
+    
+class DrugName(BaseModel):
+    id: int
+    name: str
+    
+class DrugNames(BaseModel):
+    drugs: list[DrugName]
 
 
     

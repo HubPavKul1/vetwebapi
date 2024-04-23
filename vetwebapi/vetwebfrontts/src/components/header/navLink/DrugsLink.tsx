@@ -16,6 +16,9 @@ export function DrugsLink() {
                 <NavDropdown.Item as={Link} id="RouterNavLink" to="/drugs">
                     Справочник препаратов
                 </NavDropdown.Item>
+                <NavDropdown.Item as={Link} id="RouterNavLink" to="/drugs/catalog">
+                    Каталог препаратов
+                </NavDropdown.Item>
                 <NavDropdown.Item >Отчеты</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">

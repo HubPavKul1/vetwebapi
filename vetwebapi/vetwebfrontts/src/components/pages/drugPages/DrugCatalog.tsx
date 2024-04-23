@@ -4,41 +4,46 @@ import { useQuery } from "react-query"
 import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
-import { DrugCard } from "../../drugs/drug/drugCard/DrugCard";
 import { CreateItem } from "../../createItem/CreateItem";
 import { CreateDrugForm } from "../../drugs/drug/CreateDrugForm";
-import { IDrugCard } from "../../../interfaces/DrugInterfaces";
+import { IDrugCatalogCard } from "../../../interfaces/DrugInterfaces";
 import { AppService } from "../../../app.service";
+import { CatalogDrugCard } from "../../drugs/drug/catalogDrugCard/CatalogDrugCard";
 
 
-interface DrugsData {
-    data?: IDrugCard[];
+interface DrugCatalogData {
+    data?: IDrugCatalogCard[];
     isLoading: boolean;
     error?: Error | null;
 }
 
-export function Drugs() {
-    const url = "/api/drugs"
+export function DrugCatalog() {
+
+    const url = "api/drugs/catalog"
     
-    const { data, isLoading, error }: DrugsData = useQuery(['drugs'], () => AppService.getAll(url),
+    const { data, isLoading, error }: DrugCatalogData = useQuery(['drugCatalog'], () => AppService.getAll(url),
         {
-            select: ({data}) => data?.drugs
+            select: ({data}) => data?.catalog_drugs
         }
     )
 
+
     if(isLoading || !data) return <p>Загрузка ...</p>;
+
+    console.log("data>>>", data)
 
                            
     return (
-        <Catalog title="Справочник биопрепаратов">
+        <Catalog title="Каталог биопрепаратов">
 
             <CreateItem btnTitle="Добавить препарат">
                 <CreateDrugForm/>
             </CreateItem>
+          
 
             <Row xs={1} md={3} lg={3}>
                 {data.length ? data.map(drug => (
-                    <DrugCard key={drug.id} drug={drug}/>
+                    <CatalogDrugCard key={drug.id} item={drug}/>
                 )):
                     catalogItemData.map(item => (  
                     <CatalogItem key={item.id} {...item}/> 

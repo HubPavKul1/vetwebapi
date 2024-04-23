@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException, status, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.api_v1.drug.schemas import DrugMovementIn, DrugMovementOut,DrugSchema, DrugInMovementIn, DrugOut, DrugIn, Drugs, DrugMovements, Budgets, AccountingUnits, DrugManufacturers
+from vetwebapi.api_v1.drug.schemas import DrugMovementIn, Catalog, CatalogDrugIn, CatalogDrugSchema, DrugMovementOut, DrugNames, DrugSchema, DrugInMovementIn, DrugOut, DrugIn, Drugs, DrugMovements, Budgets, AccountingUnits, DrugManufacturers
 from vetwebapi.api_v1.drug.dependencies import operation_by_id, drug_movement_by_id, drug_by_id
-from .serializers import serialize_drug, serialize_drug_card
+from .serializers import serialize_drug, serialize_drug_card, serialize_drug_name, serialize_catalog_drug
 
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Drug, DrugMovement, Operation
@@ -63,6 +63,17 @@ async def add_drug_to_movement_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     drug_in_movement = await crud.add_drug_to_movement(session=session, body=body, drug_movement=drug_movement)
+    
+    
+@router.post("/catalog", response_model=CatalogDrugSchema, status_code=status.HTTP_201_CREATED)
+async def create_catalog_drug(
+    body: CatalogDrugIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> CatalogDrugSchema:
+    
+    catalog_drug = await crud.create_catalog_drug(session=session, body=body)
+    return await serialize_catalog_drug(catalog_drug)
+    
 
 
 @router.get("/receipts", response_model=DrugMovements)
@@ -83,9 +94,24 @@ async def get_drugs_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[Drugs, dict]:
     try:
-        drugs = await crud.read_drugs(session=session)
+        drugs = await crud.read_drugs_with_options(session=session)
         drug_schemas = [await serialize_drug_card(drug) for drug in drugs]
         return Drugs(drugs=drug_schemas)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+        
+@router.get("/catalog", response_model=Catalog)
+async def get_catalog_drugs(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> Union[Catalog, dict]:
+    try:
+        drugs = await crud.read_catalog(session=session)
+        drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs]
+        return Catalog(catalog_drugs=drug_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -158,6 +184,20 @@ async def get_accounting_units_route(
     try:
         accounting_units = await crud.read_accounting_units(session=session)
         return AccountingUnits(accounting_units=accounting_units)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+@router.get("/drug_names", response_model=DrugNames)
+async def get_drug_names_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[AccountingUnits, dict]:
+    try:
+        drugs = await crud.read_drugs(session=session)
+        drug_schemas = [await serialize_drug_name(drug) for drug in drugs]
+        return DrugNames(drugs=drug_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

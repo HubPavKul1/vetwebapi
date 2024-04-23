@@ -1,26 +1,24 @@
-import { IDrugCard } from "../../../../interfaces/DrugInterfaces";
+import { IDrugCatalogCard } from "../../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
-import { DrugCardBody } from "./drugCardBody/DrugCardBody";
 import { AppService } from "../../../../app.service";
 
 
-interface DrugCardProps {
-    drug: IDrugCard;
+interface CatalogDrugCardProps {
+    item: IDrugCatalogCard;
 }
 
-export function DrugCard({drug}: DrugCardProps) {
+export function CatalogDrugCard({item}: CatalogDrugCardProps) {
 
-    
+   
     const queryClient = useQueryClient()
+    const url = `/api/drugs/catalog/${item.id}`;
 
-    const url = `/api/drugs/${drug.id}`;
-
-    const { mutate } = useMutation(["delete drug"], {
+    const { mutate } = useMutation(["delete catalogDrug"], {
         mutationFn: () => AppService.deleteItem(url),
         onSuccess: () => {
             alert("Препарат успешно удален!")
-            queryClient.invalidateQueries(["drugs"])
+            queryClient.invalidateQueries(["drugCatalog"])
         }
     },
     )
@@ -29,25 +27,23 @@ export function DrugCard({drug}: DrugCardProps) {
         mutate()
     }
 
-    const fileUploadUrl = `/api/drugs/${drug.id}/upload/`
-
+    
 
     return (
             <>
             <CatalogItem 
-                id={drug.id} 
-                cardTitle={drug.name} 
-                imgSrc={drug.image}
+                id={item.id} 
+                cardTitle={item.name} 
+                imgSrc={item.image}
                 onClick={deleteDrug}  
-                fileUploadUrl={fileUploadUrl} 
-                url={`/drugs/${drug.id}/`}
+                url={`/drugs/catalog/${item.id}`}
             >
 
-                <DrugCardBody
+                {/* <DrugCardBody
                     drugManufacturer={drug.drug_manufacturer}
                     fileUploadUrl={fileUploadUrl}
                     drugInstr={drug.instruction}
-                />
+                /> */}
                 
             </CatalogItem>
             </>

@@ -9,8 +9,8 @@ from fastapi import File, UploadFile
 
 from vetwebapi.core.settings import settings
 
-from vetwebapi.core.models import Drug, DrugMovement, DrugInMovement, Operation, DrugManufacturer, AccountingUnit, Budget
-from .schemas import DrugInMovementIn, DrugMovementIn, DrugIn
+from vetwebapi.core.models import Drug, DrugMovement, CatalogDrug, DrugInMovement, Operation, DrugManufacturer, AccountingUnit, Budget
+from .schemas import DrugInMovementIn, DrugMovementIn, DrugIn, CatalogDrugIn
 
 
 
@@ -29,6 +29,13 @@ async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
     await session.commit()
     await session.refresh(new_drug)
     return new_drug
+
+async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> CatalogDrug:
+    new_item = CatalogDrug(**body.model_dump())
+    session.add(new_item)
+    await session.commit()
+    await session.refresh(new_item)
+    return new_item
 
 async def add_drug_to_movement(
     session: AsyncSession, 
@@ -78,9 +85,19 @@ async def read_receipts(session: AsyncSession) -> list[DrugMovement]:
 async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
     return await session.get(Drug, drug_id)
 
-async def read_drugs(session: AsyncSession) -> list[Drug]:
+async def read_drugs_with_options(session: AsyncSession) -> list[Drug]:
     stmt = select(Drug).options(joinedload(Drug.drug_manufacturer)).where(Drug.is_active).order_by(Drug.name)
     return list(await session.scalars(stmt))
+
+async def read_drugs(session: AsyncSession) -> list[Drug]:
+    stmt = select(Drug).where(Drug.is_active).order_by(Drug.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_catalog(session: AsyncSession) -> list[CatalogDrug]:
+    stmt = select(CatalogDrug).options(joinedload(CatalogDrug.drug)).where(CatalogDrug.is_active)
+    return list(await session.scalars(stmt))
+
 
 async def read_drug_manufacturers(session: AsyncSession) -> list[DrugManufacturer]:
     stmt = select(DrugManufacturer).order_by(DrugManufacturer.name)
@@ -93,9 +110,6 @@ async def read_accounting_units(session: AsyncSession) -> list[AccountingUnit]:
 async def read_budgets(session: AsyncSession) -> list[Budget]:
     stmt = select(Budget).order_by(Budget.name)
     return list(await session.scalars(stmt))
-
-
-
 
 
 # Delete

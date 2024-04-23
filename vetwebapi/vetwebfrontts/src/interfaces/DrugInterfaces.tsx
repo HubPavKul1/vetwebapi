@@ -59,6 +59,10 @@ export interface IAccountingUnits {
     accounting_units: IBase[];
 }
 
+export interface IDrugNames {
+    drug_names: IBase[];
+}
+
 export interface IDrugDetail {
     id: number;
     name: string;
@@ -69,5 +73,17 @@ export interface IDrugDetail {
     packing: string;
     image?: string;
     instruction?: string;
+
+}
+
+
+export interface IDrugCatalogCard {
+    id: number;
+    name: string;
+    batch: string;
+    control: string;
+    production_date: string;
+    expiration_date: string;
+    image?: string;
 
 }

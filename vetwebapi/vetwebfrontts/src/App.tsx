@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { DrugReceipts } from "./components/pages/drugPages/DrugReceipts";
 import { Drugs } from "./components/pages/drugPages/Drugs";
 import { DrugDetail } from "./components/pages/drugPages/drugDetail/DrugDetail";
+import { DrugCatalog } from "./components/pages/drugPages/DrugCatalog";
 
 
 export function App() {
@@ -17,6 +18,7 @@ export function App() {
                 <Route path="companies" element={<Companies />} />
                 <Route path="drugs/receipts" element={<DrugReceipts />} />
                 <Route path="drugs" element={<Drugs/>} />
+                <Route path="drugs/catalog" element={<DrugCatalog/>} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
                 <Route path="drugs/:id" element={<DrugDetail />} />
                 <Route path="*" element={<div>Not Found</div>} />
