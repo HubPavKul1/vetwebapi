@@ -6,9 +6,6 @@ import { AppService } from '../../../app.service';
 import { IQueryData } from '../../../interfaces/BaseInterface';
 
 
-
-
-
 export function PositionsSelect() {
 
     const url = "/api/companies/positions"
@@ -19,7 +16,6 @@ export function PositionsSelect() {
     }
 );
     
-
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
@@ -39,7 +35,7 @@ export function PositionsSelect() {
                 { required: "Position is required!" }
             }
             render={({ field: { onChange, value },
-                    // fieldState: { error }
+                    // fieldState: {error} 
                 }) => (
                 <Select className='custom-select'
                     isSearchable

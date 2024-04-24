@@ -1,12 +1,9 @@
-import AsyncSelect from "react-select/async"
+import Select from "react-select";
 import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { AppService } from "../../../app.service";
 import { IQueryData } from "../../../interfaces/BaseInterface";
-
-
-
 
 
 export function DrugSelect() {
@@ -25,12 +22,12 @@ export function DrugSelect() {
     
     const options = data.map(drug=>({value: drug.id, label: drug.name}))
     
-    const loadOptions = (searchValue: string, callback: CallableFunction) => {
-        setTimeout(() => {
-            const filteredOptions = options?.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
-            callback(filteredOptions)
-        }, 2000)
-    }
+    // const loadOptions = (searchValue: string, callback: CallableFunction) => {
+    //     setTimeout(() => {
+    //         const filteredOptions = options?.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+    //         callback(filteredOptions)
+    //     }, 2000)
+    // }
 
     const getValue = (value: number) => 
         value ? options?.find((option) => option.value === value) : ""
@@ -44,10 +41,11 @@ export function DrugSelect() {
           {required: "Drug is required!"}
         }
         render={({field: {onChange, value}}) => (
-        <AsyncSelect className='custom-select'
+        <Select className='custom-select'
             isSearchable
             isClearable
-            loadOptions={loadOptions}
+            options={options}
+            // loadOptions={loadOptions}
             value={getValue(value)}
             onChange={newValue => onChange((newValue as IOption).value)}
         />

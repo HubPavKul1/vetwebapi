@@ -42,6 +42,6 @@ async def read_receipts(session: AsyncSession) -> list[DrugMovement]:
 # Delete
 
 
-# async def delete_catalog_drug(session: AsyncSession, drug: CatalogDrug) -> None:
-#     await session.delete(drug)
-#     await session.commit()
+async def delete_drug_movement(session: AsyncSession, drug_movement: DrugMovement) -> None:
+    await session.delete(drug_movement)
+    await session.commit()

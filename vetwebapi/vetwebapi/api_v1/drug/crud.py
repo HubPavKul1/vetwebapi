@@ -9,8 +9,8 @@ from fastapi import File, UploadFile
 
 from vetwebapi.core.settings import settings
 
-from vetwebapi.core.models import Drug, DrugMovement, CatalogDrug, Operation, DrugManufacturer, AccountingUnit, Budget
-from .schemas import DrugIn, CatalogDrugIn
+from vetwebapi.core.models import Drug, DrugManufacturer, AccountingUnit, Budget
+from .schemas import DrugIn
 
 
 
@@ -23,12 +23,7 @@ async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
     await session.refresh(new_drug)
     return new_drug
 
-async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> CatalogDrug:
-    new_item = CatalogDrug(**body.model_dump())
-    session.add(new_item)
-    await session.commit()
-    await session.refresh(new_item)
-    return new_item
+
 
 
 # Save Files
@@ -71,15 +66,6 @@ async def read_drugs(session: AsyncSession) -> list[Drug]:
     return list(await session.scalars(stmt))
 
 
-async def read_catalog(session: AsyncSession) -> list[CatalogDrug]:
-    stmt = select(CatalogDrug).options(joinedload(CatalogDrug.drug)).where(CatalogDrug.is_active)
-    return list(await session.scalars(stmt))
-
-
-async def read_catalog_drug_by_id(session: AsyncSession, id: int) -> CatalogDrug | None:
-    return await session.get(CatalogDrug, id)
-
-
 async def read_drug_manufacturers(session: AsyncSession) -> list[DrugManufacturer]:
     stmt = select(DrugManufacturer).order_by(DrugManufacturer.name)
     return list(await session.scalars(stmt))
@@ -111,6 +97,3 @@ async def delete_drug(session: AsyncSession, drug: Drug) -> None:
     await session.delete(drug)
     await session.commit()
     
-async def delete_catalog_drug(session: AsyncSession, drug: CatalogDrug) -> None:
-    await session.delete(drug)
-    await session.commit()

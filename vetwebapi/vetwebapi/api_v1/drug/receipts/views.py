@@ -10,13 +10,12 @@ from .dependencies import drug_movement_by_id
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import DrugMovement
 
-
 from . import crud
 
 router = APIRouter(prefix="/receipts")
 
 
-@router.post("/receipts", response_model=DrugMovementOut, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=DrugMovementOut, status_code=status.HTTP_201_CREATED)
 async def create_receipt_route(
     body: DrugMovementIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -38,7 +37,7 @@ async def add_drug_to_movement_route(
     drug_in_movement = await crud.add_drug_to_movement(session=session, body=body, drug_movement=drug_movement)
     
     
-@router.get("/receipts", response_model=DrugMovements)
+@router.get("/", response_model=DrugMovements)
 async def get_receipts(
     session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[DrugMovements, dict]:
@@ -50,3 +49,20 @@ async def get_receipts(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+
+
+@router.delete("/{drug_movement_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def delete_drug_movement(
+    drug_movement: DrugMovement = Depends(drug_movement_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_drug_movement(session=session, drug_movement=drug_movement)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+        

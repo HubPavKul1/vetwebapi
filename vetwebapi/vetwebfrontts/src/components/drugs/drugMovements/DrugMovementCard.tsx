@@ -1,7 +1,7 @@
 import { IDrugMovement } from "../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
-import { DrugService } from "../drugs.service";
+import { AppService } from "../../../app.service";
 
 
 interface DrugMovementCardProps {
@@ -10,28 +10,30 @@ interface DrugMovementCardProps {
 
 export function DrugMovementCard({drugMovement}: DrugMovementCardProps) {
 
-    // const queryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
-    // const { mutate } = useMutation(["delete company"], {
-    //     mutationFn: () => CompanyService.deleteCompany(company.id.toString()),
-    //     onSuccess: () => {
-    //         alert("Предприятие успешно удалено!")
-    //         queryClient.invalidateQueries(["companies"])
-    //     }
-    // },
-    // )
+    const url = `/api/drugs/receipts/${drugMovement.id}/`
 
-    // const deleteCompany = () => {
-    //     mutate()
-    // }
+    const { mutate } = useMutation(["delete receipt"], {
+        mutationFn: () => AppService.deleteItem(url),
+        onSuccess: () => {
+            alert("Поступление успешно удалено!")
+            queryClient.invalidateQueries(['drugReceipts'])
+        }
+    },
+    )
+
+    const deleteReceipt = () => {
+        mutate()
+    }
 
     return (
 
             <CatalogItem 
                 id={drugMovement.id} 
                 cardTitle={drugMovement.operation_date} 
-                imgSrc="/drugsCard.jpg"
-                // onClick={deleteCompany} 
+                imgSrc="drugsCard.jpg"
+                onClick={deleteReceipt} 
                 // url={`/companies/${company.id}`}
             />
     )

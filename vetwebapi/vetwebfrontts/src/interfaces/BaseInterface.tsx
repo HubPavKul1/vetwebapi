@@ -7,6 +7,8 @@ export interface IBase {
 export interface IQueryData {
     data?: IBase[];
     isLoading: boolean;
+    error?: Error | null;
+    
 }
 
 

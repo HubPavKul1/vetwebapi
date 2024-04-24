@@ -1,5 +1,4 @@
-import { DrugService } from "../drugs.service";
-import { SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 
 import { Input } from "../../Input";
@@ -7,9 +6,12 @@ import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../../ErrorMessages";
 import { CustomButton } from "../../button/CustomButton";
 import { IDrugMovementCreate } from "../../../interfaces/DrugInterfaces";
+import { AppService } from "../../../app.service";
 
 
 export function CreateDrugReceiptForm() {
+
+    const url = "/api/drugs/receipts"
 
     const inputItems: FormInputProps<IDrugMovementCreate>[] = [
         {fieldName: "operation_date", id: "operation_date", type: "date"},
@@ -23,7 +25,7 @@ export function CreateDrugReceiptForm() {
     const queryClient = useQueryClient()
 
     const {mutate} = useMutation(["createReceipt"], 
-        (data: IDrugMovementCreate) => DrugService.createReceipt(data), {
+        (data: IDrugMovementCreate) => AppService.createItem(url,data), {
         onSuccess: () => {
             queryClient.invalidateQueries(['drugReceipts'])
             alert('Поступление успешно добавлено!')
@@ -42,7 +44,7 @@ export function CreateDrugReceiptForm() {
        
         <form className="create-company-form" onSubmit={handleSubmit(createReceipt)}>
             <label htmlFor="operation_date" className="form-group">
-                    Дата поступления *
+                Дата поступления *
             </label>
             
         {inputItems.map(item => (

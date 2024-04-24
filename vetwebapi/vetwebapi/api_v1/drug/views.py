@@ -5,18 +5,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
 from .receipts.views import router as receipt_router
-from vetwebapi.api_v1.drug.schemas import Catalog, CatalogDrugIn, CatalogDrugSchema, DrugNames, DrugSchema, DrugOut, DrugIn, Drugs, Budgets, AccountingUnits, DrugManufacturers
-from vetwebapi.api_v1.drug.dependencies import drug_by_id, catalog_drug_by_id
-from .serializers import serialize_drug, serialize_drug_card, serialize_drug_name, serialize_catalog_drug
+from .catalog.views import router as catalog_router
+from vetwebapi.api_v1.drug.schemas import DrugNames, DrugSchema, DrugIn, Drugs, Budgets, AccountingUnits, DrugManufacturers
+from vetwebapi.api_v1.drug.dependencies import drug_by_id
+from .serializers import serialize_drug, serialize_drug_card, serialize_drug_name
 
 from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import Drug, CatalogDrug
+from vetwebapi.core.models import Drug
 
 
 from . import crud
 
 router = APIRouter(prefix="/drugs", tags=["Drugs"])
 router.include_router(receipt_router)
+router.include_router(catalog_router)
 
 
 @router.post("/", response_model=DrugSchema, status_code=status.HTTP_201_CREATED)
@@ -44,16 +46,6 @@ async def upload_drug_file_route(
         raise HTTPException(status_code=400, detail="Invalid file type")
     await crud.save_file(session=session, drug=drug, file=file)
     
-    
-@router.post("/catalog", response_model=CatalogDrugSchema, status_code=status.HTTP_201_CREATED)
-async def create_catalog_drug(
-    body: CatalogDrugIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> CatalogDrugSchema:
-    
-    catalog_drug = await crud.create_catalog_drug(session=session, body=body)
-    return await serialize_catalog_drug(catalog_drug)
-    
 
 @router.get("/", response_model=Drugs)
 async def get_drugs_route(
@@ -69,22 +61,7 @@ async def get_drugs_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
         
-        
-@router.get("/catalog", response_model=Catalog)
-async def get_catalog_drugs(
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
-) -> Union[Catalog, dict]:
-    try:
-        drugs = await crud.read_catalog(session=session)
-        drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs]
-        return Catalog(catalog_drugs=drug_schemas)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-        
-        
+              
 @router.get("/{drug_id}/", response_model=DrugSchema)
 async def get_drug_route(
     drug: Drug = Depends(drug_by_id),
@@ -98,20 +75,6 @@ async def get_drug_route(
         ) 
         
 
-@router.get("/catalog/{id}/", response_model=CatalogDrugSchema)
-async def get_catalog_drug_route(
-    drug: CatalogDrug = Depends(catalog_drug_by_id),
-) -> Union[CatalogDrugSchema, dict]:
-    try:
-        return await serialize_catalog_drug(drug=drug)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )             
-
-    
-
 @router.delete("/{drug_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_drug_route(
     drug: Drug = Depends(drug_by_id),
@@ -119,20 +82,6 @@ async def delete_drug_route(
 ) -> Union[dict, SuccessMessage]:
     try:
         await crud.delete_drug(session=session, drug=drug)
-        return SuccessMessage()
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-        
-@router.delete("/catalog/{id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
-async def delete_catalog_drug(
-    drug: CatalogDrug = Depends(catalog_drug_by_id),
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[dict, SuccessMessage]:
-    try:
-        await crud.delete_catalog_drug(session=session, drug=drug)
         return SuccessMessage()
     except Exception:
         raise HTTPException(

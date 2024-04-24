@@ -5,7 +5,6 @@ import { Catalog } from "../../catalog/Catalog";
 import { catalogItemData } from "../../data/CatalogItemData";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { CreateItem } from "../../createItem/CreateItem";
-import { CreateDrugForm } from "../../drugs/drug/CreateDrugForm";
 import { IDrugCatalogCard } from "../../../interfaces/DrugInterfaces";
 import { AppService } from "../../../app.service";
 import { CatalogDrugCard } from "../../drugs/drug/catalogDrugCard/CatalogDrugCard";
