@@ -9,6 +9,7 @@ import { CreateDrugForm } from "../../drugs/drug/CreateDrugForm";
 import { IDrugCatalogCard } from "../../../interfaces/DrugInterfaces";
 import { AppService } from "../../../app.service";
 import { CatalogDrugCard } from "../../drugs/drug/catalogDrugCard/CatalogDrugCard";
+import { CreateCatalogDrugForm } from "../../drugs/drug/CreateCatalogDrugForm";
 
 
 interface DrugCatalogData {
@@ -19,7 +20,7 @@ interface DrugCatalogData {
 
 export function DrugCatalog() {
 
-    const url = "api/drugs/catalog"
+    const url = "/api/drugs/catalog"
     
     const { data, isLoading, error }: DrugCatalogData = useQuery(['drugCatalog'], () => AppService.getAll(url),
         {
@@ -30,14 +31,12 @@ export function DrugCatalog() {
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    console.log("data>>>", data)
-
-                           
+                     
     return (
         <Catalog title="Каталог биопрепаратов">
 
             <CreateItem btnTitle="Добавить препарат">
-                <CreateDrugForm/>
+                <CreateCatalogDrugForm/>
             </CreateItem>
           
 

@@ -2,6 +2,7 @@ import { IDrugCatalogCard } from "../../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { AppService } from "../../../../app.service";
+import { CatalogDrugCardBody } from "./catalogDrugCardBody/CatalogDrugCardBody";
 
 
 interface CatalogDrugCardProps {
@@ -39,11 +40,13 @@ export function CatalogDrugCard({item}: CatalogDrugCardProps) {
                 url={`/drugs/catalog/${item.id}`}
             >
 
-                {/* <DrugCardBody
-                    drugManufacturer={drug.drug_manufacturer}
-                    fileUploadUrl={fileUploadUrl}
-                    drugInstr={drug.instruction}
-                /> */}
+                <CatalogDrugCardBody
+                    batch={item.batch}
+                    control={item.control}
+                    production_date={item.production_date}
+                    expiration_date={item.expiration_date}
+                    
+                />
                 
             </CatalogItem>
             </>

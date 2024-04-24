@@ -11,12 +11,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
-    templates: Jinja2Templates = Jinja2Templates(
-        directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "templates")
-    )
-    staticfiles: StaticFiles = StaticFiles(
-        directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "static")
-        )
+    # templates: Jinja2Templates = Jinja2Templates(
+    #     directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "templates")
+    # )
+    # staticfiles: StaticFiles = StaticFiles(
+    #     directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "static")
+    #     )
     files_dir: str =os.path.join(BASE_DIR, "vetwebapi", "files")
     
     media_dir: str = os.path.join(BASE_DIR, "vetwebfrontts", "public") # директория для статики react app

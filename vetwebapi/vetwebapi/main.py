@@ -6,7 +6,7 @@ from vetwebapi.api_v1 import router as router_v1
 from vetwebapi.api_v1.auth import crud
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.settings import settings
-from vetwebapi.frontend import router as router_frontend
+
 from vetwebapi.utils import utils
 
 app = FastAPI()
@@ -19,9 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", settings.staticfiles, name="static")
+
 app.include_router(router_v1, prefix=settings.api_v1_prefix)
-app.include_router(router_frontend)
+
 
 
 @app.get("/")

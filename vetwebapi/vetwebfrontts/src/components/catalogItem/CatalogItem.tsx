@@ -22,7 +22,7 @@ export function CatalogItem({...props}: ICardProps) {
                         <Link className={styles.cardImageLink} to={url}>
                             <img 
                                 className={styles.cardImage} 
-                                src={props.imgSrc}
+                                src={`/${props.imgSrc}`}
                                 alt={props.cardTitle}/> 
                         </Link>
                     </div>

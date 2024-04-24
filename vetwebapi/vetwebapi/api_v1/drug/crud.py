@@ -9,19 +9,12 @@ from fastapi import File, UploadFile
 
 from vetwebapi.core.settings import settings
 
-from vetwebapi.core.models import Drug, DrugMovement, CatalogDrug, DrugInMovement, Operation, DrugManufacturer, AccountingUnit, Budget
-from .schemas import DrugInMovementIn, DrugMovementIn, DrugIn, CatalogDrugIn
+from vetwebapi.core.models import Drug, DrugMovement, CatalogDrug, Operation, DrugManufacturer, AccountingUnit, Budget
+from .schemas import DrugIn, CatalogDrugIn
 
 
 
 # Create
-async def create_receipt(session: AsyncSession, body: DrugMovementIn) -> DrugMovement:
-    new_drug_movement = DrugMovement(**body.model_dump())
-    new_drug_movement.operation_id = 1
-    session.add(new_drug_movement)
-    await session.commit()
-    await session.refresh(new_drug_movement)
-    return new_drug_movement
 
 async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
     new_drug = Drug(**body.model_dump())
@@ -36,13 +29,6 @@ async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> Cat
     await session.commit()
     await session.refresh(new_item)
     return new_item
-
-async def add_drug_to_movement(
-    session: AsyncSession, 
-    body: DrugInMovementIn, 
-    drug_movement: DrugMovement
-    ) -> None:
-    pass
 
 
 # Save Files
@@ -72,15 +58,6 @@ async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(.
 
 
 # Read
-async def read_operation_by_id(session: AsyncSession, operation_id: int) -> Operation | None:
-    return await session.get(Operation, operation_id)
-
-async def read_drug_movement_by_id(session: AsyncSession, drug_movement_id: int) -> DrugMovement | None:
-    return await session.get(DrugMovement, drug_movement_id)
-
-async def read_receipts(session: AsyncSession) -> list[DrugMovement]:
-    stmt = select(DrugMovement).where(DrugMovement.operation_id == 1).order_by(desc(DrugMovement.operation_date))
-    return list(await session.scalars(stmt))
 
 async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
     return await session.get(Drug, drug_id)
@@ -97,6 +74,10 @@ async def read_drugs(session: AsyncSession) -> list[Drug]:
 async def read_catalog(session: AsyncSession) -> list[CatalogDrug]:
     stmt = select(CatalogDrug).options(joinedload(CatalogDrug.drug)).where(CatalogDrug.is_active)
     return list(await session.scalars(stmt))
+
+
+async def read_catalog_drug_by_id(session: AsyncSession, id: int) -> CatalogDrug | None:
+    return await session.get(CatalogDrug, id)
 
 
 async def read_drug_manufacturers(session: AsyncSession) -> list[DrugManufacturer]:
@@ -127,5 +108,9 @@ async def delete_drug(session: AsyncSession, drug: Drug) -> None:
         await remove_drug_image(filepath=drug.image)
     if drug.instruction is not None:
         await remove_drug_instruction(filepath=drug.instruction)
+    await session.delete(drug)
+    await session.commit()
+    
+async def delete_catalog_drug(session: AsyncSession, drug: CatalogDrug) -> None:
     await session.delete(drug)
     await session.commit()
