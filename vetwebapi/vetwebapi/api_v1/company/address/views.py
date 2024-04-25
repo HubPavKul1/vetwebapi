@@ -14,7 +14,6 @@ from .schemas import AddressIn
 router = APIRouter(prefix="/{company_id}/address")
 
 
-
 @router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_address_route(
     body: AddressIn,
@@ -44,4 +43,3 @@ async def delete_address(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-

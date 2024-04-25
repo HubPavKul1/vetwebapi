@@ -1,7 +1,6 @@
 from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
@@ -11,7 +10,6 @@ from . import crud
 from .schemas import EmployeeIn
 
 router = APIRouter(prefix="/{company_id}/employees")
-
 
 
 @router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)

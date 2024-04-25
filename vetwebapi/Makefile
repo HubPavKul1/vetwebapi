@@ -59,4 +59,4 @@ lint:
 	make lintmain
 	make lintapi
 	make lintcore
-	make linttests
+	

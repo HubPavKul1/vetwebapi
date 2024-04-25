@@ -1,7 +1,6 @@
 from vetwebapi.core.models import CatalogDrug
+
 from .schemas import CatalogDrugSchema
-
-
 
 
 async def serialize_catalog_drug(drug: CatalogDrug):

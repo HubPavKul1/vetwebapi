@@ -1,4 +1,3 @@
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -92,6 +91,7 @@ async def read_streets(session: AsyncSession) -> list[Street]:
 async def read_city_streets(session: AsyncSession, city_id: int) -> list[Street]:
     stmt = select(Street).where(Street.city_id == city_id).order_by(Street.name)
     return list(await session.scalars(stmt))
+
 
 # Delete
 

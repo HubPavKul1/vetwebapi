@@ -8,10 +8,10 @@ from vetwebapi.core.models.base import Base
 
 class Dosage(Base):
     """Модель Дозировка препарата"""
-    
+
     __tablename__ = "dosages"
-    
+
     name: Mapped[str] = mapped_column(String(300))
-    
+
     def __repr__(self) -> str:
         return self.name

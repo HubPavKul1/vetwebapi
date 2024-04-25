@@ -1,6 +1,6 @@
 from sqlalchemy import select
-from sqlalchemy.orm import selectinload, joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import joinedload, selectinload
 
 from vetwebapi.core.models import Company, Role
 
@@ -31,11 +31,16 @@ async def read_companies(session: AsyncSession) -> list[Company]:
 
 
 async def read_companies_with_options(session: AsyncSession) -> list[Company]:
-    stmt = select(Company).options(selectinload(Company.employees)).options(joinedload(Company.addresses)).where(Company.is_active).order_by(Company.short_name)
+    stmt = (
+        select(Company)
+        .options(selectinload(Company.employees))
+        .options(joinedload(Company.addresses))
+        .where(Company.is_active)
+        .order_by(Company.short_name)
+    )
     return list(await session.scalars(stmt))
 
 
-    
 async def read_company_by_id(session: AsyncSession, company_id: int) -> Company | None:
     return await session.get(Company, company_id)
 

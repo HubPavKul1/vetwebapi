@@ -15,7 +15,9 @@ async def drug_movement_by_id(
 ) -> DrugMovement:
     """Получаем объект Перемещения по id"""
 
-    drug_movement = await crud.read_drug_movement_by_id(session=session, drug_movement_id=drug_movement_id)
+    drug_movement = await crud.read_drug_movement_by_id(
+        session=session, drug_movement_id=drug_movement_id
+    )
     if drug_movement is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

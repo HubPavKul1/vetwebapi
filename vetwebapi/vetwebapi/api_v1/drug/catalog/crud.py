@@ -1,11 +1,10 @@
-from sqlalchemy import select, desc
-from sqlalchemy.orm import joinedload
+from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from sqlalchemy.orm import joinedload
 
 from vetwebapi.core.models import CatalogDrug
-from .schemas import CatalogDrugIn
 
+from .schemas import CatalogDrugIn
 
 
 async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> CatalogDrug:

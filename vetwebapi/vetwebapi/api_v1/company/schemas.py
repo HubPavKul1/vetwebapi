@@ -5,22 +5,21 @@ from .animal.schemas import AnimalSchema
 from .employee.schemas import EmployeeSchema
 
 
-
 class BaseIn(BaseModel):
     name: str
-    
-    
+
+
 class CompanyIn(BaseModel):
     full_name: str
     short_name: str
-    
-    
+
+
 class CompanyCard(CompanyIn):
     id: int
     address: AddressSchema | None = None
     employee: EmployeeSchema | None = None
     # model_config = ConfigDict(from_attributes=True)
-    
+
 
 class CompanySchema(CompanyIn):
     id: int
@@ -38,7 +37,6 @@ class CompanyOut(SuccessMessage):
 
 class Companies(BaseModel):
     companies: list[CompanyCard]
-    
 
 
 class CompanyDetail(CompanySchema):

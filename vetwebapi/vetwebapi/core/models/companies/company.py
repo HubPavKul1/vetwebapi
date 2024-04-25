@@ -23,7 +23,9 @@ class Company(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete")
-    employees: Mapped[list["Employee"]] = relationship(back_populates="company", cascade="all, delete")
+    employees: Mapped[list["Employee"]] = relationship(
+        back_populates="company", cascade="all, delete"
+    )
     animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
 
     @property

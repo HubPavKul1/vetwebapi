@@ -8,7 +8,6 @@ from pydantic_settings import BaseSettings
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
     # templates: Jinja2Templates = Jinja2Templates(
@@ -17,9 +16,11 @@ class Settings(BaseSettings):
     # staticfiles: StaticFiles = StaticFiles(
     #     directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "static")
     #     )
-    files_dir: str =os.path.join(BASE_DIR, "vetwebapi", "files")
-    
-    media_dir: str = os.path.join(BASE_DIR, "vetwebfrontts", "public") # директория для статики react app
+    files_dir: str = os.path.join(BASE_DIR, "vetwebapi", "files")
+
+    media_dir: str = os.path.join(
+        BASE_DIR, "vetwebfrontts", "public"
+    )  # директория для статики react app
 
     db_user: str
     db_pass: str
@@ -47,4 +48,3 @@ class Settings(BaseSettings):
 # settings = Settings(_env_file=f"{BASE_DIR}/.env", _env_file_encoding="utf-8")
 # settings = Settings(_env_file=f"{BASE_DIR}/.dev.env", _env_file_encoding="utf-8")
 settings = Settings(_env_file=os.path.join(BASE_DIR, ".dev.env"), _env_file_encoding="utf-8")
-

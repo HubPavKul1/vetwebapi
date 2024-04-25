@@ -3,8 +3,8 @@ from pydantic import BaseModel, ConfigDict
 
 class DiseaseIn(BaseModel):
     name: str
-    
-    
+
+
 class DiseaseOut(DiseaseIn):
     id: int
 
@@ -13,7 +13,3 @@ class DiseaseOut(DiseaseIn):
 
 class Diseases(BaseModel):
     diseases: list[DiseaseOut]
-
-
-    
-

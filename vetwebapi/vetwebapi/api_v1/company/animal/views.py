@@ -35,7 +35,6 @@ async def create_animal_route(
 #     return await serialize_animal(animal=animal)
 
 
-
 @router.delete("/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -82,7 +81,7 @@ async def update_animal_api_partial(
             detail={"result": False, "error_message": "Something wrong on backend"},
         )
 
-    
+
 @router.post("/upload/", status_code=status.HTTP_201_CREATED)
 async def upload_animals(
     company_id: int,
@@ -92,4 +91,3 @@ async def upload_animals(
     if file.content_type not in ["text/csv"]:
         raise HTTPException(status_code=400, detail="Invalid file type")
     await crud.save_animals(session=session, company_id=company_id, file=file)
-    

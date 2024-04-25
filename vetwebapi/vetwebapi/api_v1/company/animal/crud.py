@@ -17,7 +17,7 @@ from vetwebapi.core.models import (
 
 from .schemas import AnimalIn, AnimalUpdate, AnimalUpdatePartial
 
-# Create
+
 async def create_type_of_feeding(session: AsyncSession, name: str) -> int:
     new_type_of_feeding = TypeOfFeeding(name=name.capitalize())
     session.add(new_type_of_feeding)
@@ -93,9 +93,8 @@ async def save_animals(
 
     buffer.close()
     file.file.close()
-    
-    
-# Read
+
+
 async def read_company_animals(session: AsyncSession, company_id: int) -> list[Animal | None]:
     stmt = (
         select(Animal)
@@ -109,14 +108,17 @@ async def read_animal_by_id(session: AsyncSession, animal_id: int) -> Animal | N
     return await session.get(Animal, animal_id)
 
 
-# Data for create animal form
 async def read_types_of_feeding(session: AsyncSession) -> list[TypeOfFeeding]:
     stmt = select(TypeOfFeeding).order_by(TypeOfFeeding.name)
     return list(await session.scalars(stmt))
 
 
 async def read_animal_groups(session: AsyncSession, type_of_feeding_id: int) -> list[AnimalGroup]:
-    stmt = select(AnimalGroup).where(AnimalGroup.type_of_feeding_id == type_of_feeding_id).order_by(AnimalGroup.name)
+    stmt = (
+        select(AnimalGroup)
+        .where(AnimalGroup.type_of_feeding_id == type_of_feeding_id)
+        .order_by(AnimalGroup.name)
+    )
     return list(await session.scalars(stmt))
 
 
@@ -134,9 +136,6 @@ async def read_usage_types(session: AsyncSession) -> list[UsageType]:
     stmt = select(UsageType).order_by(UsageType.name)
     return list(await session.scalars(stmt))
 
-##################################################################
-
-
 
 async def read_species_by_name(session: AsyncSession, name: str) -> Species:
     stmt = select(Species).where(Species.name.ilike(name))
@@ -153,7 +152,6 @@ async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType
     return await session.scalar(stmt)
 
 
-# Update
 async def update_animal(
     session: AsyncSession,
     animal: Animal,
@@ -166,7 +164,6 @@ async def update_animal(
     return animal
 
 
-# Delete
 async def delete_animal(session: AsyncSession, animal: Animal) -> None:
     await session.delete(animal)
     await session.commit()

@@ -10,10 +10,8 @@ from . import crud
 
 
 async def catalog_drug_by_id(
-    id: Annotated[int, Path()],
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    id: Annotated[int, Path()], session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> CatalogDrug:
-    
     drug = await crud.read_catalog_drug_by_id(session=session, id=id)
     if drug is None:
         raise HTTPException(
@@ -21,5 +19,3 @@ async def catalog_drug_by_id(
             detail={"result": False, "error_message": "Drug Not Found"},
         )
     return drug
-
-    

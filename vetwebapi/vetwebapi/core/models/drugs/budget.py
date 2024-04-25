@@ -11,12 +11,12 @@ if TYPE_CHECKING:
 
 class Budget(Base):
     """Модель Бюджет"""
-    
+
     __tablename__ = "budgets"
-    
+
     name: Mapped[str] = mapped_column(String(100))
-    
+
     drugs: Mapped[list["Drug"]] = relationship(back_populates="budget")
-    
+
     def __repr__(self) -> str:
         return self.name

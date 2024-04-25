@@ -11,12 +11,12 @@ if TYPE_CHECKING:
 
 class DrugManufacturer(Base):
     """Модель Производитель препарата"""
-    
+
     __tablename__ = "drug_manufacturers"
-    
+
     name: Mapped[str] = mapped_column(String(100))
-    
-    drugs: Mapped[list["Drug"]] = relationship(back_populates="drug_manufacturer") 
-    
+
+    drugs: Mapped[list["Drug"]] = relationship(back_populates="drug_manufacturer")
+
     def __repr__(self) -> str:
         return self.name

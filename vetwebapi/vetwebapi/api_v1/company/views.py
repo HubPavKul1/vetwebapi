@@ -7,24 +7,32 @@ from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Address, Animal, Company, Employee
 
 from . import crud
-from .address.crud import read_regions, read_city_streets, read_region_districts, read_district_cities
+from .address.crud import (
+    read_city_streets,
+    read_district_cities,
+    read_region_districts,
+    read_regions,
+)
 from .address.dependencies import company_address
-from .address.schemas import RegionSchemas, DistrictSchemas, CitySchemas, StreetSchemas
+from .address.schemas import CitySchemas, DistrictSchemas, RegionSchemas, StreetSchemas
 from .address.views import router as address_router
-
-from .animal.crud import read_types_of_feeding, read_animal_groups, read_species, read_genders, read_usage_types
+from .animal.crud import (
+    read_animal_groups,
+    read_genders,
+    read_species,
+    read_types_of_feeding,
+    read_usage_types,
+)
 from .animal.dependencies import company_animals
 from .animal.schemas import (
-    TypeOfFeedingSchemas, 
-    AnimalGroupSchemas, 
-    SpeciesSchemas, 
-    GenderSchemas, 
-    UsageTypeSchemas
+    AnimalGroupSchemas,
+    GenderSchemas,
+    SpeciesSchemas,
+    TypeOfFeedingSchemas,
+    UsageTypeSchemas,
 )
-
 from .animal.views import router as animal_router
 from .dependencies import company_by_id
-
 from .employee.crud import read_positions
 from .employee.dependencies import company_employees
 from .employee.schemas import PositionSchemas
@@ -68,7 +76,8 @@ async def get_companies(
 
 
 @router.delete(
-    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_company(
     company: Company = Depends(company_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -92,17 +101,15 @@ async def get_company_detail(
 ) -> Union[dict, CompanyDetail]:
     try:
         return await serialize_company_detail(
-            company=company,
-            address=address,
-            employees=employees,
-            animals=animals,
+            company=company, address=address, employees=employees, animals=animals
         )
-        
+
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+
 
 # Get data for add address form
 @router.get("/regions", response_model=RegionSchemas)
@@ -121,8 +128,7 @@ async def get_regions_route(
 
 @router.get("/regions/{region_id}/districts", response_model=DistrictSchemas)
 async def get_region_districts_route(
-    region_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    region_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[DistrictSchemas, dict]:
     try:
         districts = await read_region_districts(session=session, region_id=region_id)
@@ -136,8 +142,7 @@ async def get_region_districts_route(
 
 @router.get("/districts/{district_id}/cities", response_model=CitySchemas)
 async def get_district_cities_route(
-    district_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    district_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[CitySchemas, dict]:
     try:
         cities = await read_district_cities(session=session, district_id=district_id)
@@ -151,8 +156,7 @@ async def get_district_cities_route(
 
 @router.get("/cities/{city_id}/streets", response_model=StreetSchemas)
 async def get_city_streets_route(
-    city_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    city_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[StreetSchemas, dict]:
     try:
         streets = await read_city_streets(session=session, city_id=city_id)
@@ -162,6 +166,7 @@ async def get_city_streets_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+
 
 # Get data for add employee form
 @router.get("/positions", response_model=PositionSchemas)
@@ -176,8 +181,8 @@ async def get_positions_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
-        
+
+
 # Get data for add animal form
 @router.get("/types_of_feeding", response_model=TypeOfFeedingSchemas)
 async def get_types_of_feeding_route(
@@ -190,9 +195,9 @@ async def get_types_of_feeding_route(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
-        ) 
-        
-        
+        )
+
+
 @router.get("/usage_types", response_model=UsageTypeSchemas)
 async def get_usage_types_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -204,16 +209,17 @@ async def get_usage_types_route(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
-        ) 
-        
-        
+        )
+
+
 @router.get("/{type_of_feeding_id}/animal_groups", response_model=AnimalGroupSchemas)
 async def get_animal_groups_route(
-    type_of_feeding_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    type_of_feeding_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[AnimalGroupSchemas, dict]:
     try:
-        animal_groups = await read_animal_groups(session=session, type_of_feeding_id=type_of_feeding_id)
+        animal_groups = await read_animal_groups(
+            session=session, type_of_feeding_id=type_of_feeding_id
+        )
         return AnimalGroupSchemas(animal_groups=animal_groups)
     except Exception:
         raise HTTPException(
@@ -221,10 +227,10 @@ async def get_animal_groups_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+
 @router.get("/{animal_group_id}/species", response_model=SpeciesSchemas)
 async def get_species_route(
-    animal_group_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    animal_group_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[SpeciesSchemas, dict]:
     try:
         species = await read_species(session=session, animal_group_id=animal_group_id)
@@ -234,12 +240,11 @@ async def get_species_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
+
 
 @router.get("/{species_id}/genders", response_model=GenderSchemas)
 async def get_genders_route(
-    species_id: int,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    species_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[GenderSchemas, dict]:
     try:
         genders = await read_genders(session=session, species_id=species_id)
@@ -248,4 +253,4 @@ async def get_genders_route(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
-        )        
+        )

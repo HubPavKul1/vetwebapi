@@ -12,6 +12,27 @@ export interface IDrugMovement extends IDrugMovementCreate {
     id: number;
 }
 
+
+export interface IDrugInMovement {
+    id: number;
+    name: string;
+    batch: string;
+    control: string;
+    production_date: string;
+    expiration_date: string;
+    packs_amount: number;
+    units_amount: number;
+
+}
+
+
+
+export interface IDrugMovementDetail extends IDrugMovementCreate {
+    drugs?: IDrugInMovement[];
+}
+
+
+
 export interface IDrugMovements {
     drug_movements?: IDrugMovement[]
 }
@@ -91,4 +112,6 @@ export interface IDrugCatalogCard extends IDrugCatalogCreate {
     image?: string;
 
 }
+
+
 

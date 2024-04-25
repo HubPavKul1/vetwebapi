@@ -1,8 +1,9 @@
-from vetwebapi.core.models import Address, Employee, Animal, Company
 from vetwebapi.api_v1.company.address.schemas import AddressSchema
-from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
 from vetwebapi.api_v1.company.animal.schemas import AnimalSchema
-from .schemas import CompanyDetail, CompanyCard
+from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
+from vetwebapi.core.models import Address, Animal, Company, Employee
+
+from .schemas import CompanyCard, CompanyDetail
 
 
 async def serialize_address(address: Address) -> AddressSchema:
@@ -15,8 +16,8 @@ async def serialize_address(address: Address) -> AddressSchema:
         phone_number1=address.phone_number1,
         phone_number2=address.phone_number2,
     )
-    
-    
+
+
 async def serialize_employee(employee: Employee) -> EmployeeSchema:
     return EmployeeSchema(
         id=employee.id,
@@ -26,8 +27,8 @@ async def serialize_employee(employee: Employee) -> EmployeeSchema:
         patronymic=employee.patronymic,
         fullname=employee.fullname,
     )
-    
-    
+
+
 async def serialize_animal(animal: Animal) -> AnimalSchema:
     return AnimalSchema(
         id=animal.id,
@@ -40,37 +41,38 @@ async def serialize_animal(animal: Animal) -> AnimalSchema:
         identification=animal.identification,
         is_active=animal.is_active,
     )
-    
-# Function to serialize data for company detail page    
+
+
+# Function to serialize data for company detail page
 async def serialize_company_detail(
-    company: Company, 
+    company: Company,
     address: Address,
-    employees: list[Employee | None], 
-    animals: list[Animal | None]
-    ) -> CompanyDetail:
-    
+    employees: list[Employee | None],
+    animals: list[Animal | None],
+) -> CompanyDetail:
     emp_schemas: list[EmployeeSchema] = []
     animal_schemas: list[AnimalSchema] = []
     address_schema: AddressSchema = None
     if employees:
         emp_schemas = [await serialize_employee(employee) for employee in employees]
-    
+
     if address is not None:
-            address_schema = await serialize_address(address=address)
+        address_schema = await serialize_address(address=address)
 
     if animals:
         animal_schemas = [await serialize_animal(animal=animal) for animal in animals]
 
     return CompanyDetail(
-            id=company.id,
-            full_name=company.full_name,
-            short_name=company.short_name,
-            address=address_schema,
-            employees=emp_schemas,
-            animals=animal_schemas,
-            )
-    
-# Function to serialize data for company card     
+        id=company.id,
+        full_name=company.full_name,
+        short_name=company.short_name,
+        address=address_schema,
+        employees=emp_schemas,
+        animals=animal_schemas,
+    )
+
+
+# Function to serialize data for company card
 async def serialize_company_card(company: Company):
     address = company.addresses
     employees = company.employees
@@ -80,13 +82,11 @@ async def serialize_company_card(company: Company):
         address_schema = await serialize_address(address=address)
     if employees:
         employee_schema = await serialize_employee(employee=employees[0])
-        
+
     return CompanyCard(
         id=company.id,
         full_name=company.full_name,
         short_name=company.short_name,
         address=address_schema,
         employee=employee_schema,
-    )    
-    
-    
+    )
