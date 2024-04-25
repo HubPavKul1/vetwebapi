@@ -41,8 +41,9 @@ export function ReceiptDetail() {
           </Col>
          
           <Col>
-            <h5>{data.operation}</h5>
-            <p>{data.operation_date}</p>
+            <h1>Поступление</h1>
+            <h5>{data.operation_date}</h5>
+            {/* <p>{data.operation_date}</p> */}
           </Col>
         </Row>
 

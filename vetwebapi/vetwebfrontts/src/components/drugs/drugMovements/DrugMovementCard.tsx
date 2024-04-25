@@ -34,7 +34,7 @@ export function DrugMovementCard({drugMovement}: DrugMovementCardProps) {
                 cardTitle={drugMovement.operation_date} 
                 imgSrc="drugsCard.jpg"
                 onClick={deleteReceipt} 
-                // url={`/companies/${company.id}`}
+                url={`/drugs/receipts/${drugMovement.id}`}
             />
     )
 }

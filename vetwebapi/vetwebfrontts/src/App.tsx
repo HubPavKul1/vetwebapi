@@ -7,6 +7,7 @@ import { DrugReceipts } from "./components/pages/drugPages/DrugReceipts";
 import { Drugs } from "./components/pages/drugPages/Drugs";
 import { DrugDetail } from "./components/pages/drugPages/drugDetail/DrugDetail";
 import { DrugCatalog } from "./components/pages/drugPages/DrugCatalog";
+import { ReceiptDetail } from "./components/pages/drugPages/receiptDetail/ReceiptDetail";
 
 
 export function App() {
@@ -17,6 +18,7 @@ export function App() {
                 <Route index element={<Home />}  />
                 <Route path="companies" element={<Companies />} />
                 <Route path="drugs/receipts" element={<DrugReceipts />} />
+                <Route path="drugs/receipts/:id" element={<ReceiptDetail />} />
                 <Route path="drugs" element={<Drugs/>} />
                 <Route path="drugs/catalog" element={<DrugCatalog/>} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
