@@ -14,9 +14,9 @@ class DrugMovementOut(DrugMovementIn):
     model_config = ConfigDict(from_attributes=True)
 
 
-class DrugMovements(BaseModel):
-    drug_movements: list[DrugMovementOut]
-
+# class DrugMovements(BaseModel):
+#     drug_movements: list[DrugMovementOut]
+    
 
 class DrugInMovementIn(BaseModel):
     catalog_drug_id: int
@@ -29,10 +29,14 @@ class DrugInMovementSchema(BaseModel):
     name: str
     batch: str
     control: str
-    production_date: str
-    expiration_date: str
+    production_date: date
+    expiration_date: date
     packs_amount: int
     units_amount: float
 
 class DrugMovementDetail(DrugMovementOut):
-    drugs: list[DrugInMovementSchema]
+    drugs: list[DrugInMovementSchema] | None = None
+
+
+class DrugMovements(BaseModel):
+    drug_movements: list[DrugMovementDetail]    

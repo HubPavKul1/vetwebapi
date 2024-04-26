@@ -5,12 +5,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.api_v1.company.schemas import SuccessMessage
 from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import DrugMovement
+from vetwebapi.core.models import DrugMovement, DrugInMovement
 
 from . import crud
 from .dependencies import drug_movement_by_id
-from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail
-from .serializers import serialize_drug_in_movement
+from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail, DrugInMovementSchema
+from .serializers import serialize_drug_in_movement, serialize_drug_movement_card
 
 router = APIRouter(prefix="/receipts")
 
@@ -28,15 +28,15 @@ async def create_receipt_route(
 
 
 @router.post(
-    "/{drug_movement_id}/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED
+    "/{drug_movement_id}/", status_code=status.HTTP_201_CREATED
 )
 async def add_drug_to_movement_route(
     body: DrugInMovementIn,
-    drug_movement: DrugMovement = Depends(drug_movement_by_id),
+    drug_movement_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    drug_in_movement = await crud.add_drug_to_movement(
-        session=session, body=body, drug_movement=drug_movement
+    await crud.add_drug_to_movement(
+        session=session, body=body, drug_movement_id=drug_movement_id
     )
 
 
@@ -45,8 +45,9 @@ async def get_receipts(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DrugMovements, dict]:
     try:
-        receipts = await crud.read_receipts(session=session)
-        return DrugMovements(drug_movements=receipts)
+        receipts = await crud.read_receipts_with_drugs(session=session)
+        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
+        return DrugMovements(drug_movements=receipt_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -60,8 +61,8 @@ async def get_receipt(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DrugMovementDetail, dict]:
     try:
-        drugs = await crud.read_drugs_in_drug_movement(session=session, drug_movement=drug_movement)
-        drug_schemas = [await serialize_drug_in_movement(item=drug) for drug in drugs]
+        drugs: list[DrugInMovement] = await crud.read_drugs_in_drug_movement(session=session, drug_movement=drug_movement)
+        drug_schemas: list[DrugInMovementSchema] = [await serialize_drug_in_movement(drug) for drug in drugs]
         return DrugMovementDetail(
             id=drug_movement.id,
             operation_date=drug_movement.operation_date,
