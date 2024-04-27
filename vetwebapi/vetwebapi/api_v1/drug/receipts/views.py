@@ -45,7 +45,7 @@ async def get_receipts(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DrugMovements, dict]:
     try:
-        receipts = await crud.read_receipts_with_drugs(session=session)
+        receipts: list[DrugMovement] = await crud.read_receipts_with_drugs(session=session)
         receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
         return DrugMovements(drug_movements=receipt_schemas)
     except Exception:

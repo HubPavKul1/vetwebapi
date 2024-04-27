@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query"
-import { CompanyAddress } from "../../../companies/address/CompanyAddress";
-import { CompanyEmployee } from "../../../companies/employee/CompanyEmployee";
-import { CompanyAnimal } from "../../../companies/animal/CompanyAnimal";
-import { CompanyPageMenu } from "../../../menu/CompanyPageMenu";
+import { CompanyAddress } from "../../../components/companies/address/CompanyAddress";
+import { CompanyEmployee } from "../../../components/companies/employee/CompanyEmployee";
+import { CompanyAnimal } from "../../../components/companies/animal/CompanyAnimal";
+import { CompanyPageMenu } from "../../../components/menu/CompanyPageMenu";
 import { Container, Row, Col } from "react-bootstrap";
 
 import styles from "./CompanyDetail.module.scss"
-import { AppService } from "../../../../app.service";
-import { ICompanyDetail } from "../../../../interfaces/CompanyInterfaces";
+import { AppService } from "../../../app.service";
+import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
 
 
 

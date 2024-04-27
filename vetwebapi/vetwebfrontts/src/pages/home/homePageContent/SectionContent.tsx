@@ -1,5 +1,5 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { contentData } from "../../../data/HomeContent";
+import { Container, Row } from "react-bootstrap";
+import { contentData } from "../../../components/data/HomeContent";
 import { HomePageCard } from "../homePageCard/HomePageCard";
 
 import styles from "./SectionContent.module.scss"

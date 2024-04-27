@@ -1,14 +1,14 @@
 import { Row } from "react-bootstrap";
 
 import { useQuery } from "react-query"
-import { Catalog } from "../../catalog/Catalog";
-import { catalogItemData } from "../../data/CatalogItemData";
-import { CatalogItem } from "../../catalogItem/CatalogItem";
-import { CreateItem } from "../../createItem/CreateItem";
-import { IDrugCatalogCard } from "../../../interfaces/DrugInterfaces";
-import { AppService } from "../../../app.service";
-import { CatalogDrugCard } from "../../drugs/drug/catalogDrugCard/CatalogDrugCard";
-import { CreateCatalogDrugForm } from "../../drugs/drug/CreateCatalogDrugForm";
+import { Catalog } from "../../components/catalog/Catalog";
+import { catalogItemData } from "../../components/data/CatalogItemData";
+import { CatalogItem } from "../../components/catalogItem/CatalogItem";
+import { CreateItem } from "../../components/createItem/CreateItem";
+import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
+import { AppService } from "../../app.service";
+import { CatalogDrugCard } from "../../components/drugs/drug/catalogDrugCard/CatalogDrugCard";
+import { CreateCatalogDrugForm } from "../../components/drugs/drug/CreateCatalogDrugForm";
 
 
 interface DrugCatalogData {

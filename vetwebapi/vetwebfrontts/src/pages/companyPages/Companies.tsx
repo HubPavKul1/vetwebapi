@@ -1,14 +1,14 @@
 import { Row } from "react-bootstrap";
 
 import { useQuery } from "react-query";
-import { Catalog } from "../../catalog/Catalog";
-import { catalogItemData } from "../../data/CatalogItemData";
-import { CatalogItem } from "../../catalogItem/CatalogItem";
-import { CompanyCard } from "../../companies/companyCard/CompanyCard";
-import { CreateCompanyForm } from "../../companies/createCompany/CreateCompanyForm";
-import { CreateItem } from "../../createItem/CreateItem";
-import { AppService } from "../../../app.service";
-import { ICompany } from "../../../interfaces/CompanyInterfaces";
+import { Catalog } from "../../components/catalog/Catalog";
+import { catalogItemData } from "../../components/data/CatalogItemData";
+import { CatalogItem } from "../../components/catalogItem/CatalogItem";
+import { CompanyCard } from "../../components/companies/companyCard/CompanyCard";
+import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
+import { CreateItem } from "../../components/createItem/CreateItem";
+import { AppService } from "../../app.service";
+import { ICompany } from "../../interfaces/CompanyInterfaces";
 
 
 interface CompaniesProps {

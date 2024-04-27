@@ -19,10 +19,10 @@ async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSche
 async def serialize_drug_movement_card(drug_movement: DrugMovement) -> DrugMovementDetail:
     drugs = drug_movement.catalog_drugs_details
     if drugs:
-        drug_schemas = [await serialize_drug_in_movement(drug) for drug in drugs]
+        drugs = [await serialize_drug_in_movement(drug) for drug in drugs]
     return DrugMovementDetail(
         id=drug_movement.id,
         operation_date=drug_movement.operation_date,
-        drugs=drug_schemas
+        drugs=drugs
     )
     

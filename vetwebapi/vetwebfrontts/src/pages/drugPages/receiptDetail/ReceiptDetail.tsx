@@ -2,25 +2,25 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "react-query"
 import { Container, Row, Col } from "react-bootstrap";
 
-import styles from "./DrugDetail.module.scss"
-import { AppService } from "../../../../app.service";
-import { IDrugDetail } from "../../../../interfaces/DrugInterfaces";
+import styles from "./ReceiptDetail.module.scss"
+import { AppService } from "../../../app.service";
+import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
 
 
 
 
-interface DrugData {
-  data?: IDrugDetail;
+interface ReceiptData {
+  data?: IDrugMovementDetail;
   isLoading: boolean;
 }
 
-export function DrugDetail() {
+export function ReceiptDetail() {
 
     const {id} = useParams();
-    const url = `/api/drugs/${id}`;
+    const url = `/api/drugs/receipts/${id}`;
 
 
-    const { isLoading, data }: DrugData = useQuery(['drug', id], () => AppService.get(url), {
+    const { isLoading, data }: ReceiptData = useQuery(['receipt', id], () => AppService.get(url), {
       enabled: !!id
     }
     );
@@ -31,22 +31,23 @@ export function DrugDetail() {
     return (
 
       <>
-      <Container className={styles.drugDetailWrap}>
+      <Container className={styles.detailWrap}>
         <Row className={styles.rowTop}>
           <Col sm={4} className={styles.colImg}>
               <img
-                src={`/${data.image}`}
-                alt={data.name}
+                src="/drugsBg.jpg"
+                alt={data.operation_date}
                 />
           </Col>
          
           <Col>
-            <h5>{data.name}</h5>
-            <p>{data.drug_manufacturer}</p>
+            <h1>Поступление</h1>
+            <h5>{data.operation_date}</h5>
+            {/* <p>{data.operation_date}</p> */}
           </Col>
         </Row>
 
-        <Row className={styles.rowBody}>
+        {/* <Row className={styles.rowBody}>
           {data.instruction && 
             <object
             type="application/pdf" 
@@ -56,7 +57,7 @@ export function DrugDetail() {
             ></object>
           }
 
-        </Row>
+        </Row> */}
        
   </Container>
 

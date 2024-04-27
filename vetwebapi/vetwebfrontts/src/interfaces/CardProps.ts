@@ -11,4 +11,8 @@ export interface ICardProps {
     buttonVariant?: string;
     onClick?: MouseEventHandler;
     children?: React.ReactElement | React.ReactNode;
+    hasContacts?: boolean;
+    phone?: string;
+    address?: string;
+    phone2?: string;
 }

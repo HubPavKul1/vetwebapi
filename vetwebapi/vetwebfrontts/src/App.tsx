@@ -1,13 +1,13 @@
 import { Layout } from "./components/Layout";
-import { Home } from "./components/pages/home/Home";
-import { Companies } from "./components/pages/companyPages/Companies";
-import { CompanyDetail } from "./components/pages/companyPages/company-detail/CompanyDetail";
+import { Home } from "./pages/home/Home";
+import { Companies } from "./pages/companyPages/Companies";
+import { CompanyDetail } from "./pages/companyPages/company-detail/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
-import { DrugReceipts } from "./components/pages/drugPages/DrugReceipts";
-import { Drugs } from "./components/pages/drugPages/Drugs";
-import { DrugDetail } from "./components/pages/drugPages/drugDetail/DrugDetail";
-import { DrugCatalog } from "./components/pages/drugPages/DrugCatalog";
-import { ReceiptDetail } from "./components/pages/drugPages/receiptDetail/ReceiptDetail";
+import { DrugReceipts } from "./pages/drugPages/DrugReceipts";
+import { Drugs } from "./pages/drugPages/Drugs";
+import { DrugDetail } from "./pages/drugPages/drugDetail/DrugDetail";
+import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
+import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
 
 
 export function App() {

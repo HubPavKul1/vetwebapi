@@ -1,5 +1,5 @@
 import { Card, Col } from "react-bootstrap";
-import { ICardProps } from "../../../../interfaces/CardProps";
+import { ICardProps } from "../../../interfaces/CardProps";
 
 import styles from "./HomePageCard.module.scss"
 

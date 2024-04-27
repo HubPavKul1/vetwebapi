@@ -1,0 +1,8 @@
+@import "../../../assets/sass/mixins";
+
+
+.sectionTitle {
+	@include pageTitle;
+	
+}
+

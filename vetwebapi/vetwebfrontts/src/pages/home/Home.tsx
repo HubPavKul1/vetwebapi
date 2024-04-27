@@ -1,5 +1,5 @@
 
-import { CarouselBox } from "../../carousel/CarouselBox";
+import { CarouselBox } from "../../components/carousel/CarouselBox";
 import { SectionContent } from "./homePageContent/SectionContent";
 
 
