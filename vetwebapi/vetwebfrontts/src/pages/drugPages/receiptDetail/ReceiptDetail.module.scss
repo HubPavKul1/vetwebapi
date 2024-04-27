@@ -14,7 +14,7 @@
     justify-content: center;
     
     >img {
-        width: 30%;
+        width: 100%;
     }
 
 
@@ -33,6 +33,13 @@
 
 .rowBody {
     min-height: 550px;
+}
+
+
+.drugWrap {
+    h5 {
+        text-align: center;
+    }
 }
 
 

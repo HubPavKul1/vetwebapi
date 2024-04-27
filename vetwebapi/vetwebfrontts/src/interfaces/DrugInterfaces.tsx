@@ -13,6 +13,14 @@ export interface IDrugMovement extends IDrugMovementCreate {
 }
 
 
+export interface IDrugInMovementIn {
+    catalog_drug_id: number;
+    packs_amount: number;
+    units_amount: number;
+
+}
+
+
 export interface IDrugInMovement {
     id: number;
     name: string;

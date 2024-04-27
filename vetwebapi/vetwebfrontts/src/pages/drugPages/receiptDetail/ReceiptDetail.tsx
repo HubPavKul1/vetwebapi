@@ -5,6 +5,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import styles from "./ReceiptDetail.module.scss"
 import { AppService } from "../../../app.service";
 import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
+import { CreateItem } from "../../../components/createItem/CreateItem";
+import { AddDrugForm } from "../../../components/drugs/drugMovements/AddDrugForm";
+import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
 
 
 
@@ -43,21 +46,34 @@ export function ReceiptDetail() {
           <Col>
             <h1>Поступление</h1>
             <h5>{data.operation_date}</h5>
-            {/* <p>{data.operation_date}</p> */}
+
+            <CreateItem btnTitle="Добавить препарат">
+                <AddDrugForm/>
+            </CreateItem>
           </Col>
         </Row>
 
-        {/* <Row className={styles.rowBody}>
-          {data.instruction && 
-            <object
-            type="application/pdf" 
-            data={`/${data.instruction}`}
-            width="100%"
-            // height="200%"
-            ></object>
-          }
+        <Container className={styles.drugWrap}>
+          <h5>Препараты </h5>
+            <table className="table">
 
-        </Row> */}
+              <tbody >
+                <tr>
+                  <th>Наименование препарата</th>
+                  <th>Серия</th>
+                  <th>Контроль</th>
+                  <th>Количество упаковок</th>
+                  <th>Количество единиц учета</th>
+                  <th />
+                </tr>
+                {data.drugs?.length && data.drugs.map(
+                  drug => <ReceiptDrug key={drug.id} drug={drug}/>
+                )
+                }
+              </tbody>
+            </table>
+
+        </Container>
        
   </Container>
 

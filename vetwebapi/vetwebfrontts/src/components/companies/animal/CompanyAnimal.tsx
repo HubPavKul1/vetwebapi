@@ -10,8 +10,6 @@ interface CompanyAnimalProps {
 }
 
 
-
-
 export function CompanyAnimal({animal}: CompanyAnimalProps) {
     const { id } = useParams()
     if (!id) return;
