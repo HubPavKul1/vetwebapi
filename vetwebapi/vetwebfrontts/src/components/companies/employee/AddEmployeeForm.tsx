@@ -1,6 +1,5 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
 import { useMutation, useQueryClient } from "react-query";
-import { EmployeeService } from "../company.service";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
 import { CustomButton } from "../../button/CustomButton";
@@ -19,9 +18,6 @@ export function AddEmployeeForm() {
 
     const url = `/api/companies/${id}/employees/`
     
-   
-
-
     const inputItems: FormInputProps<IEmployeeCreate>[] = [
         {fieldName: "lastname", placeholder: "Введите фамилию *"},
         {fieldName: "firstname", placeholder: "Введите имя *"},
@@ -46,15 +42,6 @@ export function AddEmployeeForm() {
     },
 )
 
-    // const { mutate } = useMutation(["create employee"], {
-    //     mutationFn: (data: IEmployeeCreate) => EmployeeService.createEmployee(data, id),
-    //     onSuccess: () => {
-    //         alert("Работник успешно добавлен!")
-    //         queryClient.invalidateQueries(["company", compId])
-    //         reset()
-    //     }
-    // },
-    // )
 
     const createEmployee: SubmitHandler<IEmployeeCreate> = data => {
         console.log("employee: ", data)

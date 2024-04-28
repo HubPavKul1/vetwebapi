@@ -8,6 +8,7 @@ import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
 import { CreateItem } from "../../../components/createItem/CreateItem";
 import { AddDrugForm } from "../../../components/drugs/drugMovements/AddDrugForm";
 import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
+import { CustomButton } from "../../../components/button/CustomButton";
 
 
 
@@ -46,10 +47,18 @@ export function ReceiptDetail() {
           <Col>
             <h1>Поступление</h1>
             <h5>{data.operation_date}</h5>
+          <div className={styles.buttonWrap}>
+              <CreateItem btnTitle="Добавить препарат">
+                  <AddDrugForm/>
+              </CreateItem>
+              <CustomButton
+                className="btn-nav"
+                title="Требование-накладная"
+              />
 
-            <CreateItem btnTitle="Добавить препарат">
-                <AddDrugForm/>
-            </CreateItem>
+          </div>
+
+            
           </Col>
         </Row>
 

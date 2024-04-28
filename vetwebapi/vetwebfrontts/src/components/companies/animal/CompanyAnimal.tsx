@@ -1,23 +1,25 @@
 import { IAnimal } from "../../../interfaces/AnimalInterfaces";
-import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { AnimalService } from "../company.service";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
+import { AppService } from "../../../app.service";
 
 interface CompanyAnimalProps {
     animal: IAnimal;
+    company_id: number;
 }
 
 
-export function CompanyAnimal({animal}: CompanyAnimalProps) {
-    const { id } = useParams()
-    if (!id) return;
+export function CompanyAnimal({animal, company_id}: CompanyAnimalProps) {
+
+    const id = company_id.toString()
+
+    const url = `/api/companies/${id}/animals/${animal.id}`
 
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["delete animal"], {
-        mutationFn: () => AnimalService.deleteAnimal(id, animal.id),
+        mutationFn: () => AppService.deleteItem(url),
         onSuccess: () => {
             alert("Животное успешно удалено!")
             queryClient.invalidateQueries(["company", id])

@@ -100,10 +100,9 @@ export function CompanyDetail() {
                         <th>Идентификация</th>
                         <th />
                       </tr>
-                      {data.animals?.length ? data.animals.map(animal => <CompanyAnimal key={animal.id} animal={animal}/>)
-                      
-                      
-                      : ""
+                      {data.animals?.length && data.animals.map(
+                        animal => <CompanyAnimal key={animal.id} company_id={data.id} animal={animal}/>
+                      )
                       
                       }
                     </tbody>

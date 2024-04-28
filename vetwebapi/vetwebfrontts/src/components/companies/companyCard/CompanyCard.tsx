@@ -33,19 +33,12 @@ export function CompanyCard({company}: CompanyCard) {
    
 
     return (
-
-            
             <CatalogItem 
                 id={company.id} 
                 cardTitle={company.short_name} 
-                imgSrc="/animals.jpg"
+                imgSrc="animals.jpg"
                 onClick={deleteCompany} 
-                url={`/companies/${company.id}`} 
-
-
-                
-                
-                                 
+                url={`/companies/${company.id}`}                                
             >
 
                 <CompanyCardBody 
