@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query"
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -51,9 +51,13 @@ export function ReceiptDetail() {
               <CreateItem btnTitle="Добавить препарат">
                   <AddDrugForm/>
               </CreateItem>
-              <CustomButton
-                className="btn-nav"
-                title="Требование-накладная"
+              
+              <CustomButton 
+                as={Link} 
+                id="RouterNavLink" 
+                to={`/drugs/receipts/${id}/pdf`}
+                className="btn-large"
+                title="Требование-заявка"
               />
 
           </div>

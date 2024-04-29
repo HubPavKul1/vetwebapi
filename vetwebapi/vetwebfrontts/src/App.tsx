@@ -8,6 +8,7 @@ import { Drugs } from "./pages/drugPages/Drugs";
 import { DrugDetail } from "./pages/drugPages/drugDetail/DrugDetail";
 import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
 import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
+import { ReceiptPDF } from "./pages/drugPages/receiptDetail/ReceiptPDF";
 
 
 export function App() {
@@ -19,10 +20,12 @@ export function App() {
                 <Route path="companies" element={<Companies />} />
                 <Route path="drugs/receipts" element={<DrugReceipts />} />
                 <Route path="drugs/receipts/:id" element={<ReceiptDetail />} />
+                <Route path="drugs/receipts/:id/pdf" element={<ReceiptPDF />} />
                 <Route path="drugs" element={<Drugs/>} />
                 <Route path="drugs/catalog" element={<DrugCatalog/>} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
                 <Route path="drugs/:id" element={<DrugDetail />} />
+
                 <Route path="*" element={<div>Not Found</div>} />
             </Route>
         </Routes>
