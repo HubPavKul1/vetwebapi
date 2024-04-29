@@ -51,14 +51,13 @@ export function ReceiptDetail() {
               <CreateItem btnTitle="Добавить препарат">
                   <AddDrugForm/>
               </CreateItem>
-              
-              <CustomButton 
-                as={Link} 
-                id="RouterNavLink" 
-                to={`/drugs/receipts/${id}/pdf`}
-                className="btn-large"
-                title="Требование-заявка"
-              />
+
+              <Link to={`/drugs/receipts/${id}/pdf`}>
+                <CustomButton 
+                  className="btn-large"
+                  title="Требование-заявка"
+                />
+              </Link>
 
           </div>
 

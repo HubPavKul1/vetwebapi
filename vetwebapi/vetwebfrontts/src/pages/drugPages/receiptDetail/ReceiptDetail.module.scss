@@ -51,3 +51,57 @@
 }
 
 
+.pdfTitle {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h3 {
+        font-style: italic;
+    }
+}
+
+.pdfHeader {
+    margin-bottom: 100px;
+}
+
+.pdfBoss {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    div {
+        border-bottom: 2px solid black;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+}
+
+.pdfDate {
+    display: flex;
+    
+    div {
+        text-align: center;
+        border-bottom: 2px solid black;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+}
+
+.pdfBody {
+
+    margin-bottom: 30px;
+
+    h3 {
+        margin: 0;
+        border-bottom: 2px solid black;
+    }
+ 
+}
+
+
