@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { AppService } from "../../../app.service";
 
 import styles from "./ReceiptDetail.module.scss"
+import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
 
 
 interface ReceiptData {
@@ -71,19 +72,70 @@ export function ReceiptPDF() {
                 <Col> <h3>диагностических исследований / обработок против:</h3></Col>   
                 <h3>животных г. Иваново в ветклинике на ул. Танкиста Белороссова, д.30А</h3>
             </Row>
+            <Row className={styles.tHead}>
+                <Col md={5}>Наименование ветеринарного препарата</Col>
+                <Col md={1}>Ед. измерения</Col>
+                <Col md={1}>Серия</Col>
+                <Col md={2}>Дата изготовления</Col>
+                <Col md={1}>Кол-во</Col>
+                <Col md={1}>Цена за единицу</Col>
+                <Col md={1}>Сумма</Col>
+            </Row>
+            {data.drugs &&
+                data.drugs.map(drug => 
+                <Row key={drug.id} className={styles.tBody}>
+                    <Col md={5}>{drug.name}</Col>
+                    <Col md={1}>доз</Col>
+                    <Col md={1}>{drug.batch}</Col>
+                    <Col md={2}>{drug.production_date}</Col>
+                    <Col md={1}>{drug.units_amount}</Col>
+                    <Col md={1}></Col>
+                    <Col md={1}></Col>
+                </Row>
 
-            <table>
-                <tr>
-                    <th>Наименование ветеринарного препарата</th>
-                    <th>единицы измерения</th>
-                    <th>серия</th>
-                    <th>дата изготовления</th>
-                    <th>количество</th>
-                    <th>Цена за единицу</th>
-                    <th>Сумма</th>
-                    <th />
-                </tr>
-            </table>
+                )
+            }
+           
+            <Row>
+                <Col md={4}><h5>Отпустил:</h5></Col>
+                <Col></Col>
+                <Col></Col>
+                <Col></Col>
+                <Col></Col>
+            </Row>
+            <Row className={styles.pdfFooter}>
+                <Col md={5}><h5>Уполномоченное ответственное лицо, ветеринарный врач</h5></Col>
+                <Col md={3} className={styles.col2}></Col>
+                <Col></Col>
+                <Col md={3} className={styles.col2}></Col>
+            </Row>
+            <Row>
+
+            </Row>
+            <Row>
+                <Col md={4}><h5>Получил:</h5></Col>
+                <Col></Col>
+                <Col></Col>
+                <Col></Col>
+                <Col></Col>
+            </Row>
+            <Row>
+                <Col md={5}><h5>Ветврач-исполнитель</h5></Col>
+                <Col md={3} className={styles.col2}></Col>
+                <Col></Col>
+                <Col md={3} className={styles.col2}></Col>
+            </Row>
+            <Row>
+                <Col md={5}><h5>Ветврач-лаборант</h5></Col>
+                <Col md={3} className={styles.col2}></Col>
+                <Col></Col>
+                <Col md={3} className={styles.col2}></Col>
+            </Row>
+            <Row>
+
+            </Row>
+
+          
 
         </Container>
     )
