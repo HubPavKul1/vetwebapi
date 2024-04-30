@@ -27,6 +27,7 @@ class DrugInMovementIn(BaseModel):
 class DrugInMovementSchema(BaseModel):
     id: int
     name: str
+    disease: str
     batch: str
     control: str
     production_date: date

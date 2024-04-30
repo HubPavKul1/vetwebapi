@@ -9,6 +9,8 @@ import { CreateItem } from "../../../components/createItem/CreateItem";
 import { AddDrugForm } from "../../../components/drugs/drugMovements/AddDrugForm";
 import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
 import { CustomButton } from "../../../components/button/CustomButton";
+import { useState } from "react";
+import { ReceiptPDF } from "./ReceiptPDF";
 
 
 
@@ -20,6 +22,7 @@ interface ReceiptData {
 
 export function ReceiptDetail() {
 
+    const [pdf, setPdf] = useState(false)
     const {id} = useParams();
     const url = `/api/drugs/receipts/${id}`;
 
@@ -34,8 +37,11 @@ export function ReceiptDetail() {
     
     return (
 
+      
+
       <>
-      <Container className={styles.detailWrap}>
+      { !pdf ?
+       ( <Container className={styles.detailWrap}>
         <Row className={styles.rowTop}>
           <Col sm={4} className={styles.colImg}>
               <img
@@ -51,13 +57,12 @@ export function ReceiptDetail() {
               <CreateItem btnTitle="Добавить препарат">
                   <AddDrugForm/>
               </CreateItem>
-
-              <Link to={`/drugs/receipts/${id}/pdf`}>
-                <CustomButton 
+              
+              <CustomButton 
                   className="btn-large"
                   title="Требование-заявка"
+                  onClick={() => setPdf(true)}
                 />
-              </Link>
 
           </div>
 
@@ -87,8 +92,10 @@ export function ReceiptDetail() {
 
         </Container>
        
-  </Container>
-
+  </Container>)
+      : <ReceiptPDF data={data}/>
+      
+}
 
       </>
 

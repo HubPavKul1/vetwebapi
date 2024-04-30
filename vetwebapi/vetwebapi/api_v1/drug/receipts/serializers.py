@@ -6,6 +6,7 @@ from .schemas import DrugInMovementSchema, DrugMovementDetail
 async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSchema:
     return DrugInMovementSchema(
         id=item.catalog_drug_id,
+        disease=item.catalog_drug.drug.disease.name,
         name=item.catalog_drug.drug.name,
         batch=item.catalog_drug.batch,
         control=item.catalog_drug.control,

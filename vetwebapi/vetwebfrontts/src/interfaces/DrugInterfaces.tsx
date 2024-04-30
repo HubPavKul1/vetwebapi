@@ -23,6 +23,7 @@ export interface IDrugInMovementIn {
 
 export interface IDrugInMovement {
     id: number;
+    disease: string;
     name: string;
     batch: string;
     control: string;
@@ -35,7 +36,7 @@ export interface IDrugInMovement {
 
 
 
-export interface IDrugMovementDetail extends IDrugMovementCreate {
+export interface IDrugMovementDetail extends IDrugMovement {
     drugs?: IDrugInMovement[];
 }
 
