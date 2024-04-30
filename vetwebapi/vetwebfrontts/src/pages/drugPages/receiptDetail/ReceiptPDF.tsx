@@ -28,7 +28,7 @@ export function ReceiptPDF() {
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
     return (
-        <Container>
+        <Container className={styles.pdfWrap}>
             <Row>
                 <Col></Col>
                 <Col></Col>
@@ -47,30 +47,30 @@ export function ReceiptPDF() {
             <Row className={styles.pdfHeader}>
                 <Col></Col>
                 <Col>
-                    <h2>УТВЕРЖДАЮ:</h2>
-                    <h3>Начальник БГУ Ивановской области</h3>
-                    <h3>"Ивановская городская СББЖ"</h3>
+                    <h5>УТВЕРЖДАЮ:</h5>
+                    <h5>Начальник БГУ Ивановской области</h5>
+                    <h5>"Ивановская городская СББЖ"</h5>
                     <div className={styles.pdfBoss}>
                        <Col></Col>
-                       <Col><h3>/ В.Н. Барашков</h3></Col>
+                       <Col><h5>/ В.Н. Барашков</h5></Col>
                        
                     </div>
                     <div className={styles.pdfDate}>
-                        <Col><h3>" {data.operation_date.split("-")[2]} "</h3></Col>
-                        <Col><h3>{data.operation_date.split("-")[1]}</h3></Col>
-                        <Col><h3>{data.operation_date.split("-")[0]} г</h3></Col>
+                        <Col><h5>" {data.operation_date.split("-")[2]} "</h5></Col>
+                        <Col><h5>{data.operation_date.split("-")[1]}</h5></Col>
+                        <Col><h5>{data.operation_date.split("-")[0]} г</h5></Col>
                     </div>
                 </Col>
             </Row>
             <Row className={styles.pdfTitle}>
-                <h2>Требование-заявка № {id}</h2>
-                <h3>на отпуск ветеринарных препаратов и диагностических наборов</h3>
+                <h3>Требование-заявка № {id}</h3>
+                <h5>на отпуск ветеринарных препаратов и диагностических наборов</h5>
             </Row>
             
             <Row className={styles.pdfBody}>
-                <h3>   Прошу выделить ветеринарные препараты/диагностические наборы для проведения</h3>
-                <Col> <h3>диагностических исследований / обработок против:</h3></Col>   
-                <h3>животных г. Иваново в ветклинике на ул. Танкиста Белороссова, д.30А</h3>
+                <h5>   Прошу выделить ветеринарные препараты/диагностические наборы для проведения</h5>
+                <Col> <h5>диагностических исследований / обработок против:</h5></Col>   
+                <h5>животных г. Иваново в ветклинике на ул. Танкиста Белороссова, д.30А</h5>
             </Row>
             <Row className={styles.tHead}>
                 <Col md={5}>Наименование ветеринарного препарата</Col>
