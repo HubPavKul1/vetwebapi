@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "react-query"
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -10,7 +10,7 @@ import { AddDrugForm } from "../../../components/drugs/drugMovements/AddDrugForm
 import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
 import { CustomButton } from "../../../components/button/CustomButton";
 import { useState } from "react";
-import { ReceiptPDF } from "./ReceiptPDF";
+import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
 
 
 
@@ -57,7 +57,6 @@ export function ReceiptDetail() {
               <CreateItem btnTitle="Добавить препарат">
                   <AddDrugForm/>
               </CreateItem>
-              
               <CustomButton 
                   className="btn-large"
                   title="Требование-заявка"
@@ -93,7 +92,7 @@ export function ReceiptDetail() {
         </Container>
        
   </Container>)
-      : <ReceiptPDF data={data}/>
+      : <ReceiptPDF setPdf={setPdf} data={data}/>
       
 }
 
