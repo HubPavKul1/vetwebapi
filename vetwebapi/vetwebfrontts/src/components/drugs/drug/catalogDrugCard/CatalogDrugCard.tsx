@@ -28,7 +28,8 @@ export function CatalogDrugCard({item}: CatalogDrugCardProps) {
         mutate()
     }
 
-    
+    const productionDate = AppService.convertDateString(item.production_date).shortDate;
+    const expirationDate = AppService.convertDateString(item.expiration_date).shortDate;
 
     return (
             <>
@@ -43,8 +44,8 @@ export function CatalogDrugCard({item}: CatalogDrugCardProps) {
                 <CatalogDrugCardBody
                     batch={item.batch}
                     control={item.control}
-                    production_date={item.production_date}
-                    expiration_date={item.expiration_date}
+                    production_date={productionDate}
+                    expiration_date={expirationDate}
                     
                 />
                 

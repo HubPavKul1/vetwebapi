@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query"
+import { useQuery } from "react-query";
 import { Container, Row, Col } from "react-bootstrap";
 
-import styles from "./ReceiptDetail.module.scss"
+import styles from "./ReceiptDetail.module.scss";
 import { AppService } from "../../../app.service";
 import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
 import { CreateItem } from "../../../components/createItem/CreateItem";
@@ -31,13 +31,13 @@ export function ReceiptDetail() {
       enabled: !!id
     }
     );
-
    
     if(isLoading || !data) return <p>Загрузка ...</p>;
-    
-    return (
 
-      
+    const date = AppService.convertDateString(data.operation_date)
+    
+    
+    return (  
 
       <>
       { !pdf ?
@@ -52,7 +52,7 @@ export function ReceiptDetail() {
          
           <Col>
             <h1>Поступление</h1>
-            <h5>{data.operation_date}</h5>
+            <h5>{date.fullDate}</h5>
           <div className={styles.buttonWrap}>
               <CreateItem btnTitle="Добавить препарат">
                   <AddDrugForm/>
@@ -78,6 +78,7 @@ export function ReceiptDetail() {
                   <th>Наименование препарата</th>
                   <th>Серия</th>
                   <th>Контроль</th>
+                  <th>Дата Изготовления</th>
                   <th>Количество упаковок</th>
                   <th>Количество единиц учета</th>
                   <th />

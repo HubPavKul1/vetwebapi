@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 import styles from "./ReceiptPDF.module.scss"
+import { AppService } from "../../../../app.service";
 
 
 
@@ -11,9 +12,7 @@ interface ReceiptPdfHeaderProps {
 
 
 export function ReceiptPDFHeader({operationDate}: ReceiptPdfHeaderProps) {
-    const date = new Date(operationDate)
-    const month = date.toLocaleString('default', { month: 'long' });
-
+    const date = AppService.convertDateString(operationDate)
 
     return (
         <Container>
@@ -43,9 +42,9 @@ export function ReceiptPDFHeader({operationDate}: ReceiptPdfHeaderProps) {
                             <Col><h5>/ В.Н. Барашков</h5></Col>
                         </Row>
                         <Row className={styles.pdfDate}>
-                            <Col><h5>" {operationDate.split("-")[2]} "</h5></Col>
-                            <Col><h5>{month}</h5></Col>
-                            <Col><h5>{operationDate.split("-")[0]} г</h5></Col>
+                            <Col><h5>" {date.day} "</h5></Col>
+                            <Col><h5>{date.month}</h5></Col>
+                            <Col><h5>{date.year} г</h5></Col>
                         </Row>
                     </Col>
                 </Row>

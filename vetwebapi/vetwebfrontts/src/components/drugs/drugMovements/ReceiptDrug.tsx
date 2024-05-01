@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { IDrugInMovement } from "../../../interfaces/DrugInterfaces";
+import { AppService } from "../../../app.service";
 
 interface ReceiptDrugProps {
     drug: IDrugInMovement;
@@ -12,7 +13,8 @@ interface ReceiptDrugProps {
 
 
 export function ReceiptDrug({drug}: ReceiptDrugProps) {
-    // const { id } = useParams()
+
+    const productionDate = AppService.convertDateString(drug.production_date).shortDate
      
 
     // const queryClient = useQueryClient()
@@ -37,6 +39,7 @@ export function ReceiptDrug({drug}: ReceiptDrugProps) {
                 <td>{drug.name}</td>
                 <td>{drug.batch}</td>
                 <td>{drug.control}</td>
+                <td>{productionDate}</td>
                 <td>{drug.packs_amount}</td>
                 <td>{drug.units_amount}</td>
                 {/* <td><BsPencilSquare className="edit-icon"/></td>

@@ -1,11 +1,11 @@
-import { IDrugMovement } from "../../../interfaces/DrugInterfaces";
+import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
 import { CatalogItem } from "../../catalogItem/CatalogItem";
 import { useMutation, useQueryClient } from "react-query";
 import { AppService } from "../../../app.service";
 
 
 interface DrugMovementCardProps {
-    drugMovement: IDrugMovement;
+    drugMovement: IDrugMovementDetail;
 }
 
 export function DrugMovementCard({drugMovement}: DrugMovementCardProps) {
@@ -27,11 +27,13 @@ export function DrugMovementCard({drugMovement}: DrugMovementCardProps) {
         mutate()
     }
 
+    const operationDate = AppService.convertDateString(drugMovement.operation_date)
+
     return (
 
             <CatalogItem 
                 id={drugMovement.id} 
-                cardTitle={drugMovement.operation_date} 
+                cardTitle={operationDate.fullDate} 
                 imgSrc="drugsCard.jpg"
                 onClick={deleteReceipt} 
                 url={`/drugs/receipts/${drugMovement.id}`}
