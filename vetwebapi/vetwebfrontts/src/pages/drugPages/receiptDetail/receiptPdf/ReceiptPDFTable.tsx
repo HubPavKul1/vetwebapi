@@ -33,7 +33,7 @@ export function ReceiptPDFTable({data}: ReceiptPDFTableProps) {
                                 {
                                 AppService.convertDateString(
                                     drug.production_date
-                                ).fullDate
+                                ).shortDate
                                 }
                             </h6>
                         </Col>
