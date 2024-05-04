@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
-    from vetwebapi.core.models import Animal
+    from vetwebapi.core.models import Animal, VetWork
 
     from .address import Address
     from .employee import Employee
@@ -28,6 +28,8 @@ class Company(Base):
         back_populates="company", cascade="all, delete"
     )
     animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
+    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="clinic", cascade="all, delete")
+    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="laboratory", cascade="all, delete")
 
     @property
     def company_slug(self):
