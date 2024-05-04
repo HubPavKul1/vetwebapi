@@ -16,7 +16,7 @@ class WorkType(Base):
 
     name: Mapped[str] = mapped_column(String(30))
 
-    vet_works: Mapped[list["VetWork"]] = relationship(back_populates="work_type")
+    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="work_type")
 
     def __repr__(self) -> str:
         return self.name

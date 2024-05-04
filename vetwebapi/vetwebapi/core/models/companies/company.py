@@ -20,8 +20,8 @@ class Company(Base):
 
     full_name: Mapped[str]
     short_name: Mapped[str]
-    is_vet_clinic: Mapped[bool] = mapped_column(Boolean, default=False, server_default=False)
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default=True)
+    is_vet: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete")
     employees: Mapped[list["Employee"]] = relationship(
@@ -29,7 +29,6 @@ class Company(Base):
     )
     animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
     vetworks: Mapped[list["VetWork"]] = relationship(back_populates="clinic", cascade="all, delete")
-    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="laboratory", cascade="all, delete")
 
     @property
     def company_slug(self):

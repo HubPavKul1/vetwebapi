@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vetwebapi.core.models.base import Base
 
 if TYPE_CHECKING:
-    from vetwebapi.core.models import Company
+    from vetwebapi.core.models import Company, VetWork, AnimalInVetWork
 
     from .gender import Gender
     from .species import Species
@@ -26,12 +26,19 @@ class Animal(Base):
     date_of_birth: Mapped[date]
     nickname: Mapped[str] = mapped_column(String(100))
     identification: Mapped[str] = mapped_column(String(15))
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     species: Mapped["Species"] = relationship(back_populates="animals", lazy="joined")
     company: Mapped["Company"] = relationship(back_populates="animals", lazy="joined")
     usage_type: Mapped["UsageType"] = relationship(back_populates="animals", lazy="joined")
     gender: Mapped["Gender"] = relationship(back_populates="animals", lazy="joined")
+
+    vetworks: Mapped[list["VetWork"]] = relationship(
+        back_populates="animals", secondary="animals_in_vetwork"
+    )
+    vetworks_details: Mapped[list["AnimalInVetWork"]] = relationship(
+        back_populates="animal"
+    )
 
     def __repr__(self) -> str:
         return f"{self.species.name}: {self.nickname}"

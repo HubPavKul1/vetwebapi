@@ -24,6 +24,7 @@ __all__ = (
     "AdministrationMethod",
     "Dosage",
     "PlaceOfAdministration",
+    "DisposalMethod",
     "Disease",
     "Budget",
     "Operation",
@@ -32,7 +33,12 @@ __all__ = (
     "DrugInMovement",
     "WorkType",
     "VetWork",
-    
+    "BiomaterialPackage",
+    "Biomaterial",
+    "BiomaterialFixation",
+    "AnimalInVetWork",
+    "DoctorInVetWork",
+
 )
 
 # Animals
@@ -66,6 +72,7 @@ from .drugs.drug_manufacturer import DrugManufacturer
 from .drugs.drug_movement import DrugMovement
 from .drugs.operation import Operation
 from .drugs.place_of_administration import PlaceOfAdministration
+from .drugs.disposal_method import DisposalMethod
 
 # User
 from .users.auth import auth_backend
@@ -77,3 +84,8 @@ from .users.user import User
 from .vet_work.disease import Disease
 from .vet_work.work_type import WorkType
 from .vet_work.vetwork import VetWork
+from .vet_work.biomaterial import Biomaterial
+from .vet_work.biomaterial_fixation import BiomaterialFixation
+from .vet_work.biomaterial_package import BiomaterialPackage
+from .vet_work.animal_in_vetwork import AnimalInVetWork
+from .vet_work.doctor_in_vetwork import DoctorInVetWork

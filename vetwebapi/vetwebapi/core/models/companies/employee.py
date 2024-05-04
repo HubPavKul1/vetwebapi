@@ -9,6 +9,7 @@ from vetwebapi.core.models.base import Base
 if TYPE_CHECKING:
     from .company import Company
     from .position import Position
+    from vetwebapi.core.models import VetWork, DoctorInVetWork
 
 
 class Employee(Base):
@@ -25,6 +26,15 @@ class Employee(Base):
 
     company: Mapped["Company"] = relationship(back_populates="employees")
     position: Mapped["Position"] = relationship(back_populates="employees", lazy="joined")
+
+
+    vetworks: Mapped[list["VetWork"]] = relationship(
+        back_populates="doctors", secondary="doctors_in_vetwork"
+    )
+
+    vetworks_details: Mapped[list["DoctorInVetWork"]] = relationship(
+        back_populates="doctor"
+    )
 
     @property
     def fullname(self):

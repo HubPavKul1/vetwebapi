@@ -15,7 +15,7 @@ class PlaceOfAdministration(Base):
 
     name: Mapped[str] = mapped_column(Text)
 
-    drugs: Mapped[list["Drug"]] = relationship(back_populates="dosage")
+    drugs: Mapped[list["Drug"]] = relationship(back_populates="place_of_administration")
 
     def __repr__(self) -> str:
         return self.name
