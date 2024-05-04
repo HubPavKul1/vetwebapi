@@ -20,7 +20,8 @@ class Company(Base):
 
     full_name: Mapped[str]
     short_name: Mapped[str]
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    is_vet_clinic: Mapped[bool] = mapped_column(Boolean, default=False, server_default=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default=True)
 
     addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete")
     employees: Mapped[list["Employee"]] = relationship(

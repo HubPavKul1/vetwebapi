@@ -26,7 +26,7 @@ class Animal(Base):
     date_of_birth: Mapped[date]
     nickname: Mapped[str] = mapped_column(String(100))
     identification: Mapped[str] = mapped_column(String(15))
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default=True)
 
     species: Mapped["Species"] = relationship(back_populates="animals", lazy="joined")
     company: Mapped["Company"] = relationship(back_populates="animals", lazy="joined")

@@ -30,8 +30,8 @@ __all__ = (
     "CatalogDrug",
     "DrugMovement",
     "DrugInMovement",
-    # "WorkType",
-    # "VetWork",
+    "WorkType",
+    "VetWork",
 )
 
 # Animals
@@ -74,5 +74,5 @@ from .users.user import User
 
 # VetWork
 from .vet_work.disease import Disease
-# from .vet_work.work_type import WorkType
-# from .vet_work.vetwork import VetWork
+from .vet_work.work_type import WorkType
+from .vet_work.vetwork import VetWork
