@@ -38,6 +38,7 @@ __all__ = (
     "BiomaterialFixation",
     "AnimalInVetWork",
     "DoctorInVetWork",
+    "DiagnosticMethod"
 
 )
 
@@ -89,3 +90,4 @@ from .vet_work.biomaterial_fixation import BiomaterialFixation
 from .vet_work.biomaterial_package import BiomaterialPackage
 from .vet_work.animal_in_vetwork import AnimalInVetWork
 from .vet_work.doctor_in_vetwork import DoctorInVetWork
+from .vet_work.diagnostic_method import DiagnosticMethod

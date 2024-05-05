@@ -7,6 +7,10 @@ class DrugIn(BaseModel):
     budget_id: int
     drug_manufacturer_id: int
     accounting_unit_id: int
+    disposal_method_id: int
+    dosage_id: int
+    place_of_administration_id: int
+    administration_method_id: int
     name: str
     packing: int
     image: str | None = None
@@ -19,6 +23,10 @@ class DrugSchema(BaseModel):
     budget: str
     drug_manufacturer: str
     accounting_unit: str
+    disposal_method: str
+    dosage: str
+    place_of_administration: str
+    administration_method: str
     name: str
     packing: int
     image: str | None = None
@@ -62,6 +70,21 @@ class DrugManufacturers(BaseModel):
     drug_manufacturers: list[BaseDrugSchema]
 
 
+class DisposalMethods(BaseModel):
+    disposal_methods: list[BaseDrugSchema]
+
+class Dosages(BaseModel):
+    dosages: list[BaseDrugSchema]
+
+
+class PlacesOfAdministration(BaseModel):
+    places_of_administration: list[BaseDrugSchema]
+
+
+class AdministrationMethods(BaseModel):
+    administration_methods: list[BaseDrugSchema]
+
+
 class DrugName(BaseModel):
     id: int
     name: str
@@ -69,3 +92,5 @@ class DrugName(BaseModel):
 
 class DrugNames(BaseModel):
     drugs: list[DrugName]
+
+

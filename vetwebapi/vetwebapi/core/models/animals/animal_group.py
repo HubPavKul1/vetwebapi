@@ -25,5 +25,6 @@ class AnimalGroup(Base):
         back_populates="animal_groups", lazy="joined"
     )
 
+
     def __repr__(self) -> str:
         return self.name

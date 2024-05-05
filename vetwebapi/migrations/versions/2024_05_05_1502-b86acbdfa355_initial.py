@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 56ad04570c24
+Revision ID: b86acbdfa355
 Revises: 
-Create Date: 2024-05-04 22:09:53.500165
+Create Date: 2024-05-05 15:02:20.908811
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "56ad04570c24"
+revision: str = "b86acbdfa355"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -62,6 +62,12 @@ def upgrade() -> None:
         sa.Column("short_name", sa.String(), nullable=False),
         sa.Column("is_vet", sa.Boolean(), nullable=False),
         sa.Column("is_active", sa.Boolean(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "diagnostic_methods",
+        sa.Column("name", sa.String(length=30), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -258,6 +264,7 @@ def upgrade() -> None:
         sa.Column("biomaterial_id", sa.Integer(), nullable=True),
         sa.Column("biomaterial_package_id", sa.Integer(), nullable=True),
         sa.Column("biomaterial_fixation_id", sa.Integer(), nullable=True),
+        sa.Column("diagnostic_method_id", sa.Integer(), nullable=True),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
             ["biomaterial_fixation_id"],
@@ -274,6 +281,11 @@ def upgrade() -> None:
         ),
         sa.ForeignKeyConstraint(
             ["clinic_id"], ["companies.id"], ondelete="CASCADE"
+        ),
+        sa.ForeignKeyConstraint(
+            ["diagnostic_method_id"],
+            ["diagnostic_methods.id"],
+            ondelete="CASCADE",
         ),
         sa.ForeignKeyConstraint(
             ["work_type_id"], ["work_types.id"], ondelete="CASCADE"
@@ -450,6 +462,7 @@ def downgrade() -> None:
     op.drop_table("dosages")
     op.drop_table("disposal_methods")
     op.drop_table("diseases")
+    op.drop_table("diagnostic_methods")
     op.drop_table("companies")
     op.drop_table("budgets")
     op.drop_table("biomaterials")

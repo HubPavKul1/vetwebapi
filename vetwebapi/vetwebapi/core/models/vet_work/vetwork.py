@@ -14,6 +14,7 @@ if TYPE_CHECKING:
     from .biomaterial_fixation import BiomaterialFixation
     from .animal_in_vetwork import AnimalInVetWork
     from .doctor_in_vetwork import DoctorInVetWork
+    from .diagnostic_method import DiagnosticMethod
 
 
 class VetWork(Base):
@@ -39,6 +40,9 @@ class VetWork(Base):
     biomaterial_fixation_id: Mapped[int | None] = mapped_column(
         ForeignKey("biomaterial_fixations.id", ondelete="CASCADE")
         )
+    diagnostic_method_id: Mapped[int | None] =  mapped_column(
+        ForeignKey("diagnostic_methods.id", ondelete="CASCADE")
+        )
     
 
     work_type: Mapped["WorkType"] = relationship(back_populates="vetworks", lazy="joined")
@@ -46,6 +50,7 @@ class VetWork(Base):
     biomaterial: Mapped["Biomaterial"] = relationship(back_populates="vetworks", lazy="joined")
     biomaterial_package: Mapped["BiomaterialPackage"] = relationship(back_populates="vetworks", lazy="joined")
     biomaterial_fixation: Mapped["BiomaterialFixation"] = relationship(back_populates="vetworks", lazy="joined")
+    diagnostic_method: Mapped["DiagnosticMethod"] = relationship(back_populates="vetworks", lazy="joined")
 
     animals: Mapped[list["Animal"]] = relationship(
         back_populates="vetworks", secondary="animals_in_vetwork"

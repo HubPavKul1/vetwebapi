@@ -6,15 +6,24 @@ from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from vetwebapi.core.models import AccountingUnit, Budget, Drug, DrugManufacturer
+from vetwebapi.core.models import (
+    AccountingUnit,
+    Budget,
+    Drug,
+    DrugManufacturer,
+    DisposalMethod,
+    Dosage,
+    PlaceOfAdministration,
+    AdministrationMethod
+)
+
 from vetwebapi.core.settings import settings
 from vetwebapi.utils import utils
 
 from .schemas import DrugIn
 
+
 # Create
-
-
 async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
     new_drug = Drug(**body.model_dump())
     session.add(new_drug)
@@ -46,8 +55,6 @@ async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(.
 
 
 # Read
-
-
 async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
     return await session.get(Drug, drug_id)
 
@@ -82,9 +89,28 @@ async def read_budgets(session: AsyncSession) -> list[Budget]:
     return list(await session.scalars(stmt))
 
 
+async def read_disposal_methods(session: AsyncSession) -> list[DisposalMethod]:
+    stmt = select(DisposalMethod).order_by(DisposalMethod.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_dosages(session: AsyncSession) -> list[Dosage]:
+    stmt = select(Dosage).order_by(Dosage.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_places_of_administration(session: AsyncSession) -> list[PlaceOfAdministration]:
+    stmt = select(PlaceOfAdministration).order_by(PlaceOfAdministration.name)
+    return list(await session.scalars(stmt))
+
+
+async def read_administration_methods(session: AsyncSession) -> list[AdministrationMethod]:
+    stmt = select(AdministrationMethod).order_by(AdministrationMethod.name)
+    return list(await session.scalars(stmt))
+
+
+
 # Delete
-
-
 async def remove_drug_image(filepath: str) -> None:
     image_to_remove = os.path.join(settings.media_dir, filepath)
     os.remove(image_to_remove)

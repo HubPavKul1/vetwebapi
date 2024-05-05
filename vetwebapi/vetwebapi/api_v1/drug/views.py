@@ -13,6 +13,10 @@ from vetwebapi.api_v1.drug.schemas import (
     DrugNames,
     Drugs,
     DrugSchema,
+    DisposalMethods,
+    Dosages,
+    PlacesOfAdministration,
+    AdministrationMethods
 )
 from vetwebapi.core.database import db_manager
 from vetwebapi.core.models import Drug
@@ -129,6 +133,59 @@ async def get_accounting_units_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+@router.get("/disposal_methods", response_model=DisposalMethods)
+async def get_disposal_methods_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[DisposalMethods, dict]:
+    try:
+        disposal_methods = await crud.read_disposal_methods(session=session)
+        return DisposalMethods(disposal_methods=disposal_methods)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+@router.get("/dosages", response_model=Dosages)
+async def get_dosages_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[Dosages, dict]:
+    try:
+        dosages = await crud.read_dosages(session=session)
+        return Dosages(dosages=dosages)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+@router.get("/places_of_administration", response_model=PlacesOfAdministration)
+async def get_places_of_administration_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[PlacesOfAdministration, dict]:
+    try:
+        places_of_administration = await crud.read_places_of_administration(session=session)
+        return PlacesOfAdministration(places_of_administration=places_of_administration)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+@router.get("/administration_methods", response_model=AdministrationMethods)
+async def get_administration_methods_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[AdministrationMethods, dict]:
+    try:
+        administration_methods = await crud.read_administration_methods(session=session)
+        return AdministrationMethods(administration_methods=administration_methods)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
 
 
 @router.get("/drug_names", response_model=DrugNames)
