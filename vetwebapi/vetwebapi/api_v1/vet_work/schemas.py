@@ -2,6 +2,9 @@ from datetime import date
 
 from pydantic import BaseModel, ConfigDict
 
+from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
+from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
+
 
 class DiseaseIn(BaseModel):
     name: str
@@ -23,16 +26,48 @@ class VetWorkIn(BaseModel):
     is_state_assignment: bool = False
     is_primary: bool = True
     clinic_id: int
+    diseases: list[int]
+    doctors: list[int]
+    
+
+class DiagnosticIn(VetWorkIn):
     biomaterial_id: int | None = None
     biomaterial_package_id: int | None = None
     biomaterial_fixation_id: int | None = None
-    diagnostic_method_id: int | None = None
+    diagnostic_method_id: int
 
 
-class VetWorkSchema(BaseModel):
-    pass
+class AnimalInVetWorkIn(BaseModel):
+    animal_id: int
+    dosage: float | None = None
+    is_positive: bool = False
 
+class AnimalInVetWorkSchema(AnimalInVetWorkIn):
+    animal_group: str
+    species: str
+    gender: str
+    date_of_birth: date
+    nickname: str
+    identification: str
+    is_active: bool = True
 
+class VaccinationSchema(BaseModel):
+    work_type: str
+    vetwork_date: date
+    diseases: list[DiseaseOut]
+    is_primary: bool
+    clinic: str
+
+class DiagnosticSchema(VaccinationSchema):
+    biomaterial: str | None = None
+    biomaterial_fixation: str | None = None
+    biomaterial_package: str | None = None
+    diagnostic_method: str
+
+class VaccinationDetail(VaccinationSchema):
+    animals: list[AnimalInVetWorkSchema] = []
+    doctors: list[EmployeeSchema] = []
+    drug: DrugInMovementSchema | None = None
 
 
 class BaseVetWorkSchema(BaseModel):

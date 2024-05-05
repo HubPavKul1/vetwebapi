@@ -14,10 +14,6 @@ class DrugMovementOut(DrugMovementIn):
     model_config = ConfigDict(from_attributes=True)
 
 
-# class DrugMovements(BaseModel):
-#     drug_movements: list[DrugMovementOut]
-    
-
 class DrugInMovementIn(BaseModel):
     catalog_drug_id: int
     packs_amount: int
