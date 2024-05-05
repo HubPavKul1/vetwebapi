@@ -15,6 +15,8 @@ if TYPE_CHECKING:
     from .animal_in_vetwork import AnimalInVetWork
     from .doctor_in_vetwork import DoctorInVetWork
     from .diagnostic_method import DiagnosticMethod
+    from .disease import Disease
+    from .disease_in_vetwork import DiseaseInVetWork
 
 
 class VetWork(Base):
@@ -65,6 +67,14 @@ class VetWork(Base):
     )
 
     doctors_details: Mapped[list["DoctorInVetWork"]] = relationship(
+        back_populates="vetwork"
+    )
+
+    diseases: Mapped[list["Disease"]] = relationship(
+         back_populates="vetworks", secondary="diseases_in_vetwork"
+    )
+
+    diseases_details: Mapped[list["DiseaseInVetWork"]] = relationship(
         back_populates="vetwork"
     )
 

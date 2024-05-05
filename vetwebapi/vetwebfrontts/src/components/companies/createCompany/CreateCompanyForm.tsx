@@ -9,6 +9,7 @@ import { CustomButton } from "../../button/CustomButton";
 
 
 export function CreateCompanyForm() {
+   
 
     const inputItems: FormInputProps<ICompanyCreate>[] = [
         {fieldName: "full_name", placeholder: "Введите полное наименование *"},
@@ -30,6 +31,7 @@ export function CreateCompanyForm() {
             reset()
         }
     })
+
 
     const createCompany: SubmitHandler<ICompanyCreate> = (data) => {
         mutate(data)
@@ -64,6 +66,18 @@ export function CreateCompanyForm() {
                     
                 }}
             />))}
+            <div className="form-group">
+                <label htmlFor="is_vet">
+                    Ветучреждение
+                    <Input
+                        register={register}
+                        errors={errors}
+                        fieldName="is_vet"
+                        type="checkbox"
+                        id="is_vet"
+                    />
+                </label>
+            </div>
            
             <CustomButton
                 className="btn-submit"
