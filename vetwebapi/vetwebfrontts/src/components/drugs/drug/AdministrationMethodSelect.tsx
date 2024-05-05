@@ -8,13 +8,13 @@ import { AppService } from '../../../app.service';
 
 
 
-export function AccountingUnitSelect() {
+export function AdministrationMethodSelect() {
 
-    const url = "/api/drugs/accounting_units"
+    const url = "/api/drugs/administration_methods"
  
-    const { data, isLoading}: IQueryData = useQuery(['accountingUnits'], () => AppService.getAll(url),
+    const { data, isLoading}: IQueryData = useQuery(['administrationMethods'], () => AppService.getAll(url),
     {
-        select: ({data}) => data?.accounting_units,
+        select: ({data}) => data?.administration_methods,
     }
 );
 
@@ -31,7 +31,7 @@ export function AccountingUnitSelect() {
     return (
         <Controller
             control={control}
-            name="accounting_unit_id"
+            name="administration_method_id"
             rules={
                 { required: "Field is required!" }
             }
@@ -40,7 +40,7 @@ export function AccountingUnitSelect() {
                     isSearchable
                     isClearable
                     options={options}
-                    placeholder="Выберите единицу учета *"
+                    placeholder="Выберите способ введения *"
                     value={getValue(value)}
                     onChange={newValue => onChange((newValue as IOption).value)}
                 />

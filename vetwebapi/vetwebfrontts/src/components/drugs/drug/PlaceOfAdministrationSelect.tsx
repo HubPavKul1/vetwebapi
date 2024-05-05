@@ -8,13 +8,13 @@ import { AppService } from '../../../app.service';
 
 
 
-export function AccountingUnitSelect() {
+export function PlaceOfAdministrationSelect() {
 
-    const url = "/api/drugs/accounting_units"
+    const url = "/api/drugs/places_of_administration"
  
-    const { data, isLoading}: IQueryData = useQuery(['accountingUnits'], () => AppService.getAll(url),
+    const { data, isLoading}: IQueryData = useQuery(['placeOfAdministration'], () => AppService.getAll(url),
     {
-        select: ({data}) => data?.accounting_units,
+        select: ({data}) => data?.places_of_administration,
     }
 );
 
@@ -31,7 +31,7 @@ export function AccountingUnitSelect() {
     return (
         <Controller
             control={control}
-            name="accounting_unit_id"
+            name="place_of_administration_id"
             rules={
                 { required: "Field is required!" }
             }
@@ -40,7 +40,7 @@ export function AccountingUnitSelect() {
                     isSearchable
                     isClearable
                     options={options}
-                    placeholder="Выберите единицу учета *"
+                    placeholder="Выберите место введения *"
                     value={getValue(value)}
                     onChange={newValue => onChange((newValue as IOption).value)}
                 />

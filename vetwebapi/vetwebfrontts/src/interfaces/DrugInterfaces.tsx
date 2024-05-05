@@ -51,6 +51,10 @@ export interface IDrugCreate {
     budget_id: number;
     drug_manufacturer_id: number;
     accounting_unit_id: number;
+    disposal_method_id: number;
+    dosage_id: number;
+    place_of_administration: number;
+    administration_method: number;
     name: string;
     packing: number;
     image?: string;

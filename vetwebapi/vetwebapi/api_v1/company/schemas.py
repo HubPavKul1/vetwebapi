@@ -12,13 +12,13 @@ class BaseIn(BaseModel):
 class CompanyIn(BaseModel):
     full_name: str
     short_name: str
+    is_vet: bool = False
 
 
 class CompanyCard(CompanyIn):
     id: int
     address: AddressSchema | None = None
     employee: EmployeeSchema | None = None
-    # model_config = ConfigDict(from_attributes=True)
 
 
 class CompanySchema(CompanyIn):

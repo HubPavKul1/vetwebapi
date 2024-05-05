@@ -11,6 +11,10 @@ import { DiseaseSelect } from "./DiseaseSelect";
 import { BudgetSelect } from "./BudgetSelect";
 import { DrugManufacturerSelect } from "./DrugManufacturerSelect";
 import { AccountingUnitSelect } from "./AccountingUnitSelect";
+import { DisposalMethodSelect } from "./DisposalMethodSelect";
+import { DosageSelect } from "./DosageSelect";
+import { PlaceOfAdministrationSelect } from "./PlaceOfAdministrationSelect";
+import { AdministrationMethodSelect } from "./AdministrationMethodSelect";
 
 
 
@@ -49,28 +53,28 @@ export function CreateDrugForm() {
         <>
              <FormProvider {...methods}>
                 <div className="form-group">
-                    <label>
-                        Выберите заболевание *
-                    </label>
                     <DiseaseSelect />
                 </div>
                 <div className="form-group">
-                    <label>
-                        Выберите бюджет *
-                    </label>
                     <BudgetSelect />
                 </div>
                 <div className="form-group">
-                    <label>
-                        Выберите производителя *
-                    </label>
                     <DrugManufacturerSelect />
                 </div>
                 <div className="form-group">
-                    <label>
-                        Выберите единицу учета *
-                    </label>
                     <AccountingUnitSelect />
+                </div>
+                <div className="form-group">
+                    <DisposalMethodSelect />
+                </div>
+                <div className="form-group">
+                    <DosageSelect />
+                </div>
+                <div className="form-group">
+                    <PlaceOfAdministrationSelect />
+                </div>
+                <div className="form-group">
+                    <AdministrationMethodSelect />
                 </div>
             {
                 inputItems.map(item =>(

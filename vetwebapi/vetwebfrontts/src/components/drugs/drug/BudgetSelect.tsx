@@ -41,6 +41,7 @@ export function BudgetSelect() {
                     isSearchable
                     isClearable
                     options={options}
+                    placeholder="Выберите бюджет *"
                     value={getValue(value)}
                     onChange={newValue => onChange((newValue as IOption).value)}
                 />

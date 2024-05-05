@@ -49,6 +49,7 @@ export function DiseaseSelect() {
             isClearable
             loadOptions={loadOptions}
             value={getValue(value)}
+            placeholder="Введите заболевание *"
             onChange={newValue => onChange((newValue as IOption).value)}
         />
         )

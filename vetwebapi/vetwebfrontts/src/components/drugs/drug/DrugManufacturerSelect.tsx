@@ -42,6 +42,7 @@ export function DrugManufacturerSelect() {
                     isClearable
                     options={options}
                     value={getValue(value)}
+                    placeholder="Выберите производителя *"
                     onChange={newValue => onChange((newValue as IOption).value)}
                 />
             )
