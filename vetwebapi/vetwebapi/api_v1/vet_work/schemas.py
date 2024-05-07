@@ -52,6 +52,7 @@ class AnimalInVetWorkSchema(AnimalInVetWorkIn):
     is_active: bool = True
 
 class VaccinationSchema(BaseModel):
+    id: int
     work_type: str
     vetwork_date: date
     diseases: list[DiseaseOut]
