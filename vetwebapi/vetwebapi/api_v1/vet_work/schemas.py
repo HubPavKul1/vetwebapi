@@ -28,8 +28,14 @@ class VetWorkIn(BaseModel):
     clinic_id: int
     diseases: list[int]
     doctors: list[int]
-    
 
+
+class VetWorkOut(BaseModel):
+    id: int
+    vetwork_date: date
+    
+    
+    
 class DiagnosticIn(VetWorkIn):
     biomaterial_id: int | None = None
     biomaterial_package_id: int | None = None
@@ -58,6 +64,9 @@ class VaccinationSchema(BaseModel):
     diseases: list[DiseaseOut]
     is_primary: bool
     clinic: str
+
+class VetWorks(BaseModel):
+    vetworks: list[VaccinationSchema]    
 
 class DiagnosticSchema(VaccinationSchema):
     biomaterial: str | None = None
