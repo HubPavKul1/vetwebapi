@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 7da522a95675
+Revision ID: 22e56693f695
 Revises: 
-Create Date: 2024-05-05 19:19:53.757452
+Create Date: 2024-05-08 13:00:07.236012
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "7da522a95675"
+revision: str = "22e56693f695"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -255,6 +255,38 @@ def upgrade() -> None:
     )
     op.create_index(op.f("ix_users_email"), "users", ["email"], unique=True)
     op.create_table(
+        "catalog_drugs",
+        sa.Column("drug_id", sa.Integer(), nullable=False),
+        sa.Column("batch", sa.String(length=10), nullable=False),
+        sa.Column("control", sa.String(length=10), nullable=False),
+        sa.Column("production_date", sa.Date(), nullable=False),
+        sa.Column("expiration_date", sa.Date(), nullable=False),
+        sa.Column("is_active", sa.Boolean(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["drug_id"], ["drugs.id"], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "cities",
+        sa.Column("district_id", sa.Integer(), nullable=True),
+        sa.Column("name", sa.String(length=100), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["district_id"], ["districts.id"], ondelete="CASCADE"
+        ),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "species",
+        sa.Column("animal_group_id", sa.Integer(), nullable=False),
+        sa.Column("name", sa.String(length=100), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["animal_group_id"], ["animal_groups.id"], ondelete="CASCADE"
+        ),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
         "vetworks",
         sa.Column("work_type_id", sa.Integer(), nullable=False),
         sa.Column("vetwork_date", sa.Date(), nullable=False),
@@ -265,6 +297,7 @@ def upgrade() -> None:
         sa.Column("biomaterial_package_id", sa.Integer(), nullable=True),
         sa.Column("biomaterial_fixation_id", sa.Integer(), nullable=True),
         sa.Column("diagnostic_method_id", sa.Integer(), nullable=True),
+        sa.Column("drug_movement_id", sa.Integer(), nullable=True),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
             ["biomaterial_fixation_id"],
@@ -288,29 +321,10 @@ def upgrade() -> None:
             ondelete="CASCADE",
         ),
         sa.ForeignKeyConstraint(
-            ["work_type_id"], ["work_types.id"], ondelete="CASCADE"
+            ["drug_movement_id"], ["drug_movements.id"], ondelete="CASCADE"
         ),
-        sa.PrimaryKeyConstraint("id"),
-    )
-    op.create_table(
-        "catalog_drugs",
-        sa.Column("drug_id", sa.Integer(), nullable=False),
-        sa.Column("batch", sa.String(length=10), nullable=False),
-        sa.Column("control", sa.String(length=10), nullable=False),
-        sa.Column("production_date", sa.Date(), nullable=False),
-        sa.Column("expiration_date", sa.Date(), nullable=False),
-        sa.Column("is_active", sa.Boolean(), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(["drug_id"], ["drugs.id"], ondelete="CASCADE"),
-        sa.PrimaryKeyConstraint("id"),
-    )
-    op.create_table(
-        "cities",
-        sa.Column("district_id", sa.Integer(), nullable=True),
-        sa.Column("name", sa.String(length=100), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["district_id"], ["districts.id"], ondelete="CASCADE"
+            ["work_type_id"], ["work_types.id"], ondelete="CASCADE"
         ),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -337,16 +351,6 @@ def upgrade() -> None:
         sa.UniqueConstraint(
             "vetwork_id", "employee_id", name="idx_unique_doctor_in_vetwork"
         ),
-    )
-    op.create_table(
-        "species",
-        sa.Column("animal_group_id", sa.Integer(), nullable=False),
-        sa.Column("name", sa.String(length=100), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(
-            ["animal_group_id"], ["animal_groups.id"], ondelete="CASCADE"
-        ),
-        sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
         "drugs_in_movement",
@@ -450,12 +454,12 @@ def downgrade() -> None:
     op.drop_table("streets")
     op.drop_table("genders")
     op.drop_table("drugs_in_movement")
-    op.drop_table("species")
     op.drop_table("doctors_in_vetwork")
     op.drop_table("diseases_in_vetwork")
+    op.drop_table("vetworks")
+    op.drop_table("species")
     op.drop_table("cities")
     op.drop_table("catalog_drugs")
-    op.drop_table("vetworks")
     op.drop_index(op.f("ix_users_email"), table_name="users")
     op.drop_table("users")
     op.drop_table("employees")

@@ -7,7 +7,14 @@ from sqlalchemy import select, desc
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import Disease, VetWork, DiseaseInVetWork, DoctorInVetWork
+from vetwebapi.core.models import (
+    Disease, 
+    VetWork, 
+    DiseaseInVetWork, 
+    DoctorInVetWork,
+    AnimalInVetWork,
+    DrugInMovement,
+    )
 from .schemas import VetWorkIn
 
 
@@ -49,13 +56,36 @@ async def read_diseases(session: AsyncSession) -> list[Disease]:
     stmt = select(Disease).order_by(Disease.name)
     return list(await session.scalars(stmt))
 
+
 async def read_vaccinations(session: AsyncSession) -> list[VetWork]:
     stmt = (
         select(VetWork)
-        .options(selectinload(DiseaseInVetWork.diseases_details)
+        .options(selectinload(VetWork.diseases_details)
         .joinedload(DiseaseInVetWork.disease
         ))
         .where(VetWork.work_type_id == 1)
         .order_by(desc(VetWork.vetwork_date))
     )
+    return list(await session.scalars(stmt))
+
+
+async def read_vetwork_by_id(session: AsyncSession, vetwork_id: int) -> VetWork | None:
+    return await session.get(VetWork, vetwork_id)
+
+
+async def read_animals_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[AnimalInVetWork]:
+    stmt = (
+        select(AnimalInVetWork)
+        .options(joinedload(AnimalInVetWork.animal))
+        .where(AnimalInVetWork.vetwork_id == vetwork.id)
+        )
+    return list(await session.scalars(stmt))
+    
+    
+async def read_doctors_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[DoctorInVetWork]:
+    stmt = (
+        select(DoctorInVetWork)
+        .options(joinedload(DoctorInVetWork.doctor))
+        .where(DoctorInVetWork.vetwork_id == vetwork.id)
+        )
     return list(await session.scalars(stmt))

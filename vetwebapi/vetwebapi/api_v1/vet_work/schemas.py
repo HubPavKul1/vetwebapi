@@ -61,7 +61,7 @@ class VaccinationSchema(BaseModel):
     id: int
     work_type: str
     vetwork_date: date
-    diseases: list[DiseaseOut]
+    diseases: list[str] | None = None
     is_primary: bool
     clinic: str
 

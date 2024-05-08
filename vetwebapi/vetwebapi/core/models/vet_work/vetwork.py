@@ -9,7 +9,7 @@ from vetwebapi.core.models.base import Base
 if TYPE_CHECKING:
     from .work_type import WorkType
     from .biomaterial import Biomaterial
-    from vetwebapi.core.models import Company, Animal, Employee
+    from vetwebapi.core.models import Company, Animal, Employee, DrugMovement
     from .biomaterial_package import BiomaterialPackage
     from .biomaterial_fixation import BiomaterialFixation
     from .animal_in_vetwork import AnimalInVetWork
@@ -45,6 +45,9 @@ class VetWork(Base):
     diagnostic_method_id: Mapped[int | None] =  mapped_column(
         ForeignKey("diagnostic_methods.id", ondelete="CASCADE")
         )
+    drug_movement_id: Mapped[int | None] = mapped_column(
+        ForeignKey("drug_movements.id", ondelete="CASCADE") 
+        )
     
 
     work_type: Mapped["WorkType"] = relationship(back_populates="vetworks", lazy="joined")
@@ -75,6 +78,10 @@ class VetWork(Base):
     )
 
     diseases_details: Mapped[list["DiseaseInVetWork"]] = relationship(
+        back_populates="vetwork"
+    )
+    
+    drug_movement: Mapped["DrugMovement"] = relationship(
         back_populates="vetwork"
     )
 
