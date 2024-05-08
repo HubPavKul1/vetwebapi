@@ -3,18 +3,25 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.core.models import VetWork
+from vetwebapi.api_v1.company.schemas import SuccessMessage, EmployeeSchema
+from vetwebapi.core.models import VetWork, AnimalInVetWork, DoctorInVetWork
 from .schemas import (
     DiseaseIn, 
     DiseaseOut, 
     Diseases, 
     VetWorkOut, 
-    VetWorkIn, 
+    VaccinationIn, 
     VetWorks, 
     VaccinationDetail,
+    VaccinationSchema,
+    AnimalInVetWorkSchema
     )
-from .serializers import serialize_vaccinations
+from .serializers import (
+    serialize_vaccination,
+    serialize_vaccinations, 
+    serialize_doctors_in_vetwork, 
+    serialize_animals_in_vetwork
+    )
 from .dependencies import vetwork_by_id
 from vetwebapi.core.database import db_manager
 
@@ -39,7 +46,7 @@ async def get_diseases_route(
         
 @router.post("/vaccinations", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
 async def create_vaccination(
-    body: VetWorkIn,
+    body: VaccinationIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     ) -> VetWorkOut:
     vaccination = await crud.create_vetwork(session=session, body=body)
@@ -59,14 +66,24 @@ async def get_diseases_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
         
-@router.get("/vaccinations/{vaccination_id}/", response_model=VaccinationDetail)
+@router.get("/vaccinations/{vetwork_id}/", response_model=VaccinationDetail)
 async def get_vaccination_detail(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VaccinationDetail | dict]:
-    animals = await crud.read_animals_in_vetwork(session=session, vetwork=vetwork)
-    doctors = await crud.read_doctors_in_vetwork(session=session, vetwork=vetwork)
-    
+
+    animals: list[AnimalInVetWork] = await crud.read_animals_in_vetwork(session=session, vetwork=vetwork)
+    doctors: list[DoctorInVetWork] = await crud.read_doctors_in_vetwork(session=session, vetwork=vetwork)
+    vacc_schema: VaccinationSchema = await serialize_vaccination(vaccination=vetwork)
+    if animals:
+        animals: list[AnimalInVetWorkSchema] = await serialize_animals_in_vetwork(items=animals)
+    if doctors:
+        doctors: list[EmployeeSchema] = await serialize_doctors_in_vetwork(items=doctors)
+    return VaccinationDetail(
+        vaccination=vacc_schema,
+        animals=animals,
+        doctors=doctors,
+    )
 
 
 # @router.delete("/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)

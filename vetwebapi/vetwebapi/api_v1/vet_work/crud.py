@@ -15,7 +15,7 @@ from vetwebapi.core.models import (
     AnimalInVetWork,
     DrugInMovement,
     )
-from .schemas import VetWorkIn
+from .schemas import VaccinationIn
 
 
 # Create
@@ -25,7 +25,7 @@ async def create_disease(session: AsyncSession, name: str) -> None:
     await session.commit()
     
     
-async def create_vetwork(session: AsyncSession, body: VetWorkIn) -> VetWork: 
+async def create_vetwork(session: AsyncSession, body: VaccinationIn) -> VetWork: 
     diseases = body.diseases
     doctors = body.doctors
     new_vetwork = VetWork(**body.model_dump(exclude={"diseases", "doctors"}))
@@ -70,7 +70,14 @@ async def read_vaccinations(session: AsyncSession) -> list[VetWork]:
 
 
 async def read_vetwork_by_id(session: AsyncSession, vetwork_id: int) -> VetWork | None:
-    return await session.get(VetWork, vetwork_id)
+    stmt = (
+        select(VetWork)
+        .options(selectinload(VetWork.diseases_details)
+        .joinedload(DiseaseInVetWork.disease
+        ))
+        .where(VetWork.id == vetwork_id)
+    )
+    return await session.scalar(stmt)
 
 
 async def read_animals_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[AnimalInVetWork]:

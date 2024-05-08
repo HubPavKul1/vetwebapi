@@ -21,7 +21,6 @@ class Diseases(BaseModel):
 
 
 class VetWorkIn(BaseModel):
-    work_type_id: int
     vetwork_date: date
     is_state_assignment: bool = False
     is_primary: bool = True
@@ -29,14 +28,17 @@ class VetWorkIn(BaseModel):
     diseases: list[int]
     doctors: list[int]
 
+class VaccinationIn(VetWorkIn):
+    work_type_id: int = 1
+
 
 class VetWorkOut(BaseModel):
     id: int
     vetwork_date: date
     
     
-    
 class DiagnosticIn(VetWorkIn):
+    work_type_id: int = 2
     biomaterial_id: int | None = None
     biomaterial_package_id: int | None = None
     biomaterial_fixation_id: int | None = None
@@ -74,7 +76,8 @@ class DiagnosticSchema(VaccinationSchema):
     biomaterial_package: str | None = None
     diagnostic_method: str
 
-class VaccinationDetail(VaccinationSchema):
+class VaccinationDetail(BaseModel):
+    vaccination: VaccinationSchema
     animals: list[AnimalInVetWorkSchema] = []
     doctors: list[EmployeeSchema] = []
     drug: DrugInMovementSchema | None = None
