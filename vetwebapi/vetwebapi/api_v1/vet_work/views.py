@@ -27,7 +27,7 @@ from vetwebapi.core.database import db_manager
 
 from . import crud
 
-router = APIRouter(prefix="/vet_work", tags=["VetWork"])
+router = APIRouter(prefix="/vetwork", tags=["VetWork"])
 
 
 @router.get("/diseases", response_model=Diseases)
@@ -56,7 +56,7 @@ async def create_vaccination(
 @router.get("/vaccinations", response_model=VetWorks)
 async def get_diseases_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[Diseases, dict]:
+) -> Union[VetWorks, dict]:
     try:
         vaccinations = await crud.read_vaccinations(session=session)    
         return await serialize_vaccinations(vaccinations=vaccinations)
@@ -66,7 +66,7 @@ async def get_diseases_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
         
-@router.get("/vaccinations/{vetwork_id}/", response_model=VaccinationDetail)
+@router.get("/{vetwork_id}/", response_model=VaccinationDetail)
 async def get_vaccination_detail(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

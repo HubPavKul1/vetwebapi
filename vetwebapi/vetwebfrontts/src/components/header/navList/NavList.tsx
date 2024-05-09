@@ -4,6 +4,7 @@ import { DrugsLink } from "../navLink/DrugsLink";
 import { VetWorkLink } from "../navLink/VetWorkLink";
 import { AdminLink } from "../navLink/AdminLink";
 import styles from "./NavList.module.scss"
+import { VetsLink } from "../navLink/VetsLink";
 
 
 
@@ -15,6 +16,7 @@ export function NavList() {
                     <ul className={styles.navList}> 
                         <HomeLink />
                         <CompaniesLink />
+                        <VetsLink />
                         <DrugsLink />  
                         <VetWorkLink />
                         <AdminLink/>

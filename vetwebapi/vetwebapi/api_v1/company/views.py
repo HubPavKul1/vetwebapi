@@ -73,6 +73,22 @@ async def get_companies(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+
+@router.get("/vets", response_model=Companies)
+async def get_vet_clinics(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[Companies, dict]:
+    try:
+        companies = await crud.read_vet_clinics_with_options(session=session)
+        comp_schemas = [await serialize_company_card(company) for company in companies]
+        return Companies(companies=comp_schemas)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
 
 
 @router.delete(

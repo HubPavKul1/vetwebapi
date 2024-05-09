@@ -1,4 +1,6 @@
 from sqlalchemy import select
+from operator import and_
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
@@ -35,7 +37,18 @@ async def read_companies_with_options(session: AsyncSession) -> list[Company]:
         select(Company)
         .options(selectinload(Company.employees))
         .options(joinedload(Company.addresses))
-        .where(Company.is_active)
+        .where(and_(Company.is_active, Company.is_vet == False))
+        .order_by(Company.short_name)
+    )
+    return list(await session.scalars(stmt))
+
+
+async def read_vet_clinics_with_options(session: AsyncSession) -> list[Company]:
+    stmt = (
+        select(Company)
+        .options(selectinload(Company.employees))
+        .options(joinedload(Company.addresses))
+        .where(and_(Company.is_active, Company.is_vet))
         .order_by(Company.short_name)
     )
     return list(await session.scalars(stmt))

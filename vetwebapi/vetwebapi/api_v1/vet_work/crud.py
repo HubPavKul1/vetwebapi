@@ -14,7 +14,10 @@ from vetwebapi.core.models import (
     DoctorInVetWork,
     AnimalInVetWork,
     DrugInMovement,
+    DrugMovement,
     )
+
+from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
 from .schemas import VaccinationIn
 
 
@@ -48,9 +51,27 @@ async def add_doctors_in_vetwork(session: AsyncSession, vetwork_id: int, doctors
     new_relations = [DoctorInVetWork(vetwork_id=vetwork_id, employee_id=item) for item in doctors]
     session.add_all(new_relations)
     await session.commit()
+
+
+async def add_animals_in_vetwork(session: AsyncSession, vetwork_id: int, animals: list[int]) -> None:
+    new_relations = [AnimalInVetWork(vetwork_id=vetwork_id, animal_id=item) for item in animals]
+    session.add_all(new_relations)
+    await session.commit()
     
 
+async def add_drug_in_vetwork(session: AsyncSession, vetwork: VetWork, body: DrugInMovementIn) -> None:
+    new_drug_movement = DrugMovement(operation_id=2, operation_date=vetwork.vetwork_date)
+    session.add(new_drug_movement)
+    await session.commit()
+    await session.refresh(new_drug_movement)
+    new_drug = DrugInMovement(**body.model_dump())
+    new_drug.drug_movement_id = new_drug_movement.id
+    session.add(new_drug)
+    vetwork.drug_movement_id = new_drug_movement.id
+    session.add(vetwork)
+    await session.commit()
 
+    
 # Read
 async def read_diseases(session: AsyncSession) -> list[Disease]:
     stmt = select(Disease).order_by(Disease.name)
@@ -96,3 +117,13 @@ async def read_doctors_in_vetwork(session: AsyncSession, vetwork: VetWork) -> li
         .where(DoctorInVetWork.vetwork_id == vetwork.id)
         )
     return list(await session.scalars(stmt))
+
+
+async def read_drug_in_vetwork(session: AsyncSession, vetwork: VetWork) -> DrugInMovement:
+    stmt = (
+        select(DrugInMovement)
+        .options(joinedload(DrugInMovement.catalog_drug))
+        .where(DrugInMovement.drug_movement_id == vetwork.drug_movement_id)
+        )
+    return await session.scalar(stmt)
+

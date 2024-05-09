@@ -7,11 +7,9 @@ import { IQueryData } from "../../../interfaces/BaseInterface";
 
 
 
-
-
 export function DiseaseSelect() {
 
-    const url = "/api/vet_work/diseases"
+    const url = "/api/vetwork/diseases"
 
     const { data, isLoading }: IQueryData = useQuery(['diseases'], () => AppService.getAll(url),
     {

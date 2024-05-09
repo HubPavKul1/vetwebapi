@@ -20,7 +20,7 @@ export const DrugService = {
     },
 
     async getDiseases() {
-      return await axios.get<IDiseases>("/api/vet_work/diseases")
+      return await axios.get<IDiseases>("/api/vetwork/diseases")
     },
 
     async getBudgets() {
