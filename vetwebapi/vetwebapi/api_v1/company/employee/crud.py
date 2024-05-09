@@ -1,9 +1,10 @@
 from operator import and_
 
 from sqlalchemy import select
+from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import Employee, Position
+from vetwebapi.core.models import Employee, Position, Company
 
 from .schemas import EmployeeIn
 
@@ -36,6 +37,17 @@ async def read_company_employees(session: AsyncSession, company_id: int) -> list
         .order_by(Employee.lastname)
     )
     return list(await session.scalars(stmt))
+
+
+async def read_doctors(session: AsyncSession) -> list[Employee | None]:
+    stmt = (
+        select(Employee)
+        .where(Employee.is_active)
+        .order_by(Employee.lastname)
+    )
+    return list(await session.scalars(stmt))
+   
+ 
 
 
 async def read_employee_by_id(session: AsyncSession, employee_id: int) -> Employee | None:

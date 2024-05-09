@@ -10,6 +10,7 @@ import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/Crea
 import { AppService } from "../../app.service";
 import { IVetwork } from "../../interfaces/VetWorkInterfaces";
 import { VetWorkCard } from "../../components/vetWorks/VetWorkCard";
+import { VaccinationCreateForm } from "../../components/vetWorks/VaccinationCreateForm";
 
 
 interface VaccinationsData {
@@ -37,10 +38,9 @@ export function Vaccinations() {
         <Catalog title="Вакцинация">
 
             <CreateItem btnTitle="Добавить вакцинацию">
-                <CreateDrugReceiptForm/>
+                <VaccinationCreateForm/>
             </CreateItem>
           
-
             <Row xs={1} md={3} lg={3}>
                 {data.length ? data.map(vetWork => (
                     <VetWorkCard key={vetWork.id} vetWork={vetWork}/>

@@ -4,10 +4,14 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { AppService } from "../../../app.service";
 import { IQueryData } from "../../../interfaces/BaseInterface";
+import { OnChangeValue } from "react-select";
 
 
+interface DiseaseSelectProps {
+    isMulti: boolean;
+}
 
-export function DiseaseSelect() {
+export function DiseaseSelect({isMulti}: DiseaseSelectProps) {
 
     const url = "/api/vetwork/diseases"
 
@@ -32,12 +36,16 @@ export function DiseaseSelect() {
 
     const getValue = (value: number) => 
         value ? options?.find((option) => option.value === value) : ""
+
+    const onChange = (newValue: OnChangeValue<IOption, boolean>) => {
+        (newValue as IOption[]).map(v => v.value)
+    }
     
 
     return (
         <Controller 
         control={control} 
-        name="disease_id" 
+        name={isMulti ? "diseases": "disease_id"}
         rules={
           {required: "Disease is required!"}
         }
@@ -45,10 +53,13 @@ export function DiseaseSelect() {
         <AsyncSelect className='custom-select'
             isSearchable
             isClearable
+            isMulti={isMulti}
             loadOptions={loadOptions}
             value={getValue(value)}
             placeholder="Введите заболевание *"
-            onChange={newValue => onChange((newValue as IOption).value)}
+            onChange={newValue => onChange(isMulti ? (newValue as IOption[]).map(v => v.value): 
+                (newValue as IOption).value
+            )}
         />
         )
     

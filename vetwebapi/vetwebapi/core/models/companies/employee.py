@@ -24,7 +24,7 @@ class Employee(Base):
     patronymic: Mapped[str] = mapped_column(String(100))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
-    company: Mapped["Company"] = relationship(back_populates="employees")
+    company: Mapped["Company"] = relationship(back_populates="employees", lazy="joined")
     position: Mapped["Position"] = relationship(back_populates="employees", lazy="joined")
 
 

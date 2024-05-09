@@ -1,9 +1,3 @@
-
-import { useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
-
-import { BsFillTrash3Fill } from "react-icons/bs";
-import { BsPencilSquare } from "react-icons/bs";
 import { IDrugInMovement } from "../../../interfaces/DrugInterfaces";
 import { AppService } from "../../../app.service";
 

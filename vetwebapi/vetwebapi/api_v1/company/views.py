@@ -33,12 +33,12 @@ from .animal.schemas import (
 )
 from .animal.views import router as animal_router
 from .dependencies import company_by_id
-from .employee.crud import read_positions
+from .employee.crud import read_positions, read_doctors
 from .employee.dependencies import company_employees
-from .employee.schemas import PositionSchemas
+from .employee.schemas import PositionSchemas, Employees
 from .employee.views import router as employee_router
 from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
-from .serializers import serialize_company_card, serialize_company_detail
+from .serializers import serialize_company_card, serialize_company_detail, serialize_employees
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 router.include_router(animal_router)
@@ -88,6 +88,8 @@ async def get_vet_clinics(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+
 
 
 
@@ -197,6 +199,22 @@ async def get_positions_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+
+@router.get("/doctors", response_model=Employees)
+async def get_doctors_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[Employees, dict]:
+    try:
+        doctors = await read_doctors(session=session)
+        return await serialize_employees(doctors)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
 
 
 # Get data for add animal form

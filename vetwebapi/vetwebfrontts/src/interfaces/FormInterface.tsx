@@ -6,6 +6,10 @@ export interface IOption {
     value: number;
 }
 
+export interface IOptions {
+    options: IOption[];
+}
+
 
 export interface InputProps {
     id?: string;

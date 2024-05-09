@@ -53,7 +53,7 @@ export function CreateDrugForm() {
         <>
              <FormProvider {...methods}>
                 <div className="form-group">
-                    <DiseaseSelect />
+                    <DiseaseSelect isMulti={false} />
                 </div>
                 <div className="form-group">
                     <BudgetSelect />
