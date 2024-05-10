@@ -56,35 +56,38 @@ export function AddAddressForm() {
     return (
 
   <FormProvider {...methods}>
-    <div className="form-group">
-        <label>
-          Выберите регион *
-        </label>
-          <RegionsSelect />
-      </div>
-    {
-      inputItems.map(item =>(
-      <Input key={item.fieldName}
-        className="form-control"
-        placeholder={item.placeholder}
-        register={register}
-        fieldName={item.fieldName}
-        type={item.type}
-        errors={errors}
-        rules={item.rules}
-      />
-      ))
-    }
+    <form onSubmit={handleSubmit(createAddress)}>
+      <div className="form-group">
+          <label>
+            Выберите регион *
+          </label>
+            <RegionsSelect />
+        </div>
+      {
+        inputItems.map(item =>(
+        <Input key={item.fieldName}
+          className="form-control"
+          placeholder={item.placeholder}
+          register={register}
+          fieldName={item.fieldName}
+          type={item.type}
+          errors={errors}
+          rules={item.rules}
+        />
+        ))
+      }
 
-    <div className="form-group">
-      <CustomButton
-          className="btn-submit"
-          disabled={false}
-          onClick={handleSubmit(createAddress)}
-          title="Зарегистрировать"
-      />
-      
-    </div>
+      <div className="form-group">
+        <CustomButton
+            className="btn-submit"
+            disabled={false}
+            title="Зарегистрировать"
+        />
+        
+      </div>
+
+    </form>
+    
 
   </FormProvider>
     

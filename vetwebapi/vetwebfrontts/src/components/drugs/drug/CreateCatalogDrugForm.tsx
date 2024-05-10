@@ -50,75 +50,78 @@ export function CreateCatalogDrugForm() {
     return (
         <>
              <FormProvider {...methods}>
+             <form onSubmit={handleSubmit(createCatalogDrug)}>
                 <div className="form-group">
-                    <label>
-                        Выберите препарат *
+                        <label>
+                            Выберите препарат *
+                        </label>
+                        <DrugSelect />
+                    </div>
+            
+                {
+                    inputItems.map(item =>(
+                        <Input key={item.fieldName}
+                            className="form-control"
+                            placeholder={item.placeholder}
+                            register={register}
+                            fieldName={item.fieldName}
+                            type={item.type}
+                            errors={errors}
+                            rules={{
+                                required: fieldRequiredMessage, 
+                                
+                            }}
+                        />
+                    ))
+                }
+
+                <div className="form-group">
+                    <label htmlFor="production_date">
+                        Введите дату изготовления *
                     </label>
-                    <DrugSelect />
-                </div>
-        
-            {
-                inputItems.map(item =>(
-                    <Input key={item.fieldName}
+                    <Input
                         className="form-control"
-                        placeholder={item.placeholder}
                         register={register}
-                        fieldName={item.fieldName}
-                        type={item.type}
                         errors={errors}
+                        fieldName="production_date"
+                        type="date"
+                        id="production_date"
                         rules={{
                             required: fieldRequiredMessage, 
                             
                         }}
                     />
-                ))
-            }
+                </div>
 
-            <div className="form-group">
-                <label htmlFor="production_date">
-                    Введите дату изготовления *
-                </label>
-                <Input
-                    className="form-control"
-                    register={register}
-                    errors={errors}
-                    fieldName="production_date"
-                    type="date"
-                    id="production_date"
-                    rules={{
-                        required: fieldRequiredMessage, 
-                        
-                    }}
-                />
-            </div>
+                <div className="form-group">
+                    <label htmlFor="expiration_date">
+                        Годен до *
+                    </label>
+                    <Input
+                        className="form-control"
+                        register={register}
+                        errors={errors}
+                        fieldName="expiration_date"
+                        type="date"
+                        id="expiration_date"
+                        rules={{
+                            required: fieldRequiredMessage, 
+                            
+                        }}
+                    />
+                </div>
 
-            <div className="form-group">
-                <label htmlFor="expiration_date">
-                    Годен до *
-                </label>
-                <Input
-                    className="form-control"
-                    register={register}
-                    errors={errors}
-                    fieldName="expiration_date"
-                    type="date"
-                    id="expiration_date"
-                    rules={{
-                        required: fieldRequiredMessage, 
-                        
-                    }}
-                />
-            </div>
+                <div className="form-group">
+                    <CustomButton
+                        className="btn-submit" 
+                        disabled={false}
+                        title="Добавить"
+                    />
+                
+                </div>
 
-            <div className="form-group">
-                <CustomButton
-                    className="btn-submit" 
-                    disabled={false}
-                    onClick={handleSubmit(createCatalogDrug)}
-                    title="Добавить"
-                />
-               
-            </div>
+             </form>
+                
 
         </FormProvider>
         </>

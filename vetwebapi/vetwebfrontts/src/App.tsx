@@ -9,7 +9,7 @@ import { DrugDetail } from "./pages/drugPages/drugDetail/DrugDetail";
 import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
 import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
 import { Vets } from "./pages/companyPages/Vets";
-import { Vaccinations } from "./pages/vetWorkPages/Vaccinations";
+import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
 
 
 

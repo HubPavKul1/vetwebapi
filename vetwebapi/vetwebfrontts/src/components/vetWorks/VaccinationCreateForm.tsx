@@ -53,51 +53,52 @@ export function VaccinationCreateForm() {
     return (
         <>
             <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(createVaccination)}>
                 <div className="form-group">
                     <label>
-                        Введите дату *
-                    </label>
-                    {
-                        inputItems.map(item =>(
-                        <Input key={item.fieldName}
-                            className="form-control"
-                            placeholder={item.placeholder}
-                            register={register}
-                            fieldName={item.fieldName}
-                            type={item.type}
-                            errors={errors}
-                            rules={{
-                                required: fieldRequiredMessage, 
-                                
-                            }}
-                        />
-                        ))
-                    }
+                            Введите дату *
+                        </label>
+                        {
+                            inputItems.map(item =>(
+                            <Input key={item.fieldName}
+                                className="form-control"
+                                placeholder={item.placeholder}
+                                register={register}
+                                fieldName={item.fieldName}
+                                type={item.type}
+                                errors={errors}
+                                rules={{
+                                    required: fieldRequiredMessage, 
+                                    
+                                }}
+                            />
+                            ))
+                        }
                 </div>
                 <div className="form-group">
                     <label htmlFor="is_state_assignment">
-                        Госзадание *
-                        <Input
-                            register={register}
-                            errors={errors}
-                            fieldName="is_state_assignment"
-                            type="checkbox"
-                            id="is_state_assignment"
-                        />
+                            Госзадание *
+                            <Input
+                                register={register}
+                                errors={errors}
+                                fieldName="is_state_assignment"
+                                type="checkbox"
+                                id="is_state_assignment"
+                            />
                     </label>
-                 </div>
-                 <div className="form-group">
+                </div>
+                <div className="form-group">
                     <label htmlFor="is_primary">
-                        Первичное *
-                        <Input
-                            register={register}
-                            errors={errors}
-                            fieldName="is_primary"
-                            type="checkbox"
-                            id="is_primary"
-                        />
+                            Первичное *
+                            <Input
+                                register={register}
+                                errors={errors}
+                                fieldName="is_primary"
+                                type="checkbox"
+                                id="is_primary"
+                            />
                     </label>
-                 </div>
+                </div>
                 <div className="form-group">
                     <ClinicSelect/>
                 </div>
@@ -107,7 +108,7 @@ export function VaccinationCreateForm() {
                 <div className="form-group">
                     <DoctorSelect />
                 </div>
-           
+            
                 <div className="form-group">
                     <CustomButton
                         className="btn-submit" 
@@ -115,9 +116,9 @@ export function VaccinationCreateForm() {
                         onClick={handleSubmit(createVaccination)}
                         title="Добавить"
                     />
-                
+                    
                 </div>
-
+            </form>
             </FormProvider>
         </>
        

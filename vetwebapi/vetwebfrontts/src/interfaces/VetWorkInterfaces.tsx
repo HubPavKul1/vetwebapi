@@ -26,3 +26,16 @@ export interface IVetwork extends IVetworkCreate{
 export interface IVetworks {
     vetworks?: IVetwork[];
 }
+
+export interface IVetworkSchema {
+    id: number;
+    work_type: string;
+    vetwork_date: string;
+    diseases: string[];
+    is_primary: boolean;
+    clinic: string;
+}
+
+export interface IVetworkDetail {
+    vaccination: IVetworkSchema;
+}

@@ -34,7 +34,7 @@ export function VetWorkCard({vetWork}: VetWorkCardProps) {
             <CatalogItem 
                 id={vetWork.id} 
                 cardTitle={vetWorkDate.fullDate} 
-                imgSrc="drugsCard.jpg"
+                imgSrc="vetworkBg.jpg"
                 onClick={deleteVetWork} 
                 url={`/vetworks/${vetWork.id}`}
             />

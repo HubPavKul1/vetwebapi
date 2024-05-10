@@ -52,57 +52,57 @@ export function CreateDrugForm() {
     return (
         <>
              <FormProvider {...methods}>
+                <form onSubmit={handleSubmit(createDrug)}>
+                    <div className="form-group">
+                        <DiseaseSelect isMulti={false} />
+                    </div>
+                    <div className="form-group">
+                        <BudgetSelect />
+                    </div>
+                    <div className="form-group">
+                        <DrugManufacturerSelect />
+                    </div>
+                    <div className="form-group">
+                        <AccountingUnitSelect />
+                    </div>
+                    <div className="form-group">
+                        <DisposalMethodSelect />
+                    </div>
+                    <div className="form-group">
+                        <DosageSelect />
+                    </div>
+                    <div className="form-group">
+                        <PlaceOfAdministrationSelect />
+                    </div>
+                    <div className="form-group">
+                        <AdministrationMethodSelect />
+                    </div>
+                {
+                    inputItems.map(item =>(
+                        <Input key={item.fieldName}
+                            className="form-control"
+                            placeholder={item.placeholder}
+                            register={register}
+                            fieldName={item.fieldName}
+                            type={item.type}
+                            errors={errors}
+                            rules={{
+                                required: fieldRequiredMessage, 
+                                
+                            }}
+                        />
+                    ))
+                }
+
                 <div className="form-group">
-                    <DiseaseSelect isMulti={false} />
-                </div>
-                <div className="form-group">
-                    <BudgetSelect />
-                </div>
-                <div className="form-group">
-                    <DrugManufacturerSelect />
-                </div>
-                <div className="form-group">
-                    <AccountingUnitSelect />
-                </div>
-                <div className="form-group">
-                    <DisposalMethodSelect />
-                </div>
-                <div className="form-group">
-                    <DosageSelect />
-                </div>
-                <div className="form-group">
-                    <PlaceOfAdministrationSelect />
-                </div>
-                <div className="form-group">
-                    <AdministrationMethodSelect />
-                </div>
-            {
-                inputItems.map(item =>(
-                    <Input key={item.fieldName}
-                        className="form-control"
-                        placeholder={item.placeholder}
-                        register={register}
-                        fieldName={item.fieldName}
-                        type={item.type}
-                        errors={errors}
-                        rules={{
-                            required: fieldRequiredMessage, 
-                            
-                        }}
+                    <CustomButton
+                        className="btn-submit" 
+                        disabled={false}
+                        title="Добавить"
                     />
-                ))
-            }
-
-            <div className="form-group">
-                <CustomButton
-                    className="btn-submit" 
-                    disabled={false}
-                    onClick={handleSubmit(createDrug)}
-                    title="Добавить"
-                />
-               
-            </div>
-
+                
+                </div>
+            </form>
         </FormProvider>
         </>
        

@@ -52,46 +52,49 @@ export function AddEmployeeForm() {
     return (
 
         <FormProvider {...methods}>
-            <div className="form-group">
-                <label>
-                    Выберите должность *
-                </label>
-                <PositionsSelect />
-            </div>
-            {
-                inputItems.map(item =>(
-                    <Input key={item.fieldName}
-                        className="form-control"
-                        placeholder={item.placeholder}
-                        register={register}
-                        fieldName={item.fieldName}
-                        type="text"
-                        errors={errors}
-                        rules={{
-                            required: fieldRequiredMessage, 
-                            maxLength: {
-                                value: 50,
-                                message: maxLenErrorMessage+" 50 символов!"
-                                }, 
-                            minLength: {
-                                value: 3,
-                                message: minLenErrorMessage+" 3 символа!"
-                                },
-                            
-                        }}
-                    />
-                ))
-            }
+            <form onSubmit={handleSubmit(createEmployee)}>
+                <div className="form-group">
+                    <label>
+                        Выберите должность *
+                    </label>
+                    <PositionsSelect />
+                </div>
+                {
+                    inputItems.map(item =>(
+                        <Input key={item.fieldName}
+                            className="form-control"
+                            placeholder={item.placeholder}
+                            register={register}
+                            fieldName={item.fieldName}
+                            type="text"
+                            errors={errors}
+                            rules={{
+                                required: fieldRequiredMessage, 
+                                maxLength: {
+                                    value: 50,
+                                    message: maxLenErrorMessage+" 50 символов!"
+                                    }, 
+                                minLength: {
+                                    value: 3,
+                                    message: minLenErrorMessage+" 3 символа!"
+                                    },
+                                
+                            }}
+                        />
+                    ))
+                }
 
-            <div className="form-group">
-                <CustomButton
-                    className="btn-submit" 
-                    disabled={false}
-                    onClick={handleSubmit(createEmployee)}
-                    title="Зарегистрировать"
-                />
-               
-            </div>
+                <div className="form-group">
+                    <CustomButton
+                        className="btn-submit" 
+                        disabled={false}
+                        title="Зарегистрировать"
+                    />
+                
+                </div>
+
+            </form>
+            
 
         </FormProvider>
     )
