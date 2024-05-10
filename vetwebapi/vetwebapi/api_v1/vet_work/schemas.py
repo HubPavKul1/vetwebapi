@@ -76,8 +76,7 @@ class DiagnosticSchema(VaccinationSchema):
     biomaterial_package: str | None = None
     diagnostic_method: str
 
-class VaccinationDetail(BaseModel):
-    vaccination: VaccinationSchema
+class VaccinationDetail(VaccinationSchema):
     animals: list[AnimalInVetWorkSchema] = []
     doctors: list[EmployeeSchema] = []
     drug: DrugInMovementSchema | None = None

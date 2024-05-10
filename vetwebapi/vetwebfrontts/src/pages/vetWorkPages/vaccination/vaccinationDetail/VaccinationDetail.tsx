@@ -2,19 +2,22 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Container, Row, Col } from "react-bootstrap";
 
-import styles from "./ReceiptDetail.module.scss";
+import styles from "./VaccinationDetail.module.scss";
 import { AppService } from "../../../../app.service";
 import { CreateItem } from "../../../../components/createItem/CreateItem";
 import { CustomButton } from "../../../../components/button/CustomButton";
 import { useState } from "react";
-import { IVetworkDetail } from "../../../../interfaces/VetWorkInterfaces";
+import { IVaccinationDetail } from "../../../../interfaces/VetWorkInterfaces";
+import { AddDrugForm } from "../../../../components/drugs/drugMovements/AddDrugForm";
+import { AddAnimalForm } from "../../../../components/companies/animal/AddAnimalForm";
+import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
 
 
 
 
 
 interface VaccinationData {
-  data?: IVetworkDetail;
+  data?: IVaccinationDetail;
   isLoading: boolean;
 }
 
@@ -32,7 +35,7 @@ export function VaccinationDetail() {
    
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const date = AppService.convertDateString(data.vaccination)
+    const date = AppService.convertDateString(data.vetwork_date)
     
     
     return (  
@@ -43,17 +46,20 @@ export function VaccinationDetail() {
         <Row className={styles.rowTop}>
           <Col sm={4} className={styles.colImg}>
               <img
-                src="/drugsBg.jpg"
+                src="/vetworkBg.jpg"
                 alt={data.vetwork_date}
                 />
           </Col>
          
           <Col>
-            <h1>Поступление</h1>
+            <h1>Вакцинация</h1>
             <h5>{date.fullDate}</h5>
           <div className={styles.buttonWrap}>
               <CreateItem btnTitle="Добавить препарат">
-                  <AddDrugForm/>
+                  <AddDrugForm url={url} queryKey="vaccination"/>
+              </CreateItem>
+              <CreateItem btnTitle="Добавить животных">
+                  <AddAnimalForm/>
               </CreateItem>
               <CustomButton 
                   className="btn-large"
@@ -68,7 +74,7 @@ export function VaccinationDetail() {
         </Row>
 
         <Container className={styles.drugWrap}>
-          <h5>Препараты </h5>
+          <h5>Препарат </h5>
             <table className="table">
 
               <tbody >
@@ -81,9 +87,8 @@ export function VaccinationDetail() {
                   <th>Количество единиц учета</th>
                   <th />
                 </tr>
-                {data.drugs?.length && data.drugs.map(
-                  drug => <ReceiptDrug key={drug.id} drug={drug}/>
-                )
+                {data.drug  && 
+                   <ReceiptDrug drug={data.drug}/>
                 }
               </tbody>
             </table>
@@ -91,7 +96,8 @@ export function VaccinationDetail() {
         </Container>
        
   </Container>)
-      : <ReceiptPDF setPdf={setPdf} data={data}/>
+      : ""
+      // <ReceiptPDF setPdf={setPdf} data={data}/>
       
 }
 

@@ -55,7 +55,7 @@ export function ReceiptDetail() {
             <h5>{date.fullDate}</h5>
           <div className={styles.buttonWrap}>
               <CreateItem btnTitle="Добавить препарат">
-                  <AddDrugForm/>
+                  <AddDrugForm url={url} queryKey="receipt"/>
               </CreateItem>
               <CustomButton 
                   className="btn-large"

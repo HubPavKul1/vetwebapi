@@ -10,6 +10,7 @@ import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
 import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
 import { Vets } from "./pages/companyPages/Vets";
 import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
+import { VaccinationDetail } from "./pages/vetWorkPages/vaccination/vaccinationDetail/VaccinationDetail";
 
 
 
@@ -26,6 +27,7 @@ export function App() {
                 <Route path="drugs" element={<Drugs/>} />
                 <Route path="drugs/catalog" element={<DrugCatalog/>} />
                 <Route path="vetwork/vaccinations" element={<Vaccinations/>} />
+                <Route path="vetwork/:id" element={<VaccinationDetail/>} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
                 <Route path="drugs/:id" element={<DrugDetail />} />
 

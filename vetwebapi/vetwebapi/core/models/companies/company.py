@@ -25,7 +25,8 @@ class Company(Base):
 
     addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete")
     employees: Mapped[list["Employee"]] = relationship(
-        back_populates="company", cascade="all, delete"
+        back_populates="company", 
+        cascade="all, delete", 
     )
     animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
     vetworks: Mapped[list["VetWork"]] = relationship(back_populates="clinic", cascade="all, delete")

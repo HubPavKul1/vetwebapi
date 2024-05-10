@@ -39,13 +39,29 @@ async def read_company_employees(session: AsyncSession, company_id: int) -> list
     return list(await session.scalars(stmt))
 
 
-async def read_doctors(session: AsyncSession) -> list[Employee | None]:
+async def read_employees(session: AsyncSession) -> list[Employee | None]:
     stmt = (
         select(Employee)
         .where(Employee.is_active)
         .order_by(Employee.lastname)
     )
     return list(await session.scalars(stmt))
+
+
+async def read_doctors(session: AsyncSession) -> list[Employee | None]:
+    stmt = (
+        select(Company)
+        .options(selectinload(Company.employees))
+        .where(and_(Company.is_active, Company.is_vet))
+        .order_by(Company.short_name)
+    )
+    companies = await session.scalars(stmt)
+    doctors = []
+    for item in companies:
+        docs = [emp for emp in item.employees]
+        doctors.extend(docs)
+
+    return doctors
    
  
 

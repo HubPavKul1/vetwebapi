@@ -2,6 +2,7 @@ from vetwebapi.core.models import (
     VetWork, 
     AnimalInVetWork, 
     DoctorInVetWork,
+    DrugInMovement,
     )
 
 from .schemas import (
@@ -14,19 +15,25 @@ from .schemas import (
     )
 
 from vetwebapi.api_v1.company.serializers import serialize_employee
+from vetwebapi.api_v1.drug.receipts.serializers import serialize_drug_in_movement
 from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
+from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
 
 
 async def serialize_vaccination(vaccination: VetWork) -> VaccinationSchema:
-    disease_names = [item.disease.name for item in vaccination.diseases_details]
+    
     return VaccinationSchema(
         id=vaccination.id,
         work_type=vaccination.work_type.name,
         vetwork_date=vaccination.vetwork_date,
         is_primary=vaccination.is_primary,
-        diseases=disease_names,
+        diseases=await get_disease_names(vetwork=vaccination),
         clinic=vaccination.clinic.short_name,
     )
+
+
+async def get_disease_names(vetwork: VetWork) -> list[str]:
+    return [item.disease.name for item in vetwork.diseases_details]
 
 
     
@@ -57,3 +64,37 @@ async def serialize_animals_in_vetwork(items: list[AnimalInVetWork]) -> list[Ani
 
 async def serialize_doctors_in_vetwork(items: list[DoctorInVetWork]) -> list[EmployeeSchema]:
     return [await serialize_employee(item.doctor) for item in items]
+
+
+async def serialize_vaccination_detail(
+    vetwork: VetWork, 
+    animals: list[AnimalInVetWork], 
+    doctors: list[DoctorInVetWork],
+    drug: DrugInMovement = None,
+
+    ) -> VaccinationDetail:
+
+    animal_schemas = []
+    doctor_schemas = []
+    drug_schema = None
+    if animals:
+        animal_schemas: list[AnimalInVetWorkSchema] = await serialize_animals_in_vetwork(items=animals)
+    if doctors:
+        doctor_schemas: list[EmployeeSchema] = await serialize_doctors_in_vetwork(items=doctors)
+    if drug:
+        drug_schema: DrugInMovementSchema = await serialize_drug_in_movement(drug)
+
+    return VaccinationDetail(
+        id=vetwork.id,
+        work_type=vetwork.work_type.name,
+        vetwork_date=vetwork.vetwork_date,
+        is_primary=vetwork.is_primary,
+        diseases=await get_disease_names(vetwork=vetwork),
+        clinic=vetwork.clinic.short_name,
+        animals=animal_schemas,
+        doctors=doctor_schemas,
+        drug=drug_schema,
+    )
+
+    
+    

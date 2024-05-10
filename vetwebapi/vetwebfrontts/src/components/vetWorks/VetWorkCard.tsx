@@ -18,7 +18,7 @@ export function VetWorkCard({vetWork}: VetWorkCardProps) {
         mutationFn: () => AppService.deleteItem(url),
         onSuccess: () => {
             alert("Мероприятие успешно удалено!")
-            queryClient.invalidateQueries(['vetWorks'])
+            queryClient.invalidateQueries(['vaccinations'])
         }
     },
     )
@@ -36,7 +36,7 @@ export function VetWorkCard({vetWork}: VetWorkCardProps) {
                 cardTitle={vetWorkDate.fullDate} 
                 imgSrc="vetworkBg.jpg"
                 onClick={deleteVetWork} 
-                url={`/vetworks/${vetWork.id}`}
+                url={`/vetwork/${vetWork.id}`}
             />
     )
 }

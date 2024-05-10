@@ -59,7 +59,7 @@ async def add_animals_in_vetwork(session: AsyncSession, vetwork_id: int, animals
     await session.commit()
     
 
-async def add_drug_in_vetwork(session: AsyncSession, vetwork: VetWork, body: DrugInMovementIn) -> None:
+async def add_drug_to_vetwork(session: AsyncSession, vetwork: VetWork, body: DrugInMovementIn) -> None:
     new_drug_movement = DrugMovement(operation_id=2, operation_date=vetwork.vetwork_date)
     session.add(new_drug_movement)
     await session.commit()

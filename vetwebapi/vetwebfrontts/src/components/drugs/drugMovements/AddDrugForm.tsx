@@ -12,10 +12,14 @@ import { useParams } from "react-router-dom";
 
 
 
-export function AddDrugForm() {
+interface AddDrugFormProps {
+    url: string;
+    queryKey: string;
+}
+
+export function AddDrugForm({url, queryKey}: AddDrugFormProps) {
 
     const {id} = useParams();
-    const url = `/api/drugs/receipts/${id}`;
    
     const methods = useForm<IDrugInMovementIn>({
         mode: "onChange",
@@ -29,7 +33,7 @@ export function AddDrugForm() {
         mutationFn: (data: IDrugInMovementIn) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Препарат успешно добавлен!")
-            queryClient.invalidateQueries(['receipt', id])
+            queryClient.invalidateQueries([{queryKey}, id])
             reset()
         }
     },

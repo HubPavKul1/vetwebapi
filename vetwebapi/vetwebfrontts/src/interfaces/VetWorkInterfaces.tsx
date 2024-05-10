@@ -1,4 +1,6 @@
 import { IBase } from "./BaseInterface";
+import { IDrugInMovement } from "./DrugInterfaces";
+import { IEmployee } from "./EmployeeInterfaces";
 
 
 
@@ -36,6 +38,26 @@ export interface IVetworkSchema {
     clinic: string;
 }
 
-export interface IVetworkDetail {
-    vaccination: IVetworkSchema;
+
+
+export interface IAnimalInVetwork {
+    id: number;
+    animal_group: string;
+    species: string;
+    gender: string;
+    date_of_birth: string;
+    nickname: string;
+    identification: string;
+    is_active: boolean;
+    dosage?: number;
+    is_positive?: boolean
 }
+
+
+export interface IVaccinationDetail extends IVetworkSchema{
+    animals: IAnimalInVetwork[];
+    doctors: IEmployee[];
+    drug: IDrugInMovement;
+}
+
+
