@@ -38,10 +38,13 @@ export interface IVetworkSchema {
     clinic: string;
 }
 
-
-
-export interface IAnimalInVetwork {
+export interface IAnimalInVetworkIn {
     id: number;
+    dosage?: number;
+    is_positive?: boolean;
+}
+
+export interface IAnimalInVetwork extends IAnimalInVetworkIn {
     animal_group: string;
     species: string;
     gender: string;
@@ -49,8 +52,6 @@ export interface IAnimalInVetwork {
     nickname: string;
     identification: string;
     is_active: boolean;
-    dosage?: number;
-    is_positive?: boolean
 }
 
 

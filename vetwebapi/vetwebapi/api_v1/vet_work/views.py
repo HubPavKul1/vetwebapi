@@ -55,7 +55,7 @@ async def create_vaccination(
     return VetWorkOut(id=vaccination.id, vetwork_date=vaccination.vetwork_date)
 
 
-@router.post("/{vetwork_id}/", status_code=status.HTTP_201_CREATED)
+@router.post("/{vetwork_id}/drug", status_code=status.HTTP_201_CREATED)
 async def add_drug_to_vetwork_route(
     body: DrugInMovementIn,
     vetwork: VetWork = Depends(vetwork_by_id),

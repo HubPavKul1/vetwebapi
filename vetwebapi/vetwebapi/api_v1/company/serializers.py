@@ -1,5 +1,5 @@
 from vetwebapi.api_v1.company.address.schemas import AddressSchema
-from vetwebapi.api_v1.company.animal.schemas import AnimalSchema
+from vetwebapi.api_v1.company.animal.schemas import AnimalSchema, Animals
 from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema, Employees
 from vetwebapi.core.models import Address, Animal, Company, Employee
 
@@ -45,6 +45,11 @@ async def serialize_animal(animal: Animal) -> AnimalSchema:
         identification=animal.identification,
         is_active=animal.is_active,
     )
+
+async def serialize_animals(animals: list[Animal]) -> Animals:
+    return Animals(
+        animals=[await serialize_animal(animal=animal) for animal in animals]
+        )
 
 
 # Function to serialize data for company detail page

@@ -11,6 +11,7 @@ import { IVaccinationDetail } from "../../../../interfaces/VetWorkInterfaces";
 import { AddDrugForm } from "../../../../components/drugs/drugMovements/AddDrugForm";
 import { AddAnimalForm } from "../../../../components/companies/animal/AddAnimalForm";
 import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
+import { AddAnimalsToVetWorkForm } from "../../../../components/vetWorks/AddAnimalsToVetWorkForm";
 
 
 
@@ -56,14 +57,14 @@ export function VaccinationDetail() {
             <h5>{date.fullDate}</h5>
           <div className={styles.buttonWrap}>
               <CreateItem btnTitle="Добавить препарат">
-                  <AddDrugForm url={url} queryKey="vaccination"/>
+                  <AddDrugForm url={`/api/vetwork/${id}/drug`} queryKey="vaccination"/>
               </CreateItem>
               <CreateItem btnTitle="Добавить животных">
-                  <AddAnimalForm/>
+                  <AddAnimalsToVetWorkForm/>
               </CreateItem>
               <CustomButton 
                   className="btn-large"
-                  title="Требование-заявка"
+                  title="Акт на обработку"
                   onClick={() => setPdf(true)}
                 />
 

@@ -23,6 +23,9 @@ class AnimalSchema(BaseModel):
     identification: str
     is_active: bool = True
 
+class Animals(BaseModel):
+    animals: list[AnimalSchema]
+
 
 class AnimalUpdate(AnimalIn):
     is_active: bool

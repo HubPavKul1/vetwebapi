@@ -64,7 +64,6 @@ class VetWork(Base):
         back_populates="vetwork"
     )
 
-
     doctors: Mapped[list["Employee"]] = relationship(
          back_populates="vetworks", secondary="doctors_in_vetwork"
     )

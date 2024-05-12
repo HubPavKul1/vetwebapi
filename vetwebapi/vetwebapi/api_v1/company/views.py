@@ -30,6 +30,7 @@ from .animal.schemas import (
     SpeciesSchemas,
     TypeOfFeedingSchemas,
     UsageTypeSchemas,
+    Animals,
 )
 from .animal.views import router as animal_router
 from .dependencies import company_by_id
@@ -38,7 +39,13 @@ from .employee.dependencies import company_employees
 from .employee.schemas import PositionSchemas, Employees
 from .employee.views import router as employee_router
 from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
-from .serializers import serialize_company_card, serialize_company_detail, serialize_employees
+from .serializers import (
+
+ serialize_company_card, 
+ serialize_company_detail, 
+ serialize_employees, 
+ serialize_animals,
+ )
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 router.include_router(animal_router)
@@ -90,9 +97,6 @@ async def get_vet_clinics(
         )
     
 
-
-
-
 @router.delete(
     "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
 )
@@ -120,6 +124,23 @@ async def get_company_detail(
     try:
         return await serialize_company_detail(
             company=company, address=address, employees=employees, animals=animals
+        )
+
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+    
+@router.get("/{company_id}/animals", response_model=Animals)
+async def get_company_detail(
+    animals: list[Animal | None] = Depends(company_animals),
+) -> Union[dict, Animals]:
+   
+    try:
+        return await serialize_animals(
+            animals=animals
         )
 
     except Exception:
