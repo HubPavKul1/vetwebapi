@@ -44,6 +44,10 @@ export interface IAnimalInVetworkIn {
     is_positive?: boolean;
 }
 
+export interface IAnimalsInVetworkIn {
+    animals?: IAnimalInVetworkIn[]
+}
+
 export interface IAnimalInVetwork extends IAnimalInVetworkIn {
     animal_group: string;
     species: string;
@@ -56,9 +60,9 @@ export interface IAnimalInVetwork extends IAnimalInVetworkIn {
 
 
 export interface IVaccinationDetail extends IVetworkSchema{
-    animals: IAnimalInVetwork[];
+    animals?: IAnimalInVetwork[];
     doctors: IEmployee[];
-    drug: IDrugInMovement;
+    drug?: IDrugInMovement;
 }
 
 

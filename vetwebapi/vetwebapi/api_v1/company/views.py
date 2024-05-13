@@ -66,7 +66,7 @@ async def create_company_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
-
+# Get companies, not vets
 @router.get("/", response_model=Companies)
 async def get_companies(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

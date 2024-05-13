@@ -8,30 +8,25 @@ import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "..
 import { useParams } from "react-router-dom";
 import { AppService } from "../../app.service";
 import { CompanySelect } from "./CompanySelect";
-import { IAnimalInVetworkIn } from "../../interfaces/VetWorkInterfaces";
+import { IAnimalsInVetworkIn } from "../../interfaces/VetWorkInterfaces";
 
 
 
 export function AddAnimalsToVetWorkForm() {
 
     const {id} = useParams()
-    const url = `/api/companies/${id}/animals/`
+    const url = `/api/vetwork/${id}/animals/`
 
-    const inputItems: FormInputProps<IAnimalInVetworkIn> = [
-        {fieldName: "dosage", id: "dosage", type: "number"},
-        {fieldName: "is_positive", type: "checkbox"},
-      ]
-
-
-    const methods = useForm<IAnimalInVetworkIn>({
+ 
+    const methods = useForm<IAnimalsInVetworkIn>({
         mode: "onChange",
     })
 
     const { register, reset, handleSubmit, formState: { errors } } = methods
     const queryClient = useQueryClient()
 
-    const { mutate } = useMutation(["add animal"], {
-        mutationFn: (data: IAnimalInVetworkIn) => AppService.createItem(url, data),
+    const { mutate } = useMutation(["add animals"], {
+        mutationFn: (data: IAnimalsInVetworkIn) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Животное успешно добавлено!")
             queryClient.invalidateQueries(["vaccination", id])
@@ -40,7 +35,7 @@ export function AddAnimalsToVetWorkForm() {
     },
     )
 
-    const addAnimal: SubmitHandler<IAnimalInVetworkIn> = data => {
+    const addAnimals: SubmitHandler<IAnimalsInVetworkIn> = data => {
         mutate(data)
 
     }
@@ -48,7 +43,7 @@ export function AddAnimalsToVetWorkForm() {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(addAnimal)}>
+            <form onSubmit={handleSubmit(addAnimals)}>
                 <div>
                     <label>
                         Выберите Предприятие *

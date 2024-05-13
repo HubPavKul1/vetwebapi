@@ -50,6 +50,9 @@ class AnimalInVetWorkIn(BaseModel):
     dosage: float | None = None
     is_positive: bool = False
 
+class AnimalsInVetWorkIn(BaseModel):
+    animals: list[AnimalInVetWorkIn]
+
 class AnimalInVetWorkSchema(AnimalInVetWorkIn):
     animal_group: str
     species: str

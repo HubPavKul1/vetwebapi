@@ -30,8 +30,9 @@ export function AnimalCheckForm({ animal }: AnimalCheckFormProps) {
                         {animal.nickname}
                         <input
                             type="checkbox"
-                            checked={value}  
-                            onChange={onChange}
+                            name={animal_id}
+                            value={animal_id}
+                            onChange={(value) => console.log(value)}
                         />
                     </label>
                 </div>
@@ -78,8 +79,6 @@ export function AnimalCheckForm({ animal }: AnimalCheckFormProps) {
                 )
             } 
         />
-
-
         </div>
        
     </>
