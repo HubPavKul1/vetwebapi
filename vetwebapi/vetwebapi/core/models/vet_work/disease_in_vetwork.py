@@ -22,4 +22,4 @@ class DiseaseInVetWork(Base):
     disease_id: Mapped[int] = mapped_column(ForeignKey("diseases.id"))
 
     vetwork: Mapped["VetWork"] = relationship(back_populates="diseases_details")
-    disease: Mapped["Disease"] = relationship(back_populates="vetworks_details")
+    disease: Mapped["Disease"] = relationship(back_populates="vetworks_details" )

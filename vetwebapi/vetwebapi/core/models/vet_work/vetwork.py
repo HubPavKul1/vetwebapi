@@ -61,7 +61,7 @@ class VetWork(Base):
         back_populates="vetworks", secondary="animals_in_vetwork"
     )
     animals_details: Mapped[list["AnimalInVetWork"]] = relationship(
-        back_populates="vetwork"
+        back_populates="vetwork", cascade="all, delete"
     )
 
     doctors: Mapped[list["Employee"]] = relationship(
@@ -69,7 +69,7 @@ class VetWork(Base):
     )
 
     doctors_details: Mapped[list["DoctorInVetWork"]] = relationship(
-        back_populates="vetwork"
+        back_populates="vetwork", cascade="all, delete"
     )
 
     diseases: Mapped[list["Disease"]] = relationship(
@@ -77,7 +77,7 @@ class VetWork(Base):
     )
 
     diseases_details: Mapped[list["DiseaseInVetWork"]] = relationship(
-        back_populates="vetwork"
+        back_populates="vetwork", cascade="all, delete"
     )
     
     drug_movement: Mapped["DrugMovement"] = relationship(

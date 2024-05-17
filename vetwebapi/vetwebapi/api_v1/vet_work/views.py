@@ -16,7 +16,7 @@ from .schemas import (
     VaccinationDetail,
     VaccinationSchema,
     AnimalInVetWorkSchema,
-    AnimalsInVetWorkIn
+    AnimalInVetWorkIn
     )
 from .serializers import (
     serialize_vaccination,
@@ -69,7 +69,7 @@ async def add_drug_to_vetwork_route(
 
 @router.post("/{vetwork_id}/animals", status_code=status.HTTP_201_CREATED)
 async def add_animals_to_vetwork_route(
-    animals: AnimalsInVetWorkIn,
+    animals: list[AnimalInVetWorkIn],
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
@@ -107,16 +107,16 @@ async def get_vaccination_detail(
         drug=drug
         )
 
-# @router.delete("/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
-# async def delete_drug_route(
-#     drug_id: int,
-#     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-# ) -> Union[dict, SuccessMessage]:
-#     try:
-#         await crud.delete_drug(session=session, drug_id=drug_id)
-#         return SuccessMessage()
-#     except Exception:
-#         raise HTTPException(
-#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#             detail={"result": False, "error_message": "Internal Server Error"},
-#         )
+@router.delete("/{vetwork_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def delete_vetwork_route(
+    vetwork: VetWork = Depends(vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_vetwork(session=session, vetwork=vetwork)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )

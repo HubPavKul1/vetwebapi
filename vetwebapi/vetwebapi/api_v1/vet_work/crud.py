@@ -18,7 +18,7 @@ from vetwebapi.core.models import (
     )
 
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
-from .schemas import VaccinationIn, AnimalsInVetWorkIn
+from .schemas import VaccinationIn, AnimalInVetWorkIn
 
 
 # Create
@@ -53,15 +53,14 @@ async def add_doctors_in_vetwork(session: AsyncSession, vetwork_id: int, doctors
     await session.commit()
 
 
-async def add_animals_to_vetwork(session: AsyncSession, vetwork: VetWork, animals: AnimalsInVetWorkIn) -> None:
+async def add_animals_to_vetwork(session: AsyncSession, vetwork: VetWork, animals: list[AnimalInVetWorkIn]) -> None:
     new_relations = [
         AnimalInVetWork(
-            vetwork_id=vetwork.id, 
-            animal_id=item.id,
-            dosage=item.dosage,
-            is_positive=item.is_positive
+            **item.model_dump(),
+            vetwork_id=vetwork.id
             ) for item in animals
         ]
+    
     session.add_all(new_relations)
     await session.commit()
     
@@ -133,4 +132,17 @@ async def read_drug_in_vetwork(session: AsyncSession, vetwork: VetWork) -> DrugI
         .where(DrugInMovement.drug_movement_id == vetwork.drug_movement_id)
         )
     return await session.scalar(stmt)
+
+
+async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
+    
+    # doctors_in_vetwork: list[DoctorInVetWork] = await read_doctors_in_vetwork(session=session, vetwork=vetwork)
+    # animals_in_vetwork: list[AnimalInVetWork] = await read_animals_in_vetwork(session=session, vetwork=vetwork)
+    # if doctors_in_vetwork:
+    #     [await session.delete(item) for item in doctors_in_vetwork]
+    # if animals_in_vetwork:
+    #     [await session.delete(item) for item in animals_in_vetwork]
+    await session.delete(vetwork)
+    await session.commit()
+
 

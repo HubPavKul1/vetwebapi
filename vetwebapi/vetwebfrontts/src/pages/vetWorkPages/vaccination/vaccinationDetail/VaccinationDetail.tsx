@@ -12,6 +12,8 @@ import { AddDrugForm } from "../../../../components/drugs/drugMovements/AddDrugF
 import { AddAnimalForm } from "../../../../components/companies/animal/AddAnimalForm";
 import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
 import { AddAnimalsToVetWorkForm } from "../../../../components/vetWorks/AddAnimalsToVetWorkForm";
+import { AnimalInVetwork } from "../../../../components/vetWorks/AnimalInVetwork";
+import { ActPDF } from "./actPdf/ActPDF";
 
 
 
@@ -95,10 +97,34 @@ export function VaccinationDetail() {
             </table>
 
         </Container>
+        <Container>
+          <h5>Животные </h5>
+          <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p>
+            <table className="table">
+              
+
+                    <tbody className="animals-rows">
+                      <tr>
+                        <th>Вид животных</th>
+                        <th>Пол животных</th>
+                        <th>Дата рождения</th>
+                        <th>Кличка</th>
+                        <th>Идентификация</th>
+                        <th />
+                      </tr>
+                      {data.animals?.length && data.animals.map(
+                        animal => <AnimalInVetwork key={animal.id} animal={animal}/>
+                      )
+                      
+                      }
+                    </tbody>
+                  </table>
+
+        </Container>
        
   </Container>)
-      : ""
-      // <ReceiptPDF setPdf={setPdf} data={data}/>
+      : <ActPDF setPdf={setPdf} data={data}/>
+      
       
 }
 
