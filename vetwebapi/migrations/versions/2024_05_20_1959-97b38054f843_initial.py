@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 22e56693f695
+Revision ID: 97b38054f843
 Revises: 
-Create Date: 2024-05-08 13:00:07.236012
+Create Date: 2024-05-20 19:59:18.536084
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "22e56693f695"
+revision: str = "97b38054f843"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -329,6 +329,18 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
+        "companies_in_vetwork",
+        sa.Column("vetwork_id", sa.Integer(), nullable=False),
+        sa.Column("company_id", sa.Integer(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["company_id"], ["companies.id"]),
+        sa.ForeignKeyConstraint(["vetwork_id"], ["vetworks.id"]),
+        sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint(
+            "vetwork_id", "company_id", name="idx_unique_company_in_vetwork"
+        ),
+    )
+    op.create_table(
         "diseases_in_vetwork",
         sa.Column("vetwork_id", sa.Integer(), nullable=False),
         sa.Column("disease_id", sa.Integer(), nullable=False),
@@ -456,6 +468,7 @@ def downgrade() -> None:
     op.drop_table("drugs_in_movement")
     op.drop_table("doctors_in_vetwork")
     op.drop_table("diseases_in_vetwork")
+    op.drop_table("companies_in_vetwork")
     op.drop_table("vetworks")
     op.drop_table("species")
     op.drop_table("cities")

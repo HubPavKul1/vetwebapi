@@ -3,7 +3,9 @@ from vetwebapi.core.models import (
     AnimalInVetWork, 
     DoctorInVetWork,
     DrugInMovement,
+    CompanyInVetWork,
     )
+
 
 from .schemas import (
     VaccinationSchema, 
@@ -14,8 +16,9 @@ from .schemas import (
     VaccinationDetail,
     )
 
-from vetwebapi.api_v1.company.serializers import serialize_employee
+from vetwebapi.api_v1.company.serializers import serialize_employee, serialize_address
 from vetwebapi.api_v1.drug.receipts.serializers import serialize_drug_in_movement
+from vetwebapi.api_v1.company.schemas import CompanyCard, AddressSchema
 from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
 
@@ -58,8 +61,30 @@ async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkS
 
     )   
 
+async def serialize_company_in_vetwork(item: CompanyInVetWork) -> CompanyCard:
+    address = item.company.addresses
+    employees = item.company.employees
+    address_schema: AddressSchema = None
+    employee_schema: EmployeeSchema = None
+    if address:
+        address_schema = await serialize_address(address=address)
+    if employees:
+        employee_schema = await serialize_employee(employee=employees[0])
+    return CompanyCard(
+        full_name=item.company.full_name,
+        short_name=item.company.short_name,
+        # is_vet=item.company.is_vet,
+        id=item.company.id,
+        address=address_schema,
+        employee=employee_schema
+    )
+
 async def serialize_animals_in_vetwork(items: list[AnimalInVetWork]) -> list[AnimalInVetWorkSchema]:
     return [await serialize_animal_in_vetwork(item) for item in items]
+
+
+async def serialize_companies_in_vetwork(items: list[CompanyInVetWork]) -> list[CompanyCard]:
+    return [await serialize_company_in_vetwork(item) for item in items]
 
 
 async def serialize_doctors_in_vetwork(items: list[DoctorInVetWork]) -> list[EmployeeSchema]:
@@ -68,6 +93,7 @@ async def serialize_doctors_in_vetwork(items: list[DoctorInVetWork]) -> list[Emp
 
 async def serialize_vaccination_detail(
     vetwork: VetWork, 
+    companies: list[CompanyInVetWork],
     animals: list[AnimalInVetWork], 
     doctors: list[DoctorInVetWork],
     drug: DrugInMovement = None,
@@ -76,7 +102,10 @@ async def serialize_vaccination_detail(
 
     animal_schemas = []
     doctor_schemas = []
+    company_schemas = []
     drug_schema = None
+    if companies:
+        company_schemas: list[CompanyCard] = await serialize_company_in_vetwork(items=companies)
     if animals:
         animal_schemas: list[AnimalInVetWorkSchema] = await serialize_animals_in_vetwork(items=animals)
     if doctors:
@@ -91,6 +120,7 @@ async def serialize_vaccination_detail(
         is_primary=vetwork.is_primary,
         diseases=await get_disease_names(vetwork=vetwork),
         clinic=vetwork.clinic.short_name,
+        companies=company_schemas,
         animals=animal_schemas,
         doctors=doctor_schemas,
         drug=drug_schema,

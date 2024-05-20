@@ -15,6 +15,7 @@ from vetwebapi.core.models import (
     AnimalInVetWork,
     DrugInMovement,
     DrugMovement,
+    CompanyInVetWork,
     )
 
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
@@ -50,6 +51,15 @@ async def add_diseases_in_vetwork(session: AsyncSession, vetwork_id: int, diseas
 async def add_doctors_in_vetwork(session: AsyncSession, vetwork_id: int, doctors: list[int]) -> None:
     new_relations = [DoctorInVetWork(vetwork_id=vetwork_id, employee_id=item) for item in doctors]
     session.add_all(new_relations)
+    await session.commit()
+
+
+async def add_company_to_vetwork(session: AsyncSession, vetwork: VetWork, company_id: int) -> None:
+    new_relation = CompanyInVetWork(
+        vetwork_id=vetwork.id,
+        company_id=company_id
+        )
+    session.add(new_relation)
     await session.commit()
 
 
@@ -112,6 +122,15 @@ async def read_animals_in_vetwork(session: AsyncSession, vetwork: VetWork) -> li
         select(AnimalInVetWork)
         .options(joinedload(AnimalInVetWork.animal))
         .where(AnimalInVetWork.vetwork_id == vetwork.id)
+        )
+    return list(await session.scalars(stmt))
+
+
+async def read_companies_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[CompanyInVetWork]:
+    stmt = (
+        select(CompanyInVetWork)
+        .options(joinedload(CompanyInVetWork.company))
+        .where(CompanyInVetWork.vetwork_id == vetwork.id)
         )
     return list(await session.scalars(stmt))
     

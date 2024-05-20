@@ -3,6 +3,7 @@ from datetime import date
 from pydantic import BaseModel, ConfigDict
 
 from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
+from vetwebapi.api_v1.company.schemas import CompanyCard
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
 
 
@@ -45,6 +46,10 @@ class DiagnosticIn(VetWorkIn):
     diagnostic_method_id: int
 
 
+class CompanyInVetWorkIn(BaseModel):
+    company_id: int
+
+
 class AnimalInVetWorkIn(BaseModel):
     animal_id: int
     dosage: float | None = None
@@ -78,6 +83,7 @@ class DiagnosticSchema(VaccinationSchema):
     diagnostic_method: str
 
 class VaccinationDetail(VaccinationSchema):
+    companies: list[CompanyCard] = []
     animals: list[AnimalInVetWorkSchema] = []
     doctors: list[EmployeeSchema] = []
     drug: DrugInMovementSchema | None = None

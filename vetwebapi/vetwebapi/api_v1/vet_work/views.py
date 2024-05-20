@@ -3,26 +3,19 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.api_v1.company.schemas import SuccessMessage, EmployeeSchema
+from vetwebapi.api_v1.company.schemas import SuccessMessage
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
-from vetwebapi.core.models import VetWork, AnimalInVetWork, DoctorInVetWork
+from vetwebapi.core.models import VetWork, AnimalInVetWork, DoctorInVetWork, CompanyInVetWork
 from .schemas import (
-    DiseaseIn, 
-    DiseaseOut, 
     Diseases, 
     VetWorkOut, 
     VaccinationIn, 
     VetWorks, 
     VaccinationDetail,
-    VaccinationSchema,
-    AnimalInVetWorkSchema,
-    AnimalInVetWorkIn
+    AnimalInVetWorkIn,
     )
 from .serializers import (
-    serialize_vaccination,
     serialize_vaccinations, 
-    serialize_doctors_in_vetwork, 
-    serialize_animals_in_vetwork,
     serialize_vaccination_detail,
     )
 from .dependencies import vetwork_by_id
@@ -78,6 +71,17 @@ async def add_animals_to_vetwork_route(
     )
 
 
+@router.post("/{vetwork_id}/company", status_code=status.HTTP_201_CREATED)
+async def add_company_to_vetwork_route(
+    company_id: int,
+    vetwork: VetWork = Depends(vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    await crud.add_company_to_vetwork(
+        session=session, company_id=company_id, vetwork=vetwork
+    )
+
+
 @router.get("/vaccinations", response_model=VetWorks)
 async def get_diseases_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -97,11 +101,13 @@ async def get_vaccination_detail(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VaccinationDetail | dict]:
 
+    companies: list[CompanyInVetWork] = await crud.read_companies_in_vetwork(session=session, vetwork=vetwork)
     animals: list[AnimalInVetWork] = await crud.read_animals_in_vetwork(session=session, vetwork=vetwork)
     doctors: list[DoctorInVetWork] = await crud.read_doctors_in_vetwork(session=session, vetwork=vetwork)
     drug: DrugInMovementIn = await crud.read_drug_in_vetwork(session=session, vetwork=vetwork)
     return await serialize_vaccination_detail(
         vetwork=vetwork, 
+        companies=companies,
         animals=animals,
         doctors=doctors,
         drug=drug

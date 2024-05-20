@@ -39,7 +39,8 @@ __all__ = (
     "AnimalInVetWork",
     "DoctorInVetWork",
     "DiagnosticMethod",
-    "DiseaseInVetWork"
+    "DiseaseInVetWork",
+    "CompanyInVetWork",
 
 )
 
@@ -93,3 +94,4 @@ from .vet_work.animal_in_vetwork import AnimalInVetWork
 from .vet_work.doctor_in_vetwork import DoctorInVetWork
 from .vet_work.diagnostic_method import DiagnosticMethod
 from .vet_work.disease_in_vetwork import DiseaseInVetWork
+from .vet_work.company_in_vetwork import CompanyInVetWork
