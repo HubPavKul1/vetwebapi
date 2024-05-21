@@ -32,3 +32,7 @@ export interface ICompanyDetail extends ICompany {
     employees?: IEmployee[];
     animals?: IAnimal[];
 }
+
+export interface ICompanyInVetWorkIn {
+    company_id: number;
+}

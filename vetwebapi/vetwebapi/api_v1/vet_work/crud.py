@@ -19,7 +19,7 @@ from vetwebapi.core.models import (
     )
 
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
-from .schemas import VaccinationIn, AnimalInVetWorkIn
+from .schemas import VaccinationIn, AnimalInVetWorkIn, CompanyInVetWorkIn
 
 
 # Create
@@ -54,10 +54,10 @@ async def add_doctors_in_vetwork(session: AsyncSession, vetwork_id: int, doctors
     await session.commit()
 
 
-async def add_company_to_vetwork(session: AsyncSession, vetwork: VetWork, company_id: int) -> None:
+async def add_company_to_vetwork(session: AsyncSession, vetwork: VetWork, body: CompanyInVetWorkIn) -> None:
     new_relation = CompanyInVetWork(
         vetwork_id=vetwork.id,
-        company_id=company_id
+        company_id=body.company_id
         )
     session.add(new_relation)
     await session.commit()

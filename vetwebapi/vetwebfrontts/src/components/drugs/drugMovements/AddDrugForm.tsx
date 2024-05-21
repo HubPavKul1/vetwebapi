@@ -20,7 +20,7 @@ interface AddDrugFormProps {
 export function AddDrugForm({url, queryKey}: AddDrugFormProps) {
 
     const {id} = useParams();
-   
+
     const methods = useForm<IDrugInMovementIn>({
         mode: "onChange",
     })
@@ -29,7 +29,7 @@ export function AddDrugForm({url, queryKey}: AddDrugFormProps) {
     const { register, reset, handleSubmit, formState: { errors } } = methods
     const queryClient = useQueryClient()
 
-    const { mutate } = useMutation(["addDrugToReceipt"], {
+    const { mutate } = useMutation(["addDrugToDrugMovement"], {
         mutationFn: (data: IDrugInMovementIn) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Препарат успешно добавлен!")
@@ -40,7 +40,7 @@ export function AddDrugForm({url, queryKey}: AddDrugFormProps) {
     )
 
     
-    const addDrugToReceipt: SubmitHandler<IDrugInMovementIn> = data => {
+    const addDrugToDrugMovement: SubmitHandler<IDrugInMovementIn> = data => {
         mutate(data)
 
     }
@@ -48,7 +48,8 @@ export function AddDrugForm({url, queryKey}: AddDrugFormProps) {
     return (
         <>
              <FormProvider {...methods}>
-                <div className="form-group">
+             <form onSubmit={handleSubmit(addDrugToDrugMovement)}>
+             <div className="form-group">
                     <label>
                         Выберите препарат *
                     </label>
@@ -95,11 +96,13 @@ export function AddDrugForm({url, queryKey}: AddDrugFormProps) {
                 <CustomButton
                     className="btn-submit" 
                     disabled={false}
-                    onClick={handleSubmit(addDrugToReceipt)}
                     title="Добавить"
                 />
                
             </div>
+
+             </form>
+       
 
         </FormProvider>
         </>

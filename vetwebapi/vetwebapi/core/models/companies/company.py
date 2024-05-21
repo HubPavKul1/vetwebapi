@@ -23,10 +23,11 @@ class Company(Base):
     is_vet: Mapped[bool] = mapped_column(Boolean, default=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
-    addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete")
+    addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete", lazy="joined")
     employees: Mapped[list["Employee"]] = relationship(
         back_populates="company", 
-        cascade="all, delete", 
+        cascade="all, delete",
+        lazy="selectin" 
     )
     animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
     vetworks: Mapped[list["VetWork"]] = relationship(back_populates="clinic", cascade="all, delete")

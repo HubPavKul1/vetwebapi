@@ -1,4 +1,5 @@
 import { IBase } from "./BaseInterface";
+import { ICompanyCard } from "./CompanyInterfaces";
 import { IDrugInMovement } from "./DrugInterfaces";
 import { IEmployee } from "./EmployeeInterfaces";
 
@@ -29,13 +30,17 @@ export interface IVetworks {
     vetworks?: IVetwork[];
 }
 
-export interface IVetworkSchema {
+export interface IVetWorkSchema {
     id: number;
     work_type: string;
     vetwork_date: string;
     diseases: string[];
     is_primary: boolean;
     clinic: string;
+    companies?: ICompanyCard[];
+    animals?: IAnimalInVetwork[];
+    doctors: IEmployee[];
+    drug?: IDrugInMovement;
 }
 
 export interface IAnimalInVetworkIn {
@@ -50,6 +55,7 @@ export interface IAnimalsInVetworkIn {
 
 export interface IAnimalInVetwork extends IAnimalInVetworkIn {
     animal_group: string;
+    company_id: number;
     species: string;
     gender: string;
     date_of_birth: string;
@@ -57,12 +63,3 @@ export interface IAnimalInVetwork extends IAnimalInVetworkIn {
     identification: string;
     is_active: boolean;
 }
-
-
-export interface IVaccinationDetail extends IVetworkSchema{
-    animals?: IAnimalInVetwork[];
-    doctors: IEmployee[];
-    drug?: IDrugInMovement;
-}
-
-

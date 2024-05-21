@@ -39,8 +39,6 @@ async def get_disease_names(vetwork: VetWork) -> list[str]:
     return [item.disease.name for item in vetwork.diseases_details]
 
 
-    
-    
 async def serialize_vaccinations(vaccinations: list[VetWork]) -> VetWorks:
     vaccination_schemas = [await serialize_vaccination(vaccination=vaccination) for vaccination in vaccinations]
     return VetWorks(vetworks=vaccination_schemas)
@@ -49,6 +47,7 @@ async def serialize_vaccinations(vaccinations: list[VetWork]) -> VetWorks:
 async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkSchema:
     return AnimalInVetWorkSchema(
         animal_id=item.animal.id,
+        company_id=item.animal.company_id,
         dosage=item.dosage,
         is_positive=item.is_positive,
         animal_group=item.animal.species.animal_group.name,
@@ -73,7 +72,7 @@ async def serialize_company_in_vetwork(item: CompanyInVetWork) -> CompanyCard:
     return CompanyCard(
         full_name=item.company.full_name,
         short_name=item.company.short_name,
-        # is_vet=item.company.is_vet,
+        is_vet=item.company.is_vet,
         id=item.company.id,
         address=address_schema,
         employee=employee_schema
@@ -105,7 +104,7 @@ async def serialize_vaccination_detail(
     company_schemas = []
     drug_schema = None
     if companies:
-        company_schemas: list[CompanyCard] = await serialize_company_in_vetwork(items=companies)
+        company_schemas: list[CompanyCard] = await serialize_companies_in_vetwork(items=companies)
     if animals:
         animal_schemas: list[AnimalInVetWorkSchema] = await serialize_animals_in_vetwork(items=animals)
     if doctors:

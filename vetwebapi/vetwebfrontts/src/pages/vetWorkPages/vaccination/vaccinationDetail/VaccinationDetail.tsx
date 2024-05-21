@@ -7,20 +7,22 @@ import { AppService } from "../../../../app.service";
 import { CreateItem } from "../../../../components/createItem/CreateItem";
 import { CustomButton } from "../../../../components/button/CustomButton";
 import { useState } from "react";
-import { IVaccinationDetail } from "../../../../interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AddDrugForm } from "../../../../components/drugs/drugMovements/AddDrugForm";
 import { AddAnimalForm } from "../../../../components/companies/animal/AddAnimalForm";
 import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
 import { AddAnimalsToVetWorkForm } from "../../../../components/vetWorks/AddAnimalsToVetWorkForm";
 import { AnimalInVetwork } from "../../../../components/vetWorks/AnimalInVetwork";
 import { ActPDF } from "./actPdf/ActPDF";
+import { VetWorkPageMenu } from "../../../../components/menu/VetWorkPageMenu";
+import { CompanyAddress } from "../../../../components/companies/address/CompanyAddress";
 
 
 
 
 
 interface VaccinationData {
-  data?: IVaccinationDetail;
+  data?: IVetWorkSchema;
   isLoading: boolean;
 }
 
@@ -47,14 +49,24 @@ export function VaccinationDetail() {
       { !pdf ?
        ( <Container className={styles.detailWrap}>
         <Row className={styles.rowTop}>
-          <Col sm={4} className={styles.colImg}>
+          <Col sm={8} className={styles.colImg}>
               <img
                 src="/vetworkBg.jpg"
                 alt={data.vetwork_date}
                 />
           </Col>
-         
+
           <Col>
+              <VetWorkPageMenu />
+              <CustomButton 
+                  className="btn-large"
+                  title="Акт на обработку"
+                  onClick={() => setPdf(true)}
+                />
+          </Col>
+        </Row>
+         
+          {/* <Col>
             <h1>Вакцинация</h1>
             <h5>{date.fullDate}</h5>
           <div className={styles.buttonWrap}>
@@ -73,8 +85,54 @@ export function VaccinationDetail() {
           </div>
 
             
-          </Col>
-        </Row>
+          </Col> */}
+
+        <Container className={styles.titleWrap}>
+        <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p>
+        <h5>Предприятия </h5>
+          {data.companies?.length && data.companies.map(
+            company => (
+              <>
+                <div key={company.id}>
+                <h6><a href="#">{company.full_name}</a></h6>
+                <p>адрес: {`${company.address?.street}, ${company.address?.house_number}`}</p>
+                <p>телефон: {`${company.address?.phone_number1}, ${company.address?.phone_number2}`}</p>
+              </div>
+
+                <Container>
+                <h5>Животные </h5>
+                  <table className="table">
+                    
+
+                          <tbody className="animals-rows">
+                            <tr>
+                              <th>Вид животных</th>
+                              <th>Пол животных</th>
+                              <th>Дата рождения</th>
+                              <th>Кличка</th>
+                              <th>Идентификация</th>
+                              <th />
+                            </tr>
+                            {data.animals?.length && data.animals.filter((animal) => animal.company_id === company.id)
+                            .map(animal => <AnimalInVetwork key={animal.id} animal={animal}/>)
+                            
+                            }
+                          </tbody>
+                        </table>
+
+                </Container>
+
+              </>
+              
+
+            
+           )
+          )
+
+          }
+                  
+                 
+        </Container>
 
         <Container className={styles.drugWrap}>
           <h5>Препарат </h5>
@@ -97,30 +155,7 @@ export function VaccinationDetail() {
             </table>
 
         </Container>
-        <Container>
-          <h5>Животные </h5>
-          <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p>
-            <table className="table">
-              
-
-                    <tbody className="animals-rows">
-                      <tr>
-                        <th>Вид животных</th>
-                        <th>Пол животных</th>
-                        <th>Дата рождения</th>
-                        <th>Кличка</th>
-                        <th>Идентификация</th>
-                        <th />
-                      </tr>
-                      {data.animals?.length && data.animals.map(
-                        animal => <AnimalInVetwork key={animal.id} animal={animal}/>
-                      )
-                      
-                      }
-                    </tbody>
-                  </table>
-
-        </Container>
+        
        
   </Container>)
       : <ActPDF setPdf={setPdf} data={data}/>

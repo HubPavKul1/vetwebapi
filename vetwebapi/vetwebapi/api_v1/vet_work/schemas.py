@@ -58,6 +58,7 @@ class AnimalInVetWorkIn(BaseModel):
 
 class AnimalInVetWorkSchema(AnimalInVetWorkIn):
     animal_group: str
+    company_id: int
     species: str
     gender: str
     date_of_birth: date

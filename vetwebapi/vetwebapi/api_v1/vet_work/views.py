@@ -13,6 +13,7 @@ from .schemas import (
     VetWorks, 
     VaccinationDetail,
     AnimalInVetWorkIn,
+    CompanyInVetWorkIn,
     )
 from .serializers import (
     serialize_vaccinations, 
@@ -73,12 +74,12 @@ async def add_animals_to_vetwork_route(
 
 @router.post("/{vetwork_id}/company", status_code=status.HTTP_201_CREATED)
 async def add_company_to_vetwork_route(
-    company_id: int,
+    body: CompanyInVetWorkIn,
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     await crud.add_company_to_vetwork(
-        session=session, company_id=company_id, vetwork=vetwork
+        session=session, body=body, vetwork=vetwork
     )
 
 
