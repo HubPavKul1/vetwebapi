@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Container, Row, Col } from "react-bootstrap";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 import styles from "./VaccinationDetail.module.scss";
 import { AppService } from "../../../../app.service";
@@ -87,17 +88,18 @@ export function VaccinationDetail() {
             
           </Col> */}
 
-        <Container className={styles.titleWrap}>
+        <Container className={styles.drugWrap}>
         <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p>
         <h5>Предприятия </h5>
           {data.companies?.length && data.companies.map(
             company => (
               <>
                 <div key={company.id}>
-                <h6><a href="#">{company.full_name}</a></h6>
-                <p>адрес: {`${company.address?.street}, ${company.address?.house_number}`}</p>
-                <p>телефон: {`${company.address?.phone_number1}, ${company.address?.phone_number2}`}</p>
-              </div>
+                  <h6><a href="#">{company.full_name}</a></h6>
+                  <p>адрес: {`${company.address?.street}, ${company.address?.house_number}`}</p>
+                  <p>телефон: {`${company.address?.phone_number1}, ${company.address?.phone_number2}`}</p>
+
+                </div>
 
                 <Container>
                 <h5>Животные </h5>

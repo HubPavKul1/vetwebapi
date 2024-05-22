@@ -1,11 +1,12 @@
 import { PDF } from "../../../../../components/pdf/PDF";
-import { IVaccinationDetail } from "../../../../../interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "../../../../../interfaces/VetWorkInterfaces";
+import { ActPDFBody } from "./ActPDFBody";
 import { ActPDFHeader } from "./ActPDFHeader";
 
 
 interface ActPDFProps {
     setPdf: CallableFunction;
-    data: IVaccinationDetail;
+    data: IVetWorkSchema;
   }
 
 
@@ -15,6 +16,7 @@ export function ActPDF({setPdf, data}: ActPDFProps) {
 
         <PDF setPdf={setPdf} filename="act.pdf">
             <ActPDFHeader data={data}/>
+            <ActPDFBody data={data} />
         </PDF>
     )
 }

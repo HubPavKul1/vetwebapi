@@ -2,14 +2,14 @@ import { Container, Row, Col } from "react-bootstrap";
 
 
 import { AppService } from "../../../../../app.service";
-import { IVaccinationDetail } from "../../../../../interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "../../../../../interfaces/VetWorkInterfaces";
 
 import styles from "./ActPDF.module.scss"
 
 
 
 interface ActPDFHeaderProps {
-    data: IVaccinationDetail;
+    data: IVetWorkSchema;
 }
 
 
@@ -51,22 +51,22 @@ export function ActPDFHeader({data}: ActPDFHeaderProps) {
             <Row>
                 <Col sm={2}></Col>
                 <Col className={styles.colTitle}><h5>населенный пункт</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>г. Иваново</h5></Col>
+                <Col sm={4} className={styles.colBody}><h5>{data.companies ? data.companies[0].address?.city : "г. Иваново"}</h5></Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
                 <Col className={styles.colTitle}><h5>хозяйство</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5></h5></Col>
+                <Col sm={4} className={styles.colBody}><h5>{data.companies ? data.companies[0].short_name : ""}</h5></Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
                 <Col className={styles.colTitle}><h5>район</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5></h5></Col>
+                <Col sm={4} className={styles.colBody}><h5>{data.companies ? data.companies[0].address?.district : ""}</h5></Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
                 <Col className={styles.colTitle}><h5>область</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5></h5></Col>
+                <Col sm={4} className={styles.colBody}><h5>Ивановская обл.</h5></Col>
             </Row>   
         </Container>
     )

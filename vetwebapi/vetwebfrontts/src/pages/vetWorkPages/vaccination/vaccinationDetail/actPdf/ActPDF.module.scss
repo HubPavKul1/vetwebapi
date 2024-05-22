@@ -1,3 +1,7 @@
+.pdfHeader {
+    margin-bottom: 30px;
+}
+
 .actTitle {
     h5 {
         text-align: center;
@@ -28,7 +32,6 @@
     
 .pdfBody {
     margin-bottom: 20px;
-    border-bottom: 2px solid black;
     
     .disease {
         display: flex;

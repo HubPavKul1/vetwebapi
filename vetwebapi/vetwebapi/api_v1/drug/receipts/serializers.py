@@ -7,6 +7,11 @@ async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSche
     return DrugInMovementSchema(
         id=item.catalog_drug_id,
         disease=item.catalog_drug.drug.disease.name,
+        drug_manufacturer=item.catalog_drug.drug.drug_manufacturer.name,
+        drug_dosage=item.catalog_drug.drug.dosage.name,
+        administration_method=item.catalog_drug.drug.administration_method.name,
+        place_of_administration=item.catalog_drug.drug.place_of_administration.name,
+        disposal_method=item.catalog_drug.drug.disposal_method.name,
         name=item.catalog_drug.drug.name,
         batch=item.catalog_drug.batch,
         control=item.catalog_drug.control,

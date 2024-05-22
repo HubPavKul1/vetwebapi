@@ -29,8 +29,13 @@ export interface IDrugInMovement {
     control: string;
     production_date: string;
     expiration_date: string;
+    drug_manufacturer: string;
     packs_amount: number;
     units_amount: number;
+    drug_dosage: string;
+    administration_method: string;
+    place_of_administration: string;
+    disposal_method: string;
 
 }
 
