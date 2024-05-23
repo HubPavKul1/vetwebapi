@@ -35,6 +35,7 @@ class DrugInMovementSchema(BaseModel):
     administration_method: str
     place_of_administration: str
     disposal_method: str
+    packing: int
 
 class DrugMovementDetail(DrugMovementOut):
     drugs: list[DrugInMovementSchema] | None = None

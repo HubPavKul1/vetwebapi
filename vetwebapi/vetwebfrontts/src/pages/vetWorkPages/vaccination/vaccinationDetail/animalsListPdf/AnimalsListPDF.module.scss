@@ -4,8 +4,10 @@
 }
 
 .actTitle {
+    margin-top: 50px;
     h5 {
         text-align: center;
+        margin-bottom: 50px;
     }
 }
 
@@ -31,15 +33,30 @@
 }
     
     
-.pdfBody {
+.pdfTable {
     margin-bottom: 20px;
-    line-height: 2em;
-
     
-    .actFooter {
-        margin-top: 30px;
+    
+    .tHead {
+        div {
+            border: 2px solid black;
+            text-align: center;
+        }
 
     }  
+
+    .tBody {
+        div {
+            border: 2px solid black;
+            text-align: center;
+            line-height: 2em;
+        }
+    }     
+
+    .companyRow {
+        border: 2px solid black;
+        text-align: center;
+    }
     
     .underScored {
         text-align: center;

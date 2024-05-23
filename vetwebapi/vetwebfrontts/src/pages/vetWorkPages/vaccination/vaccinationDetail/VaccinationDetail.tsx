@@ -17,6 +17,7 @@ import { AnimalInVetwork } from "../../../../components/vetWorks/AnimalInVetwork
 import { ActPDF } from "./actPdf/ActPDF";
 import { VetWorkPageMenu } from "../../../../components/menu/VetWorkPageMenu";
 import { CompanyAddress } from "../../../../components/companies/address/CompanyAddress";
+import { AnimalsListPDF } from "./animalsListPdf/AnimalsListPDF";
 
 
 
@@ -30,6 +31,7 @@ interface VaccinationData {
 export function VaccinationDetail() {
 
     const [pdf, setPdf] = useState(false)
+    const [animalsList, setAnimalsList] = useState(false)
     const {id} = useParams();
     const url = `/api/vetwork/${id}`;
 
@@ -47,7 +49,7 @@ export function VaccinationDetail() {
     return (  
 
       <>
-      { !pdf ?
+      { !pdf && !animalsList ?
        ( <Container className={styles.detailWrap}>
         <Row className={styles.rowTop}>
           <Col sm={8} className={styles.colImg}>
@@ -59,11 +61,20 @@ export function VaccinationDetail() {
 
           <Col>
               <VetWorkPageMenu />
-              <CustomButton 
-                  className="btn-large"
-                  title="Акт на обработку"
-                  onClick={() => setPdf(true)}
-                />
+              <Container className={styles.pdfButtons}>
+                <CustomButton 
+                    className="btn-large"
+                    title="Акт на обработку"
+                    onClick={() => setPdf(true)}
+                  />
+                  <Row></Row>
+                <CustomButton 
+                    className="btn-large"
+                    title="Опись к акту"
+                    onClick={() => setAnimalsList(true)}
+                  />
+              </Container>
+              
           </Col>
         </Row>
          
@@ -160,10 +171,13 @@ export function VaccinationDetail() {
         
        
   </Container>)
-      : <ActPDF setPdf={setPdf} data={data}/>
+      : pdf && !animalsList ? <ActPDF setPdf={setPdf} data={data}/>
+      : !pdf && animalsList && <AnimalsListPDF setPdf={setAnimalsList} data={data}/>
       
       
 }
+
+
 
       </>
 

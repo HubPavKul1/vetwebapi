@@ -16,6 +16,7 @@ interface ActPDFHeaderProps {
 
 export function ActPDFHeader({data}: ActPDFHeaderProps) {
     const date = AppService.convertDateString(data.vetwork_date)
+    
 
     return (
         <Container className={styles.pdfHeader}>
@@ -40,33 +41,33 @@ export function ActPDFHeader({data}: ActPDFHeaderProps) {
             </Row>
             <Row>
                 <Col sm={2}></Col>
-                <Col className={styles.colTitle}><h5>о проведении вакцинации животных против</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>{data.diseases}</h5></Col>
+                <Col className={styles.colTitle}>о проведении вакцинации животных против</Col>
+                <Col sm={4} className={styles.colBody}>{data.diseases}</Col>
             </Row>
             <Row className={styles.actDate}>
                 <Col sm={2}></Col>
-                <Col className={styles.colTitle}><h5>от</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>{date.fullDate}</h5></Col>
+                <Col className={styles.colTitle}>от</Col>
+                <Col sm={4} className={styles.colBody}>{date.fullDate}</Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
-                <Col className={styles.colTitle}><h5>населенный пункт</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>{data.companies ? data.companies[0].address?.city : "г. Иваново"}</h5></Col>
+                <Col className={styles.colTitle}>населенный пункт</Col>
+                <Col sm={4} className={styles.colBody}>{data.companies ? data.companies[0].address?.city : "г. Иваново"}</Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
-                <Col className={styles.colTitle}><h5>хозяйство</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>{data.companies ? data.companies[0].short_name : ""}</h5></Col>
+                <Col className={styles.colTitle}>хозяйство</Col>
+                <Col sm={4} className={styles.colBody}>{data.companies ? data.companies[0].short_name : ""}</Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
-                <Col className={styles.colTitle}><h5>район</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>{data.companies ? data.companies[0].address?.district : ""}</h5></Col>
+                <Col className={styles.colTitle}>район</Col>
+                <Col sm={4} className={styles.colBody}>{data.companies ? data.companies[0].address?.district : ""}</Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>
-                <Col className={styles.colTitle}><h5>область</h5></Col>
-                <Col sm={4} className={styles.colBody}><h5>Ивановская обл.</h5></Col>
+                <Col className={styles.colTitle}>область</Col>
+                <Col sm={4} className={styles.colBody}>Ивановская обл.</Col>
             </Row>   
         </Container>
     )

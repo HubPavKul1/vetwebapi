@@ -36,6 +36,7 @@ export interface IDrugInMovement {
     administration_method: string;
     place_of_administration: string;
     disposal_method: string;
+    packing: number;
 
 }
 

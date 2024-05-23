@@ -63,12 +63,12 @@ async def add_drug_to_vetwork_route(
 
 @router.post("/{vetwork_id}/animals", status_code=status.HTTP_201_CREATED)
 async def add_animals_to_vetwork_route(
-    animals: list[AnimalInVetWorkIn],
+    body: list[AnimalInVetWorkIn],
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     await crud.add_animals_to_vetwork(
-        session=session, animals=animals, vetwork=vetwork
+        session=session, body=body, vetwork=vetwork
     )
 
 

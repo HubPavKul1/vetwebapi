@@ -1,0 +1,22 @@
+import { PDF } from "../../../../../components/pdf/PDF";
+import { IVetWorkSchema } from "../../../../../interfaces/VetWorkInterfaces";
+import { AnimalsListPDFBody } from "./AnimalsListPDFBody";
+import { AnimalsListPDFHeader } from "./AnimalsListPDFHeader";
+
+
+interface AnimalsListPDFProps {
+    setPdf: CallableFunction;
+    data: IVetWorkSchema;
+  }
+
+
+export function AnimalsListPDF({setPdf, data}: AnimalsListPDFProps) {
+   
+    return (
+
+        <PDF setPdf={setPdf} filename="animalsList.pdf">
+            <AnimalsListPDFHeader data={data} />
+            <AnimalsListPDFBody data={data} />
+        </PDF>
+    )
+}

@@ -134,7 +134,8 @@ body {
 
 .btn-large {
 	@extend %btn;
-	@include btn-size(15px, 30px, 5px, 1em)
+	@include btn-size(15px, 30px, 5px, 1em);
+	
 }
 
 .btn-submit {

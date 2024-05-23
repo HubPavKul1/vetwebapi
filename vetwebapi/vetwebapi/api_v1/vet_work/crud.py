@@ -63,12 +63,12 @@ async def add_company_to_vetwork(session: AsyncSession, vetwork: VetWork, body: 
     await session.commit()
 
 
-async def add_animals_to_vetwork(session: AsyncSession, vetwork: VetWork, animals: list[AnimalInVetWorkIn]) -> None:
+async def add_animals_to_vetwork(session: AsyncSession, vetwork: VetWork, body: list[AnimalInVetWorkIn]) -> None:
     new_relations = [
         AnimalInVetWork(
             **item.model_dump(),
             vetwork_id=vetwork.id
-            ) for item in animals
+            ) for item in body
         ]
     
     session.add_all(new_relations)

@@ -54,6 +54,13 @@ class AnimalInVetWorkIn(BaseModel):
     animal_id: int
     dosage: float | None = None
     is_positive: bool = False
+    
+    # model_config = ConfigDict(from_attributes=True)
+    
+    
+    
+class AnimalsInVetWorkIn(BaseModel):
+    animals: list[AnimalInVetWorkIn]
 
 
 class AnimalInVetWorkSchema(AnimalInVetWorkIn):

@@ -31,6 +31,13 @@
     }
 }
 
+
+.pdfButtons {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
 .rowBody {
     min-height: 550px;
 }
