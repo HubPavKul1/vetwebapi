@@ -32,7 +32,7 @@ export function AnimalInVetwork({animal}: AnimalInVetworkProps) {
     const date_of_birth = AppService.convertDateString(animal.date_of_birth).shortDate
  
     return(
-            <tr key={animal.animal_id}>
+            <tr>
                 <td>{animal.species}</td>
                 <td>{animal.gender}</td>
                 <td>{date_of_birth}</td>
@@ -40,7 +40,7 @@ export function AnimalInVetwork({animal}: AnimalInVetworkProps) {
                 <td>{animal.identification}</td>
                 <td><BsPencilSquare className="edit-icon"/></td>
                 <td><BsFillTrash3Fill className="delete-icon"/></td>
-            </tr>
+             </tr>
         )                
 
 }

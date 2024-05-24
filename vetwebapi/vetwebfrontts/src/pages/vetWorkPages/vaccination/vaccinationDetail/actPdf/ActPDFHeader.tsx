@@ -57,7 +57,7 @@ export function ActPDFHeader({data}: ActPDFHeaderProps) {
             <Row>
                 <Col sm={2}></Col>
                 <Col className={styles.colTitle}>хозяйство</Col>
-                <Col sm={4} className={styles.colBody}>{data.companies ? data.companies[0].short_name : ""}</Col>
+                <Col sm={4} className={styles.colBody}>частный сектор и организации г. Иваново</Col>
             </Row>
             <Row>
                 <Col sm={2}></Col>

@@ -96,8 +96,8 @@ export function VaccinationDetail() {
         <h5>Предприятия </h5>
           {data.companies?.length && data.companies.map(
             company => (
-              <>
-                <div key={company.id}>
+              <div key={company.id}>
+                <div>
                   <Row className={styles.companyTitle}> 
                     <Col sm={6}><h5><Link to={`/companies/${company.id}`}>{company.full_name}</Link></h5></Col>
                     <Col>
@@ -119,27 +119,27 @@ export function VaccinationDetail() {
                 <Container>
                 <h5>Животные </h5>
                   <table className="table">
-                    
-
-                          <tbody className="animals-rows">
-                            <tr>
-                              <th>Вид животных</th>
-                              <th>Пол животных</th>
-                              <th>Дата рождения</th>
-                              <th>Кличка</th>
-                              <th>Идентификация</th>
-                              <th />
-                            </tr>
-                            {data.animals?.length && data.animals.filter((animal) => animal.company_id === company.id)
+                    <tbody className="animals-rows">
+                      <tr>
+                        <th>Вид животных</th>
+                          <th>Пол животных</th>
+                            <th>Дата рождения</th>
+                            <th>Кличка</th>
+                            <th>Идентификация</th>
+                      </tr>
+                      
+                        {data.animals?.length && data.animals.filter((animal) => animal.company_id === company.id)
                             .map(animal => <AnimalInVetwork key={animal.animal_id} animal={animal}/>)
                             
                             }
-                          </tbody>
-                        </table>
+                      
+                           
+                      </tbody>
+                    </table>
 
                 </Container>
 
-              </>
+              </div>
               
 
             

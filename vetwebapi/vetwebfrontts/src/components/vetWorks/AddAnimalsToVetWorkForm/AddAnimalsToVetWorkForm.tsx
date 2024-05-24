@@ -33,21 +33,25 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
     const companyUrl = `/api/companies/${companyId}`;
 
 
-    const { isLoading, data }: CompanyData = useQuery(['company', id], () => AppService.get(companyUrl), {
+    const { isLoading, data }: CompanyData = useQuery(['vetworkCompany', id], () => AppService.get(companyUrl), {
       enabled: !!id
     }
     );
 
  
-    const methods = useForm<IAnimalsInVetworkIn>({
+    // const methods = useForm<IAnimalsInVetworkIn>({
+    //     mode: "onChange",
+    // })
+
+    const { register, reset, handleSubmit, formState: {errors} } = useForm<IAnimalInVetworkIn>({
         mode: "onChange",
     })
 
-    const { register, reset, handleSubmit, formState: { errors } } = methods
+    // const { register, reset, handleSubmit, formState: { errors } } = methods
     const queryClient = useQueryClient()
 
     const { mutate } = useMutation(["add animals"], {
-        mutationFn: (data: IAnimalsInVetworkIn) => AppService.createItem(url, data),
+        mutationFn: (data: IAnimalInVetworkIn) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Животное успешно добавлено!")
             queryClient.invalidateQueries(["vaccination", id])
@@ -56,11 +60,15 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
     },
     )
 
-    const addAnimals: SubmitHandler<IAnimalsInVetworkIn> = data => {
-        console.log(data)
-        mutate(data)
+    const addAnimals: SubmitHandler<IAnimalInVetworkIn> = (data) => {
+        console.log("DATA>>>>", data)
+        console.log()
+        
+        // mutate(data)
 
     }
+
+ 
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
@@ -72,63 +80,57 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
     return (
         <Container>
             <CustomButton className="btn-upload" title= "Назад" onClick={() => setAnimals(false)} />
-            <FormProvider {...methods}>
+            {/* <FormProvider {...methods}> */}
             <form onSubmit={handleSubmit(addAnimals)}>
                 {animals.map(animal => (
-                    <Container className={styles.formWrap}>
+                    <Container className={styles.formWrap} key={animal.id}>
                         <div className="form-group">
-                            <label htmlFor="animal_id">
+                            <label htmlFor={animal.id.toString()}>
                                 {animal.nickname}
                                 <Input
-                                    register={register}
                                     errors={errors}
                                     fieldName="animal_id"
                                     type="checkbox"
                                     id={animal.id.toString()}
+                                    register={register}
                                 />
                             </label>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="dosage">
-                                Введено доз препарата*
                                 <Input
-                                    register={register}
+                                    className="form-control"
                                     errors={errors}
                                     fieldName="dosage"
                                     type="number"
-                                    id="dosage"
-                                />
-                            </label>
-                        </div>
-                        {/* <div className="form-group">
-                            <label htmlFor="is_positive">
-                                {animal.nickname}
-                                <Input
                                     register={register}
-                                    errors={errors}
-                                    fieldName="animal_id"
-                                    type="checkbox"
-                                    id={animal.id.toString()}
+                                    placeholder="Введено доз препарата*"
                                 />
-                            </label>
-                        </div> */}
+                            
+                        </div>
+                        <div className="form-group">
+                            <CustomButton
+                                className="btn-submit"
+                                disabled={false}
+                                title="Зарегистрировать"
+                        />
+                        </div>
                     </Container>
                     
                     
                 ))}
                 
                 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <CustomButton
                         className="btn-submit"
                         disabled={false}
                         title="Зарегистрировать"
                     />
-                </div>
+                </div> */}
 
             </form>
             
-        </FormProvider>
+        {/* </FormProvider> */}
             
 
         </Container>
