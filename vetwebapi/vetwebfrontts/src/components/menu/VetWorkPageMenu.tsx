@@ -9,7 +9,6 @@ export function VetWorkPageMenu() {
   return(
       <Menu>
         <AddCompanyToVetWork />
-        {/* <AddAnimalsToVetWork /> */}
         <AddDrugToVetWork />
       </Menu>    
     )

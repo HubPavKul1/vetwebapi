@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Container, Row, Col } from "react-bootstrap";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -12,7 +12,7 @@ import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AddDrugForm } from "../../../../components/drugs/drugMovements/AddDrugForm";
 import { AddAnimalForm } from "../../../../components/companies/animal/AddAnimalForm";
 import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
-import { AddAnimalsToVetWorkForm } from "../../../../components/vetWorks/AddAnimalsToVetWorkForm";
+import { AddAnimalsToVetWorkForm } from "../../../../components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
 import { AnimalInVetwork } from "../../../../components/vetWorks/AnimalInVetwork";
 import { ActPDF } from "./actPdf/ActPDF";
 import { VetWorkPageMenu } from "../../../../components/menu/VetWorkPageMenu";
@@ -30,8 +30,11 @@ interface VaccinationData {
 
 export function VaccinationDetail() {
 
-    const [pdf, setPdf] = useState(false)
-    const [animalsList, setAnimalsList] = useState(false)
+    const [act, showAct] = useState(false)
+    const [animalsList, showAnimalsList] = useState(false)
+    const [animals, setAnimals] = useState(false)
+    const [companyId, setCompanyId] = useState("")
+
     const {id} = useParams();
     const url = `/api/vetwork/${id}`;
 
@@ -44,12 +47,17 @@ export function VaccinationDetail() {
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
     const date = AppService.convertDateString(data.vetwork_date)
+
+    const addAnimals = (company_id: string) => {
+      setAnimals(true);
+      setCompanyId(company_id)
+    }
     
     
     return (  
 
       <>
-      { !pdf && !animalsList ?
+      { !act && !animalsList && !animals ?
        ( <Container className={styles.detailWrap}>
         <Row className={styles.rowTop}>
           <Col sm={8} className={styles.colImg}>
@@ -62,43 +70,27 @@ export function VaccinationDetail() {
           <Col>
               <VetWorkPageMenu />
               <Container className={styles.pdfButtons}>
-                <CustomButton 
-                    className="btn-large"
+                <div>
+                  <CustomButton 
+                    className="btn-submit"
                     title="Акт на обработку"
-                    onClick={() => setPdf(true)}
+                    onClick={() => showAct(true)}
                   />
-                  <Row></Row>
-                <CustomButton 
-                    className="btn-large"
+                </div>
+                <div>
+                  <CustomButton 
+                    className="btn-submit"
                     title="Опись к акту"
-                    onClick={() => setAnimalsList(true)}
+                    onClick={() => showAnimalsList(true)}
                   />
+
+                </div>
+                
               </Container>
               
           </Col>
         </Row>
          
-          {/* <Col>
-            <h1>Вакцинация</h1>
-            <h5>{date.fullDate}</h5>
-          <div className={styles.buttonWrap}>
-              <CreateItem btnTitle="Добавить препарат">
-                  <AddDrugForm url={`/api/vetwork/${id}/drug`} queryKey="vaccination"/>
-              </CreateItem>
-              <CreateItem btnTitle="Добавить животных">
-                  <AddAnimalsToVetWorkForm/>
-              </CreateItem>
-              <CustomButton 
-                  className="btn-large"
-                  title="Акт на обработку"
-                  onClick={() => setPdf(true)}
-                />
-
-          </div>
-
-            
-          </Col> */}
-
         <Container className={styles.drugWrap}>
         <p className={styles.animalCounter}>Всего голов: {data?.animals?.length}</p>
         <h5>Предприятия </h5>
@@ -106,7 +98,19 @@ export function VaccinationDetail() {
             company => (
               <>
                 <div key={company.id}>
-                  <h6><a href="#">{company.full_name}</a></h6>
+                  <Row className={styles.companyTitle}> 
+                    <Col sm={6}><h5><Link to={`/companies/${company.id}`}>{company.full_name}</Link></h5></Col>
+                    <Col>
+                      <CustomButton 
+                        className="btn-submit" 
+                        title="Добавить животных"
+                        onClick={() => addAnimals(company.id.toString())}
+                      />
+                    </Col>
+                    <Col></Col>
+                    
+                  </Row>
+                  
                   <p>адрес: {`${company.address?.street}, ${company.address?.house_number}`}</p>
                   <p>телефон: {`${company.address?.phone_number1}, ${company.address?.phone_number2}`}</p>
 
@@ -127,7 +131,7 @@ export function VaccinationDetail() {
                               <th />
                             </tr>
                             {data.animals?.length && data.animals.filter((animal) => animal.company_id === company.id)
-                            .map(animal => <AnimalInVetwork key={animal.id} animal={animal}/>)
+                            .map(animal => <AnimalInVetwork key={animal.animal_id} animal={animal}/>)
                             
                             }
                           </tbody>
@@ -171,8 +175,9 @@ export function VaccinationDetail() {
         
        
   </Container>)
-      : pdf && !animalsList ? <ActPDF setPdf={setPdf} data={data}/>
-      : !pdf && animalsList && <AnimalsListPDF setPdf={setAnimalsList} data={data}/>
+      : act ? <ActPDF setPdf={showAct} data={data}/>
+      : animalsList ? <AnimalsListPDF setPdf={showAnimalsList} data={data}/>
+      : animals && <AddAnimalsToVetWorkForm setAnimals={setAnimals} companyId={companyId}/>
       
       
 }

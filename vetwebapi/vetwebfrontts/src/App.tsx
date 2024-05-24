@@ -30,7 +30,7 @@ export function App() {
                 <Route path="vetwork/:id" element={<VaccinationDetail/>} />
                 <Route path="companies/:id" element={<CompanyDetail />} />
                 <Route path="drugs/:id" element={<DrugDetail />} />
-
+                
                 <Route path="*" element={<div>Not Found</div>} />
             </Route>
         </Routes>

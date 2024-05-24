@@ -44,7 +44,7 @@ export interface IVetWorkSchema {
 }
 
 export interface IAnimalInVetworkIn {
-    id: number;
+    animal_id: number;
     dosage?: number;
     is_positive?: boolean;
 }

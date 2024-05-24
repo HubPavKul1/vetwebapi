@@ -62,7 +62,7 @@ export function AddAddressForm() {
             Выберите регион *
           </label>
             <RegionsSelect />
-        </div>
+      </div>
       {
         inputItems.map(item =>(
         <Input key={item.fieldName}

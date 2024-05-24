@@ -36,6 +36,10 @@
     padding: 5px;
     display: flex;
     flex-direction: column;
+
+    div {
+        margin-bottom: 20px;
+    }
 }
 
 .rowBody {
@@ -55,6 +59,14 @@
     align-items: center;
     height: 100px;
 
+}
+
+.companyTitle {
+    display: flex;
+    
+    h5 {
+        font-weight: 600;
+    }
 }
 
 
