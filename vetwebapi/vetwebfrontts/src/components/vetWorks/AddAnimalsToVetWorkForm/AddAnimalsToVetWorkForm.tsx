@@ -1,4 +1,4 @@
-import { useForm, FormProvider, SubmitHandler, RegisterOptions } from "react-hook-form"
+import { useForm, FormProvider, SubmitHandler, RegisterOptions, Controller, useFieldArray } from "react-hook-form"
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { IAnimal, IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { CustomButton } from "../../button/CustomButton";
@@ -39,19 +39,29 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
     );
 
  
-    // const methods = useForm<IAnimalsInVetworkIn>({
+    const methods = useForm<IAnimalsInVetworkIn>({
+        mode: "onChange",
+        defaultValues: {
+            animals:[{animal_id: 0, dosage: 0, is_positive: false}]
+
+        }
+    })
+
+    // const { register, reset, handleSubmit, formState: {errors} } = useForm<IAnimalInVetworkIn>({
     //     mode: "onChange",
     // })
 
-    const { register, reset, handleSubmit, formState: {errors} } = useForm<IAnimalInVetworkIn>({
-        mode: "onChange",
-    })
-
-    // const { register, reset, handleSubmit, formState: { errors } } = methods
+    const { control, register, reset, handleSubmit, formState: { errors } } = methods
     const queryClient = useQueryClient()
 
+    const { fields } = useFieldArray({
+        name: "animals",
+        control: control,
+        shouldUnregister: true
+      })
+
     const { mutate } = useMutation(["add animals"], {
-        mutationFn: (data: IAnimalInVetworkIn) => AppService.createItem(url, data),
+        mutationFn: (data: IAnimalsInVetworkIn) => AppService.createItem(url, data),
         onSuccess: () => {
             alert("Животное успешно добавлено!")
             queryClient.invalidateQueries(["vaccination", id])
@@ -60,7 +70,7 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
     },
     )
 
-    const addAnimals: SubmitHandler<IAnimalInVetworkIn> = (data) => {
+    const addAnimals: SubmitHandler<IAnimalsInVetworkIn> = (data) => {
         console.log("DATA>>>>", data)
         console.log()
         
@@ -80,58 +90,67 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
     return (
         <Container>
             <CustomButton className="btn-upload" title= "Назад" onClick={() => setAnimals(false)} />
-            {/* <FormProvider {...methods}> */}
+            <FormProvider {...methods}>
             <form onSubmit={handleSubmit(addAnimals)}>
-                {animals.map(animal => (
-                    <Container className={styles.formWrap} key={animal.id}>
-                        <div className="form-group">
-                            <label htmlFor={animal.id.toString()}>
-                                {animal.nickname}
-                                <Input
-                                    errors={errors}
-                                    fieldName="animal_id"
-                                    type="checkbox"
-                                    id={animal.id.toString()}
-                                    register={register}
-                                />
-                            </label>
-                        </div>
-                        <div className="form-group">
-                                <Input
-                                    className="form-control"
-                                    errors={errors}
-                                    fieldName="dosage"
-                                    type="number"
-                                    register={register}
-                                    placeholder="Введено доз препарата*"
-                                />
-                            
-                        </div>
-                        <div className="form-group">
-                            <CustomButton
-                                className="btn-submit"
-                                disabled={false}
-                                title="Зарегистрировать"
+            {fields.map((animal, index) => (
+            <Container className={styles.formWrap} key={animal.id}>
+                 <Controller 
+                    name={`animals.${index}.id`}
+                    control={control}
+                    defaultValue={animals[index].id}
+                    render={({ field: { value, onChange } }) =>
+                    <div className="form-group">
+                        <label htmlFor={animal.id.toString()}>
+                            {animals[index].nickname} {animals[index].id}
+                        <input
+                            type="number"
+                            id={animal.id.toString()}
+                            value={value}
+                            onChange={onChange}
+                                        
                         />
-                        </div>
+                        </label>
+                    </div>
+                            
+                    }
+                />
+                <Controller 
+                    name="dosage"
+                    control={control}
+                    render={({ field: { value, onChange } }) =>
+                    <div className="form-group">
+                        <label htmlFor="dosage">
+                            Дозировка
+                        <input
+                            name="dosage"
+                            type="number"
+                            id="dosage"
+                            value={value}
+                            onChange={onChange}
+                                        
+                        />
+                        </label>
+                    </div>
+                            
+                    }
+                    />   
                     </Container>
                     
                     
                 ))}
-                
-                
-                {/* <div className="form-group">
+            
+                <div className="form-group">
                     <CustomButton
                         className="btn-submit"
                         disabled={false}
                         title="Зарегистрировать"
                     />
-                </div> */}
+                </div>
 
             </form>
-            
-        {/* </FormProvider> */}
-            
+                
+
+            </FormProvider>
 
         </Container>
         

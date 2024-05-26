@@ -16,7 +16,9 @@ interface AnimalsListPDFBodyProps {
 
 export function AnimalsListPDFBody({data}: AnimalsListPDFBodyProps) {
     const date = AppService.convertDateString(data.vetwork_date).fullDate;
-    const animals = new Set(data.animals?.map(animal => animal.animal_group.toLowerCase() + ", "));
+    if(!data.animals) return;
+
+    // const animals = new Set(data.animals.map(animal => animal.animal_group.toLowerCase() + ", "));
     
 
 
@@ -38,14 +40,14 @@ export function AnimalsListPDFBody({data}: AnimalsListPDFBodyProps) {
 
                         {data.animals && data.animals.filter((animal) => animal.company_id === company.id)
                         .map(
-                            animal => 
-                            <Row key={animal.id} className={styles.tBody}>
-                                <Col></Col>
+                            (animal, index) => 
+                            <Row key={animal.animal_id} className={styles.tBody}>
+                                <Col>{index + 1}</Col>
                                 <Col sm={3}>{animal.species}</Col>
                                 <Col sm={3}>{animal.nickname}</Col>
                                 <Col sm={1}>{AppService.convertDateString(animal.date_of_birth).year}</Col>
                                 <Col >38</Col>
-                                <Col>{animal.dosage / 1000}</Col>
+                                <Col>{animal.dosage && (animal.dosage / 1000)}</Col>
                                 <Col></Col>
                             </Row>
                             )}
