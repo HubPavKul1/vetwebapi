@@ -13,6 +13,7 @@ import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
 import { Container } from "react-bootstrap";
 
 import styles from "./AddAnimalsToVetWorkForm.module.scss"
+import { useState } from "react";
 
 
 interface AddAnimalsToVetWorkFormProps {
@@ -26,6 +27,8 @@ interface CompanyData {
   }
 
 export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVetWorkFormProps) {
+
+    const [animalsData, setAnimalsData] = useState<IAnimalInVetworkIn[]>()
 
     const {id} = useParams()
     const url = `/api/vetwork/${id}/animals/`
@@ -68,7 +71,8 @@ export function AddAnimalsToVetWorkForm({companyId, setAnimals}: AddAnimalsToVet
             reset()
         }
     },
-    )
+    );
+
 
     const addAnimals: SubmitHandler<IAnimalsInVetworkIn> = (data) => {
         console.log("DATA>>>>", data)

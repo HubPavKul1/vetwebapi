@@ -24,7 +24,8 @@ from vetwebapi.core.models import(
         BiomaterialPackage,
         WorkType,
         Dosage,
-        DiagnosticMethod
+        DiagnosticMethod,
+        Drug
 )
 
 # Address
@@ -64,7 +65,7 @@ async def add_roles(session: AsyncSession) -> None:
     
 async def add_positions(session: AsyncSession) -> None:
     """Добавляем должности работников в базу данных"""
-    names = ["ветврач", "ИП", "гр"]
+    names = ["ветврач", "ведущий ветврач", "кавалерист", "ИП", "гр"]
     [await create_position(session=session, name=name) for name in names]
     
 
@@ -163,7 +164,7 @@ async def add_places_of_administration(session:AsyncSession) -> None:
     ]
     session.add_all([PlaceOfAdministration(name=item) for item in items])
     await session.commit()
-    
+
         
 async def add_drugs_data(session: AsyncSession) -> None:
     await add_budgets(session=session)

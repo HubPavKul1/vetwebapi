@@ -12,28 +12,26 @@ import { Vets } from "./pages/companyPages/Vets";
 import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
 import { VaccinationDetail } from "./pages/vetWorkPages/vaccination/vaccinationDetail/VaccinationDetail";
 
-
-
 export function App() {
-    return (
-        <>
-        <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />}  />
-                <Route path="companies" element={<Companies />} />
-                <Route path="companies/vets" element={<Vets />} />
-                <Route path="drugs/receipts" element={<DrugReceipts />} />
-                <Route path="drugs/receipts/:id" element={<ReceiptDetail />} />
-                <Route path="drugs" element={<Drugs/>} />
-                <Route path="drugs/catalog" element={<DrugCatalog/>} />
-                <Route path="vetwork/vaccinations" element={<Vaccinations/>} />
-                <Route path="vetwork/:id" element={<VaccinationDetail/>} />
-                <Route path="companies/:id" element={<CompanyDetail />} />
-                <Route path="drugs/:id" element={<DrugDetail />} />
-                
-                <Route path="*" element={<div>Not Found</div>} />
-            </Route>
-        </Routes>
-        </> 
-    )
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="companies" element={<Companies />} />
+          <Route path="companies/vets" element={<Vets />} />
+          <Route path="drugs/receipts" element={<DrugReceipts />} />
+          <Route path="drugs/receipts/:id" element={<ReceiptDetail />} />
+          <Route path="drugs" element={<Drugs />} />
+          <Route path="drugs/catalog" element={<DrugCatalog />} />
+          <Route path="vetwork/vaccinations" element={<Vaccinations />} />
+          <Route path="vetwork/:id" element={<VaccinationDetail />} />
+          <Route path="companies/:id" element={<CompanyDetail />} />
+          <Route path="drugs/:id" element={<DrugDetail />} />
+
+          <Route path="*" element={<div>Not Found</div>} />
+        </Route>
+      </Routes>
+    </>
+  );
 }

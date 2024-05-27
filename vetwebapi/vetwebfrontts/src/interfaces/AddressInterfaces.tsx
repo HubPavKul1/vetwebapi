@@ -1,45 +1,34 @@
 import { IBase } from "./BaseInterface";
 
-
 export interface IAddressIn {
-    street_id: number;
-    house_number: string;
-    phone_number1: string;
-    phone_number2: string | null;
+  street_id: number;
+  house_number: string;
+  phone_number1: string;
+  phone_number2: string | null;
 }
-
 
 export interface IAddress {
-    id: number;
-    district: string;
-    city: string;
-    street: string;
-    house_number: string;
-    phone_number1: string;
-    phone_number2: string | null;
+  id: number;
+  district: string;
+  city: string;
+  street: string;
+  house_number: string;
+  phone_number1: string;
+  phone_number2: string | null;
 }
-
-
 
 export interface IRegions {
-    regions?: IBase[]
+  regions?: IBase[];
 }
-
 
 export interface IDistricts {
-    districts?: IBase[]
+  districts?: IBase[];
 }
-
 
 export interface ICities {
-    cities?: IBase[]
+  cities?: IBase[];
 }
-
 
 export interface IStreets {
-    streets?: IBase[]
+  streets?: IBase[];
 }
-
-
-
-

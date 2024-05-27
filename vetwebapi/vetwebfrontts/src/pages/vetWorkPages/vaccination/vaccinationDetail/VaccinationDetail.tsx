@@ -111,8 +111,8 @@ export function VaccinationDetail() {
                     
                   </Row>
                   
-                  <p>адрес: {`${company.address?.street}, ${company.address?.house_number}`}</p>
-                  <p>телефон: {`${company.address?.phone_number1}, ${company.address?.phone_number2}`}</p>
+                  <p>адрес: {company.address &&`${company.address.street}, ${company.address.house_number}`}</p>
+                  <p>телефон: {company.address && `${company.address.phone_number1}, ${company.address.phone_number2}`}</p>
 
                 </div>
 
