@@ -1,6 +1,32 @@
+.wrapper {
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+
 .formWrap {
+	border-bottom: 2px solid black;
 	display: flex;
-	justify-content: space-evenly;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	label {
+		margin-right: 30px;
+		font-weight: 700;
+	}
+	
+	input {
+		max-width: 100px;
+		text-align: right;
+	}
+
+	button {
+		max-width: 100px;
+		min-height: 14px;
+		font-size: 12px;
+		text-align: center;
+	}
 }
 
 
@@ -11,7 +37,6 @@
 }
 
 .formGroup label {
-    margin-right: 30px;
-	font-weight: 700;
+    
 }
 
