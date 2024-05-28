@@ -15,18 +15,23 @@ interface ActPDFBodyProps {
 
 
 export function ActPDFBody({data}: ActPDFBodyProps) {
-    const productionDate = data.drug && AppService.convertDateString(data.drug?.production_date).shortDate
-    const expirationDate = data.drug && AppService.convertDateString(data.drug?.expiration_date).shortDate
+
+    if(!data.animals) return;
+    if(!data.drug) return;
+    if(!data.companies) return
+
+    const productionDate = AppService.convertDateString(data.drug.production_date).shortDate
+    const expirationDate = AppService.convertDateString(data.drug.expiration_date).shortDate
 
     const doctor1 = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`
     const doctor2 = `${data.doctors[1].position} ${data.clinic} ${data.doctors[1].fullname}`
-    const companyDoctor = data.companies && `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`
-    const animals = new Set(data.animals?.map(animal => animal.animal_group.toLowerCase() + ", "));
-    const diseases = new Set(data.diseases?.map(disease => disease.toLowerCase() + ", "));
+    const companyDoctor = `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`
+    const animals = new Set(data.animals.map(animal => animal.animal_group.toLowerCase() + ", "));
+    const diseases = new Set(data.diseases.map(disease => disease.toLowerCase() + ", "));
     let dosage = 0;
-    data.animals?.map(animal => animal.dosage ? dosage += animal.dosage: 0);
-    const drugPacks = data.drug?.packs_amount
-    const drugRest = ((drugPacks * data.drug?.packing) - dosage) / 1000
+    data.animals.map(animal => animal.dosage ? dosage += animal.dosage: 0);
+    const drugPacks = data.drug.packs_amount
+    const drugRest = ((drugPacks * data.drug.packing) - dosage) / 1000
 
     return (
         <Container className={styles.pdfBody}>
@@ -83,15 +88,15 @@ export function ActPDFBody({data}: ActPDFBodyProps) {
                 </Row>
                 <Row>
                     <Col>изготовитель</Col>
-                    <Col sm={4} className={styles.underScored}>{data.drug?.drug_manufacturer}</Col>
+                    <Col sm={4} className={styles.underScored}>{data.drug.drug_manufacturer}</Col>
                     <Col >применялась путем</Col>
-                    <Col className={styles.underScored}>{data.drug?.administration_method}</Col>
+                    <Col className={styles.underScored}>{data.drug.administration_method}</Col>
                     <Col >введения в область</Col>    
                 </Row>
                 <Row>
-                    <Col sm={4} className={styles.underScored}>{data.drug?.place_of_administration}</Col>
+                    <Col sm={4} className={styles.underScored}>{data.drug.place_of_administration}</Col>
                     <Col >в дозе</Col>
-                    <Col sm={7} className={styles.underScored}>{data.drug?.drug_dosage}</Col> 
+                    <Col sm={7} className={styles.underScored}>{data.drug.drug_dosage}</Col> 
                 </Row>
                 <Row>
                     <Col >место инъекции дезинфицировали</Col>
@@ -106,23 +111,23 @@ export function ActPDFBody({data}: ActPDFBodyProps) {
                 </Row>
                 <Row>
                     <Col sm={3} >1. Препарата</Col>
-                    <Col sm={6} className={styles.underScored}>{data.drug?.name}</Col>
+                    <Col sm={6} className={styles.underScored}>{data.drug.name}</Col>
                     <Col className={styles.underScored}>{dosage / 1000}</Col>
                     <Col >тыс. доз</Col>
                 </Row>
                 <Row>
                     <Col sm={3} >2. 70% этилового спирта</Col>
-                    <Col sm={3} className={styles.underScored}></Col>
+                    <Col sm={3} className={styles.underScored}>{data.animals.length / 2}</Col>
                     <Col >мл</Col>
                 </Row>
                 <Row>
                     <Col sm={3} >3. Вата гигроскопическая</Col>
-                    <Col sm={3} className={styles.underScored}>{data.animals?.length}</Col>
+                    <Col sm={3} className={styles.underScored}>{data.animals.length}</Col>
                     <Col >г</Col>
                 </Row>
                 <Row>
                     <Col sm={3} >4. Шприцы одноразовые</Col>
-                    <Col sm={3} className={styles.underScored}>{data.animals?.length}</Col>
+                    <Col sm={3} className={styles.underScored}>{data.animals.length}</Col>
                     <Col >штук</Col>
                 </Row>
                 <Row>
@@ -134,7 +139,7 @@ export function ActPDFBody({data}: ActPDFBodyProps) {
                 </Row>
                 <Row>
                     <Col sm={3} >обезврежены методом</Col>
-                    <Col className={styles.underScored}>{data.drug?.disposal_method}</Col>
+                    <Col className={styles.underScored}>{data.drug.disposal_method}</Col>
                 </Row>
                 <Row>
                     <Col sm={6} >Опись на обработанных прилагается.</Col> 
@@ -156,7 +161,7 @@ export function ActPDFBody({data}: ActPDFBodyProps) {
                 <Row>
                     <Col sm={3}></Col> 
                     <Col sm={2} className={styles.underScored}></Col>
-                    <Col sm={4}>{data.companies && data.companies[0].employee?.fullname}</Col> 
+                    <Col sm={4}>{data.companies[0].employee?.fullname}</Col> 
                 </Row>
 
             </Container>

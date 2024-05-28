@@ -49,28 +49,9 @@
 	@extend %textBase;
 }
 
-.cardImageLink {
-	height: 50px;
-}
 
-.cardImage {
-    width: 100px;
-	@include transition(transform);
-	
-	&:hover {
-		@include transform;
-	}
-}
 
-.cardImageWrap {
-	display: flex;
-	width: 30%;
-	@include transition(transform);
-	
-	&:hover {
-		@include transform;
-	}
-}
+
 
 .cardBody {
 	display: flex;
