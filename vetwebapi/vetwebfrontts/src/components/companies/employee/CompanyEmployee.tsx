@@ -1,3 +1,4 @@
+import { Col, Row } from "react-bootstrap";
 import { IEmployee } from "../../../interfaces/EmployeeInterfaces";
 
 
@@ -9,12 +10,12 @@ interface CompanyEmployeeProps {
 export function CompanyEmployee({employee}: CompanyEmployeeProps) {
     return(
         
-            <tr key={employee.id}>
-                <td>{employee.position}</td>
-                <td>{employee.lastname}</td>
-                <td>{employee.firstname}</td>
-                <td>{employee.patronymic}</td>
-            </tr>
+            <Row key={employee.id}>
+                <Col>{employee.position}</Col>
+                <Col>{employee.lastname}</Col>
+                <Col>{employee.firstname}</Col>
+                <Col>{employee.patronymic}</Col>
+            </Row>
         )                
 
 }

@@ -1,7 +1,7 @@
 import { Row } from "react-bootstrap";
 
 import { useQuery } from "react-query";
-import { Catalog } from "../../components/catalog/Catalog";
+import { Catalog } from "../../components/Catalog";
 import { catalogItemData } from "../../components/data/CatalogItemData";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { DrugMovementCard } from "../../components/drugs/drugMovements/DrugMovementCard";
@@ -10,44 +10,43 @@ import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/Crea
 import { IDrugMovement } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
 
-
 interface DrugReceiptsData {
-    data?: IDrugMovement[];
-    isLoading: boolean;
-    error?: Error | null;
+  data?: IDrugMovement[];
+  isLoading: boolean;
+  error?: Error | null;
 }
 
-
 export function DrugReceipts() {
+  const url = "/api/drugs/receipts";
 
-    const url = "/api/drugs/receipts"
-    
-    const { data, isLoading, error }: DrugReceiptsData = useQuery(['drugReceipts'], () => AppService.getAll(url),
-        {
-            select: ({data}) => data?.drug_movements
-        }
-    )
+  const { data, isLoading, error }: DrugReceiptsData = useQuery(
+    ["drugReceipts"],
+    () => AppService.getAll(url),
+    {
+      select: ({ data }) => data?.drug_movements,
+    }
+  );
 
-    if(isLoading || !data) return <p>Загрузка ...</p>;
-                           
-    return (
-        <Catalog title="Поступление биопрепаратов">
+  if (isLoading || !data) return <p>Загрузка ...</p>;
 
-            <CreateItem btnTitle="Добавить поступление препарата">
-                <CreateDrugReceiptForm/>
-            </CreateItem>
-          
+  return (
+    <Catalog title="Поступление биопрепаратов">
+      <CreateItem btnTitle="Добавить поступление препарата">
+        <CreateDrugReceiptForm />
+      </CreateItem>
 
-            <Row xs={1} md={3} lg={3}>
-                {data.length ? data.map(drugMovement => (
-                    <DrugMovementCard key={drugMovement.id} drugMovement={drugMovement}/>
-                )):
-                    catalogItemData.map(item => (  
-                    <CatalogItem key={item.id} {...item} /> 
-                ))}
-            </Row>
-                
-        </Catalog>
-    )
-      
+      <Row xs={1} md={3} lg={3}>
+        {data.length
+          ? data.map((drugMovement) => (
+              <DrugMovementCard
+                key={drugMovement.id}
+                drugMovement={drugMovement}
+              />
+            ))
+          : catalogItemData.map((item) => (
+              <CatalogItem key={item.id} {...item} />
+            ))}
+      </Row>
+    </Catalog>
+  );
 }

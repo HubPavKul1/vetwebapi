@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { AppService } from "../../../app.service";
+import { Col, Row } from "react-bootstrap";
 
 interface CompanyAnimalProps {
     animal: IAnimal;
@@ -31,17 +32,18 @@ export function CompanyAnimal({animal, company_id}: CompanyAnimalProps) {
         mutate()
     }
 
+    const date_of_birth = AppService.convertDateString(animal.date_of_birth).shortDate
  
     return(
-            <tr key={animal.id}>
-                <td>{animal.species}</td>
-                <td>{animal.gender}</td>
-                <td>{animal.date_of_birth}</td>
-                <td>{animal.nickname}</td>
-                <td>{animal.identification}</td>
-                <td><BsPencilSquare className="edit-icon"/></td>
-                <td><BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal}/></td>
-            </tr>
+            <Row key={animal.id}>
+                <Col>{animal.species}</Col>
+                <Col>{animal.gender}</Col>
+                <Col>{date_of_birth}</Col>
+                <Col>{animal.nickname}</Col>
+                <Col>{animal.identification}</Col>
+                <Col><BsPencilSquare className="edit-icon"/></Col>
+                <Col><BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal}/></Col>
+            </Row>
         )                
 
 }

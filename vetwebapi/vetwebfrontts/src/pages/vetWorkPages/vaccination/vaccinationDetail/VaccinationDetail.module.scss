@@ -32,6 +32,12 @@
 }
 
 
+.companyWrap {
+    margin-bottom: 30px;
+    border-bottom: 2px solid grey;
+}
+
+
 .pdfButtons {
     padding: 5px;
     display: flex;
@@ -49,6 +55,7 @@
 
 .drugWrap {
     h5 {
+        margin-bottom: 20px;
         text-align: center;
     }
 }

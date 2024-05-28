@@ -1,108 +1,109 @@
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form"
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { TypesOfFeedingSelect } from "./TypeOfFeedingSelect";
 import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
-import { CustomButton } from "../../button/CustomButton";
+import { CustomButton } from "../../CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
-import { fieldRequiredMessage, maxLenErrorMessage, minLenErrorMessage } from "../../ErrorMessages";
+import {
+  fieldRequiredMessage,
+  maxLenErrorMessage,
+  minLenErrorMessage,
+} from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { AppService } from "../../../app.service";
 
-
-
 export function AddAnimalForm() {
+  const { id } = useParams();
+  const url = `/api/companies/${id}/animals/`;
 
-    const {id} = useParams()
-    const url = `/api/companies/${id}/animals/`
-
-    const inputItems: FormInputProps<IAnimalCreate>[] = [
-        {fieldName: "date_of_birth", id: "date_of_birth", type: "date"},
-        {fieldName: "nickname", placeholder: "Введите кличку животного *", type: "text"},
-        {fieldName: "identification", placeholder: "Введите номер микрочипа *", type: "text"},
-      ]
-
-
-    const methods = useForm<IAnimalCreate>({
-        mode: "onChange",
-    })
-
-    const { register, reset, handleSubmit, formState: { errors } } = methods
-    const queryClient = useQueryClient()
-
-    const { mutate } = useMutation(["create animal"], {
-        mutationFn: (data: IAnimalCreate) => AppService.createItem(url, data),
-        onSuccess: () => {
-            alert("Животное успешно добавлено!")
-            queryClient.invalidateQueries(["company", id])
-            reset()
-        }
+  const inputItems: FormInputProps<IAnimalCreate>[] = [
+    { fieldName: "date_of_birth", id: "date_of_birth", type: "date" },
+    {
+      fieldName: "nickname",
+      placeholder: "Введите кличку животного *",
+      type: "text",
     },
-    )
+    {
+      fieldName: "identification",
+      placeholder: "Введите номер микрочипа *",
+      type: "text",
+    },
+  ];
 
-    const createAnimal: SubmitHandler<IAnimalCreate> = data => {
-        mutate(data)
+  const methods = useForm<IAnimalCreate>({
+    mode: "onChange",
+  });
 
-    }
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+  const queryClient = useQueryClient();
 
+  const { mutate } = useMutation(["create animal"], {
+    mutationFn: (data: IAnimalCreate) => AppService.createItem(url, data),
+    onSuccess: () => {
+      alert("Животное успешно добавлено!");
+      queryClient.invalidateQueries(["company", id]);
+      reset();
+    },
+  });
 
-    return (
-        <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(createAnimal)}>
-                <div className="form-group">
-                    <label>
-                        Выберите Тип Кормления *
-                    </label>
-                    <TypesOfFeedingSelect />
-                </div>
-                <div className="form-group">
-                    <label>
-                        Выберите Тип Использования *
-                    </label>
-                    <UsageTypesSelect />
-                </div>
+  const createAnimal: SubmitHandler<IAnimalCreate> = (data) => {
+    mutate(data);
+  };
 
-                    <label htmlFor="date_of_birth" className="form-group">
-                        Дата рождения *
-                    </label>
-                    {
-                        inputItems.map(item =>(
-                            <Input key={item.fieldName}
-                                className="form-control"
-                                id={item.id}
-                                register={register}
-                                rules={{
-                                    required: fieldRequiredMessage, 
-                                    maxLength: {
-                                        value: 50,
-                                        message: maxLenErrorMessage+" 50 символов!"
-                                        }, 
-                                    minLength: {
-                                        value: 3,
-                                        message: minLenErrorMessage+" 3 символа!"
-                                        },   
-                                }}
-                                fieldName={item.fieldName}
-                                type={item.type}
-                                errors={errors}
-                                placeholder={item.placeholder}
-                            />
-                        ))
-                    }
-                
-                <div className="form-group">
-                    <CustomButton
-                        className="btn-submit"
-                        disabled={false}
-                        title="Зарегистрировать"
-                    />
-                </div>
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(createAnimal)}>
+        <div className="form-group">
+          <label>Выберите Тип Кормления *</label>
+          <TypesOfFeedingSelect />
+        </div>
+        <div className="form-group">
+          <label>Выберите Тип Использования *</label>
+          <UsageTypesSelect />
+        </div>
 
-            </form>
-            
-        </FormProvider>
+        <label htmlFor="date_of_birth" className="form-group">
+          Дата рождения *
+        </label>
+        {inputItems.map((item) => (
+          <Input
+            key={item.fieldName}
+            className="form-control"
+            id={item.id}
+            register={register}
+            rules={{
+              required: fieldRequiredMessage,
+              maxLength: {
+                value: 50,
+                message: maxLenErrorMessage + " 50 символов!",
+              },
+              minLength: {
+                value: 3,
+                message: minLenErrorMessage + " 3 символа!",
+              },
+            }}
+            fieldName={item.fieldName}
+            type={item.type}
+            errors={errors}
+            placeholder={item.placeholder}
+          />
+        ))}
 
-
-    )
+        <div className="form-group">
+          <CustomButton
+            className="btn-submit"
+            disabled={false}
+            title="Зарегистрировать"
+          />
+        </div>
+      </form>
+    </FormProvider>
+  );
 }

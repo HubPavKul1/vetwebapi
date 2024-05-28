@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { IAnimal } from "../../../interfaces/AnimalInterfaces";
 import { IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
-import { CustomButton } from "../../button/CustomButton";
+import { CustomButton } from "../../CustomButton";
 import { AppService } from "../../../app.service";
 import { useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -20,10 +20,6 @@ export function AnimalFormItem({
   setAnimalsData,
   animalsData,
 }: AnimalFormItemProps) {
-  const { id } = useParams();
-
-  const url = `/api/vetwork/${id}/animals/`;
-
   const {
     register,
     reset,
@@ -33,25 +29,24 @@ export function AnimalFormItem({
     mode: "onChange",
   });
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["add animals"], {
-    mutationFn: (data: IAnimalInVetworkIn) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Животное успешно добавлено!");
-      queryClient.invalidateQueries(["vaccination", id]);
-      reset();
-    },
-  });
+  // const { mutate } = useMutation(["add animals"], {
+  //   mutationFn: (data: IAnimalInVetworkIn) => AppService.createItem(url, data),
+  //   onSuccess: () => {
+  //     alert("Животное успешно добавлено!");
+  //     queryClient.invalidateQueries(["vaccination", id]);
+  //     reset();
+  //   },
+  // });
 
-  const addAnimal: SubmitHandler<IAnimalInVetworkIn> = (data) => {
-    console.log("DATA>>>", data);
+  const addAnimalData: SubmitHandler<IAnimalInVetworkIn> = (data) => {
     setAnimalsData([...animalsData, data]);
     // mutate(data)
   };
 
   return (
-    <form onSubmit={handleSubmit(addAnimal)}>
+    <form onSubmit={handleSubmit(addAnimalData)}>
       <Row className={styles.formWrap}>
         <Col>{animal.species}</Col>
         <Col>
