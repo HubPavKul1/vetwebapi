@@ -12,8 +12,8 @@ from .schemas import CompanyIn
 # Create Data
 async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     new_company = Company(**body.model_dump())
-    new_company.full_name = new_company.full_name.capitalize()
-    new_company.short_name = new_company.short_name.capitalize()
+    new_company.full_name = new_company.full_name.upper()
+    new_company.short_name = new_company.short_name.upper()
     session.add(new_company)
     await session.commit()
     await session.refresh(new_company)
