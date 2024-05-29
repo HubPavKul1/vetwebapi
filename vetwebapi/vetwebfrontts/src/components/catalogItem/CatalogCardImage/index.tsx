@@ -2,21 +2,21 @@
 import { FileUpload } from "../../fileUpload/FileUpload";
 import { Link } from "react-router-dom";
 
-import styles from "./CatalogCardHeader.module.scss";
+import styles from "./CatalogCardImage.module.scss";
 
 
-interface CatalogItemHeaderProps {
+interface CatalogCardImageProps {
     url: string;
     imgSrc?: string;
-    cardTitle?: string;
+    cardTitle: string;
     fileUploadUrl?: string
 }
 
-export function CatalogItemHeader({...props}: CatalogItemHeaderProps) {
+export function CatalogCardImage({...props}: CatalogCardImageProps) {
   return (
     <>
       {props.imgSrc ? (
-        <div className={styles.cardImageWrap}>
+        // <div className={styles.cardImageWrap}>
           <Link className={styles.cardImageLink} to={props.url}>
             <img
               className={styles.cardImage}
@@ -24,9 +24,9 @@ export function CatalogItemHeader({...props}: CatalogItemHeaderProps) {
               alt={props.cardTitle}
             />
           </Link>
-        </div>
+        // </div>
       ) : (
-        <div className={styles.cardImageWrap}>
+        <div >
           {props.fileUploadUrl && (
             <FileUpload
               uploadUrl={props.fileUploadUrl}

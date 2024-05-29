@@ -30,12 +30,17 @@ export function DrugReceipts() {
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog title="Поступление биопрепаратов">
-      <CreateItem btnTitle="Добавить поступление препарата">
-        <CreateDrugReceiptForm />
-      </CreateItem>
+    <Catalog
+      title="Поступление биопрепаратов"
+      btnTitle="Добавить поступление препарата"
+      items={data}
+      cardsInRow={4}
+      imgSrc="drugsCard.jpg"
+      invQueryName="drugReceipts"
+    >
+      <CreateDrugReceiptForm />
 
-      <Row xs={1} md={3} lg={3}>
+      {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((drugMovement) => (
               <DrugMovementCard
@@ -46,7 +51,7 @@ export function DrugReceipts() {
           : catalogItemData.map((item) => (
               <CatalogItem key={item.id} {...item} />
             ))}
-      </Row>
+      </Row> */}
     </Catalog>
   );
 }

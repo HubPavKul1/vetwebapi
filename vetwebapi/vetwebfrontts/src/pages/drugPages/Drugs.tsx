@@ -30,18 +30,22 @@ export function Drugs() {
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog title="Справочник биопрепаратов">
-      <CreateItem btnTitle="Добавить препарат">
-        <CreateDrugForm />
-      </CreateItem>
+    <Catalog
+      title="Справочник биопрепаратов"
+      btnTitle="Добавить препарат"
+      items={data}
+      invQueryName="drugs"
+      cardsInRow={3}
+    >
+      <CreateDrugForm />
 
-      <Row xs={1} md={3} lg={3}>
+      {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((drug) => <DrugCard key={drug.id} drug={drug} />)
           : catalogItemData.map((item) => (
               <CatalogItem key={item.id} {...item} />
             ))}
-      </Row>
+      </Row> */}
     </Catalog>
   );
 }

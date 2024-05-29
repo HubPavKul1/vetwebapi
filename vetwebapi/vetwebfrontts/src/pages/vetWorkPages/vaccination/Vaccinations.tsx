@@ -32,12 +32,12 @@ export function Vaccinations() {
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog title="Вакцинация">
-      <CreateItem btnTitle="Добавить вакцинацию">
+    <Catalog title="Вакцинация" btnTitle="Добавить вакцинацию" items={data}>
+      {/* <CreateItem btnTitle="Добавить вакцинацию"> */}
         <VaccinationCreateForm />
-      </CreateItem>
+      {/* </CreateItem> */}
 
-      <Row xs={1} md={3} lg={3}>
+      {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((vetWork) => (
               <VetWorkCard key={vetWork.id} vetWork={vetWork} />
@@ -45,7 +45,7 @@ export function Vaccinations() {
           : catalogItemData.map((item) => (
               <CatalogItem key={item.id} {...item} />
             ))}
-      </Row>
+      </Row> */}
     </Catalog>
   );
 }

@@ -35,15 +35,7 @@
 
 
 
-.cardTitle {
-	@extend %cardTitle;
-	cursor: pointer;
-	@include transition(color);
 
-	&:hover {
-		color: blueviolet;
-	}
-}
 
 .cardText {
 	@extend %textBase;

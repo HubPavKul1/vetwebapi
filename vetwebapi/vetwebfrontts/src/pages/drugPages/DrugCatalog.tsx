@@ -30,18 +30,18 @@ export function DrugCatalog() {
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog title="Каталог биопрепаратов">
-      <CreateItem btnTitle="Добавить препарат">
+    <Catalog title="Каталог биопрепаратов" btnTitle="Добавить препарат" items={data}>
+     
         <CreateCatalogDrugForm />
-      </CreateItem>
+    
 
-      <Row xs={1} md={3} lg={3}>
+      {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((drug) => <CatalogDrugCard key={drug.id} item={drug} />)
           : catalogItemData.map((item) => (
               <CatalogItem key={item.id} {...item} />
             ))}
-      </Row>
+      </Row> */}
     </Catalog>
   );
 }
