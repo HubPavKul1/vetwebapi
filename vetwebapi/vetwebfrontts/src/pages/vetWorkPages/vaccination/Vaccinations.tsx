@@ -32,10 +32,15 @@ export function Vaccinations() {
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog title="Вакцинация" btnTitle="Добавить вакцинацию" items={data}>
-      {/* <CreateItem btnTitle="Добавить вакцинацию"> */}
-        <VaccinationCreateForm />
-      {/* </CreateItem> */}
+    <Catalog
+      title="Вакцинация"
+      btnTitle="Добавить вакцинацию"
+      items={data}
+      invQueryName="vaccinations"
+      createForm={<VaccinationCreateForm />}
+      cardsInRow={4}
+    >
+     
 
       {/* <Row xs={1} md={3} lg={3}>
         {data.length

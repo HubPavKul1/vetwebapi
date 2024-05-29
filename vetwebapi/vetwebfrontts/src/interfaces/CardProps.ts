@@ -11,9 +11,10 @@ export interface ICardProps {
     buttonVariant?: string;
     onClick?: MouseEventHandler;
     children?: React.ReactElement | React.ReactNode;
+    employee: string;
     hasContacts?: boolean;
     phone?: string;
     address?: string;
-    queryKey: string;
+    invQueryName: string;
     phone2?: string;
 }

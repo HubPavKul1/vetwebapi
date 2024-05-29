@@ -8,46 +8,48 @@ import { CatalogCardImage } from "./CatalogCardImage";
 import { CatalogCardTitle } from "./CatalogCardTitle";
 import { useMutation, useQueryClient } from "react-query";
 import { AppService } from "../../app.service";
+import { CatalogCardBody } from "./CatalogICardBody";
 
+export function CatalogItem({ ...props }: ICardProps) {
+  const queryClient = useQueryClient();
+  // const url = `/api/companies/${company.id}`
 
-export function CatalogItem({ ...props }) {
-
-  const queryClient = useQueryClient()
-    // const url = `/api/companies/${company.id}`
-
-
-    const { mutate } = useMutation(["delete item"], {
-        mutationFn: () => AppService.deleteItem(url),
-        onSuccess: () => {
-            alert(`${props.cardTitle} успешно удалено!`)
-            queryClient.invalidateQueries([`${props.queryKey}`])
-        }
+  const { mutate } = useMutation(["delete item"], {
+    mutationFn: () => AppService.deleteItem(props.url),
+    onSuccess: () => {
+      alert(`${props.cardTitle} успешно удалено!`);
+      queryClient.invalidateQueries([`${props.invQueryName}`]);
     },
-    )
+  });
 
-    const deleteCompany = () => {
-        mutate()
-    }
+  const deleteCompany = () => {
+    mutate();
+  };
 
-  let url = "";
-  props.url ? (url = props.url) : (url = "/");
   return (
     <Col>
       <Container className={styles.catalogItem}>
         <Col sm={3}>
           <CatalogCardImage
-            url={url}
+            url={props.url}
             imgSrc={props.imgSrc}
             cardTitle={props.cardTitle}
             fileUploadUrl={props.fileUploadUrl}
           />
         </Col>
-        <Col sm={9}>
+        <Col sm={9} className={styles.cardContent}>
           <Row>
-           <CatalogCardTitle url={props.url} cardTitle={props.cardTitle} />
+            <CatalogCardTitle url={props.url} cardTitle={props.cardTitle} />
           </Row>
           <Row>
-            
+            {props.hasContacts && (
+              <CatalogCardBody
+                address={props.address}
+                employee={props.employee}
+                phone={props.phone}
+                phone2={props.phone2}
+              />
+            )}
           </Row>
         </Col>
       </Container>

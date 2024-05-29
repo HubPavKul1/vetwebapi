@@ -36,8 +36,9 @@ export function Drugs() {
       items={data}
       invQueryName="drugs"
       cardsInRow={3}
+      createForm={<CreateDrugForm />}
     >
-      <CreateDrugForm />
+      
 
       {/* <Row xs={1} md={3} lg={3}>
         {data.length

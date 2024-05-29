@@ -37,8 +37,9 @@ export function DrugReceipts() {
       cardsInRow={4}
       imgSrc="drugsCard.jpg"
       invQueryName="drugReceipts"
+      createForm={<CreateDrugReceiptForm />}
     >
-      <CreateDrugReceiptForm />
+      
 
       {/* <Row xs={1} md={3} lg={3}>
         {data.length

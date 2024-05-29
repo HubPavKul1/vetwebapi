@@ -3,7 +3,8 @@ import { Catalog } from "../../components/Catalog";
 import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
 
 import { AppService } from "../../app.service";
-import { ICompany } from "../../interfaces/CompanyInterfaces";
+import { ICompany, ICompanyCard } from "../../interfaces/CompanyInterfaces";
+import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 
 interface CompaniesProps {
   data?: ICompany[];
@@ -23,25 +24,38 @@ export function Companies() {
   if (!data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog 
-    title="Предприятия" 
-    btnTitle="Добавить предприятие" 
-    items={data}
-    cardsInRow={3}
-    imgSrc="animals.jpg"
-    invQueryName="companies"
+    <Catalog
+      title="Предприятия"
+      btnTitle="Добавить предприятие"
+      cardsInRow={3}
+      createForm={<CreateCompanyForm />}
     >
-      <CreateCompanyForm />
-
-      {/* <Row xs={1} md={3} lg={3}>
-        {data.length
-          ? data.map((company) => (
-              <CompanyCard key={company.id} company={company} />
-            ))
-          : catalogItemData.map((item) => (
-              <CatalogItem key={item.id} {...item} />
-            ))}
-      </Row> */}
+      {data.length ? (
+        data.map((company: ICompanyCard) => (
+          <CatalogItem
+            key={company.id}
+            url={`/api/companies/${company.id}`}
+            imgSrc="animals.jpg"
+            invQueryName="companies"
+            cardTitle={company.short_name}
+            id={company.id}
+            cardText=""
+            hasContacts
+            address={
+              company.address &&
+              `${company.address?.street}, ${company.address?.house_number}`
+            }
+            phone={company.address && `${company.address?.phone_number1}`}
+            phone2={company.address && `${company.address?.phone_number2}`}
+            employee={
+              company.employee &&
+              `${company.employee?.position} ${company.employee?.fullname}`
+            }
+          />
+        ))
+      ) : (
+        <h5>Предприятия отсутствуют</h5>
+      )}
     </Catalog>
   );
 }

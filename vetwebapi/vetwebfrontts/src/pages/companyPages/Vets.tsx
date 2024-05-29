@@ -30,8 +30,9 @@ export function Vets() {
       cardsInRow={3}
       imgSrc="animals.jpg"
       invQueryName="vets"
+      createForm={<CreateCompanyForm />}
     >
-      <CreateCompanyForm />
+      
 
       {/* <Row xs={1} md={3} lg={3}>
         {data.length

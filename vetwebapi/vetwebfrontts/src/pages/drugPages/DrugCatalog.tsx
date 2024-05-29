@@ -30,11 +30,14 @@ export function DrugCatalog() {
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
-    <Catalog title="Каталог биопрепаратов" btnTitle="Добавить препарат" items={data}>
-     
-        <CreateCatalogDrugForm />
-    
-
+    <Catalog
+      title="Каталог биопрепаратов"
+      btnTitle="Добавить препарат"
+      items={data}
+      createForm={<CreateCatalogDrugForm />}
+      cardsInRow={3}
+      invQueryName="drugCatalog"
+    >
       {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((drug) => <CatalogDrugCard key={drug.id} item={drug} />)
