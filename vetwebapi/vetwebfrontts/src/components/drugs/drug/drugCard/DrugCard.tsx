@@ -38,14 +38,12 @@ export function DrugCard({drug}: DrugCardProps) {
                 id={drug.id} 
                 cardTitle={drug.name} 
                 imgSrc={drug.image}
-                onClick={deleteDrug}  
                 fileUploadUrl={fileUploadUrl} 
                 url={`/drugs/${drug.id}/`}
             >
 
                 <DrugCardBody
                     drugManufacturer={drug.drug_manufacturer}
-                    fileUploadUrl={fileUploadUrl}
                     drugInstr={drug.instruction}
                 />
                 

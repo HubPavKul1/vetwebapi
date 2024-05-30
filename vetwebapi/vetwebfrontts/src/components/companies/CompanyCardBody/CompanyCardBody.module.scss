@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    h6 {
+        font-size: 12px;
+    }
 
 }
 
@@ -9,13 +13,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
+    h6 {
+        font-size: 12px;
+    }
+
 }
 
 .cardPhone {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: start;
 
     > span {
         font-size: .8rem;

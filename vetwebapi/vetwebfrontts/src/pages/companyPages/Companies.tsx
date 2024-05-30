@@ -5,6 +5,7 @@ import { CreateCompanyForm } from "../../components/companies/createCompany/Crea
 import { AppService } from "../../app.service";
 import { ICompany, ICompanyCard } from "../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
+import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
 
 interface CompaniesProps {
   data?: ICompany[];
@@ -34,24 +35,26 @@ export function Companies() {
         data.map((company: ICompanyCard) => (
           <CatalogItem
             key={company.id}
-            url={`/api/companies/${company.id}`}
+            delUrl={`/api/companies/${company.id}`}
+            url={`/companies/${company.id}`}
             imgSrc="animals.jpg"
             invQueryName="companies"
             cardTitle={company.short_name}
             id={company.id}
-            cardText=""
-            hasContacts
-            address={
-              company.address &&
-              `${company.address?.street}, ${company.address?.house_number}`
-            }
-            phone={company.address && `${company.address?.phone_number1}`}
-            phone2={company.address && `${company.address?.phone_number2}`}
-            employee={
-              company.employee &&
-              `${company.employee?.position} ${company.employee?.fullname}`
-            }
-          />
+          >
+            <CompanyCardBody
+              address={
+                company.address &&
+                `${company.address?.street}, ${company.address?.house_number}`
+              }
+              phone={company.address && `${company.address?.phone_number1}`}
+              phone2={company.address && `${company.address?.phone_number2}`}
+              employee={
+                company.employee &&
+                `${company.employee?.position} ${company.employee?.fullname}`
+              }
+            />
+          </CatalogItem>
         ))
       ) : (
         <h5>Предприятия отсутствуют</h5>

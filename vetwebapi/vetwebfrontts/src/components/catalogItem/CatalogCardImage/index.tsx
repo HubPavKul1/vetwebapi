@@ -16,7 +16,6 @@ export function CatalogCardImage({...props}: CatalogCardImageProps) {
   return (
     <>
       {props.imgSrc ? (
-        // <div className={styles.cardImageWrap}>
           <Link className={styles.cardImageLink} to={props.url}>
             <img
               className={styles.cardImage}
@@ -24,7 +23,6 @@ export function CatalogCardImage({...props}: CatalogCardImageProps) {
               alt={props.cardTitle}
             />
           </Link>
-        // </div>
       ) : (
         <div >
           {props.fileUploadUrl && (
@@ -33,7 +31,7 @@ export function CatalogCardImage({...props}: CatalogCardImageProps) {
               accept="image/*"
               mutationName="drugImage upload"
               invQueryName="drugs"
-              imgSrc="/emptyImage.jpg"
+              iconSrc="/emptyImage.jpg"
             />
           )}
         </div>

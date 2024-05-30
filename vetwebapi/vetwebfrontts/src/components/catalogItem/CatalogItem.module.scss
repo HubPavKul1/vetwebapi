@@ -1,70 +1,58 @@
 @import "../../assets/sass/mixins";
 @import "../../assets/sass/templates";
 
-
 .catalogItem {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid grey;
+  box-shadow: 3px 3px grey;
+  border-radius: 5px;
+  height: 250px;
+  @include transition(transform);
+
+  > a {
+    max-width: 27%;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px grey;
+    @include transition(transform);
+  }
+
+  .cardTitle {
     display: flex;
-	padding: 10px;
-	margin-bottom: 20px;
-	border: 1px solid grey;
-	box-shadow: 3px 3px grey;
-	border-radius: 5px;
-	height: 200px;
-	@include transition(transform);
+    align-items: center;
+    height: 100px;
+  }
+
+  .cardBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 	
+  }
 
-	>a {
-		max-width: 27%;;
-	}
-
-	&:hover {
-		transform: scale(1.05);
-		box-shadow: 5px 5px grey;
-		@include transition(transform);
-	}
-
-}
-
-.card {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
-}
-
-
-.cardContent {
-	padding: 5px 20px;
-	text-align: center;
-}
-
-
-
-.cardText {
-	@extend %textBase;
-}
-
-
-
-
-
-.cardBody {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.services {
+  .services {
 	display: flex;
 	justify-content: end;
-	align-items: end;
-	margin-bottom: 10px;
+	align-items: center;
+	height: 50px;
+	
+	.fileUpload {
+		margin: 0;
+		margin-left: auto;
+		cursor: pointer;
+		@include transition(transform);
+	
+		&:hover {
+			@include transform;
+		}
+	}
+  }
 }
 
-.fileUpload {
-	display: flex;
-	margin-right: 50px;
-	width: 30px;
-	height: 30px;
 
-}
+
+
+

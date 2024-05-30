@@ -9,6 +9,7 @@ import { CreateItem } from "../../components/createItem/CreateItem";
 import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
 import { IDrugCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
+import { DrugCardBody } from "../../components/drugs/drug/drugCard/drugCardBody/DrugCardBody";
 
 interface DrugsData {
   data?: IDrugCard[];
@@ -33,20 +34,34 @@ export function Drugs() {
     <Catalog
       title="Справочник биопрепаратов"
       btnTitle="Добавить препарат"
-      items={data}
-      invQueryName="drugs"
       cardsInRow={3}
       createForm={<CreateDrugForm />}
     >
-      
-
-      {/* <Row xs={1} md={3} lg={3}>
-        {data.length
-          ? data.map((drug) => <DrugCard key={drug.id} drug={drug} />)
-          : catalogItemData.map((item) => (
-              <CatalogItem key={item.id} {...item} />
-            ))}
-      </Row> */}
+      {data.length ? (
+        data.map((drug) => (
+          <CatalogItem
+            key={drug.id}
+            delUrl={`/api/drugs/${drug.id}`}
+            url={`/drugs/${drug.id}`}
+            imgSrc={drug.image}
+            invQueryName="drugs"
+            cardTitle={drug.name}
+            id={drug.id}
+            hasFileUploader
+            accept=".pdf"
+            mutationName="drugInstr upload"
+            fileUploadUrl={`/api/drugs/${drug.id}/upload/`}
+            iconSrc="/pdf.jpg"
+          >
+            <DrugCardBody
+              drugManufacturer={drug.drug_manufacturer}
+              drugInstr={drug.instruction}
+            />
+          </CatalogItem>
+        ))
+      ) : (
+        <h5>Биопрепараты отсутствуют</h5>
+      )}
     </Catalog>
   );
 }

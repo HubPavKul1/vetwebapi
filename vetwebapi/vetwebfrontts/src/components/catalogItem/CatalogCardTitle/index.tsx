@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-import styles from "./CatalogGardTitle.module.scss"
+import styles from "./CatalogCardTitle.module.scss"
 
 interface CatalogCardTitleProps {
     url: string;

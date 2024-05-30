@@ -11,10 +11,10 @@ interface FileUploadProps {
     uploadUrl: string;
     mutationName: string;
     invQueryName: string;
-    imgSrc: string;
+    iconSrc: string;
 }
 
-export function FileUpload({uploadUrl, accept, mutationName, invQueryName, imgSrc}: FileUploadProps) {
+export function FileUpload({uploadUrl, accept, mutationName, invQueryName, iconSrc}: FileUploadProps) {
     const id = useId()
     
     const { reset } = useForm<FileList>();
@@ -58,7 +58,7 @@ export function FileUpload({uploadUrl, accept, mutationName, invQueryName, imgSr
                 accept={accept}
                 onChange={selectFile}
             />
-            <img src={imgSrc}/>
+            <img src={iconSrc}/>
  
         </label>
     )
