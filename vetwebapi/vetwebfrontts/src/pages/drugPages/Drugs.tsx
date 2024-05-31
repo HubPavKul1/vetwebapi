@@ -9,7 +9,7 @@ import { CreateItem } from "../../components/CreateItem";
 import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
 import { IDrugCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
-import { DrugCardBody } from "../../components/drugs/drug/drugCard/drugCardBody/DrugCardBody";
+import { DrugCardBody } from "../../components/drugs/drug/DrugCardBody";
 
 interface DrugsData {
   data?: IDrugCard[];

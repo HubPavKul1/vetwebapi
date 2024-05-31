@@ -2,7 +2,6 @@ import { Container, Row } from "react-bootstrap";
 
 import styles from "./Catalog.module.scss";
 import { CreateItem } from "../CreateItem";
-import { CatalogItem } from "../catalogItem/CatalogItem";
 
 interface CatalogProps {
   title: string;

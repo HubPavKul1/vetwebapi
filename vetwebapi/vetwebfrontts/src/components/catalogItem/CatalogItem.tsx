@@ -1,5 +1,4 @@
 import { ICardProps } from "../../interfaces/CardProps";
-import { Link } from "react-router-dom";
 
 import styles from "./CatalogItem.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
@@ -48,9 +47,11 @@ export function CatalogItem({ ...props }: ICardProps) {
         </Container>
         <Container className={styles.services}>
           <Row>
-            <Col sm={7}></Col>
-            <Col className={styles.fileUpload}>
-              <Container>
+            <Col sm={7}>
+              {props.hasFileUploader && <p>Загрузите инструкцию</p>}
+            </Col>
+            <Col>
+              <Container className={styles.fileUpload}>
                 {props.hasFileUploader && (
                   <FileUpload
                     uploadUrl={props.fileUploadUrl}

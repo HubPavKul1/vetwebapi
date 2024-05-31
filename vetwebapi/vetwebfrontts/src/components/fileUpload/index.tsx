@@ -7,11 +7,11 @@ import styles from "./FileUpload.module.scss";
 
 
 interface FileUploadProps {
-    accept: string;
-    uploadUrl: string;
-    mutationName: string;
-    invQueryName: string;
-    iconSrc: string;
+    accept?: string;
+    uploadUrl?: string;
+    mutationName?: string;
+    invQueryName?: string;
+    iconSrc?: string;
 }
 
 export function FileUpload({uploadUrl, accept, mutationName, invQueryName, iconSrc}: FileUploadProps) {

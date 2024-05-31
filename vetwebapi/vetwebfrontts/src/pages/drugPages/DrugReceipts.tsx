@@ -1,11 +1,7 @@
-import { Row } from "react-bootstrap";
 
 import { useQuery } from "react-query";
 import { Catalog } from "../../components/Catalog";
-import { catalogItemData } from "../../components/data/CatalogItemData";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { DrugMovementCard } from "../../components/drugs/drugMovements/DrugMovementCard";
-import { CreateItem } from "../../components/CreateItem";
 import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/CreateDrugReceiptForm";
 import { IDrugMovement } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
@@ -33,24 +29,25 @@ export function DrugReceipts() {
     <Catalog
       title="Поступление биопрепаратов"
       btnTitle="Добавить поступление препарата"
-      items={data}
       cardsInRow={4}
-      imgSrc="drugsCard.jpg"
-      invQueryName="drugReceipts"
       createForm={<CreateDrugReceiptForm />}
     >
-      {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((drugMovement) => (
-              <DrugMovementCard
+              <CatalogItem
                 key={drugMovement.id}
-                drugMovement={drugMovement}
+                delUrl={`/api/drugs/receipts/${drugMovement.id}`}
+                url={`/drugs/receipts/${drugMovement.id}`}
+                imgSrc="drugsCard.jpg"
+                invQueryName="drugReceipts"
+                cardTitle={AppService.convertDateString(drugMovement.operation_date).fullDate}
+                id={drugMovement.id}  
               />
             ))
-          : catalogItemData.map((item) => (
-              <CatalogItem key={item.id} {...item} />
-            ))}
-      </Row> */}
+          : (
+            <h5>Поступления отсутствуют</h5>
+          )}
+      
     </Catalog>
   );
 }

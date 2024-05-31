@@ -1,14 +1,10 @@
-import { Row } from "react-bootstrap";
-
 import { useQuery } from "react-query";
 import { Catalog } from "../../components/Catalog";
-import { catalogItemData } from "../../components/data/CatalogItemData";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { CreateItem } from "../../components/CreateItem";
 import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
-import { CatalogDrugCard } from "../../components/drugs/drug/catalogDrugCard/CatalogDrugCard";
 import { CreateCatalogDrugForm } from "../../components/drugs/drug/CreateCatalogDrugForm";
+import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogDrugCardBody";
 
 interface DrugCatalogData {
   data?: IDrugCatalogCard[];
@@ -33,18 +29,35 @@ export function DrugCatalog() {
     <Catalog
       title="Каталог биопрепаратов"
       btnTitle="Добавить препарат"
-      items={data}
       createForm={<CreateCatalogDrugForm />}
       cardsInRow={3}
-      invQueryName="drugCatalog"
+      
     >
-      {/* <Row xs={1} md={3} lg={3}>
+
         {data.length
-          ? data.map((drug) => <CatalogDrugCard key={drug.id} item={drug} />)
-          : catalogItemData.map((item) => (
-              <CatalogItem key={item.id} {...item} />
-            ))}
-      </Row> */}
+          ? data.map((drug) => 
+          <CatalogItem 
+            key={drug.id}
+            delUrl={`/api/drugs/catalog/${drug.id}`}
+            url={`/drugs/catalog/${drug.id}`}
+            imgSrc={!drug.image ? "drugsCard.jpg": drug.image}
+            invQueryName="drugCatalog"
+            cardTitle={drug.name}
+            id={drug.id}
+          >
+            <CatalogDrugCardBody
+              batch={drug.batch}
+              control={drug.control}
+              expiration_date={AppService.convertDateString(drug.expiration_date).shortDate}
+              production_date={AppService.convertDateString(drug.production_date).shortDate}
+              
+            />
+          </CatalogItem>
+        )
+          : (
+            <h5>Биопрепараты отсутствуют</h5>
+          )}
+
     </Catalog>
   );
 }
