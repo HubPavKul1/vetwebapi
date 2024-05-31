@@ -46,13 +46,13 @@ export function Vets() {
             <CompanyCardBody
               address={
                 company.address &&
-                `${company.address?.street}, ${company.address?.house_number}`
+                `${company.address.street}, ${company.address.house_number}`
               }
-              phone={company.address && `${company.address?.phone_number1}`}
-              phone2={company.address && `${company.address?.phone_number2}`}
+              phone={company.address && `${company.address.phone_number1}`}
+              phone2={company.address && `${company.address.phone_number2}`}
               employee={
                 company.employee &&
-                `${company.employee?.position} ${company.employee?.fullname}`
+                `${company.employee.position} ${company.employee.fullname}`
               }
             />
           </CatalogItem>

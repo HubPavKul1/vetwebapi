@@ -5,7 +5,7 @@ import { Catalog } from "../../components/Catalog";
 import { catalogItemData } from "../../components/data/CatalogItemData";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { DrugMovementCard } from "../../components/drugs/drugMovements/DrugMovementCard";
-import { CreateItem } from "../../components/createItem/CreateItem";
+import { CreateItem } from "../../components/CreateItem";
 import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/CreateDrugReceiptForm";
 import { IDrugMovement } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
@@ -39,8 +39,6 @@ export function DrugReceipts() {
       invQueryName="drugReceipts"
       createForm={<CreateDrugReceiptForm />}
     >
-      
-
       {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((drugMovement) => (

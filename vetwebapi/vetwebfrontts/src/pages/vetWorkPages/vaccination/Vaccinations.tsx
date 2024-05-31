@@ -5,7 +5,7 @@ import { Catalog } from "../../../components/Catalog";
 import { catalogItemData } from "../../../components/data/CatalogItemData";
 import { CatalogItem } from "../../../components/catalogItem/CatalogItem";
 
-import { CreateItem } from "../../../components/createItem/CreateItem";
+import { CreateItem } from "../../../components/CreateItem";
 import { CreateDrugReceiptForm } from "../../../components/drugs/drugMovements/CreateDrugReceiptForm";
 import { AppService } from "../../../app.service";
 import { IVetwork } from "../../../interfaces/VetWorkInterfaces";
@@ -31,26 +31,32 @@ export function Vaccinations() {
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
+ 
+
   return (
     <Catalog
       title="Вакцинация"
       btnTitle="Добавить вакцинацию"
-      items={data}
-      invQueryName="vaccinations"
       createForm={<VaccinationCreateForm />}
       cardsInRow={4}
     >
-     
-
-      {/* <Row xs={1} md={3} lg={3}>
         {data.length
           ? data.map((vetWork) => (
-              <VetWorkCard key={vetWork.id} vetWork={vetWork} />
+              <CatalogItem 
+                key={vetWork.id} 
+                delUrl={`/api/vetwork/${vetWork.id}`}
+                url={`/vetwork/${vetWork.id}`}
+                imgSrc="vetworkBg.jpg"
+                invQueryName="vaccinations"
+                cardTitle={AppService.convertDateString(vetWork.vetwork_date).fullDate}
+                id={vetWork.id}
+              >
+
+              </CatalogItem>
             ))
-          : catalogItemData.map((item) => (
-              <CatalogItem key={item.id} {...item} />
-            ))}
-      </Row> */}
+          : (
+            <h5>Мероприятия отсутствуют</h5>
+          )}
     </Catalog>
   );
 }

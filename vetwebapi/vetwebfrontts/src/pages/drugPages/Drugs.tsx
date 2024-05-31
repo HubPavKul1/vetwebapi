@@ -5,7 +5,7 @@ import { Catalog } from "../../components/Catalog";
 import { catalogItemData } from "../../components/data/CatalogItemData";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { DrugCard } from "../../components/drugs/drug/drugCard/DrugCard";
-import { CreateItem } from "../../components/createItem/CreateItem";
+import { CreateItem } from "../../components/CreateItem";
 import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
 import { IDrugCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
@@ -47,7 +47,7 @@ export function Drugs() {
             invQueryName="drugs"
             cardTitle={drug.name}
             id={drug.id}
-            hasFileUploader
+            hasFileUploader={!drug.instruction}
             accept=".pdf"
             mutationName="drugInstr upload"
             fileUploadUrl={`/api/drugs/${drug.id}/upload/`}

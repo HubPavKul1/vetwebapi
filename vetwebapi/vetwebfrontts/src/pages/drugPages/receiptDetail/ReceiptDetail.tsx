@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import styles from "./ReceiptDetail.module.scss";
 import { AppService } from "../../../app.service";
 import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
-import { CreateItem } from "../../../components/createItem/CreateItem";
+import { CreateItem } from "../../../components/CreateItem";
 import { AddDrugForm } from "../../../components/drugs/drugMovements/AddDrugForm";
 import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
 import { CustomButton } from "../../../components/CustomButton";

@@ -8,7 +8,7 @@ import { CatalogCardImage } from "./CatalogCardImage";
 import { CatalogCardTitle } from "./CatalogCardTitle";
 import { useMutation, useQueryClient } from "react-query";
 import { AppService } from "../../app.service";
-import { FileUpload } from "../fileUpload/FileUpload";
+import { FileUpload } from "../FileUpload";
 
 export function CatalogItem({ ...props }: ICardProps) {
   const queryClient = useQueryClient();
@@ -28,41 +28,45 @@ export function CatalogItem({ ...props }: ICardProps) {
   return (
     <Col>
       <Container className={styles.catalogItem}>
-        <Row className={styles.cardTitle}>
-          <Col sm={3}>
-            <CatalogCardImage
-              url={props.url}
-              imgSrc={props.imgSrc}
-              cardTitle={props.cardTitle}
-              fileUploadUrl={props.fileUploadUrl}
-            />
-          </Col>
-          <Col>
-            <CatalogCardTitle url={props.url} cardTitle={props.cardTitle} />
-          </Col>
-        </Row>
-
-        <Row className={styles.cardBody}>{props.children}</Row>
-        <Row className={styles.services}>
-          <Col sm={7}></Col>
-          <Col className={styles.fileUpload}>
-            <Container>
-              {props.hasFileUploader && (
-                <FileUpload
-                  uploadUrl={props.fileUploadUrl}
-                  accept={props.accept}
-                  mutationName={props.mutationName}
-                  invQueryName={props.invQueryName}
-                  iconSrc={props.iconSrc}
-                />
-              )}
-            </Container>
-            
-          </Col>
-          <Col>
-            <BsFillTrash3Fill className="delete-icon" onClick={deleteItem} />
-          </Col>
-        </Row>
+        <Container className={styles.cardTitle}>
+          <Row>
+            <Col sm={3}>
+              <CatalogCardImage
+                url={props.url}
+                imgSrc={props.imgSrc}
+                cardTitle={props.cardTitle}
+                fileUploadUrl={props.fileUploadUrl}
+              />
+            </Col>
+            <Col>
+              <CatalogCardTitle url={props.url} cardTitle={props.cardTitle} />
+            </Col>
+          </Row>
+        </Container>
+        <Container className={styles.cardBody}>
+          <Row>{props.children}</Row>
+        </Container>
+        <Container className={styles.services}>
+          <Row>
+            <Col sm={7}></Col>
+            <Col className={styles.fileUpload}>
+              <Container>
+                {props.hasFileUploader && (
+                  <FileUpload
+                    uploadUrl={props.fileUploadUrl}
+                    accept={props.accept}
+                    mutationName={props.mutationName}
+                    invQueryName={props.invQueryName}
+                    iconSrc={props.iconSrc}
+                  />
+                )}
+              </Container>
+            </Col>
+            <Col>
+              <BsFillTrash3Fill className="delete-icon" onClick={deleteItem} />
+            </Col>
+          </Row>
+        </Container>
       </Container>
     </Col>
   );

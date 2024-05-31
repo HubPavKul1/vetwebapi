@@ -13,5 +13,10 @@ export interface ICardProps {
     accept?: string;
     mutationName?: string;
     iconSrc?: string;
+    hasContacts?: boolean;
+    cardText?: string;
+    address?: string;
+    phone?: string;
+    phone2?: string;
     
 }

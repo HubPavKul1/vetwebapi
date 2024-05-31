@@ -1,7 +1,7 @@
 import { Container, Row } from "react-bootstrap";
 
 import styles from "./Catalog.module.scss";
-import { CreateItem } from "../createItem/CreateItem";
+import { CreateItem } from "../CreateItem";
 import { CatalogItem } from "../catalogItem/CatalogItem";
 
 interface CatalogProps {
@@ -18,7 +18,6 @@ export function Catalog({
   children,
   btnTitle,
   cardsInRow,
-  
 }: CatalogProps) {
   return (
     <Container className={styles.catalogWrap}>

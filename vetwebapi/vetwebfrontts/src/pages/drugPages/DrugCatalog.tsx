@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { Catalog } from "../../components/Catalog";
 import { catalogItemData } from "../../components/data/CatalogItemData";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { CreateItem } from "../../components/createItem/CreateItem";
+import { CreateItem } from "../../components/CreateItem";
 import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
 import { CatalogDrugCard } from "../../components/drugs/drug/catalogDrugCard/CatalogDrugCard";

@@ -15,9 +15,6 @@ export function DrugCardBody({drugManufacturer, drugInstr}: DrugCardBodyProps) {
             <Container className={styles.drugManufacturer}>
                 <h6>{drugManufacturer}</h6>
             </Container>
-            {!drugInstr && <p>Загрузите Инструкцию</p>
-                   
-            }
             
         </>
         
