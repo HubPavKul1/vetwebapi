@@ -1,0 +1,24 @@
+@import "../../../assets/sass/mixins";
+@import "../../../assets/sass/templates";
+
+
+
+.services {
+    height: 30px;
+    text-align: right;
+    
+    p {
+        margin: 0;
+    }
+  
+  .fileUpload {
+      margin: 0;
+      margin-left: auto;
+      cursor: pointer;
+      @include transition(transform);
+  
+      &:hover {
+          @include transform;
+      }
+  }
+}

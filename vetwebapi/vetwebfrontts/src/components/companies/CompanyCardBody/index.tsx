@@ -1,4 +1,4 @@
-import { Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 
 import styles from "./CompanyCardBody.module.scss"
@@ -22,8 +22,10 @@ export function CompanyCardBody({address, phone, phone2, employee}: CompanyCardB
                 <h6>{employee}</h6>
             </Container>
             <Container className={styles.cardPhone}>
-                <span>тел.: {phone}</span>
-                <span>тел2.: {phone2}</span>
+                <Row>
+                    <Col><span>тел.: {phone}</span></Col>
+                    {phone2 && <Col><span>тел2.: {phone2}</span></Col>}
+                </Row>
             </Container>
         </>
         

@@ -7,7 +7,6 @@
   border: 1px solid grey;
   box-shadow: 3px 3px grey;
   border-radius: 5px;
-  height: 250px;
   @include transition(transform);
 
   > a {
@@ -31,20 +30,7 @@
 	
   }
 
-  .services {
-	  height: 50px;
-	
-	.fileUpload {
-		margin: 0;
-		margin-left: auto;
-		cursor: pointer;
-		@include transition(transform);
-	
-		&:hover {
-			@include transform;
-		}
-	}
-  }
+  
 }
 
 

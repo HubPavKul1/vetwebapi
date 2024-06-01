@@ -2,28 +2,12 @@ import { ICardProps } from "../../interfaces/CardProps";
 
 import styles from "./CatalogItem.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
-import { BsFillTrash3Fill } from "react-icons/bs";
 import { CatalogCardImage } from "./CatalogCardImage";
 import { CatalogCardTitle } from "./CatalogCardTitle";
-import { useMutation, useQueryClient } from "react-query";
-import { AppService } from "../../app.service";
-import { FileUpload } from "../FileUpload";
+import { CatalogCardFooter } from "./CatalogCardFooter";
 
 export function CatalogItem({ ...props }: ICardProps) {
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation(["delete item"], {
-    mutationFn: () => AppService.deleteItem(props.delUrl),
-    onSuccess: () => {
-      alert(`${props.cardTitle} успешно удалено!`);
-      queryClient.invalidateQueries([`${props.invQueryName}`]);
-    },
-  });
-
-  const deleteItem = () => {
-    mutate();
-  };
-
+  
   return (
     <Col>
       <Container className={styles.catalogItem}>
@@ -42,32 +26,22 @@ export function CatalogItem({ ...props }: ICardProps) {
             </Col>
           </Row>
         </Container>
-        <Container className={styles.cardBody}>
-          <Row>{props.children}</Row>
-        </Container>
-        <Container className={styles.services}>
-          <Row>
-            <Col sm={7}>
-              {props.hasFileUploader && <p>Загрузите инструкцию</p>}
-            </Col>
-            <Col>
-              <Container className={styles.fileUpload}>
-                {props.hasFileUploader && (
-                  <FileUpload
-                    uploadUrl={props.fileUploadUrl}
-                    accept={props.accept}
-                    mutationName={props.mutationName}
-                    invQueryName={props.invQueryName}
-                    iconSrc={props.iconSrc}
-                  />
-                )}
-              </Container>
-            </Col>
-            <Col>
-              <BsFillTrash3Fill className="delete-icon" onClick={deleteItem} />
-            </Col>
-          </Row>
-        </Container>
+        {props.children && 
+           <Container className={styles.cardBody}>
+           <Row>{props.children}</Row>
+         </Container>
+        }
+        <CatalogCardFooter 
+          hasFileUploader={props.hasFileUploader}
+          fileUploadUrl={props.fileUploadUrl}
+          accept={props.accept}
+          mutationName={props.mutationName} 
+          invQueryName={props.invQueryName}
+          iconSrc={props.iconSrc}
+          delUrl={props.delUrl}
+          cardTitle={props.cardTitle}
+        />
+        
       </Container>
     </Col>
   );

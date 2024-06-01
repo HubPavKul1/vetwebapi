@@ -22,11 +22,8 @@
 }
 
 .cardPhone {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
 
-    > span {
+    span {
         font-size: .8rem;
     }
 }

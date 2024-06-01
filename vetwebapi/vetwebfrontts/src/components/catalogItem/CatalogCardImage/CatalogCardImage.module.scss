@@ -1,15 +1,6 @@
 @import "../../../assets/sass/mixins";
 @import "../../../assets/sass/templates";
 
-.cardImageWrap {
-	display: flex;
-	width: 30%;
-	@include transition(transform);
-	
-	&:hover {
-		@include transform;
-	}
-}
 
 .cardImageLink {
 	height: 50px;
