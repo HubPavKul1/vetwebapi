@@ -118,7 +118,7 @@ export function VaccinationDetail() {
                   <Container className={styles.companyAnimals}>
                     <h5>Животные </h5>
                     <p className={styles.animalCounter}>
-                      Всего голов хозяйства : {data.animals?.length}
+                      Всего голов хозяйства : {data.animals?.filter((animal) => animal.company_id === company.id).length}
                     </p>
                     <Row>
                       <Col>Вид животных</Col>

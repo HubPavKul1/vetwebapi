@@ -1,0 +1,18 @@
+@import "../../../assets/sass/mixins";
+@import "../../../assets/sass/templates";
+
+
+
+.companyAnimals {
+	margin-bottom: 30px;
+
+    >h5 {
+        @extend %titleBase;
+   
+    }
+}
+
+.animalCounter {
+	color:blueviolet;
+	font-weight: 700;
+}

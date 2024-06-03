@@ -1,0 +1,16 @@
+@import "../../../assets/sass/mixins";
+@import "../../../assets/sass/templates";
+
+
+.rowTop {
+	margin-bottom: 30px;
+}
+
+.colImg {
+    display: flex;
+    justify-content: center;
+    
+    >img {
+        width: 80%;
+    }
+}
