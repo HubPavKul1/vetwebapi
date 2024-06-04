@@ -16,3 +16,8 @@
 	color:blueviolet;
 	font-weight: 700;
 }
+
+
+.tableHead {
+    @extend %tableHead;
+}

@@ -18,6 +18,7 @@ interface PageDetailProps {
   employees?: IEmployee[]
   companyId?: number;
   animals?: IAnimal[];
+  children?: React.ReactElement;
 
 }
 
@@ -26,11 +27,10 @@ export function PageDetail({ ...props }: PageDetailProps) {
     <Container className={styles.pageDetailWrap}>
       <PageDetailTop imgSrc={props.imgSrc} alt={props.alt} menu={props.menu} />
       <PageDetailTitle title={props.title}/>
-      <PageDetailAddress address={props.address} />
-      <PageDetailEmployees employees={props.employees}/>
-      <PageDetailAnimals animals={props.animals} companyId={props.companyId} />
-
-      
+      {props.address && <PageDetailAddress address={props.address} />}
+      {props.employees && <PageDetailEmployees employees={props.employees}/>}
+      {(props.animals && props.companyId) && <PageDetailAnimals animals={props.animals} companyId={props.companyId} /> }
+      {props.children}
     </Container>
   );
 }

@@ -14,6 +14,8 @@ import { AnimalInVetwork } from "../../../../components/vetWorks/AnimalInVetwork
 import { ActPDF } from "./actPdf/ActPDF";
 import { VetWorkPageMenu } from "../../../../components/menu/VetWorkPageMenu";
 import { AnimalsListPDF } from "./animalsListPdf/AnimalsListPDF";
+import { PageDetail } from "../../../../components/PageDetail";
+import { VetWorkCompany } from "../../VetWorkCompany";
 
 interface VaccinationData {
   data?: IVetWorkSchema;
@@ -41,126 +43,56 @@ export function VaccinationDetail() {
 
   const date = AppService.convertDateString(data.vetwork_date);
 
-  const addAnimals = (company_id: string) => {
-    setAnimals(true);
-    setCompanyId(company_id);
-  };
-
   return (
     <>
       {!act && !animalsList && !animals ? (
-        <Container className={styles.detailWrap}>
-          <Row className={styles.rowTop}>
-            <Col sm={8} className={styles.colImg}>
-              <img src="/vetworkBg.jpg" alt={data.vetwork_date} />
-            </Col>
-
-            <Col>
-              <VetWorkPageMenu />
-              <Container className={styles.pdfButtons}>
-                <div>
-                  <CustomButton
-                    className="btn-submit"
-                    title="Акт на обработку"
-                    onClick={() => showAct(true)}
+        <PageDetail
+          imgSrc="/vetworkBg.jpg"
+          alt={data.vetwork_date}
+          menu={
+            <VetWorkPageMenu
+              showAct={showAct}
+              showAnimalsList={showAnimalsList}
+            />
+          }
+          title={`Вакцинация ${date.fullDate}`}
+        >
+          <>
+            <Container className={styles.drugWrap}>
+              <p className={styles.animalCounter}>
+                Всего голов: {data?.animals?.length}
+              </p>
+              <h5>Предприятия </h5>
+              {data.companies?.length &&
+                data.companies.map((company) => (
+                  <VetWorkCompany
+                   company={company}
+                   setAnimals={setAnimals} 
+                   setCompanyId={setCompanyId}
+                   animals={data.animals}
                   />
-                </div>
-                <div>
-                  <CustomButton
-                    className="btn-submit"
-                    title="Опись к акту"
-                    onClick={() => showAnimalsList(true)}
-                  />
-                </div>
-              </Container>
-            </Col>
-          </Row>
+                ))}
+            </Container>
 
-          <Container className={styles.drugWrap}>
-            <p className={styles.animalCounter}>
-              Всего голов: {data?.animals?.length}
-            </p>
-            <h5>Предприятия </h5>
-            {data.companies?.length &&
-              data.companies.map((company) => (
-                <div key={company.id} className={styles.companyWrap}>
-                  <div>
-                    <Row className={styles.companyTitle}>
-                      <Col sm={6}>
-                        <h5>
-                          <Link to={`/companies/${company.id}`}>
-                            {company.full_name}
-                          </Link>
-                        </h5>
-                      </Col>
-                      <Col>
-                        <CustomButton
-                          className="btn-submit"
-                          title="Добавить животных"
-                          onClick={() => addAnimals(company.id.toString())}
-                        />
-                      </Col>
-                      <Col></Col>
-                    </Row>
+            <Container className={styles.drugWrap}>
+              <h5>Препарат </h5>
 
-                    <p>
-                      адрес:{" "}
-                      {company.address &&
-                        `${company.address.street}, ${company.address.house_number}`}
-                    </p>
-                    <p>
-                      телефон:{" "}
-                      {company.address &&
-                        `${company.address.phone_number1}, ${company.address.phone_number2}`}
-                    </p>
-                  </div>
+              <Row>
+                <Col>Наименование препарата</Col>
+                <Col>Серия</Col>
+                <Col>Контроль</Col>
+                <Col>Дата Изготовления</Col>
+                <Col>Количество упаковок</Col>
+                <Col>Количество единиц учета</Col>
+              </Row>
 
-                  <Container className={styles.companyAnimals}>
-                    <h5>Животные </h5>
-                    <p className={styles.animalCounter}>
-                      Всего голов хозяйства : {data.animals?.filter((animal) => animal.company_id === company.id).length}
-                    </p>
-                    <Row>
-                      <Col>Вид животных</Col>
-                      <Col>Пол животных</Col>
-                      <Col>Дата рождения</Col>
-                      <Col>Кличка</Col>
-                      <Col>Идентификация</Col>
-                      <Col>Дозировка</Col>
-                      <Col></Col>
-                      <Col></Col>
-                    </Row>
-
-                    {data.animals?.length &&
-                      data.animals
-                        .filter((animal) => animal.company_id === company.id)
-                        .map((animal) => (
-                          <AnimalInVetwork
-                            key={animal.animal_id}
-                            animal={animal}
-                          />
-                        ))}
-                  </Container>
-                </div>
-              ))}
-          </Container>
-
-          <Container className={styles.drugWrap}>
-            <h5>Препарат </h5>
-
-            <Row>
-              <Col>Наименование препарата</Col>
-              <Col>Серия</Col>
-              <Col>Контроль</Col>
-              <Col>Дата Изготовления</Col>
-              <Col>Количество упаковок</Col>
-              <Col>Количество единиц учета</Col>
-            </Row>
-
-            {data.drug && <ReceiptDrug drug={data.drug} />}
-          </Container>
-        </Container>
-      ) : act ? (
+              {data.drug && <ReceiptDrug drug={data.drug} />}
+            </Container>
+          </>
+        </PageDetail>
+      ) : 
+      
+      act ? (
         <ActPDF setPdf={showAct} data={data} />
       ) : animalsList ? (
         <AnimalsListPDF setPdf={showAnimalsList} data={data} />

@@ -1,0 +1,8 @@
+@import "../../../../assets/sass/mixins";
+@import "../../../../assets/sass/templates";
+
+
+
+.tableRow {
+    @extend %tableRow;
+}

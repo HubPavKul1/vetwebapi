@@ -4,18 +4,14 @@ import { IAddress } from "../../../interfaces/AddressInterfaces";
 
 
 interface PageDetailAddressProps {
-    address?: IAddress;
+    address: IAddress;
 }
 
 
 export function PageDetailAddress({address}: PageDetailAddressProps) {
   return (
     <Container>
-        {address ? (
-            <CompanyAddress address={address} />
-          ) : (
-            <p>Адрес отсутствует!</p>
-          )}
+      <CompanyAddress address={address} />
     </Container>
   )
 }

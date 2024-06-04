@@ -1,0 +1,19 @@
+@import "../../../assets/sass/mixins";
+@import "../../../assets/sass/templates";
+
+.companyWrap {
+    margin-bottom: 30px;
+    border-bottom: 2px solid grey;
+}
+
+.companyTitle {
+    display: flex;
+    
+    h5 {
+        font-weight: 600;
+    }
+}
+
+.tableHead {
+    @extend %tableHead;
+}

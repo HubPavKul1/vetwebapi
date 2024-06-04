@@ -1,4 +1,4 @@
-.MenuWrap {
+.menuWrap {
 	text-align: left;
 	padding: 15px;
 	border: 1px solid grey;
@@ -8,7 +8,7 @@
 }
 
 
-.Menu {
+.menu {
 	display: flex;
 	width: 100%;
 	flex-direction: column;
@@ -25,3 +25,16 @@
 		flex-direction: column;
 	}
 }
+
+
+.buttonsSet {
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+    
+    div {
+        margin-bottom: 15px;
+    }
+}
+
+
