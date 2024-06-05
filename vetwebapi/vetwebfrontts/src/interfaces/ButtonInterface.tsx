@@ -9,5 +9,5 @@ export interface IButtonProps {
     className?: string;
     disabled?: boolean;
     onClick?: MouseEventHandler<HTMLButtonElement>;
-    title: string;
+    title?: string;
 }

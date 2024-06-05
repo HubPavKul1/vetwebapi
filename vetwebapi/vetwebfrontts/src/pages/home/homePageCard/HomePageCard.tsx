@@ -28,12 +28,12 @@ export function HomePageCard({item}: HomePageCardProps) {
                             </Card.Text>
                         </Card.Body>
                             {
-                                item.hasContacts ? 
+                                item.hasContacts && 
                                 <Card.Footer>
                                     <span className={styles.cardFooterItem}>{item.address}</span><br />
                                     <span className={styles.cardFooterItem}>{item.phone}</span> <br />
                                     <span className={styles.cardFooterItem}>{item.phone2}</span>
-                                </Card.Footer>: ""
+                                </Card.Footer>
                             }
                                     
                     </Card>

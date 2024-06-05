@@ -1,13 +1,12 @@
 import { Container, Row } from "react-bootstrap";
 
-import styles from "./Catalog.module.scss";
 import { CreateItem } from "../CreateItem";
 
 interface CatalogProps {
   title: string;
-  createForm: React.ReactElement;
+  createForm?: React.ReactElement;
   children: React.ReactElement | React.ReactNode;
-  btnTitle: string;
+  btnTitle?: string;
   cardsInRow: number;
 }
 
@@ -19,9 +18,10 @@ export function Catalog({
   cardsInRow,
 }: CatalogProps) {
   return (
-    <Container className={styles.catalogWrap}>
-      <h1>{title}</h1>
-      <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
+    <Container className="p-8 mb-8">
+      <h1 className="text-center text-3xl mb-5">{title}</h1>
+      {createForm && <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>}
+      
       <Row xs={1} md={cardsInRow} lg={cardsInRow}>
         {children}
       </Row>
