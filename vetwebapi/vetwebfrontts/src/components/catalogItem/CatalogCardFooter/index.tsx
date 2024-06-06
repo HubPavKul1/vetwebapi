@@ -35,7 +35,8 @@ export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
   return (
     <Container className={styles.services}>
       <Row>
-        <Col sm={7}>{props.hasFileUploader && <p>Загрузите инструкцию</p>}</Col>
+        <Col sm={7}>
+          {props.hasFileUploader && <p>Загрузите инструкцию </p>}</Col>
         <Col>
           <Container className={styles.fileUpload}>
             {props.hasFileUploader && (

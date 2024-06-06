@@ -56,3 +56,5 @@ export default {
 yarn build
 ```
 в папке public появится style.css со стилями tailwind
+
+## [Ресурс с иконками для tailwind](https://heroicons.com/)
