@@ -16,7 +16,7 @@ export function CreateItem({ btnTitle, children }: ICreateItemProps) {
   return (
     <Container className="flex justify-center mb-6">
       <CustomButton
-        className="px-3 py-2 bg-violet-300  rounded text-violet-500 text-2xl uppercase"
+        className="btn-color text-2xl btn-transform"
         title={btnTitle}
         onClick={() => setModalActive(true)}
       />

@@ -10,7 +10,7 @@ export function Menu({ children, buttons }: MenuProps) {
   return (
     <div className={styles.menuWrap}>
       <div className={styles.pageMenu}>
-        <h2>Меню</h2>
+        <h2 className="text-2xl text-center font-bold">Меню</h2>
         <ul>{children}</ul>
       </div>
       <div className={styles.buttonsSet}>

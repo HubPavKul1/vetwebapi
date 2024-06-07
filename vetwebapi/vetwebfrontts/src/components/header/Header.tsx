@@ -13,8 +13,7 @@ export function Header() {
         <Container className={styles.wrap}>
           <LogoLink />
           <NavList />
-
-          <CustomButton className="btn-nav" title="Войти" />
+          <CustomButton className="text-sm btn-color btn-transform" title="Войти" />
         </Container>
       </header>
     </>

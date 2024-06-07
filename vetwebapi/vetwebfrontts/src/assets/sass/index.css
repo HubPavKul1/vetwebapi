@@ -4,6 +4,15 @@
 
 
 
+.btn-color {
+  @apply px-3 py-2 rounded-lg bg-gradient-to-tr from-violet-100 to-violet-300 text-violet-500 uppercase
+}
+
+.btn-transform {
+  @apply transition-transform ease-in-out duration-500 hover:scale-105
+}
+
+
 .btn-upload, .btn-nav, .btn-submit, .btn-large {
   padding: 0;
   border: none;

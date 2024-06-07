@@ -14,7 +14,7 @@ export function MenuItem({ title, children }: MenuItemProps) {
   const [modalActive, setModalActive] = useState(false);
   return (
     <li className={styles.menuItem}>
-      <a href="#" onClick={() => setModalActive(true)}>
+      <a className="flex " href="#" onClick={() => setModalActive(true)}>
         <i className="icon-check">
           <FaCheck />
         </i>
