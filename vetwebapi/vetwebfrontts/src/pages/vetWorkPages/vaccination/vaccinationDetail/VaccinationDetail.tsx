@@ -77,7 +77,7 @@ export function VaccinationDetail() {
             <Container className={styles.drugWrap}>
               <h5>Препарат </h5>
 
-              <Row>
+              <Row className="border-top border-bottom border-black font-bold">
                 <Col>Наименование препарата</Col>
                 <Col>Серия</Col>
                 <Col>Контроль</Col>

@@ -11,6 +11,9 @@ import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug
 import { CustomButton } from "../../../components/CustomButton";
 import { useState } from "react";
 import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
+import { PageDetail } from "../../../components/PageDetail";
+import { CompanyPageMenu } from "../../../components/menu/CompanyPageMenu";
+import { ReceiptPageMenu } from "../../../components/menu/ReceiptPageMenu";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -37,45 +40,31 @@ export function ReceiptDetail() {
   return (
     <>
       {!pdf ? (
-        <Container className={styles.detailWrap}>
-          <Row className={styles.rowTop}>
-            <Col sm={4} className={styles.colImg}>
-              <img src="/drugsBg.jpg" alt={data.operation_date} />
-            </Col>
+        <PageDetail
+          title={`Поступление от ${date.fullDate}`}
+          imgSrc="/drugsBg.jpg"
+          alt={date.fullDate}
+          menu={<ReceiptPageMenu url={url} setPdf={setPdf} />}
+        >
+          <Container className={styles.detailWrap}>
+            <Container className={styles.drugWrap}>
+              <h5 className="text-xl mb-8">Препараты </h5>
 
-            <Col>
-              <h1>Поступление</h1>
-              <h5>{date.fullDate}</h5>
-              <div className={styles.buttonWrap}>
-                <CreateItem btnTitle="Добавить препарат">
-                  <AddDrugForm url={url} queryKey="receipt" />
-                </CreateItem>
-                <CustomButton
-                  className="btn-large"
-                  title="Требование-заявка"
-                  onClick={() => setPdf(true)}
-                />
-              </div>
-            </Col>
-          </Row>
-
-          <Container className={styles.drugWrap}>
-            <h5>Препараты </h5>
-
-            <Row>
-              <Col>Наименование препарата</Col>
-              <Col>Серия</Col>
-              <Col>Контроль</Col>
-              <Col>Дата Изготовления</Col>
-              <Col>Количество упаковок</Col>
-              <Col>Количество единиц учета</Col>
-            </Row>
-            {data.drugs?.length &&
-              data.drugs.map((drug) => (
-                <ReceiptDrug key={drug.id} drug={drug} />
-              ))}
+              <Row className="border-top border-bottom border-black">
+                <Col>Наименование препарата</Col>
+                <Col>Серия</Col>
+                <Col>Контроль</Col>
+                <Col>Дата Изготовления</Col>
+                <Col>Количество упаковок</Col>
+                <Col>Количество единиц учета</Col>
+              </Row>
+              {data.drugs?.length &&
+                data.drugs.map((drug) => (
+                  <ReceiptDrug key={drug.id} drug={drug} />
+                ))}
+            </Container>
           </Container>
-        </Container>
+        </PageDetail>
       ) : (
         <ReceiptPDF setPdf={setPdf} data={data} />
       )}

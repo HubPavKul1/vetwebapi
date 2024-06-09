@@ -110,6 +110,9 @@ async def read_administration_methods(session: AsyncSession) -> list[Administrat
 
 
 
+
+
+
 # Delete
 async def remove_drug_image(filepath: str) -> None:
     image_to_remove = os.path.join(settings.media_dir, filepath)

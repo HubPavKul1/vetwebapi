@@ -1,10 +1,12 @@
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
+from operator import and_
+from datetime import date
 
 from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation
 
-from .schemas import DrugInMovementIn, DrugMovementIn
+from .schemas import DrugInMovementIn, DrugMovementIn, DateRangeIn
 
 
 # Create
@@ -69,6 +71,25 @@ async def read_drugs_in_drug_movement(session: AsyncSession, drug_movement: Drug
         .where(DrugInMovement.drug_movement_id == drug_movement.id)
     
     )
+    
+    return list(await session.scalars(stmt))
+
+
+async def read_receipts_by_date(session: AsyncSession, date_start: date, date_end: date) -> list[DrugMovement]:
+    # date_start = body.date_start
+    # date_end = body.date_end
+
+    stmt = (
+        select(DrugMovement)
+        .options(selectinload(DrugMovement.catalog_drugs_details)
+        .joinedload(DrugInMovement.catalog_drug
+        ))
+        .where(
+            and_(DrugMovement.id == 1, 
+                  (date_start <= DrugMovement.operation_date <= date_end)
+                 )
+                 )
+        )
     
     return list(await session.scalars(stmt))
 

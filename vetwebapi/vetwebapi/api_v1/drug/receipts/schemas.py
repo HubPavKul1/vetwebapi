@@ -43,3 +43,8 @@ class DrugMovementDetail(DrugMovementOut):
 
 class DrugMovements(BaseModel):
     drug_movements: list[DrugMovementDetail]    
+
+
+class DateRangeIn(BaseModel):
+    date_start: date
+    date_end: date

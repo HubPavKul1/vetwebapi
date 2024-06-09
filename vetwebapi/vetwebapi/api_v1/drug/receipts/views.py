@@ -1,4 +1,5 @@
 from typing import Union
+from datetime import date
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -9,7 +10,7 @@ from vetwebapi.core.models import DrugMovement, DrugInMovement
 
 from . import crud
 from .dependencies import drug_movement_by_id
-from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail, DrugInMovementSchema
+from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail, DrugInMovementSchema, DateRangeIn
 from .serializers import serialize_drug_in_movement, serialize_drug_movement_card
 
 router = APIRouter(prefix="/receipts")
@@ -68,6 +69,29 @@ async def get_receipt(
             operation_date=drug_movement.operation_date,
             drugs=drug_schemas,
         )
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+@router.get("/{date_start}/{date_end}", response_model=DrugMovements)
+async def get_receipts_in_date_range(
+    date_start: date,
+    date_end: date,
+    # body: DateRangeIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[DrugMovements, dict]:
+    try:
+        print("*" * 20)
+        print("Дата:   ", date_start, date_end)
+        print("*" * 20)
+        receipts: list[DrugMovement] = await crud.read_receipts_by_date(session=session, date_start=date_start, date_end=date_end)
+        print(receipts)
+        print("*" * 20)
+        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
+        return DrugMovements(drug_movements=receipt_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
