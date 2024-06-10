@@ -1,7 +1,7 @@
-from sqlalchemy import desc, select
+from sqlalchemy import desc, select, func, cast, Integer, and_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
-from operator import and_
+# from operator import and_, or_
 from datetime import date
 
 from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation
@@ -75,9 +75,9 @@ async def read_drugs_in_drug_movement(session: AsyncSession, drug_movement: Drug
     return list(await session.scalars(stmt))
 
 
-async def read_receipts_by_date(session: AsyncSession, date_start: date, date_end: date) -> list[DrugMovement]:
-    # date_start = body.date_start
-    # date_end = body.date_end
+async def read_receipts_by_date(session: AsyncSession, body: DateRangeIn) -> list[DrugMovement]:
+    date_start = body.date_start
+    date_end = body.date_end
 
     stmt = (
         select(DrugMovement)
@@ -85,10 +85,37 @@ async def read_receipts_by_date(session: AsyncSession, date_start: date, date_en
         .joinedload(DrugInMovement.catalog_drug
         ))
         .where(
-            and_(DrugMovement.id == 1, 
-                  (date_start <= DrugMovement.operation_date <= date_end)
-                 )
-                 )
+            and_(
+                DrugMovement.operation_id == 1, 
+                DrugMovement.operation_date.between(date_start, date_end)
+                )
+            )
+        .order_by(
+            desc(DrugMovement.operation_date)
+        )
+        )
+    
+    return list(await session.scalars(stmt))
+
+
+async def read_receipts_by_date_grouped_by_drug_id(session: AsyncSession, body: DateRangeIn) -> list[DrugMovement]:
+    date_start = body.date_start
+    date_end = body.date_end
+
+    stmt = (
+        select(
+            DrugMovement.id, 
+            DrugMovement.operation_date, 
+            cast(func.sum(DrugInMovement.packs_amount), Integer), 
+            cast(func.sum(DrugInMovement.units_amount), Integer)
+            )
+        .options(selectinload(DrugMovement.catalog_drugs_details)
+        .joinedload(DrugInMovement.catalog_drug)
+        )
+        .filter(and_(DrugMovement.operation_id == 1, DrugMovement.operation_date.between(date_start, date_end)))
+        .group_by(
+            DrugInMovement.catalog_drug_id
+        )
         )
     
     return list(await session.scalars(stmt))
