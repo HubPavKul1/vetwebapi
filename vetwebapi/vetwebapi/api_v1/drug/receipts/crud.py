@@ -74,6 +74,20 @@ async def read_drugs_in_drug_movement(session: AsyncSession, drug_movement: Drug
     
     return list(await session.scalars(stmt))
 
+async def read_drugs_in_receipt_grouped_by_catalog_drug_id(session: AsyncSession) -> list[DrugInMovement]:
+    stmt = (
+        select(DrugInMovement.catalog_drug_id, func.sum(DrugInMovement.packs_amount).label("sum_packs"), func.sum(DrugInMovement.units_amount).label("sum_units"))
+        # .options(selectinload(DrugInMovement.catalog_drug))
+        # .options(selectinload(DrugInMovement.drug_movement))
+        .group_by(DrugInMovement.catalog_drug_id)
+    )
+
+    res = list(await session.scalars(stmt))
+    # [print(item.sum_packs, item.sum_units) for item in res]
+    print(type(res[0]))
+
+    return res
+
 
 async def read_receipts_by_date(session: AsyncSession, body: DateRangeIn) -> list[DrugMovement]:
     date_start = body.date_start
