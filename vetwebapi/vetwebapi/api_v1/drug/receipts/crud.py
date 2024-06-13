@@ -74,6 +74,57 @@ async def read_drugs_in_drug_movement(session: AsyncSession, drug_movement: Drug
     
     return list(await session.scalars(stmt))
 
+
+"""
+1) Приход и Расход:
+
+SELECT * ,
+SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
+SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
+FROM catalog_drugs c_d
+JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
+JOIN drug_movements dm ON dm.id = dim.drug_movement_id;
+
+2) Приход:
+
+SELECT * ,
+SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
+SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
+FROM catalog_drugs c_d
+JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
+JOIN drug_movements dm ON dm.id = dim.drug_movement_id
+WHERE dm.id = 1;
+
+3) Расход:
+
+SELECT * ,
+SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
+SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
+FROM catalog_drugs c_d
+JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
+JOIN drug_movements dm ON dm.id = dim.drug_movement_id
+WHERE dm.id = 2;
+
+4) 
+SELECT 
+d.name, 
+c_d.batch, 
+c_d.production_date, 
+c_d.expiration_date,
+dm.id,
+o.name,
+dm.operation_date,
+dim.packs_amount,
+dim.units_amount,
+SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
+SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
+FROM catalog_drugs c_d
+JOIN drugs d ON d.id = c_d.drug_id
+JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
+JOIN drug_movements dm ON dm.id = dim.drug_movement_id
+JOIN operations o ON o.id = dm.operation_id;
+"""
+
 async def read_drugs_in_receipt_grouped_by_catalog_drug_id(session: AsyncSession) -> list[DrugInMovement]:
     stmt = (
         select(DrugInMovement.catalog_drug_id, func.sum(DrugInMovement.packs_amount).label("sum_packs"), func.sum(DrugInMovement.units_amount).label("sum_units"))
