@@ -93,7 +93,7 @@ SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
 FROM catalog_drugs c_d
 JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
 JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-WHERE dm.id = 1;
+WHERE dm.operation_id = 1;
 
 3) Расход:
 
@@ -103,7 +103,7 @@ SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
 FROM catalog_drugs c_d
 JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
 JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-WHERE dm.id = 2;
+WHERE dm.operation_id = 2;
 
 4) 
 SELECT 
