@@ -123,6 +123,47 @@ JOIN drugs d ON d.id = c_d.drug_id
 JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
 JOIN drug_movements dm ON dm.id = dim.drug_movement_id
 JOIN operations o ON o.id = dm.operation_id;
+
+
+5)
+SELECT
+d.name as drug_name,
+cd.batch,
+dm.operation_id,
+o.name as operation_name,
+SUM(dim.packs_amount) AS sum_packs_receipt,
+SUM(dim.units_amount) AS sum_units_receipt,
+
+spent_drugs.sum_packs_spent AS packs_spent,
+spent_drugs.sum_units_spent AS units_spent
+
+FROM catalog_drugs cd
+JOIN drugs d ON d.id = cd.drug_id
+JOIN drugs_in_movement dim ON dim.catalog_drug_id = cd.id
+JOIN drug_movements dm ON dm.id = dim.drug_movement_id
+JOIN operations o ON o.id = dm.operation_id
+LEFT OUTER JOIN (
+SELECT
+cd.id AS catalog_drug_id,
+SUM(dim.packs_amount) AS sum_packs_spent,
+SUM(dim.units_amount) AS sum_units_spent
+FROM catalog_drugs cd
+JOIN drugs_in_movement dim ON dim.catalog_drug_id = cd.id
+JOIN drug_movements dm ON dm.id = dim.drug_movement_id
+JOIN operations o ON o.id = dm.operation_id
+WHERE o.id = 2
+GROUP BY(cd.id, dm.operation_id)
+) spent_drugs ON spent_drugs.catalog_drug_id = cd.id
+WHERE o.id = 1
+GROUP BY(
+drug_name, 
+cd.batch, 
+cd.id, 
+dm.operation_id, 
+operation_name,
+spent_drugs.sum_packs_spent,
+spent_drugs.sum_units_spent
+);
 """
 
 async def read_drugs_in_receipt_grouped_by_catalog_drug_id(session: AsyncSession) -> list[DrugInMovement]:
