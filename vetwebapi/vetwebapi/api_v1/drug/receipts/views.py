@@ -76,15 +76,15 @@ async def get_receipt(
         )
     
 
-@router.post("/date_range", response_model=DrugMovements)
+@router.post("/date_range", response_model=SuccessMessage)
 async def get_receipts_in_date_range(
     body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[DrugMovements, dict]:
+) -> Union[SuccessMessage, dict]:
     try:
         receipts: list[DrugMovement] = await crud.read_receipts_by_date(session=session, body=body)
-        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
-        return DrugMovements(drug_movements=receipt_schemas)
+        # receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
+        return SuccessMessage
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -92,18 +92,18 @@ async def get_receipts_in_date_range(
         )
     
 
-@router.post("/date_range_grouped", response_model=DrugMovements)
-async def get_receipts_in_date_range_grouped(
+@router.post("/date_range_grouped", response_model=SuccessMessage)
+async def get_receipts_ids_in_date_range(
     body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[DrugMovements, dict]:
+) -> Union[SuccessMessage, dict]:
     try:
-        receipts: list[DrugMovement] = await crud.read_receipts_by_date_grouped_by_drug_id(session=session, body=body)
+        receipts: list[int] = await crud.read_receipts_ids_by_date(session=session, body=body)
         print("*" * 20)
         print(receipts)
         print("*" * 20)
-        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
-        return DrugMovements(drug_movements=receipt_schemas)
+        # receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
+        return SuccessMessage
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -111,12 +111,13 @@ async def get_receipts_in_date_range_grouped(
         )
     
     
-@router.get("/drugs_in_receipt", response_model=SuccessMessage)
+@router.post("/drugs_in_receipt", response_model=SuccessMessage)
 async def get_drugs_in_receipts(
+    body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[SuccessMessage, dict]:
     try:
-        drugs: list[DrugInMovement] = await crud.read_drugs_in_receipt_grouped_by_catalog_drug_id(session=session)
+        drugs: list[DrugInMovement] = await crud.read_drugs_in_receipts_by_date(session=session, body=body)
         print("*" * 20)
         print(drugs)
         print("*" * 20)

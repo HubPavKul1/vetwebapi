@@ -247,27 +247,52 @@ async def read_receipts_by_date(session: AsyncSession, body: DateRangeIn) -> lis
     return list(await session.scalars(stmt))
 
 
-async def read_receipts_by_date_grouped_by_drug_id(session: AsyncSession, body: DateRangeIn) -> list[DrugMovement]:
+async def read_receipts_ids_by_date(session: AsyncSession, body: DateRangeIn) -> list[int]:
     date_start = body.date_start
     date_end = body.date_end
 
     stmt = (
         select(
-            DrugMovement.id, 
-            DrugMovement.operation_date, 
-            cast(func.sum(DrugInMovement.packs_amount), Integer), 
-            cast(func.sum(DrugInMovement.units_amount), Integer)
+            DrugMovement.id
             )
-        .options(selectinload(DrugMovement.catalog_drugs_details)
-        .joinedload(DrugInMovement.catalog_drug)
-        )
         .filter(and_(DrugMovement.operation_id == 1, DrugMovement.operation_date.between(date_start, date_end)))
-        .group_by(
-            DrugInMovement.catalog_drug_id
-        )
         )
     
     return list(await session.scalars(stmt))
+
+
+async def read_drug_spent_ids_by_date(session: AsyncSession, body: DateRangeIn) -> list[int]:
+    date_start = body.date_start
+    date_end = body.date_end
+
+    stmt = (
+        select(
+            DrugMovement.id
+            )
+        .filter(and_(DrugMovement.operation_id == 2, DrugMovement.operation_date.between(date_start, date_end)))
+        )
+    
+    return list(await session.scalars(stmt))
+
+
+async def read_drugs_in_receipts_by_date(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+    # date_start = body.date_start
+    # date_end = body.date_end
+    receipt_ids = await read_receipts_ids_by_date(session=session, body=body)
+
+    stmt = (
+        select(
+            DrugInMovement.catalog_drug_id,
+            func.sum(DrugInMovement.packs_amount).label("sum_packs_receipts"),
+            func.sum(DrugInMovement.units_amount).label("sum_units_receipts")
+            )
+        
+        .filter(DrugInMovement.drug_movement_id.in_(receipt_ids))
+        .group_by(DrugInMovement.catalog_drug_id)
+        )
+    
+    return list(await session.execute(stmt)) # [(1, 60, 120.0), (2, 3, 150.0)]
+
 
 
 # Delete
