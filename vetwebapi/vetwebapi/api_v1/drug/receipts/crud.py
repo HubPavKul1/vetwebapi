@@ -4,7 +4,7 @@ from sqlalchemy.orm import joinedload, selectinload
 # from operator import and_, or_
 from datetime import date
 
-from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation
+from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation, Drug
 
 from .schemas import DrugInMovementIn, DrugMovementIn, DateRangeIn
 
@@ -211,7 +211,10 @@ spent_drugs.sum_units_spent
 
 async def read_drugs_in_receipt_grouped_by_catalog_drug_id(session: AsyncSession) -> list[DrugInMovement]:
     stmt = (
-        select(DrugInMovement.catalog_drug_id, func.sum(DrugInMovement.packs_amount).label("sum_packs"), func.sum(DrugInMovement.units_amount).label("sum_units"))
+        select(
+            DrugInMovement.catalog_drug_id, 
+            func.sum(DrugInMovement.packs_amount).label("sum_packs"), 
+            func.sum(DrugInMovement.units_amount).label("sum_units"))
         # .options(selectinload(DrugInMovement.catalog_drug))
         # .options(selectinload(DrugInMovement.drug_movement))
         .group_by(DrugInMovement.catalog_drug_id)
@@ -276,8 +279,7 @@ async def read_drug_spent_ids_by_date(session: AsyncSession, body: DateRangeIn) 
 
 
 async def read_drugs_in_receipts_by_date(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
-    # date_start = body.date_start
-    # date_end = body.date_end
+    
     receipt_ids = await read_receipts_ids_by_date(session=session, body=body)
 
     stmt = (
@@ -286,12 +288,41 @@ async def read_drugs_in_receipts_by_date(session: AsyncSession, body: DateRangeI
             func.sum(DrugInMovement.packs_amount).label("sum_packs_receipts"),
             func.sum(DrugInMovement.units_amount).label("sum_units_receipts")
             )
-        
         .filter(DrugInMovement.drug_movement_id.in_(receipt_ids))
         .group_by(DrugInMovement.catalog_drug_id)
         )
     
     return list(await session.execute(stmt)) # [(1, 60, 120.0), (2, 3, 150.0)]
+
+
+async def read_spent_drugs_by_date(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+    
+    spent_ids = await read_drug_spent_ids_by_date(session=session, body=body)
+
+    stmt = (
+        select(
+            DrugInMovement.catalog_drug_id,
+            func.sum(DrugInMovement.packs_amount).label("sum_packs_receipts"),
+            func.sum(DrugInMovement.units_amount).label("sum_units_receipts")
+            )
+        .filter(DrugInMovement.drug_movement_id.in_(spent_ids))
+        .group_by(DrugInMovement.catalog_drug_id)
+        )
+    
+    return list(await session.execute(stmt))
+
+
+async def read_drug_movement_by_date_range(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+
+    receipt_drugs = await read_drugs_in_receipts_by_date(session=session, body=body)
+    spent_drugs = await read_spent_drugs_by_date(session=session, body=body)
+
+    stmt = (
+        select(
+            Drug.name,
+            
+        )
+    )
 
 
 

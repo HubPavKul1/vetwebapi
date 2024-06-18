@@ -128,6 +128,24 @@ async def get_drugs_in_receipts(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
     
+    
+@router.post("/drugs_spent", response_model=SuccessMessage)
+async def get_spent_drugs(
+    body: DateRangeIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[SuccessMessage, dict]:
+    try:
+        drugs: list[DrugInMovement] = await crud.read_spent_drugs_by_date(session=session, body=body)
+        print("*" * 20)
+        print(drugs)
+        print("*" * 20)
+        return SuccessMessage
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
 
 @router.delete(
     "/{drug_movement_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
