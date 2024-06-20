@@ -4,7 +4,7 @@ from sqlalchemy.orm import joinedload, selectinload
 # from operator import and_, or_
 from datetime import date
 
-from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation, Drug
+from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation, Drug, CatalogDrug
 
 from .schemas import DrugInMovementIn, DrugMovementIn, DateRangeIn
 
@@ -312,17 +312,93 @@ async def read_spent_drugs_by_date(session: AsyncSession, body: DateRangeIn) -> 
     return list(await session.execute(stmt))
 
 
-async def read_drug_movement_by_date_range(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+async def read_drug_movement_report_by_date_range(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
 
-    receipt_drugs = await read_drugs_in_receipts_by_date(session=session, body=body)
-    spent_drugs = await read_spent_drugs_by_date(session=session, body=body)
+    receipt_ids = await read_receipts_ids_by_date(session=session, body=body)
+    spent_ids = await read_drug_spent_ids_by_date(session=session, body=body)
 
-    stmt = (
+
+    subq_1 = (
         select(
-            Drug.name,
+            DrugInMovement.catalog_drug_id.label("cd_id"),
+            func.sum(DrugInMovement.packs_amount).label("sum_packs_rec"),
+            func.sum(DrugInMovement.units_amount).label("sum_units_rec")
+            )
+        .filter(DrugInMovement.drug_movement_id.in_(receipt_ids))
+        .group_by(DrugInMovement.catalog_drug_id)
+        .subquery("recept_drugs")  
+    )
+    
+    subq_2 = (
+        select(
+            DrugInMovement.catalog_drug_id.label("cd_id"),
+            func.sum(DrugInMovement.packs_amount).label("sum_packs_spent"),
+            func.sum(DrugInMovement.units_amount).label("sum_units_spent")
+            )
+        .filter(DrugInMovement.drug_movement_id.in_(spent_ids))
+        .group_by(DrugInMovement.catalog_drug_id)
+        .subquery("spent_drugs")
+        
+    )
+    
+    subq_3 = (
+        select(
+            subq_1.c.cd_id.label("cd_id"),
+            subq_1.c.sum_packs_rec.label("packs_rec"),
+            subq_1.c.sum_units_rec.label("units_rec"),
+            subq_2.c.sum_packs_spent.label("packs_spent"),
+            subq_2.c.sum_units_spent.label("units_spent"),
+            (subq_1.c.sum_packs_rec - func.coalesce(subq_2.c.sum_packs_spent, 0))
+            .cast(Integer).label("packs_rest"),
+            (subq_1.c.sum_units_rec - func.coalesce(subq_2.c.sum_units_spent, 0))
+            .cast(Integer).label("units_rest")
+        )
+        # .select_from(subq_1)
+        .join(subq_2, subq_2.c.cd_id == subq_1.c.cd_id, isouter=True)
+        .subquery("drug_rec_spent")
+    )
+    
+    subq_4 = (
+        select(
+            Drug.name.label("drug_name"),
+            CatalogDrug.id.label("cd_id"),
+            CatalogDrug.batch.label("batch"),
+            CatalogDrug.control.label("control"),
+            CatalogDrug.production_date.label("production_date"),
+            CatalogDrug.expiration_date.label("expiration_date"),
+        )
+        # .select_from(CatalogDrug)
+        .join(Drug, Drug.id == CatalogDrug.drug_id)
+        .subquery("catalog_drug_info")
+    )
+    
+    query = (
+        select(
+            subq_4.c.cd_id,
+            subq_4.c.drug_name,
+            subq_4.c.batch,
+            subq_4.c.control,
+            subq_4.c.production_date,
+            subq_4.c.expiration_date,
+            subq_3.c.packs_rec,
+            subq_3.c.units_rec,
+            subq_3.c.packs_spent,
+            subq_3.c.units_spent,
+            subq_3.c.packs_rest,
+            subq_3.c.units_rest
             
         )
+        .join(subq_3, subq_3.c.cd_id == subq_4.c.cd_id)
     )
+    
+    return list(await session.execute(query))
+    
+    
+    
+    
+    
+    
+    
 
 
 

@@ -10,8 +10,8 @@ from vetwebapi.core.models import DrugMovement, DrugInMovement
 
 from . import crud
 from .dependencies import drug_movement_by_id
-from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail, DrugInMovementSchema, DateRangeIn
-from .serializers import serialize_drug_in_movement, serialize_drug_movement_card
+from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail, DrugInMovementSchema, DateRangeIn, DrugReportSchema, DrugReportItemSchema
+from .serializers import serialize_drug_in_movement, serialize_drug_movement_card, serialize_drug_report, serialize_drug_in_report
 
 router = APIRouter(prefix="/receipts")
 
@@ -129,17 +129,22 @@ async def get_drugs_in_receipts(
         )
     
     
-@router.post("/drugs_spent", response_model=SuccessMessage)
-async def get_spent_drugs(
+@router.post(
+    "/drugs_report", 
+    response_model=DrugReportSchema
+    )
+async def get_drugs_report(
     body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[SuccessMessage, dict]:
+) -> Union[DrugReportSchema, dict]:
     try:
-        drugs: list[DrugInMovement] = await crud.read_spent_drugs_by_date(session=session, body=body)
+        drugs: list[tuple] = await crud.read_drug_movement_report_by_date_range(session=session, body=body)
+        drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(drug) for drug in drugs]
         print("*" * 20)
         print(drugs)
+        print(drug_schema)
         print("*" * 20)
-        return SuccessMessage
+        return DrugReportSchema(drugs_report=drug_schema)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

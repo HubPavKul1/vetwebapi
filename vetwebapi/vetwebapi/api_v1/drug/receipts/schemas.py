@@ -38,22 +38,23 @@ class DrugInMovementSchema(BaseModel):
     packing: int
 
 
-# class DrugInMovementSchemaGrouped(BaseModel):
-#     id: int
-#     name: str
-#     disease: str
-#     batch: str
-#     control: str
-#     production_date: date
-#     expiration_date: date
-#     packs_amount: int
-#     units_amount: float
-#     drug_manufacturer: str
-#     drug_dosage: str
-#     administration_method: str
-#     place_of_administration: str
-#     disposal_method: str
-#     packing: int
+class DrugReportItemSchema(BaseModel):
+    id: int
+    drug_name: str
+    batch: str
+    control: str
+    production_date: date
+    expiration_date: date
+    packs_rec: int
+    units_rec: int
+    packs_spent: int | None
+    units_spent: int | None
+    packs_rest: int | None
+    units_rest: int | None
+    
+class DrugReportSchema(BaseModel):
+    drugs_report: list[DrugReportItemSchema]
+    
 
 class DrugMovementDetail(DrugMovementOut):
     drugs: list[DrugInMovementSchema] | None = None

@@ -1,6 +1,6 @@
 from vetwebapi.core.models import DrugMovement, DrugInMovement
 
-from .schemas import DrugInMovementSchema, DrugMovementDetail
+from .schemas import DrugInMovementSchema, DrugMovementDetail, DrugReportItemSchema, DrugReportSchema
 
 
 async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSchema:
@@ -33,3 +33,24 @@ async def serialize_drug_movement_card(drug_movement: DrugMovement) -> DrugMovem
         drugs=drugs
     )
     
+    
+async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
+    return DrugReportItemSchema(
+        id=item[0],
+        drug_name=item[1],
+        batch=item[2],
+        control=item[3],
+        production_date=item[4],
+        expiration_date=item[5],
+        packs_rec=item[6],
+        units_rec=item[7],
+        packs_spent=item[8],
+        units_spent=item[9],
+        packs_rest=item[10],
+        units_rest=item[11]
+    )
+    
+async def serialize_drug_report(items: list[tuple]) -> DrugReportSchema:
+    DrugReportSchema(
+        drugs_report=[await serialize_drug_in_report(item) for item in items]
+        ) 
