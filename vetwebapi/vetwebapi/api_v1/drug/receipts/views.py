@@ -10,8 +10,22 @@ from vetwebapi.core.models import DrugMovement, DrugInMovement
 
 from . import crud
 from .dependencies import drug_movement_by_id
-from .schemas import DrugInMovementIn, DrugMovementIn, DrugMovementOut, DrugMovements, DrugMovementDetail, DrugInMovementSchema, DateRangeIn, DrugReportSchema, DrugReportItemSchema
-from .serializers import serialize_drug_in_movement, serialize_drug_movement_card, serialize_drug_report, serialize_drug_in_report
+from .schemas import (
+    DrugInMovementIn, 
+    DrugMovementIn, 
+    DrugMovementOut, 
+    DrugMovements, 
+    DrugMovementDetail, 
+    DrugInMovementSchema, 
+    DateRangeIn, 
+    DrugReportSchema, 
+    DrugReportItemSchema
+    )
+from .serializers import (
+    serialize_drug_in_movement, 
+    serialize_drug_movement_card, 
+    serialize_drug_in_report
+    )
 
 router = APIRouter(prefix="/receipts")
 

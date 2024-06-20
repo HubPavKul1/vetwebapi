@@ -317,7 +317,7 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
     receipt_ids = await read_receipts_ids_by_date(session=session, body=body)
     spent_ids = await read_drug_spent_ids_by_date(session=session, body=body)
 
-
+    # get drugs amount in receipt in date range
     subq_1 = (
         select(
             DrugInMovement.catalog_drug_id.label("cd_id"),
@@ -328,7 +328,8 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
         .group_by(DrugInMovement.catalog_drug_id)
         .subquery("recept_drugs")  
     )
-    
+
+    # get drugs amount spent in date range
     subq_2 = (
         select(
             DrugInMovement.catalog_drug_id.label("cd_id"),
@@ -340,7 +341,9 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
         .subquery("spent_drugs")
         
     )
-    
+
+
+    # join prev tables and calc rest drugs amount
     subq_3 = (
         select(
             subq_1.c.cd_id.label("cd_id"),
@@ -358,6 +361,7 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
         .subquery("drug_rec_spent")
     )
     
+    # get catalog_drugs joined with drugs table
     subq_4 = (
         select(
             Drug.name.label("drug_name"),
@@ -372,6 +376,7 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
         .subquery("catalog_drug_info")
     )
     
+    # get final report query
     query = (
         select(
             subq_4.c.cd_id,
@@ -394,14 +399,6 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
     return list(await session.execute(query))
     
     
-    
-    
-    
-    
-    
-
-
-
 # Delete
 async def delete_drug_movement(session: AsyncSession, drug_movement: DrugMovement) -> None:
     await session.delete(drug_movement)
