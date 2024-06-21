@@ -45,12 +45,15 @@ class DrugReportItemSchema(BaseModel):
     control: str
     production_date: date
     expiration_date: date
+    packs_start: int | None
+    units_start: int | None
     packs_rec: int
-    units_rec: int
+    units_rec: float
     packs_spent: int | None
-    units_spent: int | None
+    units_spent: float | None
+    disposed_units: float | None
     packs_rest: int | None
-    units_rest: int | None
+    units_rest: float | None
     
 class DrugReportSchema(BaseModel):
     drugs_report: list[DrugReportItemSchema]

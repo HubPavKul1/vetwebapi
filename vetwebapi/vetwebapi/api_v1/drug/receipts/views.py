@@ -90,75 +90,27 @@ async def get_receipt(
         )
     
 
-@router.post("/date_range", response_model=SuccessMessage)
-async def get_receipts_in_date_range(
-    body: DateRangeIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[SuccessMessage, dict]:
-    try:
-        receipts: list[DrugMovement] = await crud.read_receipts_by_date(session=session, body=body)
-        # receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
-        return SuccessMessage
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-    
-
-@router.post("/date_range_grouped", response_model=SuccessMessage)
-async def get_receipts_ids_in_date_range(
-    body: DateRangeIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[SuccessMessage, dict]:
-    try:
-        receipts: list[int] = await crud.read_receipts_ids_by_date(session=session, body=body)
-        print("*" * 20)
-        print(receipts)
-        print("*" * 20)
-        # receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
-        return SuccessMessage
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-    
-    
-@router.post("/drugs_in_receipt", response_model=SuccessMessage)
-async def get_drugs_in_receipts(
-    body: DateRangeIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[SuccessMessage, dict]:
-    try:
-        drugs: list[DrugInMovement] = await crud.read_drugs_in_receipts_by_date(session=session, body=body)
-        print("*" * 20)
-        print(drugs)
-        print("*" * 20)
-        return SuccessMessage
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-    
-    
-@router.post(
-    "/drugs_report", 
-    response_model=DrugReportSchema
-    )
+@router.post("/drugs_report"
+             , response_model=DrugReportSchema
+            #  , response_model=SuccessMessage
+             )
 async def get_drugs_report(
     body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[DrugReportSchema, dict]:
+) -> Union[
+    DrugReportSchema, dict
+    # SuccessMessage, dict
+    ]:
     try:
         drugs: list[tuple] = await crud.read_drug_movement_report_by_date_range(session=session, body=body)
-        drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(drug) for drug in drugs]
+        drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
         print("*" * 20)
         print(drugs)
         print(drug_schema)
         print("*" * 20)
+        
         return DrugReportSchema(drugs_report=drug_schema)
+        # return SuccessMessage
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

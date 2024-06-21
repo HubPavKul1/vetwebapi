@@ -42,11 +42,14 @@ async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
         control=item[3],
         production_date=item[4],
         expiration_date=item[5],
-        packs_rec=item[6],
-        units_rec=item[7],
-        packs_spent=item[8],
-        units_spent=item[9],
-        packs_rest=item[10],
-        units_rest=item[11]
+        packs_start=item[6],
+        units_start=item[7],
+        packs_rec=item[8],
+        units_rec=item[9],
+        packs_spent=item[10],
+        units_spent=item[11],
+        disposed_units=item[12],
+        packs_rest=item[13],
+        units_rest=item[14]
     )
     

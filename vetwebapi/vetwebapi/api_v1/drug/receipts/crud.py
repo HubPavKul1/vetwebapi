@@ -1,4 +1,4 @@
-from sqlalchemy import desc, select, func, cast, Integer, and_
+from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 # from operator import and_, or_
@@ -264,6 +264,22 @@ async def read_receipts_ids_by_date(session: AsyncSession, body: DateRangeIn) ->
     return list(await session.scalars(stmt))
 
 
+async def read_receipts_ids_before_date_start(session: AsyncSession, body: DateRangeIn) -> list[int]:
+    date_start = body.date_start
+    
+    stmt = (
+        select(
+            DrugMovement.id
+            )
+        .filter(
+            and_(DrugMovement.operation_id == 1, 
+                 DrugMovement.operation_date < date_start
+                 ))
+        )
+    
+    return list(await session.scalars(stmt))
+
+
 async def read_drug_spent_ids_by_date(session: AsyncSession, body: DateRangeIn) -> list[int]:
     date_start = body.date_start
     date_end = body.date_end
@@ -273,6 +289,22 @@ async def read_drug_spent_ids_by_date(session: AsyncSession, body: DateRangeIn) 
             DrugMovement.id
             )
         .filter(and_(DrugMovement.operation_id == 2, DrugMovement.operation_date.between(date_start, date_end)))
+        )
+    
+    return list(await session.scalars(stmt))
+
+
+async def read_drug_spent_ids_before_date_start(session: AsyncSession, body: DateRangeIn) -> list[int]:
+    date_start = body.date_start
+    
+    stmt = (
+        select(
+            DrugMovement.id
+            )
+        .filter(and_(
+            DrugMovement.operation_id == 2,
+            DrugMovement.operation_date < date_start
+            ))
         )
     
     return list(await session.scalars(stmt))
@@ -315,7 +347,9 @@ async def read_spent_drugs_by_date(session: AsyncSession, body: DateRangeIn) -> 
 async def read_drug_movement_report_by_date_range(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
 
     receipt_ids = await read_receipts_ids_by_date(session=session, body=body)
+    # receipt_ids = await read_receipts_ids_before_date_start(session=session, body=body)
     spent_ids = await read_drug_spent_ids_by_date(session=session, body=body)
+    # spent_ids = await read_drug_spent_ids_before_date_start(session=session, body=body)
 
     # get drugs amount in receipt in date range
     subq_1 = (
@@ -342,6 +376,111 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
         
     )
 
+    # join prev tables
+    subq_3 = (
+        select(
+            subq_1.c.cd_id.label("cd_id"),
+            subq_1.c.sum_packs_rec.label("packs_rec"),
+            subq_1.c.sum_units_rec.label("units_rec"),
+            subq_2.c.sum_packs_spent.label("packs_spent"),
+            subq_2.c.sum_units_spent.label("units_spent")
+            
+        )
+        .join(subq_2, subq_2.c.cd_id == subq_1.c.cd_id, isouter=True)
+        .subquery("drug_rec_spent")
+    )
+    
+    subq_4 = await drug_movement_report_before_date(session=session, body=body)
+    
+    subq_5 = (
+        select(
+            subq_3.c.cd_id.label("cd_id"),
+            subq_4.c.packs_rest.label("packs_rest_start"),
+            subq_4.c.units_rest.label("units_rest_start"),
+            subq_3.c.packs_rec.label("packs_rec"),
+            subq_3.c.units_rec.label("units_rec"),
+            subq_3.c.packs_spent.label("packs_spent"),
+            subq_3.c.units_spent.label("units_spent"),
+            (func.coalesce(subq_4.c.packs_rest, 0) + subq_3.c.packs_rec - func.coalesce(subq_3.c.packs_spent, 0))
+            .cast(Integer).label("packs_rest_end") 
+        )
+        .join(subq_4, subq_4.c.cd_id == subq_3.c.cd_id, isouter=True)
+        .subquery("drugs_movement")
+    )
+    
+    # get catalog_drugs joined with drugs table
+    subq_6 = (
+        select(
+            Drug.name.label("drug_name"),
+            Drug.packing.label("packing"),
+            CatalogDrug.id.label("cd_id"),
+            CatalogDrug.batch.label("batch"),
+            CatalogDrug.control.label("control"),
+            CatalogDrug.production_date.label("production_date"),
+            CatalogDrug.expiration_date.label("expiration_date"),
+        )
+        .select_from(CatalogDrug)
+        .join(Drug, Drug.id == CatalogDrug.drug_id)
+        .subquery("catalog_drug_info")
+    )
+    
+    
+    
+    # get final report query
+    query = (
+        select(
+            subq_6.c.cd_id,
+            subq_6.c.drug_name,
+            subq_6.c.batch,
+            subq_6.c.control,
+            subq_6.c.production_date,
+            subq_6.c.expiration_date,
+            subq_5.c.packs_rest_start,
+            subq_5.c.units_rest_start,
+            subq_5.c.packs_rec,
+            subq_5.c.units_rec,
+            subq_5.c.packs_spent,
+            subq_5.c.units_spent,
+            ((subq_6.c.packing * func.coalesce(subq_5.c.packs_spent, 0)) - func.coalesce(subq_5.c.units_spent, 0)).cast(Float),
+            subq_5.c.packs_rest_end,
+            (subq_6.c.packing * subq_5.c.packs_rest_end).cast(Float)
+            
+        )
+        .join(subq_5, subq_5.c.cd_id == subq_6.c.cd_id)
+    )
+    
+    return list(await session.execute(query))
+
+
+async def drug_movement_report_before_date(session: AsyncSession, body: DateRangeIn) -> Subquery:
+
+    receipt_ids = await read_receipts_ids_before_date_start(session=session, body=body)
+    spent_ids = await read_drug_spent_ids_before_date_start(session=session, body=body)
+
+    # get drugs amount in receipt in date range
+    subq_1 = (
+        select(
+            DrugInMovement.catalog_drug_id.label("cd_id"),
+            func.sum(DrugInMovement.packs_amount).label("sum_packs_rec"),
+            func.sum(DrugInMovement.units_amount).label("sum_units_rec")
+            )
+        .filter(DrugInMovement.drug_movement_id.in_(receipt_ids))
+        .group_by(DrugInMovement.catalog_drug_id)
+        .subquery("recept_drugs")  
+    )
+
+    # get drugs amount spent in date range
+    subq_2 = (
+        select(
+            DrugInMovement.catalog_drug_id.label("cd_id"),
+            func.sum(DrugInMovement.packs_amount).label("sum_packs_spent"),
+            func.sum(DrugInMovement.units_amount).label("sum_units_spent")
+            )
+        .filter(DrugInMovement.drug_movement_id.in_(spent_ids))
+        .group_by(DrugInMovement.catalog_drug_id)
+        .subquery("spent_drugs")
+        
+    )
 
     # join prev tables and calc rest drugs amount
     subq_3 = (
@@ -352,11 +491,8 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
             subq_2.c.sum_packs_spent.label("packs_spent"),
             subq_2.c.sum_units_spent.label("units_spent"),
             (subq_1.c.sum_packs_rec - func.coalesce(subq_2.c.sum_packs_spent, 0))
-            .cast(Integer).label("packs_rest"),
-            (subq_1.c.sum_units_rec - func.coalesce(subq_2.c.sum_units_spent, 0))
-            .cast(Integer).label("units_rest")
+            .cast(Integer).label("packs_rest")
         )
-        # .select_from(subq_1)
         .join(subq_2, subq_2.c.cd_id == subq_1.c.cd_id, isouter=True)
         .subquery("drug_rec_spent")
     )
@@ -365,6 +501,7 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
     subq_4 = (
         select(
             Drug.name.label("drug_name"),
+            Drug.packing.label("packing"),
             CatalogDrug.id.label("cd_id"),
             CatalogDrug.batch.label("batch"),
             CatalogDrug.control.label("control"),
@@ -379,7 +516,7 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
     # get final report query
     query = (
         select(
-            subq_4.c.cd_id,
+            subq_4.c.cd_id.label("cd_id"),
             subq_4.c.drug_name,
             subq_4.c.batch,
             subq_4.c.control,
@@ -389,14 +526,17 @@ async def read_drug_movement_report_by_date_range(session: AsyncSession, body: D
             subq_3.c.units_rec,
             subq_3.c.packs_spent,
             subq_3.c.units_spent,
-            subq_3.c.packs_rest,
-            subq_3.c.units_rest
+            ((subq_4.c.packing * func.coalesce(subq_3.c.packs_spent, 0)) - func.coalesce(subq_3.c.units_spent, 0)).cast(Float).label("disposed_units"),
+            subq_3.c.packs_rest.label("packs_rest"),
+            (subq_4.c.packing * subq_3.c.packs_rest).cast(Float).label("units_rest")
             
         )
         .join(subq_3, subq_3.c.cd_id == subq_4.c.cd_id)
+        .subquery("drugs_rest_before")
     )
     
-    return list(await session.execute(query))
+    # return list(await session.execute(query))
+    return query
     
     
 # Delete
