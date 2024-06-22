@@ -3,7 +3,7 @@ from datetime import date
 from pydantic import BaseModel, ConfigDict
 
 
-# Drug Movement
+
 class DrugMovementIn(BaseModel):
     operation_date: date
 
@@ -37,26 +37,6 @@ class DrugInMovementSchema(BaseModel):
     disposal_method: str
     packing: int
 
-
-class DrugReportItemSchema(BaseModel):
-    id: int
-    drug_name: str
-    batch: str
-    control: str
-    production_date: date
-    expiration_date: date
-    packs_start: int | None
-    units_start: int | None
-    packs_rec: int
-    units_rec: float
-    packs_spent: int | None
-    units_spent: float | None
-    disposed_units: float | None
-    packs_rest: int | None
-    units_rest: float | None
-    
-class DrugReportSchema(BaseModel):
-    drugs_report: list[DrugReportItemSchema]
     
 
 class DrugMovementDetail(DrugMovementOut):
@@ -67,6 +47,3 @@ class DrugMovements(BaseModel):
     drug_movements: list[DrugMovementDetail]    
 
 
-class DateRangeIn(BaseModel):
-    date_start: date
-    date_end: date

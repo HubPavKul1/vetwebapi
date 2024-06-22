@@ -17,14 +17,11 @@ from .schemas import (
     DrugMovements, 
     DrugMovementDetail, 
     DrugInMovementSchema, 
-    DateRangeIn, 
-    DrugReportSchema, 
-    DrugReportItemSchema
+
     )
 from .serializers import (
     serialize_drug_in_movement, 
     serialize_drug_movement_card, 
-    serialize_drug_in_report
     )
 
 router = APIRouter(prefix="/receipts")
@@ -90,33 +87,6 @@ async def get_receipt(
         )
     
 
-@router.post("/drugs_report"
-             , response_model=DrugReportSchema
-            #  , response_model=SuccessMessage
-             )
-async def get_drugs_report(
-    body: DateRangeIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[
-    DrugReportSchema, dict
-    # SuccessMessage, dict
-    ]:
-    try:
-        drugs: list[tuple] = await crud.read_drug_movement_report_by_date_range(session=session, body=body)
-        drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
-        print("*" * 20)
-        print(drugs)
-        print(drug_schema)
-        print("*" * 20)
-        
-        return DrugReportSchema(drugs_report=drug_schema)
-        # return SuccessMessage
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-    
 
 @router.delete(
     "/{drug_movement_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED

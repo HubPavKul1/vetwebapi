@@ -24,11 +24,13 @@ from vetwebapi.core.models import Drug
 from . import crud
 from .catalog.views import router as catalog_router
 from .receipts.views import router as receipt_router
+from .reports.views import router as report_router
 from .serializers import serialize_drug, serialize_drug_card, serialize_drug_name
 
 router = APIRouter(prefix="/drugs", tags=["Drugs"])
 router.include_router(receipt_router)
 router.include_router(catalog_router)
+router.include_router(report_router)
 
 
 @router.post("/", response_model=DrugSchema, status_code=status.HTTP_201_CREATED)
