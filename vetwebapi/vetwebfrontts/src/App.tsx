@@ -11,6 +11,7 @@ import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
 import { Vets } from "./pages/companyPages/Vets";
 import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
 import { VaccinationDetail } from "./pages/vetWorkPages/vaccination/vaccinationDetail/VaccinationDetail";
+import DrugReportMainPage from "./pages/drugPages/drugReports/DrugReportMainPage";
 
 export function App() {
   return (
@@ -28,6 +29,7 @@ export function App() {
           <Route path="vetwork/:id" element={<VaccinationDetail />} />
           <Route path="companies/:id" element={<CompanyDetail />} />
           <Route path="drugs/:id" element={<DrugDetail />} />
+          <Route path="drugs/reports" element={<DrugReportMainPage />} />
 
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
