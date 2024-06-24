@@ -1,9 +1,24 @@
 import { CreateItem } from "../../../CreateItem";
+import { DrugReportForm } from "../DrugReportForm";
 
-export default function DrugMovementBetweenDateRange() {
+interface DrugMovementBetweenDateRangeProps {
+  setDrugReportData: CallableFunction;
+  setDateRange: CallableFunction;
+  setReportActive: CallableFunction;
+}
+
+export default function DrugMovementBetweenDateRange({
+  setDrugReportData,
+  setDateRange,
+  setReportActive
+}: DrugMovementBetweenDateRangeProps) {
   return (
     <CreateItem btnTitle="Движение биопрепаратов за период времени">
-      <div>Форма</div>
+      <DrugReportForm
+        setDrugReportData={setDrugReportData}
+        setDateRange={setDateRange}
+        setReportActive={setReportActive}
+      />
     </CreateItem>
   );
 }

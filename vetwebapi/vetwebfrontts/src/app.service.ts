@@ -17,6 +17,12 @@ export const AppService = {
         .catch(err => console.log(err))
     },
 
+    async createReport(url: string, data: object) {
+        return await axios.post<object>(url, data)
+        .then(response => response.data)
+        .catch(err => console.log(err))
+    },
+
     async deleteItem(url: string) {
         await axios.delete(url)
       },

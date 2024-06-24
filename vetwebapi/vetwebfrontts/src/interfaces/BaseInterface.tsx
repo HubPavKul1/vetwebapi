@@ -15,3 +15,8 @@ export interface IQueryData {
 export interface ISelectData {
     data: IBase[];
 }
+
+export interface IDateRange {
+    date_start: string;
+    date_end: string
+}

@@ -132,5 +132,23 @@ export interface IDrugCatalogCard extends IDrugCatalogCreate {
 
 }
 
+export interface IDrugReport {
+    id: number;
+    drug_name: string;
+    batch: string;
+    control: string;
+    production_date: string;
+    expiration_date: string;
+    packs_start?: number;
+    units_start?: number;
+    packs_received?: number;
+    units_received?: number;
+    packs_spent?: number;
+    units_spent?: number;
+    disposed_units?: number;
+    packs_rest?: number;
+    units_rest?: number
+}
+
 
 
