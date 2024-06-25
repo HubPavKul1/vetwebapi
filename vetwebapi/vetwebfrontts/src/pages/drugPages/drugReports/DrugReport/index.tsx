@@ -9,6 +9,7 @@ import { ReceiptPageMenu } from "../../../../components/menu/ReceiptPageMenu";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
+import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
 
 interface DrugReportProps {
   data: IDrugReport[];
@@ -45,15 +46,15 @@ export function DrugReport({
                 <Col xs={2}>Наименование препарата</Col>
                 <Col>Серия</Col>
                 <Col>Годен до</Col>
-                <Col>Кол-во упаковок на начало отчетного периода</Col>
-                <Col>Кол-во единиц учета на начало отчетного периода</Col>
-                <Col>Кол-во упаковок получено за отчетный период</Col>
-                <Col>Кол-во единиц учета получено за отчетный период</Col>
-                <Col>Кол-во упаковок израсходовано за отчетный период</Col>
-                <Col>Кол-во единиц учета израсходовано за отчетный период</Col>
-                <Col>Кол-во единиц учета утилизировано за отчетный период</Col>
-                <Col>Кол-во упаковок на конец отчетного периода</Col>
-                <Col>Кол-во единиц учета на конец отчетного периода</Col>
+                <Col>Упак. на нач. отчет. периода</Col>
+                <Col>Ед. учета на нач. отчет. периода</Col>
+                <Col>Упак. получено за отчет. период</Col>
+                <Col>Ед. учета получено за отчет. период</Col>
+                <Col>Упак. израсход. за отчет. период</Col>
+                <Col>Ед. учета израсход. за отчет. период</Col>
+                <Col>Ед. учета утилиз-но за отчет. период</Col>
+                <Col>Упак. на конец отчет. периода</Col>
+                <Col>Ед. учета на конец отчет. периода</Col>
               </Row>
               {data.length &&
                 data.map((drug) => <DrugInReport key={drug.id} drug={drug} />)}
@@ -61,8 +62,7 @@ export function DrugReport({
           </Container>
         </PageDetail>
       ) : (
-        // <ReceiptPDF setPdf={setPdf} data={data} />
-        <h1>PDF</h1>
+        <DrugReportPDF setPdf={setPdf} data={data} dateStart={dateStart} dateEnd={dateEnd}/>
       )}
     </>
   );
