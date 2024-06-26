@@ -11,17 +11,25 @@ export function DrugReportMenu({
   setReportActive,
 }: ReceiptPageMenuProps) {
   const menuButtons = [
-    <CustomButton
+    {
+      id: 1,
+      element: <CustomButton
       className="btn-submit"
       title="Отчет PDF"
       onClick={() => setPdf(true)}
-    />,
+    />
+    }
+    ,
 
-    <CustomButton
+    {
+      id: 2,
+      element: <CustomButton
       className="btn-submit"
       title="Выйти из отчета"
       onClick={() => setReportActive(false)}
-    />,
+    />
+    }
+    
   ];
 
   return <Menu buttons={menuButtons}></Menu>;

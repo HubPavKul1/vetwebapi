@@ -66,10 +66,11 @@ export function VaccinationDetail() {
               {data.companies?.length &&
                 data.companies.map((company) => (
                   <VetWorkCompany
-                   company={company}
-                   setAnimals={setAnimals} 
-                   setCompanyId={setCompanyId}
-                   animals={data.animals}
+                    key={company.id}
+                    company={company}
+                    setAnimals={setAnimals}
+                    setCompanyId={setCompanyId}
+                    animals={data.animals}
                   />
                 ))}
             </Container>
@@ -90,9 +91,7 @@ export function VaccinationDetail() {
             </Container>
           </>
         </PageDetail>
-      ) : 
-      
-      act ? (
+      ) : act ? (
         <ActPDF setPdf={showAct} data={data} />
       ) : animalsList ? (
         <AnimalsListPDF setPdf={showAnimalsList} data={data} />

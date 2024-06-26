@@ -1,9 +1,12 @@
 
+import { IReactElement } from "../../interfaces/BaseInterface";
 import styles from "./Menu.module.scss";
+
+
 
 interface MenuProps {
   children?: React.ReactElement | React.ReactNode;
-  buttons?: React.ReactElement[]
+  buttons?: IReactElement[]
 }
 
 export function Menu({ children, buttons }: MenuProps) {
@@ -16,7 +19,7 @@ export function Menu({ children, buttons }: MenuProps) {
       <div className={styles.buttonsSet}>
         {buttons && buttons.map(
           item => (
-            <div>{item}</div>
+            <div key={item.id}>{item.element}</div>
           )
         )}
       </div>

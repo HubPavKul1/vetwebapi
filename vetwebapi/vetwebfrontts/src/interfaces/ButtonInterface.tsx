@@ -11,3 +11,4 @@ export interface IButtonProps {
     onClick?: MouseEventHandler<HTMLButtonElement>;
     title?: string;
 }
+

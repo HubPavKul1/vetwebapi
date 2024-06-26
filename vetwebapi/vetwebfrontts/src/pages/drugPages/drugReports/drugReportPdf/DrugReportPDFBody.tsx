@@ -47,7 +47,7 @@ export function DrugReportPDFBody({data}: DrugReportPDFBodyProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map(drug => <DrugReportTableItem drug={drug} />)}
+                    {data.map(drug => <DrugReportTableItem key={drug.id} drug={drug} />)}
                 </tbody>
             </Table>    
         </Container>

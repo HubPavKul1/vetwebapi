@@ -39,28 +39,36 @@
     
     .tHead {
         div {
-            border: 2px solid black;
+            padding-bottom: 5px;
+            border: 1px solid black;
             text-align: center;
+            vertical-align: top;
         }
 
     }  
 
     .tBody {
         div {
-            border: 2px solid black;
+            padding-bottom: 5px;
+            border: 1px solid black;
             text-align: center;
             line-height: 2em;
         }
     }     
 
     .companyRow {
-        border: 2px solid black;
+        border: 1px solid black;
         text-align: center;
+        font-size: 14px;
+
+        h5 {
+            margin-bottom: 5px;
+        }
     }
     
     .underScored {
         text-align: center;
-        border-bottom: 2px solid black;
+        border-bottom: 1px solid black;
     }
 
     

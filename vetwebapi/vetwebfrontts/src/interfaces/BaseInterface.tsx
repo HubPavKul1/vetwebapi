@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface IBase {
     id: number;
     name: string;
@@ -19,4 +21,9 @@ export interface ISelectData {
 export interface IDateRange {
     date_start: string;
     date_end: string
+}
+
+export interface IReactElement {
+    id: number;
+    element: React.ReactElement
 }
