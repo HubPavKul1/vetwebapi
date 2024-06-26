@@ -394,6 +394,7 @@ async def catalog_drug_movement_report(session: AsyncSession, body: DateRangeIn)
             c_d_info.c.control,
             c_d_info.c.production_date,
             c_d_info.c.expiration_date,
+            c_d_info.c.packing,
             c_d_movement.c.packs_rest_start,
             c_d_movement.c.units_rest_start,
             c_d_movement.c.packs_received,

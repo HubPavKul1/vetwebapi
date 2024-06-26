@@ -139,6 +139,7 @@ export interface IDrugReport {
     control: string;
     production_date: string;
     expiration_date: string;
+    packing: number;
     packs_start?: number;
     units_start?: number;
     packs_received?: number;

@@ -8,10 +8,11 @@ interface PDFProps {
   setPdf: CallableFunction;
   children?: React.ReactElement | React.ReactNode;
   filename: string;
+  orientation?: "p" | "l";
 }
 
-export function PDF({ setPdf, filename, children }: PDFProps) {
-  const { toPDF, targetRef } = usePDF({ filename: `${filename}` });
+export function PDF({ setPdf, filename, orientation="p", children }: PDFProps) {
+  const { toPDF, targetRef } = usePDF({ filename: `${filename}` , page: {orientation: `${orientation}`}});
 
   const onClick = () => {
     setPdf(false);
