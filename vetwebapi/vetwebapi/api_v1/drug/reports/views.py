@@ -28,3 +28,22 @@ async def get_drugs_report(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+        
+        
+@router.post("/1vet_B", response_model=SuccessMessage)
+async def get_drugs_report(
+    body: DateRangeIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[SuccessMessage, dict]:
+    try:
+        drugs: list[tuple] = await crud.animals_count_in_vetworks_between_date_range(session=session, body=body)
+        print("*" *20)
+        print(drugs)
+        print("*" *20)
+        # drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
+        return SuccessMessage
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )

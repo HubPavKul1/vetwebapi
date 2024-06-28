@@ -1,145 +1,10 @@
 from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import joinedload
 
-from vetwebapi.core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug
+from vetwebapi.core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug, VetWork, AnimalInVetWork
 
 from .schemas import DateRangeIn
-
-
-
-"""
-1) Приход и Расход:
-
-SELECT * ,
-SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
-SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
-FROM catalog_drugs c_d
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id;
-
-2) Приход:
-
-SELECT * ,
-SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
-SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
-FROM catalog_drugs c_d
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-WHERE dm.operation_id = 1;
-
-3) Расход:
-
-SELECT * ,
-SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
-SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
-FROM catalog_drugs c_d
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-WHERE dm.operation_id = 2;
-
-4) 
-SELECT 
-d.name, 
-c_d.batch, 
-c_d.production_date, 
-c_d.expiration_date,
-dm.id,
-o.name,
-dm.operation_date,
-dim.packs_amount,
-dim.units_amount,
-SUM(dim.packs_amount) OVER(PARTITION BY dm.id) AS sum_packs,
-SUM(dim.units_amount) OVER(PARTITION BY dm.id) AS sum_units
-FROM catalog_drugs c_d
-JOIN drugs d ON d.id = c_d.drug_id
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = c_d.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-JOIN operations o ON o.id = dm.operation_id;
-
-
-5)
-SELECT
-d.name as drug_name,
-cd.batch,
-dm.operation_id,
-o.name as operation_name,
-SUM(dim.packs_amount) AS sum_packs_receipt,
-SUM(dim.units_amount) AS sum_units_receipt,
-
-spent_drugs.sum_packs_spent AS packs_spent,
-spent_drugs.sum_units_spent AS units_spent
-
-FROM catalog_drugs cd
-JOIN drugs d ON d.id = cd.drug_id
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = cd.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-JOIN operations o ON o.id = dm.operation_id
-LEFT OUTER JOIN (
-SELECT
-cd.id AS catalog_drug_id,
-SUM(dim.packs_amount) AS sum_packs_spent,
-SUM(dim.units_amount) AS sum_units_spent
-FROM catalog_drugs cd
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = cd.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-JOIN operations o ON o.id = dm.operation_id
-WHERE o.id = 2
-GROUP BY(cd.id, dm.operation_id)
-) spent_drugs ON spent_drugs.catalog_drug_id = cd.id
-WHERE o.id = 1
-GROUP BY(
-drug_name, 
-cd.batch, 
-cd.id, 
-dm.operation_id, 
-operation_name,
-spent_drugs.sum_packs_spent,
-spent_drugs.sum_units_spent
-);
-
-6) Весь запрос:
-SELECT *,
-sum_packs_receipt - COALESCE(packs_spent, 0) AS packs_rest,
-sum_units_receipt - COALESCE(units_spent, 0) AS units_rest
-FROM
-(SELECT
-d.name as drug_name,
-cd.batch,
-dm.operation_id,
-o.name as operation_name,
-SUM(dim.packs_amount) AS sum_packs_receipt,
-SUM(dim.units_amount) AS sum_units_receipt,
-spent_drugs.sum_packs_spent AS packs_spent,
-spent_drugs.sum_units_spent AS units_spent
-
-FROM catalog_drugs cd
-JOIN drugs d ON d.id = cd.drug_id
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = cd.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-JOIN operations o ON o.id = dm.operation_id
-LEFT OUTER JOIN (
-SELECT
-cd.id AS catalog_drug_id,
-SUM(dim.packs_amount) AS sum_packs_spent,
-SUM(dim.units_amount) AS sum_units_spent
-FROM catalog_drugs cd
-JOIN drugs_in_movement dim ON dim.catalog_drug_id = cd.id
-JOIN drug_movements dm ON dm.id = dim.drug_movement_id
-JOIN operations o ON o.id = dm.operation_id
-WHERE o.id = 2
-GROUP BY(cd.id, dm.operation_id)
-) spent_drugs ON spent_drugs.catalog_drug_id = cd.id
-WHERE o.id = 1
-GROUP BY(
-drug_name, 
-cd.batch, 
-cd.id, 
-dm.operation_id, 
-operation_name,
-spent_drugs.sum_packs_spent,
-spent_drugs.sum_units_spent
-)) sub_query;
-"""
 
 # catalog_drug_info
 async def catalog_drug_info() -> Subquery:
@@ -160,6 +25,40 @@ async def catalog_drug_info() -> Subquery:
     return query
 
 
+# vetwork between date range
+async def read_vetworks_data_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
+    date_start = body.date_start
+    date_end = body.date_end
+    
+    query = (
+        select(
+            VetWork.id.label("vetwork_id"), 
+            VetWork.drug_movement_id.label("dm_id")
+        )
+        .filter(VetWork.vetwork_date.between(date_start, date_end))
+        .subquery("vetworks_data_between_date_range")
+    )
+    return query
+
+# animals count in vetworks
+async def animals_count_in_vetworks_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
+    vetworks = await read_vetworks_data_between_date_range(session=session, body=body)
+    
+    query = (
+        select(
+            vetworks.c.dm_id.label("dm_id"),
+            func.count(AnimalInVetWork.animal_id).label("animals_count")
+        )
+        .join(AnimalInVetWork, AnimalInVetWork.vetwork_id == vetworks.c.vetwork_id)
+        .group_by(vetworks.c.dm_id)
+    )
+    
+    return list(await session.execute(query))
+
+
+
+
+
 # received drugs queries
 async def read_receipts_ids_between_date_range(session: AsyncSession, body: DateRangeIn) -> list[int]:
     date_start = body.date_start
@@ -167,7 +66,7 @@ async def read_receipts_ids_between_date_range(session: AsyncSession, body: Date
 
     stmt = (
         select(
-            DrugMovement.id
+            DrugMovement.id,
             )
         .filter(and_(DrugMovement.operation_id == 1, DrugMovement.operation_date.between(date_start, date_end)))
         )
