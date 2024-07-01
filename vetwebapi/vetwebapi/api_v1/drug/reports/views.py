@@ -8,8 +8,8 @@ from vetwebapi.core.database import db_manager
 
 
 from . import crud
-from .schemas import DrugReportItemSchema, DrugReportSchema, DateRangeIn
-from .serializers import serialize_drug_in_report
+from .schemas import DrugReportItemSchema, DrugReportSchema, DateRangeIn, Report1VetBSchema, Report1VetBItemSchema
+from .serializers import serialize_drug_in_report, serialize_drug_in_report_1B
 
 router = APIRouter(prefix="/reports")
 
@@ -30,18 +30,19 @@ async def get_drugs_report(
         )
         
         
-@router.post("/1vet_B", response_model=SuccessMessage)
+@router.post("/1vet_B", response_model=Report1VetBSchema)
 async def get_drugs_report(
     body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[SuccessMessage, dict]:
+) -> Union[Report1VetBSchema, dict]:
     try:
-        drugs: list[tuple] = await crud.animals_count_in_vetworks_between_date_range(session=session, body=body)
+        drugs: list[tuple] = await crud.report_1B(session=session, body=body)
         print("*" *20)
         print(drugs)
+        drug_schema: list[Report1VetBItemSchema] = [await serialize_drug_in_report_1B(item=drug) for drug in drugs]
+        print(drug_schema)
         print("*" *20)
-        # drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
-        return SuccessMessage
+        return Report1VetBSchema(drugs_report=drug_schema)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
