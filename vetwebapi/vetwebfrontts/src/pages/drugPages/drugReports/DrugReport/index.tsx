@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 
 import { AppService } from "../../../../app.service";
 
@@ -41,22 +41,29 @@ export function DrugReport({
         >
           <Container>
             <Container>
-              <Row className="border-top border-bottom border-black">
-                <Col xs={2}>Наименование препарата</Col>
-                <Col>Серия</Col>
-                <Col>Годен до</Col>
-                <Col>Упак. на нач. отчет. периода</Col>
-                <Col>Ед. учета на нач. отчет. периода</Col>
-                <Col>Упак. получено за отчет. период</Col>
-                <Col>Ед. учета получено за отчет. период</Col>
-                <Col>Упак. израсход. за отчет. период</Col>
-                <Col>Ед. учета израсход. за отчет. период</Col>
-                <Col>Ед. учета утилиз-но за отчет. период</Col>
-                <Col>Упак. на конец отчет. периода</Col>
-                <Col>Ед. учета на конец отчет. периода</Col>
-              </Row>
-              {data.length &&
-                data.map((drug) => <DrugInReport key={drug.id} drug={drug} />)}
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Наименование продукции</th>
+                    <th>Серия</th>
+                    <th>Годен до</th>
+                    <th>Единицы учета</th>
+                    <th>Упак. на нач. отчет. периода</th>
+                    <th>Ед. учета на нач. отчет. периода</th>
+                    <th>Упак. получено за отчет. период</th>
+                    <th>Ед. учета получено за отчет. период</th>
+                    <th>Упак. израсход. за отчет. период</th>
+                    <th>Ед. учета израсход. за отчет. период</th>
+                    <th>Ед. учета утилиз-но за отчет. период</th>
+                    <th>Упак. на конец отчет. периода</th>
+                    <th>Ед. учета на конец отчет. периода</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.length &&
+                  data.map((drug) => <DrugInReport key={drug.id} drug={drug} />)}
+                </tbody>
+              </Table>
             </Container>
           </Container>
         </PageDetail>

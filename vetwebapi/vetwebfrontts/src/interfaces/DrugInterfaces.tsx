@@ -149,6 +149,7 @@ export interface IDrugReport {
     units_spent?: number;
     animals_count?: number;
     disposed_units?: number;
+    units_spent_disposed?: number;
     packs_rest?: number;
     units_rest?: number
 }

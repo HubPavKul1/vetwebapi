@@ -1,10 +1,10 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import Table from 'react-bootstrap/Table';
 
-import styles from "./DrugReportPDF.module.scss"
-import { AppService } from "../../../../app.service";
+import styles from "./DrugReportPDF.module.scss";
 import { DrugReportTableItem } from "./DrugReportTableItem";
+
 
 
 interface DrugReportPDFBodyProps {

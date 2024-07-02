@@ -43,11 +43,10 @@ export function Vet1B({
             <Container>
               <Table>
                 <thead>
-                  <tr>
+                  <tr className="text-center border-bottom border-top border-black">
                     <th>Наименование болезни</th>
                     <th>Наименование продукции</th>
                     <th>Серия</th>
-                    <th>Годен до</th>
                     <th>Единицы измерения</th>
                     <th>Наличие на нач. отчет. периода</th>
                     <th>Приход за отчет. периода</th>

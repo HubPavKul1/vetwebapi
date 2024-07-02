@@ -22,6 +22,7 @@ class DrugReportItemSchema(BaseModel):
     packs_spent: int | None
     units_spent: float | None
     disposed_units: float | None
+    units_spent_disposed: float | None
     packs_rest: int | None
     units_rest: float | None
     

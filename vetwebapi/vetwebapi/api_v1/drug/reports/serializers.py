@@ -17,8 +17,9 @@ async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
         packs_spent=item[11],
         units_spent=item[12],
         disposed_units=item[13],
-        packs_rest=item[14],
-        units_rest=item[15]
+        units_spent_disposed=item[14],
+        packs_rest=item[15],
+        units_rest=item[16]
     )
     
 async def serialize_drug_in_report_1B(item: tuple) -> Report1VetBItemSchema:

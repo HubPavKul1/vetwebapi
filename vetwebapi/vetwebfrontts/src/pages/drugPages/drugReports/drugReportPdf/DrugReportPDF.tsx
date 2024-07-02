@@ -12,6 +12,7 @@ interface DrugReportPDFProps {
   dateEnd: string;
 }
 
+
 export function DrugReportPDF({ setPdf, data, dateEnd, dateStart }: DrugReportPDFProps) {
   return (
     <PDF setPdf={setPdf} filename="drugReport.pdf" orientation="l">

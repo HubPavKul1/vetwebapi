@@ -250,7 +250,7 @@ async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateR
             (c_d_info.c.packing * catalog_drugs_movement.c.packs_rest)
             .cast(Float).label("units_rest")   
         )
-        .join(catalog_drugs_movement, catalog_drugs_movement.c.cd_id == c_d_info.c.cd_id)
+        .join(catalog_drugs_movement, catalog_drugs_movement.c.cd_id == c_d_info.c.cd_id, isouter=True)
         .subquery("catalog_drug_rest_before_date_start")
     )
     return query
@@ -319,6 +319,7 @@ async def catalog_drug_movement_report(session: AsyncSession, body: DateRangeIn)
             c_d_movement.c.packs_spent.label("packs_spent"),
             c_d_movement.c.units_spent.label("units_spent"),
             ((c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)) - func.coalesce(c_d_movement.c.units_spent, 0)).cast(Float).label("disposed_units"),
+            (c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)).cast(Float).label("units_spent_&_disposed"),
             c_d_movement.c.packs_rest_end.label("packs_rest_end"),
             (c_d_info.c.packing * c_d_movement.c.packs_rest_end).cast(Float).label("units_rest_end")
             
@@ -351,7 +352,7 @@ async def report_1B(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
             
         )
         .join(c_d_movement, c_d_movement.c.cd_id == c_d_info.c.cd_id)
-        .join(animals_count, animals_count.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(animals_count, animals_count.c.cd_id == c_d_info.c.cd_id)
     )
     
     return list(await session.execute(stmt))
