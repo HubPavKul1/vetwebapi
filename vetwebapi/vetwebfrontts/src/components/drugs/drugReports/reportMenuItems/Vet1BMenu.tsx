@@ -1,24 +1,24 @@
 import { CreateItem } from "../../../CreateItem";
 import { ReportForm } from "../../../ReportForm";
 
-interface DrugMovementBetweenDateRangeProps {
+interface Vet1BMenuProps {
   setDrugReportData: CallableFunction;
   setDateRange: CallableFunction;
   setReportActive: CallableFunction;
 }
 
-export default function DrugMovementBetweenDateRange({
+export default function Vet1BMenu({
   setDrugReportData,
   setDateRange,
   setReportActive
-}: DrugMovementBetweenDateRangeProps) {
+}: Vet1BMenuProps) {
   return (
-    <CreateItem btnTitle="Движение биопрепаратов за период времени">
+    <CreateItem btnTitle="Отчет 1-вет В">
       <ReportForm
         setDrugReportData={setDrugReportData}
         setDateRange={setDateRange}
         setReportActive={setReportActive}
-        url="/api/drugs/reports/drugs_movement"
+        url="/api/drugs/reports/1vet_B"
       />
     </CreateItem>
   );

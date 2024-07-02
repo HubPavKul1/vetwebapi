@@ -7,24 +7,48 @@ interface ReceiptDrugProps {
 }
 
 export function DrugInReport({ drug }: ReceiptDrugProps) {
-  const expirationDate = AppService.convertDateString(
-    drug.expiration_date
-  ).shortDate;
 
+  
   return (
-    <Row key={drug.id} className="border-bottom border-black">
-      <Col xs={2}>{drug.drug_name}</Col>
-      <Col>{drug.batch}</Col>
-      <Col>{expirationDate}</Col>
-      <Col>{drug.packs_start}</Col>
-      <Col>{drug.units_start}</Col>
-      <Col>{drug.packs_received}</Col>
-      <Col>{drug.units_received}</Col>
-      <Col>{drug.packs_spent}</Col>
-      <Col>{drug.units_spent}</Col>
-      <Col>{drug.disposed_units}</Col>
-      <Col>{drug.packs_rest}</Col>
-      <Col>{drug.units_rest}</Col>
-    </Row>
+    <tr key={drug.id} className="border-bottom border-black text-s text-center">
+      {
+        drug.disease && 
+        <td>{drug.disease}</td>
+      }
+      <td>{drug.drug_name}</td>
+      <td>{drug.batch}</td>
+      {
+        drug.expiration_date && 
+        <td>{drug.expiration_date}</td>
+      }
+      <td>доз</td>
+      {
+        drug.packs_start && 
+        <td>{drug.packs_start}</td>
+      }
+      
+      <td>{drug.units_start}</td>
+      {
+        drug.packs_received && 
+        <td>{drug.packs_received}</td>
+      }
+      <td>{drug.units_received}</td>
+      {
+        drug.animals_count && 
+        <td>{drug.animals_count}</td>
+      }
+      {
+        drug.packs_spent && 
+        <td>{drug.packs_spent}</td>
+      }
+      
+      <td>{drug.units_spent}</td>
+      <td>{drug.disposed_units}</td>
+      {
+        drug.packs_rest && 
+        <td>{drug.packs_rest}</td>
+      }
+      <td>{drug.units_rest}</td>
+    </tr>
   );
 }

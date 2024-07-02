@@ -134,11 +134,12 @@ export interface IDrugCatalogCard extends IDrugCatalogCreate {
 
 export interface IDrugReport {
     id: number;
+    disease?: string;
     drug_name: string;
     batch: string;
     control: string;
-    production_date: string;
-    expiration_date: string;
+    production_date?: string;
+    expiration_date?: string;
     packing: number;
     packs_start?: number;
     units_start?: number;
@@ -146,10 +147,9 @@ export interface IDrugReport {
     units_received?: number;
     packs_spent?: number;
     units_spent?: number;
+    animals_count?: number;
     disposed_units?: number;
     packs_rest?: number;
     units_rest?: number
 }
-
-
 

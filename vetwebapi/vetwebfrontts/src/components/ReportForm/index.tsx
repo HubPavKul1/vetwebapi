@@ -1,26 +1,28 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 
-import { Input } from "../../Input";
-import { fieldRequiredMessage } from "../../ErrorMessages";
-import { CustomButton } from "../../CustomButton";
+import { Input } from "../Input";
+import { fieldRequiredMessage } from "../ErrorMessages";
+import { CustomButton } from "../CustomButton";
 
-import { AppService } from "../../../app.service";
-import { IDateRange } from "../../../interfaces/BaseInterface";
+import { AppService } from "../../app.service";
+import { IDateRange } from "../../interfaces/BaseInterface";
 
 
-interface DrugReportProps {
+interface ReportFormProps {
   setDrugReportData: CallableFunction;
   setDateRange: CallableFunction;
-  setReportActive: CallableFunction
+  setReportActive: CallableFunction;
+  url: string
 }
 
-export function DrugReportForm({
+export function ReportForm({
   setDrugReportData,
   setDateRange,
-  setReportActive
-}: DrugReportProps) {
-  const url = "/api/drugs/reports/drugs_movement";
+  setReportActive,
+  url
+}: ReportFormProps) {
+  // const url = "/api/drugs/reports/drugs_movement";
 
   const {
     register,
@@ -34,14 +36,14 @@ export function DrugReportForm({
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
-    ["createDrugReport"],
+    ["createReport"],
     (dateRange: IDateRange) => AppService.createReport(url, dateRange),
     {
       onSuccess: (data, dateRange) => {
         // console.log("REPORT ", data?.drugs_report)
         alert("Отчет успешно выполнен!");
         reset();
-        setDrugReportData(data.drugs_report);
+        setDrugReportData(data);
         setDateRange(dateRange);
         setReportActive(true)
       },

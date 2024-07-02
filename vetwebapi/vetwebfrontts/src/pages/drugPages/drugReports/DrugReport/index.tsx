@@ -5,7 +5,6 @@ import { AppService } from "../../../../app.service";
 import { useState } from "react";
 
 import { PageDetail } from "../../../../components/PageDetail";
-import { ReceiptPageMenu } from "../../../../components/menu/ReceiptPageMenu";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";

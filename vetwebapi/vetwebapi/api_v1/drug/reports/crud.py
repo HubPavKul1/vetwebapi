@@ -2,7 +2,7 @@ from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from vetwebapi.core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug, VetWork, AnimalInVetWork
+from vetwebapi.core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug, VetWork, AnimalInVetWork, Disease
 
 from .schemas import DateRangeIn
 
@@ -11,6 +11,7 @@ async def catalog_drug_info() -> Subquery:
     query = (
         select(
             Drug.name.label("drug_name"),
+            Disease.name.label("disease"),
             Drug.packing.label("packing"),
             CatalogDrug.id.label("cd_id"),
             CatalogDrug.batch.label("batch"),
@@ -19,6 +20,7 @@ async def catalog_drug_info() -> Subquery:
             CatalogDrug.expiration_date.label("expiration_date"),
         )
         .join(Drug, Drug.id == CatalogDrug.drug_id)
+        .join(Disease, Disease.id == Drug.disease_id)
         .subquery("catalog_drug_info")
         
     )
@@ -335,19 +337,16 @@ async def report_1B(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
     stmt = (
         select(
             c_d_info.c.cd_id.label("cd_id"),
+            c_d_info.c.disease.label("disease"),
             c_d_info.c.drug_name.label("drug_name"),
             c_d_info.c.batch.label("batch"),
-            c_d_info.c.expiration_date.label("expiration_date"),
             c_d_info.c.packing.label("packing"),
-            c_d_movement.c.packs_rest_start.label("packs_rest_start"),
             c_d_movement.c.units_rest_start.label("units_rest_start"),
-            c_d_movement.c.packs_received.label("packs_received"),
             c_d_movement.c.units_received.label("units_received"),
-            c_d_movement.c.packs_spent.label("packs_spent"),
             c_d_movement.c.units_spent.label("units_spent"),
             animals_count.c.animals_count.label("animals_count"),
             ((c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)) - func.coalesce(c_d_movement.c.units_spent, 0)).cast(Float).label("disposed_units"),
-            c_d_movement.c.packs_rest_end.label("packs_rest_end"),
+            (c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)).cast(Float).label("units_spent_&_disposed"),
             (c_d_info.c.packing * c_d_movement.c.packs_rest_end).cast(Float).label("units_rest_end")
             
         )

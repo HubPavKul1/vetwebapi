@@ -27,19 +27,16 @@ class DrugReportItemSchema(BaseModel):
     
 class Report1VetBItemSchema(BaseModel):
     id: int
+    disease: str
     drug_name: str
     batch: str
-    expiration_date: date
     packing: int
-    packs_start: int | None
     units_start: int | None
-    packs_received: int
     units_received: float
-    packs_spent: int | None
     units_spent: float | None
     animals_count: int | None
     disposed_units: float | None
-    packs_rest: int | None
+    units_spent_disposed: float | None
     units_rest: float | None
     
     
@@ -48,4 +45,4 @@ class DrugReportSchema(BaseModel):
     
 
 class Report1VetBSchema(BaseModel):
-    drugs_report: list[Report1VetBItemSchema]
+    vet1B_report: list[Report1VetBItemSchema]

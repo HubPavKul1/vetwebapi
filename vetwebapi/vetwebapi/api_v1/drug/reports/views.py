@@ -31,7 +31,7 @@ async def get_drugs_report(
         
         
 @router.post("/1vet_B", response_model=Report1VetBSchema)
-async def get_drugs_report(
+async def vet_1B_report(
     body: DateRangeIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Report1VetBSchema, dict]:
@@ -42,7 +42,7 @@ async def get_drugs_report(
         drug_schema: list[Report1VetBItemSchema] = [await serialize_drug_in_report_1B(item=drug) for drug in drugs]
         print(drug_schema)
         print("*" *20)
-        return Report1VetBSchema(drugs_report=drug_schema)
+        return Report1VetBSchema(vet1B_report=drug_schema)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
