@@ -20,9 +20,27 @@ async def get_drugs_report(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DrugReportSchema, dict]:
     try:
-        drugs: list[tuple] = await crud.catalog_drug_movement_report(session=session, body=body)
+        drugs: list[tuple] = await crud.catalog_drugs_movement_report(session=session, body=body)
         drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
         return DrugReportSchema(drugs_report=drug_schema)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+        
+@router.post("/test", response_model=SuccessMessage)
+async def get_drugs_report(
+    body: DateRangeIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[SuccessMessage, dict]:
+    try:
+        drugs: list[tuple] = await crud.report_1B(session=session, body=body)
+        print("*" *20)
+        print(drugs)
+        print("*" *20)
+        # drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
+        return SuccessMessage
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -37,11 +55,7 @@ async def vet_1B_report(
 ) -> Union[Report1VetBSchema, dict]:
     try:
         drugs: list[tuple] = await crud.report_1B(session=session, body=body)
-        print("*" *20)
-        print(drugs)
         drug_schema: list[Report1VetBItemSchema] = [await serialize_drug_in_report_1B(item=drug) for drug in drugs]
-        print(drug_schema)
-        print("*" *20)
         return Report1VetBSchema(vet1B_report=drug_schema)
     except Exception:
         raise HTTPException(

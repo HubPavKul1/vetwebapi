@@ -1,6 +1,5 @@
 from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload
 
 from vetwebapi.core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug, VetWork, AnimalInVetWork, Disease
 
@@ -28,7 +27,7 @@ async def catalog_drug_info() -> Subquery:
 
 
 # vetwork between date range
-async def read_vetworks_data_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
+async def read_vetworks_data_between_date_range(body: DateRangeIn) -> Subquery:
     date_start = body.date_start
     date_end = body.date_end
     
@@ -43,8 +42,8 @@ async def read_vetworks_data_between_date_range(session: AsyncSession, body: Dat
     return query
 
 # animals count in vetworks
-async def animals_count_in_vetworks_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
-    vetworks = await read_vetworks_data_between_date_range(session=session, body=body)
+async def animals_count_in_vetworks_between_date_range(body: DateRangeIn) -> Subquery:
+    vetworks = await read_vetworks_data_between_date_range(body=body)
     
     query = (
         select(
@@ -59,8 +58,8 @@ async def animals_count_in_vetworks_between_date_range(session: AsyncSession, bo
     return query
 
 # animals_count catalog_drugs
-async def animals_count_catalog_drug_id(session: AsyncSession, body: DateRangeIn) -> Subquery:
-    animals_count = await animals_count_in_vetworks_between_date_range(session=session, body=body)
+async def animals_count_catalog_drug_id(body: DateRangeIn) -> Subquery:
+    animals_count = await animals_count_in_vetworks_between_date_range(body=body)
     
     query = (
         select(
@@ -73,11 +72,7 @@ async def animals_count_catalog_drug_id(session: AsyncSession, body: DateRangeIn
     
     return query
 
-
-
-
-
-# received drugs queries
+# received receipts ids 
 async def read_receipts_ids_between_date_range(session: AsyncSession, body: DateRangeIn) -> list[int]:
     date_start = body.date_start
     date_end = body.date_end
@@ -108,6 +103,7 @@ async def read_receipts_ids_before_date_start(session: AsyncSession, body: DateR
     return list(await session.scalars(stmt))
 
 
+# get catalog drugs by drug movement ids
 async def catalog_drugs_received_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
     
     receipt_ids = await read_receipts_ids_between_date_range(session=session, body=body)
@@ -124,7 +120,6 @@ async def catalog_drugs_received_between_date_range(session: AsyncSession, body:
         )
     
     return query
-
 
 async def catalog_drugs_received_before_date_start(session: AsyncSession, body: DateRangeIn) -> Subquery:
     
@@ -211,7 +206,7 @@ async def catalog_drugs_spent_before_date_start(session: AsyncSession, body: Dat
     return query
 
 
-# catalog_drugs amount before date_range
+# catalog_drugs received and spent before date_range
 async def catalog_drugs_received_and_spent_before_date_start(session: AsyncSession, body: DateRangeIn) -> Subquery:
     received_drugs = await catalog_drugs_received_before_date_start(session=session, body=body)
     spent_drugs = await catalog_drugs_spent_before_date_start(session=session, body=body)
@@ -250,60 +245,19 @@ async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateR
             (c_d_info.c.packing * catalog_drugs_movement.c.packs_rest)
             .cast(Float).label("units_rest")   
         )
-        .join(catalog_drugs_movement, catalog_drugs_movement.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(catalog_drugs_movement, catalog_drugs_movement.c.cd_id == c_d_info.c.cd_id)
         .subquery("catalog_drug_rest_before_date_start")
     )
     return query
 
-
-# catalog_drugs amount between date_range
-async def catalog_drugs_received_and_spent_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
+# catalog_drugs movement main query
+async def catalog_drugs_movement_report(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+    c_d_info = await catalog_drug_info()
+    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
     received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
     spent_drugs = await catalog_drugs_spent_between_date_range(session=session, body=body)
     
     query = (
-        select(
-            received_drugs.c.cd_id.label("cd_id"),
-            received_drugs.c.packs_received.label("packs_received"),
-            received_drugs.c.units_received.label("units_received"),
-            spent_drugs.c.packs_spent.label("packs_spent"),
-            spent_drugs.c.units_spent.label("units_spent"),
-            (received_drugs.c.packs_received - func.coalesce(spent_drugs.c.packs_spent, 0))
-            .cast(Integer).label("packs_rest")
-        )
-        .join(spent_drugs, spent_drugs.c.cd_id == received_drugs.c.cd_id, isouter=True)
-        .subquery("catalog_drugs_received_and_spent_between_date_range")
-    )
-    
-    return query
-
-# main query
-async def catalog_drug_movement_between_date_range(session: AsyncSession, body: DateRangeIn) -> Subquery:
-    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
-    c_d_movement = await catalog_drugs_received_and_spent_between_date_range(session=session, body=body)
-    
-    query = (
-        select(
-            c_d_movement.c.cd_id.label("cd_id"),
-            c_d_rest_start.c.packs_rest.label("packs_rest_start"),
-            c_d_rest_start.c.units_rest.label("units_rest_start"),
-            c_d_movement.c.packs_received.label("packs_received"),
-            c_d_movement.c.units_received.label("units_received"),
-            c_d_movement.c.packs_spent.label("packs_spent"),
-            c_d_movement.c.units_spent.label("units_spent"),
-            (func.coalesce(c_d_rest_start.c.packs_rest, 0) + c_d_movement.c.packs_received - func.coalesce(c_d_movement.c.packs_spent, 0))
-            .cast(Integer).label("packs_rest_end") 
-        )
-        .join(c_d_rest_start, c_d_rest_start.c.cd_id == c_d_movement.c.cd_id, isouter=True)
-        .subquery("catalog_drug_movement_between_date_range")
-    )
-    return query
-
-async def catalog_drug_movement_report(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
-    c_d_movement = await catalog_drug_movement_between_date_range(session=session, body=body)
-    c_d_info = await catalog_drug_info()
-    
-    stmt = (
         select(
             c_d_info.c.cd_id.label("cd_id"),
             c_d_info.c.drug_name.label("drug_name"),
@@ -312,47 +266,89 @@ async def catalog_drug_movement_report(session: AsyncSession, body: DateRangeIn)
             c_d_info.c.production_date.label("production_date"),
             c_d_info.c.expiration_date.label("expiration_date"),
             c_d_info.c.packing.label("packing"),
-            c_d_movement.c.packs_rest_start.label("packs_rest_start"),
-            c_d_movement.c.units_rest_start.label("units_rest_start"),
-            c_d_movement.c.packs_received.label("packs_received"),
-            c_d_movement.c.units_received.label("units_received"),
-            c_d_movement.c.packs_spent.label("packs_spent"),
-            c_d_movement.c.units_spent.label("units_spent"),
-            ((c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)) - func.coalesce(c_d_movement.c.units_spent, 0)).cast(Float).label("disposed_units"),
-            (c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)).cast(Float).label("units_spent_&_disposed"),
-            c_d_movement.c.packs_rest_end.label("packs_rest_end"),
-            (c_d_info.c.packing * c_d_movement.c.packs_rest_end).cast(Float).label("units_rest_end")
-            
+            c_d_rest_start.c.packs_rest.label("packs_rest_start"),
+            c_d_rest_start.c.units_rest.label("units_rest_start"),
+            received_drugs.c.packs_received.label("packs_received"),
+            received_drugs.c.units_received.label("units_received"),
+            spent_drugs.c.packs_spent.label("packs_spent"),
+            spent_drugs.c.units_spent.label("units_spent"),
+            ((c_d_info.c.packing * func.coalesce(spent_drugs.c.packs_spent, 0)) - func.coalesce(spent_drugs.c.units_spent, 0))
+            .cast(Float).label("disposed_units"),
+            (c_d_info.c.packing * func.coalesce(spent_drugs.c.packs_spent, 0))
+            .cast(Float).label("units_spent_disposed"),
+            (func.coalesce(c_d_rest_start.c.packs_rest, 0) + func.coalesce(received_drugs.c.packs_received, 0) - func.coalesce(spent_drugs.c.packs_spent, 0))
+            .cast(Integer).label("packs_rest_end"),
+            (c_d_info.c.packing * (func.coalesce(c_d_rest_start.c.packs_rest, 0) + func.coalesce(received_drugs.c.packs_received, 0) - func.coalesce(spent_drugs.c.packs_spent, 0)))
+            .cast(Float).label("units_rest_end")
         )
-        .join(c_d_movement, c_d_movement.c.cd_id == c_d_info.c.cd_id)
+        .join(c_d_rest_start, c_d_rest_start.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(received_drugs, received_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(spent_drugs, spent_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
     )
     
-    return list(await session.execute(stmt))
+    return list(await session.execute(query))
+
+# 1 VetB queries
+async def catalog_drugs_movement_for_1vetB(session: AsyncSession, body: DateRangeIn) -> Subquery:
+    c_d_info = await catalog_drug_info()
+    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
+    received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
+    spent_drugs = await catalog_drugs_spent_between_date_range(session=session, body=body)
+    
+    query = (
+        select(
+            c_d_info.c.cd_id.label("cd_id"),
+            c_d_info.c.drug_name.label("drug_name"),
+            c_d_info.c.disease.label("disease"),
+            c_d_info.c.batch.label("batch"),
+            c_d_info.c.control.label("control"),
+            c_d_info.c.production_date.label("production_date"),
+            c_d_info.c.expiration_date.label("expiration_date"),
+            c_d_info.c.packing.label("packing"),
+            c_d_rest_start.c.packs_rest.label("packs_rest_start"),
+            c_d_rest_start.c.units_rest.label("units_rest_start"),
+            received_drugs.c.packs_received.label("packs_received"),
+            received_drugs.c.units_received.label("units_received"),
+            spent_drugs.c.packs_spent.label("packs_spent"),
+            spent_drugs.c.units_spent.label("units_spent"),
+            ((c_d_info.c.packing * func.coalesce(spent_drugs.c.packs_spent, 0)) - func.coalesce(spent_drugs.c.units_spent, 0))
+            .cast(Float).label("disposed_units"),
+            (c_d_info.c.packing * func.coalesce(spent_drugs.c.packs_spent, 0))
+            .cast(Float).label("units_spent_disposed"),
+            (func.coalesce(c_d_rest_start.c.packs_rest, 0) + func.coalesce(received_drugs.c.packs_received, 0) - func.coalesce(spent_drugs.c.packs_spent, 0))
+            .cast(Integer).label("packs_rest_end"),
+            (c_d_info.c.packing * (func.coalesce(c_d_rest_start.c.packs_rest, 0) + func.coalesce(received_drugs.c.packs_received, 0) - func.coalesce(spent_drugs.c.packs_spent, 0)))
+            .cast(Float).label("units_rest_end")
+        )
+        .join(c_d_rest_start, c_d_rest_start.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(received_drugs, received_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(spent_drugs, spent_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .subquery("catalog_drugs_movement_for_1vetB")
+    )
+    
+    return query
 
 
 async def report_1B(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
-    c_d_movement = await catalog_drug_movement_between_date_range(session=session, body=body)
-    c_d_info = await catalog_drug_info()
-    animals_count = await animals_count_catalog_drug_id(session=session, body=body)
+    c_d_movement = await catalog_drugs_movement_for_1vetB(session=session, body=body)
+    animals_count = await animals_count_catalog_drug_id(body=body)
     
     stmt = (
         select(
-            c_d_info.c.cd_id.label("cd_id"),
-            c_d_info.c.disease.label("disease"),
-            c_d_info.c.drug_name.label("drug_name"),
-            c_d_info.c.batch.label("batch"),
-            c_d_info.c.packing.label("packing"),
+            c_d_movement.c.cd_id.label("cd_id"),
+            c_d_movement.c.disease.label("disease"),
+            c_d_movement.c.drug_name.label("drug_name"),
+            c_d_movement.c.batch.label("batch"),
+            c_d_movement.c.packing.label("packing"),
             c_d_movement.c.units_rest_start.label("units_rest_start"),
             c_d_movement.c.units_received.label("units_received"),
             c_d_movement.c.units_spent.label("units_spent"),
             animals_count.c.animals_count.label("animals_count"),
-            ((c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)) - func.coalesce(c_d_movement.c.units_spent, 0)).cast(Float).label("disposed_units"),
-            (c_d_info.c.packing * func.coalesce(c_d_movement.c.packs_spent, 0)).cast(Float).label("units_spent_&_disposed"),
-            (c_d_info.c.packing * c_d_movement.c.packs_rest_end).cast(Float).label("units_rest_end")
-            
+            c_d_movement.c.disposed_units.label("disposed_units"),
+            c_d_movement.c.units_spent_disposed.label("units_spent_disposed"),
+            c_d_movement.c.units_rest_end.label("units_rest_end")
         )
-        .join(c_d_movement, c_d_movement.c.cd_id == c_d_info.c.cd_id)
-        .join(animals_count, animals_count.c.cd_id == c_d_info.c.cd_id)
+        .join(animals_count, animals_count.c.cd_id == c_d_movement.c.cd_id, isouter=True)
     )
     
     return list(await session.execute(stmt))

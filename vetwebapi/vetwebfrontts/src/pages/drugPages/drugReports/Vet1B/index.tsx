@@ -9,6 +9,7 @@ import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
 import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
+import { drugReportHeaders } from "../../../../Constants";
 
 interface Vet1BProps {
   data: IDrugReport[];
@@ -16,6 +17,7 @@ interface Vet1BProps {
   dateEnd: string;
   setReportActive: CallableFunction;
 }
+
 
 export function Vet1B({
   data,
@@ -27,6 +29,9 @@ export function Vet1B({
 
   const date1 = AppService.convertDateString(dateStart);
   const date2 = AppService.convertDateString(dateEnd);
+  const reportHeaders = drugReportHeaders;
+  
+  
 
   return (
     <>
@@ -41,21 +46,10 @@ export function Vet1B({
         >
           <Container>
             <Container>
-              <Table>
+              <Table className="text-sm text-center">
                 <thead>
-                  <tr className="text-center border-bottom border-top border-black">
-                    <th>Наименование болезни</th>
-                    <th>Наименование продукции</th>
-                    <th>Серия</th>
-                    <th>Единицы измерения</th>
-                    <th>Наличие на нач. отчет. периода</th>
-                    <th>Приход за отчет. периода</th>
-                    <th>Количество вакцинированных, подвергнутых диагностическим
-                    исследованиям животных тыс. гол</th>
-                    <th>Расход на обработку</th>
-                    <th>Утилизировано</th>
-                    <th>Расход с утилизацией</th>
-                    <th>Осталось на конец отчет. периода</th>
+                  <tr className="border-bottom border-top border-black">
+                    {reportHeaders.map(item => <th key={item.id}>{item.title}</th>)}
                   </tr>
                 </thead>
                 <tbody>
