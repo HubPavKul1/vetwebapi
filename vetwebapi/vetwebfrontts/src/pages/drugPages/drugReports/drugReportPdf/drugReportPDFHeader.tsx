@@ -3,7 +3,6 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import styles from "./DrugReportPDF.module.scss";
 import { AppService } from "../../../../app.service";
-import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 
 
 

@@ -39,9 +39,10 @@ export const AppService = {
         const month: string = dateObj.toLocaleString('default', { month: 'long' });
         const year: number = dateObj.getFullYear()
         const day: number = dateObj.getDate()
+        const quarter: number = Math.floor((dateObj.getMonth() + 3) / 3)
         const fullDate: string = `${day} ${month} ${year}`
         const shortDate: string = dateObj.toLocaleDateString()
 
-        return ({day, month, year, fullDate, shortDate})
+        return ({day, month, year, quarter, fullDate, shortDate})
     },
 }

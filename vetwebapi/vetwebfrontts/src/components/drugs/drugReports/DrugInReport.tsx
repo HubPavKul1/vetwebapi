@@ -19,7 +19,7 @@ export function DrugInReport({ drug }: ReceiptDrugProps) {
       : <td></td>
       }
       <td>доз</td>
-      {drug.packs_start ? <td>{drug.packs_start}</td> : 0}
+      {drug.packs_start ? <td>{drug.packs_start}</td> : <td>0</td>}
       {drug.units_start ? <td>{drug.units_start}</td> : <td>0</td>}
       {drug.packs_received ? <td>{drug.packs_received}</td> : <td>0</td>}
       {drug.units_received ? <td>{drug.units_received}</td> : <td>0</td>}

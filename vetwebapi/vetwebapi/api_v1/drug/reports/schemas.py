@@ -17,8 +17,8 @@ class DrugReportItemSchema(BaseModel):
     packing: int
     packs_start: int | None
     units_start: int | None
-    packs_received: int
-    units_received: float
+    packs_received: int | None
+    units_received: float | None
     packs_spent: int | None
     units_spent: float | None
     disposed_units: float | None
@@ -31,9 +31,9 @@ class Report1VetBItemSchema(BaseModel):
     disease: str
     drug_name: str
     batch: str
-    packing: int
-    units_start: int | None
-    units_received: float
+    packing: float
+    units_start: float | None
+    units_received: float | None
     units_spent: float | None
     animals_count: int | None
     disposed_units: float | None

@@ -1,4 +1,4 @@
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 
 import { AppService } from "../../../../app.service";
 
@@ -8,8 +8,8 @@ import { PageDetail } from "../../../../components/PageDetail";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
-import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
 import { drugReportHeaders } from "../../../../Constants";
+import { VetB1PDF } from "../Vet1BPdf/Vet1BPdf";
 
 interface Vet1BProps {
   data: IDrugReport[];
@@ -27,8 +27,7 @@ export function Vet1B({
 }: Vet1BProps) {
   const [pdf, setPdf] = useState(false);
 
-  const date1 = AppService.convertDateString(dateStart);
-  const date2 = AppService.convertDateString(dateEnd);
+  const reportDate = AppService.convertDateString(dateEnd);
   const reportHeaders = drugReportHeaders;
   
   
@@ -37,7 +36,7 @@ export function Vet1B({
     <>
       {!pdf ? (
         <PageDetail
-          title={`Отчет 1-вет В с ${date1.shortDate} по ${date2.shortDate}`}
+          title={`Отчет 1-вет В за ${reportDate.quarter} квартал ${reportDate.year} г.`}
           imgSrc="/drugsBg.jpg"
           alt="Отчет 1-вет В"
           menu={
@@ -61,7 +60,7 @@ export function Vet1B({
           </Container>
         </PageDetail>
       ) : (
-        <DrugReportPDF
+        <VetB1PDF
           setPdf={setPdf}
           data={data}
           dateStart={dateStart}
