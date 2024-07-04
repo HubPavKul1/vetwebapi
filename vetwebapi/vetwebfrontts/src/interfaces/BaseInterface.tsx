@@ -27,3 +27,8 @@ export interface IReactElement {
     id: number;
     element: React.ReactElement
 }
+
+export interface ITableHeaders {
+    id: number;
+    title: string
+}
