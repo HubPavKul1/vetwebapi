@@ -6,12 +6,11 @@ import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
 import { drugReportHeaders } from "../../../../Constants";
-import { VetB1PDF } from "../Vet1BPdf/Vet1BPdf";
 import { ReportPageMain } from "../../../../components/ReportPage/ReportPageMain.tsx";
+import { Vet1BPDF } from "../Vet1BPdf/index.tsx";
 
 interface Vet1BProps {
   data: IDrugReport[];
-  dateStart: string;
   dateEnd: string;
   setReportActive: CallableFunction;
 }
@@ -19,7 +18,6 @@ interface Vet1BProps {
 
 export function Vet1B({
   data,
-  dateStart,
   dateEnd,
   setReportActive,
 }: Vet1BProps) {
@@ -45,10 +43,9 @@ export function Vet1B({
         />
 
       ) : (
-        <VetB1PDF
+        <Vet1BPDF
           setPdf={setPdf}
           data={data}
-          dateStart={dateStart}
           dateEnd={dateEnd}
         />
       )}

@@ -6,7 +6,7 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
+	padding: 20px;
 	@include transition(transform);
 	height: 100%;
 	box-shadow: 5px 5px grey;

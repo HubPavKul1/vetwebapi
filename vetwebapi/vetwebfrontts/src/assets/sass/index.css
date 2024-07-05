@@ -205,3 +205,26 @@ body {
 .btn-default:hover {
   transform: scale(1.1);
 }/*# sourceMappingURL=index.css.map */
+
+
+/* report styles*/
+
+.report-header {
+  @apply text-sm mb-8 
+}
+
+.table-report th, td {
+  @apply text-center text-sm align-middle border border-black
+}
+
+.report-title {
+  @apply text-center font-semibold mb-5
+}
+
+.pdf-report-footer {
+  @apply text-sm
+}
+
+.pdf-report-underlined {
+  @apply text-center border-b border-black
+}

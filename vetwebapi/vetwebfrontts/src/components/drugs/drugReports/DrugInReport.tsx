@@ -25,6 +25,7 @@ export function DrugInReport({ drug }: ReceiptDrugProps) {
       {drug.units_received ? <td>{drug.units_received}</td> : <td>0</td>}
       {drug.packs_spent ? <td>{drug.packs_spent}</td> : <td>0</td>}
       {drug.units_spent ? <td>{drug.units_spent}</td> : <td>0</td>}
+      {drug.animals_count ? <td>{drug.animals_count}</td> : <td>0</td>}
       <td>{drug.disposed_units}</td>
       <td>{drug.units_spent_disposed}</td>
       {drug.packs_rest ? <td>{drug.packs_rest}</td> : <td>0</td>}

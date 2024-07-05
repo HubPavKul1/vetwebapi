@@ -10,7 +10,7 @@ interface ReportPageTableProps {
 export function ReportPageTable({ ...props }: ReportPageTableProps) {
   return (
     <>
-      <Table className="text-sm text-center">
+      <Table className="table-report">
         <thead>
           <tr className="border-bottom border-top border-black">
             {props.reportHeaders.map((item) => (

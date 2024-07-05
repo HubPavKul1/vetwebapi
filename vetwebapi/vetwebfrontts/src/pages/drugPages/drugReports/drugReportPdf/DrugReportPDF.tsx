@@ -8,15 +8,14 @@ import { DrugReportPDFHeader } from "./drugReportPDFHeader";
 interface DrugReportPDFProps {
   setPdf: CallableFunction;
   data: IDrugReport[];
-  dateStart: string;
   dateEnd: string;
 }
 
 
-export function DrugReportPDF({ setPdf, data, dateEnd, dateStart }: DrugReportPDFProps) {
+export function DrugReportPDF({ setPdf, data, dateEnd }: DrugReportPDFProps) {
   return (
     <PDF setPdf={setPdf} filename="drugReport.pdf" orientation="l">
-        <DrugReportPDFHeader dateStart={dateStart} dateEnd={dateEnd}/>
+        <DrugReportPDFHeader dateEnd={dateEnd}/>
         <DrugReportPDFBody data={data}/>
         <DrugReportPDFFooter />
     </PDF>

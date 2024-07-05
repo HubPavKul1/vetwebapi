@@ -1,4 +1,4 @@
-import { Card, Col } from "react-bootstrap";
+import { Card, Col, Container } from "react-bootstrap";
 import { ICardProps } from "../../../interfaces/CardProps";
 
 import styles from "./HomePageCard.module.scss"
@@ -13,11 +13,14 @@ export function HomePageCard({item}: HomePageCardProps) {
             <Col>
                 <a href={item.url}>
                     <Card className={styles.card}>
-                        <Card.Img variant="top"
-                            src={item.imgSrc}
-                            alt={item.imgAlt}
-                            className={styles.cardImage}
-                        />
+                        <Container className="max-w-45">
+                            <Card.Img variant="top"
+                                src={item.imgSrc}
+                                alt={item.imgAlt}
+                                className={styles.cardImage}
+                            />
+                        </Container>
+                        
                                             
                         <Card.Body>
                             <Card.Title>

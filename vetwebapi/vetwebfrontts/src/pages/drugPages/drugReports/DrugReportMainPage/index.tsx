@@ -9,7 +9,6 @@ import { Vet1B } from "../Vet1B";
 export default function DrugReportMainPage() {
   const [drugReportData, setDrugReportData] = useState<object>({});
   const [dateRange, setDateRange] = useState<IDateRange>();
-  const [vet1BData, setVet1BData] = useState();
   const [reportActive, setReportActive] = useState(false);
 
   return (
@@ -41,7 +40,6 @@ export default function DrugReportMainPage() {
           drugReportData.vet1B_report && (
             <Vet1B
               data={drugReportData.vet1B_report}
-              dateStart={dateRange?.date_start}
               dateEnd={dateRange?.date_end}
               setReportActive={setReportActive}
             />

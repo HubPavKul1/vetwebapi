@@ -2,7 +2,6 @@ import { Container } from "react-bootstrap";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import Table from 'react-bootstrap/Table';
 
-import styles from "./DrugReportPDF.module.scss";
 import { DrugReportTableItem } from "./DrugReportTableItem";
 
 
@@ -14,8 +13,8 @@ interface DrugReportPDFBodyProps {
 export function DrugReportPDFBody({data}: DrugReportPDFBodyProps) {
 
     return (
-        <Container className={styles.tableWrap}>
-            <Table>
+        <Container >
+            <Table className="table-report">
                 <thead>
                     <tr>
                         <th rowSpan={3}>Наименование продукции</th>
