@@ -1,4 +1,3 @@
-import { CompanyService } from "../company.service";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
@@ -10,12 +9,15 @@ import {
   minLenErrorMessage,
 } from "../../ErrorMessages";
 import { CustomButton } from "../../CustomButton";
+import { AppService } from "../../../app.service";
 
 export function CreateCompanyForm() {
   const inputItems: FormInputProps<ICompanyCreate>[] = [
     { fieldName: "full_name", placeholder: "Введите полное наименование *" },
     { fieldName: "short_name", placeholder: "Введите краткое наименование *" },
   ];
+
+  const url = "/api/companies/";
 
   const {
     register,
@@ -30,7 +32,7 @@ export function CreateCompanyForm() {
 
   const { mutate } = useMutation(
     ["create company"],
-    (data: ICompanyCreate) => CompanyService.createCompany(data),
+    (data: ICompanyCreate) => AppService.createItem(url, data),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["companies"]);

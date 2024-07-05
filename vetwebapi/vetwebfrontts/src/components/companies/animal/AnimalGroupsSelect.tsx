@@ -1,5 +1,4 @@
 import Select, { SingleValue } from 'react-select'
-import { AnimalService } from '../company.service'
 import { useQuery } from "react-query";
 import { useState } from 'react';
 import { SpeciesSelect } from './SpeciesSelect';
