@@ -12,7 +12,7 @@ export function ReportPageTable({ ...props }: ReportPageTableProps) {
     <>
       <Table className="table-report">
         <thead>
-          <tr className="border-bottom border-top border-black">
+          <tr >
             {props.reportHeaders.map((item) => (
               <th key={item.id}>{item.title}</th>
             ))}

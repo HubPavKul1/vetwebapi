@@ -90,11 +90,21 @@ class DiagnosticSchema(VaccinationSchema):
     biomaterial_package: str | None = None
     diagnostic_method: str
 
+class Diagnostics(BaseModel):
+    diagnostics: list[DiagnosticSchema]
+
 class VaccinationDetail(VaccinationSchema):
     companies: list[CompanyCard] = []
     animals: list[AnimalInVetWorkSchema] = []
     doctors: list[EmployeeSchema] = []
     drug: DrugInMovementSchema | None = None
+
+class DiagnosticDetail(DiagnosticSchema):
+    companies: list[CompanyCard] = []
+    animals: list[AnimalInVetWorkSchema] = []
+    doctors: list[EmployeeSchema] = []
+    drug: DrugInMovementSchema | None = None
+
 
 
 class BaseVetWorkSchema(BaseModel):

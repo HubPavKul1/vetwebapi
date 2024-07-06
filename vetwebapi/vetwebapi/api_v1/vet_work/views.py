@@ -14,10 +14,13 @@ from .schemas import (
     VaccinationDetail,
     AnimalInVetWorkIn,
     CompanyInVetWorkIn,
+    DiagnosticIn,
+    Diagnostics
     )
 from .serializers import (
     serialize_vaccinations, 
     serialize_vaccination_detail,
+    serialize_diagnostics
     )
 from .dependencies import vetwork_by_id
 from vetwebapi.core.database import db_manager
@@ -48,6 +51,15 @@ async def create_vaccination(
     ) -> VetWorkOut:
     vaccination = await crud.create_vetwork(session=session, body=body)
     return VetWorkOut(id=vaccination.id, vetwork_date=vaccination.vetwork_date)
+
+
+@router.post("/diagnostics", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
+async def create_diagnostic(
+    body: DiagnosticIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    ) -> VetWorkOut:
+    diagnostic = await crud.create_diagnostic(session=session, body=body)
+    return VetWorkOut(id=diagnostic.id, vetwork_date=diagnostic.vetwork_date)
 
 
 @router.post("/{vetwork_id}/drug", status_code=status.HTTP_201_CREATED)
@@ -84,12 +96,26 @@ async def add_company_to_vetwork_route(
 
 
 @router.get("/vaccinations", response_model=VetWorks)
-async def get_diseases_route(
+async def get_vaccinations_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
     try:
         vaccinations = await crud.read_vaccinations(session=session)    
         return await serialize_vaccinations(vaccinations=vaccinations)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+@router.get("/diagnostics", response_model=Diagnostics)
+async def get_diagnostics_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[Diagnostics, dict]:
+    try:
+        diagnostics = await crud.read_diagnostics(session=session)  
+        return await serialize_diagnostics(diagnostics=diagnostics)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

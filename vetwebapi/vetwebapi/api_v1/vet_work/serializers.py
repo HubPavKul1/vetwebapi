@@ -14,6 +14,7 @@ from .schemas import (
     VetWorks,
     AnimalInVetWorkSchema,
     VaccinationDetail,
+    Diagnostics
     )
 
 from vetwebapi.api_v1.company.serializers import serialize_employee, serialize_address
@@ -34,6 +35,20 @@ async def serialize_vaccination(vaccination: VetWork) -> VaccinationSchema:
         clinic=vaccination.clinic.short_name,
     )
 
+async def serialize_diagnostic(diagnostic: VetWork) -> DiagnosticSchema:
+    return DiagnosticSchema(
+        id=diagnostic.id,
+        work_type=diagnostic.work_type.name,
+        vetwork_date=diagnostic.vetwork_date,
+        is_primary=diagnostic.is_primary,
+        diseases=await get_disease_names(vetwork=diagnostic),
+        clinic=diagnostic.clinic.short_name,
+        biomaterial=diagnostic.biomaterial.name,
+        biomaterial_fixation=diagnostic.biomaterial_fixation.name,
+        biomaterial_package=diagnostic.biomaterial_fixation.name,
+        diagnostic_method=diagnostic.diagnostic_method.name
+    )
+
 
 async def get_disease_names(vetwork: VetWork) -> list[str]:
     return [item.disease.name for item in vetwork.diseases_details]
@@ -42,6 +57,10 @@ async def get_disease_names(vetwork: VetWork) -> list[str]:
 async def serialize_vaccinations(vaccinations: list[VetWork]) -> VetWorks:
     vaccination_schemas = [await serialize_vaccination(vaccination=vaccination) for vaccination in vaccinations]
     return VetWorks(vetworks=vaccination_schemas)
+
+async def serialize_diagnostics(diagnostics: list[VetWork]) -> Diagnostics:
+    diagnostic_schemas = [await serialize_diagnostic(diagnostic=diagnostic) for diagnostic in diagnostics]
+    return Diagnostics(diagnostics=diagnostic_schemas)
     
 
 async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkSchema:

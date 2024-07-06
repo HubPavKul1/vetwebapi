@@ -1,7 +1,5 @@
 import { Container } from "react-bootstrap";
 
-import { useState } from "react";
-
 import { PageDetail } from "../../PageDetail";
 
 import { ITableHeaders } from "../../../interfaces/BaseInterface";
