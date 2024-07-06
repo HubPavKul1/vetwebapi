@@ -1,15 +1,9 @@
-import { Row } from "react-bootstrap";
-
 import { useQuery } from "react-query";
 import { Catalog } from "../../../components/Catalog";
-import { catalogItemData } from "../../../components/data/CatalogItemData";
 import { CatalogItem } from "../../../components/catalogItem/CatalogItem";
 
-import { CreateItem } from "../../../components/CreateItem";
-import { CreateDrugReceiptForm } from "../../../components/drugs/drugMovements/CreateDrugReceiptForm";
 import { AppService } from "../../../app.service";
 import { IVetwork } from "../../../interfaces/VetWorkInterfaces";
-import { VetWorkCard } from "../../../components/vetWorks/VetWorkCard";
 import { VaccinationCreateForm } from "../../../components/vetWorks/VaccinationCreateForm";
 
 interface VaccinationsData {

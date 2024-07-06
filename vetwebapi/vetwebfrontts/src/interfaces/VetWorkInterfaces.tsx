@@ -37,6 +37,10 @@ export interface IVetWorkSchema {
     diseases: string[];
     is_primary: boolean;
     clinic: string;
+    biomaterial?: string;
+    biomaterial_fixation?: string;
+    biomaterial_package?: string;
+    diagnostic_method?: string;
     companies?: ICompanyCard[];
     animals?: IAnimalInVetwork[];
     doctors: IEmployee[];
