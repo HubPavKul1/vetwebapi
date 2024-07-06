@@ -73,38 +73,29 @@ class AnimalInVetWorkSchema(AnimalInVetWorkIn):
     identification: str
     is_active: bool = True
 
-class VaccinationSchema(BaseModel):
+
+class VetWorkSchema(BaseModel):
     id: int
     work_type: str
     vetwork_date: date
     diseases: list[str] | None = None
     is_primary: bool
     clinic: str
-
-class VetWorks(BaseModel):
-    vetworks: list[VaccinationSchema]    
-
-class DiagnosticSchema(VaccinationSchema):
     biomaterial: str | None = None
     biomaterial_fixation: str | None = None
     biomaterial_package: str | None = None
-    diagnostic_method: str
+    diagnostic_method: str | None = None
 
-class Diagnostics(BaseModel):
-    diagnostics: list[DiagnosticSchema]
 
-class VaccinationDetail(VaccinationSchema):
+class VetWorks(BaseModel):
+    vetworks: list[VetWorkSchema]    
+
+
+class VetWorkDetail(VetWorkSchema):
     companies: list[CompanyCard] = []
     animals: list[AnimalInVetWorkSchema] = []
     doctors: list[EmployeeSchema] = []
     drug: DrugInMovementSchema | None = None
-
-class DiagnosticDetail(DiagnosticSchema):
-    companies: list[CompanyCard] = []
-    animals: list[AnimalInVetWorkSchema] = []
-    doctors: list[EmployeeSchema] = []
-    drug: DrugInMovementSchema | None = None
-
 
 
 class BaseVetWorkSchema(BaseModel):

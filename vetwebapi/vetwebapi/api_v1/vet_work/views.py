@@ -11,16 +11,14 @@ from .schemas import (
     VetWorkOut, 
     VaccinationIn, 
     VetWorks, 
-    VaccinationDetail,
     AnimalInVetWorkIn,
     CompanyInVetWorkIn,
     DiagnosticIn,
-    Diagnostics
+    VetWorkDetail
     )
 from .serializers import (
-    serialize_vaccinations, 
-    serialize_vaccination_detail,
-    serialize_diagnostics
+    serialize_vetworks,
+    serialize_vetwork_detail
     )
 from .dependencies import vetwork_by_id
 from vetwebapi.core.database import db_manager
@@ -100,8 +98,8 @@ async def get_vaccinations_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
     try:
-        vaccinations = await crud.read_vaccinations(session=session)    
-        return await serialize_vaccinations(vaccinations=vaccinations)
+        vaccinations = await crud.read_vaccinations(session=session) 
+        return await serialize_vetworks(vetworks=vaccinations)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -109,30 +107,30 @@ async def get_vaccinations_route(
         )
     
 
-@router.get("/diagnostics", response_model=Diagnostics)
+@router.get("/diagnostics", response_model=VetWorks)
 async def get_diagnostics_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[Diagnostics, dict]:
+) -> Union[VetWorks, dict]:
     try:
         diagnostics = await crud.read_diagnostics(session=session)  
-        return await serialize_diagnostics(diagnostics=diagnostics)
+        return await serialize_vetworks(vetworks=diagnostics)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
         
-@router.get("/{vetwork_id}/", response_model=VaccinationDetail)
-async def get_vaccination_detail(
+@router.get("/{vetwork_id}/", response_model=VetWorkDetail)
+async def get_vetwork_detail(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[VaccinationDetail | dict]:
+) -> Union[VetWorkDetail | dict]:
 
     companies: list[CompanyInVetWork] = await crud.read_companies_in_vetwork(session=session, vetwork=vetwork)
     animals: list[AnimalInVetWork] = await crud.read_animals_in_vetwork(session=session, vetwork=vetwork)
     doctors: list[DoctorInVetWork] = await crud.read_doctors_in_vetwork(session=session, vetwork=vetwork)
     drug: DrugInMovementIn = await crud.read_drug_in_vetwork(session=session, vetwork=vetwork)
-    return await serialize_vaccination_detail(
+    return await serialize_vetwork_detail(
         vetwork=vetwork, 
         companies=companies,
         animals=animals,

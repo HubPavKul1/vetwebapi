@@ -8,13 +8,10 @@ from vetwebapi.core.models import (
 
 
 from .schemas import (
-    VaccinationSchema, 
-    DiagnosticSchema, 
-    DiseaseOut, 
     VetWorks,
     AnimalInVetWorkSchema,
-    VaccinationDetail,
-    Diagnostics
+    VetWorkSchema,
+    VetWorkDetail
     )
 
 from vetwebapi.api_v1.company.serializers import serialize_employee, serialize_address
@@ -24,44 +21,47 @@ from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
 
 
-async def serialize_vaccination(vaccination: VetWork) -> VaccinationSchema:
-    
-    return VaccinationSchema(
-        id=vaccination.id,
-        work_type=vaccination.work_type.name,
-        vetwork_date=vaccination.vetwork_date,
-        is_primary=vaccination.is_primary,
-        diseases=await get_disease_names(vetwork=vaccination),
-        clinic=vaccination.clinic.short_name,
-    )
 
-async def serialize_diagnostic(diagnostic: VetWork) -> DiagnosticSchema:
-    return DiagnosticSchema(
-        id=diagnostic.id,
-        work_type=diagnostic.work_type.name,
-        vetwork_date=diagnostic.vetwork_date,
-        is_primary=diagnostic.is_primary,
-        diseases=await get_disease_names(vetwork=diagnostic),
-        clinic=diagnostic.clinic.short_name,
-        biomaterial=diagnostic.biomaterial.name,
-        biomaterial_fixation=diagnostic.biomaterial_fixation.name,
-        biomaterial_package=diagnostic.biomaterial_fixation.name,
-        diagnostic_method=diagnostic.diagnostic_method.name
-    )
+async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
+
+    diseases = await get_disease_names(vetwork=vetwork)
+
+
+    if vetwork.work_type_id == 2:
+    
+        return VetWorkSchema(
+            id=vetwork.id,
+            work_type=vetwork.work_type.name,
+            vetwork_date=vetwork.vetwork_date,
+            is_primary=vetwork.is_primary,
+            diseases=diseases,
+            clinic=vetwork.clinic.short_name,
+            biomaterial=vetwork.biomaterial.name,
+            biomaterial_fixation=vetwork.biomaterial_fixation.name,
+            biomaterial_package=vetwork.biomaterial_fixation.name,
+            diagnostic_method=vetwork.diagnostic_method.name
+
+        )
+            
+    return VetWorkSchema(
+            id=vetwork.id,
+            work_type=vetwork.work_type.name,
+            vetwork_date=vetwork.vetwork_date,
+            is_primary=vetwork.is_primary,
+            diseases=diseases,
+            clinic=vetwork.clinic.short_name
+        )
+
+
 
 
 async def get_disease_names(vetwork: VetWork) -> list[str]:
     return [item.disease.name for item in vetwork.diseases_details]
 
+async def serialize_vetworks(vetworks: list[VetWork]) -> VetWorks:
+    vetwork_schemas = [await serialize_vetwork(vetwork=vetwork) for vetwork in vetworks]
+    return VetWorks(vetworks=vetwork_schemas)
 
-async def serialize_vaccinations(vaccinations: list[VetWork]) -> VetWorks:
-    vaccination_schemas = [await serialize_vaccination(vaccination=vaccination) for vaccination in vaccinations]
-    return VetWorks(vetworks=vaccination_schemas)
-
-async def serialize_diagnostics(diagnostics: list[VetWork]) -> Diagnostics:
-    diagnostic_schemas = [await serialize_diagnostic(diagnostic=diagnostic) for diagnostic in diagnostics]
-    return Diagnostics(diagnostics=diagnostic_schemas)
-    
 
 async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkSchema:
     return AnimalInVetWorkSchema(
@@ -109,15 +109,17 @@ async def serialize_doctors_in_vetwork(items: list[DoctorInVetWork]) -> list[Emp
     return [await serialize_employee(item.doctor) for item in items]
 
 
-async def serialize_vaccination_detail(
+async def serialize_vetwork_detail(
     vetwork: VetWork, 
     companies: list[CompanyInVetWork],
     animals: list[AnimalInVetWork], 
     doctors: list[DoctorInVetWork],
     drug: DrugInMovement = None,
 
-    ) -> VaccinationDetail:
+    ) -> VetWorkDetail:
 
+    vetwork_schema: VetWorkSchema = await serialize_vetwork(vetwork=vetwork)
+    print(vetwork_schema)
     animal_schemas = []
     doctor_schemas = []
     company_schemas = []
@@ -131,18 +133,15 @@ async def serialize_vaccination_detail(
     if drug:
         drug_schema: DrugInMovementSchema = await serialize_drug_in_movement(drug)
 
-    return VaccinationDetail(
-        id=vetwork.id,
-        work_type=vetwork.work_type.name,
-        vetwork_date=vetwork.vetwork_date,
-        is_primary=vetwork.is_primary,
-        diseases=await get_disease_names(vetwork=vetwork),
-        clinic=vetwork.clinic.short_name,
+
+    return VetWorkDetail(
+        **vetwork_schema.model_dump(),
         companies=company_schemas,
         animals=animal_schemas,
         doctors=doctor_schemas,
         drug=drug_schema,
     )
+
 
     
     
