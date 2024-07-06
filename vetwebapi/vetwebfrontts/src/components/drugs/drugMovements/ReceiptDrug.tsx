@@ -1,6 +1,5 @@
 import { IDrugInMovement } from "../../../interfaces/DrugInterfaces";
 import { AppService } from "../../../app.service";
-import { Col, Row } from "react-bootstrap";
 
 interface ReceiptDrugProps {
     drug: IDrugInMovement;
@@ -30,16 +29,16 @@ export function ReceiptDrug({drug}: ReceiptDrugProps) {
 
  
     return(
-            <Row key={drug.id} className="border-bottom border-black">
-                <Col>{drug.name}</Col>
-                <Col>{drug.batch}</Col>
-                <Col>{drug.control}</Col>
-                <Col>{productionDate}</Col>
-                <Col>{drug.packs_amount}</Col>
-                <Col>{drug.units_amount}</Col>
+            <tr key={drug.id}>
+                <td>{drug.name}</td>
+                <td>{drug.batch}</td>
+                <td>{drug.control}</td>
+                <td>{productionDate}</td>
+                <td>{drug.packs_amount}</td>
+                <td>{drug.units_amount}</td>
                 {/* <td><BsPencilSquare className="edit-icon"/></td>
                 <td><BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal}/></td> */}
-            </Row>
+            </tr>
         )                
 
 }

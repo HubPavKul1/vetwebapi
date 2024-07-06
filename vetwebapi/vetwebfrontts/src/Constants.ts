@@ -1,3 +1,30 @@
+export const drugReceiptHeaders = [
+  {
+    id: 1,
+    title: "Наименование продукции",
+  },
+  {
+    id: 2,
+    title: "Серия",
+  },
+  {
+    id: 3,
+    title: "Контроль",
+  },
+  {
+    id: 4,
+    title: "Дата изготовления",
+  },
+  {
+    id: 5,
+    title: "Количество упаковок",
+  },
+  {
+    id: 6,
+    title: "Количество единиц учета",
+  }
+]
+
 export const drugReportHeaders = [
   {
     id: 1,

@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
-import { CompanyPageMenu } from "../../../components/menu/CompanyPageMenu";
+import { CompanyPageMenu } from "../../components/menu/CompanyPageMenu";
 
-import { AppService } from "../../../app.service";
-import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
-import { PageDetail } from "../../../components/PageDetail";
+import { AppService } from "../../app.service";
+import { ICompanyDetail } from "../../interfaces/CompanyInterfaces";
+import { PageDetail } from "../../components/PageDetail";
 
 interface CompanyData {
   data?: ICompanyDetail;
@@ -38,7 +38,6 @@ export function CompanyDetail() {
         animals={data.animals}
         companyId={data.id}
       ></PageDetail>
-
     </>
   );
 }

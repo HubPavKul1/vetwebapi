@@ -7,7 +7,7 @@ import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInRep
 import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
 import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
 import { drugReportHeaders } from "../../../../Constants";
-import { ReportPageMain } from "../../../../components/ReportPage/ReportPageMain.tsx";
+import { ReportPage } from "../../../../components/ReportPage/index.tsx";
 
 interface DrugReportProps {
   data: IDrugReport[];
@@ -27,25 +27,22 @@ export function DrugReport({
   const date1 = AppService.convertDateString(dateStart);
   const date2 = AppService.convertDateString(dateEnd);
 
-  
   return (
     <>
       {!pdf ? (
-         <ReportPageMain
-         reportTitle={`Движение биопрепаратов за период с ${date1.shortDate} по ${date2.shortDate}`}
-         imgSrc="/drugsBg.jpg"
-         menu={
-           <DrugReportMenu setPdf={setPdf} setReportActive={setReportActive} />
-         }
-         reportHeaders={drugReportHeaders}
-         reportItems={
-           data.map((drug) => <DrugInReport key={drug.id} drug={drug} />)
-         }
- 
-         />
- 
+        <ReportPage
+          reportTitle={`Движение биопрепаратов за период с ${date1.shortDate} по ${date2.shortDate}`}
+          imgSrc="/drugsBg.jpg"
+          menu={
+            <DrugReportMenu setPdf={setPdf} setReportActive={setReportActive} />
+          }
+          reportHeaders={drugReportHeaders}
+          reportItems={data.map((drug) => (
+            <DrugInReport key={drug.id} drug={drug} />
+          ))}
+        />
       ) : (
-        <DrugReportPDF setPdf={setPdf} data={data} dateEnd={dateEnd}/>
+        <DrugReportPDF setPdf={setPdf} data={data} dateEnd={dateEnd} />
       )}
     </>
   );

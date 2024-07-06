@@ -1,7 +1,7 @@
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/home/Home";
 import { Companies } from "./pages/companyPages/Companies";
-import { CompanyDetail } from "./pages/companyPages/company-detail/CompanyDetail";
+import { CompanyDetail } from "./pages/companyPages/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
 import { DrugReceipts } from "./pages/drugPages/DrugReceipts";
 import { Drugs } from "./pages/drugPages/Drugs";
