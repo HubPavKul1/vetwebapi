@@ -12,6 +12,7 @@ import { Vets } from "./pages/companyPages/Vets";
 import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
 import { VaccinationDetail } from "./pages/vetWorkPages/vaccination/vaccinationDetail/VaccinationDetail";
 import DrugReportMainPage from "./pages/drugPages/drugReports/DrugReportMainPage";
+import { Diagnostics } from "./pages/vetWorkPages/diagnostic/Diagnostics";
 
 export function App() {
   return (
@@ -26,6 +27,7 @@ export function App() {
           <Route path="drugs" element={<Drugs />} />
           <Route path="drugs/catalog" element={<DrugCatalog />} />
           <Route path="vetwork/vaccinations" element={<Vaccinations />} />
+          <Route path="vetwork/diagnostics" element={<Diagnostics />} />
           <Route path="vetwork/:id" element={<VaccinationDetail />} />
           <Route path="companies/:id" element={<CompanyDetail />} />
           <Route path="drugs/:id" element={<DrugDetail />} />
