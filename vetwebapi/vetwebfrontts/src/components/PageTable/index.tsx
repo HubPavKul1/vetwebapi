@@ -4,7 +4,7 @@ import { ITableHeaders } from "../../interfaces/BaseInterface";
 
 interface ReportPageTableProps {
   reportHeaders: ITableHeaders[];
-  reportItems: React.ReactElement;
+  reportItems?: React.ReactElement;
 }
 
 export function PageTable({ ...props }: ReportPageTableProps) {

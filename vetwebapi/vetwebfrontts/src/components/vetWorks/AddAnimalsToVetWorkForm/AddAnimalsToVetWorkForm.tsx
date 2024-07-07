@@ -32,6 +32,8 @@ export function AddAnimalsToVetWorkForm({
   const companyUrl = `/api/companies/${companyId}`;
   const url = `/api/vetwork/${id}/animals/`;
 
+  console.log("Animals>>>", animalsData)
+
   const {
     register,
     reset,
