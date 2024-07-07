@@ -1,16 +1,14 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Container, Row, Col } from "react-bootstrap";
 import styles from "./VaccinationDetail.module.scss";
 import { AppService } from "../../../../app.service";
 
-import { CustomButton } from "../../../../components/CustomButton";
 import { useState } from "react";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 
 import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
 import { AddAnimalsToVetWorkForm } from "../../../../components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
-import { AnimalInVetwork } from "../../../../components/vetWorks/AnimalInVetwork";
 import { ActPDF } from "./actPdf/ActPDF";
 import { VetWorkPageMenu } from "../../../../components/menu/VetWorkPageMenu";
 import { AnimalsListPDF } from "./animalsListPdf/AnimalsListPDF";

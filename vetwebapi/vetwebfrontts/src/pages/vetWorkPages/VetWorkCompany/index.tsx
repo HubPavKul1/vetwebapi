@@ -15,7 +15,7 @@ interface VetWorkCompanyProps {
   animals?: IAnimalInVetwork[];
 }
 
-export function VetWorkCompany({
+export function  VetWorkCompany({
   company,
   setAnimals,
   setCompanyId,

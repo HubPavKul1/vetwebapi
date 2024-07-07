@@ -1,15 +1,20 @@
 import { IBase } from "./BaseInterface";
 
 export interface IAnimal {
-    id: number;
+    animal_id?: number
+    id?: number;
     animal_group: string;
     species: string;
-    usage_type: string;
+    usage_type?: string;
     gender: string;
     date_of_birth: string;
     nickname: string;
     identification: string;
     is_active: boolean;
+    company_id?: number;
+    dosage?: number;
+    is_positive?: boolean;
+
 }
 
 export interface IAnimalCreate {

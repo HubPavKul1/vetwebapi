@@ -4,9 +4,10 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { AppService } from "../../app.service";
 import { Col, Row } from "react-bootstrap";
+import { IAnimal } from "../../interfaces/AnimalInterfaces";
 
 interface AnimalInVetworkProps {
-    animal: IAnimalInVetwork;
+    animal: IAnimal;
 }
 
 
