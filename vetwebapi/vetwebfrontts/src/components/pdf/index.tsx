@@ -29,7 +29,7 @@ export function PDF({ setPdf, filename, orientation="p", children }: PDFProps) {
         <CustomButton className="btn-upload" title="Назад" onClick={onClick} />
       </div>
 
-      <div className={styles.pdfWrap} ref={targetRef}>
+      <div className="py-10 px-20" ref={targetRef}>
         {children}
       </div>
     </Container>

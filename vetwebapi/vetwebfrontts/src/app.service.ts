@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IAddress } from "./interfaces/AddressInterfaces";
 
 
 export const AppService = {
@@ -45,4 +46,8 @@ export const AppService = {
 
         return ({day, month, year, quarter, fullDate, shortDate})
     },
+
+    addressString(data: IAddress) {
+        return (`${data.city}, ${data.street}, ${data.house_number}`)
+    }
 }
