@@ -34,6 +34,7 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
             work_type=vetwork.work_type.name,
             vetwork_date=vetwork.vetwork_date,
             is_primary=vetwork.is_primary,
+            is_state_assignment=vetwork.is_state_assignment,
             diseases=diseases,
             clinic=vetwork.clinic.short_name,
             biomaterial=vetwork.biomaterial.name,
@@ -48,6 +49,7 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
             work_type=vetwork.work_type.name,
             vetwork_date=vetwork.vetwork_date,
             is_primary=vetwork.is_primary,
+            is_state_assignment=vetwork.is_state_assignment,
             diseases=diseases,
             clinic=vetwork.clinic.short_name
         )

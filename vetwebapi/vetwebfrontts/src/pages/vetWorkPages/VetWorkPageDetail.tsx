@@ -10,7 +10,7 @@ import { AddAnimalsToVetWorkForm } from "../../components/vetWorks/AddAnimalsToV
 import { ActPDF } from "./vaccination/vaccinationDetail/actPdf/ActPDF";
 import { AnimalsListPDF } from "./vaccination/vaccinationDetail/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
-import { ReferralPDF } from "./vaccination/vaccinationDetail/referralPdf/ReferralPDF";
+import { ReferralPDF } from "./vetWorkPdf/referralPdf/ReferralPDF";
 
 interface VetWorkData {
   data?: IVetWorkSchema;

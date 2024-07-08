@@ -80,6 +80,7 @@ class VetWorkSchema(BaseModel):
     vetwork_date: date
     diseases: list[str] | None = None
     is_primary: bool
+    is_state_assignment: bool
     clinic: str
     biomaterial: str | None = None
     biomaterial_fixation: str | None = None

@@ -50,7 +50,7 @@ export function VetWorks({url, createForm, title, btnTitle, imgSrc, invQueryName
                 url={`/vetwork/${vetWork.id}`}
                 imgSrc={imgSrc}
                 invQueryName={invQueryName}
-                cardTitle={AppService.convertDateString(vetWork.vetwork_date).fullDate}
+                cardTitle={AppService.convertDateString(vetWork.vetwork_date).fullDate + " " + vetWork.diseases}
                 id={vetWork.id}
               >
 

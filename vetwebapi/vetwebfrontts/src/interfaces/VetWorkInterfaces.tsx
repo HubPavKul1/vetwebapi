@@ -36,6 +36,7 @@ export interface IVetWorkSchema {
     vetwork_date: string;
     diseases: string[];
     is_primary: boolean;
+    is_state_assignment: boolean;
     clinic: string;
     biomaterial?: string;
     biomaterial_fixation?: string;

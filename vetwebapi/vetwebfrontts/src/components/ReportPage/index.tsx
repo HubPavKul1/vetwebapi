@@ -2,13 +2,12 @@ import { Container } from "react-bootstrap";
 
 import { PageDetail } from "../PageDetail";
 
-import { ITableHeaders } from "../../interfaces/BaseInterface";
 import { PageTable } from "../PageTable";
 
 interface ReportPageMainProps {
   reportTitle: string;
   imgSrc: string;
-  reportHeaders: ITableHeaders[];
+  reportHeaders: string[];
   menu: React.ReactElement;
   reportItems: any;
 }
