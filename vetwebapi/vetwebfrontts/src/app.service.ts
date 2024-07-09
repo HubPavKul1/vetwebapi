@@ -1,5 +1,8 @@
 import axios from "axios";
 import { IAddress } from "./interfaces/AddressInterfaces";
+import { IEmployee } from "./interfaces/EmployeeInterfaces";
+import { ICompanyCard } from "./interfaces/CompanyInterfaces";
+import { IAnimalInVetwork } from "./interfaces/VetWorkInterfaces";
 
 
 export const AppService = {
@@ -48,6 +51,23 @@ export const AppService = {
     },
 
     addressString(data: IAddress) {
-        return (`${data.city}, ${data.street}, ${data.house_number}`)
+        return `${data.city}, ${data.street}, ${data.house_number}`
+    },
+
+    employeeString(employee: IEmployee, company: ICompanyCard) {
+        return `${employee.position} ${company.short_name} ${employee.fullname}`
+    },
+
+    doctorString(doctor: IEmployee, clinic: string) {
+        return `${doctor.position} ${clinic} ${doctor.fullname}`
+    },
+
+    vetWorkAnimalsString(animals: IAnimalInVetwork[]) {
+        return new Set(animals.map(animal => animal.animal_group.toLowerCase() + ", "));
+    },
+
+    diseasesString(diseases: string[]) {
+        return new Set(diseases.map(disease => disease.toLowerCase() + ", "));
     }
+
 }

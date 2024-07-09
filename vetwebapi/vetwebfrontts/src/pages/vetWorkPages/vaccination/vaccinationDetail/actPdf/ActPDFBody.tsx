@@ -151,8 +151,7 @@ export function ActPDFBody({data}: ActPDFBodyProps) {
                     <Col sm={3}>Подписи:</Col> 
                 </Row>
                 {data.doctors.map(doctor => 
-
-                    <Row>
+                    <Row key={doctor.id}>
                         <Col sm={3}></Col> 
                         <Col sm={2} className={styles.underScored}></Col>
                         <Col sm={4}>{doctor.fullname}</Col> 

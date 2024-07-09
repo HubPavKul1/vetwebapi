@@ -9,7 +9,7 @@ from vetwebapi.core.models.base import Base
 if TYPE_CHECKING:
     from .work_type import WorkType
     from .biomaterial import Biomaterial
-    from vetwebapi.core.models import Company, Animal, Employee, DrugMovement
+    from vetwebapi.core.models import Company, Animal, Employee, DrugMovement, Clinic, Laboratory
     from .biomaterial_package import BiomaterialPackage
     from .biomaterial_fixation import BiomaterialFixation
     from .animal_in_vetwork import AnimalInVetWork
@@ -32,7 +32,10 @@ class VetWork(Base):
     is_state_assignment: Mapped[bool] = mapped_column(Boolean, default=False)
     is_primary: Mapped[bool] = mapped_column(Boolean, default=True)
     clinic_id: Mapped[int] = mapped_column(
-        ForeignKey("companies.id", ondelete="CASCADE")
+        ForeignKey("clinics.id", ondelete="CASCADE")
+        )
+    laboratory_id: Mapped[int | None] = mapped_column(
+        ForeignKey("laboratories.id", ondelete="CASCADE")
         )
     biomaterial_id: Mapped[int | None] = mapped_column(
         ForeignKey("biomaterials.id", ondelete="CASCADE")
@@ -52,7 +55,8 @@ class VetWork(Base):
     
 
     work_type: Mapped["WorkType"] = relationship(back_populates="vetworks", lazy="joined")
-    clinic: Mapped["Company"] = relationship(back_populates="vetworks", lazy="joined")
+    clinic: Mapped["Clinic"] = relationship(back_populates="vetworks", lazy="joined")
+    laboratory: Mapped["Laboratory"] = relationship(back_populates="vetworks", lazy="joined")
     biomaterial: Mapped["Biomaterial"] = relationship(back_populates="vetworks", lazy="joined")
     biomaterial_package: Mapped["BiomaterialPackage"] = relationship(back_populates="vetworks", lazy="joined")
     biomaterial_fixation: Mapped["BiomaterialFixation"] = relationship(back_populates="vetworks", lazy="joined")

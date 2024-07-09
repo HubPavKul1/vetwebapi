@@ -4,7 +4,7 @@ from slugify import slugify
 from sqlalchemy import Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.models.base import Base
+from vetwebapi.core.models.base import BaseNoPk, intpk
 
 if TYPE_CHECKING:
     from vetwebapi.core.models import Animal, VetWork, CompanyInVetWork
@@ -13,15 +13,17 @@ if TYPE_CHECKING:
     from .employee import Employee
 
 
-class Company(Base):
+class Company(BaseNoPk):
     """класс Компания"""
 
     __tablename__ = "companies"
 
+    id: Mapped[intpk]
     full_name: Mapped[str]
     short_name: Mapped[str]
-    is_vet: Mapped[bool] = mapped_column(Boolean, default=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    type: Mapped[str]
+    
 
     addresses: Mapped["Address"] = relationship(back_populates="company", cascade="all, delete", lazy="joined")
     employees: Mapped[list["Employee"]] = relationship(
@@ -30,8 +32,6 @@ class Company(Base):
         lazy="selectin" 
     )
     animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
-    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="clinic", cascade="all, delete")
-
     vetworks: Mapped[list["VetWork"]] = relationship(
         back_populates="companies", secondary="companies_in_vetwork"
     )
@@ -42,6 +42,12 @@ class Company(Base):
     @property
     def company_slug(self):
         return slugify(self.short_name)
+    
+    
+    __mapper_args__ = {
+        "polymorphic_identity": "company",
+        "polymorphic_on": "type"
+    }
 
     def __repr__(self) -> str:
         return self.short_name

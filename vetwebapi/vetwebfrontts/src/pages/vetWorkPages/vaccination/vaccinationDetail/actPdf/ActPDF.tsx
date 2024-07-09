@@ -9,6 +9,7 @@ interface ActPDFProps {
 }
 
 export function ActPDF({ setPdf, data }: ActPDFProps) {
+  
   return (
     <PDF setPdf={setPdf} filename="act.pdf">
       <ActPDFHeader data={data} />

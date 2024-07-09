@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 97b38054f843
+Revision ID: 1d71a7cc4872
 Revises: 
-Create Date: 2024-05-20 19:59:18.536084
+Create Date: 2024-07-09 18:25:54.158027
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "97b38054f843"
+revision: str = "1d71a7cc4872"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -58,11 +58,11 @@ def upgrade() -> None:
     )
     op.create_table(
         "companies",
+        sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("full_name", sa.String(), nullable=False),
         sa.Column("short_name", sa.String(), nullable=False),
-        sa.Column("is_vet", sa.Boolean(), nullable=False),
         sa.Column("is_active", sa.Boolean(), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("type", sa.String(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
@@ -154,6 +154,12 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
+        "clinics",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["id"], ["companies.id"]),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
         "districts",
         sa.Column("region_id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=100), nullable=False),
@@ -239,6 +245,12 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
+        "laboratories",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(["id"], ["companies.id"]),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
         "users",
         sa.Column("role_id", sa.Integer(), nullable=False),
         sa.Column("username", sa.String(length=10), nullable=False),
@@ -293,6 +305,7 @@ def upgrade() -> None:
         sa.Column("is_state_assignment", sa.Boolean(), nullable=False),
         sa.Column("is_primary", sa.Boolean(), nullable=False),
         sa.Column("clinic_id", sa.Integer(), nullable=False),
+        sa.Column("laboratory_id", sa.Integer(), nullable=True),
         sa.Column("biomaterial_id", sa.Integer(), nullable=True),
         sa.Column("biomaterial_package_id", sa.Integer(), nullable=True),
         sa.Column("biomaterial_fixation_id", sa.Integer(), nullable=True),
@@ -313,7 +326,7 @@ def upgrade() -> None:
             ondelete="CASCADE",
         ),
         sa.ForeignKeyConstraint(
-            ["clinic_id"], ["companies.id"], ondelete="CASCADE"
+            ["clinic_id"], ["clinics.id"], ondelete="CASCADE"
         ),
         sa.ForeignKeyConstraint(
             ["diagnostic_method_id"],
@@ -322,6 +335,9 @@ def upgrade() -> None:
         ),
         sa.ForeignKeyConstraint(
             ["drug_movement_id"], ["drug_movements.id"], ondelete="CASCADE"
+        ),
+        sa.ForeignKeyConstraint(
+            ["laboratory_id"], ["laboratories.id"], ondelete="CASCADE"
         ),
         sa.ForeignKeyConstraint(
             ["work_type_id"], ["work_types.id"], ondelete="CASCADE"
@@ -475,10 +491,12 @@ def downgrade() -> None:
     op.drop_table("catalog_drugs")
     op.drop_index(op.f("ix_users_email"), table_name="users")
     op.drop_table("users")
+    op.drop_table("laboratories")
     op.drop_table("employees")
     op.drop_table("drugs")
     op.drop_table("drug_movements")
     op.drop_table("districts")
+    op.drop_table("clinics")
     op.drop_table("animal_groups")
     op.drop_table("work_types")
     op.drop_table("usage_types")
