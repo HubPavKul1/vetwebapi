@@ -2,9 +2,9 @@ from sqlalchemy import select
 from operator import and_
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload, selectinload
+from sqlalchemy.orm import joinedload, selectinload, with_polymorphic
 
-from vetwebapi.core.models import Company, Role
+from vetwebapi.core.models import Company, Role, Clinic, Laboratory
 
 from .schemas import CompanyIn
 
@@ -12,12 +12,26 @@ from .schemas import CompanyIn
 # Create Data
 async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     new_company = Company(**body.model_dump())
-    new_company.full_name = new_company.full_name.upper()
-    new_company.short_name = new_company.short_name.upper()
     session.add(new_company)
     await session.commit()
     await session.refresh(new_company)
     return new_company
+
+
+async def create_clinic(session: AsyncSession, body: CompanyIn) -> Clinic:
+    clinic = Clinic(**body.model_dump())
+    session.add(clinic)
+    await session.commit()
+    await session.refresh(clinic)
+    return clinic
+
+
+async def create_lab(session: AsyncSession, body: CompanyIn) -> Laboratory:
+    new_lab = Laboratory(**body.model_dump())
+    session.add(new_lab)
+    await session.commit()
+    await session.refresh(new_lab)
+    return new_lab
 
 
 async def create_role(session: AsyncSession, name: str) -> None:
@@ -37,18 +51,30 @@ async def read_companies_with_options(session: AsyncSession) -> list[Company]:
         select(Company)
         .options(selectinload(Company.employees))
         .options(joinedload(Company.addresses))
-        .where(and_(Company.is_active, Company.is_vet == False))
+        .where(Company.is_active)
         .order_by(Company.short_name)
     )
     return list(await session.scalars(stmt))
 
 
-async def read_vet_clinics_with_options(session: AsyncSession) -> list[Company]:
+async def read_clinics_with_options(session: AsyncSession) -> list[Clinic]:
     stmt = (
-        select(Company)
+        select(Clinic)
         .options(selectinload(Company.employees))
         .options(joinedload(Company.addresses))
-        .where(and_(Company.is_active, Company.is_vet))
+        .where(Company.is_active)
+        .order_by(Company.short_name)
+    )
+    return list(await session.scalars(stmt))
+
+
+async def read_labs_with_options(session: AsyncSession) -> list[Laboratory]:
+   
+    stmt = (
+        select(Laboratory)
+        .options(selectinload(Company.employees))
+        .options(joinedload(Company.addresses))
+        .where(Company.is_active)
         .order_by(Company.short_name)
     )
     return list(await session.scalars(stmt))

@@ -12,8 +12,7 @@ class BaseIn(BaseModel):
 class CompanyIn(BaseModel):
     full_name: str
     short_name: str
-    is_vet: bool = False
-
+    
 
 class CompanyCard(CompanyIn):
     id: int
