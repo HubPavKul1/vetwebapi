@@ -54,8 +54,12 @@ export const AppService = {
         return `${data.city}, ${data.street}, ${data.house_number}`
     },
 
-    employeeString(employee: IEmployee, company: ICompanyCard) {
+    employeeWithCompanyNameString(employee: IEmployee, company: ICompanyCard) {
         return `${employee.position} ${company.short_name} ${employee.fullname}`
+    },
+
+    employeeString(employee: IEmployee) {
+        return `${employee.position} ${employee.fullname}`
     },
 
     doctorString(doctor: IEmployee, clinic: string) {

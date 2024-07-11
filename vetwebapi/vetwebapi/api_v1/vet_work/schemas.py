@@ -40,6 +40,7 @@ class VetWorkOut(BaseModel):
     
 class DiagnosticIn(VetWorkIn):
     work_type_id: int = 2
+    laboratory_id: int | None = None
     biomaterial_id: int | None = None
     biomaterial_package_id: int | None = None
     biomaterial_fixation_id: int | None = None
@@ -82,6 +83,7 @@ class VetWorkSchema(BaseModel):
     is_primary: bool
     is_state_assignment: bool
     clinic: str
+    laboratory: str | None = None
     biomaterial: str | None = None
     biomaterial_fixation: str | None = None
     biomaterial_package: str | None = None

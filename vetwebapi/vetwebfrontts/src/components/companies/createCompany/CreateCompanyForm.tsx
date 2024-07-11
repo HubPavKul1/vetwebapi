@@ -11,13 +11,16 @@ import {
 import { CustomButton } from "../../CustomButton";
 import { AppService } from "../../../app.service";
 
-export function CreateCompanyForm() {
+interface CreateCompanyFormProps {
+  url: string;
+  invQueryName: string;
+}
+
+export function CreateCompanyForm({ url, invQueryName }: CreateCompanyFormProps) {
   const inputItems: FormInputProps<ICompanyCreate>[] = [
     { fieldName: "full_name", placeholder: "Введите полное наименование *" },
     { fieldName: "short_name", placeholder: "Введите краткое наименование *" },
   ];
-
-  const url = "/api/companies/";
 
   const {
     register,
@@ -31,7 +34,7 @@ export function CreateCompanyForm() {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
-    ["create company"],
+    [{ invQueryName }],
     (data: ICompanyCreate) => AppService.createItem(url, data),
     {
       onSuccess: () => {
@@ -74,18 +77,6 @@ export function CreateCompanyForm() {
           }}
         />
       ))}
-      <div className="form-group">
-        <label htmlFor="is_vet">
-          Ветучреждение
-          <Input
-            register={register}
-            errors={errors}
-            fieldName="is_vet"
-            type="checkbox"
-            id="is_vet"
-          />
-        </label>
-      </div>
 
       <CustomButton
         className="btn-submit"

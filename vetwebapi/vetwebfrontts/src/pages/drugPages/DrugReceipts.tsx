@@ -27,13 +27,14 @@ export function DrugReceipts() {
 
   return (
     <Catalog
-      title="Поступление биопрепаратов"
+      title="Поступления биопрепаратов"
       btnTitle="Добавить поступление препарата"
       cardsInRow={4}
       createForm={<CreateDrugReceiptForm />}
+      dataLength={data.length}
     >
         {data.length
-          ? data.map((drugMovement) => (
+          && data.map((drugMovement) => (
               <CatalogItem
                 key={drugMovement.id}
                 delUrl={`/api/drugs/receipts/${drugMovement.id}`}
@@ -43,10 +44,7 @@ export function DrugReceipts() {
                 cardTitle={AppService.convertDateString(drugMovement.operation_date).fullDate}
                 id={drugMovement.id}  
               />
-            ))
-          : (
-            <h5>Поступления отсутствуют</h5>
-          )}
+            ))}
       
     </Catalog>
   );

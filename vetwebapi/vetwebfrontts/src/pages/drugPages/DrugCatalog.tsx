@@ -31,11 +31,12 @@ export function DrugCatalog() {
       btnTitle="Добавить препарат"
       createForm={<CreateCatalogDrugForm />}
       cardsInRow={3}
+      dataLength={data.length}
       
     >
 
         {data.length
-          ? data.map((drug) => 
+          && data.map((drug) => 
           <CatalogItem 
             key={drug.id}
             delUrl={`/api/drugs/catalog/${drug.id}`}
@@ -53,10 +54,7 @@ export function DrugCatalog() {
               
             />
           </CatalogItem>
-        )
-          : (
-            <h5>Биопрепараты отсутствуют</h5>
-          )}
+        )}
 
     </Catalog>
   );

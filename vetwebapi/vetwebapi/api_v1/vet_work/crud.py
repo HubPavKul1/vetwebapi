@@ -18,7 +18,8 @@ from vetwebapi.core.models import (
     CompanyInVetWork,
     Biomaterial,
     BiomaterialFixation,
-    BiomaterialPackage
+    BiomaterialPackage,
+    DiagnosticMethod
     )
 
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
@@ -178,14 +179,35 @@ async def read_drug_in_vetwork(session: AsyncSession, vetwork: VetWork) -> DrugI
     return await session.scalar(stmt)
 
 
+async def read_biomaterial_fixations(session: AsyncSession) -> list[BiomaterialFixation]:
+    stmt = (
+        select(BiomaterialFixation).order_by(BiomaterialFixation.name)
+    )
+    return list(await session.scalars(stmt))
+
+async def read_biomaterials(session: AsyncSession) -> list[Biomaterial]:
+    stmt = (
+        select(Biomaterial).order_by(Biomaterial.name)
+    )
+    return list(await session.scalars(stmt))
+
+async def read_biomaterial_packages(session: AsyncSession) -> list[BiomaterialPackage]:
+    stmt = (
+        select(BiomaterialPackage).order_by(BiomaterialPackage.name)
+    )
+    return list(await session.scalars(stmt))
+
+
+async def read_diagnosic_methods(session: AsyncSession) -> list[DiagnosticMethod]:
+    stmt = (
+        select(DiagnosticMethod).order_by(DiagnosticMethod.name)
+    )
+    return list(await session.scalars(stmt))
+
+
+# DELETE
+
 async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
-    
-    # doctors_in_vetwork: list[DoctorInVetWork] = await read_doctors_in_vetwork(session=session, vetwork=vetwork)
-    # animals_in_vetwork: list[AnimalInVetWork] = await read_animals_in_vetwork(session=session, vetwork=vetwork)
-    # if doctors_in_vetwork:
-    #     [await session.delete(item) for item in doctors_in_vetwork]
-    # if animals_in_vetwork:
-    #     [await session.delete(item) for item in animals_in_vetwork]
     await session.delete(vetwork)
     await session.commit()
 

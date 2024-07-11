@@ -8,7 +8,6 @@ export interface ICompany {
     id: number;
     full_name: string;
     short_name: string;
-    is_vet?: boolean;
 }
 
 export interface ICompanyCard extends ICompany {

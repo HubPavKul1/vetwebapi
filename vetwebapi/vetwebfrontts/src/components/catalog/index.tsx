@@ -1,7 +1,8 @@
-import { Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 import { CreateItem } from "../CreateItem";
 import { PageWrapper } from "../PageWrapper";
+import NoData from "../NoData";
 
 interface CatalogProps {
   title: string;
@@ -9,6 +10,7 @@ interface CatalogProps {
   children: React.ReactElement | React.ReactNode;
   btnTitle?: string;
   cardsInRow: number;
+  dataLength: number;
 }
 
 export function Catalog({
@@ -17,15 +19,19 @@ export function Catalog({
   children,
   btnTitle,
   cardsInRow,
+  dataLength,
 }: CatalogProps) {
   return (
     <PageWrapper>
       <h1 className="text-center text-3xl mb-5">{title}</h1>
       {createForm && <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>}
-      
-      <Row xs={1} md={cardsInRow} lg={cardsInRow}>
-        {children}
-      </Row>
+      {dataLength > 0 ? (
+        <Row xs={1} md={cardsInRow} lg={cardsInRow}>
+          {children}
+        </Row>
+      ) : (
+        <NoData title={title} />
+      )}
     </PageWrapper>
   );
 }

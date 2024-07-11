@@ -150,6 +150,7 @@ async def add_dosages(session: AsyncSession) -> None:
         "лошади, крс, олени, верблюды 1 см куб. на голову, мрс 0,5 см куб. на голову",
         "0,2 см куб. на голову",
         "4,5 г на 100 кг ЖМ",
+        "крс 5 см куб, мрс 3 см куб., лошади 2 см куб."
     ]
     session.add_all([Dosage(name=item) for item in dosages])
     await session.commit()

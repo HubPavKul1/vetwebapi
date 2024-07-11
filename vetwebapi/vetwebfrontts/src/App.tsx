@@ -13,6 +13,7 @@ import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
 import DrugReportMainPage from "./pages/drugPages/drugReports/DrugReportMainPage";
 import { Diagnostics } from "./pages/vetWorkPages/diagnostic/Diagnostics";
 import { VetWorkPageDetail } from "./pages/vetWorkPages/VetWorkPageDetail";
+import { Labs } from "./pages/companyPages/Labs";
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
           <Route index element={<Home />} />
           <Route path="companies" element={<Companies />} />
           <Route path="companies/vets" element={<Vets />} />
+          <Route path="companies/labs" element={<Labs />} />
           <Route path="drugs/receipts" element={<DrugReceipts />} />
           <Route path="drugs/receipts/:id" element={<ReceiptDetail />} />
           <Route path="drugs" element={<Drugs />} />

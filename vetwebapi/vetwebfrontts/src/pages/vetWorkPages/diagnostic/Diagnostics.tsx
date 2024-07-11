@@ -7,7 +7,7 @@ export function Diagnostics() {
       url="/api/vetwork/diagnostics"
       createForm={<VaccinationCreateForm />}
       imgSrc="diagnostic.jpg"
-      title="Диагностика"
+      title="Диагностические исследования"
       btnTitle="Добавить диагностику"
       invQueryName="diagnostics"
     />

@@ -41,9 +41,10 @@ export function VetWorks({url, createForm, title, btnTitle, imgSrc, invQueryName
       btnTitle={btnTitle}
       createForm={createForm}
       cardsInRow={4}
+      dataLength={data.length}
     >
         {data.length
-          ? data.map((vetWork) => (
+          && data.map((vetWork) => (
               <CatalogItem 
                 key={vetWork.id} 
                 delUrl={`/api/vetwork/${vetWork.id}`}
@@ -55,10 +56,7 @@ export function VetWorks({url, createForm, title, btnTitle, imgSrc, invQueryName
               >
 
               </CatalogItem>
-            ))
-          : (
-            <h5>Мероприятия отсутствуют</h5>
-          )}
+            ))}
     </Catalog>
   );
 }

@@ -14,7 +14,11 @@ from .schemas import (
     AnimalInVetWorkIn,
     CompanyInVetWorkIn,
     DiagnosticIn,
-    VetWorkDetail
+    VetWorkDetail,
+    BiomaterialFixations,
+    BiomaterialPackages,
+    Biomaterials,
+    DiagnosticMethods
     )
 from .serializers import (
     serialize_vetworks,
@@ -151,3 +155,64 @@ async def delete_vetwork_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+# Data for diagnostic create:
+
+@router.get("/biomaterial_fixations", response_model=BiomaterialFixations)
+async def get_biomaterial_fixations(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    ) -> Union[dict, BiomaterialFixations]:
+
+    try:
+        biomaterial_fixations = await crud.read_biomaterial_fixations(session=session)
+        return BiomaterialFixations(biomaterial_fixations=biomaterial_fixations)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+@router.get("/biomaterials", response_model=Biomaterials)
+async def get_biomaterials(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    ) -> Union[dict, Biomaterials]:
+
+    try:
+        biomaterials = await crud.read_biomaterials(session=session)
+        return Biomaterials(biomaterials=biomaterials)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+    
+@router.get("/biomaterial_packages", response_model=BiomaterialPackages)
+async def get_biomaterial_packages(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    ) -> Union[dict, BiomaterialPackages]:
+
+    try:
+        biomaterial_packages = await crud.read_biomaterial_packages(session=session)
+        return BiomaterialPackages(biomaterial_packages=biomaterial_packages)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+@router.get("/diagnostic_methods", response_model=DiagnosticMethods)
+async def get_diagnostic_methods(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    ) -> Union[dict, DiagnosticMethods]:
+
+    try:
+        diagnostic_methods = await crud.read_diagnosic_methods(session=session)
+        return DiagnosticMethods(diagnostic_methods=diagnostic_methods)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+

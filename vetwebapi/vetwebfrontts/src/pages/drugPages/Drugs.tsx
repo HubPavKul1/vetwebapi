@@ -36,8 +36,9 @@ export function Drugs() {
       btnTitle="Добавить препарат"
       cardsInRow={3}
       createForm={<CreateDrugForm />}
+      dataLength={data.length}
     >
-      {data.length ? (
+      {data.length && (
         data.map((drug) => (
           <CatalogItem
             key={drug.id}
@@ -59,8 +60,6 @@ export function Drugs() {
             />
           </CatalogItem>
         ))
-      ) : (
-        <h5>Биопрепараты отсутствуют</h5>
       )}
     </Catalog>
   );

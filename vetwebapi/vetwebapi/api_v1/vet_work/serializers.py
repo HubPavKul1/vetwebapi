@@ -37,6 +37,7 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
             is_state_assignment=vetwork.is_state_assignment,
             diseases=diseases,
             clinic=vetwork.clinic.short_name,
+            laboratory=vetwork.laboratory.short_name,
             biomaterial=vetwork.biomaterial.name,
             biomaterial_fixation=vetwork.biomaterial_fixation.name,
             biomaterial_package=vetwork.biomaterial_package.name,

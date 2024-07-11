@@ -14,11 +14,12 @@ export default function DrugReportMainPage() {
   return (
     <>
       {!reportActive ? (
-        <Catalog title="Отчеты по биопрепаратам" cardsInRow={3}>
+        <Catalog title="Отчеты по биопрепаратам" cardsInRow={3} dataLength={1}>
           <DrugMovementBetweenDateRange
             setDrugReportData={setDrugReportData}
             setDateRange={setDateRange}
             setReportActive={setReportActive}
+          
           />
           <Vet1BMenu
             setDrugReportData={setDrugReportData}

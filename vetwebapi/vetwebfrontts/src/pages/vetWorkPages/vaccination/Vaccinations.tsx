@@ -7,7 +7,7 @@ export function Vaccinations() {
       url="/api/vetwork/vaccinations"
       createForm={<VaccinationCreateForm />}
       imgSrc="vetworkBg.jpg"
-      title="Вакцинация"
+      title="Вакцинации"
       btnTitle="Добавить вакцинацию"
       invQueryName="vaccinations"
     />

@@ -51,7 +51,7 @@ async def read_companies_with_options(session: AsyncSession) -> list[Company]:
         select(Company)
         .options(selectinload(Company.employees))
         .options(joinedload(Company.addresses))
-        .where(Company.is_active)
+        .where(and_(Company.is_active, Company.type == "company"))
         .order_by(Company.short_name)
     )
     return list(await session.scalars(stmt))

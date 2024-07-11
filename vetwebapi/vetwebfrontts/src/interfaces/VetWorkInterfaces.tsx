@@ -19,6 +19,14 @@ export interface IVetworkCreate {
     doctors?: number[];
 }
 
+export interface IDiagnosticCreate extends IVetworkCreate {
+    laboratory_id?: number;
+    biomaterial_id?: number;
+    biomaterial_package_id?: number;
+    biomaterial_fixation_id?: number;
+    diagnostic_method_id?: number;
+}
+
 
 export interface IVetwork extends IVetworkCreate{
     id: number;
@@ -68,3 +76,23 @@ export interface IAnimalInVetwork extends IAnimalInVetworkIn {
     identification: string;
     is_active: boolean;
 }
+
+
+export interface IBiomaterials {
+    biomaterials: IBase[]
+}
+
+export interface IBiomaterialFixations {
+    biomaterial_fixations: IBase[]
+}
+
+export interface IBiomaterialPackages {
+    biomaterial_packages: IBase[]
+}
+
+export interface DiagnosticMethods {
+    diagnostic_methods: IBase[]
+}
+
+
+
