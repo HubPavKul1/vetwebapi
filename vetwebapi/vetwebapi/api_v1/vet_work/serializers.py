@@ -28,6 +28,20 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
 
 
     if vetwork.work_type_id == 2:
+        laboratory = ""
+        biomaterial = ""
+        biomaterial_fixation = ""
+        biomaterial_package = ""
+
+        if vetwork.laboratory:
+            laboratory = vetwork.laboratory.short_name
+        if vetwork.biomaterial:
+            biomaterial = vetwork.biomaterial.name
+        if vetwork.biomaterial_fixation:
+            biomaterial_fixation = vetwork.biomaterial_fixation.name
+        if vetwork.biomaterial_package:
+            biomaterial_package = vetwork.biomaterial_package.name
+
     
         return VetWorkSchema(
             id=vetwork.id,
@@ -37,10 +51,10 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
             is_state_assignment=vetwork.is_state_assignment,
             diseases=diseases,
             clinic=vetwork.clinic.short_name,
-            laboratory=vetwork.laboratory.short_name,
-            biomaterial=vetwork.biomaterial.name,
-            biomaterial_fixation=vetwork.biomaterial_fixation.name,
-            biomaterial_package=vetwork.biomaterial_package.name,
+            laboratory=laboratory,
+            biomaterial=biomaterial,
+            biomaterial_fixation=biomaterial_fixation,
+            biomaterial_package=biomaterial_package,
             diagnostic_method=vetwork.diagnostic_method.name
 
         )

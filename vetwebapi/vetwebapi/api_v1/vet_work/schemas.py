@@ -83,11 +83,11 @@ class VetWorkSchema(BaseModel):
     is_primary: bool
     is_state_assignment: bool
     clinic: str
-    laboratory: str | None = None
-    biomaterial: str | None = None
-    biomaterial_fixation: str | None = None
-    biomaterial_package: str | None = None
-    diagnostic_method: str | None = None
+    laboratory: str | None = ""
+    biomaterial: str | None = ""
+    biomaterial_fixation: str | None = ""
+    biomaterial_package: str | None = ""
+    diagnostic_method: str | None = ""
 
 
 class VetWorks(BaseModel):

@@ -5,7 +5,6 @@ import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { AppService } from "../../app.service";
 import { IVetwork } from "../../interfaces/VetWorkInterfaces";
 
-
 interface VetWorkData {
   data?: IVetwork[];
   isLoading: boolean;
@@ -13,18 +12,24 @@ interface VetWorkData {
 }
 
 interface VetWorksProps {
-    url: string;
-    createForm: React.ReactElement;
-    title: string;
-    btnTitle: string;
-    imgSrc: string;
-    invQueryName: string
+  url: string;
+  createForm: React.ReactElement;
+  title: string;
+  btnTitle: string;
+  imgSrc: string;
+  queryKey: string;
 }
 
-export function VetWorks({url, createForm, title, btnTitle, imgSrc, invQueryName}: VetWorksProps) {
-  
+export function VetWorks({
+  url,
+  createForm,
+  title,
+  btnTitle,
+  imgSrc,
+  queryKey,
+}: VetWorksProps) {
   const { data, isLoading, error }: VetWorkData = useQuery(
-    [{invQueryName}],
+    [{ queryKey }],
     () => AppService.getAll(url),
     {
       select: ({ data }) => data?.vetworks,
@@ -32,8 +37,6 @@ export function VetWorks({url, createForm, title, btnTitle, imgSrc, invQueryName
   );
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
-
- 
 
   return (
     <Catalog
@@ -43,20 +46,22 @@ export function VetWorks({url, createForm, title, btnTitle, imgSrc, invQueryName
       cardsInRow={4}
       dataLength={data.length}
     >
-        {data.length
-          && data.map((vetWork) => (
-              <CatalogItem 
-                key={vetWork.id} 
-                delUrl={`/api/vetwork/${vetWork.id}`}
-                url={`/vetwork/${vetWork.id}`}
-                imgSrc={imgSrc}
-                invQueryName={invQueryName}
-                cardTitle={AppService.convertDateString(vetWork.vetwork_date).fullDate + " " + vetWork.diseases}
-                id={vetWork.id}
-              >
-
-              </CatalogItem>
-            ))}
+      {data.length &&
+        data.map((vetWork) => (
+          <CatalogItem
+            key={vetWork.id}
+            delUrl={`/api/vetwork/${vetWork.id}`}
+            url={`/vetwork/${vetWork.id}`}
+            imgSrc={imgSrc}
+            invQueryName={queryKey}
+            cardTitle={
+              AppService.convertDateString(vetWork.vetwork_date).fullDate +
+              " " +
+              vetWork.diseases
+            }
+            id={vetWork.id}
+          ></CatalogItem>
+        ))}
     </Catalog>
   );
 }

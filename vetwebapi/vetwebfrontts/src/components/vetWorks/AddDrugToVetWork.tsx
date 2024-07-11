@@ -7,7 +7,7 @@ export function AddDrugToVetWork() {
 
   return (
     <MenuItem title="Добавить препарат">
-      <AddDrugForm url={`/api/vetwork/${id}/drug`} queryKey="vaccination" />
+      <AddDrugForm url={`/api/vetwork/${id}/drug`} queryKey="vetwork" />
     </MenuItem>
   );
 }

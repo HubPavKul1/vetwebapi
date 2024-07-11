@@ -17,15 +17,20 @@ export interface IVetworkCreate {
     clinic_id: number;
     diseases: number[];
     doctors?: number[];
-}
-
-export interface IDiagnosticCreate extends IVetworkCreate {
     laboratory_id?: number;
     biomaterial_id?: number;
     biomaterial_package_id?: number;
     biomaterial_fixation_id?: number;
     diagnostic_method_id?: number;
 }
+
+// export interface IDiagnosticCreate extends IVetworkCreate {
+//     laboratory_id?: number;
+//     biomaterial_id?: number;
+//     biomaterial_package_id?: number;
+//     biomaterial_fixation_id?: number;
+//     diagnostic_method_id?: number;
+// }
 
 
 export interface IVetwork extends IVetworkCreate{
