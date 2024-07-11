@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import Employee, Position, Company
+from vetwebapi.core.models import Employee, Position, Company, Clinic
 
 from .schemas import EmployeeIn
 
@@ -50,10 +50,10 @@ async def read_employees(session: AsyncSession) -> list[Employee | None]:
 
 async def read_doctors(session: AsyncSession) -> list[Employee | None]:
     stmt = (
-        select(Company)
+        select(Clinic)
         .options(selectinload(Company.employees))
-        .where(and_(Company.is_active, Company.is_vet))
-        .order_by(Company.short_name)
+        .where(Company.is_active)
+        .order_by(Clinic.short_name)
     )
     companies = await session.scalars(stmt)
     doctors = []

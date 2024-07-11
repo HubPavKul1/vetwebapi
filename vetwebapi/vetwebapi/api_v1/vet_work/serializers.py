@@ -94,7 +94,6 @@ async def serialize_company_in_vetwork(item: CompanyInVetWork) -> CompanyCard:
     return CompanyCard(
         full_name=item.company.full_name,
         short_name=item.company.short_name,
-        is_vet=item.company.is_vet,
         id=item.company.id,
         address=address_schema,
         employee=employee_schema
@@ -122,7 +121,6 @@ async def serialize_vetwork_detail(
     ) -> VetWorkDetail:
 
     vetwork_schema: VetWorkSchema = await serialize_vetwork(vetwork=vetwork)
-    print(vetwork_schema)
     animal_schemas = []
     doctor_schemas = []
     company_schemas = []

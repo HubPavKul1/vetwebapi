@@ -9,7 +9,7 @@ export function AddCompanyToVetWork() {
     <MenuItem title="Добавить предприятие">
       <AddCompanyToVetWorkForm
         url={`/api/vetwork/${id}/company`}
-        queryKey="vaccination"
+        queryKey="vetwork"
       />
     </MenuItem>
   );
