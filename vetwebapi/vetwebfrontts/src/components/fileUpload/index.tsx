@@ -4,6 +4,7 @@ import { useQueryClient, useMutation } from "react-query";
 import axios from "axios";
 import styles from "./FileUpload.module.scss";
 import { Container } from "react-bootstrap";
+import { LiaFileDownloadSolid } from "react-icons/lia";
 
 interface FileUploadProps {
   accept?: string;
@@ -62,6 +63,7 @@ export function FileUpload({
           onChange={selectFile}
         />
         <img src={iconSrc} />
+        <LiaFileDownloadSolid fontSize={20} color="red"/>
       </label>
     </Container>
   );

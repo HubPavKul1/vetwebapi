@@ -5,6 +5,7 @@ import { AppService } from "../../../../../app.service";
 import { IVetWorkSchema } from "../../../../../interfaces/VetWorkInterfaces";
 
 import styles from "./ActPDF.module.scss"
+import NoData from "../../../../../components/NoData";
 
 
 
@@ -16,7 +17,10 @@ interface ActPDFHeaderProps {
 
 export function ActPDFHeader({data}: ActPDFHeaderProps) {
     const date = AppService.convertDateString(data.vetwork_date)
-    
+    if(!data.animals) return <NoData title="Данные о животных"/>;
+    if(!data.drug) return <NoData title="Данные о препаратах"/>;
+    if(!data.companies) return <NoData title="Данные о предприятиях"/>;
+
 
     return (
         <Container className={styles.pdfHeader}>

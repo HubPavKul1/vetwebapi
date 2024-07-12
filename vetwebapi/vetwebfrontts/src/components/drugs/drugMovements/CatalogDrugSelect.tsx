@@ -28,12 +28,6 @@ export function CatalogDrugSelect() {
     
     const options = data.map(drug=>({value: drug.id, label: `${drug.name}:${drug.batch}`}))
     
-    // const loadOptions = (searchValue: string, callback: CallableFunction) => {
-    //     setTimeout(() => {
-    //         const filteredOptions = options?.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
-    //         callback(filteredOptions)
-    //     }, 2000)
-    // }
 
     const getValue = (value: number) => 
         value ? options?.find((option) => option.value === value) : ""
@@ -51,7 +45,6 @@ export function CatalogDrugSelect() {
             isSearchable
             isClearable
             options={options}
-            // loadOptions={loadOptions}
             value={getValue(value)}
             onChange={newValue => onChange((newValue as IOption).value)}
         />

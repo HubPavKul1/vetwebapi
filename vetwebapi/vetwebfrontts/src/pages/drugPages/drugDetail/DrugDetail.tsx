@@ -27,15 +27,15 @@ export function DrugDetail() {
 
   return (
     <>
-      <Container className={styles.drugDetailWrap}>
-        <Row className={styles.rowTop}>
-          <Col sm={4} className={styles.colImg}>
+      <Container>
+        <Row className="p-3 font-bold text-center items-center">
+          <Col sm={3} className="">
             <img src={`/${data.image}`} alt={data.name} />
           </Col>
 
           <Col>
-            <h5>{data.name}</h5>
-            <p>{data.drug_manufacturer}</p>
+            <h5 className="text-3xl mb-5">{data.name}</h5>
+            <p className="text-2xl">Производитель: {data.drug_manufacturer}</p>
           </Col>
         </Row>
 

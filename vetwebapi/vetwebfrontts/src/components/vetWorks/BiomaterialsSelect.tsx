@@ -1,22 +1,13 @@
-import Select from "react-select";
 import { useQuery } from "react-query";
-import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../interfaces/FormInterface";
-import { AppService } from "../../app.service";
-import { ICompany } from "../../interfaces/CompanyInterfaces";
-import { IBase } from "../../interfaces/BaseInterface";
-import { CustomSelect } from "../CustomSelect";
 
-interface IBiomaterialsSelectProps {
-  data?: IBase[];
-  isLoading: boolean;
-  error?: Error | null;
-}
+import { AppService } from "../../app.service";
+import { IQueryData } from "../../interfaces/BaseInterface";
+import { CustomSelect } from "../CustomSelect";
 
 export function BiomaterialsSelect() {
   const url = "/api/vetwork/biomaterials";
 
-  const { data, isLoading }: IBiomaterialsSelectProps = useQuery(
+  const { data, isLoading }: IQueryData = useQuery(
     ["biomaterials"],
     () => AppService.getAll(url),
     {
@@ -24,14 +15,13 @@ export function BiomaterialsSelect() {
     }
   );
 
-
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
     <CustomSelect
       data={data}
       fieldName="biomaterial_id"
-      placeholder="биоматериал"
+      placeholder="Выберите биоматериал *"
     />
   );
 }

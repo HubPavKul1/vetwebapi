@@ -42,7 +42,7 @@ export function VetWorkPageDetail() {
   const pageTitle =
     data.work_type === "вакцинация"
       ? `Вакцинация: ${diseases}`
-      : `Диагностические исследования: ${diseases}`;
+      : `Диагностические исследования на: ${diseases}`;
   const imgSrc =
     data.work_type === "вакцинация" ? "/vetworkBg.jpg" : "/diagnostic.jpg";
 
@@ -70,6 +70,7 @@ export function VetWorkPageDetail() {
           <AddAnimalsToVetWorkForm
             setAnimals={setAnimals}
             companyId={companyId}
+            workType={data.work_type}
           />
         )
       )}

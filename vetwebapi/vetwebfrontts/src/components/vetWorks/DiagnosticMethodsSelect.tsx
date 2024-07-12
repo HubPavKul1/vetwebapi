@@ -1,19 +1,13 @@
 import { useQuery } from "react-query";
 
 import { AppService } from "../../app.service";
-import { IBase } from "../../interfaces/BaseInterface";
+import { IQueryData } from "../../interfaces/BaseInterface";
 import { CustomSelect } from "../CustomSelect";
-
-interface IDiagnosticMethodsSelectProps {
-  data?: IBase[];
-  isLoading: boolean;
-  error?: Error | null;
-}
 
 export function DiagnosticMethodsSelect() {
   const url = "/api/vetwork/diagnostic_methods";
 
-  const { data, isLoading }: IDiagnosticMethodsSelectProps = useQuery(
+  const { data, isLoading }: IQueryData = useQuery(
     ["diagnosticMethods"],
     () => AppService.getAll(url),
     {

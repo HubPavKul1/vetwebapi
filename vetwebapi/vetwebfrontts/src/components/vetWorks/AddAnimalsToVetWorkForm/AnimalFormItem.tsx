@@ -5,19 +5,27 @@ import { CustomButton } from "../../CustomButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import styles from "./AddAnimalsToVetWorkForm.module.scss";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import { useState } from "react";
+import { TiInputCheckedOutline } from "react-icons/ti";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { CiCircleRemove } from "react-icons/ci";
 
 interface AnimalFormItemProps {
   animal: IAnimal;
   setAnimalsData: CallableFunction;
   animalsData: IAnimalInVetworkIn[];
+  workType: string;
 }
 
 export function AnimalFormItem({
   animal,
   setAnimalsData,
   animalsData,
+  workType,
 }: AnimalFormItemProps) {
+  const [animalChecked, setAnimalChecked] = useState(false);
+
   const {
     register,
     reset,
@@ -28,17 +36,27 @@ export function AnimalFormItem({
   });
 
   const addAnimalData: SubmitHandler<IAnimalInVetworkIn> = (data) => {
-    
     data.dosage?.toString() === "" && (data.dosage = 0);
-    
-    
-    setAnimalsData([...animalsData, data]);
 
+    setAnimalsData([...animalsData, data]);
+    console.log("AnimlsData added>>>>", animalsData);
+
+    setAnimalChecked(true);
+  };
+
+  const removeAnimalData = (animalId?: number) => {
+    setAnimalsData(
+      animalsData.filter(
+        (animal) => Number(animal.animal_id) !== Number(animalId)
+      )
+    );
+
+    setAnimalChecked(false);
   };
 
   return (
     <form onSubmit={handleSubmit(addAnimalData)}>
-      <Row className={styles.formWrap}>
+      <Row className="flex items-center justify-center border-b-2 border-b-black">
         <Col>{animal.species}</Col>
         <Col>
           <label htmlFor="animal_id">
@@ -51,34 +69,53 @@ export function AnimalFormItem({
             />
           </label>
         </Col>
-        <Col>
-          <input
-            type="number"
-            step="any"
-            id="dosage"
-            placeholder="Доза"
-            {...register("dosage")}
-          />
-        </Col>
-        <Col>
-          <label htmlFor="is_positive">
-            Положительная реакция
-            <input
-              type="checkbox"
-              id="is_positive"
-              {...register("is_positive")}
-            />
-          </label>
-        </Col>
 
         <Col>
-          <CustomButton
-            className="btn-submit"
-            disabled={false}
-            title="Добавить"
-          />
+            <input
+              className="border-2 w-auto text-center"
+              type="number"
+              step="any"
+              id="dosage"
+              placeholder="Доза"
+              {...register("dosage")}
+            />
+  
         </Col>
-        <Col></Col>
+        {workType === "диагностика" && (
+          <Col>
+            <label htmlFor="is_positive">
+              <input
+                type="checkbox"
+                id="is_positive"
+                {...register("is_positive")}
+              />
+            </label>
+          </Col>
+        )}
+
+        {!animalChecked ? (
+          <Col>
+            <Container className="flex justify-center cursor-pointer p-1">
+              <button
+                type="submit"
+                className="hover:scale-125 transition-transform"
+              >
+                <IoIosAddCircleOutline fontSize={30} color="green" />
+              </button>
+            </Container>
+          </Col>
+        ) : (
+          <Col>
+            <Container className="flex justify-center cursor-pointer p-1">
+              <CiCircleRemove
+                className="hover:scale-125 transition-transform"
+                onClick={() => removeAnimalData(animal.id)}
+                fontSize={30}
+                color="red"
+              />
+            </Container>
+          </Col>
+        )}
       </Row>
     </form>
   );

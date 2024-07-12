@@ -1,6 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
 
-import styles from "./CatalogCardFooter.module.scss";
 import { FileUpload } from "../../FileUpload";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { useMutation, useQueryClient } from "react-query";
@@ -33,24 +32,26 @@ export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
   };
 
   return (
-    <Container className={styles.services}>
+    <Container>
       <Row>
-        <Col sm={7}>
-          {props.hasFileUploader && <p>Загрузите инструкцию </p>}</Col>
-        <Col>
-          <Container className={styles.fileUpload}>
-            {props.hasFileUploader && (
-              <FileUpload
-                uploadUrl={props.fileUploadUrl}
-                accept={props.accept}
-                mutationName={props.mutationName}
-                invQueryName={props.invQueryName}
-                iconSrc={props.iconSrc}
-              />
-            )}
-          </Container>
-        </Col>
-        <Col>
+        {props.hasFileUploader ? (
+          <>
+            <Col sm={8} className="text-right">
+              <h5>Загрузите инструкцию </h5>
+            </Col>
+            <Col sm={2}>
+              <Container className="w-20">
+                <FileUpload
+                  uploadUrl={props.fileUploadUrl}
+                  accept={props.accept}
+                  mutationName={props.mutationName}
+                  invQueryName={props.invQueryName}
+                />
+              </Container>
+            </Col>
+          </>
+        ): <Col sm={10}></Col>}
+        <Col sm={2}>
           <BsFillTrash3Fill className="delete-icon" onClick={deleteItem} />
         </Col>
       </Row>

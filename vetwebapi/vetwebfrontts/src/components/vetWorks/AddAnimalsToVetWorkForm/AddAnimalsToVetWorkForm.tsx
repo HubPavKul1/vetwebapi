@@ -1,12 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { CustomButton } from "../../CustomButton";
 import { useParams } from "react-router-dom";
 import { AppService } from "../../../app.service";
 
 import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
-import styles from "./AddAnimalsToVetWorkForm.module.scss";
 import { AnimalFormItem } from "./AnimalFormItem";
 import { useState } from "react";
 import { IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
@@ -15,6 +14,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
   setAnimals: CallableFunction;
+  workType: string;
 }
 
 interface CompanyData {
@@ -25,6 +25,7 @@ interface CompanyData {
 export function AddAnimalsToVetWorkForm({
   companyId,
   setAnimals,
+  workType,
 }: AddAnimalsToVetWorkFormProps) {
   const [animalsData, setAnimalsData] = useState<IAnimalInVetworkIn[]>([]);
   const { id } = useParams();
@@ -32,26 +33,22 @@ export function AddAnimalsToVetWorkForm({
   const companyUrl = `/api/companies/${companyId}`;
   const url = `/api/vetwork/${id}/animals/`;
 
-  console.log("Animals>>>", animalsData)
+  console.log("Animals>>>", animalsData);
 
   const {
-    register,
     reset,
-    handleSubmit,
     formState: { errors },
   } = useForm<IAnimalInVetworkIn[]>({
     mode: "onChange",
   });
-
-  const queryClient = useQueryClient();
 
   const { mutate } = useMutation(["add animals"], {
     mutationFn: (data: IAnimalInVetworkIn[]) =>
       AppService.createItem(url, data),
     onSuccess: () => {
       alert("Животное успешно добавлено!");
-      queryClient.invalidateQueries(["vaccination", id]);
       reset();
+      setAnimals(false);
     },
   });
 
@@ -75,28 +72,45 @@ export function AddAnimalsToVetWorkForm({
   };
 
   return (
-    <Container className={styles.wrapper}>
+    <Container className="mb-8 p-8">
       <CustomButton
-        className="btn-upload"
+        className="btn-upload mb-3"
         title="Назад"
         onClick={() => setAnimals(false)}
       />
+      <Container className="mb-8 text-center">
+        <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
 
-      {animals.map((animal) => (
-        <Container key={animal.id}>
-          <AnimalFormItem
-            animal={animal}
-            setAnimalsData={setAnimalsData}
-            animalsData={animalsData}
-          />
-        </Container>
-      ))}
-      <CustomButton
-        className="btn-submit"
-        disabled={false}
-        title="Добавить"
-        onClick={() => addAnimals(animalsData)}
-      />
+        <Row className="border-2 border-black font-bold">
+          <Col>Вид животного</Col>
+          <Col>Кличка</Col>
+          <Col>Дозировка препарата</Col>
+          {workType === "диагностика" &&
+          <Col>Положительная реакция</Col>
+          }
+          <Col>Выбрать</Col>
+
+        </Row>
+
+        {animals.map((animal) => (
+          <Container key={animal.id}>
+            <AnimalFormItem
+              animal={animal}
+              setAnimalsData={setAnimalsData}
+              animalsData={animalsData}
+              workType={workType}
+            />
+          </Container>
+        ))}
+      </Container>
+      <Container className="w-80">
+        <CustomButton
+          className="btn-submit"
+          disabled={false}
+          title="Добавить"
+          onClick={() => addAnimals(animalsData)}
+        />
+      </Container>
     </Container>
   );
 }

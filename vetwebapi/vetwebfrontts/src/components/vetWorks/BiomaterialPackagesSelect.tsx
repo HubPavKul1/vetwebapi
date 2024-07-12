@@ -1,19 +1,15 @@
 import { useQuery } from "react-query";
 
 import { AppService } from "../../app.service";
-import { IBase } from "../../interfaces/BaseInterface";
+import { IQueryData } from "../../interfaces/BaseInterface";
 import { CustomSelect } from "../CustomSelect";
 
-interface IBiomaterialPackagesSelectProps {
-  data?: IBase[];
-  isLoading: boolean;
-  error?: Error | null;
-}
+
 
 export function BiomaterialPackagesSelect() {
   const url = "/api/vetwork/biomaterial_packages";
 
-  const { data, isLoading }: IBiomaterialPackagesSelectProps = useQuery(
+  const { data, isLoading }: IQueryData = useQuery(
     ["biomaterialPackages"],
     () => AppService.getAll(url),
     {

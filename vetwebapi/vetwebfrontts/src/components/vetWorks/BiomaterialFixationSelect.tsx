@@ -2,19 +2,15 @@
 import { useQuery } from "react-query";
 
 import { AppService } from "../../app.service";
-import { IBase } from "../../interfaces/BaseInterface";
+import { IQueryData } from "../../interfaces/BaseInterface";
 import { CustomSelect } from "../CustomSelect";
 
-interface IBiomaterialFixationSelectProps {
-  data?: IBase[];
-  isLoading: boolean;
-  error?: Error | null;
-}
+
 
 export function BiomaterialFixationsSelect() {
   const url = "/api/vetwork/biomaterial_fixations";
 
-  const { data, isLoading }: IBiomaterialFixationSelectProps = useQuery(
+  const { data, isLoading }: IQueryData = useQuery(
     ["biomaterialFixations"],
     () => AppService.getAll(url),
     {
