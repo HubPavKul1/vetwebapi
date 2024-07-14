@@ -10,6 +10,7 @@ import { useState } from "react";
 import { TiInputCheckedOutline } from "react-icons/ti";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
+import CustomCheckBox from "../../CustomCheckBox";
 
 interface AnimalFormItemProps {
   animal: IAnimal;
@@ -71,24 +72,26 @@ export function AnimalFormItem({
         </Col>
 
         <Col>
-            <input
-              className="border-2 w-auto text-center"
-              type="number"
-              step="any"
-              id="dosage"
-              placeholder="Доза"
-              {...register("dosage")}
-            />
-  
+          <input
+            className="border-2 w-auto text-center"
+            type="number"
+            step="any"
+            id="dosage"
+            placeholder="Доза"
+            {...register("dosage")}
+          />
         </Col>
         {workType === "диагностика" && (
+
           <Col>
-            <label htmlFor="is_positive">
+          {/* <CustomCheckBox id="is_positive" register={register} labelTitle="Positive" animalId={animal.id}/> */}
+            <label htmlFor="is_positive" className="cursor-pointer">
               <input
                 type="checkbox"
                 id="is_positive"
                 {...register("is_positive")}
               />
+            
             </label>
           </Col>
         )}

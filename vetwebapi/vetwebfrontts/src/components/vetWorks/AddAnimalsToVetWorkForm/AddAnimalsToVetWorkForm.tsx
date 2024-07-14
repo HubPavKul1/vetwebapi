@@ -71,12 +71,17 @@ export function AddAnimalsToVetWorkForm({
     setAnimalsData([]);
   };
 
+  const backButtonOnClick = () => {
+    setAnimalsData([]);
+    setAnimals(false);
+  }
+
   return (
     <Container className="mb-8 p-8">
       <CustomButton
         className="btn-upload mb-3"
         title="Назад"
-        onClick={() => setAnimals(false)}
+        onClick={() => backButtonOnClick()}
       />
       <Container className="mb-8 text-center">
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
@@ -88,7 +93,7 @@ export function AddAnimalsToVetWorkForm({
           {workType === "диагностика" &&
           <Col>Положительная реакция</Col>
           }
-          <Col>Выбрать</Col>
+          <Col>Выбрать / отменить</Col>
 
         </Row>
 
@@ -103,11 +108,11 @@ export function AddAnimalsToVetWorkForm({
           </Container>
         ))}
       </Container>
-      <Container className="w-80">
+      <Container className="w-96">
         <CustomButton
           className="btn-submit"
           disabled={false}
-          title="Добавить"
+          title="Добавить выбранных животных"
           onClick={() => addAnimals(animalsData)}
         />
       </Container>

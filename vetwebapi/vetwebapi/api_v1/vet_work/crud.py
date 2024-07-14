@@ -205,6 +205,7 @@ async def read_diagnosic_methods(session: AsyncSession) -> list[DiagnosticMethod
     return list(await session.scalars(stmt))
 
 
+
 # DELETE
 
 async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:

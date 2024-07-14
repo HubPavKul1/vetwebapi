@@ -28,8 +28,10 @@ from .dependencies import vetwork_by_id
 from vetwebapi.core.database import db_manager
 
 from . import crud
+from .reports.views import router as report_router
 
 router = APIRouter(prefix="/vetwork", tags=["VetWork"])
+router.include_router(report_router)
 
 
 @router.get("/diseases", response_model=Diseases)
