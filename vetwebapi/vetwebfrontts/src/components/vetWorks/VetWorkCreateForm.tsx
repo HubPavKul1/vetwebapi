@@ -48,14 +48,14 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
     },
   });
 
-  const createVaccination: SubmitHandler<IVetworkCreate> = (data) => {
+  const createVetWork: SubmitHandler<IVetworkCreate> = (data) => {
     mutate(data);
   };
 
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(createVaccination)}>
+        <form onSubmit={handleSubmit(createVetWork)}>
           <div className="form-group">
             <label>Введите дату *</label>
             {inputItems.map((item) => (
@@ -130,7 +130,6 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
             <CustomButton
               className="btn-submit"
               disabled={false}
-              onClick={handleSubmit(createVaccination)}
               title="Добавить"
             />
           </div>

@@ -8,7 +8,8 @@ from vetwebapi.core.database import db_manager
 
 
 from . import crud
-from vetwebapi.api_v1.drug.reports.schemas import DateRangeIn
+from .schemas import DateRangeIn, DiagnosticReportItemSchema, DiagnosticReport, VetWorkReport, VetWorkReportSchema
+from .serializers import serialize_diagnostic, serialize_vetwork
 
 
 router = APIRouter(prefix="/reports")
@@ -31,6 +32,40 @@ async def get_drugs_report(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+@router.post("/diagnostics", response_model=DiagnosticReport)
+async def get_diagnostic_report(
+    body: DateRangeIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[DiagnosticReport, dict]:
+    try:
+        report: list[tuple] = await crud.diagnostic_report(session=session, body=body)
+        report_schema: list[DiagnosticReportItemSchema] = [await serialize_diagnostic(item=elem) for elem in report]
+        return DiagnosticReport(report=report_schema)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+@router.post("/vaccinations", response_model=VetWorkReport)
+async def get_vaccination_report(
+    body: DateRangeIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[VetWorkReport, dict]:
+    try:
+        report: list[tuple] = await crud.vaccination_report(session=session, body=body)
+        report_schema: list[VetWorkReportSchema] = [await serialize_vetwork(item=elem) for elem in report]
+        return VetWorkReport(report=report_schema)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+    
 
 @router.get("/test", response_model=SuccessMessage)
 async def get_drugs_report(

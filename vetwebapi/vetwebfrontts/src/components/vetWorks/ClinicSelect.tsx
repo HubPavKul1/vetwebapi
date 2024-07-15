@@ -50,7 +50,7 @@ export function ClinicSelect() {
                     options={options}
                     value={getValue(value)}
                     onChange={newValue => onChange((newValue as IOption).value)}
-                    placeholder="Выберите ветучреждение"
+                    placeholder="Выберите ветклинику"
                     
                 />
             )

@@ -21,7 +21,7 @@ export function BiomaterialsSelect() {
     <CustomSelect
       data={data}
       fieldName="biomaterial_id"
-      placeholder="Выберите биоматериал *"
+      placeholder="Выберите биоматериал"
     />
   );
 }

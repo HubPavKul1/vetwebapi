@@ -38,9 +38,6 @@ export function LabsSelect() {
         <Controller
             control={control}
             name="laboratory_id"
-            rules={
-                { required: "laboratory is required!" }
-            }
             render={({ field: { onChange, value },
                     // fieldState: {error} 
                 }) => (

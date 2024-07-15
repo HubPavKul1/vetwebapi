@@ -65,7 +65,7 @@ async def add_roles(session: AsyncSession) -> None:
     
 async def add_positions(session: AsyncSession) -> None:
     """Добавляем должности работников в базу данных"""
-    names = ["ветврач", "ведущий ветврач", "кавалерист", "ИП", "гр"]
+    names = ["ветврач", "ведущий ветврач", "кавалерист", "ИП", "гр", "начальник"]
     [await create_position(session=session, name=name) for name in names]
     
 
