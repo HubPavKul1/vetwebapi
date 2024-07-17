@@ -71,6 +71,7 @@ export function VetWorkPageDetail() {
             setAnimals={setAnimals}
             companyId={companyId}
             workType={data.work_type}
+            choosenAnimals={data.animals}
           />
         )
       )}

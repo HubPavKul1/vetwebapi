@@ -1,13 +1,10 @@
 import { IAnimal } from "../../../interfaces/AnimalInterfaces";
 import { IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
-import { CustomButton } from "../../CustomButton";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import styles from "./AddAnimalsToVetWorkForm.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
-import { TiInputCheckedOutline } from "react-icons/ti";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
 import CustomCheckBox from "../../CustomCheckBox";
@@ -82,17 +79,8 @@ export function AnimalFormItem({
           />
         </Col>
         {workType === "диагностика" && (
-
           <Col>
-          {/* <CustomCheckBox id="is_positive" register={register} labelTitle="Positive" animalId={animal.id}/> */}
-            <label htmlFor="is_positive" className="cursor-pointer">
-              <input
-                type="checkbox"
-                id="is_positive"
-                {...register("is_positive")}
-              />
-            
-            </label>
+            <CustomCheckBox id="is_positive" register={register} />
           </Col>
         )}
 

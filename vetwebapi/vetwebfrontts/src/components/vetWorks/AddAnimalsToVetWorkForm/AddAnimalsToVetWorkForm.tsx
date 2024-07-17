@@ -8,13 +8,15 @@ import { Col, Container, Row } from "react-bootstrap";
 
 import { AnimalFormItem } from "./AnimalFormItem";
 import { useState } from "react";
-import { IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
+import { IAnimalInVetwork, IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
+
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
   setAnimals: CallableFunction;
   workType: string;
+  choosenAnimals?: IAnimalInVetwork[]
 }
 
 interface CompanyData {
@@ -26,8 +28,10 @@ export function AddAnimalsToVetWorkForm({
   companyId,
   setAnimals,
   workType,
+  choosenAnimals
 }: AddAnimalsToVetWorkFormProps) {
   const [animalsData, setAnimalsData] = useState<IAnimalInVetworkIn[]>([]);
+  
   const { id } = useParams();
 
   const companyUrl = `/api/companies/${companyId}`;
@@ -66,6 +70,14 @@ export function AddAnimalsToVetWorkForm({
 
   const animals = data.animals;
 
+  const choosenAnimalsIds = choosenAnimals && choosenAnimals.map(animal => animal.animal_id)
+
+  const unchoosenAnimals = choosenAnimalsIds?.length ? animals.filter(animal => !choosenAnimalsIds.includes(animal.id)) : animals
+  
+
+
+
+
   const addAnimals: SubmitHandler<IAnimalInVetworkIn[]> = (animalsData) => {
     mutate(animalsData);
     setAnimalsData([]);
@@ -97,7 +109,7 @@ export function AddAnimalsToVetWorkForm({
 
         </Row>
 
-        {animals.map((animal) => (
+        {unchoosenAnimals.map((animal) => (
           <Container key={animal.id}>
             <AnimalFormItem
               animal={animal}
