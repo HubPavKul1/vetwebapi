@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
-import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
+import { ReportMenu } from "../../../../components/menu/ReportMenu.tsx";
 import { drugReportHeaders } from "../../../../Constants";
 import { ReportPage } from "../../../../components/ReportPage/index.tsx";
 import { Vet1BPDF } from "../Vet1BPdf/index.tsx";
@@ -27,7 +27,7 @@ export function Vet1B({ data, dateEnd, setReportActive }: Vet1BProps) {
           reportTitle={`Отчет 1-вет В за ${reportDate.quarter} квартал ${reportDate.year} г.`}
           imgSrc="/drugsBg.jpg"
           menu={
-            <DrugReportMenu setPdf={setPdf} setReportActive={setReportActive} />
+            <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
           }
           reportHeaders={drugReportHeaders}
           reportItems={data.map((drug) => (

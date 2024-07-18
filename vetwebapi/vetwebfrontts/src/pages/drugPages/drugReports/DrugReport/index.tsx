@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
-import { DrugReportMenu } from "../../../../components/menu/DrugReportMenu";
+import { ReportMenu } from "../../../../components/menu/ReportMenu.tsx";
 import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
 import { drugReportHeaders } from "../../../../Constants";
 import { ReportPage } from "../../../../components/ReportPage/index.tsx";
@@ -34,7 +34,7 @@ export function DrugReport({
           reportTitle={`Движение биопрепаратов за период с ${date1.shortDate} по ${date2.shortDate}`}
           imgSrc="/drugsBg.jpg"
           menu={
-            <DrugReportMenu setPdf={setPdf} setReportActive={setReportActive} />
+            <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
           }
           reportHeaders={drugReportHeaders}
           reportItems={data.map((drug) => (

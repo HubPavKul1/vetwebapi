@@ -15,7 +15,7 @@ class DiagnosticReportItemSchema(VetWorkReportSchema):
     positive_count: int
 
 class DiagnosticReport(BaseModel):
-    report: list[DiagnosticReportItemSchema]
+    diagnostics: list[DiagnosticReportItemSchema]
 
 class VetWorkReport(BaseModel):
-    report: list[VetWorkReportSchema]
+    vaccinations: list[VetWorkReportSchema]

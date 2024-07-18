@@ -1,15 +1,15 @@
 import { Menu } from "../MenuComponent";
 import { CustomButton } from "../CustomButton";
 
-interface ReceiptPageMenuProps {
+interface ReportMenuProps {
   setPdf: CallableFunction;
   setReportActive: CallableFunction;
 }
 
-export function DrugReportMenu({
+export function ReportMenu({
   setPdf,
   setReportActive,
-}: ReceiptPageMenuProps) {
+}: ReportMenuProps) {
   const menuButtons = [
     {
       id: 1,

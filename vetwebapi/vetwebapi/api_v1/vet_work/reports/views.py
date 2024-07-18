@@ -41,7 +41,7 @@ async def get_diagnostic_report(
     try:
         report: list[tuple] = await crud.diagnostic_report(session=session, body=body)
         report_schema: list[DiagnosticReportItemSchema] = [await serialize_diagnostic(item=elem) for elem in report]
-        return DiagnosticReport(report=report_schema)
+        return DiagnosticReport(diagnostics=report_schema)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -57,7 +57,7 @@ async def get_vaccination_report(
     try:
         report: list[tuple] = await crud.vaccination_report(session=session, body=body)
         report_schema: list[VetWorkReportSchema] = [await serialize_vetwork(item=elem) for elem in report]
-        return VetWorkReport(report=report_schema)
+        return VetWorkReport(vaccinations=report_schema)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

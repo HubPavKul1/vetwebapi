@@ -10,10 +10,11 @@ import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
 import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
 import { Vets } from "./pages/companyPages/Vets";
 import { Vaccinations } from "./pages/vetWorkPages/vaccination/Vaccinations";
-import DrugReportMainPage from "./pages/drugPages/drugReports/DrugReportMainPage";
+import { DrugReportMainPage } from "./pages/drugPages/drugReports/DrugReportMainPage";
 import { Diagnostics } from "./pages/vetWorkPages/diagnostic/Diagnostics";
 import { VetWorkPageDetail } from "./pages/vetWorkPages/VetWorkPageDetail";
 import { Labs } from "./pages/companyPages/Labs";
+import { VetWorkReportMainPage } from "./pages/vetWorkPages/reports/vetWorkReportMainPage";
 
 export function App() {
   return (
@@ -34,6 +35,8 @@ export function App() {
           <Route path="companies/:id" element={<CompanyDetail />} />
           <Route path="drugs/:id" element={<DrugDetail />} />
           <Route path="drugs/reports" element={<DrugReportMainPage />} />
+          <Route path="vetwork/reports" element={<VetWorkReportMainPage />} />
+          
 
           <Route path="*" element={<div>Not Found</div>} />
         </Route>

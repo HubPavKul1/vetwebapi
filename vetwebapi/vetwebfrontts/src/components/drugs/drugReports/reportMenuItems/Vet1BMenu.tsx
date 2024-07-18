@@ -7,7 +7,7 @@ interface Vet1BMenuProps {
   setReportActive: CallableFunction;
 }
 
-export default function Vet1BMenu({
+export function Vet1BMenu({
   setDrugReportData,
   setDateRange,
   setReportActive
@@ -15,7 +15,7 @@ export default function Vet1BMenu({
   return (
     <CreateItem btnTitle="Отчет 1-вет В">
       <ReportForm
-        setDrugReportData={setDrugReportData}
+        setReportData={setDrugReportData}
         setDateRange={setDateRange}
         setReportActive={setReportActive}
         url="/api/drugs/reports/1vet_B"

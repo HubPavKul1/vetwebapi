@@ -7,7 +7,7 @@ interface DrugMovementBetweenDateRangeProps {
   setReportActive: CallableFunction;
 }
 
-export default function DrugMovementBetweenDateRange({
+export function DrugMovementBetweenDateRange({
   setDrugReportData,
   setDateRange,
   setReportActive
@@ -15,7 +15,7 @@ export default function DrugMovementBetweenDateRange({
   return (
     <CreateItem btnTitle="Движение биопрепаратов за период времени">
       <ReportForm
-        setDrugReportData={setDrugReportData}
+        setReportData={setDrugReportData}
         setDateRange={setDateRange}
         setReportActive={setReportActive}
         url="/api/drugs/reports/drugs_movement"

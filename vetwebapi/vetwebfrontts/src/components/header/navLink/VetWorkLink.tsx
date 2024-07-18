@@ -13,7 +13,7 @@ export function VetWorkLink() {
                     <NavDropdown.Item as={Link} to="/vetwork/vaccinations">Вакцинация</NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/vetwork/diagnostics">Диагностика</NavDropdown.Item>
                     <NavDropdown.Item>Обработка</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Отчеты</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/vetwork/reports">Отчеты</NavDropdown.Item>
                 </DropdownWrapper>
             </li>
         

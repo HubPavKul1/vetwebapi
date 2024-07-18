@@ -10,14 +10,14 @@ import { IDateRange } from "../../interfaces/BaseInterface";
 
 
 interface ReportFormProps {
-  setDrugReportData: CallableFunction;
+  setReportData: CallableFunction;
   setDateRange: CallableFunction;
   setReportActive: CallableFunction;
   url: string
 }
 
 export function ReportForm({
-  setDrugReportData,
+  setReportData,
   setDateRange,
   setReportActive,
   url
@@ -43,7 +43,7 @@ export function ReportForm({
         // console.log("REPORT ", data?.drugs_report)
         alert("Отчет успешно выполнен!");
         reset();
-        setDrugReportData(data);
+        setReportData(data);
         setDateRange(dateRange);
         setReportActive(true)
       },

@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 
 interface ReportPageTableProps {
   reportHeaders: string[];
-  reportItems?: React.ReactElement;
+  reportItems?: React.ReactElement | any;
 }
 
 export function PageTable({ ...props }: ReportPageTableProps) {

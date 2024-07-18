@@ -24,13 +24,7 @@ export interface IVetworkCreate {
     diagnostic_method_id?: number;
 }
 
-// export interface IDiagnosticCreate extends IVetworkCreate {
-//     laboratory_id?: number;
-//     biomaterial_id?: number;
-//     biomaterial_package_id?: number;
-//     biomaterial_fixation_id?: number;
-//     diagnostic_method_id?: number;
-// }
+
 
 
 export interface IVetwork extends IVetworkCreate{
@@ -100,4 +94,9 @@ export interface DiagnosticMethods {
 }
 
 
-
+export interface IVetWorkReport {
+    disease: string;
+    animal_group: string;
+    animal_count: number;
+    positive_count?: number
+}
