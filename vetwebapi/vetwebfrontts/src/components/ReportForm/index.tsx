@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 
 import { Input } from "../Input";
 import { fieldRequiredMessage } from "../ErrorMessages";
@@ -22,7 +22,7 @@ export function ReportForm({
   setReportActive,
   url
 }: ReportFormProps) {
-  // const url = "/api/drugs/reports/drugs_movement";
+ 
 
   const {
     register,
@@ -33,14 +33,12 @@ export function ReportForm({
     mode: "onChange",
   });
 
-  const queryClient = useQueryClient();
-
+ 
   const { mutate } = useMutation(
     ["createReport"],
     (dateRange: IDateRange) => AppService.createReport(url, dateRange),
     {
       onSuccess: (data, dateRange) => {
-        // console.log("REPORT ", data?.drugs_report)
         alert("Отчет успешно выполнен!");
         reset();
         setReportData(data);

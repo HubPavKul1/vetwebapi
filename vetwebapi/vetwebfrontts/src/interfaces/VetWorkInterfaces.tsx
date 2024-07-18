@@ -94,9 +94,4 @@ export interface DiagnosticMethods {
 }
 
 
-export interface IVetWorkReport {
-    disease: string;
-    animal_group: string;
-    animal_count: number;
-    positive_count?: number
-}
+

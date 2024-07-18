@@ -9,7 +9,7 @@ interface ReportPageMainProps {
   imgSrc: string;
   reportHeaders: string[];
   menu: React.ReactElement;
-  reportItems: any;
+  reportItems: React.ReactNode;
 }
 
 export function ReportPage({ ...props }: ReportPageMainProps) {

@@ -1,21 +1,18 @@
+import { ReportBetweenDateRangeProps } from "../../../../interfaces/ReportInterfaces";
 import { CreateItem } from "../../../CreateItem";
 import { ReportForm } from "../../../ReportForm";
 
-interface Vet1BMenuProps {
-  setDrugReportData: CallableFunction;
-  setDateRange: CallableFunction;
-  setReportActive: CallableFunction;
-}
+
 
 export function Vet1BMenu({
-  setDrugReportData,
+  setReportData,
   setDateRange,
   setReportActive
-}: Vet1BMenuProps) {
+}: ReportBetweenDateRangeProps) {
   return (
     <CreateItem btnTitle="Отчет 1-вет В">
       <ReportForm
-        setReportData={setDrugReportData}
+        setReportData={setReportData}
         setDateRange={setDateRange}
         setReportActive={setReportActive}
         url="/api/drugs/reports/1vet_B"

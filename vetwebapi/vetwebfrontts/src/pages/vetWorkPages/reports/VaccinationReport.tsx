@@ -5,13 +5,13 @@ import { useState } from "react";
 import { ReportMenu } from "../../../components/menu/ReportMenu.tsx";
 import { ReportPage } from "../../../components/ReportPage/index.tsx";
 import { VetWorkReportProps } from "../../../interfaces/ReportInterfaces.tsx";
-import { diagnosticHeaders } from "../../../Constants.ts";
+import { vaccinationHeaders } from "../../../Constants.ts";
 import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
 
 
 
-export function DiagnosticReport({
+export function VaccinationReport({
   data,
   dateEnd,
   setReportActive,
@@ -24,17 +24,17 @@ export function DiagnosticReport({
     <>
       {!pdf ? (
         <ReportPage
-          reportTitle={`Отчет по диагностическим исследованиям за ${date2.month} ${date2.year}`}
-          imgSrc="/diagnostic.jpg"
+          reportTitle={`Отчет по ветеринарно-профилактическим обработкам за ${date2.month} ${date2.year}`}
+          imgSrc="/vetworkBg.jpg"
           menu={
             <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
           }
-          reportHeaders={diagnosticHeaders}
+          reportHeaders={vaccinationHeaders}
           reportItems={data.map((item, index) => (
             <VetWorkReportItem
               key={index}
               data={item}
-              isDiagnostic={true}
+              isDiagnostic={false}
               rowNum={index + 1}
             />
           ))}
@@ -43,9 +43,9 @@ export function DiagnosticReport({
         <VetWorkReportPDF
           setPdf={setPdf}
           data={data}
-          isDiagnostic={true}
+          isDiagnostic={false}
           dateEnd={dateEnd}
-          fileName="diagnostic"
+          fileName="vaccination"
         />
       )}
     </>

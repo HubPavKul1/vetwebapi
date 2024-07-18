@@ -1,22 +1,22 @@
 import { Container } from "react-bootstrap";
 import { AppService } from "../../../../app.service";
 import { PageTable } from "../../../../components/PageTable";
-import { diagnosticHeaders } from "../../../../Constants";
-import { IVetWorkReport } from "../../../../interfaces/VetWorkInterfaces";
+import { diagnosticHeaders, vaccinationHeaders } from "../../../../Constants";
+import { IVetWorkReport } from "../../../../interfaces/ReportInterfaces";
 import { VetWorkReportItem } from "../ReportItem";
 
-interface VetWorkReportPDFHeaderProps {
+interface VetWorkReportPDFBodyProps {
   isDiagnostic: boolean;
   dateEnd: string;
   data: IVetWorkReport[];
 }
 
-export function VetWorkReportPDFHeader({
+export function VetWorkReportPDFBody({
   isDiagnostic,
   dateEnd,
   data,
-}: VetWorkReportPDFHeaderProps) {
-  const reportHeaders = diagnosticHeaders;
+}: VetWorkReportPDFBodyProps) {
+  const reportHeaders = isDiagnostic ? diagnosticHeaders: vaccinationHeaders;
   const date = AppService.convertDateString(dateEnd);
   const title = isDiagnostic
     ? `I. Диагностические исследования ${date.month} ${date.year}`
@@ -28,9 +28,9 @@ export function VetWorkReportPDFHeader({
         reportHeaders={reportHeaders}
         reportItems={data.map((item, index) => (
           <VetWorkReportItem
-            key={item.animal_group}
+            key={index}
             data={item}
-            isDiagnostic={true}
+            isDiagnostic={isDiagnostic}
             rowNum={index + 1}
           />
         ))}

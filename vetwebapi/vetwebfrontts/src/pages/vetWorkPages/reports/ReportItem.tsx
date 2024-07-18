@@ -1,4 +1,4 @@
-import { IVetWorkReport } from "../../../interfaces/VetWorkInterfaces";
+import { IVetWorkReport } from "../../../interfaces/ReportInterfaces";
 
 interface VetWorkReportItemProps {
   data: IVetWorkReport;
@@ -8,7 +8,7 @@ interface VetWorkReportItemProps {
 
 export function VetWorkReportItem({ data, isDiagnostic, rowNum }: VetWorkReportItemProps) {
   return (
-    <tr key={data.animal_group} className="border-bottom border-black align-middle">
+    <tr key={rowNum} className="border-bottom border-black align-middle">
       <td>{data.animal_group}</td>
       <td>{data.disease}</td>
       <td>{rowNum}</td>
