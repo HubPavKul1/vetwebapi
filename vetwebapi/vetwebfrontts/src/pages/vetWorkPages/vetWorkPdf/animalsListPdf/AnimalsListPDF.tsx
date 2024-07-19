@@ -1,5 +1,5 @@
-import { PDF } from "../../../../../components/PDF";
-import { IVetWorkSchema } from "../../../../../interfaces/VetWorkInterfaces";
+import { PDF } from "../../../../components/PDF";
+import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AnimalsListPDFBody } from "./AnimalsListPDFBody";
 import { AnimalsListPDFHeader } from "./AnimalsListPDFHeader";
 

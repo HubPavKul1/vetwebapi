@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AppService } from "../../../../app.service";
+import { StateAssignment } from "../../../../components/StateAssignment";
 
 interface ReferralPDFBodyProps {
   data: IVetWorkSchema;
@@ -10,7 +11,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
   if (!data.animals) return;
   if (!data.companies) return;
 
-  const date = AppService.convertDateString(data.vetwork_date)
+  const date = AppService.convertDateString(data.vetwork_date);
 
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
@@ -20,8 +21,9 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
   );
   const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
 
-  const companyAddress = data.companies[0].address
-    && AppService.addressString(data.companies[0].address);
+  const companyAddress =
+    data.companies[0].address &&
+    AppService.addressString(data.companies[0].address);
 
   return (
     <Container>
@@ -37,7 +39,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={5}></Col>
         <Col>(вид животных)</Col>
       </Row>
-      <Row >
+      <Row>
         <Col sm={2}>принадлежащих</Col>
         <Col sm={10} className="pdf-report-underlined">
           {data.companies[0].full_name}
@@ -50,17 +52,21 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         </Col>
       </Row>
       <Row>
-        <Col sm={12} className="pdf-report-underlined">{companyAddress}</Col>
+        <Col sm={12} className="pdf-report-underlined">
+          {companyAddress}
+        </Col>
       </Row>
       <Row className="text-center text-sm">
-        <Col sm={12}>
-          (фактический / юридический адрес)
-        </Col>
+        <Col sm={12}>(фактический / юридический адрес)</Col>
       </Row>
       <Row>
         <Col sm={1}>для</Col>
-        <Col sm={4} className="pdf-report-underlined">{data.diagnostic_method}</Col>
-        <Col sm={2} className="text-center">исследований на</Col>
+        <Col sm={4} className="pdf-report-underlined">
+          {data.diagnostic_method}
+        </Col>
+        <Col sm={2} className="text-center">
+          исследований на
+        </Col>
         <Col className="pdf-report-underlined">{diseases}</Col>
       </Row>
       <Row className="text-center text-sm">
@@ -75,23 +81,24 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
       </Row>
       <Row className="text-center text-sm">
         <Col sm={3}></Col>
-        <Col >(благополучное, неблагополучное)</Col>
+        <Col>(благополучное, неблагополучное)</Col>
       </Row>
-      <Row >
+      <Row>
         <Col sm={2}>Животное</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="text-center text-sm">
         <Col sm={2}></Col>
-        <Col >(вакцинировано, указать вакцину, дату вакцинации)</Col>
+        <Col>(вакцинировано, указать вакцину, дату вакцинации)</Col>
       </Row>
-      <Row >
+      <Row>
         <Col>Дата, время взятия крови</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col>№ акта</Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
-      <Row >
+      {data.is_state_assignment && <StateAssignment />}
+      <Row>
         <Col>Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col>вид упаковки</Col>
@@ -103,9 +110,8 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
       </Row>
       <Row className="text-center text-sm">
         <Col sm={4}></Col>
-        <Col >(должность, подпись, ФИО)</Col>
+        <Col>(должность, подпись, ФИО)</Col>
       </Row>
-
     </Container>
   );
 }

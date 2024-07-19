@@ -7,8 +7,8 @@ import { useState } from "react";
 import { IVetWorkSchema } from "../../interfaces/VetWorkInterfaces";
 
 import { AddAnimalsToVetWorkForm } from "../../components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
-import { ActPDF } from "./vaccination/vaccinationDetail/actPdf/ActPDF";
-import { AnimalsListPDF } from "./vaccination/vaccinationDetail/animalsListPdf/AnimalsListPDF";
+import { ActPDF } from "./vetWorkPdf/actPdf/ActPDF";
+import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
 import { ReferralPDF } from "./vetWorkPdf/referralPdf/ReferralPDF";
 

@@ -1,8 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 
-import { AppService } from "../../../../../app.service";
-import { IVetWorkSchema } from "../../../../../interfaces/VetWorkInterfaces";
+import { AppService } from "../../../../app.service";
+import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 
 import styles from "./AnimalsListPDF.module.scss"
 
