@@ -17,17 +17,9 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
   return (
     <Container className="mb-3">
       <Row className="mb-10">
-        <Col sm={8}></Col>
+        <Col sm={11}></Col>
         <Col>
           Ф-21
-          <p>
-            {" "}
-            Приложение № 7 к Порядку учета, хранения, использования и списания
-            лекарственных средств и препаратов для ветеринарного применения,
-            поступающих за счет средств федерального и областного бюджетов,
-            бюджетными государственными учреждениями ветеринарии Ивановской
-            области
-          </p>
         </Col>
       </Row>
       <Row className="mb-5">
@@ -68,7 +60,10 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
           </Row>
           <Row className="mb-4 text-center text-sm">
             <Col sm={2}></Col>
-            <Col sm={10}>юридический адрес)</Col>
+            <Col sm={10}>юридический адрес, контактный телефон)</Col>
+          </Row>
+          <Row className="pdf-report-underlined">
+            <Col sm={12}></Col>
           </Row>
         </Col>
       </Row>
