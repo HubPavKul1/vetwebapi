@@ -2,15 +2,21 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AppService } from "../../../../app.service";
+import NoData from "../../../../components/NoData";
 
 interface ReferralPDFHeaderProps {
   data: IVetWorkSchema;
 }
 
 export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
-  if (!data.companies) return;
+  
+  if (!data.companies?.length) return <NoData title="Данные о предприятиях" />;
+  if (!data.animals) return <NoData title="Данные о животных" />;
 
-  const companyName = data.companies[0].short_name;
+
+  const title = data.biomaterial === ("сыворотка крови" || "цельная кровь") ? "К ПРОБАМ КРОВИ, СЫВОРОТКИ КРОВИ (ненужное зачеркнуть)" : "К ПАТОЛОГИЧЕСКОМУ(БИОЛОГИЧЕСКОМУ) МАТЕРИАЛУ"
+  const formNumber = data.biomaterial === ("сыворотка крови" || "цельная кровь") ? 1 : 0
+  const companyName = data.companies[0] && data.companies[0].short_name;
   const clinic = data.clinic;
   const companyAddress = data.companies[0].address && AppService.addressString(data.companies[0].address)
     
@@ -19,10 +25,10 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
       <Row className="mb-10">
         <Col sm={11}></Col>
         <Col>
-          Ф-21
+          Ф-2{formNumber}
         </Col>
       </Row>
-      <Row className="mb-5">
+      <Row className="mb-4">
         <Col sm={6} className="text-center text-lg font-bold">
           <p>
             Бюджетное государственное <br />
@@ -76,7 +82,7 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
         <Col></Col>
         <Col sm={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-sm text-center mb-5">
+      <Row className="text-sm text-center mb-3">
         <Col sm={2}>Регистрационный номер заявки</Col>
         <Col></Col>
         <Col sm={2}>Шифр образца</Col>
@@ -89,7 +95,7 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
         <h5>СОПРОВОДИТЕЛЬНЫЙ ДОКУМЕНТ-ЗАЯВКА</h5>
       </Row>
       <Row className="text-center">
-        <h5>К ПРОБАМ КРОВИ, СЫВОРОТКИ КРОВИ (ненужное зачеркнуть)</h5>
+        <h5>{title}</h5>
       </Row>
     </Container>
   );

@@ -21,9 +21,12 @@ interface VetWorkDetailProps {
   showReferral: CallableFunction;
   showAnimalsList: CallableFunction;
   setCompanyId: CallableFunction;
+  showReferralAnimalList: CallableFunction
 }
 
 export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
+
+  const disease = props.data.diseases[0].toLowerCase()
   return (
     <>
       <PageDetail
@@ -35,6 +38,8 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
             showAnimalsList={props.showAnimalsList}
             showReferral={props.showReferral}
             workType={props.data.work_type}
+            disease={disease}
+            showReferralAnimalList={props.showReferralAnimalList}
           />
         }
         title={props.pageTitle}

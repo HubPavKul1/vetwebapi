@@ -4,7 +4,6 @@ import { AppService } from "../../../../app.service";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 
 import styles from "./AnimalsListPDF.module.scss";
-import { StateAssignment } from "../../../../components/StateAssignment";
 
 interface AnimalsListPDFBodyProps {
   data: IVetWorkSchema;

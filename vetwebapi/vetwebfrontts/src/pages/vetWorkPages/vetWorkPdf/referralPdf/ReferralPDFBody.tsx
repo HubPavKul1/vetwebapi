@@ -2,14 +2,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AppService } from "../../../../app.service";
 import { StateAssignment } from "../../../../components/StateAssignment";
+import NoData from "../../../../components/NoData";
 
 interface ReferralPDFBodyProps {
   data: IVetWorkSchema;
 }
 
 export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
-  if (!data.animals) return;
-  if (!data.companies) return;
+  if (!data.animals) return <NoData title="Данные о животных" />;
+  if (!data.companies) return <NoData title="Данные о предприятиях" />;
 
   const date = AppService.convertDateString(data.vetwork_date);
 
@@ -94,6 +95,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
       <Row>
         <Col>Дата, время взятия крови</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
+        <Col></Col>
         <Col>№ акта</Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
@@ -101,6 +103,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
       <Row>
         <Col>Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
+        <Col></Col>
         <Col>вид упаковки</Col>
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>

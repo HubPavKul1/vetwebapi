@@ -78,21 +78,39 @@ async def add_horses_group(session: AsyncSession) -> int:
     type_of_feeding_ids = await add_type_of_feeding(session=session)
     return await create_animal_group(session=session, type_of_feeding_id=type_of_feeding_ids[0], name="Лошади")
 
+async def add_cows_group(session: AsyncSession) -> int:
+    type_of_feeding_ids = await add_type_of_feeding(session=session)
+    return await create_animal_group(session=session, type_of_feeding_id=type_of_feeding_ids[0], name="Крупный рогатый скот")
+
  
 async def add_usage_types(session: AsyncSession) -> None:
     names = ["пользовательное", "племенное", "спортивное"]
     [await create_usage_type(session=session, name=name) for name in names]
     
-async def add_species(session: AsyncSession) -> list[int]:
+async def add_horses_species(session: AsyncSession) -> list[int]:
     animal_group_id = await add_horses_group(session=session)
     names = ["Лошади", "Пони"]
     return [await create_species(session=session, animal_group_id=animal_group_id, name=name) for name in names]
-    
-    
-async def add_genders(session: AsyncSession) -> None:
+
+
+async def add_cows_species(session: AsyncSession) -> list[int]:
+    animal_group_id = await add_cows_group(session=session)
+    names = ["Крупный рогатый скот", "Як домашний", "Зубр европейский", "Олень пятнистый", "Олень северный", "Лань европейская"]
+    return [await create_species(session=session, animal_group_id=animal_group_id, name=name) for name in names]
+
+
+async def add_horse_genders(session: AsyncSession) -> None:
     names = ["жеребец", "кобыла", "мерин"]
     [await create_gender(session=session, name=name, species_id=1) for name in names]
-    
+    [await create_gender(session=session, name=name, species_id=2) for name in names]
+
+
+async def add_cows_genders(session: AsyncSession) -> None:
+    species_ids = await add_cows_species(session=session)
+    names = ["бык", "корова", "телка", "бычок", "самец", "самка"]
+    for id in species_ids:         
+        [await create_gender(session=session, name=name, species_id=id) for name in names]
+   
     
 # Drugs
 async def add_budgets(session: AsyncSession) -> None:
@@ -127,6 +145,7 @@ async def add_administration_methods(session: AsyncSession) -> None:
         "орошение",
         "наружного",
         "внутреннего",
+        "инстилляции"
         ]
     session.add_all([AdministrationMethod(name=method) for method in methods])
     await session.commit()
@@ -161,7 +180,9 @@ async def add_places_of_administration(session:AsyncSession) -> None:
         "средней трети шеи слева",
         "верхней трети шеи слева",
         "крупа",
-        "холки"
+        "холки",
+        "конъюнктивы нижнего века левого глаза",
+        "конъюнктивы нижнего века правого глаза"
     ]
     session.add_all([PlaceOfAdministration(name=item) for item in items])
     await session.commit()
@@ -261,8 +282,9 @@ async def prepare_db(session: AsyncSession) -> None:
     await fill_street_table(session=session)
     await add_positions(session=session)
     await add_usage_types(session=session)
-    await add_species(session=session)
-    await add_genders(session=session)
+    await add_horses_species(session=session)
+    await add_horse_genders(session=session)
+    await add_cows_genders(session=session)
     await add_drugs_data(session=session)
     await add_vet_works_data(session=session)
     await add_roles(session=session)
