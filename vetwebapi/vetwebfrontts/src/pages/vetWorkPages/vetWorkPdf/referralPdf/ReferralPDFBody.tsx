@@ -2,15 +2,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AppService } from "../../../../app.service";
 import { StateAssignment } from "../../../../components/StateAssignment";
-import NoData from "../../../../components/NoData";
+
 
 interface ReferralPDFBodyProps {
   data: IVetWorkSchema;
 }
 
 export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
-  if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+  if (!data.animals) return;
+  if (!data.companies?.length) return;
 
   const date = AppService.convertDateString(data.vetwork_date);
 
@@ -23,7 +23,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
   const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
 
   const companyAddress =
-    data.companies[0].address &&
+    data.companies[0]?.address &&
     AppService.addressString(data.companies[0].address);
 
   return (

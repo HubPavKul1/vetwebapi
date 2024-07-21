@@ -2,6 +2,7 @@
 import { PDF } from "../../../../components/PDF";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { ActPDFBody } from "./ActPDFBody";
+import { ActPDFFooter } from "./ActPDFFooter";
 import { ActPDFHeader } from "./ActPDFHeader";
 
 interface ActPDFProps {
@@ -14,6 +15,7 @@ export function ActPDF({ setPdf, data }: ActPDFProps) {
     <PDF setPdf={setPdf} filename="act.pdf">
       <ActPDFHeader data={data} />
       <ActPDFBody data={data} />
+      <ActPDFFooter data={data} />
     </PDF>
   );
 }

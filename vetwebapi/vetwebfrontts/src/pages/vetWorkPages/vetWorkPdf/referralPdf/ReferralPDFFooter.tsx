@@ -7,11 +7,9 @@ interface ReferralPDFFooterProps {
 }
 
 export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
-  if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.companies) return <NoData title="Данные о предприятиях" />;
-  if (!data.companies[0].employee) return <NoData title="Данные о работниках" />;
-  if (!data.companies[0].address) return <NoData title="Данные об адресе предприятия" />;
-
+  if (!data.animals) return;
+  if (!data.companies?.length) return;
+  
 
   const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
 

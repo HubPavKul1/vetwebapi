@@ -214,7 +214,7 @@ body {
 }
 
 .table-report th, td {
-  @apply text-center text-sm align-middle border border-black
+  @apply text-center align-middle border border-black
 }
 
 .report-title {
@@ -226,6 +226,6 @@ body {
 }
 
 .pdf-report-underlined {
-  @apply text-center border-b border-black text-sm
+  @apply text-center border-b-2 border-black text-sm
 }
 

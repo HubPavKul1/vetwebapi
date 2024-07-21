@@ -10,7 +10,7 @@ interface ReferralPDFBodyNoBloodProps {
 
 export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
   if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+  if (!data.companies?.length) return <NoData title="Данные о предприятиях" />;
 
   const date = AppService.convertDateString(data.vetwork_date);
 
