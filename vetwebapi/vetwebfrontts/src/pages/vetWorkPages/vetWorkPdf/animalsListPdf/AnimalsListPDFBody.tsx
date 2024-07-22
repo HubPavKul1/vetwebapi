@@ -27,7 +27,7 @@ export function AnimalsListPDFBody({ data }: AnimalsListPDFBodyProps) {
             data.companies.map((company) => (
               <>
                 <tr>
-                  <td colSpan={7}>
+                  <td colSpan={8}>
                     <h5>{company.full_name}</h5>
                   </td>
                 </tr>
@@ -38,6 +38,7 @@ export function AnimalsListPDFBody({ data }: AnimalsListPDFBodyProps) {
                       <td>{index + 1}</td>
                       <td>{animal.animal_group}</td>
                       <td>{animal.nickname}</td>
+                      <td>{animal.identification}</td>
                       <td>{AppService.convertDateString(animal.date_of_birth).year}</td>
                       <td></td>
                       <td>{animal.dosage && animal.dosage / 1000}</td>

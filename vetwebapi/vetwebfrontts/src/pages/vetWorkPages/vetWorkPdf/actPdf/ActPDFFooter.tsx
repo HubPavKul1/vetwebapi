@@ -2,16 +2,15 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 
-import NoData from "../../../../components/NoData";
 
 interface ActPDFFooterProps {
   data: IVetWorkSchema;
 }
 
 export function ActPDFFooter({ data }: ActPDFFooterProps) {
-  if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.drug) return <NoData title="Данные о препаратах" />;
-  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+  if (!data.animals) return;
+  if (!data.drug) return;
+  if (!data.companies) return;
 
   
 

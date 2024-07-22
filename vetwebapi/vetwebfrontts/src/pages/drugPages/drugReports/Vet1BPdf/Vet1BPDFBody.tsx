@@ -15,7 +15,7 @@ export function Vet1BPDFBody({ data }: Vet1BPDFBodyProps) {
 
   return (
     <Container>
-      <Table className="table-report">
+      <Table className="table-report text-sm">
         <thead >
           <tr>
             <th rowSpan={2}>Наименование болезни</th>

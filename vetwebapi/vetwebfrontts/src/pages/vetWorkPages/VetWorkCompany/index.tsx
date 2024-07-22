@@ -62,6 +62,7 @@ export function  VetWorkCompany({
           <Col>Кличка</Col>
           <Col>Идентификация</Col>
           <Col>Дозировка</Col>
+          <Col>Результат исследования</Col>
           <Col></Col>
           <Col></Col>
         </Row>

@@ -42,11 +42,15 @@ export function ActPDFHeader({ data }: ActPDFHeaderProps) {
         <Col sm={4}></Col>
       </Row>
       <Row>
-        {disease === "туберкулез" && animals === "лошади" ? (
+        {disease === "туберкулез" && animals === "лошади" && data.is_primary ? (
           <Col className="text-center italic">
             о проведении туберкулинизации лошадей
           </Col>
-        ) : disease === "туберкулез" && animals === "крупный рогатый скот" ? (
+        ) : disease === "туберкулез" && animals === "лошади" && !data.is_primary ? (
+          <Col className="text-center italic">
+            о проведении туберкулинизации лошадей (повторно)
+          </Col>
+        ) :disease === "туберкулез" && animals === "крупный рогатый скот" ? (
           <Col className="text-center italic">
             о проведении туберкулинизации крупного рогатого скота
           </Col>

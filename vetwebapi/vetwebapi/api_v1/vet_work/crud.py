@@ -23,7 +23,7 @@ from vetwebapi.core.models import (
     )
 
 from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
-from .schemas import VaccinationIn, AnimalInVetWorkIn, CompanyInVetWorkIn, DiagnosticIn
+from .schemas import VaccinationIn, AnimalInVetWorkIn, CompanyInVetWorkIn, DiagnosticIn, AnimalInVetWorkUpdatePartial
 
 
 # Create
@@ -152,6 +152,16 @@ async def read_animals_in_vetwork(session: AsyncSession, vetwork: VetWork) -> li
     return list(await session.scalars(stmt))
 
 
+async def read_animal_in_vetwork_by_id(session: AsyncSession, vetwork: VetWork, animal_id: int) -> AnimalInVetWork | None:
+    stmt = (
+        select(AnimalInVetWork)
+        .where(and_(AnimalInVetWork.vetwork_id == vetwork.id, AnimalInVetWork.animal_id == animal_id))
+        )
+    return await session.scalar(stmt)
+
+
+
+
 async def read_companies_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[CompanyInVetWork]:
     stmt = (
         select(CompanyInVetWork)
@@ -205,11 +215,30 @@ async def read_diagnosic_methods(session: AsyncSession) -> list[DiagnosticMethod
     return list(await session.scalars(stmt))
 
 
+# UPDATE
+
+async def update_animal_in_vetwork(
+    session: AsyncSession,
+    animal: AnimalInVetWork,
+    animal_update: AnimalInVetWorkUpdatePartial,
+    partial: bool = False,
+) -> AnimalInVetWork:
+    for name, value in animal_update.model_dump(exclude_unset=partial).items():
+        setattr(animal, name, value)
+    await session.commit()
+    return animal
+
+
 
 # DELETE
 
 async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
     await session.delete(vetwork)
+    await session.commit()
+
+
+async def delete_animal_in_vetwork(session: AsyncSession, animal: AnimalInVetWork) -> None:
+    await session.delete(animal)
     await session.commit()
 
 

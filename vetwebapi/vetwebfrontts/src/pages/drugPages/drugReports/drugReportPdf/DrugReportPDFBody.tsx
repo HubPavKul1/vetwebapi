@@ -14,7 +14,7 @@ export function DrugReportPDFBody({data}: DrugReportPDFBodyProps) {
 
     return (
         <Container >
-            <Table className="table-report">
+            <Table className="table-report text-sm">
                 <thead>
                     <tr>
                         <th rowSpan={3}>Наименование продукции</th>

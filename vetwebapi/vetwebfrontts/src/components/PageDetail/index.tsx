@@ -1,6 +1,5 @@
-import { Col, Container, Row } from "react-bootstrap";
+
 import { PageDetailTop } from "./PageDetailTop";
-import styles from "./PageDetail.module.scss"
 import { PageDetailTitle } from "./PageDetailTitle";
 import { PageDetailAddress } from "./PageDetailAddress";
 import { IAddress } from "../../interfaces/AddressInterfaces";

@@ -57,7 +57,11 @@ class AnimalInVetWorkIn(BaseModel):
     is_positive: bool = False
     
     # model_config = ConfigDict(from_attributes=True)
-    
+
+
+class AnimalInVetWorkUpdatePartial(BaseModel):
+    dosage: float | None = None
+    is_positive: bool | None = None
     
     
 class AnimalsInVetWorkIn(BaseModel):

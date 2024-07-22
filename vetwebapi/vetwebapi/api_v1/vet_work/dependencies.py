@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, Path, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import VetWork
+from vetwebapi.core.models import VetWork, AnimalInVetWork
 
 from . import crud
 
@@ -17,6 +17,20 @@ async def vetwork_by_id(
     if vetwork is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail={"result": False, "error_message": "Drug Not Found"},
+            detail={"result": False, "error_message": "VetWork Not Found"},
         )
     return vetwork
+
+async def animal_in_vetwork_by_id(
+    animal_id: Annotated[int, Path()],
+    vetwork: VetWork = Depends(vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> AnimalInVetWork:
+
+    animal = await crud.read_animal_in_vetwork_by_id(animal_id=animal_id, vetwork=vetwork, session=session)
+    if animal is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"result": False, "error_message": "Animal Not Found"},
+        )
+    return animal

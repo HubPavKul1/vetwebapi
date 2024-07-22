@@ -18,13 +18,14 @@ from .schemas import (
     BiomaterialFixations,
     BiomaterialPackages,
     Biomaterials,
-    DiagnosticMethods
+    DiagnosticMethods,
+    AnimalInVetWorkUpdatePartial
     )
 from .serializers import (
     serialize_vetworks,
     serialize_vetwork_detail
     )
-from .dependencies import vetwork_by_id
+from .dependencies import vetwork_by_id, animal_in_vetwork_by_id
 from vetwebapi.core.database import db_manager
 
 from . import crud
@@ -86,6 +87,23 @@ async def add_animals_to_vetwork_route(
     await crud.add_animals_to_vetwork(
         session=session, body=body, vetwork=vetwork
     )
+
+
+@router.patch("/{vetwork_id}/animals/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def update_animal_in_vetwork_api_partial(
+    body: AnimalInVetWorkUpdatePartial,
+    animal: AnimalInVetWork = Depends(animal_in_vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.update_animal_in_vetwork(session=session, animal=animal, animal_update=body, partial=True)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Something wrong on backend"},
+        )
+
 
 
 @router.post("/{vetwork_id}/company", status_code=status.HTTP_201_CREATED)
@@ -151,6 +169,21 @@ async def delete_vetwork_route(
 ) -> Union[dict, SuccessMessage]:
     try:
         await crud.delete_vetwork(session=session, vetwork=vetwork)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+@router.delete("/{vetwork_id}/animals/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def delete_vetwork_route(
+    animal: AnimalInVetWork = Depends(animal_in_vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_animal_in_vetwork(session=session, animal=animal)
         return SuccessMessage()
     except Exception:
         raise HTTPException(

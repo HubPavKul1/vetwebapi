@@ -21,7 +21,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
     data.drug.expiration_date
   ).shortDate;
 
-  const vetworkDate = AppService.convertDateString(data.vetwork_date)
+  const vetworkDate = AppService.convertDateString(data.vetwork_date);
 
   const disease = data.diseases[0].toLowerCase();
   const animal = data.animals[0].animal_group.toLowerCase();
@@ -58,29 +58,46 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
       </Row>
       {disease === "туберкулез" && animal === "лошади" ? (
         <>
-         <Row>
-          <Col>Составили настоящий акт о том, что</Col>
-          <Col className="pdf-report-underlined mb-2 p-1">{vetworkDate.shortDate}</Col>
-          <Col>нами проведены клинический осмотр и</Col>
-        </Row>
-        <Row>
-          <Col sm={6}>аллергическое исследование на туберкулез методом офтальмопробы</Col>
-          <Col className="pdf-report-underlined mb-2 p-1">{data.animals.length}</Col>
-          <Col>голов лошадей</Col>
-          <Col sm={2}></Col>
-        </Row>
-        <Row>
-          <Col sm={2}>Туберкулин введен</Col>
-          <Col sm={2} className="pdf-report-underlined mb-2 p-1">{vetworkDate.shortDate}</Col>
-          <Col>в</Col>
-          <Col className="pdf-report-underlined mb-2 p-1">8 - 00</Col>
-          <Col sm={6}></Col>
-        </Row>
-        <Row>
-          <Col>Учет реакции провести через 6, 9, 12 и 24 часа после введения туберкулина.</Col>
-        </Row>
+          <Row>
+            <Col>Составили настоящий акт о том, что</Col>
+            <Col className="pdf-report-underlined mb-2 p-1">
+              {vetworkDate.shortDate}
+            </Col>
+            <Col>нами проведены клинический осмотр и</Col>
+          </Row>
+          <Row>
+            <Col sm={6}>
+              аллергическое исследование на туберкулез методом офтальмопробы
+            </Col>
+            <Col className="pdf-report-underlined mb-2 p-1">
+              {data.animals.length}
+            </Col>
+            <Col>голов лошадей</Col>
+            <Col sm={2}></Col>
+          </Row>
+          <Row>
+            <Col sm={2}>Туберкулин введен</Col>
+            <Col sm={2} className="pdf-report-underlined mb-2 p-1">
+              {vetworkDate.shortDate}
+            </Col>
+            <Col>в</Col>
+            <Col className="pdf-report-underlined mb-2 p-1">8 - 00</Col>
+            <Col sm={6}></Col>
+          </Row>
+          <Row>
+            {!data.is_primary ? (
+              <Col>
+                Учет реакции провести через 3, 6, 9, 12 часов после введения
+                туберкулина.
+              </Col>
+            ) : (
+              <Col>
+                Учет реакции провести через 6, 9, 12 и 24 часа после введения
+                туберкулина.
+              </Col>
+            )}
+          </Row>
         </>
-       
       ) : disease === "туберкулез" && animal === "крупный рогатый скот" ? (
         <Row>
           <Col></Col>
@@ -98,7 +115,9 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
               {diseases}
             </Col>
             <Col></Col>
-            <Col className="pdf-report-underlined p-1">{data.animals?.length}</Col>
+            <Col className="pdf-report-underlined p-1">
+              {data.animals?.length}
+            </Col>
             <Col>голов</Col>
           </Row>
           {data.is_state_assignment && <StateAssignment />}
@@ -115,13 +134,17 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
 
       <Row>
         <Col sm={3}>применяли препарат</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 italic">{data.drug?.name}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 italic">
+          {data.drug?.name}
+        </Col>
       </Row>
       <Row>
         <Col>серия №</Col>
         <Col className="pdf-report-underlined mb-2 p-1">{data.drug?.batch}</Col>
         <Col>контроль №</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{data.drug?.control}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1">
+          {data.drug?.control}
+        </Col>
         <Col>изготовлен</Col>
         <Col className="pdf-report-underlined mb-2 p-1">{productionDate}</Col>
         <Col>годен до</Col>
@@ -158,9 +181,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
         <Col sm={8}>(согласно инструкции по применению вакцины)</Col>
       </Row>
       <Row>
-        <Col className="font-bold">
-          Для проведения обработки израсходовано:
-        </Col>
+        <Col className="font-bold">Для проведения обработки израсходовано:</Col>
       </Row>
       <Row>
         <Col sm={3}>1. Препарата</Col>
@@ -198,17 +219,17 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
         <Col>тыс.доз</Col>
         <Col className="pdf-report-underlined mb-2 p-1">{drugPacks}</Col>
         <Col sm={3}>ампул/флаконов, шприцы</Col>
-        <Col sm={2}l></Col>
+        <Col sm={2} l></Col>
       </Row>
       <Row>
         <Col sm={3}>обезврежены методом</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{data.drug.disposal_method}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1">
+          {data.drug.disposal_method}
+        </Col>
       </Row>
       <Row>
         <Col sm={6}>Опись на обработанных прилагается.</Col>
       </Row>
-      </Container>
-
-      
+    </Container>
   );
 }
