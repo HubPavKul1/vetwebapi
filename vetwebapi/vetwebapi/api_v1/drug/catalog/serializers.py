@@ -1,4 +1,4 @@
-from vetwebapi.core.models import CatalogDrug
+from core.models import CatalogDrug
 
 from .schemas import CatalogDrugSchema
 

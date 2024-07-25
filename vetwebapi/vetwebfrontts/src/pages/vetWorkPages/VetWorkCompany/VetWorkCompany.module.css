@@ -1,0 +1,18 @@
+.tableHead {
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.companyWrap {
+  margin-bottom: 30px;
+  border-bottom: 2px solid grey;
+}
+
+.companyTitle {
+  display: flex;
+}
+.companyTitle h5 {
+  font-weight: 600;
+}/*# sourceMappingURL=VetWorkCompany.module.css.map */

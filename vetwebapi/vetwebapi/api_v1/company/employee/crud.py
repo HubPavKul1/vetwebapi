@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import Employee, Position, Company, Clinic
+from core.models import Employee, Position, Company, Clinic
 
 from .schemas import EmployeeIn
 

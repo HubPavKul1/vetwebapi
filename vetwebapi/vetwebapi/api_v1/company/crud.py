@@ -4,7 +4,7 @@ from operator import and_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload, with_polymorphic
 
-from vetwebapi.core.models import Company, Role, Clinic, Laboratory
+from core.models import Company, Role, Clinic, Laboratory
 
 from .schemas import CompanyIn
 

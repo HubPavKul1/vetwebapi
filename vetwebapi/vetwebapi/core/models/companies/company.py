@@ -4,7 +4,7 @@ from slugify import slugify
 from sqlalchemy import Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.models.base import BaseNoPk, intpk
+from core.models.base import BaseNoPk, intpk
 
 if TYPE_CHECKING:
     from vetwebapi.core.models import Animal, VetWork, CompanyInVetWork

@@ -2,7 +2,7 @@ from datetime import date
 
 from pydantic import BaseModel
 
-from vetwebapi.api_v1.drug.reports.schemas import DateRangeIn
+from api_v1.drug.reports.schemas import DateRangeIn
 
 
 

@@ -1,0 +1,22 @@
+.cardAddress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cardAddress h6 {
+  font-size: 12px;
+}
+
+.cardEmployee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.cardEmployee h6 {
+  font-size: 12px;
+}
+
+.cardPhone span {
+  font-size: 0.8rem;
+}/*# sourceMappingURL=CompanyCardBody.module.css.map */

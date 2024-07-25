@@ -6,7 +6,7 @@ from fastapi import File, UploadFile
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import (
+from core.models import (
     Animal,
     AnimalGroup,
     Gender,

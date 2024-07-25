@@ -1,7 +1,7 @@
 from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug, VetWork, AnimalInVetWork, Disease
+from core.models import DrugInMovement, DrugMovement, Drug, CatalogDrug, VetWork, AnimalInVetWork, Disease
 
 from .schemas import DateRangeIn
 

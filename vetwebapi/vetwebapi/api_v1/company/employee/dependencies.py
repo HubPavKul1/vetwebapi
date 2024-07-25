@@ -3,8 +3,8 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Path, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import Employee
+from core.database import db_manager
+from core.models import Employee
 
 from .crud import read_company_employees, read_employee_by_id
 

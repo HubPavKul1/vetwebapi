@@ -4,10 +4,10 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Boolean, Date, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.models.base import Base
+from core.models.base import Base
 
 if TYPE_CHECKING:
-    from vetwebapi.core.models import Company, VetWork, AnimalInVetWork
+    from core.models import Company, VetWork, AnimalInVetWork
 
     from .gender import Gender
     from .species import Species

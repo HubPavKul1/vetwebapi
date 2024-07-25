@@ -2,17 +2,20 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.api_v1 import router as router_v1
-from vetwebapi.api_v1.auth import crud
-from vetwebapi.core.database import db_manager
-from vetwebapi.core.settings import settings
-from vetwebapi.utils import utils
+from api_v1 import router as router_v1
+from api_v1.auth import crud
+from core.database import db_manager
+from core.settings import settings
+from utils import utils
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http//localhost:5173",
+        "http//192.168.99.101"
+        ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

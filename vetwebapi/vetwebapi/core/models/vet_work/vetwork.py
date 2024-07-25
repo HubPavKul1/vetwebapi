@@ -4,12 +4,12 @@ from datetime import date
 from sqlalchemy import ForeignKey, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.models.base import Base
+from core.models.base import Base
 
 if TYPE_CHECKING:
     from .work_type import WorkType
     from .biomaterial import Biomaterial
-    from vetwebapi.core.models import Company, Animal, Employee, DrugMovement, Clinic, Laboratory
+    from  core.models import Company, Animal, Employee, DrugMovement, Clinic, Laboratory
     from .biomaterial_package import BiomaterialPackage
     from .biomaterial_fixation import BiomaterialFixation
     from .animal_in_vetwork import AnimalInVetWork

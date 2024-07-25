@@ -1,0 +1,16 @@
+.cardTitle {
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.cardTitle {
+  cursor: pointer;
+  transition: color 0.5s ease-in-out;
+}
+.cardTitle:hover {
+  color: blueviolet;
+}/*# sourceMappingURL=CatalogCardTitle.module.css.map */

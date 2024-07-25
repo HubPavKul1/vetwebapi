@@ -1,7 +1,7 @@
-from vetwebapi.api_v1.company.address.schemas import AddressSchema
-from vetwebapi.api_v1.company.animal.schemas import AnimalSchema, Animals
-from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema, Employees
-from vetwebapi.core.models import Address, Animal, Company, Employee
+from api_v1.company.address.schemas import AddressSchema
+from api_v1.company.animal.schemas import AnimalSchema, Animals
+from api_v1.company.employee.schemas import EmployeeSchema, Employees
+from core.models import Address, Animal, Company, Employee
 
 from .schemas import CompanyCard, CompanyDetail
 

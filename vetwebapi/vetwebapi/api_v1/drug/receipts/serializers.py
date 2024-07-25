@@ -1,4 +1,4 @@
-from vetwebapi.core.models import DrugMovement, DrugInMovement
+from core.models import DrugMovement, DrugInMovement
 
 from .schemas import DrugInMovementSchema, DrugMovementDetail
 

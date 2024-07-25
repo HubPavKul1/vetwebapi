@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import Address, City, District, Region, Street
+from core.models import Address, City, District, Region, Street
 
 from .schemas import AddressIn
 

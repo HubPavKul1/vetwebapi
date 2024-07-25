@@ -1,4 +1,4 @@
-from vetwebapi.core.models import (
+from core.models import (
     VetWork, 
     AnimalInVetWork, 
     DoctorInVetWork,
@@ -14,11 +14,11 @@ from .schemas import (
     VetWorkDetail
     )
 
-from vetwebapi.api_v1.company.serializers import serialize_employee, serialize_address
-from vetwebapi.api_v1.drug.receipts.serializers import serialize_drug_in_movement
-from vetwebapi.api_v1.company.schemas import CompanyCard, AddressSchema
-from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
-from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
+from api_v1.company.serializers import serialize_employee, serialize_address
+from api_v1.drug.receipts.serializers import serialize_drug_in_movement
+from api_v1.company.schemas import CompanyCard, AddressSchema
+from api_v1.company.employee.schemas import EmployeeSchema
+from api_v1.drug.receipts.schemas import DrugInMovementSchema
 
 
 

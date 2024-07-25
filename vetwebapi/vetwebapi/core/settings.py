@@ -1,22 +1,14 @@
 import os
 from pathlib import Path
 
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from pydantic_settings import BaseSettings
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
-    # templates: Jinja2Templates = Jinja2Templates(
-    #     directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "templates")
-    # )
-    # staticfiles: StaticFiles = StaticFiles(
-    #     directory=os.path.join(BASE_DIR, "vetwebapi", "frontend", "static")
-    #     )
-    files_dir: str = os.path.join(BASE_DIR, "vetwebapi", "files")
+    files_dir: str = os.path.join(BASE_DIR, "files")
 
     media_dir: str = os.path.join(
         BASE_DIR, "vetwebfrontts", "public"
@@ -33,15 +25,15 @@ class Settings(BaseSettings):
     postgres_user: str
     postgres_password: str
     postgres_db: str
-    db_echo: bool = True
+    db_echo: bool = False
 
     @property
     def db_url(self):
         return f"postgresql+asyncpg://{self.db_user}:{self.db_pass}@{self.db_host}:{self.db_port}/{self.db_name}"
 
     class Config:
-        # env_file = ".env"
-        env_file = ".dev.env"
+        env_file = ".env"
+        # env_file = ".dev.env"
         env_file_encoding = "utf-8"
 
 

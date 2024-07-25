@@ -6,7 +6,7 @@ from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from vetwebapi.core.models import (
+from core.models import (
     AccountingUnit,
     Budget,
     Drug,
@@ -17,8 +17,8 @@ from vetwebapi.core.models import (
     AdministrationMethod
 )
 
-from vetwebapi.core.settings import settings
-from vetwebapi.utils import utils
+from core.settings import settings
+from utils import utils
 
 from .schemas import DrugIn
 

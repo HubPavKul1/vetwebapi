@@ -4,12 +4,12 @@ from slugify import slugify
 from sqlalchemy import Boolean, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.models.base import Base
+from core.models.base import Base
 
 if TYPE_CHECKING:
     from .company import Company
     from .position import Position
-    from vetwebapi.core.models import VetWork, DoctorInVetWork
+    from core.models import VetWork, DoctorInVetWork
 
 
 class Employee(Base):

@@ -6,7 +6,7 @@ from sqlalchemy import select, desc, Subquery, func, cast, Integer
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import VetWork, AnimalInVetWork, Animal, Species, AnimalGroup, Disease, DiseaseInVetWork
+from core.models import VetWork, AnimalInVetWork, Animal, Species, AnimalGroup, Disease, DiseaseInVetWork
 
 from .schemas import DateRangeIn
 

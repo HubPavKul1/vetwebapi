@@ -3,9 +3,9 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.api_v1.drug.dependencies import drug_by_id
-from vetwebapi.api_v1.drug.schemas import (
+from api_v1.company.schemas import SuccessMessage
+from api_v1.drug.dependencies import drug_by_id
+from api_v1.drug.schemas import (
     AccountingUnits,
     Budgets,
     DrugIn,
@@ -18,8 +18,8 @@ from vetwebapi.api_v1.drug.schemas import (
     PlacesOfAdministration,
     AdministrationMethods
 )
-from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import Drug
+from core.database import db_manager
+from core.models import Drug
 
 from . import crud
 from .catalog.views import router as catalog_router

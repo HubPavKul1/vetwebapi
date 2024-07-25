@@ -4,7 +4,7 @@ from sqlalchemy.orm import joinedload, selectinload
 # from operator import and_, or_
 from datetime import date
 
-from vetwebapi.core.models import DrugInMovement, DrugMovement, Operation, Drug, CatalogDrug
+from core.models import DrugInMovement, DrugMovement, Operation, Drug, CatalogDrug
 
 from .schemas import DrugInMovementIn, DrugMovementIn
 

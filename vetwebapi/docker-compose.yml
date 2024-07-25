@@ -1,40 +1,54 @@
 version: '3.3'
 services:
-  # app:
-  #   container_name: "vetwebapi"
-  #   build: .
-  #   stop_signal: SIGKILL
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - "8000:8000"
-  #   # volumes:
-  #   #   - ./blog_project/images/:/blog_project/images:rw
-  #   depends_on:
-  #     - db
-  #   networks:
-  #     - network
+  app:
+    container_name: "vetwebapi"
+    build: ./vetwebapi/
+    stop_signal: SIGKILL
+    env_file:
+      - ./vetwebapi/.env
+    ports:
+      - "8000:8000"
+    # volumes:
+    #   - ./blog_project/images/:/blog_project/images:rw
+    depends_on:
+      - db
+    networks:
+      - network
 
-  # nginx:
-  #   container_name: "nginx"
-  #   restart: always
-  #   build: ./blog_project/frontend
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./blog_project/images:/usr/share/nginx/html/images:rw
+  frontend:
+    container_name: "vetwebfront"
+    build: ./vetwebfrontts/
+    stop_signal: SIGKILL
+    ports:
+      - "3000:3000"
+    # volumes:
+    #   - ./blog_project/images/:/blog_project/images:rw
+    depends_on:
+      - db
+    networks:
+      - network
 
-  #   networks:
-  #     - network
-  #   depends_on:
-  #     - app
+
+  nginx:
+    container_name: "nginx"
+    restart: always
+    build: ./vetwebfrontts/
+    ports:
+      - "80:80"
+    # volumes:
+    #   - .\nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - network
+    depends_on:
+      - app
+      - frontend
 
   db:
     image: postgres:15.3-alpine3.18
     container_name: "db"
     restart: always
     env_file:
-      - .dev.env
+      - ./vetwebapi/.env
     ports:
       - "5432:5432"
     command: postgres -c log_destination=stderr -c logging_collector=on -c log_directory='logs'

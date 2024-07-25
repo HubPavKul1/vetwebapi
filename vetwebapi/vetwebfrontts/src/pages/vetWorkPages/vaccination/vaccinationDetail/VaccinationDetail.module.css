@@ -1,0 +1,69 @@
+.detailWrap {
+  padding-top: 20px;
+}
+
+.rowTop {
+  margin-bottom: 50px;
+}
+
+.colImg {
+  display: flex;
+  justify-content: center;
+}
+.colImg > img {
+  width: 100%;
+}
+
+.titleWrap {
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.titleWrap > h1 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.companyWrap {
+  margin-bottom: 30px;
+  border-bottom: 2px solid grey;
+}
+
+.pdfButtons {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.pdfButtons div {
+  margin-bottom: 20px;
+}
+
+.rowBody {
+  min-height: 550px;
+}
+
+.drugWrap h5 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.buttonWrap {
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+.companyTitle {
+  display: flex;
+}
+.companyTitle h5 {
+  font-weight: 600;
+}
+
+.animalCounter {
+  color: blueviolet;
+  font-weight: 700;
+}/*# sourceMappingURL=VaccinationDetail.module.css.map */

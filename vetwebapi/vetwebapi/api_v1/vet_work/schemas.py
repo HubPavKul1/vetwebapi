@@ -2,9 +2,9 @@ from datetime import date
 
 from pydantic import BaseModel, ConfigDict
 
-from vetwebapi.api_v1.company.employee.schemas import EmployeeSchema
-from vetwebapi.api_v1.company.schemas import CompanyCard
-from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementSchema
+from api_v1.company.employee.schemas import EmployeeSchema
+from api_v1.company.schemas import CompanyCard
+from api_v1.drug.receipts.schemas import DrugInMovementSchema
 
 
 class DiseaseIn(BaseModel):

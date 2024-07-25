@@ -3,11 +3,11 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey, Boolean, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.models.base import Base
+from core.models.base import Base
 
 if TYPE_CHECKING:
     from .vetwork import VetWork
-    from vetwebapi.core.models import Employee
+    from core.models import Employee
 
 
 class DoctorInVetWork(Base):

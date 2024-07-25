@@ -4,9 +4,9 @@ from datetime import date
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.core.database import db_manager
-from vetwebapi.core.models import DrugMovement, DrugInMovement
+from api_v1.company.schemas import SuccessMessage
+from core.database import db_manager
+from core.models import DrugMovement, DrugInMovement
 
 from . import crud
 from .dependencies import drug_movement_by_id

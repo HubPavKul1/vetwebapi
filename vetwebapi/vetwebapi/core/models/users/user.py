@@ -6,8 +6,8 @@ from sqlalchemy import ForeignKey, String
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from vetwebapi.core.database import db_manager
-from vetwebapi.core.models.base import Base
+from core.database import db_manager
+from core.models.base import Base
 
 if TYPE_CHECKING:
     from .role import Role

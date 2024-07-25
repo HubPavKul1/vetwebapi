@@ -1,0 +1,19 @@
+.companyEmployee > h5 {
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.tableHead {
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.companyEmployee {
+  margin-bottom: 30px;
+}/*# sourceMappingURL=PageDetailEmployees.module.css.map */

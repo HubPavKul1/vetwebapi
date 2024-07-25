@@ -3,9 +3,9 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.api_v1.company.schemas import SuccessMessage
-from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
-from vetwebapi.core.models import VetWork, AnimalInVetWork, DoctorInVetWork, CompanyInVetWork
+from api_v1.company.schemas import SuccessMessage
+from api_v1.drug.receipts.schemas import DrugInMovementIn
+from core.models import VetWork, AnimalInVetWork, DoctorInVetWork, CompanyInVetWork
 from .schemas import (
     Diseases, 
     VetWorkOut, 
@@ -26,7 +26,7 @@ from .serializers import (
     serialize_vetwork_detail
     )
 from .dependencies import vetwork_by_id, animal_in_vetwork_by_id
-from vetwebapi.core.database import db_manager
+from core.database import db_manager
 
 from . import crud
 from .reports.views import router as report_router

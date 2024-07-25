@@ -7,7 +7,7 @@ from sqlalchemy import select, desc
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from vetwebapi.core.models import (
+from core.models import (
     Disease, 
     VetWork, 
     DiseaseInVetWork, 
@@ -22,7 +22,7 @@ from vetwebapi.core.models import (
     DiagnosticMethod
     )
 
-from vetwebapi.api_v1.drug.receipts.schemas import DrugInMovementIn
+from api_v1.drug.receipts.schemas import DrugInMovementIn
 from .schemas import VaccinationIn, AnimalInVetWorkIn, CompanyInVetWorkIn, DiagnosticIn, AnimalInVetWorkUpdatePartial
 
 

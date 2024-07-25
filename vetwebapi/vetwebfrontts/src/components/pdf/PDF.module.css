@@ -1,0 +1,7 @@
+.btnWrap {
+  display: flex;
+  padding: 15px;
+}
+.btnWrap > button {
+  margin-right: 20px;
+}/*# sourceMappingURL=PDF.module.css.map */

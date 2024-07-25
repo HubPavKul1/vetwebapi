@@ -1,8 +1,9 @@
 migrate:
 	alembic upgrade head
 
+
 startapp:
-	uvicorn vetwebapi.main:app --reload
+	uvicorn main:app --reload
 
 start:
 	make migrate
@@ -14,24 +15,24 @@ test:
 lintmain:
 	black --check --diff vetwebapi/main.py
 	isort --check-only --profile black vetwebapi/main.py
-	flake8 vetwebapi/main.py
-	mypy vetwebapi/main.py
+	flake8 main.py
+	mypy main.py
 
 lintapi_1:
-	black --check --diff vetwebapi/api_v1/
-	isort --check-only --profile black vetwebapi/api_v1/
-	flake8 vetwebapi/api_v1/
-	mypy vetwebapi/api_v1/
+	black --check --diff api_v1/
+	isort --check-only --profile black api_v1/
+	flake8 api_v1/
+	mypy api_v1/
 
 lintapi:
-	flake8 vetwebapi/api_v1/
-	mypy vetwebapi/api_v1/
+	flake8 api_v1/
+	mypy api_v1/
 
 lintcore:
-	black --check --diff vetwebapi/core/
-	isort --check-only --profile black vetwebapi/core/
-	flake8 vetwebapi/core/
-	mypy vetwebapi/core/
+	black --check --diff core/
+	isort --check-only --profile black core/
+	flake8 core/
+	mypy core/
 
 linttests:
 	black --check --diff tests/

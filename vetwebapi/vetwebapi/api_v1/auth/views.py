@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi_users import FastAPIUsers
 
-from vetwebapi.core.models import User, auth_backend, get_user_manager
+from core.models import User, auth_backend, get_user_manager
 
 from .schemas import UserCreate, UserRead
 

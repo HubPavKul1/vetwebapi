@@ -1,4 +1,4 @@
-from vetwebapi.core.models import Drug
+from core.models import Drug
 
 from .schemas import DrugCard, DrugName, DrugSchema
 
