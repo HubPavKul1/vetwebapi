@@ -1,0 +1,18 @@
+server {
+
+  listen 3000;
+  server_name localhost;
+  # server_name 192.168.99.101;
+
+  root   /usr/share/nginx/html;
+
+  location / {
+    autoindex on;
+    
+    # index  index.html index.htm;
+    # try_files $uri $uri/ /index.html;
+  }
+
+  # include /etc/nginx/extra-conf.d/*.conf;
+
+}
