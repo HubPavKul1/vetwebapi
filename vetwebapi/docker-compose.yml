@@ -8,8 +8,6 @@ services:
       - ./vetwebapi/.env
     ports:
       - "8000:8000"
-    # volumes:
-    #   - ./blog_project/images/:/blog_project/images:rw
     depends_on:
       - db
     networks:
@@ -20,9 +18,7 @@ services:
     build: ./vetwebfrontts/
     stop_signal: SIGKILL
     ports:
-      - "3000:3000"
-    # volumes:
-    #   - ./blog_project/images/:/blog_project/images:rw
+      - "3000:5173"
     depends_on:
       - db
     networks:
@@ -35,8 +31,8 @@ services:
     build: ./vetwebfrontts/
     ports:
       - "80:80"
-    # volumes:
-    #   - ./nginx_from_image.conf:/etc/nginx/nginx.conf
+    volumes:
+      - ./nginx_from_image.conf:/etc/nginx/nginx.conf
     networks:
       - network
     depends_on:
