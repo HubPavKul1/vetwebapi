@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
 .btn-upload, .btn-nav, .btn-submit, .btn-large {
   padding: 0;
   border: none;

@@ -7,6 +7,6 @@ interface PageWrapperProps {
 
 export function PageWrapper({children}: PageWrapperProps) {
   return (
-    <Container className="h-full py-4 px-10 ">{children}</Container>
+    <Container className="w-screen p-5">{children}</Container>
   )
 }

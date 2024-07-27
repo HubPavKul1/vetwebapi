@@ -11,7 +11,7 @@ export default defineConfig({
     strictPort: true,
     port: 5173,
     proxy: {
-      "/api": "http://app:8000"
+      "/api": "http://192.168.99.101:8000"
     }
   },
   plugins: [react()],
