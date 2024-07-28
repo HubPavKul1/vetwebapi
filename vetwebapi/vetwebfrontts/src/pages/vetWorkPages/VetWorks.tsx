@@ -31,9 +31,7 @@ export function VetWorks({
   const { data, isLoading, error }: VetWorkData = useQuery(
     [{ queryKey }],
     () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.vetworks,
-    }
+    {select: ({ data }) => data?.vetworks}
   );
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
