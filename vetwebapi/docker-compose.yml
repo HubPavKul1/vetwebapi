@@ -13,31 +13,31 @@ services:
     networks:
       - network
 
-  frontend:
-    container_name: "vetwebfront"
-    build: ./vetwebfrontts/
-    stop_signal: SIGKILL
-    ports:
-      - "3000:5173"
-    depends_on:
-      - db
-    networks:
-      - network
+  # frontend:
+  #   container_name: "vetwebfront"
+  #   build: ./vetwebfrontts/
+  #   stop_signal: SIGKILL
+  #   ports:
+  #     - "3000:5173"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - network
 
 
-  nginx:
-    container_name: "nginx"
-    restart: always
-    build: ./vetwebfrontts/
-    ports:
-      - "80:80"
+  # nginx:
+  #   container_name: "nginx"
+  #   restart: always
+  #   build: ./vetwebfrontts/
+  #   ports:
+  #     - "80:80"
     # volumes:
     #   - ./nginx_from_image.conf:/etc/nginx/nginx.conf
-    networks:
-      - network
-    depends_on:
-      - app
-      - frontend
+    # networks:
+    #   - network
+    # depends_on:
+    #   - app
+    #   - frontend
 
   db:
     image: postgres:15.3-alpine3.18

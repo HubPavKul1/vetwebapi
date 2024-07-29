@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 
 import { FileUpload } from "../../FileUpload";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AppService } from "../../../app.service";
 
 interface CatalogCardFooterProps {
@@ -19,11 +19,12 @@ interface CatalogCardFooterProps {
 export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["delete item"], {
+  const { mutate } = useMutation({
+    mutationKey: ["delete item"],
     mutationFn: () => AppService.deleteItem(props.delUrl),
     onSuccess: () => {
       alert(`${props.cardTitle} успешно удалено!`);
-      queryClient.invalidateQueries([`${props.invQueryName}`]);
+      queryClient.invalidateQueries({queryKey: [`${props.invQueryName}`]});
     },
   });
 

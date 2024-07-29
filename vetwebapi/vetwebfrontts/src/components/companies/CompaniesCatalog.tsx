@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Catalog } from "../../components/Catalog";
 import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
 
@@ -27,9 +27,9 @@ export function CompaniesCatalog({
   invQueryName,
 }: CompaniesCatalogProps) {
   const { data }: CompaniesProps = useQuery(
-    [{ invQueryName }],
-    () => AppService.getAll(url),
     {
+      queryKey: [{ invQueryName }],
+      queryFn: () => AppService.getAll(url),
       select: ({ data }) => data?.companies,
     }
   );

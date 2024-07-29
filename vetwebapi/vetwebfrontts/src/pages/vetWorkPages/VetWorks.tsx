@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Catalog } from "../../components/Catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 
@@ -28,11 +28,11 @@ export function VetWorks({
   imgSrc,
   queryKey,
 }: VetWorksProps) {
-  const { data, isLoading, error }: VetWorkData = useQuery(
-    [{ queryKey }],
-    () => AppService.getAll(url),
-    {select: ({ data }) => data?.vetworks}
-  );
+  const { data, isLoading, error }: VetWorkData = useQuery({
+    queryKey: [{ queryKey }],
+    queryFn: () => AppService.getAll(url),
+    select: ({ data }) => data?.vetworks
+  });
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
