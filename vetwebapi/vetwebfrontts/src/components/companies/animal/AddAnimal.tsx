@@ -1,7 +1,7 @@
 import { AddAnimalForm } from "./AddAnimalForm";
 import { UploadAnimalForm } from "./UploadAnimalForm";
 
-import { MenuItem } from "../../MenuItem";
+import { MenuItem } from "../../menuItem";
 
 export function AddAnimal() {
   return (

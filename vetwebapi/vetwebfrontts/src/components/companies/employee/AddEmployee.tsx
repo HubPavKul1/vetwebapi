@@ -1,5 +1,5 @@
 import { AddEmployeeForm } from "./AddEmployeeForm";
-import { MenuItem } from "../../MenuItem";
+import { MenuItem } from "../../menuItem";
 
 export function AddEmployee() {
   return (

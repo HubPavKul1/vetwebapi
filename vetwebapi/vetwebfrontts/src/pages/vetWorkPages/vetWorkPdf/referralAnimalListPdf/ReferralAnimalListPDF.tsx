@@ -1,4 +1,4 @@
-import { PDF } from "../../../../components/PDF";
+import { PDF } from "../../../../components/pdf";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { ReferralAnimalListPDFBody } from "./ReferralAnimalListPDFBody";
 import { ReferralAnimalListPDFHeader } from "./ReferralAnimalListPDFHeader";

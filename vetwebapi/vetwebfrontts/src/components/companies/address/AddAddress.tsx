@@ -1,6 +1,6 @@
 import { AddAddressForm } from "./AddAddressForm";
 
-import { MenuItem } from "../../MenuItem";
+import { MenuItem } from "../../menuItem";
 
 export function AddAddress() {
   return (

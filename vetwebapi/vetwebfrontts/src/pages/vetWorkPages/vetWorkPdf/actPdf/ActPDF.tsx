@@ -1,5 +1,5 @@
 
-import { PDF } from "../../../../components/PDF";
+import { PDF } from "../../../../components/pdf";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { ActPDFBody } from "./ActPDFBody";
 import { ActPDFFooter } from "./ActPDFFooter";

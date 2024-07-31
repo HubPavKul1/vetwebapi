@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IDateRange } from "../../../interfaces/BaseInterface";
-import { Catalog } from "../../../components/Catalog";
+import { Catalog } from "../../../components/catalog";
 import { DiagnosticBetweenDateRange } from "./DiagnosticBetweenDateRange";
 import { DiagnosticReport } from "./DiagnosticReport";
 import { VaccinationReport } from "./VaccinationReport";

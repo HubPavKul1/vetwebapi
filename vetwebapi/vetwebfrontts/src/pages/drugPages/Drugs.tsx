@@ -1,11 +1,6 @@
-import { Row } from "react-bootstrap";
-
 import { useQuery } from "react-query";
-import { Catalog } from "../../components/Catalog";
-import { catalogItemData } from "../../components/data/CatalogItemData";
+import { Catalog } from "../../components/catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { DrugCard } from "../../components/drugs/drug/drugCard/DrugCard";
-import { CreateItem } from "../../components/CreateItem";
 import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
 import { IDrugCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";

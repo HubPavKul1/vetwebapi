@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Catalog } from "../../components/Catalog";
+import { Catalog } from "../../components/catalog";
 import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
 
 import { AppService } from "../../app.service";

@@ -1,4 +1,4 @@
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import { useState } from "react";
 
 import { FaCheck } from "react-icons/fa";

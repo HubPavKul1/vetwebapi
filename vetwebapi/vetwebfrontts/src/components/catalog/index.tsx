@@ -1,6 +1,6 @@
 import { Row } from "react-bootstrap";
 
-import { CreateItem } from "../CreateItem";
+import { CreateItem } from "../../components/createItem/";
 import { PageWrapper } from "../PageWrapper";
 import NoData from "../NoData";
 

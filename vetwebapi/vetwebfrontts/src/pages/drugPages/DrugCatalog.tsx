@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Catalog } from "../../components/Catalog";
+import { Catalog } from "../../components/catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";

@@ -1,4 +1,4 @@
-import { Menu } from "../MenuComponent";
+import { Menu } from "../menuComponent";
 import { AddCompanyToVetWork } from "../vetWorks/AddCompanyToVetWork";
 import { AddDrugToVetWork } from "../vetWorks/AddDrugToVetWork";
 import { CustomButton } from "../CustomButton";

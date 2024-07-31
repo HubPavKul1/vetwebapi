@@ -33,17 +33,15 @@ export function CreateCompanyForm({ url, invQueryName }: CreateCompanyFormProps)
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(
-    [{ invQueryName }],
-    (data: ICompanyCreate) => AppService.createItem(url, data),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["companies"]);
-        alert("Предприятие успешно добавлено!");
-        reset();
+  const { mutate } = useMutation({
+    mutationKey: [{ invQueryName }],
+    mutationFn: (data: ICompanyCreate) => AppService.createItem(url, data),
+    onSuccess: () => {
+        queryClient.invalidateQueries({queryKey: ["companies"]}),
+        alert("Предприятие успешно добавлено!"),
+        reset()
       },
-    }
-  );
+    });
 
   const createCompany: SubmitHandler<ICompanyCreate> = (data) => {
     mutate(data);

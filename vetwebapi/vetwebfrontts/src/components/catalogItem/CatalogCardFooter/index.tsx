@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 
-import { FileUpload } from "../../FileUpload";
+import { FileUpload } from "../../fileUpload";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AppService } from "../../../app.service";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Catalog } from "../../../../components/Catalog";
+import { Catalog } from "../../../../components/catalog";
 import { DrugMovementBetweenDateRange } from "../../../../components/drugs/drugReports/reportMenuItems/DrugMovementBetweenDateRange";
 import { IDateRange } from "../../../../interfaces/BaseInterface";
 import { DrugReport } from "../DrugReport";

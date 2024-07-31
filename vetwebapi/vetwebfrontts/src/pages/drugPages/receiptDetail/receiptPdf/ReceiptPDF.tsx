@@ -3,7 +3,7 @@ import { ReceiptPDFHeader } from "./ReceiptPDFHeader";
 import { ReceiptPDFBody } from "./ReceiptPDFBody";
 import { ReceiptPDFTable } from "./ReceiptPDFTable";
 import { ReceiptPDFFooter } from "./ReceiptPDFFooter";
-import { PDF } from "../../../../components/PDF";
+import { PDF } from "../../../../components/pdf";
 
 interface ReceiptPDFProps {
   setPdf: CallableFunction;

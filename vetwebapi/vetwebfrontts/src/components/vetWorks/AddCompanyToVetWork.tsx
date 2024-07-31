@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { MenuItem } from "../MenuItem";
+import { MenuItem } from "../menuItem";
 import { AddCompanyToVetWorkForm } from "./AddCompanyToVetWorkForm";
 
 export function AddCompanyToVetWork() {

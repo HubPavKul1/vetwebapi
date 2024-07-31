@@ -1,4 +1,4 @@
-import { Menu } from "../MenuComponent";
+import { Menu } from "../menuComponent";
 import { CustomButton } from "../CustomButton";
 
 interface ReportMenuProps {

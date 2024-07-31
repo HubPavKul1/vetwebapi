@@ -1,4 +1,4 @@
-import { PDF } from "../../../../components/PDF";
+import { PDF } from "../../../../components/pdf";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { Vet1BPDFBody } from "./Vet1BPDFBody";
 import { Vet1BPDFFooter } from "./Vet1BPDFFooter";
