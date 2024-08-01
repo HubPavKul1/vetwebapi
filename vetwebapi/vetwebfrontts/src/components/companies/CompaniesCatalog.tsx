@@ -1,15 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { Catalog } from "../../components/catalog";
 import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
 
 import { AppService } from "../../app.service";
-import { ICompany, ICompanyCard } from "../../interfaces/CompanyInterfaces";
+import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
+import { useGetData } from "../../hooks/useGetData";
 
-interface CompaniesProps {
-  data?: ICompany[];
-}
+
 
 interface CompaniesCatalogProps {
   url: string;
@@ -26,15 +24,11 @@ export function CompaniesCatalog({
   imgSrc,
   invQueryName,
 }: CompaniesCatalogProps) {
-  const { data }: CompaniesProps = useQuery(
-    {
-      queryKey: [{ invQueryName }],
-      queryFn: () => AppService.getAll(url),
-      select: ({ data }) => data?.companies,
-    }
-  );
 
-  if (!data) return <p>Загрузка ...</p>;
+  const {data, isLoading} = useGetData(invQueryName, url)
+
+  if (isLoading | !data) return <p>Загрузка ...</p>;
+
 
   return (
     <Catalog
@@ -42,10 +36,10 @@ export function CompaniesCatalog({
       btnTitle={btnTitle}
       cardsInRow={3}
       createForm={<CreateCompanyForm url={url} invQueryName={invQueryName} />}
-      dataLength={data.length}
+      dataLength={data.companies?.length}
     >
-      {data.length &&
-        data.map((company: ICompanyCard) => (
+      {data.companies?.length &&
+        data.companies.map((company: ICompanyCard) => (
           <CatalogItem
             key={company.id}
             delUrl={`/api/companies/${company.id}`}

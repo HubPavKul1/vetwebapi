@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
@@ -9,7 +8,7 @@ import {
   minLenErrorMessage,
 } from "../../ErrorMessages";
 import { CustomButton } from "../../CustomButton";
-import { AppService } from "../../../app.service";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 interface CreateCompanyFormProps {
   url: string;
@@ -31,17 +30,9 @@ export function CreateCompanyForm({ url, invQueryName }: CreateCompanyFormProps)
     mode: "onChange",
   });
 
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationKey: [{ invQueryName }],
-    mutationFn: (data: ICompanyCreate) => AppService.createItem(url, data),
-    onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ["companies"]}),
-        alert("Предприятие успешно добавлено!"),
-        reset()
-      },
-    });
+  const { mutate } = useCreateItem(invQueryName, url, "companies", "Предприятие успешно добавлено!", reset)
+
 
   const createCompany: SubmitHandler<ICompanyCreate> = (data) => {
     mutate(data);
