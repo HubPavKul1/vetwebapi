@@ -1,10 +1,10 @@
 
-import { useQuery } from "react-query";
 import { Catalog } from "../../components/catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/CreateDrugReceiptForm";
 import { IDrugMovement } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
+import { useGetData } from "../../hooks/useGetData";
 
 interface DrugReceiptsData {
   data?: IDrugMovement[];
@@ -15,14 +15,8 @@ interface DrugReceiptsData {
 export function DrugReceipts() {
   const url = "/api/drugs/receipts";
 
-  const { data, isLoading, error }: DrugReceiptsData = useQuery(
-    ["drugReceipts"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.drug_movements,
-    }
-  );
-
+  const { data, isLoading, error }: DrugReceiptsData = useGetData("drugReceipts", url);
+    
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (

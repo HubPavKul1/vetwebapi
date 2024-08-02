@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { Input } from "../Input";
 import { fieldRequiredMessage } from "../ErrorMessages";
@@ -34,19 +34,18 @@ export function ReportForm({
   });
 
  
-  const { mutate } = useMutation(
-    ["createReport"],
-    (dateRange: IDateRange) => AppService.createReport(url, dateRange),
-    {
-      onSuccess: (data, dateRange) => {
+  const { mutate } = useMutation({
+
+    mutationKey: ["createReport"],
+    mutationFn: (dateRange: IDateRange) => AppService.createReport(url, dateRange),
+    onSuccess: (data, dateRange) => {
         alert("Отчет успешно выполнен!");
         reset();
         setReportData(data);
         setDateRange(dateRange);
         setReportActive(true)
       },
-    }
-  );
+    });
 
   const createDrugReport: SubmitHandler<IDateRange> = (dateRange) => {
     mutate(dateRange);

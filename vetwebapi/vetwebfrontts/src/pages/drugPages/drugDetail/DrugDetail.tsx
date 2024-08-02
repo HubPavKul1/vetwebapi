@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
 import { Container, Row, Col } from "react-bootstrap";
 
 import styles from "./DrugDetail.module.scss";
-import { AppService } from "../../../app.service";
+
 import { IDrugDetail } from "../../../interfaces/DrugInterfaces";
+import { useGetDataById } from "../../../hooks/useGetDataById";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -15,13 +15,7 @@ export function DrugDetail() {
   const { id } = useParams();
   const url = `/api/drugs/${id}`;
 
-  const { isLoading, data }: DrugData = useQuery(
-    ["drug", id],
-    () => AppService.get(url),
-    {
-      enabled: !!id,
-    }
-  );
+  const { isLoading, data }: DrugData = useGetDataById("drug", url, id);
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 

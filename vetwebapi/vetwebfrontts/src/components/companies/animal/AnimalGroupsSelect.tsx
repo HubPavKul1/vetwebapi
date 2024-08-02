@@ -1,10 +1,10 @@
 import Select, { SingleValue } from 'react-select'
-import { useQuery } from "react-query";
 import { useState } from 'react';
 import { SpeciesSelect } from './SpeciesSelect';
 import { IOption } from '../../../interfaces/FormInterface';
 import { AppService } from '../../../app.service';
 import { IQueryData } from '../../../interfaces/BaseInterface';
+import { useGetData } from '../../../hooks/useGetData';
 
 
 
@@ -14,22 +14,18 @@ interface AnimalGroupsSelectProps {
 
 
 export function AnimalGroupsSelect({ typeOfFeedingId }: AnimalGroupsSelectProps) {
-    const [animalGroupId, setAnymalGroupId] = useState<string | undefined>()
+    const [animalGroupId, setAnimalGroupId] = useState<string | undefined>()
 
     const url = `/api/companies/${typeOfFeedingId}/animal_groups`
 
-    const { data, isLoading }: IQueryData = useQuery(['animal_groups'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.animal_groups
-    }
-);
+    const { data, isLoading }: IQueryData = useGetData('animal_groups', url);
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
     const options = data.map(group => ({ value: group.id, label: group.name }))
 
     function handleSelect(data: SingleValue<IOption>) {
-        setAnymalGroupId(data?.value?.toString());
+        setAnimalGroupId(data?.value?.toString());
     }
 
     return (

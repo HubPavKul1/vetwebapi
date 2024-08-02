@@ -4,6 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../interfaces/FormInterface';
 import { AppService } from '../../app.service';
 import { IEmployee } from '../../interfaces/EmployeeInterfaces';
+import { useGetData } from '../../hooks/useGetData';
 
 
 interface IDoctorSelectProps {
@@ -17,11 +18,7 @@ export function DoctorSelect() {
 
     const url = "/api/companies/doctors"
 
-    const { data, isLoading }: IDoctorSelectProps = useQuery(['doctors'], () => AppService.getAll(url), 
-    {
-        select: ({data}) => data?.employees
-    }
-);
+    const { data, isLoading }: IDoctorSelectProps = useGetData("doctors", url)
     
     const { control } = useFormContext()
 

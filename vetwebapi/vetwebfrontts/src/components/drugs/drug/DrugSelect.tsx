@@ -1,21 +1,16 @@
 import Select from "react-select";
-import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { AppService } from "../../../app.service";
+
 import { IQueryData } from "../../../interfaces/BaseInterface";
+import { useGetData } from "../../../hooks/useGetData";
 
 
 export function DrugSelect() {
 
     const url = "/api/drugs/drug_names"
 
-    const { data, isLoading }: IQueryData = useQuery(['drugNames'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.drugs,
-    }
-);
-
+    const { data, isLoading }: IQueryData = useGetData('drugNames', url);
     const { control } = useFormContext()
 
     if (isLoading || !data) return <p>...Загрузка</p>;

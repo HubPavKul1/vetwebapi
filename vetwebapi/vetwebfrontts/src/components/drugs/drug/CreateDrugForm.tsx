@@ -1,12 +1,11 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 
 import { CustomButton } from "../../CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../../ErrorMessages";
 import { IDrugCreate } from "../../../interfaces/DrugInterfaces";
-import { DrugService } from "../drugs.service";
+
 import { DiseaseSelect } from "./DiseaseSelect";
 import { BudgetSelect } from "./BudgetSelect";
 import { DrugManufacturerSelect } from "./DrugManufacturerSelect";
@@ -15,6 +14,7 @@ import { DisposalMethodSelect } from "./DisposalMethodSelect";
 import { DosageSelect } from "./DosageSelect";
 import { PlaceOfAdministrationSelect } from "./PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "./AdministrationMethodSelect";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 export function CreateDrugForm() {
   const inputItems: FormInputProps<IDrugCreate>[] = [
@@ -40,17 +40,11 @@ export function CreateDrugForm() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["create drug"], {
-    mutationFn: (data: IDrugCreate) => DrugService.createDrug(data),
-    onSuccess: () => {
-      alert("Препарат успешно добавлен!");
-      queryClient.invalidateQueries(["drugs"]);
-      reset();
-    },
-  });
-
+  const url = "/api/drugs";
+  
+  const { mutate } = useCreateItem("create drug", url, "drugs", "Препарат успешно добавлен!", reset);
+   
   const createDrug: SubmitHandler<IDrugCreate> = (data) => {
     mutate(data);
   };

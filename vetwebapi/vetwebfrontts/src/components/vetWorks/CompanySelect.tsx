@@ -1,10 +1,10 @@
 import Select, { SingleValue } from 'react-select'
 
-import { useQuery } from "react-query";
 import { IOption } from '../../interfaces/FormInterface';
-import { AppService } from '../../app.service';
+
 import { ICompany } from '../../interfaces/CompanyInterfaces';
 import { Controller, useFormContext } from 'react-hook-form';
+import { useGetData } from '../../hooks/useGetData';
 
 
 
@@ -17,11 +17,8 @@ interface CompaniesProps {
 export function CompanySelect() {
     
     const url = "/api/companies/"
-    const { data, isLoading }: CompaniesProps = useQuery(['companies'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.companies
-    }
-)
+    const { data, isLoading }: CompaniesProps = useGetData('companies', url);
+
 
     const { control } = useFormContext()
 

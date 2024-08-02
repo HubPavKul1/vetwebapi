@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { useForm } from "react-hook-form";
-import { useQueryClient, useMutation } from "react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import styles from "./FileUpload.module.scss";
 import { Container } from "react-bootstrap";
@@ -26,7 +26,8 @@ export function FileUpload({
   const { reset } = useForm<FileList>();
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation([{ mutationName }], {
+  const { mutate } = useMutation({
+    mutationKey: [ mutationName ], 
     mutationFn: async (data: FormData) =>
       await axios
         .post(uploadUrl, data)
@@ -34,7 +35,7 @@ export function FileUpload({
         .catch((err) => console.log(err)),
     onSuccess: () => {
       alert("Файл успешно загружен!");
-      queryClient.invalidateQueries([{ invQueryName }]);
+      queryClient.invalidateQueries({queryKey: [invQueryName]});
       reset();
     },
   });

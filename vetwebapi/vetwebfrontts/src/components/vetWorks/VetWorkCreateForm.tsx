@@ -1,12 +1,10 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 
 import { CustomButton } from "../CustomButton";
 import { Input } from "../Input";
 import { FormInputProps } from "../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../ErrorMessages";
 
-import { AppService } from "../../app.service";
 import { IVetworkCreate } from "../../interfaces/VetWorkInterfaces";
 import { ClinicSelect } from "./ClinicSelect";
 import { DiseaseSelect } from "../drugs/drug/DiseaseSelect";
@@ -16,6 +14,7 @@ import { BiomaterialsSelect } from "./BiomaterialsSelect";
 import { BiomaterialFixationsSelect } from "./BiomaterialFixationSelect";
 import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
+import { useCreateItem } from "../../hooks/useCreateItem";
 
 interface VetWorkCreateFormProps {
   url: string;
@@ -37,17 +36,9 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation(["create vetWork"], {
-    mutationFn: (data: IVetworkCreate) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Мероприятие успешно добавлено!");
-      queryClient.invalidateQueries([{ queryKey }]);
-      reset();
-    },
-  });
-
+  
+  const { mutate } = useCreateItem("create vetWork", url, queryKey, "Мероприятие успешно добавлено!", reset);
+    
   const createVetWork: SubmitHandler<IVetworkCreate> = (data) => {
     mutate(data);
   };

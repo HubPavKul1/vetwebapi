@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
 
 import { AppService } from "../../../app.service";
 import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
@@ -9,6 +8,7 @@ import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
 import { ReceiptPageMenu } from "../../../components/menu/ReceiptPageMenu";
 import { ReportPage } from "../../../components/ReportPage";
 import { drugReceiptHeaders } from "../../../Constants";
+import { useGetDataById } from "../../../hooks/useGetDataById";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -20,13 +20,8 @@ export function ReceiptDetail() {
   const { id } = useParams();
   const url = `/api/drugs/receipts/${id}`;
 
-  const { isLoading, data }: ReceiptData = useQuery(
-    ["receipt", id],
-    () => AppService.get(url),
-    {
-      enabled: !!id,
-    }
-  );
+  const { isLoading, data }: ReceiptData = useGetDataById("receipt", url, id);
+
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 

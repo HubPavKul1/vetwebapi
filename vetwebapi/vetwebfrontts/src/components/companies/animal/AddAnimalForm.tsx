@@ -1,5 +1,4 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 import { TypesOfFeedingSelect } from "./TypeOfFeedingSelect";
 import { IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
 import { UsageTypesSelect } from "./UsageTypesSelect";
@@ -12,7 +11,7 @@ import {
   minLenErrorMessage,
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
-import { AppService } from "../../../app.service";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 export function AddAnimalForm() {
   const { id } = useParams();
@@ -42,16 +41,9 @@ export function AddAnimalForm() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
+  
+  const { mutate } = useCreateItem("create animal", url, "company", "Животное успешно добавлено!", reset)
 
-  const { mutate } = useMutation(["create animal"], {
-    mutationFn: (data: IAnimalCreate) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Животное успешно добавлено!");
-      queryClient.invalidateQueries(["company", id]);
-      reset();
-    },
-  });
 
   const createAnimal: SubmitHandler<IAnimalCreate> = (data) => {
     mutate(data);

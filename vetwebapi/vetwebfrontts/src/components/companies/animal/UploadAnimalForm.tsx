@@ -1,6 +1,6 @@
 import { MouseEventHandler, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 import { CustomButton } from "../../CustomButton";
@@ -14,11 +14,12 @@ export function UploadAnimalForm() {
   const { reset } = useForm<FileList>();
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["upload animals"], {
+  const { mutate } = useMutation({
+    mutationKey: ["upload animals"], 
     mutationFn: (data: FormData) => AppService.uploadFile(url, data),
     onSuccess: () => {
       alert("Животные успешно добавлены!");
-      queryClient.invalidateQueries(["company", id]);
+      queryClient.invalidateQueries({queryKey: ["company", id]});
       reset();
     },
   });

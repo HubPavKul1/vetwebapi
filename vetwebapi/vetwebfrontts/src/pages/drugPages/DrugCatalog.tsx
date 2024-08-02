@@ -1,10 +1,10 @@
-import { useQuery } from "react-query";
 import { Catalog } from "../../components/catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
 import { CreateCatalogDrugForm } from "../../components/drugs/drug/CreateCatalogDrugForm";
 import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogDrugCardBody";
+import { useGetData } from "../../hooks/useGetData";
 
 interface DrugCatalogData {
   data?: IDrugCatalogCard[];
@@ -15,13 +15,8 @@ interface DrugCatalogData {
 export function DrugCatalog() {
   const url = "/api/drugs/catalog";
 
-  const { data, isLoading, error }: DrugCatalogData = useQuery(
-    ["drugCatalog"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.catalog_drugs,
-    }
-  );
+  const { data, isLoading }: DrugCatalogData = useGetData("drugCatalog", url);
+    
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 

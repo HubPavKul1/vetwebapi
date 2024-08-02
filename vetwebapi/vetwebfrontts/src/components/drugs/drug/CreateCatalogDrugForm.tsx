@@ -1,5 +1,4 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 
 import { CustomButton } from "../../CustomButton";
 import { Input } from "../../Input";
@@ -7,8 +6,8 @@ import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../../ErrorMessages";
 import { IDrugCatalogCreate } from "../../../interfaces/DrugInterfaces";
 
-import { AppService } from "../../../app.service";
 import { DrugSelect } from "./DrugSelect";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 export function CreateCatalogDrugForm() {
   const inputItems: FormInputProps<IDrugCatalogCreate>[] = [
@@ -36,16 +35,15 @@ export function CreateCatalogDrugForm() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation(["create catalogDrug"], {
-    mutationFn: (data: IDrugCatalogCreate) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Препарат успешно добавлен!");
-      queryClient.invalidateQueries(["drugCatalog"]);
-      reset();
-    },
-  });
+  
+  const { mutate } = useCreateItem("create catalogDrug", url, "drugCatalog", "Препарат успешно добавлен!", reset);
+  //   mutationFn: (data: IDrugCatalogCreate) => AppService.createItem(url, data),
+  //   onSuccess: () => {
+  //     alert("Препарат успешно добавлен!");
+  //     queryClient.invalidateQueries(["drugCatalog"]);
+  //     reset();
+  //   },
+  // });
 
   const createCatalogDrug: SubmitHandler<IDrugCatalogCreate> = (data) => {
     mutate(data);

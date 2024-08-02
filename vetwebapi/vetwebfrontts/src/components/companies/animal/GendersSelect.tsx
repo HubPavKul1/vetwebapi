@@ -1,9 +1,9 @@
 import Select from 'react-select';
-import { useQuery } from "react-query";
+
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
+import { useGetData } from '../../../hooks/useGetData';
 import { IQueryData } from '../../../interfaces/BaseInterface';
-import { AppService } from '../../../app.service';
 
 
 interface GendersSelectProps {
@@ -14,11 +14,7 @@ export function GendersSelect({ speciesId }: GendersSelectProps) {
 
     const url = `/api/companies/${speciesId}/genders`
 
-    const { data, isLoading }: IQueryData = useQuery(['genders'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.genders
-    }
-)
+    const { data, isLoading }: IQueryData = useGetData('genders', url);
 
     const { control } = useFormContext()
 

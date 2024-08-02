@@ -1,9 +1,10 @@
 import Select from 'react-select';
-import { useQuery } from "react-query";
+
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../interfaces/FormInterface';
-import { AppService } from '../../app.service';
+
 import { ICompany } from '../../interfaces/CompanyInterfaces';
+import { useGetData } from '../../hooks/useGetData';
 
 
 interface ILabsSelectProps {
@@ -17,12 +18,8 @@ export function LabsSelect() {
 
     const url = "/api/companies/labs"
 
-    const { data, isLoading }: ILabsSelectProps = useQuery(['labs'], () => AppService.getAll(url), 
-    {
-        select: ({data}) => data?.companies
-    }
-);
-    
+    const { data, isLoading }: ILabsSelectProps = useGetData('labs', url); 
+  
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { CustomButton } from "../../CustomButton";
 import { useParams } from "react-router-dom";
 import { AppService } from "../../../app.service";
@@ -10,6 +10,7 @@ import { AnimalFormItem } from "./AnimalFormItem";
 import { useState } from "react";
 import { IAnimalInVetwork, IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useGetDataById } from "../../../hooks/useGetDataById";
 
 
 interface AddAnimalsToVetWorkFormProps {
@@ -46,7 +47,8 @@ export function AddAnimalsToVetWorkForm({
     mode: "onChange",
   });
 
-  const { mutate } = useMutation(["add animals"], {
+  const { mutate } = useMutation({
+    mutationKey: ["add animals"], 
     mutationFn: (data: IAnimalInVetworkIn[]) =>
       AppService.createItem(url, data),
     onSuccess: () => {
@@ -56,13 +58,8 @@ export function AddAnimalsToVetWorkForm({
     },
   });
 
-  const { isLoading, data }: CompanyData = useQuery(
-    ["vetworkCompany", id],
-    () => AppService.get(companyUrl),
-    {
-      enabled: !!id,
-    }
-  );
+  const { isLoading, data }: CompanyData = useGetDataById("vetworkCompany", companyUrl, id);
+    
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 

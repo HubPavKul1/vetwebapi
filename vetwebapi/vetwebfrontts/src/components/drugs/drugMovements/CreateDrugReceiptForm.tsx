@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../../ErrorMessages";
 import { CustomButton } from "../../CustomButton";
 import { IDrugMovementCreate } from "../../../interfaces/DrugInterfaces";
-import { AppService } from "../../../app.service";
+
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 export function CreateDrugReceiptForm() {
   const url = "/api/drugs/receipts";
@@ -24,20 +24,9 @@ export function CreateDrugReceiptForm() {
     mode: "onChange",
   });
 
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation(
-    ["createReceipt"],
-    (data: IDrugMovementCreate) => AppService.createItem(url, data),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["drugReceipts"]);
-        alert("Поступление успешно добавлено!");
-        reset();
-      },
-    }
-  );
-
+ 
+  const { mutate } = useCreateItem("createReceipt", url, "drugReceipts", "Поступление успешно добавлено!", reset);
+   
   const createReceipt: SubmitHandler<IDrugMovementCreate> = (data) => {
     mutate(data);
   };

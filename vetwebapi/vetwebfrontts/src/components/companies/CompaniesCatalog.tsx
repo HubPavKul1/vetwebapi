@@ -1,4 +1,4 @@
-import { Catalog } from "../../components/catalog";
+import { Catalog } from "../catalog";
 import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
 
 import { AppService } from "../../app.service";
@@ -6,6 +6,7 @@ import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
 import { useGetData } from "../../hooks/useGetData";
+
 
 
 
@@ -24,11 +25,15 @@ export function CompaniesCatalog({
   imgSrc,
   invQueryName,
 }: CompaniesCatalogProps) {
+  const { data, isLoading } = useGetData(invQueryName, url);
 
-  const {data, isLoading} = useGetData(invQueryName, url)
-
-  if (isLoading | !data) return <p>Загрузка ...</p>;
-
+  if (isLoading && !data) return (
+    <div className="py-20 text-center">
+      <h4 className="text-3xl">Загрузка...</h4>
+    </div>
+    
+  )
+    
 
   return (
     <Catalog
@@ -36,9 +41,11 @@ export function CompaniesCatalog({
       btnTitle={btnTitle}
       cardsInRow={3}
       createForm={<CreateCompanyForm url={url} invQueryName={invQueryName} />}
-      dataLength={data.companies?.length}
+      dataLength={data && data.companies && data.companies.length}
     >
-      {data.companies?.length &&
+      {data &&
+        data.companies &&
+        data.companies.length &&
         data.companies.map((company: ICompanyCard) => (
           <CatalogItem
             key={company.id}

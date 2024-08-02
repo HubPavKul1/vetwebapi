@@ -1,11 +1,12 @@
 import Select from 'react-select'
 import { useState } from 'react';
-import { useQuery } from "react-query";
+
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { GendersSelect } from './GendersSelect';
 import { IQueryData } from '../../../interfaces/BaseInterface';
-import { AppService } from '../../../app.service';
+
+import { useGetData } from '../../../hooks/useGetData';
 
 
 interface SpeciesSelectProps {
@@ -19,11 +20,7 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
 
     const url = `/api/companies/${animalGroupId}/species`
 
-    const { data, isLoading }: IQueryData = useQuery(['species'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.species
-    }
-);
+    const { data, isLoading }: IQueryData = useGetData('species', url);
 
     if (isLoading || !data) return <p>Загрузка ...</p>;
 

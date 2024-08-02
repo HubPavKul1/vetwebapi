@@ -6,6 +6,7 @@ import { CompanyPageMenu } from "../../components/menu/CompanyPageMenu";
 import { AppService } from "../../app.service";
 import { ICompanyDetail } from "../../interfaces/CompanyInterfaces";
 import { PageDetail } from "../../components/PageDetail";
+import { useGetDataById } from "../../hooks/useGetDataById";
 
 interface CompanyData {
   data?: ICompanyDetail;
@@ -16,13 +17,7 @@ export function CompanyDetail() {
   const { id } = useParams();
   const url = `/api/companies/${id}`;
 
-  const { isLoading, data }: CompanyData = useQuery(
-    ["company", id],
-    () => AppService.get(url),
-    {
-      enabled: !!id,
-    }
-  );
+  const { isLoading, data }: CompanyData = useGetDataById("company", url, id);
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 

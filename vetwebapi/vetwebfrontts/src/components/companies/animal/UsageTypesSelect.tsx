@@ -1,9 +1,9 @@
 import Select from 'react-select'
-import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { IQueryData } from '../../../interfaces/BaseInterface';
-import { AppService } from '../../../app.service';
+
+import { useGetData } from '../../../hooks/useGetData';
 
 
 
@@ -11,11 +11,7 @@ export function UsageTypesSelect() {
 
     const url = "/api/companies/usage_types"
 
-    const { data, isLoading }: IQueryData = useQuery(['usage_types'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.usage_types,
-    }
-);
+    const { data, isLoading }: IQueryData = useGetData('usage_types', url);
 
     const { control } = useFormContext()
 

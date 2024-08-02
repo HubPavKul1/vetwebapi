@@ -1,10 +1,10 @@
 import Select from 'react-select';
 
-import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../../interfaces/FormInterface';
 import { IQueryData } from '../../../interfaces/BaseInterface';
-import { AppService } from '../../../app.service';
+
+import { useGetData } from '../../../hooks/useGetData';
 
 
 
@@ -12,12 +12,8 @@ export function AccountingUnitSelect() {
 
     const url = "/api/drugs/accounting_units"
  
-    const { data, isLoading}: IQueryData = useQuery(['accountingUnits'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.accounting_units,
-    }
-);
-
+    const { data, isLoading}: IQueryData = useGetData('accountingUnits', url);
+   
     const { control } = useFormContext()
     if (isLoading || !data) return <p>...Загрузка</p>;
 

@@ -1,19 +1,13 @@
-import { useQuery } from "react-query";
-
 import { IQueryData } from "../../../interfaces/BaseInterface";
-import { AppService } from "../../../app.service";
+
 import { CustomSelect } from "../../CustomSelect";
+import { useGetData } from "../../../hooks/useGetData";
 
 export function BudgetSelect() {
   const url = "/api/drugs/budgets";
 
-  const { data, isLoading }: IQueryData = useQuery(
-    ["budgets"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.budgets,
-    }
-  );
+  const { data, isLoading }: IQueryData = useGetData("budgets", url);
+   
 
   if (isLoading || !data) return <p>...Загрузка</p>;
 
