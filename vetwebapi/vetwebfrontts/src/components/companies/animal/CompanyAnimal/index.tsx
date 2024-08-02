@@ -6,6 +6,7 @@ import { AppService } from "../../../../app.service";
 import { Col, Row } from "react-bootstrap";
 
 import styles from "./CompanyAnimal.module.scss"
+import { useDeleteItem } from "../../../../hooks/useDeleteItem";
 
 interface CompanyAnimalProps {
   animal: IAnimal;
@@ -17,15 +18,9 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
 
   const url = `/api/companies/${id}/animals/${animal.id}`;
 
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["delete animal"], {
-    mutationFn: () => AppService.deleteItem(url),
-    onSuccess: () => {
-      alert("Животное успешно удалено!");
-      queryClient.invalidateQueries(["company", id]);
-    },
-  });
+  const { mutate } = useDeleteItem("delete animal", url, "company", "Животное успешно удалено!", id);
+  
 
   const deleteAnimal = () => {
     mutate();

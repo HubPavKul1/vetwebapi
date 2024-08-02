@@ -18,13 +18,13 @@ export function LabsSelect() {
 
     const url = "/api/companies/labs"
 
-    const { data, isLoading }: ILabsSelectProps = useGetData('labs', url); 
+    const { data, isLoading } = useGetData('labs', url); 
   
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const options = data.map(company => ({ value: company.id, label: company.short_name }))
+    const options = data.labs && data.labs.map(company => ({ value: company.id, label: company.short_name }))
 
 
     const getValue = (value: number) =>

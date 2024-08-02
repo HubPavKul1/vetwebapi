@@ -1,25 +1,19 @@
-import { useQuery } from "react-query";
 
-import { IQueryData } from "../../../interfaces/BaseInterface";
-import { AppService } from "../../../app.service";
 import { CustomSelect } from "../../CustomSelect";
+import { useGetData } from "../../../hooks/useGetData";
 
 export function DosageSelect() {
   const url = "/api/drugs/dosages";
 
-  const { data, isLoading }: IQueryData = useQuery(
-    ["dosages"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.dosages,
-    }
-  );
+  const { data, isLoading } = useGetData("dosages", url);
+
 
   if (isLoading || !data) return <p>...Загрузка</p>;
 
+
   return (
     <CustomSelect
-      data={data}
+      data={data.dosages}
       fieldName="dosage_id"
       placeholder="Выберите дозировку *"
     />

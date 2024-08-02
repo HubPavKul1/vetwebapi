@@ -12,12 +12,12 @@ export function AccountingUnitSelect() {
 
     const url = "/api/drugs/accounting_units"
  
-    const { data, isLoading}: IQueryData = useGetData('accountingUnits', url);
+    const { data, isLoading} = useGetData('accountingUnits', url);
    
     const { control } = useFormContext()
     if (isLoading || !data) return <p>...Загрузка</p>;
 
-    const options = data.map(unit => ({ value: unit.id, label: unit.name }))
+    const options = data.accounting_units && data.accounting_units.map(unit => ({ value: unit.id, label: unit.name }))
 
 
     const getValue = (value: number) =>

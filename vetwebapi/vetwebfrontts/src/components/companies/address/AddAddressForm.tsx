@@ -4,7 +4,6 @@ import {
   SubmitHandler,
   RegisterOptions,
 } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 import { RegionsSelect } from "./RegionsSelect";
 import { IAddressIn } from "../../../interfaces/AddressInterfaces";
 import { CustomButton } from "../../CustomButton";
@@ -16,7 +15,7 @@ import {
   minLenErrorMessage,
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
-import { AppService } from "../../../app.service";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 export function AddAddressForm() {
   const { id } = useParams();
@@ -57,16 +56,8 @@ export function AddAddressForm() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["create address"], {
-    mutationFn: (data: IAddressIn) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Адрес успешно добавлен!");
-      queryClient.invalidateQueries(["company", id]);
-      reset();
-    },
-  });
+  const { mutate } = useCreateItem("create address", url, "company", "Адрес успешно добавлен!", reset, id);
 
   const createAddress: SubmitHandler<IAddressIn> = (data) => {
     mutate(data);

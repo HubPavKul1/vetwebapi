@@ -1,25 +1,16 @@
-import { useQuery } from "react-query";
-
-import { AppService } from "../../../app.service";
-import { IQueryData } from "../../../interfaces/BaseInterface";
 import { CustomSelect } from "../../CustomSelect";
+import { useGetData } from "../../../hooks/useGetData";
 
 export function PositionsSelect() {
   const url = "/api/companies/positions";
 
-  const { data, isLoading }: IQueryData = useQuery(
-    ["positions"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.positions,
-    }
-  );
-
+  const { data, isLoading } = useGetData("positions", url);
+ 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
     <CustomSelect
-      data={data}
+      data={data.positions}
       fieldName="position_id"
       placeholder="Выберите должность *"
     />

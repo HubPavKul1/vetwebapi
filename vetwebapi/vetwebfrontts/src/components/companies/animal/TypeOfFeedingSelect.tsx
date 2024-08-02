@@ -12,11 +12,11 @@ export function TypesOfFeedingSelect() {
     const [typeOfFeedingId, setTypeOfFeedingId] = useState<string | undefined>()
 
     const url = "/api/companies/types_of_feeding"
-    const { data, isLoading }: IQueryData = useGetData('types_of_feeding', url);
+    const { data, isLoading } = useGetData('types_of_feeding', url);
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const options = data.map(item => ({ value: item.id, label: item.name }))
+    const options = data.types_of_feeding && data.types_of_feeding.map(item => ({ value: item.id, label: item.name }))
 
     function handleSelect(data: SingleValue<IOption>) {
         setTypeOfFeedingId(data?.value.toString());

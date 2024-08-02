@@ -2,7 +2,6 @@ import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 
-import { IQueryData } from "../../../interfaces/BaseInterface";
 import { useGetData } from "../../../hooks/useGetData";
 
 
@@ -10,12 +9,12 @@ export function DrugSelect() {
 
     const url = "/api/drugs/drug_names"
 
-    const { data, isLoading }: IQueryData = useGetData('drugNames', url);
+    const { data, isLoading } = useGetData('drugNames', url);
     const { control } = useFormContext()
 
     if (isLoading || !data) return <p>...Загрузка</p>;
     
-    const options = data.map(drug=>({value: drug.id, label: drug.name}))
+    const options = data.drugs && data.drugs.map(drug=>({value: drug.id, label: drug.name}))
     
     // const loadOptions = (searchValue: string, callback: CallableFunction) => {
     //     setTimeout(() => {

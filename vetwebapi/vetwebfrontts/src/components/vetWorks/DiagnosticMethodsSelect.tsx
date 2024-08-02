@@ -13,7 +13,7 @@ export function DiagnosticMethodsSelect() {
 
   return (
     <CustomSelect
-      data={data}
+      data={data.diagnostic_methods}
       fieldName="diagnostic_method_id"
       placeholder="метод диагностики"
     />

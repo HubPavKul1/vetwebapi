@@ -18,13 +18,13 @@ export function DoctorSelect() {
 
     const url = "/api/companies/doctors"
 
-    const { data, isLoading }: IDoctorSelectProps = useGetData("doctors", url)
+    const { data, isLoading } = useGetData("doctors", url)
     
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const options = data.map(employee => ({ value: employee.id, label: employee.fullname }))
+    const options = data.employees && data.employees.map(employee => ({ value: employee.id, label: employee.fullname }))
 
 
     const getValue = (value: number) =>

@@ -1,10 +1,8 @@
 import Select, { SingleValue } from 'react-select';
-import { useQuery } from "react-query";
 import { useState } from 'react';
 import { StreetsSelect } from './StreetsSelect';
 import { IOption } from '../../../interfaces/FormInterface';
-import { AppService } from '../../../app.service';
-import { IQueryData } from '../../../interfaces/BaseInterface';
+import { useGetData } from '../../../hooks/useGetData';
 
 interface CitiesSelectProps {
     districtId: string;
@@ -15,14 +13,11 @@ interface CitiesSelectProps {
 export function CitiesSelect({districtId}: CitiesSelectProps) {
     const [cityId, setCityId] = useState<string | undefined>();
     const url = `/api/companies/districts/${districtId}/cities`
-    const { data, isLoading }: IQueryData = useQuery(['cities'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.cities
-    }
-);
+    const { data, isLoading } = useGetData('cities', url);
+
    
     if(isLoading || !data) return <p>Загрузка ...</p>;
-    const options = data.map(city=>({value: city.id, label: city.name}));
+    const options = data.cities && data.cities.map(city=>({value: city.id, label: city.name}));
     
     function handleSelect(data: SingleValue<IOption>) {
         setCityId(data?.value?.toString());

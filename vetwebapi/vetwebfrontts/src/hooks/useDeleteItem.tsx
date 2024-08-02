@@ -1,15 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { AppService } from "../app.service"
-import { UseFormReset } from "react-hook-form"
 
 
 
-export function useCreateItem(
+export function useDeleteItem(
   mutationKey: string,
   url: string,
   queryKey: string,
   alertMessage: string,
-  reset: UseFormReset<TFieldValues>,
   id?: string
 ) {
 
@@ -17,17 +15,14 @@ export function useCreateItem(
 
   const {mutate} = useMutation({
         mutationKey: [mutationKey],
-        mutationFn: (data: object) => AppService.createItem(url, data),
+        mutationFn: () => AppService.deleteItem(url),  
         onSuccess: () => {
-          queryClient.invalidateQueries({queryKey: !id? [queryKey]: [queryKey, id]}),
-          alert(alertMessage),
-          reset()
+          queryClient.invalidateQueries({queryKey: [queryKey, id]}),
+          alert(alertMessage)
           
         }
 
     })
-
-  
 
   return ({mutate})
 }

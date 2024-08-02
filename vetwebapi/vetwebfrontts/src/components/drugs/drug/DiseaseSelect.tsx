@@ -1,10 +1,9 @@
-import AsyncSelect from "react-select/async"
-import { useQuery } from "react-query";
+import AsyncSelect from "react-select/async";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { AppService } from "../../../app.service";
 import { IQueryData } from "../../../interfaces/BaseInterface";
 import { OnChangeValue } from "react-select";
+import { useGetData } from "../../../hooks/useGetData";
 
 
 interface DiseaseSelectProps {
@@ -15,17 +14,14 @@ export function DiseaseSelect({isMulti}: DiseaseSelectProps) {
 
     const url = "/api/vetwork/diseases"
 
-    const { data, isLoading }: IQueryData = useQuery(['diseases'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.diseases,
-    }
-);
+    const { data, isLoading } = useGetData('diseases', url);
+    
 
     const { control } = useFormContext()
 
     if (isLoading || !data) return <p>...Загрузка</p>;
     
-    const options = data.map(disease=>({value: disease.id, label: disease.name}))
+    const options = data.diseases && data.diseases.map(disease=>({value: disease.id, label: disease.name}))
     
     const loadOptions = (searchValue: string, callback: CallableFunction) => {
         setTimeout(() => {

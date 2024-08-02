@@ -1,9 +1,7 @@
-import Select, { SingleValue } from 'react-select'
+import Select, { SingleValue } from 'react-select';
 import { useState } from 'react';
 import { SpeciesSelect } from './SpeciesSelect';
 import { IOption } from '../../../interfaces/FormInterface';
-import { AppService } from '../../../app.service';
-import { IQueryData } from '../../../interfaces/BaseInterface';
 import { useGetData } from '../../../hooks/useGetData';
 
 
@@ -18,11 +16,11 @@ export function AnimalGroupsSelect({ typeOfFeedingId }: AnimalGroupsSelectProps)
 
     const url = `/api/companies/${typeOfFeedingId}/animal_groups`
 
-    const { data, isLoading }: IQueryData = useGetData('animal_groups', url);
+    const { data, isLoading } = useGetData('animal_groups', url);
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const options = data.map(group => ({ value: group.id, label: group.name }))
+    const options = data.animal_groups && data.animal_groups.map(group => ({ value: group.id, label: group.name }))
 
     function handleSelect(data: SingleValue<IOption>) {
         setAnimalGroupId(data?.value?.toString());

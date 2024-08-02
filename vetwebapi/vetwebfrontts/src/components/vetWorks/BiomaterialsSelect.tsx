@@ -1,25 +1,17 @@
-import { useQuery } from "react-query";
 
-import { AppService } from "../../app.service";
-import { IQueryData } from "../../interfaces/BaseInterface";
 import { CustomSelect } from "../CustomSelect";
+import { useGetData } from "../../hooks/useGetData";
 
 export function BiomaterialsSelect() {
   const url = "/api/vetwork/biomaterials";
 
-  const { data, isLoading }: IQueryData = useQuery(
-    ["biomaterials"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.biomaterials,
-    }
-  );
-
+  const { data, isLoading } = useGetData("biomaterials", url);
+   
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
     <CustomSelect
-      data={data}
+      data={data.biomaterials}
       fieldName="biomaterial_id"
       placeholder="Выберите биоматериал"
     />

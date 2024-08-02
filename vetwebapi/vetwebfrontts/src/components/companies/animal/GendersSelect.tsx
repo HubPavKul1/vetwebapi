@@ -3,7 +3,6 @@ import Select from 'react-select';
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 import { useGetData } from '../../../hooks/useGetData';
-import { IQueryData } from '../../../interfaces/BaseInterface';
 
 
 interface GendersSelectProps {
@@ -14,13 +13,13 @@ export function GendersSelect({ speciesId }: GendersSelectProps) {
 
     const url = `/api/companies/${speciesId}/genders`
 
-    const { data, isLoading }: IQueryData = useGetData('genders', url);
+    const { data, isLoading } = useGetData('genders', url);
 
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const options = data.map(gender => ({ value: gender.id, label: gender.name }))
+    const options = data.genders && data.genders.map(gender => ({ value: gender.id, label: gender.name }))
 
 
     const getValue = (value: number) =>

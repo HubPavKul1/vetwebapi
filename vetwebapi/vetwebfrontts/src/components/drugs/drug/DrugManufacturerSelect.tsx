@@ -1,25 +1,17 @@
-import { useQuery } from "react-query";
-
-import { AppService } from "../../../app.service";
-import { IQueryData } from "../../../interfaces/BaseInterface";
 import { CustomSelect } from "../../CustomSelect";
+import { useGetData } from "../../../hooks/useGetData";
 
 export function DrugManufacturerSelect() {
   const url = "/api/drugs/drug_manufacturers";
 
-  const { data, isLoading }: IQueryData = useQuery(
-    ["drugManufacturers"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.drug_manufacturers,
-    }
-  );
+  const { data, isLoading } = useGetData("drugManufacturers", url);
+    
 
   if (isLoading || !data) return <p>...Загрузка</p>;
 
   return (
     <CustomSelect
-      data={data}
+      data={data.drug_manufacturers}
       fieldName="drug_manufacturer_id"
       placeholder="Выберите производителя *"
     />

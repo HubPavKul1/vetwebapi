@@ -1,14 +1,13 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 
 import { CustomButton } from "../../CustomButton";
 import { Input } from "../../Input";
 import { fieldRequiredMessage } from "../../ErrorMessages";
 import { IDrugInMovementIn } from "../../../interfaces/DrugInterfaces";
 
-import { AppService } from "../../../app.service";
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 interface AddDrugFormProps {
   url: string;
@@ -28,16 +27,9 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["addDrugToDrugMovement"], {
-    mutationFn: (data: IDrugInMovementIn) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Препарат успешно добавлен!");
-      queryClient.invalidateQueries([{ queryKey }, id]);
-      reset();
-    },
-  });
+  const { mutate } = useCreateItem("addDrugToDrugMovement", url, queryKey, "Препарат успешно добавлен!", reset, id);
+  
 
   const addDrugToDrugMovement: SubmitHandler<IDrugInMovementIn> = (data) => {
     mutate(data);

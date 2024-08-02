@@ -15,20 +15,21 @@ interface DrugReceiptsData {
 export function DrugReceipts() {
   const url = "/api/drugs/receipts";
 
-  const { data, isLoading, error }: DrugReceiptsData = useGetData("drugReceipts", url);
+  const { data, isLoading, error } = useGetData("drugReceipts", url);
     
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (
     <Catalog
-      title="Поступления биопрепаратов"
+      title="Поступление биопрепаратов"
       btnTitle="Добавить поступление препарата"
       cardsInRow={4}
       createForm={<CreateDrugReceiptForm />}
-      dataLength={data.length}
+      dataLength={data.drug_movements && data.drug_movements.length}
     >
-        {data.length
-          && data.map((drugMovement) => (
+        {data && data.drug_movements &&
+        data.drug_movements.length
+          && data.drug_movements.map((drugMovement) => (
               <CatalogItem
                 key={drugMovement.id}
                 delUrl={`/api/drugs/receipts/${drugMovement.id}`}

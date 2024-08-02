@@ -1,7 +1,6 @@
 import AsyncSelect from "react-select/async";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { IQueryData } from "../../../interfaces/BaseInterface";
 import { useGetData } from "../../../hooks/useGetData";
 
 
@@ -15,13 +14,13 @@ export function StreetsSelect({cityId}: StreetsSelectProps) {
 
     const url = `/api/companies/cities/${cityId}/streets`
 
-    const { data, isLoading}: IQueryData = useGetData('cityStreets', url);
+    const { data, isLoading} = useGetData('cityStreets', url);
   
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
     
-    const options = data.map(street=>({value: street.id, label: street.name}))
+    const options = data.streets && data.streets.map(street=>({value: street.id, label: street.name}))
     
     const loadOptions = (searchValue: string, callback: CallableFunction) => {
         setTimeout(() => {

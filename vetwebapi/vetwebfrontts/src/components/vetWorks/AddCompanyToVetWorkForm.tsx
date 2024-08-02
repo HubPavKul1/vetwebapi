@@ -1,13 +1,12 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 
 import { CustomButton } from "../CustomButton";
 
-import { AppService } from "../../app.service";
 
 import { useParams } from "react-router-dom";
 import { CompanySelect } from "./CompanySelect";
 import { ICompanyInVetWorkIn } from "../../interfaces/CompanyInterfaces";
+import { useCreateItem } from "../../hooks/useCreateItem";
 
 interface AddCompanyToVetWorkFormProps {
   url: string;
@@ -30,16 +29,9 @@ export function AddCompanyToVetWorkForm({
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation(["addCompanyToVetWork"], {
-    mutationFn: (data: ICompanyInVetWorkIn) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Предприятие успешно добавлено!");
-      queryClient.invalidateQueries([{ queryKey }, id]);
-      reset();
-    },
-  });
+  
+  const { mutate } = useCreateItem("addCompanyToVetWork", url, queryKey, "Предприятие успешно добавлено!", reset, id);
+    
 
   const addCompanyToVetWork: SubmitHandler<ICompanyInVetWorkIn> = (data) => {
     mutate(data);

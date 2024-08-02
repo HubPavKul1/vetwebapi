@@ -1,9 +1,8 @@
 import Select from "react-select";
-import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { AppService } from "../../../app.service";
 import { IDrugCatalogCard } from "../../../interfaces/DrugInterfaces";
+import { useGetData } from "../../../hooks/useGetData";
 
 
 interface DrugCatalogData {
@@ -16,17 +15,14 @@ export function CatalogDrugSelect() {
 
     const url = "/api/drugs/catalog"
 
-    const { data, isLoading }: DrugCatalogData = useQuery(['catalogNames'], () => AppService.getAll(url),
-    {
-        select: ({data}) => data?.catalog_drugs,
-    }
-);
+    const { data, isLoading } = useGetData('catalogNames', url);
+   
 
     const { control } = useFormContext()
 
     if (isLoading || !data) return <p>...Загрузка</p>;
     
-    const options = data.map(drug=>({value: drug.id, label: `${drug.name}:${drug.batch}`}))
+    const options = data.catalog_drugs && data.catalog_drugs.map(drug=>({value: drug.id, label: `${drug.name}:${drug.batch}`}))
     
 
     const getValue = (value: number) => 

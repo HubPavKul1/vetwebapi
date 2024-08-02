@@ -1,25 +1,16 @@
-import { useQuery } from "react-query";
-
-import { IQueryData } from "../../../interfaces/BaseInterface";
-import { AppService } from "../../../app.service";
 import { CustomSelect } from "../../CustomSelect";
+import { useGetData } from "../../../hooks/useGetData";
 
 export function AdministrationMethodSelect() {
   const url = "/api/drugs/administration_methods";
 
-  const { data, isLoading }: IQueryData = useQuery(
-    ["administrationMethods"],
-    () => AppService.getAll(url),
-    {
-      select: ({ data }) => data?.administration_methods,
-    }
-  );
-
+  const { data, isLoading } = useGetData("administrationMethods", url);
+  
   if (isLoading || !data) return <p>...Загрузка</p>;
 
   return (
     <CustomSelect
-      data={data}
+      data={data.administration_methods}
       fieldName="administration_method_id"
       placeholder="Выберите способ введения *"
     />

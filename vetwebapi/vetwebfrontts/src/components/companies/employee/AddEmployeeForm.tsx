@@ -1,5 +1,4 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "../../../interfaces/EmployeeInterfaces";
 import { CustomButton } from "../../CustomButton";
@@ -11,7 +10,7 @@ import {
   minLenErrorMessage,
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
-import { AppService } from "../../../app.service";
+import { useCreateItem } from "../../../hooks/useCreateItem";
 
 export function AddEmployeeForm() {
   const { id } = useParams();
@@ -34,16 +33,9 @@ export function AddEmployeeForm() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(["create employee"], {
-    mutationFn: (data: IEmployeeCreate) => AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Работник успешно добавлен!");
-      queryClient.invalidateQueries(["company", id]);
-      reset();
-    },
-  });
+  const { mutate } = useCreateItem("create employee", url, "company", "Работник успешно добавлен!", reset, id);
+  
 
   const createEmployee: SubmitHandler<IEmployeeCreate> = (data) => {
     console.log("employee: ", data);

@@ -1,9 +1,8 @@
 import Select from 'react-select';
-import { useQuery } from "react-query";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../interfaces/FormInterface';
-import { AppService } from '../../app.service';
 import { ICompany } from '../../interfaces/CompanyInterfaces';
+import { useGetData } from '../../hooks/useGetData';
 
 
 interface IClinicSelectProps {
@@ -17,17 +16,14 @@ export function ClinicSelect() {
 
     const url = "/api/companies/vets"
 
-    const { data, isLoading }: IClinicSelectProps = useQuery(['clinics'], () => AppService.getAll(url), 
-    {
-        select: ({data}) => data?.companies
-    }
-);
+    const { data, isLoading }: IClinicSelectProps = useGetData('clinics', url);
+   
     
     const { control } = useFormContext()
 
     if(isLoading || !data) return <p>Загрузка ...</p>;
 
-    const options = data.map(company => ({ value: company.id, label: company.short_name }))
+    const options = data.companies && data.companies.map(company => ({ value: company.id, label: company.short_name }))
 
 
     const getValue = (value: number) =>

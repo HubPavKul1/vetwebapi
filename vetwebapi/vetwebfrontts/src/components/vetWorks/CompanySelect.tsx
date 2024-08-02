@@ -17,7 +17,7 @@ interface CompaniesProps {
 export function CompanySelect() {
     
     const url = "/api/companies/"
-    const { data, isLoading }: CompaniesProps = useGetData('companies', url);
+    const { data, isLoading } = useGetData('companies', url);
 
 
     const { control } = useFormContext()
@@ -26,7 +26,7 @@ export function CompanySelect() {
 
     
 
-    const options = data.map(item => ({ value: item.id, label: item.short_name }))
+    const options = data.companies && data.companies.map(item => ({ value: item.id, label: item.short_name }))
 
     const getValue = (value: number) => 
         value ? options?.find((option) => option.value === value) : ""

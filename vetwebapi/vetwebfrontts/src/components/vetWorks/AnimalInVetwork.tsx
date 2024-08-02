@@ -1,11 +1,10 @@
-import { IAnimalInVetwork } from "../../interfaces/VetWorkInterfaces";
-import { useMutation, useQueryClient } from "react-query";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { AppService } from "../../app.service";
 import { Col, Row } from "react-bootstrap";
 import { IAnimal } from "../../interfaces/AnimalInterfaces";
 import { useParams } from "react-router-dom";
+import { useDeleteItem } from "../../hooks/useDeleteItem";
 
 interface AnimalInVetworkProps {
     animal: IAnimal;
@@ -18,16 +17,7 @@ export function AnimalInVetwork({animal}: AnimalInVetworkProps) {
     const url = `/api/vetwork/${id}/animals/${animal.animal_id}`
 
 
-    const queryClient = useQueryClient()
-
-    const { mutate } = useMutation(["delete animal"], {
-        mutationFn: () => AppService.deleteItem(url),
-        onSuccess: () => {
-            alert("Животное успешно удалено!")
-            queryClient.invalidateQueries(["vetwork", id])
-        }
-    },
-    )
+    const { mutate } = useDeleteItem("delete animal", url, "vetwork", "Животное успешно удалено!", id);
 
     const deleteAnimal = () => {
         mutate()
