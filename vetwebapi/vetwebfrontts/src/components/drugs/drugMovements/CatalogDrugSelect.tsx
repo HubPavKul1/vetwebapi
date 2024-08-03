@@ -1,15 +1,9 @@
 import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { IDrugCatalogCard } from "../../../interfaces/DrugInterfaces";
+
 import { useGetData } from "../../../hooks/useGetData";
 
-
-interface DrugCatalogData {
-    data?: IDrugCatalogCard[];
-    isLoading: boolean;
-    error?: Error | null;
-}
 
 export function CatalogDrugSelect() {
 

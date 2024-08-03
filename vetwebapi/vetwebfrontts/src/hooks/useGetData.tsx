@@ -9,10 +9,6 @@ export function useGetData(queryKey: string, url: string) {
         queryFn: getData,
         select: data => data.data
     });
-
-    if (isError) return <p>{`ERROR: ${JSON.stringify(error)}`}</p>;
     
-    
-
     return ({data, isLoading, isError, error})
 }

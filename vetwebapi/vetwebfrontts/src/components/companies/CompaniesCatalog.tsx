@@ -6,9 +6,8 @@ import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
 import { useGetData } from "../../hooks/useGetData";
-
-
-
+import { ErrorLoadDataMessage } from "../ErrorLoadDataMessage";
+import { Loader } from "../Loader";
 
 interface CompaniesCatalogProps {
   url: string;
@@ -25,15 +24,11 @@ export function CompaniesCatalog({
   imgSrc,
   invQueryName,
 }: CompaniesCatalogProps) {
-  const { data, isLoading } = useGetData(invQueryName, url);
+  const { data, isLoading, isError, error } = useGetData(invQueryName, url);
 
-  if (isLoading && !data) return (
-    <div className="py-20 text-center">
-      <h4 className="text-3xl">Загрузка...</h4>
-    </div>
-    
-  )
-    
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
+
 
   return (
     <Catalog

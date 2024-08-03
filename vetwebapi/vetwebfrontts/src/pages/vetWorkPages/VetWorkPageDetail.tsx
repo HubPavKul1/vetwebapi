@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 
 import { AppService } from "../../app.service";
 
@@ -12,6 +11,9 @@ import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
 import { ReferralPDF } from "./vetWorkPdf/referralPdf/ReferralPDF";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
+import { useGetDataById } from "../../hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
+import { Loader } from "../../components/Loader";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
@@ -29,15 +31,10 @@ export function VetWorkPageDetail() {
   const { id } = useParams();
   const url = `/api/vetwork/${id}`;
 
-  const { isLoading, data }: VetWorkData = useQuery(
-    ["vetwork", id],
-    () => AppService.get(url),
-    {
-      enabled: !!id,
-    }
-  );
-
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  const { isLoading, data, isError, error }: VetWorkData = useGetDataById("vetwork", url, id);
+    
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   const date = AppService.convertDateString(data.vetwork_date);
   const diseases = data.diseases;

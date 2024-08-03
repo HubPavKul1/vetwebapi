@@ -24,9 +24,14 @@ export function CreateDrugReceiptForm() {
     mode: "onChange",
   });
 
- 
-  const { mutate } = useCreateItem("createReceipt", url, "drugReceipts", "Поступление успешно добавлено!", reset);
-   
+  const { mutate } = useCreateItem(
+    "createReceipt",
+    url,
+    "drugReceipts",
+    "Поступление успешно добавлено!",
+    reset
+  );
+
   const createReceipt: SubmitHandler<IDrugMovementCreate> = (data) => {
     mutate(data);
   };

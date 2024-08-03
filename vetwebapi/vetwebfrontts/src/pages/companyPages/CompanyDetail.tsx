@@ -1,25 +1,26 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-
 import { CompanyPageMenu } from "../../components/menu/CompanyPageMenu";
-
-import { AppService } from "../../app.service";
 import { ICompanyDetail } from "../../interfaces/CompanyInterfaces";
 import { PageDetail } from "../../components/PageDetail";
 import { useGetDataById } from "../../hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
+import { Loader } from "../../components/Loader";
 
 interface CompanyData {
   data?: ICompanyDetail;
   isLoading: boolean;
+  isError: boolean;
+  error: Error
 }
 
 export function CompanyDetail() {
   const { id } = useParams();
   const url = `/api/companies/${id}`;
 
-  const { isLoading, data }: CompanyData = useGetDataById("company", url, id);
+  const { isLoading, data, isError, error }: CompanyData = useGetDataById("company", url, id);
 
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <>

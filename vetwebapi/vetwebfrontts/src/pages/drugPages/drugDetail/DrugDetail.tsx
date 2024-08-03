@@ -5,6 +5,8 @@ import styles from "./DrugDetail.module.scss";
 
 import { IDrugDetail } from "../../../interfaces/DrugInterfaces";
 import { useGetDataById } from "../../../hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
+import { Loader } from "../../../components/Loader";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -15,9 +17,10 @@ export function DrugDetail() {
   const { id } = useParams();
   const url = `/api/drugs/${id}`;
 
-  const { isLoading, data }: DrugData = useGetDataById("drug", url, id);
+  const { isLoading, data, isError, error }: DrugData = useGetDataById("drug", url, id);
 
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <>

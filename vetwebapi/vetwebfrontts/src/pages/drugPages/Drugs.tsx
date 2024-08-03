@@ -5,6 +5,8 @@ import { IDrugCard } from "../../interfaces/DrugInterfaces";
 
 import { DrugCardBody } from "../../components/drugs/drug/DrugCardBody";
 import { useGetData } from "../../hooks/useGetData";
+import { Loader } from "../../components/Loader";
+import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 
 interface DrugsData {
   data?: IDrugCard[];
@@ -14,9 +16,10 @@ interface DrugsData {
 export function Drugs() {
   const url = "/api/drugs";
 
-  const { data, isLoading }: DrugsData = useGetData("drugs", url);
+  const { data, isLoading, isError, error } = useGetData("drugs", url);
    
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <Catalog
@@ -24,10 +27,10 @@ export function Drugs() {
       btnTitle="Добавить препарат"
       cardsInRow={3}
       createForm={<CreateDrugForm />}
-      dataLength={data.length}
+      dataLength={data && data.drugs && data.drugs.length}
     >
-      {data.length && (
-        data.map((drug) => (
+      {data && data.drugs.length && (
+        data.drugs.map((drug) => (
           <CatalogItem
             key={drug.id}
             delUrl={`/api/drugs/${drug.id}`}

@@ -4,11 +4,14 @@ import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 
 import { AppService } from "../../app.service";
 import { IVetwork } from "../../interfaces/VetWorkInterfaces";
+import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
+import { Loader } from "../../components/Loader";
+import { useGetData } from "../../hooks/useGetData";
 
 interface VetWorkData {
   data?: IVetwork[];
   isLoading: boolean;
-  error?: Error | null;
+  error: Error | null;
 }
 
 interface VetWorksProps {
@@ -28,13 +31,10 @@ export function VetWorks({
   imgSrc,
   queryKey,
 }: VetWorksProps) {
-  const { data, isLoading, error }: VetWorkData = useQuery({
-    queryKey: [{ queryKey }],
-    queryFn: () => AppService.getAll(url),
-    select: ({ data }) => data?.vetworks
-  });
-
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  const { data, isLoading, error, isError } = useGetData( queryKey, url);
+   
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <Catalog
@@ -42,10 +42,10 @@ export function VetWorks({
       btnTitle={btnTitle}
       createForm={createForm}
       cardsInRow={4}
-      dataLength={data.length}
+      dataLength={data && data.vetworks && data.vetworks.length}
     >
-      {data.length &&
-        data.map((vetWork) => (
+      {data && data.vetworks.length &&
+        data.vetworks.map((vetWork) => (
           <CatalogItem
             key={vetWork.id}
             delUrl={`/api/vetwork/${vetWork.id}`}

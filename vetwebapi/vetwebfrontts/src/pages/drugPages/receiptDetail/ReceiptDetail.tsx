@@ -9,6 +9,8 @@ import { ReceiptPageMenu } from "../../../components/menu/ReceiptPageMenu";
 import { ReportPage } from "../../../components/ReportPage";
 import { drugReceiptHeaders } from "../../../Constants";
 import { useGetDataById } from "../../../hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
+import { Loader } from "../../../components/Loader";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -20,10 +22,11 @@ export function ReceiptDetail() {
   const { id } = useParams();
   const url = `/api/drugs/receipts/${id}`;
 
-  const { isLoading, data }: ReceiptData = useGetDataById("receipt", url, id);
+  const { isLoading, data, isError, error }: ReceiptData = useGetDataById("receipt", url, id);
 
 
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   const date = AppService.convertDateString(data.operation_date);
 

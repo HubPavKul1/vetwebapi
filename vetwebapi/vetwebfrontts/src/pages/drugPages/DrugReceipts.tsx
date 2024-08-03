@@ -5,19 +5,23 @@ import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/Crea
 import { IDrugMovement } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
 import { useGetData } from "../../hooks/useGetData";
+import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
+import { Loader } from "../../components/Loader";
 
 interface DrugReceiptsData {
   data?: IDrugMovement[];
   isLoading: boolean;
   error?: Error | null;
+  isError: boolean
 }
 
 export function DrugReceipts() {
   const url = "/api/drugs/receipts";
 
-  const { data, isLoading, error } = useGetData("drugReceipts", url);
+  const { data, isLoading, isError, error } = useGetData("drugReceipts", url);
     
-  if (isLoading || !data) return <p>Загрузка ...</p>;
+  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <Catalog
