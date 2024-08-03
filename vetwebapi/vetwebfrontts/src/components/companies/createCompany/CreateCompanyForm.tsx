@@ -31,7 +31,7 @@ export function CreateCompanyForm({ url, invQueryName }: CreateCompanyFormProps)
   });
 
 
-  const { mutate } = useCreateItem(invQueryName, url, "companies", "Предприятие успешно добавлено!", reset)
+  const { mutate } = useCreateItem(invQueryName, url, invQueryName, "Предприятие успешно добавлено!", reset)
 
 
   const createCompany: SubmitHandler<ICompanyCreate> = (data) => {

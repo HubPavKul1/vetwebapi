@@ -73,8 +73,6 @@ export function AddAnimalsToVetWorkForm({
   
 
 
-
-
   const addAnimals: SubmitHandler<IAnimalInVetworkIn[]> = (animalsData) => {
     mutate(animalsData);
     setAnimalsData([]);

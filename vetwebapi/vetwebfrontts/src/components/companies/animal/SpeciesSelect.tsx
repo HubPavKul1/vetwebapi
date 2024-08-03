@@ -20,12 +20,12 @@ export function SpeciesSelect({ animalGroupId }: SpeciesSelectProps) {
 
     const url = `/api/companies/${animalGroupId}/species`
 
-    const { data, isLoading }: IQueryData = useGetData('species', url);
+    const { data, isLoading } = useGetData('species', url);
 
     if (isLoading || !data) return <p>Загрузка ...</p>;
 
 
-    const options = data.map(spec => ({ value: spec.id, label: spec.name }))
+    const options = data.species && data.species.map(spec => ({ value: spec.id, label: spec.name }))
 
     const getValue = (value: number) =>
         value ? options?.find((option) => option.value === value): ""
