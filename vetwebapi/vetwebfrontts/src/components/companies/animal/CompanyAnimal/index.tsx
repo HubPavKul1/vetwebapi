@@ -1,5 +1,4 @@
 import { IAnimal } from "../../../../interfaces/AnimalInterfaces";
-import { useMutation, useQueryClient } from "react-query";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { AppService } from "../../../../app.service";
@@ -20,6 +19,7 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
 
 
   const { mutate } = useDeleteItem("delete animal", url, "company", "Животное успешно удалено!", id);
+  
   
 
   const deleteAnimal = () => {

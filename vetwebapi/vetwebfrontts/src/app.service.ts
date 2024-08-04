@@ -31,6 +31,13 @@ export const AppService = {
         await axios.delete(url)
       },
 
+    async updateItem(url: string, data: object) {
+        await axios.patch(url, data)
+        .then(response => response.data)
+        .catch(err => console.log(err))
+        
+    },
+
     async uploadFile(url: string, file: FormData) {
         await axios.post(url, file)
 
