@@ -1,11 +1,12 @@
 import { IAnimal } from "../../../../interfaces/AnimalInterfaces";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import { BsPencilSquare } from "react-icons/bs";
 import { AppService } from "../../../../app.service";
 import { Col, Row } from "react-bootstrap";
 
 import styles from "./CompanyAnimal.module.scss"
 import { useDeleteItem } from "../../../../hooks/useDeleteItem";
+import { UpdateItem } from "../../../UpdateItem";
+import { UpdateAnimalForm } from "../UpdateAnimalForm";
 
 interface CompanyAnimalProps {
   animal: IAnimal;
@@ -38,7 +39,9 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
       <Col>{animal.nickname}</Col>
       <Col>{animal.identification}</Col>
       <Col>
-        <BsPencilSquare className="edit-icon" />
+        <UpdateItem>
+          <UpdateAnimalForm animal={animal}/>
+        </UpdateItem>
       </Col>
       <Col>
         <BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal} />

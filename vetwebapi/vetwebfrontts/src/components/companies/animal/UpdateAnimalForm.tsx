@@ -1,7 +1,5 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { TypesOfFeedingSelect } from "./TypeOfFeedingSelect";
-import { IAnimal, IAnimalCreate } from "../../../interfaces/AnimalInterfaces";
-import { UsageTypesSelect } from "./UsageTypesSelect";
+import { IAnimal, IAnimalCreate, IAnimalUpdate } from "../../../interfaces/AnimalInterfaces";
 import { CustomButton } from "../../CustomButton";
 import { Input } from "../../Input";
 import { FormInputProps } from "../../../interfaces/FormInterface";
@@ -11,19 +9,25 @@ import {
   minLenErrorMessage,
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
-import { useCreateItem } from "../../../hooks/useCreateItem";
+import { useUpdateItem } from "../../../hooks/useUpdateItem";
 
-export function UpdateAnimalForm(animal: IAnimal) {
+
+interface UpdateAnimalFormProps {
+  animal: IAnimal;
+}
+
+export function UpdateAnimalForm({animal}: UpdateAnimalFormProps) {
   const { id } = useParams();
   const url = `/api/companies/${id}/animals/${animal.id}`;
 
-  const inputItems: FormInputProps<IAnimalCreate>[] = [
+  const inputItems: FormInputProps<IAnimalUpdate>[] = [
     { fieldName: "date_of_birth", id: "date_of_birth", type: "date", value: animal.date_of_birth},
     {
       fieldName: "nickname",
       placeholder: "Введите кличку животного *",
       type: "text",
-      value: animal.nickname
+      value: animal.nickname,
+      
     },
     {
       fieldName: "identification",
@@ -33,7 +37,7 @@ export function UpdateAnimalForm(animal: IAnimal) {
     },
   ];
 
-  const methods = useForm<IAnimalCreate>({
+  const methods = useForm<IAnimalUpdate>({
     mode: "onChange",
   });
 
@@ -44,25 +48,17 @@ export function UpdateAnimalForm(animal: IAnimal) {
     formState: { errors },
   } = methods;
   
-  const { mutate } = useCreateItem("create animal", url, "company", "Животное успешно добавлено!", reset)
+  const { mutate } = useUpdateItem("update animal", url, "company", "Данные успешно обновлены!", reset, id)
 
 
-  const createAnimal: SubmitHandler<IAnimalCreate> = (data) => {
+  const updateAnimal: SubmitHandler<IAnimalUpdate> = (data) => {
+    console.log("UPDATE DATA>>>", data)
     mutate(data);
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(createAnimal)}>
-        <div className="form-group">
-          <label>Выберите Тип Кормления *</label>
-          <TypesOfFeedingSelect />
-        </div>
-        <div className="form-group">
-          <label>Выберите Тип Использования *</label>
-          <UsageTypesSelect />
-        </div>
-
+      <form onSubmit={handleSubmit(updateAnimal)}>
         <label htmlFor="date_of_birth" className="form-group">
           Дата рождения *
         </label>
@@ -87,6 +83,8 @@ export function UpdateAnimalForm(animal: IAnimal) {
             type={item.type}
             errors={errors}
             placeholder={item.placeholder}
+            value={item.value}
+
           />
         ))}
 
@@ -94,7 +92,7 @@ export function UpdateAnimalForm(animal: IAnimal) {
           <CustomButton
             className="btn-submit"
             disabled={false}
-            title="Обновить"
+            title="Отправить"
           />
         </div>
       </form>

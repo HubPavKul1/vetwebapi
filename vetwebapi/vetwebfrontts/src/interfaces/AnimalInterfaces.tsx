@@ -26,6 +26,12 @@ export interface IAnimalCreate {
     identification: string;
 }
 
+export interface IAnimalUpdate {
+    date_of_birth: string;
+    nickname: string;
+    identification: string;
+}
+
 
 export interface ITypesOfFeeding {
     types_of_feeding?: IBase[];
