@@ -76,6 +76,11 @@ export interface IAnimalInVetwork extends IAnimalInVetworkIn {
     is_active: boolean;
 }
 
+export interface IAnimalInVetWorkUpdate {
+    dosage?: number;
+    is_positive?: boolean;
+}
+
 
 export interface IBiomaterials {
     biomaterials: IBase[]

@@ -54,7 +54,7 @@ class CompanyInVetWorkIn(BaseModel):
 class AnimalInVetWorkIn(BaseModel):
     animal_id: int
     dosage: float | None = None
-    is_positive: bool = False
+    is_positive: bool | None = None
     
     # model_config = ConfigDict(from_attributes=True)
 

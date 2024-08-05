@@ -56,6 +56,7 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
                   setAnimals={props.setAnimals}
                   setCompanyId={props.setCompanyId}
                   animals={props.data.animals}
+                  workType={props.data.work_type}
                 />
               ))}
           </Container>

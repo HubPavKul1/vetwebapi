@@ -17,7 +17,8 @@ export interface InputProps {
     placeholder?: string;
     className?: string;
     style?: React.CSSProperties;
-    value?: string;
+    defaultValue?: string | number | boolean;
+    step?: any;
 }
 
 

@@ -13,6 +13,7 @@ interface VetWorkCompanyProps {
   setAnimals: CallableFunction;
   setCompanyId: CallableFunction;
   animals?: IAnimalInVetwork[];
+  workType: string;
 }
 
 export function  VetWorkCompany({
@@ -20,6 +21,7 @@ export function  VetWorkCompany({
   setAnimals,
   setCompanyId,
   animals,
+  workType
 }: VetWorkCompanyProps) {
   const addAnimals = (company_id: string) => {
     setAnimals(true);
@@ -71,7 +73,7 @@ export function  VetWorkCompany({
           animals
             .filter((animal) => animal.company_id === company.id)
             .map((animal) => (
-              <AnimalInVetwork key={animal.animal_id} animal={animal} />
+              <AnimalInVetwork key={animal.animal_id} animal={animal} workType={workType}/>
             ))}
       </Container>
     </Container>
