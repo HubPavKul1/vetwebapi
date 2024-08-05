@@ -17,7 +17,7 @@ export default function CustomCheckBox({
   
 
   return (
-    <div className="flex p-2 mb-2 justify-center">
+    <div className="">
       <label className="" htmlFor={id}>
         <input
           className={styles.custom_checkbox} 
