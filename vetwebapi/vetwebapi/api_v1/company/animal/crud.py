@@ -155,7 +155,7 @@ async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType
 async def update_animal(
     session: AsyncSession,
     animal: Animal,
-    animal_update: AnimalUpdate | AnimalUpdatePartial,
+    animal_update: AnimalUpdatePartial | AnimalUpdate,
     partial: bool = False,
 ) -> Animal:
     for name, value in animal_update.model_dump(exclude_unset=partial).items():

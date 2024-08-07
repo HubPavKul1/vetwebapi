@@ -35,7 +35,7 @@ class AnimalUpdatePartial(BaseModel):
     species_id: int | None = None
     usage_type_id: int | None = None
     gender_id: int | None = None
-    date_of_birth: str | None = None
+    date_of_birth: date | None = None
     nickname: str | None = None
     identification: str | None = None
     is_active: bool = True

@@ -17,11 +17,13 @@ export function PageDetailAnimals({
     <Container className={styles.companyAnimals}>
       <h5>Животные </h5>
       <p className={styles.animalCounter}>Всего голов: {animals?.length}</p>
-      <Row className={styles.tableHead}>
+      <Row className="text-center font-bold border-2 border-black">
         <Col>Вид животных</Col>
         <Col>Пол животных</Col>
         <Col>Дата рождения</Col>
+        <Col></Col>
         <Col>Кличка</Col>
+        <Col></Col>
         <Col>Идентификация</Col>
         <Col></Col>
         <Col></Col>

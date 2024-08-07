@@ -31,8 +31,15 @@ export const AppService = {
         await axios.delete(url)
       },
 
-    async updateItem(url: string, data: object) {
+    async updateItemPartial(url: string, data: object) {
         await axios.patch(url, data)
+        .then(response => response.data)
+        .catch(err => console.log(err))
+        
+    },
+
+    async updateItem(url: string, data: object) {
+        await axios.put(url, data)
         .then(response => response.data)
         .catch(err => console.log(err))
         

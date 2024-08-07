@@ -27,9 +27,9 @@ export interface IAnimalCreate {
 }
 
 export interface IAnimalUpdate {
-    date_of_birth: string;
-    nickname: string;
-    identification: string;
+    date_of_birth?: string;
+    nickname?: string;
+    identification?: string;
 }
 
 

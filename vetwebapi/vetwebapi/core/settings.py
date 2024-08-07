@@ -39,4 +39,4 @@ class Settings(BaseSettings):
 
 # settings = Settings(_env_file=f"{BASE_DIR}/.env", _env_file_encoding="utf-8")
 # settings = Settings(_env_file=f"{BASE_DIR}/.dev.env", _env_file_encoding="utf-8")
-settings = Settings(_env_file=os.path.join(BASE_DIR, ".dev.env"), _env_file_encoding="utf-8")
+settings = Settings(_env_file=os.path.join(BASE_DIR, ".env"), _env_file_encoding="utf-8")
