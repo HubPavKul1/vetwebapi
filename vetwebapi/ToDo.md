@@ -73,6 +73,8 @@ mypy-extensions = "^1.0.0"
 pytest-dotenv = "^0.5.2"
 pytest-cov = "^4.1.0"
 ```
+* ### Возможно на убунту надо будет установить setuptools : pip3 install setuptools в оболочке poetry shell
+
 * ### Добавим файл docker-compose.yml
 ```
 version: '3.3'
@@ -173,9 +175,6 @@ PS D:\VscodeProjects\vetwebapi\vetwebapi> poetry shell
 ```
 (vetwebapi-py3.11) PS D:\VscodeProjects\vetwebapi\vetwebapi> alembic init migrations
 ```
-
-
-
 
 
 ### Файл main.py

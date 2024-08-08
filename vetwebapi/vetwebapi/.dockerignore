@@ -1,0 +1,10 @@
+.venv
+node_modules/
+npm-debug.log
+dist/
+yarn-debug.log
+yarn-error.log
+docker/
+vscode/
+idea/
+DS_Store
