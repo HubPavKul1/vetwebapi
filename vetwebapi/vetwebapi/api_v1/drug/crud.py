@@ -17,7 +17,7 @@ from core.models import (
     AdministrationMethod
 )
 
-from core.settings import settings
+from core.settings import settings, BASE_DIR
 from utils import utils
 
 from .schemas import DrugIn
@@ -41,6 +41,11 @@ async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(.
     if file.content_type in ["application/pdf"]:
         drug.instruction = drug.instruction_path(filename=filename)
         dest = os.path.join(settings.media_dir, drug.instruction)
+        print("*" *20)
+        print("BASEDIR>>>>> ", BASE_DIR)
+        print(settings.media_dir)
+        print("dest_folder>>>>>", dest)
+        print("*" *20)
 
     else:
         drug.image = drug.image_path(filename=filename)
@@ -107,11 +112,6 @@ async def read_places_of_administration(session: AsyncSession) -> list[PlaceOfAd
 async def read_administration_methods(session: AsyncSession) -> list[AdministrationMethod]:
     stmt = select(AdministrationMethod).order_by(AdministrationMethod.name)
     return list(await session.scalars(stmt))
-
-
-
-
-
 
 # Delete
 async def remove_drug_image(filepath: str) -> None:

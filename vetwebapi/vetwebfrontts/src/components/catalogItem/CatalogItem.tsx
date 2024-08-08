@@ -7,7 +7,6 @@ import { CatalogCardTitle } from "./CatalogCardTitle";
 import { CatalogCardFooter } from "./CatalogCardFooter";
 
 export function CatalogItem({ ...props }: ICardProps) {
-  
   return (
     <Col>
       <Container className={styles.catalogItem}>
@@ -26,22 +25,21 @@ export function CatalogItem({ ...props }: ICardProps) {
             </Col>
           </Row>
         </Container>
-        {props.children && 
-           <Container className={styles.cardBody}>
-           <Row>{props.children}</Row>
-         </Container>
-        }
-        <CatalogCardFooter 
+        {props.children && (
+          <Container className={styles.cardBody}>
+            <Row>{props.children}</Row>
+          </Container>
+        )}
+        <CatalogCardFooter
           hasFileUploader={props.hasFileUploader}
           fileUploadUrl={props.fileUploadUrl}
           accept={props.accept}
-          mutationName={props.mutationName} 
+          mutationName={props.mutationName}
           invQueryName={props.invQueryName}
           iconSrc={props.iconSrc}
           delUrl={props.delUrl}
           cardTitle={props.cardTitle}
         />
-        
       </Container>
     </Col>
   );

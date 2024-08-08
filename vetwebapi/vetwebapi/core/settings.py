@@ -9,10 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
     files_dir: str = os.path.join(BASE_DIR, "files")
+    
+    media_dir: str = os.path.join(BASE_DIR, "media")
 
-    media_dir: str = os.path.join(
-        BASE_DIR, "vetwebfrontts", "public"
-    )  # директория для статики react app
+    # media_dir: str = os.path.join(
+    #     BASE_DIR, "vetwebfrontts", "public"
+    # )  # директория для статики react app
 
     db_user: str
     db_pass: str
@@ -36,7 +38,4 @@ class Settings(BaseSettings):
         # env_file = ".dev.env"
         env_file_encoding = "utf-8"
 
-
-# settings = Settings(_env_file=f"{BASE_DIR}/.env", _env_file_encoding="utf-8")
-# settings = Settings(_env_file=f"{BASE_DIR}/.dev.env", _env_file_encoding="utf-8")
 settings = Settings(_env_file=os.path.join(BASE_DIR, ".env"), _env_file_encoding="utf-8")

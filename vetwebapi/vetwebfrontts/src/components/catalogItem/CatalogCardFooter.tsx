@@ -1,37 +1,19 @@
 import { Col, Container, Row } from "react-bootstrap";
-
-import { FileUpload } from "../../fileUpload";
-import { BsFillTrash3Fill } from "react-icons/bs";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AppService } from "../../../app.service";
+import { FileUpload } from "../fileUpload";
+import { DeleteItem } from "../DeleteItem";
 
 interface CatalogCardFooterProps {
   hasFileUploader?: boolean;
-  fileUploadUrl?: string;
+  fileUploadUrl: string;
   accept?: string;
-  mutationName?: string;
-  invQueryName?: string;
+  mutationName: string;
+  invQueryName: string;
   iconSrc?: string;
   delUrl: string;
   cardTitle: string;
 }
 
 export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation({
-    mutationKey: ["delete item"],
-    mutationFn: () => AppService.deleteItem(props.delUrl),
-    onSuccess: () => {
-      alert(`${props.cardTitle} успешно удалено!`);
-      queryClient.invalidateQueries({queryKey: [`${props.invQueryName}`]});
-    },
-  });
-
-  const deleteItem = () => {
-    mutate();
-  };
-
   return (
     <Container>
       <Row>
@@ -51,9 +33,16 @@ export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
               </Container>
             </Col>
           </>
-        ): <Col sm={10}></Col>}
+        ) : (
+          <Col sm={10}></Col>
+        )}
         <Col sm={2}>
-          <BsFillTrash3Fill className="delete-icon" onClick={deleteItem} />
+          <DeleteItem
+            queryKey={props.invQueryName}
+            url={props.delUrl}
+            mutationKey="deleteItem"
+            alertMessage={`${props.cardTitle} успешно удалено!`}
+          />
         </Col>
       </Row>
     </Container>

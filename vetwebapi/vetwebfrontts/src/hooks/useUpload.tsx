@@ -2,7 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AppService } from "../app.service";
 import { UseFormReset } from "react-hook-form";
 
-export function useCreateItem(
+
+export function useUpload(
   mutationKey: string,
   url: string,
   queryKey: string,
@@ -13,14 +14,14 @@ export function useCreateItem(
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationKey: [mutationKey],
-    mutationFn: (data: object) => AppService.createItem(url, data),
+    mutationKey: [mutationKey], 
+    mutationFn: (data: FormData) => AppService.uploadFile(url, data),
     onSuccess: () => {
+      alert(alertMessage);
       queryClient.invalidateQueries({
         queryKey: !id ? [queryKey] : [queryKey, id],
       }),
-        alert(alertMessage),
-        reset();
+      reset();
     },
   });
 

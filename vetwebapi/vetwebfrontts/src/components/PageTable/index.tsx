@@ -1,19 +1,19 @@
 import { Table } from "react-bootstrap";
 
 
-interface ReportPageTableProps {
+interface PageTableProps {
   reportHeaders: string[];
   reportItems?: React.ReactElement | React.ReactNode;
 }
 
-export function PageTable({ ...props }: ReportPageTableProps) {
+export function PageTable({ ...props }: PageTableProps) {
   return (
     <>
-      <Table className="table-report">
+      <Table >
         <thead>
-          <tr>
+          <tr className="border border-black text-center font-bold">
             {props.reportHeaders.map((item, i) => (
-              <th key={i}>{item}</th>
+              <th  key={i}>{item}</th>
             ))}
           </tr>
         </thead>

@@ -8,11 +8,11 @@ import { DeleteItem } from "../../../DeleteItem";
 
 interface CompanyAnimalProps {
   animal: IAnimal;
-  company_id: number;
+  companyId: number;
 }
 
-export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
-  const id = company_id.toString();
+export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
+  const id = companyId.toString();
 
   const url = `/api/companies/${id}/animals/${animal.id}`;
 
@@ -21,14 +21,14 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
   ).shortDate;
 
   return (
-    <Row
+    <tr
       key={animal.id}
       className="border-b border-black text-center items-center justify-center"
     >
-      <Col>{animal.species}</Col>
-      <Col>{animal.gender}</Col>
-      <Col>{date_of_birth}</Col>
-      <Col>
+      <td>{animal.species}</td>
+      <td>{animal.gender}</td>
+      <td>{date_of_birth}</td>
+      <td>
         <UpdateItem>
           <UpdateAnimalForm
             animal={animal}
@@ -37,9 +37,9 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
             updateFieldType="date"
           />
         </UpdateItem>
-      </Col>
-      <Col>{animal.nickname}</Col>
-      <Col>
+      </td>
+      <td>{animal.nickname}</td>
+      <td>
         <UpdateItem>
           <UpdateAnimalForm
             animal={animal}
@@ -48,9 +48,9 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
             updateFieldType="text"
           />
         </UpdateItem>
-      </Col>
-      <Col>{animal.identification}</Col>
-      <Col>
+      </td>
+      <td>{animal.identification}</td>
+      <td>
         <UpdateItem>
           <UpdateAnimalForm
             animal={animal}
@@ -59,8 +59,8 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
             updateFieldType="text"
           />
         </UpdateItem>
-      </Col>
-      <Col>
+      </td>
+      <td>
         <DeleteItem
           queryKeyId={id}
           queryKey="company"
@@ -68,7 +68,7 @@ export function CompanyAnimal({ animal, company_id }: CompanyAnimalProps) {
           alertMessage="Животное успешно удалено!"
           url={url}
         />
-      </Col>
-    </Row>
+      </td>
+    </tr>
   );
 }

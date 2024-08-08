@@ -1,10 +1,8 @@
 import { MouseEventHandler, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-
 import { CustomButton } from "../../CustomButton";
-import { AppService } from "../../../app.service";
+import { useUpload } from "../../../hooks/useUpload";
 
 export function UploadAnimalForm() {
   const { id } = useParams();
@@ -12,17 +10,16 @@ export function UploadAnimalForm() {
 
   const [currentFile, setCurrentFile] = useState<File>();
   const { reset } = useForm<FileList>();
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationKey: ["upload animals"], 
-    mutationFn: (data: FormData) => AppService.uploadFile(url, data),
-    onSuccess: () => {
-      alert("Животные успешно добавлены!");
-      queryClient.invalidateQueries({queryKey: ["company", id]});
-      reset();
-    },
-  });
+  const { mutate } = useUpload(
+    "uploadAnimals",
+    url,
+    "company",
+    "Животные успешно добавлены!",
+    reset,
+    id
+  );
+
 
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -38,16 +35,16 @@ export function UploadAnimalForm() {
   };
 
   return (
-    <div className="container">
-      <div className="container">
+    <div className="container p-2">
+      <div className="container text-md">
         <label className="btn-default">
-          <input type="file" onChange={selectFile} />
+          <input className="text-sm" type="file" onChange={selectFile} />
         </label>
       </div>
 
       <div className="container">
         <CustomButton
-          className="btn-upload"
+          className="btn-upload w-full"
           disabled={!currentFile}
           onClick={upload}
           title="Загрузить"

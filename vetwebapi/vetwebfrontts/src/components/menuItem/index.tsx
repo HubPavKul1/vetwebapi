@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 
 import styles from "./MenuItem.module.scss";
+import { Container } from "react-bootstrap";
 
 interface MenuItemProps {
   title: string;

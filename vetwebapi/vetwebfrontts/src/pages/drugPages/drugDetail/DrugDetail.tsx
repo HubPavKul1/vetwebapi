@@ -22,6 +22,8 @@ export function DrugDetail() {
   if (isError) return <ErrorLoadDataMessage error={error}/>;
   if (isLoading || !data) return <Loader />;
 
+  console.log("DRUGdata>>>>", data.instruction, data.image)
+
   return (
     <>
       <Container>
@@ -40,7 +42,8 @@ export function DrugDetail() {
           {data.instruction && (
             <object
               type="application/pdf"
-              data={`/${data.instruction}`}
+              data={data.instruction}
+              // data={`/${data.instruction}`}
               width="100%"
             ></object>
           )}
