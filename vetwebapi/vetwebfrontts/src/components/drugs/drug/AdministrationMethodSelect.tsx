@@ -1,11 +1,13 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
+import { administrationMethodsUrl } from "../../../Urls";
 
 export function AdministrationMethodSelect() {
-  const url = "/api/drugs/administration_methods";
+  const { data, isLoading } = useGetData(
+    "administrationMethods",
+    administrationMethodsUrl
+  );
 
-  const { data, isLoading } = useGetData("administrationMethods", url);
-  
   if (isLoading || !data) return <p>...Загрузка</p>;
 
   return (

@@ -2,26 +2,27 @@ import Select from 'react-select';
 
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from '../../../interfaces/FormInterface';
-import { IQueryData } from '../../../interfaces/BaseInterface';
+import { IBase } from '../../../interfaces/BaseInterface';
 
 import { useGetData } from '../../../hooks/useGetData';
+import { accountingUnitsUrl } from '../../../Urls';
 
 
 
 export function AccountingUnitSelect() {
 
-    const url = "/api/drugs/accounting_units"
+   
  
-    const { data, isLoading} = useGetData('accountingUnits', url);
+    const { data, isLoading} = useGetData('accountingUnits', accountingUnitsUrl);
    
     const { control } = useFormContext()
     if (isLoading || !data) return <p>...Загрузка</p>;
 
-    const options = data.accounting_units && data.accounting_units.map(unit => ({ value: unit.id, label: unit.name }))
+    const options = data.accounting_units && data.accounting_units.map((unit: IBase) => ({ value: unit.id, label: unit.name }))
 
 
     const getValue = (value: number) =>
-        value ? options?.find((option) => option.value === value) : ""
+        value ? options?.find((option: IOption) => option.value === value) : ""
 
 
     return (

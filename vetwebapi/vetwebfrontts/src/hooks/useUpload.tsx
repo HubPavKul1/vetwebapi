@@ -4,11 +4,12 @@ import { UseFormReset } from "react-hook-form";
 
 
 export function useUpload(
-  mutationKey: string,
-  url: string,
-  queryKey: string,
-  alertMessage: string,
   reset: UseFormReset<TFieldValues>,
+  url: string,
+  mutationKey?: string,
+  queryKey?: string,
+  alertMessage?: string,
+  
   id?: string
 ) {
   const queryClient = useQueryClient();

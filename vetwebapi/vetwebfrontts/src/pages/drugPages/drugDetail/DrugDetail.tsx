@@ -7,6 +7,7 @@ import { IDrugDetail } from "../../../interfaces/DrugInterfaces";
 import { useGetDataById } from "../../../hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
 import { Loader } from "../../../components/Loader";
+import { drugDetailUrl, drugImageUrl, drugInstructionUrl } from "../../../Urls";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -15,21 +16,23 @@ interface DrugData {
 
 export function DrugDetail() {
   const { id } = useParams();
-  const url = `/api/drugs/${id}`;
+  const drugId = Number(id);
 
-  const { isLoading, data, isError, error }: DrugData = useGetDataById("drug", url, id);
+  const { isLoading, data, isError, error }: DrugData = useGetDataById(
+    "drug",
+    drugDetailUrl(drugId),
+    id
+  );
 
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
-
-  console.log("DRUGdata>>>>", data.instruction, data.image)
 
   return (
     <>
       <Container>
         <Row className="p-3 font-bold text-center items-center">
           <Col sm={3} className="">
-            <img src={`/${data.image}`} alt={data.name} />
+            <img src={drugImageUrl(drugId)} alt={data.name} />
           </Col>
 
           <Col>
@@ -42,8 +45,7 @@ export function DrugDetail() {
           {data.instruction && (
             <object
               type="application/pdf"
-              data={data.instruction}
-              // data={`/${data.instruction}`}
+              data={drugInstructionUrl(drugId)}
               width="100%"
             ></object>
           )}

@@ -8,6 +8,7 @@ import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
 import { useGetData } from "../../hooks/useGetData";
 import { ErrorLoadDataMessage } from "../ErrorLoadDataMessage";
 import { Loader } from "../Loader";
+import { companyDetailUrl, companyLink } from "../../Urls";
 
 interface CompaniesCatalogProps {
   url: string;
@@ -44,8 +45,8 @@ export function CompaniesCatalog({
         data.companies.map((company: ICompanyCard) => (
           <CatalogItem
             key={company.id}
-            delUrl={`/api/companies/${company.id}`}
-            url={`/companies/${company.id}`}
+            delUrl={companyDetailUrl(company.id)}
+            url={companyLink(company.id)}
             imgSrc={imgSrc}
             invQueryName={invQueryName}
             cardTitle={company.short_name}

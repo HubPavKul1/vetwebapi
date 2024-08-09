@@ -6,7 +6,7 @@ import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { ReportMenu } from "../../../../components/menu/ReportMenu.tsx";
 import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
-import { drugReportHeaders } from "../../../../Constants";
+import { drugReportHeaders } from "../../../../TableHeaders.ts";
 import { ReportPage } from "../../../../components/ReportPage/index.tsx";
 
 interface DrugReportProps {

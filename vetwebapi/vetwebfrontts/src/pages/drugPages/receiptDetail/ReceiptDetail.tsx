@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
 import { ReceiptPageMenu } from "../../../components/menu/ReceiptPageMenu";
 import { ReportPage } from "../../../components/ReportPage";
-import { drugReceiptHeaders } from "../../../Constants";
+import { drugReceiptHeaders } from "../../../TableHeaders";
 import { useGetDataById } from "../../../hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
 import { Loader } from "../../../components/Loader";
@@ -22,10 +22,13 @@ export function ReceiptDetail() {
   const { id } = useParams();
   const url = `/api/drugs/receipts/${id}`;
 
-  const { isLoading, data, isError, error }: ReceiptData = useGetDataById("receipt", url, id);
+  const { isLoading, data, isError, error }: ReceiptData = useGetDataById(
+    "receipt",
+    url,
+    id
+  );
 
-
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
   const date = AppService.convertDateString(data.operation_date);

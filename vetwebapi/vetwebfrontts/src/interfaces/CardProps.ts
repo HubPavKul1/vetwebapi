@@ -5,13 +5,13 @@ export interface ICardProps {
     cardTitle: string;
     url: string;
     delUrl: string;
-    fileUploadUrl: string;
+    fileUploadUrl?: string;
     buttonVariant?: string;
     children?: React.ReactElement | React.ReactNode;
     invQueryName: string;
     hasFileUploader?: boolean;
     accept?: string;
-    mutationName: string;
+    mutationName?: string;
     iconSrc?: string;
     hasContacts?: boolean;
     cardText?: string;

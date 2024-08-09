@@ -41,11 +41,6 @@ async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(.
     if file.content_type in ["application/pdf"]:
         drug.instruction = drug.instruction_path(filename=filename)
         dest = os.path.join(settings.media_dir, drug.instruction)
-        print("*" *20)
-        print("BASEDIR>>>>> ", BASE_DIR)
-        print(settings.media_dir)
-        print("dest_folder>>>>>", dest)
-        print("*" *20)
 
     else:
         drug.image = drug.image_path(filename=filename)

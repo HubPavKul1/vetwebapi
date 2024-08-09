@@ -17,8 +17,7 @@ export function CatalogCardImage({ ...props }: CatalogCardImageProps) {
         <Link className={styles.cardImageLink} to={props.url}>
           <img
             className={styles.cardImage}
-            // src={props.imgSrc}
-            src={`/${props.imgSrc}`}
+            src={props.imgSrc}
             alt={props.cardTitle}
           />
         </Link>

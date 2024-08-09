@@ -5,11 +5,10 @@ import styles from "./DrugCardBody.module.scss"
 
 interface DrugCardBodyProps{
     drugManufacturer: string;
-    drugInstr?: string;
     
 }
 
-export function DrugCardBody({drugManufacturer, drugInstr}: DrugCardBodyProps) {
+export function DrugCardBody({drugManufacturer}: DrugCardBodyProps) {
     return (
         <>
             <Container className={styles.drugManufacturer}>

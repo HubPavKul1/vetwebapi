@@ -1,12 +1,13 @@
 import { CompaniesCatalog } from "../../components/companies/CompaniesCatalog";
+import { vetsUrl } from "../../Urls";
 
 export function Vets() {
   return (
     <CompaniesCatalog
-      url="/api/companies/vets"
+      url={vetsUrl}
       title="Ветклиники"
       btnTitle="Добавить ветклинику"
-      imgSrc="gosvet.jpg"
+      imgSrc="/gosvet.jpg"
       invQueryName="vets"
     />
   );

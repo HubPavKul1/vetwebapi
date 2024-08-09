@@ -5,11 +5,9 @@ import { useState } from "react";
 import { ReportMenu } from "../../../components/menu/ReportMenu.tsx";
 import { ReportPage } from "../../../components/ReportPage/index.tsx";
 import { VetWorkReportProps } from "../../../interfaces/ReportInterfaces.tsx";
-import { diagnosticHeaders } from "../../../Constants.ts";
+import { diagnosticHeaders } from "../../../TableHeaders.ts";
 import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
-
-
 
 export function DiagnosticReport({
   data,

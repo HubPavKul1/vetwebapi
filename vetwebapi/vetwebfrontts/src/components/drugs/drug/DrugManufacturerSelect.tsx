@@ -1,11 +1,12 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
+import { drugManufacturersUrl } from "../../../Urls";
 
 export function DrugManufacturerSelect() {
-  const url = "/api/drugs/drug_manufacturers";
-
-  const { data, isLoading } = useGetData("drugManufacturers", url);
-    
+  const { data, isLoading } = useGetData(
+    "drugManufacturers",
+    drugManufacturersUrl
+  );
 
   if (isLoading || !data) return <p>...Загрузка</p>;
 

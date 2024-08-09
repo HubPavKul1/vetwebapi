@@ -4,9 +4,9 @@ import { DeleteItem } from "../DeleteItem";
 
 interface CatalogCardFooterProps {
   hasFileUploader?: boolean;
-  fileUploadUrl: string;
+  fileUploadUrl?: string;
   accept?: string;
-  mutationName: string;
+  mutationName?: string;
   invQueryName: string;
   iconSrc?: string;
   delUrl: string;
@@ -17,7 +17,7 @@ export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
   return (
     <Container>
       <Row>
-        {props.hasFileUploader ? (
+        {props.hasFileUploader && props.fileUploadUrl ? (
           <>
             <Col sm={8} className="text-right">
               <h5>Загрузите инструкцию </h5>

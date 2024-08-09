@@ -8,7 +8,7 @@ import { useUpload } from "../../hooks/useUpload";
 interface FileUploadProps {
   accept?: string;
   uploadUrl: string;
-  mutationName: string;
+  mutationName?: string;
   invQueryName: string;
   iconSrc?: string;
 }
@@ -25,11 +25,12 @@ export function FileUpload({
   const { reset } = useForm<FileList>();
 
   const { mutate} = useUpload(
-    mutationName,
+    reset,
     uploadUrl,
+    mutationName,
     invQueryName,
     "Файл успешно загружен!",
-    reset
+    
   );
 
  

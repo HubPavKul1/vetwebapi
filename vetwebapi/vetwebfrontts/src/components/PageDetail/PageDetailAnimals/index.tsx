@@ -4,7 +4,7 @@ import { IAnimal } from "../../../interfaces/AnimalInterfaces";
 import styles from "./PageDetailAnimals.module.scss";
 import { CompanyAnimal } from "../../companies/animal/CompanyAnimal";
 import { PageTable } from "../../PageTable";
-import { companyAnimalsHeaders } from "../../../Constants";
+import { companyAnimalsHeaders } from "../../../TableHeaders";
 
 interface PageDetailAnimalsProps {
   animals: IAnimal[];
@@ -19,8 +19,15 @@ export function PageDetailAnimals({
     <Container className={styles.companyAnimals}>
       <h5>Животные </h5>
       <p className={styles.animalCounter}>Всего голов: {animals?.length}</p>
-      <PageTable reportHeaders={companyAnimalsHeaders}
-        reportItems={animals.map(animal => <CompanyAnimal key={animal.id} animal={animal} companyId={companyId}/>)}
+      <PageTable
+        reportHeaders={companyAnimalsHeaders}
+        reportItems={animals.map((animal) => (
+          <CompanyAnimal
+            key={animal.id}
+            animal={animal}
+            companyId={companyId}
+          />
+        ))}
       />
     </Container>
   );

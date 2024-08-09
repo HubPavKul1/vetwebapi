@@ -1,6 +1,8 @@
 from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
+from fastapi.responses import FileResponse
+from pathlib import Path
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
@@ -77,7 +79,20 @@ async def get_drug_route(drug: Drug = Depends(drug_by_id)) -> Union[DrugSchema, 
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+        
+@router.get("/{drug_id}/image")
+async def get_drug_image(drug: Drug = Depends(drug_by_id)):
+    image_path = Path(f"media/{drug.image}")
+    if not image_path.is_file():
+        return {"error": "Image not found on the server"}
+    return FileResponse(image_path)
 
+@router.get("/{drug_id}/instruction")
+async def get_drug_instruction(drug: Drug = Depends(drug_by_id)):
+    file_path = Path(f"media/{drug.instruction}")
+    if not file_path.is_file():
+        return {"error": "Image not found on the server"}
+    return FileResponse(file_path)
 
 @router.delete("/{drug_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_drug_route(

@@ -1,24 +1,24 @@
 import { Catalog } from "../../components/catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
-import { IDrugCard } from "../../interfaces/DrugInterfaces";
 
 import { DrugCardBody } from "../../components/drugs/drug/DrugCardBody";
 import { useGetData } from "../../hooks/useGetData";
 import { Loader } from "../../components/Loader";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-
-interface DrugsData {
-  data?: IDrugCard[];
-  isLoading: boolean;
-}
+import {
+  drugDetailUrl,
+  drugFileUploadUrl,
+  drugImageUrl,
+  drugLink,
+  drugsUrl,
+} from "../../Urls";
+import { IDrugCard } from "../../interfaces/DrugInterfaces";
 
 export function Drugs() {
-  const url = "/api/drugs";
+  const { data, isLoading, isError, error } = useGetData("drugs", drugsUrl);
 
-  const { data, isLoading, isError, error } = useGetData("drugs", url);
-   
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
   return (
@@ -29,29 +29,28 @@ export function Drugs() {
       createForm={<CreateDrugForm />}
       dataLength={data && data.drugs && data.drugs.length}
     >
-      {data && data.drugs.length && (
-        data.drugs.map((drug) => (
+      {data &&
+        data.drugs.length &&
+        data.drugs.map((drug: IDrugCard) => (
           <CatalogItem
             key={drug.id}
-            delUrl={`/api/drugs/${drug.id}`}
-            url={`/drugs/${drug.id}`}
-            imgSrc={drug.image}
+            delUrl={drugDetailUrl(drug.id)}
+            url={drugLink(drug.id)}
+            imgSrc={drug.image && drugImageUrl(drug.id)}
             invQueryName="drugs"
             cardTitle={drug.name}
             id={drug.id}
             hasFileUploader={!drug.instruction}
             accept=".pdf"
             mutationName="drugInstr upload"
-            fileUploadUrl={`/api/drugs/${drug.id}/upload/`}
+            fileUploadUrl={drugFileUploadUrl(drug.id)}
             iconSrc="/pdf.jpg"
           >
             <DrugCardBody
               drugManufacturer={drug.drug_manufacturer}
-              drugInstr={drug.instruction}
             />
           </CatalogItem>
-        ))
-      )}
+        ))}
     </Catalog>
   );
 }

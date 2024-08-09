@@ -1,10 +1,10 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
+import { budgetsUrl } from "../../../Urls";
 
 export function BudgetSelect() {
-  const url = "/api/drugs/budgets";
-
-  const { data, isLoading } = useGetData("budgets", url);
+  
+  const { data, isLoading } = useGetData("budgets", budgetsUrl);
    
 
   if (isLoading || !data) return <p>...Загрузка</p>;

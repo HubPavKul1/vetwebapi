@@ -3,7 +3,7 @@ import { Container, Table } from "react-bootstrap";
 import { AppService } from "../../../../app.service";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 
-import { animalListHeaders } from "../../../../Constants";
+import { animalListHeaders } from "../../../../TableHeaders";
 
 interface AnimalsListPDFBodyProps {
   data: IVetWorkSchema;
@@ -34,16 +34,23 @@ export function AnimalsListPDFBody({ data }: AnimalsListPDFBodyProps) {
                 {data.animals &&
                   data.animals
                     .filter((animal) => animal.company_id === company.id)
-                    .map((animal, index) => <tr key={animal.animal_id}>
-                      <td>{index + 1}</td>
-                      <td>{animal.animal_group}</td>
-                      <td>{animal.nickname}</td>
-                      <td>{animal.identification}</td>
-                      <td>{AppService.convertDateString(animal.date_of_birth).year}</td>
-                      <td></td>
-                      <td>{animal.dosage && animal.dosage / 1000}</td>
-                      <td></td>
-                    </tr>)}
+                    .map((animal, index) => (
+                      <tr key={animal.animal_id}>
+                        <td>{index + 1}</td>
+                        <td>{animal.animal_group}</td>
+                        <td>{animal.nickname}</td>
+                        <td>{animal.identification}</td>
+                        <td>
+                          {
+                            AppService.convertDateString(animal.date_of_birth)
+                              .year
+                          }
+                        </td>
+                        <td></td>
+                        <td>{animal.dosage && animal.dosage / 1000}</td>
+                        <td></td>
+                      </tr>
+                    ))}
               </>
             ))}
         </tbody>

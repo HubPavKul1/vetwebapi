@@ -8,6 +8,7 @@ import { IDrugCatalogCreate } from "../../../interfaces/DrugInterfaces";
 
 import { DrugSelect } from "./DrugSelect";
 import { useCreateItem } from "../../../hooks/useCreateItem";
+import { catalogDrugsUrl } from "../../../Urls";
 
 export function CreateCatalogDrugForm() {
   const inputItems: FormInputProps<IDrugCatalogCreate>[] = [
@@ -27,23 +28,20 @@ export function CreateCatalogDrugForm() {
     mode: "onChange",
   });
 
-  const url = "/api/drugs/catalog";
-
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
   } = methods;
-  
-  const { mutate } = useCreateItem("create catalogDrug", url, "drugCatalog", "Препарат успешно добавлен!", reset);
-  //   mutationFn: (data: IDrugCatalogCreate) => AppService.createItem(url, data),
-  //   onSuccess: () => {
-  //     alert("Препарат успешно добавлен!");
-  //     queryClient.invalidateQueries(["drugCatalog"]);
-  //     reset();
-  //   },
-  // });
+
+  const { mutate } = useCreateItem(
+    "create catalogDrug",
+    catalogDrugsUrl,
+    "drugCatalog",
+    "Препарат успешно добавлен!",
+    reset
+  );
 
   const createCatalogDrug: SubmitHandler<IDrugCatalogCreate> = (data) => {
     mutate(data);

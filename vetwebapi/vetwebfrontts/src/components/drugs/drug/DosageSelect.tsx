@@ -1,11 +1,11 @@
 
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
+import { dosagesUrl } from "../../../Urls";
 
 export function DosageSelect() {
-  const url = "/api/drugs/dosages";
-
-  const { data, isLoading } = useGetData("dosages", url);
+  
+  const { data, isLoading } = useGetData("dosages", dosagesUrl);
 
 
   if (isLoading || !data) return <p>...Загрузка</p>;

@@ -7,7 +7,7 @@ import { ReceiptDrug } from "../../components/drugs/drugMovements/ReceiptDrug";
 import { PageDetail } from "../../components/PageDetail";
 import { VetWorkCompany } from "./VetWorkCompany";
 import { PageTable } from "../../components/PageTable";
-import { drugReceiptHeaders } from "../../Constants";
+import { drugReceiptHeaders } from "../../TableHeaders";
 
 import { VetWorkPageMenu } from "../../components/menu/VetWorkPageMenu";
 
@@ -21,12 +21,11 @@ interface VetWorkDetailProps {
   showReferral: CallableFunction;
   showAnimalsList: CallableFunction;
   setCompanyId: CallableFunction;
-  showReferralAnimalList: CallableFunction
+  showReferralAnimalList: CallableFunction;
 }
 
 export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
-
-  const disease = props.data.diseases[0].toLowerCase()
+  const disease = props.data.diseases[0].toLowerCase();
   return (
     <>
       <PageDetail

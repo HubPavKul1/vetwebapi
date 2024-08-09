@@ -15,6 +15,7 @@ import { DosageSelect } from "./DosageSelect";
 import { PlaceOfAdministrationSelect } from "./PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "./AdministrationMethodSelect";
 import { useCreateItem } from "../../../hooks/useCreateItem";
+import { drugsUrl } from "../../../Urls";
 
 export function CreateDrugForm() {
   const inputItems: FormInputProps<IDrugCreate>[] = [
@@ -41,10 +42,14 @@ export function CreateDrugForm() {
     formState: { errors },
   } = methods;
 
-  const url = "/api/drugs";
-  
-  const { mutate } = useCreateItem("create drug", url, "drugs", "Препарат успешно добавлен!", reset);
-   
+  const { mutate } = useCreateItem(
+    "create drug",
+    drugsUrl,
+    "drugs",
+    "Препарат успешно добавлен!",
+    reset
+  );
+
   const createDrug: SubmitHandler<IDrugCreate> = (data) => {
     mutate(data);
   };

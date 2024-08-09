@@ -1,10 +1,10 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
+import { disposalMethodsUrl } from "../../../Urls";
 
 export function DisposalMethodSelect() {
-  const url = "/api/drugs/disposal_methods";
-
-  const { data, isLoading } = useGetData("disposalMethods", url);
+  
+  const { data, isLoading } = useGetData("disposalMethods", disposalMethodsUrl);
 
 
   if (isLoading || !data) return <p>...Загрузка</p>;

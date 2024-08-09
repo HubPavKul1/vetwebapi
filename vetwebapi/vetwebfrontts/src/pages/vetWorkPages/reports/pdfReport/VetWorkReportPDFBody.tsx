@@ -1,7 +1,10 @@
 import { Container } from "react-bootstrap";
 import { AppService } from "../../../../app.service";
 import { PageTable } from "../../../../components/PageTable";
-import { diagnosticHeaders, vaccinationHeaders } from "../../../../Constants";
+import {
+  diagnosticHeaders,
+  vaccinationHeaders,
+} from "../../../../TableHeaders";
 import { IVetWorkReport } from "../../../../interfaces/ReportInterfaces";
 import { VetWorkReportItem } from "../ReportItem";
 
@@ -16,7 +19,7 @@ export function VetWorkReportPDFBody({
   dateEnd,
   data,
 }: VetWorkReportPDFBodyProps) {
-  const reportHeaders = isDiagnostic ? diagnosticHeaders: vaccinationHeaders;
+  const reportHeaders = isDiagnostic ? diagnosticHeaders : vaccinationHeaders;
   const date = AppService.convertDateString(dateEnd);
   const title = isDiagnostic
     ? `I. Диагностические исследования ${date.month} ${date.year}`
