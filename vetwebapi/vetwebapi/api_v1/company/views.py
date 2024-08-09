@@ -40,12 +40,11 @@ from .employee.schemas import PositionSchemas, Employees
 from .employee.views import router as employee_router
 from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
 from .serializers import (
-
- serialize_company_card, 
- serialize_company_detail, 
- serialize_employees, 
- serialize_animals,
- )
+    serialize_company_card,
+    serialize_company_detail,
+    serialize_employees,
+    serialize_animals,
+)
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
 router.include_router(animal_router)
@@ -65,7 +64,7 @@ async def create_company_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
 
 @router.post("/vets", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_clinic_route(
@@ -80,6 +79,7 @@ async def create_clinic_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+
 @router.post("/labs", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_lab_route(
     body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
@@ -92,9 +92,8 @@ async def create_lab_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
 
-    
+
 @router.get("/", response_model=Companies)
 async def get_companies(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -108,7 +107,7 @@ async def get_companies(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
 
 @router.get("/vets", response_model=Companies)
 async def get_clinics(
@@ -174,17 +173,15 @@ async def get_company_detail(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
-    
+
+
 @router.get("/{company_id}/animals", response_model=Animals)
 async def get_company_detail(
     animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, Animals]:
-   
+
     try:
-        return await serialize_animals(
-            animals=animals
-        )
+        return await serialize_animals(animals=animals)
 
     except Exception:
         raise HTTPException(
@@ -263,7 +260,7 @@ async def get_positions_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
 
 @router.get("/doctors", response_model=Employees)
 async def get_doctors_route(
@@ -277,8 +274,6 @@ async def get_doctors_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
-
 
 
 # Get data for add animal form

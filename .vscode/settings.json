@@ -25,5 +25,38 @@
             "command": "sass styles.scss styles.css ",
             "group": "build",
         }
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always",
+    },
+    "eslint.format.enable": true,
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange",
+    "eslint.alwaysShowStatus": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[jsx-tags]": {
+        "editor.defaultFormatter": "bradlc.vscode-tailwindcss"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    "editor.fontLigatures": false
 }

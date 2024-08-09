@@ -28,10 +28,12 @@ async def serialize_employee(employee: Employee) -> EmployeeSchema:
         fullname=employee.fullname,
     )
 
+
 async def serialize_employees(employees: list[Employee]) -> Employees:
-    return Employees (
+    return Employees(
         employees=[await serialize_employee(employee=employee) for employee in employees]
     )
+
 
 async def serialize_animal(animal: Animal) -> AnimalSchema:
     return AnimalSchema(
@@ -46,10 +48,9 @@ async def serialize_animal(animal: Animal) -> AnimalSchema:
         is_active=animal.is_active,
     )
 
+
 async def serialize_animals(animals: list[Animal]) -> Animals:
-    return Animals(
-        animals=[await serialize_animal(animal=animal) for animal in animals]
-        )
+    return Animals(animals=[await serialize_animal(animal=animal) for animal in animals])
 
 
 # Function to serialize data for company detail page
