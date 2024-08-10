@@ -12,10 +12,11 @@ import {
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "../../../hooks/useCreateItem";
+import { companyAnimalsUrl } from "../../../Urls";
 
 export function AddAnimalForm() {
   const { id } = useParams();
-  const url = `/api/companies/${id}/animals/`;
+  const companyId = Number(id);
 
   const inputItems: FormInputProps<IAnimalCreate>[] = [
     { fieldName: "date_of_birth", id: "date_of_birth", type: "date" },
@@ -41,9 +42,14 @@ export function AddAnimalForm() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  
-  const { mutate } = useCreateItem("create animal", url, "company", "Животное успешно добавлено!", reset)
 
+  const { mutate } = useCreateItem(
+    "create animal",
+    companyAnimalsUrl(companyId),
+    "company",
+    "Животное успешно добавлено!",
+    reset
+  );
 
   const createAnimal: SubmitHandler<IAnimalCreate> = (data) => {
     mutate(data);

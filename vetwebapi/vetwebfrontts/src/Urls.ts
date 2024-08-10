@@ -9,6 +9,50 @@ export const companyLink = (id?: number) => {
   return `/companies/${id}`;
 };
 
+// Company Address
+
+export const regionsUrl = companiesUrl + "regions";
+export const districtsUrl = (regionId: string) => {
+  return regionsUrl + `/${regionId}/districts`;
+};
+export const citiesUrl = (districtId: string) => {
+  return companiesUrl + `districts/${districtId}/cities`;
+};
+export const streetsUrl = (cityId: string) => {
+  return companiesUrl + `cities/${cityId}/streets`;
+};
+
+export const addressUrl = (companyId?: string) => {
+  return companiesUrl + `${companyId}/address`;
+};
+
+// Company Animals
+
+export const typesOfFeedingUrl = companiesUrl + "types_of_feeding";
+export const animalGroupsUrl = (typeOfFeedingId: string) => {
+  return companiesUrl + `${typeOfFeedingId}/animal_groups`;
+};
+export const speciesUrl = (animalGroupId: string) => {
+  return companiesUrl + `${animalGroupId}/species`;
+};
+export const gendersUrl = (speciesId: string) => {
+  return companiesUrl + `${speciesId}/genders`;
+};
+export const usageTypesUrls = companiesUrl + "usage_types";
+export const uploadAnimalsUrl = (companyId: number) => {
+  return companyDetailUrl(companyId) + "/animals/upload";
+};
+
+export const companyAnimalsUrl = (companyId: number) => {
+  return companyDetailUrl(companyId) + "/animals";
+};
+export const companyAnimalUpdateUrl = (
+  companyId: number,
+  animalId?: number
+) => {
+  return companyAnimalsUrl(companyId) + `/${animalId}`;
+};
+
 // Drugs
 export const drugsUrl = "/api/drugs";
 export const drugDetailUrl = (id?: number) => {
