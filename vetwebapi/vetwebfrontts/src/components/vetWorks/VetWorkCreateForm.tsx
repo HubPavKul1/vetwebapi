@@ -36,9 +36,15 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
     handleSubmit,
     formState: { errors },
   } = methods;
-  
-  const { mutate } = useCreateItem("create vetWork", url, queryKey, "Мероприятие успешно добавлено!", reset);
-    
+
+  const { mutate } = useCreateItem(
+    "create vetWork",
+    url,
+    queryKey,
+    "Мероприятие успешно добавлено!",
+    reset
+  );
+
   const createVetWork: SubmitHandler<IVetworkCreate> = (data) => {
     mutate(data);
   };

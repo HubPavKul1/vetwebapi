@@ -1,4 +1,4 @@
-import { FileUpload } from "../../fileUpload";
+import { FileUpload } from "../../FileUpload";
 import { Link } from "react-router-dom";
 
 import styles from "./CatalogCardImage.module.scss";

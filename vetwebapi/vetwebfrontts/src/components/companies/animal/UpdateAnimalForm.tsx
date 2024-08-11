@@ -6,7 +6,7 @@ import { FormInputProps } from "../../../interfaces/FormInterface";
 
 import { useParams } from "react-router-dom";
 import { useUpdateItemPartial } from "../../../hooks/useUpdateItemPartial";
-import { companyAnimalUpdateUrl } from "../../../Urls";
+import { companyAnimalUrl } from "../../../Urls";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;
@@ -46,7 +46,7 @@ export function UpdateAnimalForm({
 
   const { mutate } = useUpdateItemPartial(
     "update animal",
-    companyAnimalUpdateUrl(companyId, animal.id),
+    companyAnimalUrl(companyId, animal.id),
     "company",
     "Данные успешно обновлены!",
     reset,

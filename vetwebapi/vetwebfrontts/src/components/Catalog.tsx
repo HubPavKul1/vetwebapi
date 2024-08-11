@@ -1,8 +1,8 @@
 import { Row } from "react-bootstrap";
 
-import { CreateItem } from "../createItem";
-import { PageWrapper } from "../PageWrapper";
-import NoData from "../NoData";
+import { CreateItem } from "./CreateItem";
+import { PageWrapper } from "./PageWrapper";
+import NoData from "./NoData";
 
 interface CatalogProps {
   title: string;

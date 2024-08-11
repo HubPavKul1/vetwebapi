@@ -2,7 +2,6 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { CustomButton } from "../CustomButton";
 
-
 import { useParams } from "react-router-dom";
 import { CompanySelect } from "./CompanySelect";
 import { ICompanyInVetWorkIn } from "../../interfaces/CompanyInterfaces";
@@ -29,9 +28,15 @@ export function AddCompanyToVetWorkForm({
     handleSubmit,
     formState: { errors },
   } = methods;
-  
-  const { mutate } = useCreateItem("addCompanyToVetWork", url, queryKey, "Предприятие успешно добавлено!", reset, id);
-    
+
+  const { mutate } = useCreateItem(
+    "addCompanyToVetWork",
+    url,
+    queryKey,
+    "Предприятие успешно добавлено!",
+    reset,
+    id
+  );
 
   const addCompanyToVetWork: SubmitHandler<ICompanyInVetWorkIn> = (data) => {
     mutate(data);

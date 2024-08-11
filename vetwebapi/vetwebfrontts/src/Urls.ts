@@ -46,11 +46,21 @@ export const uploadAnimalsUrl = (companyId: number) => {
 export const companyAnimalsUrl = (companyId: number) => {
   return companyDetailUrl(companyId) + "/animals";
 };
-export const companyAnimalUpdateUrl = (
-  companyId: number,
-  animalId?: number
-) => {
+export const companyAnimalUrl = (companyId: number, animalId?: number) => {
   return companyAnimalsUrl(companyId) + `/${animalId}`;
+};
+
+// Company employee
+export const companyEmployeesUrl = (companyId: number) => {
+  return companyDetailUrl(companyId) + "/employees";
+};
+
+export const positionsUrl = companiesUrl + "positions";
+export const companyEmployeeDetailUrl = (
+  companyId: number,
+  employeeId?: number
+) => {
+  return companyEmployeesUrl(companyId) + `/${employeeId}`;
 };
 
 // Drugs
@@ -79,6 +89,15 @@ export const drugNamesUrl = drugsUrl + "/drug_names";
 
 // catalog drugs
 export const catalogDrugsUrl = drugsUrl + "/catalog";
+
+// drug receipts
+export const drugReceiptsUrl = drugsUrl + "/receipts";
+export const drugReceiptDetailUrl = (receiptId?: number) => {
+  return drugReceiptsUrl + `/${receiptId}`;
+};
+export const drugReceiptsLink = (receiptId?: number) => {
+  return `/drugs/receipts/${receiptId}`;
+};
 
 // create drug selects urls
 export const placesOfAdministrationUrl = drugsUrl + "/places_of_administration";

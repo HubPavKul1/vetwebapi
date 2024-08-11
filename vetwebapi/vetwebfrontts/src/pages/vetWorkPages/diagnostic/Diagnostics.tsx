@@ -8,7 +8,7 @@ export function Diagnostics() {
     <VetWorks
       url={url}
       createForm={<VetWorkCreateForm url={url} queryKey={queryKey} />}
-      imgSrc="diagnostic.jpg"
+      imgSrc="/diagnostic.jpg"
       title="Диагностические исследования"
       btnTitle="Добавить диагностику"
       queryKey={queryKey}

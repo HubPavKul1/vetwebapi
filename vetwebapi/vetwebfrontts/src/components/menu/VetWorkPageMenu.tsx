@@ -1,4 +1,4 @@
-import { Menu } from "../menuComponent";
+import { Menu } from "../Menu";
 import { AddCompanyToVetWork } from "../vetWorks/AddCompanyToVetWork";
 import { AddDrugToVetWork } from "../vetWorks/AddDrugToVetWork";
 import { CustomButton } from "../CustomButton";
@@ -47,22 +47,20 @@ export function VetWorkPageMenu({
 
     {
       id: 2,
-      element: workType === "диагностика" && disease !== "туберкулез" ? 
-      (
-        <CustomButton
-          className="btn-submit"
-          title="Опись к сопроводительной"
-          onClick={() => showReferralAnimalList(true)}
-        />
-      ) :
-      
-      (
-        <CustomButton
-          className="btn-submit"
-          title="Опись животных"
-          onClick={() => showAnimalsList(true)}
-        />
-      ),
+      element:
+        workType === "диагностика" && disease !== "туберкулез" ? (
+          <CustomButton
+            className="btn-submit"
+            title="Опись к сопроводительной"
+            onClick={() => showReferralAnimalList(true)}
+          />
+        ) : (
+          <CustomButton
+            className="btn-submit"
+            title="Опись животных"
+            onClick={() => showAnimalsList(true)}
+          />
+        ),
     },
   ];
 

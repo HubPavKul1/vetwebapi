@@ -1,11 +1,10 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
+import { positionsUrl } from "../../../Urls";
 
 export function PositionsSelect() {
-  const url = "/api/companies/positions";
+  const { data, isLoading } = useGetData("positions", positionsUrl);
 
-  const { data, isLoading } = useGetData("positions", url);
- 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
   return (

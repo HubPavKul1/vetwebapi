@@ -11,11 +11,11 @@ import {
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "../../../hooks/useCreateItem";
+import { companyEmployeesUrl } from "../../../Urls";
 
 export function AddEmployeeForm() {
   const { id } = useParams();
-
-  const url = `/api/companies/${id}/employees/`;
+  const companyId = Number(id);
 
   const inputItems: FormInputProps<IEmployeeCreate>[] = [
     { fieldName: "lastname", placeholder: "Введите фамилию *" },
@@ -34,8 +34,14 @@ export function AddEmployeeForm() {
     formState: { errors },
   } = methods;
 
-  const { mutate } = useCreateItem("create employee", url, "company", "Работник успешно добавлен!", reset, id);
-  
+  const { mutate } = useCreateItem(
+    "create employee",
+    companyEmployeesUrl(companyId),
+    "company",
+    "Работник успешно добавлен!",
+    reset,
+    id
+  );
 
   const createEmployee: SubmitHandler<IEmployeeCreate> = (data) => {
     console.log("employee: ", data);

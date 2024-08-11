@@ -8,16 +8,18 @@ import { Col, Container, Row } from "react-bootstrap";
 
 import { AnimalFormItem } from "./AnimalFormItem";
 import { useState } from "react";
-import { IAnimalInVetwork, IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
+import {
+  IAnimalInVetwork,
+  IAnimalInVetworkIn,
+} from "../../../interfaces/VetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useGetDataById } from "../../../hooks/useGetDataById";
-
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
   setAnimals: CallableFunction;
   workType: string;
-  choosenAnimals?: IAnimalInVetwork[]
+  choosenAnimals?: IAnimalInVetwork[];
 }
 
 interface CompanyData {
@@ -29,10 +31,10 @@ export function AddAnimalsToVetWorkForm({
   companyId,
   setAnimals,
   workType,
-  choosenAnimals
+  choosenAnimals,
 }: AddAnimalsToVetWorkFormProps) {
   const [animalsData, setAnimalsData] = useState<IAnimalInVetworkIn[]>([]);
-  
+
   const { id } = useParams();
 
   const companyUrl = `/api/companies/${companyId}`;
@@ -48,7 +50,7 @@ export function AddAnimalsToVetWorkForm({
   });
 
   const { mutate } = useMutation({
-    mutationKey: ["add animals"], 
+    mutationKey: ["add animals"],
     mutationFn: (data: IAnimalInVetworkIn[]) =>
       AppService.createItem(url, data),
     onSuccess: () => {
@@ -58,8 +60,11 @@ export function AddAnimalsToVetWorkForm({
     },
   });
 
-  const { isLoading, data }: CompanyData = useGetDataById("vetworkCompany", companyUrl, id);
-    
+  const { isLoading, data }: CompanyData = useGetDataById(
+    "vetworkCompany",
+    companyUrl,
+    id
+  );
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
@@ -67,11 +72,12 @@ export function AddAnimalsToVetWorkForm({
 
   const animals = data.animals;
 
-  const choosenAnimalsIds = choosenAnimals && choosenAnimals.map(animal => animal.animal_id)
+  const choosenAnimalsIds =
+    choosenAnimals && choosenAnimals.map((animal) => animal.animal_id);
 
-  const unchoosenAnimals = choosenAnimalsIds?.length ? animals.filter(animal => !choosenAnimalsIds.includes(animal.id)) : animals
-  
-
+  const unchoosenAnimals = choosenAnimalsIds?.length
+    ? animals.filter((animal) => !choosenAnimalsIds.includes(animal.id))
+    : animals;
 
   const addAnimals: SubmitHandler<IAnimalInVetworkIn[]> = (animalsData) => {
     mutate(animalsData);
@@ -81,7 +87,7 @@ export function AddAnimalsToVetWorkForm({
   const backButtonOnClick = () => {
     setAnimalsData([]);
     setAnimals(false);
-  }
+  };
 
   return (
     <Container className="mb-8 p-8">
@@ -97,11 +103,8 @@ export function AddAnimalsToVetWorkForm({
           <Col>Вид животного</Col>
           <Col>Кличка</Col>
           <Col>Дозировка препарата</Col>
-          {workType === "диагностика" &&
-          <Col>Положительная реакция</Col>
-          }
+          {workType === "диагностика" && <Col>Положительная реакция</Col>}
           <Col>Выбрать / отменить</Col>
-
         </Row>
 
         {unchoosenAnimals.map((animal) => (

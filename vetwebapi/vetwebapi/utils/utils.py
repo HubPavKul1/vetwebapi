@@ -118,7 +118,7 @@ async def add_horses_species(session: AsyncSession, horse_group_id: int) -> None
         await create_species(session=session, animal_group_id=horse_group_id, name=name)
         for name in names
     ]
-    await add_horse_genders(session=session, species_id=horse_species_ids[0])
+    await add_horse_genders(session=session, species_ids=horse_species_ids)
 
 
 async def add_cows_species(session: AsyncSession, cows_group_id: int) -> list[int]:
@@ -137,10 +137,10 @@ async def add_cows_species(session: AsyncSession, cows_group_id: int) -> list[in
     await add_cows_genders(session=session, species_ids=cows_species_ids)
 
 
-async def add_horse_genders(session: AsyncSession, species_id: int) -> None:
+async def add_horse_genders(session: AsyncSession, species_ids: list[int]) -> None:
     names = ["жеребец", "кобыла", "мерин"]
-    [await create_gender(session=session, name=name, species_id=species_id) for name in names]
-    [await create_gender(session=session, name=name, species_id=species_id) for name in names]
+    for id in species_ids:
+        [await create_gender(session=session, name=name, species_id=id) for name in names]
 
 
 async def add_cows_genders(session: AsyncSession, species_ids: list[int]) -> None:

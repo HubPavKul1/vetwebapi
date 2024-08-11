@@ -1,12 +1,11 @@
-import { CreateItem } from "../../../components/createItem";
+import { CreateItem } from "../../../components/CreateItem";
 import { ReportForm } from "../../../components/ReportForm";
 import { ReportBetweenDateRangeProps } from "../../../interfaces/ReportInterfaces";
-
 
 export function DiagnosticBetweenDateRange({
   setReportData,
   setDateRange,
-  setReportActive
+  setReportActive,
 }: ReportBetweenDateRangeProps) {
   return (
     <CreateItem btnTitle="Отчет по диагностическим исследованиям за период времени">

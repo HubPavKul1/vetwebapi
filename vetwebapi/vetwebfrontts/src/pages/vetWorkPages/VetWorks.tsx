@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Catalog } from "../../components/catalog";
+import { Catalog } from "../../components/Catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 
 import { AppService } from "../../app.service";
@@ -31,9 +31,9 @@ export function VetWorks({
   imgSrc,
   queryKey,
 }: VetWorksProps) {
-  const { data, isLoading, error, isError } = useGetData( queryKey, url);
-   
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  const { data, isLoading, error, isError } = useGetData(queryKey, url);
+
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
   return (
@@ -44,7 +44,8 @@ export function VetWorks({
       cardsInRow={4}
       dataLength={data && data.vetworks && data.vetworks.length}
     >
-      {data && data.vetworks.length &&
+      {data &&
+        data.vetworks.length &&
         data.vetworks.map((vetWork) => (
           <CatalogItem
             key={vetWork.id}

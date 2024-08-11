@@ -17,7 +17,7 @@ export function PageTable({ ...props }: PageTableProps) {
             ))}
           </tr>
         </thead>
-        <tbody>{props.reportItems}</tbody>
+        <tbody className="text-center border border-black">{props.reportItems}</tbody>
       </Table>
     </>
   );

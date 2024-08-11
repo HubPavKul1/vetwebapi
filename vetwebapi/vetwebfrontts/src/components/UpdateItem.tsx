@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "./modal";
+import { Modal } from "./Modal";
 import { BsPencilSquare } from "react-icons/bs";
 
 interface UpdateItemProps {

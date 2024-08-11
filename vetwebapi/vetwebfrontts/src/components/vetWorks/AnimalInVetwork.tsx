@@ -8,40 +8,73 @@ import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
 import { UpdateItem } from "../UpdateItem";
 
 interface AnimalInVetworkProps {
-    animal: IAnimal;
-    workType: string;
+  animal: IAnimal;
+  workType: string;
+  disease: string;
 }
 
+export function AnimalInVetwork({
+  animal,
+  workType,
+  disease,
+}: AnimalInVetworkProps) {
+  const { id } = useParams();
 
-export function AnimalInVetwork({animal, workType}: AnimalInVetworkProps) {
-    const { id }= useParams()
+  console.log("WORKTYPE>>>>>", workType)
+  console.log("DESEASE", disease)
 
-    const url = `/api/vetwork/${id}/animals/${animal.animal_id}`
+  const url = `/api/vetwork/${id}/animals/${animal.animal_id}`;
 
+  const { mutate } = useDeleteItem(
+    "delete animal",
+    url,
+    "vetwork",
+    "Животное успешно удалено!",
+    id
+  );
 
-    const { mutate } = useDeleteItem("delete animal", url, "vetwork", "Животное успешно удалено!", id);
+  const deleteAnimal = () => {
+    mutate();
+  };
+  const date_of_birth = AppService.convertDateString(
+    animal.date_of_birth
+  ).shortDate;
 
-    const deleteAnimal = () => {
-        mutate()
-    }
-    const date_of_birth = AppService.convertDateString(animal.date_of_birth).shortDate
- 
-    return(
-            <Row key={animal.animal_id}>
-                <Col>{animal.species}</Col>
-                <Col>{animal.gender}</Col>
-                <Col>{date_of_birth}</Col>
-                <Col>{animal.nickname}</Col>
-                <Col>{animal.identification}</Col>
-                <Col>{animal.dosage}</Col>
-                {animal.is_positive ? <Col className="text-red-600 font-bold">Положительный!</Col> : <Col>Отрицательный</Col>}
-                <Col>
-                    <UpdateItem>
-                        <UpdateAnimalInVetWorkForm animal={animal} workType={workType} url={url}/>
-                    </UpdateItem>
-                </Col>
-                <Col><BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal}/></Col>
-             </Row>
-        )                
+  return (
+    <tr key={animal.animal_id}>
+      <td>{animal.species}</td>
+      <td>{animal.gender}</td>
+      <td>{date_of_birth}</td>
+      <td>{animal.nickname}</td>
+      <td>{animal.identification}</td>
+      {workType === "вакцинация" ||
+        (workType === "диагностика" && disease === "туберкулез" && (
+          <>
+            <td>{animal.dosage}</td>
+            <td>
+              <UpdateItem>
+                <UpdateAnimalInVetWorkForm
+                  url=""
+                  animal={animal}
+                  workType={workType}
+                />
+              </UpdateItem>
+            </td>
+          </>
+        ))}
 
+      {workType === "диагностика" &&
+        (animal.is_positive ? (
+          <td className="text-red-600 font-bold">Положительный!</td>
+        ) : (
+          <td>Отрицательный</td>
+        ))
+
+        }
+      
+      <td>
+        <BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal} />
+      </td>
+    </tr>
+  );
 }

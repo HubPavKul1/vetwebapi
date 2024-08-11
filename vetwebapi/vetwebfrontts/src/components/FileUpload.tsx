@@ -1,9 +1,8 @@
 import { useId } from "react";
 import { useForm } from "react-hook-form";
-import styles from "./FileUpload.module.scss";
 import { Container } from "react-bootstrap";
 import { LiaFileDownloadSolid } from "react-icons/lia";
-import { useUpload } from "../../hooks/useUpload";
+import { useUpload } from "../hooks/useUpload";
 
 interface FileUploadProps {
   accept?: string;
@@ -24,16 +23,14 @@ export function FileUpload({
 
   const { reset } = useForm<FileList>();
 
-  const { mutate} = useUpload(
+  const { mutate } = useUpload(
     reset,
     uploadUrl,
     mutationName,
     invQueryName,
-    "Файл успешно загружен!",
-    
+    "Файл успешно загружен!"
   );
 
- 
   const upload = async (currentFile: File) => {
     if (!currentFile) return;
     const formData = new FormData();
@@ -45,11 +42,14 @@ export function FileUpload({
     const { files } = event.target;
     const selectedFiles = files as FileList;
     upload(selectedFiles?.[0]);
-  }; 
+  };
 
   return (
     <Container className="max-h-4 hover:scale-125 transition-transform cursor-pointer">
-      <label htmlFor={id} className={styles.fileLabel}>
+      <label
+        htmlFor={id}
+        className="flex items-center justify-center cursor-pointer w-full h-full"
+      >
         <input
           type="file"
           id={id}
@@ -58,7 +58,7 @@ export function FileUpload({
           onChange={selectFile}
         />
         <img src={iconSrc} />
-        <LiaFileDownloadSolid fontSize={20} color="red"/>
+        <LiaFileDownloadSolid fontSize={20} color="red" />
       </label>
     </Container>
   );
