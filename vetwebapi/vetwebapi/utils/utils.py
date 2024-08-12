@@ -11,6 +11,8 @@ from api_v1.company.animal.crud import (
     create_gender,
     create_species,
     create_usage_type,
+    read_types_of_feeding,
+    read_animal_groups,
 )
 from api_v1.company.address.crud import create_region, create_district, create_city, create_street
 from api_v1.company.employee.crud import create_position
@@ -79,7 +81,7 @@ async def add_positions(session: AsyncSession) -> None:
 
 
 # Animals
-async def add_type_of_feeding(session: AsyncSession) -> list[int]:
+async def add_type_of_feeding(session: AsyncSession) -> None:
     names = [
         "Травоядные",
         "Дикие плотоядные",
@@ -88,21 +90,21 @@ async def add_type_of_feeding(session: AsyncSession) -> list[int]:
         "Всеядные",
         "Грызуны",
     ]
-    return [await create_type_of_feeding(session=session, name=name) for name in names]
+    types_of_feedings_ids = [
+        await create_type_of_feeding(session=session, name=name) for name in names
+    ]
+    await add_animals_group(session=session, type_of_feeding_id=types_of_feedings_ids[0])
 
 
-async def add_horses_group(session: AsyncSession) -> int:
-    type_of_feeding_ids = await add_type_of_feeding(session=session)
-    return await create_animal_group(
-        session=session, type_of_feeding_id=type_of_feeding_ids[0], name="Лошади"
+async def add_animals_group(session: AsyncSession, type_of_feeding_id: int) -> None:
+    horse_group_ids = await create_animal_group(
+        session=session, type_of_feeding_id=type_of_feeding_id, name="Лошади"
     )
-
-
-async def add_cows_group(session: AsyncSession) -> int:
-    type_of_feeding_ids = await add_type_of_feeding(session=session)
-    return await create_animal_group(
-        session=session, type_of_feeding_id=type_of_feeding_ids[0], name="Крупный рогатый скот"
+    cows_groups_ids = await create_animal_group(
+        session=session, type_of_feeding_id=type_of_feeding_id, name="Крупный рогатый скот"
     )
+    await add_horses_species(session=session, horse_group_id=horse_group_ids)
+    await add_cows_species(session=session, cows_group_id=cows_groups_ids)
 
 
 async def add_usage_types(session: AsyncSession) -> None:
@@ -110,17 +112,16 @@ async def add_usage_types(session: AsyncSession) -> None:
     [await create_usage_type(session=session, name=name) for name in names]
 
 
-async def add_horses_species(session: AsyncSession) -> list[int]:
-    animal_group_id = await add_horses_group(session=session)
+async def add_horses_species(session: AsyncSession, horse_group_id: int) -> None:
     names = ["Лошади", "Пони"]
-    return [
-        await create_species(session=session, animal_group_id=animal_group_id, name=name)
+    horse_species_ids = [
+        await create_species(session=session, animal_group_id=horse_group_id, name=name)
         for name in names
     ]
+    await add_horse_genders(session=session, species_ids=horse_species_ids)
 
 
-async def add_cows_species(session: AsyncSession) -> list[int]:
-    animal_group_id = await add_cows_group(session=session)
+async def add_cows_species(session: AsyncSession, cows_group_id: int) -> list[int]:
     names = [
         "Крупный рогатый скот",
         "Як домашний",
@@ -129,20 +130,20 @@ async def add_cows_species(session: AsyncSession) -> list[int]:
         "Олень северный",
         "Лань европейская",
     ]
-    return [
-        await create_species(session=session, animal_group_id=animal_group_id, name=name)
+    cows_species_ids = [
+        await create_species(session=session, animal_group_id=cows_group_id, name=name)
         for name in names
     ]
+    await add_cows_genders(session=session, species_ids=cows_species_ids)
 
 
-async def add_horse_genders(session: AsyncSession) -> None:
+async def add_horse_genders(session: AsyncSession, species_ids: list[int]) -> None:
     names = ["жеребец", "кобыла", "мерин"]
-    [await create_gender(session=session, name=name, species_id=1) for name in names]
-    [await create_gender(session=session, name=name, species_id=2) for name in names]
+    for id in species_ids:
+        [await create_gender(session=session, name=name, species_id=id) for name in names]
 
 
-async def add_cows_genders(session: AsyncSession) -> None:
-    species_ids = await add_cows_species(session=session)
+async def add_cows_genders(session: AsyncSession, species_ids: list[int]) -> None:
     names = ["бык", "корова", "телка", "бычок", "самец", "самка"]
     for id in species_ids:
         [await create_gender(session=session, name=name, species_id=id) for name in names]
@@ -308,10 +309,11 @@ async def prepare_db(session: AsyncSession) -> None:
     """Подготовка базы данных при первом запуске"""
     await fill_street_table(session=session)
     await add_positions(session=session)
+    await add_type_of_feeding(session=session)
     await add_usage_types(session=session)
-    await add_horses_species(session=session)
-    await add_horse_genders(session=session)
-    await add_cows_genders(session=session)
+    # await add_horses_species(sess(ion=session)
+    # await add_horse_genders(session=session)
+    # await add_cows_genders(session=session)
     await add_drugs_data(session=session)
     await add_vet_works_data(session=session)
     await add_roles(session=session)

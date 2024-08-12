@@ -1,10 +1,10 @@
 import { IAnimal } from "../../../../interfaces/AnimalInterfaces";
 import { AppService } from "../../../../app.service";
-import { Col, Row } from "react-bootstrap";
 
 import { UpdateItem } from "../../../UpdateItem";
 import { UpdateAnimalForm } from "../UpdateAnimalForm";
 import { DeleteItem } from "../../../DeleteItem";
+import { companyAnimalUrl } from "../../../../Urls";
 
 interface CompanyAnimalProps {
   animal: IAnimal;
@@ -13,8 +13,6 @@ interface CompanyAnimalProps {
 
 export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
   const id = companyId.toString();
-
-  const url = `/api/companies/${id}/animals/${animal.id}`;
 
   const date_of_birth = AppService.convertDateString(
     animal.date_of_birth
@@ -66,7 +64,7 @@ export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
           queryKey="company"
           mutationKey="deleteAnimal"
           alertMessage="Животное успешно удалено!"
-          url={url}
+          url={companyAnimalUrl(companyId, animal.id)}
         />
       </td>
     </tr>

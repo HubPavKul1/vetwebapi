@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { FileUpload } from "../fileUpload";
+import { FileUpload } from "../FileUpload";
 import { DeleteItem } from "../DeleteItem";
 
 interface CatalogCardFooterProps {

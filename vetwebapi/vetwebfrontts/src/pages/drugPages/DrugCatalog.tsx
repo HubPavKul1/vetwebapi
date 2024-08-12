@@ -1,4 +1,4 @@
-import { Catalog } from "../../components/catalog";
+import { Catalog } from "../../components/Catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
@@ -18,9 +18,8 @@ export function DrugCatalog() {
   const url = "/api/drugs/catalog";
 
   const { data, isLoading, isError, error } = useGetData("drugCatalog", url);
-    
 
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
   return (
@@ -30,16 +29,16 @@ export function DrugCatalog() {
       createForm={<CreateCatalogDrugForm />}
       cardsInRow={3}
       dataLength={data && data.catalog_drugs && data.catalog_drugs.length}
-      
     >
-
-        {data && data.catalog_drugs && data.catalog_drugs.length
-          && data.catalog_drugs.map((drug) => 
-          <CatalogItem 
+      {data &&
+        data.catalog_drugs &&
+        data.catalog_drugs.length &&
+        data.catalog_drugs.map((drug) => (
+          <CatalogItem
             key={drug.id}
             delUrl={`/api/drugs/catalog/${drug.id}`}
             url={`/drugs/catalog/${drug.id}`}
-            imgSrc={!drug.image ? "drugsCard.jpg": drug.image}
+            imgSrc={!drug.image ? "drugsCard.jpg" : drug.image}
             invQueryName="drugCatalog"
             cardTitle={drug.name}
             id={drug.id}
@@ -47,13 +46,15 @@ export function DrugCatalog() {
             <CatalogDrugCardBody
               batch={drug.batch}
               control={drug.control}
-              expiration_date={AppService.convertDateString(drug.expiration_date).shortDate}
-              production_date={AppService.convertDateString(drug.production_date).shortDate}
-              
+              expiration_date={
+                AppService.convertDateString(drug.expiration_date).shortDate
+              }
+              production_date={
+                AppService.convertDateString(drug.production_date).shortDate
+              }
             />
           </CatalogItem>
-        )}
-
+        ))}
     </Catalog>
   );
 }

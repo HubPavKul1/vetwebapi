@@ -1,6 +1,7 @@
 from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
+
 # from operator import and_, or_
 from datetime import date
 
@@ -22,13 +23,12 @@ async def create_receipt(session: AsyncSession, body: DrugMovementIn) -> DrugMov
 async def add_drug_to_movement(
     session: AsyncSession, body: DrugInMovementIn, drug_movement_id: int
 ) -> DrugInMovement:
-    
+
     new_drug = DrugInMovement(**body.model_dump())
     new_drug.drug_movement_id = drug_movement_id
     session.add(new_drug)
     await session.commit()
     return new_drug
-    
 
 
 # Read
@@ -50,32 +50,46 @@ async def read_receipts(session: AsyncSession) -> list[DrugMovement]:
     )
     return list(await session.scalars(stmt))
 
+
 async def read_receipts_with_drugs(session: AsyncSession) -> list[DrugMovement]:
     stmt = (
         select(DrugMovement)
-        .options(selectinload(DrugMovement.catalog_drugs_details)
-        .joinedload(DrugInMovement.catalog_drug
-        ))
+        .options(
+            selectinload(DrugMovement.catalog_drugs_details).joinedload(DrugInMovement.catalog_drug)
+        )
         .where(DrugMovement.operation_id == 1)
         .order_by(desc(DrugMovement.operation_date))
     )
-    
+
     return list(await session.scalars(stmt))
 
 
-async def read_drugs_in_drug_movement(session: AsyncSession, drug_movement: DrugInMovement) -> list[DrugInMovement]:
+async def read_drugs_in_drug_movement(
+    session: AsyncSession, drug_movement: DrugInMovement
+) -> list[DrugInMovement]:
     stmt = (
         select(DrugInMovement)
-        .options(joinedload(DrugInMovement.catalog_drug)
-        )
+        .options(joinedload(DrugInMovement.catalog_drug))
         .where(DrugInMovement.drug_movement_id == drug_movement.id)
-    
     )
-    
+
     return list(await session.scalars(stmt))
 
-    
+
+async def read_drugs_in_drug_movement_relation(
+    session: AsyncSession, drug_movement: DrugInMovement
+) -> list[DrugInMovement]:
+    stmt = select(DrugInMovement).where(DrugInMovement.drug_movement_id == drug_movement.id)
+
+    return list(await session.scalars(stmt))
+
+
 # Delete
 async def delete_drug_movement(session: AsyncSession, drug_movement: DrugMovement) -> None:
+    drugs_in_movement = await read_drugs_in_drug_movement_relation(
+        session=session, drug_movement=drug_movement
+    )
+    
+    [await session.delete(drug) for drug in drugs_in_movement]
     await session.delete(drug_movement)
     await session.commit()

@@ -12,7 +12,7 @@ class BaseIn(BaseModel):
 class CompanyIn(BaseModel):
     full_name: str
     short_name: str
-    
+
 
 class CompanyCard(CompanyIn):
     id: int

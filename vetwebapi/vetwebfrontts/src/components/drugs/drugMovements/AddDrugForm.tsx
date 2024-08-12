@@ -28,8 +28,14 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
     formState: { errors },
   } = methods;
 
-  const { mutate } = useCreateItem("addDrugToDrugMovement", url, queryKey, "Препарат успешно добавлен!", reset, id);
-  
+  const { mutate } = useCreateItem(
+    "addDrugToDrugMovement",
+    url,
+    queryKey,
+    "Препарат успешно добавлен!",
+    reset,
+    id
+  );
 
   const addDrugToDrugMovement: SubmitHandler<IDrugInMovementIn> = (data) => {
     mutate(data);

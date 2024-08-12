@@ -1,7 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { AppService } from "../app.service"
-
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AppService } from "../app.service";
 
 export function useDeleteItem(
   mutationKey: string,
@@ -10,21 +8,16 @@ export function useDeleteItem(
   alertMessage: string,
   id?: string
 ) {
+  const queryClient = useQueryClient();
 
-  const queryClient = useQueryClient()
+  const { mutate } = useMutation({
+    mutationKey: [mutationKey],
+    mutationFn: () => AppService.deleteItem(url),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKey, id] }),
+        alert(alertMessage);
+    },
+  });
 
-  const {mutate} = useMutation({
-        mutationKey: [mutationKey],
-        mutationFn: () => AppService.deleteItem(url),  
-        onSuccess: () => {
-          queryClient.invalidateQueries({queryKey: [queryKey, id]}),
-          alert(alertMessage)
-          
-        }
-
-    })
-
-  return ({mutate})
+  return { mutate };
 }
-
-

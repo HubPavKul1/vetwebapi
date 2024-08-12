@@ -7,10 +7,9 @@ import { CustomButton } from "../../CustomButton";
 import { IDrugMovementCreate } from "../../../interfaces/DrugInterfaces";
 
 import { useCreateItem } from "../../../hooks/useCreateItem";
+import { drugReceiptsUrl } from "../../../Urls";
 
 export function CreateDrugReceiptForm() {
-  const url = "/api/drugs/receipts";
-
   const inputItems: FormInputProps<IDrugMovementCreate>[] = [
     { fieldName: "operation_date", id: "operation_date", type: "date" },
   ];
@@ -26,7 +25,7 @@ export function CreateDrugReceiptForm() {
 
   const { mutate } = useCreateItem(
     "createReceipt",
-    url,
+    drugReceiptsUrl,
     "drugReceipts",
     "Поступление успешно добавлено!",
     reset

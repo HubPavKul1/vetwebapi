@@ -1,13 +1,11 @@
 import { ReportBetweenDateRangeProps } from "../../../../interfaces/ReportInterfaces";
-import { CreateItem } from "../../../createItem";
+import { CreateItem } from "../../../CreateItem";
 import { ReportForm } from "../../../ReportForm";
-
-
 
 export function DrugMovementBetweenDateRange({
   setReportData,
   setDateRange,
-  setReportActive
+  setReportActive,
 }: ReportBetweenDateRangeProps) {
   return (
     <CreateItem btnTitle="Движение биопрепаратов за период времени">

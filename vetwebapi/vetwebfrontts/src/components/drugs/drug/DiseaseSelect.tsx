@@ -1,8 +1,7 @@
 import AsyncSelect from "react-select/async";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
-import { IBase, IQueryData } from "../../../interfaces/BaseInterface";
-import { OnChangeValue } from "react-select";
+import { IBase } from "../../../interfaces/BaseInterface";
 import { useGetData } from "../../../hooks/useGetData";
 import { diseasesUrl } from "../../../Urls";
 
@@ -35,10 +34,6 @@ export function DiseaseSelect({ isMulti }: DiseaseSelectProps) {
 
   const getValue = (value: number) =>
     value ? options?.find((option: IOption) => option.value === value) : "";
-
-  // const onChange = (newValue: OnChangeValue<IOption, boolean>) => {
-  //     (newValue as IOption[]).map(v => v.value)
-  // }
 
   return (
     <Controller

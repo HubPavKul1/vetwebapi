@@ -1,21 +1,24 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ICompanyCreate } from "../../../interfaces/CompanyInterfaces";
-import { Input } from "../../Input";
-import { FormInputProps } from "../../../interfaces/FormInterface";
+import { ICompanyCreate } from "../../interfaces/CompanyInterfaces";
+import { Input } from "../Input";
+import { FormInputProps } from "../../interfaces/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,
   minLenErrorMessage,
-} from "../../ErrorMessages";
-import { CustomButton } from "../../CustomButton";
-import { useCreateItem } from "../../../hooks/useCreateItem";
+} from "../ErrorMessages";
+import { CustomButton } from "../CustomButton";
+import { useCreateItem } from "../../hooks/useCreateItem";
 
 interface CreateCompanyFormProps {
   url: string;
   invQueryName: string;
 }
 
-export function CreateCompanyForm({ url, invQueryName }: CreateCompanyFormProps) {
+export function CreateCompanyForm({
+  url,
+  invQueryName,
+}: CreateCompanyFormProps) {
   const inputItems: FormInputProps<ICompanyCreate>[] = [
     { fieldName: "full_name", placeholder: "Введите полное наименование *" },
     { fieldName: "short_name", placeholder: "Введите краткое наименование *" },
@@ -30,9 +33,13 @@ export function CreateCompanyForm({ url, invQueryName }: CreateCompanyFormProps)
     mode: "onChange",
   });
 
-
-  const { mutate } = useCreateItem(invQueryName, url, invQueryName, "Предприятие успешно добавлено!", reset)
-
+  const { mutate } = useCreateItem(
+    invQueryName,
+    url,
+    invQueryName,
+    "Предприятие успешно добавлено!",
+    reset
+  );
 
   const createCompany: SubmitHandler<ICompanyCreate> = (data) => {
     mutate(data);

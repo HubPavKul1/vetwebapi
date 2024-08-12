@@ -8,22 +8,19 @@ import { CustomButton } from "../CustomButton";
 import { AppService } from "../../app.service";
 import { IDateRange } from "../../interfaces/BaseInterface";
 
-
 interface ReportFormProps {
   setReportData: CallableFunction;
   setDateRange: CallableFunction;
   setReportActive: CallableFunction;
-  url: string
+  url: string;
 }
 
 export function ReportForm({
   setReportData,
   setDateRange,
   setReportActive,
-  url
+  url,
 }: ReportFormProps) {
- 
-
   const {
     register,
     reset,
@@ -33,19 +30,18 @@ export function ReportForm({
     mode: "onChange",
   });
 
- 
   const { mutate } = useMutation({
-
     mutationKey: ["createReport"],
-    mutationFn: (dateRange: IDateRange) => AppService.createReport(url, dateRange),
+    mutationFn: (dateRange: IDateRange) =>
+      AppService.createReport(url, dateRange),
     onSuccess: (data, dateRange) => {
-        alert("Отчет успешно выполнен!");
-        reset();
-        setReportData(data);
-        setDateRange(dateRange);
-        setReportActive(true)
-      },
-    });
+      alert("Отчет успешно выполнен!");
+      reset();
+      setReportData(data);
+      setDateRange(dateRange);
+      setReportActive(true);
+    },
+  });
 
   const createDrugReport: SubmitHandler<IDateRange> = (dateRange) => {
     mutate(dateRange);

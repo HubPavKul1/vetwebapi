@@ -3,23 +3,23 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { CustomButton } from "../../CustomButton";
 import { useUpload } from "../../../hooks/useUpload";
+import { uploadAnimalsUrl } from "../../../Urls";
 
 export function UploadAnimalForm() {
   const { id } = useParams();
-  const url = `/api/companies/${id}/animals/upload`;
+  const companyId = Number(id);
 
   const [currentFile, setCurrentFile] = useState<File>();
   const { reset } = useForm<FileList>();
 
   const { mutate } = useUpload(
+    reset,
+    uploadAnimalsUrl(companyId),
     "uploadAnimals",
-    url,
     "company",
     "Животные успешно добавлены!",
-    reset,
     id
   );
-
 
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;

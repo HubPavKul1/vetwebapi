@@ -16,10 +16,10 @@ import {
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "../../../hooks/useCreateItem";
+import { addressUrl } from "../../../Urls";
 
 export function AddAddressForm() {
   const { id } = useParams();
-  const url = `/api/companies/${id}/address`;
 
   const rulesOptions: RegisterOptions = {
     required: { value: true, message: fieldRequiredMessage },
@@ -57,7 +57,14 @@ export function AddAddressForm() {
     formState: { errors },
   } = methods;
 
-  const { mutate } = useCreateItem("create address", url, "company", "Адрес успешно добавлен!", reset, id);
+  const { mutate } = useCreateItem(
+    "create address",
+    addressUrl(id),
+    "company",
+    "Адрес успешно добавлен!",
+    reset,
+    id
+  );
 
   const createAddress: SubmitHandler<IAddressIn> = (data) => {
     mutate(data);

@@ -6,14 +6,7 @@ from fastapi import File, UploadFile
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.models import (
-    Animal,
-    AnimalGroup,
-    Gender,
-    Species,
-    TypeOfFeeding,
-    UsageType,
-)
+from core.models import Animal, AnimalGroup, Gender, Species, TypeOfFeeding, UsageType
 
 from .schemas import AnimalIn, AnimalUpdate, AnimalUpdatePartial
 

@@ -1,4 +1,4 @@
-import { Catalog } from "../../components/catalog";
+import { Catalog } from "../../components/Catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
 
@@ -46,9 +46,7 @@ export function Drugs() {
             fileUploadUrl={drugFileUploadUrl(drug.id)}
             iconSrc="/pdf.jpg"
           >
-            <DrugCardBody
-              drugManufacturer={drug.drug_manufacturer}
-            />
+            <DrugCardBody drugManufacturer={drug.drug_manufacturer} />
           </CatalogItem>
         ))}
     </Catalog>

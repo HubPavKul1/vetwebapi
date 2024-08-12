@@ -1,4 +1,9 @@
-import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import { CustomButton } from "../CustomButton";
 
 interface FormWrapperProps {
@@ -14,8 +19,8 @@ export function FormWrapper({ children, submitFunction }: FormWrapperProps) {
   const { handleSubmit } = methods;
 
   const onSave = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
     <FormProvider {...methods}>

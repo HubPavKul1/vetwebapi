@@ -8,7 +8,7 @@ export function Vaccinations() {
     <VetWorks
       url={url}
       createForm={<VetWorkCreateForm url={url} queryKey={queryKey} />}
-      imgSrc="vetworkBg.jpg"
+      imgSrc="/vetworkBg.jpg"
       title="Вакцинации"
       btnTitle="Добавить вакцинацию"
       queryKey={queryKey}

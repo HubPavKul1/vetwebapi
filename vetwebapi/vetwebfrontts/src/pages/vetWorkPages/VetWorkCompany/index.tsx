@@ -7,6 +7,8 @@ import { CustomButton } from "../../../components/CustomButton";
 import { CompanyAddress } from "../../../components/companies/address/CompanyAddress";
 import { IAnimalInVetwork } from "../../../interfaces/VetWorkInterfaces";
 import { AnimalInVetwork } from "../../../components/vetWorks/AnimalInVetwork";
+import { PageTable } from "../../../components/PageTable";
+import { animalInVetWorkHeaders } from "../../../TableHeaders";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
@@ -14,14 +16,16 @@ interface VetWorkCompanyProps {
   setCompanyId: CallableFunction;
   animals?: IAnimalInVetwork[];
   workType: string;
+  disease: string;
 }
 
-export function  VetWorkCompany({
+export function VetWorkCompany({
   company,
   setAnimals,
   setCompanyId,
   animals,
-  workType
+  workType,
+  disease,
 }: VetWorkCompanyProps) {
   const addAnimals = (company_id: string) => {
     setAnimals(true);
@@ -48,7 +52,6 @@ export function  VetWorkCompany({
         </Row>
 
         {company.address && <CompanyAddress address={company.address} />}
-
       </div>
 
       <Container className={styles.companyAnimals}>
@@ -57,7 +60,23 @@ export function  VetWorkCompany({
           Всего голов хозяйства :{" "}
           {animals?.filter((animal) => animal.company_id === company.id).length}
         </p>
-        <Row className={styles.tableHead}>
+        <PageTable
+          reportHeaders={animalInVetWorkHeaders(workType, disease)}
+          reportItems={
+            animals?.length &&
+            animals
+              .filter((animal) => animal.company_id === company.id)
+              .map((animal) => (
+                <AnimalInVetwork
+                  key={animal.animal_id}
+                  animal={animal}
+                  workType={workType}
+                  disease={disease}
+                />
+              ))
+          }
+        />
+        {/* <Row className={styles.tableHead}>
           <Col>Вид животных</Col>
           <Col>Пол животных</Col>
           <Col>Дата рождения</Col>
@@ -67,14 +86,18 @@ export function  VetWorkCompany({
           <Col>Результат исследования</Col>
           <Col></Col>
           <Col></Col>
-        </Row>
+        </Row> */}
 
-        {animals?.length &&
+        {/* {animals?.length &&
           animals
             .filter((animal) => animal.company_id === company.id)
             .map((animal) => (
-              <AnimalInVetwork key={animal.animal_id} animal={animal} workType={workType}/>
-            ))}
+              <AnimalInVetwork
+                key={animal.animal_id}
+                animal={animal}
+                workType={workType}
+              />
+            ))} */}
       </Container>
     </Container>
   );

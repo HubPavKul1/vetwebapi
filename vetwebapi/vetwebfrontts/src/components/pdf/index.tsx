@@ -11,8 +11,16 @@ interface PDFProps {
   orientation?: "p" | "l";
 }
 
-export function PDF({ setPdf, filename, orientation="p", children }: PDFProps) {
-  const { toPDF, targetRef } = usePDF({ filename: `${filename}` , page: {orientation: `${orientation}`}});
+export function PDF({
+  setPdf,
+  filename,
+  orientation = "p",
+  children,
+}: PDFProps) {
+  const { toPDF, targetRef } = usePDF({
+    filename: `${filename}`,
+    page: { orientation: `${orientation}` },
+  });
 
   const onClick = () => {
     setPdf(false);

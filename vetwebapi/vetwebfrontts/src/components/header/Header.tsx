@@ -1,7 +1,6 @@
 import { Container } from "react-bootstrap";
 import { LogoLink } from "./logo/Logo";
 
-
 import { NavList } from "./navList/NavList";
 import { CustomButton } from "../CustomButton";
 
@@ -12,7 +11,10 @@ export function Header() {
         <Container className="flex items-center ">
           <LogoLink />
           <NavList />
-          <CustomButton className="text-sm btn-nav btn-transform" title="Войти" />
+          <CustomButton
+            className="text-sm btn-nav btn-transform"
+            title="Войти"
+          />
         </Container>
       </header>
     </>

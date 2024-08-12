@@ -1,5 +1,5 @@
-import { Catalog } from "../catalog";
-import { CreateCompanyForm } from "../../components/companies/createCompany/CreateCompanyForm";
+import { Catalog } from "../Catalog";
+import { CreateCompanyForm } from "./CreateCompanyForm";
 
 import { AppService } from "../../app.service";
 import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
@@ -27,9 +27,8 @@ export function CompaniesCatalog({
 }: CompaniesCatalogProps) {
   const { data, isLoading, isError, error } = useGetData(invQueryName, url);
 
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
-
 
   return (
     <Catalog

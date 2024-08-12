@@ -14,7 +14,7 @@ from core.models import (
     DisposalMethod,
     Dosage,
     PlaceOfAdministration,
-    AdministrationMethod
+    AdministrationMethod,
 )
 
 from core.settings import settings, BASE_DIR
@@ -107,6 +107,7 @@ async def read_places_of_administration(session: AsyncSession) -> list[PlaceOfAd
 async def read_administration_methods(session: AsyncSession) -> list[AdministrationMethod]:
     stmt = select(AdministrationMethod).order_by(AdministrationMethod.name)
     return list(await session.scalars(stmt))
+
 
 # Delete
 async def remove_drug_image(filepath: str) -> None:

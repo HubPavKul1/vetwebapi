@@ -1,9 +1,8 @@
-import { Modal } from "../modal";
+import { Modal } from "./Modal";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 
-import { CustomButton } from "../CustomButton";
-
+import { CustomButton } from "./CustomButton";
 
 interface ICreateItemProps {
   btnTitle?: string;

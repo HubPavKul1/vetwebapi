@@ -132,6 +132,8 @@ export interface IDrugCatalogCard extends IDrugCatalogCreate {
 
 }
 
+
+
 export interface IDrugReport {
     id: number;
     disease?: string;

@@ -52,7 +52,6 @@ async def delete_animal_route(
 
 @router.put("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def update_animal_api(
-    company_id: int,
     body: AnimalUpdate,
     animal: Animal = Depends(animal_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -69,7 +68,6 @@ async def update_animal_api(
 
 @router.patch("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def update_animal_api_partial(
-    company_id: int,
     body: AnimalUpdatePartial,
     animal: Animal = Depends(animal_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

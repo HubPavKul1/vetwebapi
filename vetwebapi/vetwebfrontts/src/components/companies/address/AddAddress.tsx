@@ -1,10 +1,14 @@
 import { AddAddressForm } from "./AddAddressForm";
 
-import { MenuItem } from "../../menuItem";
+import { MenuItem } from "../../MenuItem";
+import { BsBuildingAdd } from "react-icons/bs";
 
 export function AddAddress() {
   return (
-    <MenuItem title="Добавить адрес">
+    <MenuItem
+      title="Добавить адрес"
+      icon={<BsBuildingAdd color="blue" fontSize={30} />}
+    >
       <AddAddressForm />
     </MenuItem>
   );

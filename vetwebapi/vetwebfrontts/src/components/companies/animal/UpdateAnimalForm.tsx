@@ -6,6 +6,7 @@ import { FormInputProps } from "../../../interfaces/FormInterface";
 
 import { useParams } from "react-router-dom";
 import { useUpdateItemPartial } from "../../../hooks/useUpdateItemPartial";
+import { companyAnimalUrl } from "../../../Urls";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;
@@ -21,7 +22,7 @@ export function UpdateAnimalForm({
   updateFieldType,
 }: UpdateAnimalFormProps) {
   const { id } = useParams();
-  const url = `/api/companies/${id}/animals/${animal.id}`;
+  const companyId = Number(id);
 
   const inputItems: FormInputProps<IAnimalUpdate>[] = [
     {
@@ -45,7 +46,7 @@ export function UpdateAnimalForm({
 
   const { mutate } = useUpdateItemPartial(
     "update animal",
-    url,
+    companyAnimalUrl(companyId, animal.id),
     "company",
     "Данные успешно обновлены!",
     reset,

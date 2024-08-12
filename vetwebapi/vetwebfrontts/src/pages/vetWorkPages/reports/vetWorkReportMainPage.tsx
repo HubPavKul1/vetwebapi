@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { IDateRange } from "../../../interfaces/BaseInterface";
-import { Catalog } from "../../../components/catalog";
+import { Catalog } from "../../../components/Catalog";
 import { DiagnosticBetweenDateRange } from "./DiagnosticBetweenDateRange";
 import { DiagnosticReport } from "./DiagnosticReport";
 import { VaccinationReport } from "./VaccinationReport";
 import { VaccinationBetweenDateRange } from "./VaccinationBetweenDateRange";
-
 
 export function VetWorkReportMainPage() {
   const [vetWorkReportData, setVetWorkReportData] = useState<object>({});

@@ -1,6 +1,6 @@
-import { Menu } from "../menuComponent";
+import { Menu } from "../Menu";
 import { CustomButton } from "../CustomButton";
-import { CreateItem } from "../createItem";
+import { CreateItem } from "../CreateItem";
 import { AddDrugForm } from "../drugs/drugMovements/AddDrugForm";
 
 interface ReceiptPageMenuProps {
