@@ -1,4 +1,4 @@
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { CustomButton } from "../CustomButton";
 import { Input } from "../Input";
 import { FormInputProps } from "../../interfaces/FormInterface";
@@ -8,32 +8,49 @@ import { useUpdateItem } from "../../hooks/useUpdateItem";
 import { IAnimalInVetWorkUpdate } from "../../interfaces/VetWorkInterfaces";
 import CustomCheckBox from "../CustomCheckBox";
 import { IAnimal } from "../../interfaces/AnimalInterfaces";
+import { vetWorkAnimalDetailUrl } from "../../Urls";
+import { useUpdateItemPartial } from "../../hooks/useUpdateItemPartial";
 
 interface UpdateAnimalFormProps {
-  url: string;
   animal: IAnimal;
-  workType: string;
+  updateData?: string | number | boolean;
+  updateFieldName: "dosage" | "is_positive";
+  updateFieldType: "number" | "checkbox";
+  className?: string;
 }
 
 export function UpdateAnimalInVetWorkForm({
-  url,
-  workType,
   animal,
+  updateData,
+  updateFieldName,
+  updateFieldType,
+  className,
 }: UpdateAnimalFormProps) {
   const { id } = useParams();
+  const vetWorkId = Number(id);
+
+  const inputItems: FormInputProps<IAnimalInVetWorkUpdate>[] = [
+    {
+      fieldName: updateFieldName,
+      id: updateFieldName,
+      type: updateFieldType,
+    },
+  ];
+
+  const methods = useForm<IAnimalInVetWorkUpdate>({
+    mode: "onChange",
+  });
 
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAnimalInVetWorkUpdate>({
-    mode: "onChange",
-  });
+  } = methods;
 
-  const { mutate } = useUpdateItem(
+  const { mutate } = useUpdateItemPartial(
     "update animalInVetWork",
-    url,
+    vetWorkAnimalDetailUrl(vetWorkId, animal.animal_id),
     "vetwork",
     "Данные успешно обновлены!",
     reset,
@@ -46,38 +63,28 @@ export function UpdateAnimalInVetWorkForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(updateAnimal)}>
-      <div className="mb-2">
-        <input
-          className="form-control"
-          type="number"
-          defaultValue={animal.dosage}
-          id="dosage"
-          placeholder="Дозировка"
-          {...register("dosage")}
-        />
-      </div>
-      {workType.toLowerCase() === "диагностика" && (
-        <div className="form-group mb-2">
-          <label htmlFor="is_positive">
-            Положительно
-            <Input
-              register={register}
-              errors={errors}
-              fieldName="is_positive"
-              type="checkbox"
-              id="is_positive"
-            />
-          </label>
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(updateAnimal)}>
+        {inputItems.map((item) => (
+          <Input
+            key={item.fieldName}
+            className={className}
+            id={item.id}
+            register={register}
+            fieldName={item.fieldName}
+            type={item.type}
+            errors={errors}
+          />
+        ))}
+
+        <div className="form-group">
+          <CustomButton
+            className="btn-submit"
+            disabled={false}
+            title="Отправить"
+          />
         </div>
-      )}
-      <div className="form-group">
-        <CustomButton
-          className="btn-submit"
-          disabled={false}
-          title="Отправить"
-        />
-      </div>
-    </form>
+      </form>
+    </FormProvider>
   );
 }

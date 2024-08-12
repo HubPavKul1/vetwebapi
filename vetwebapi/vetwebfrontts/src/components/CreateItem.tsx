@@ -13,9 +13,9 @@ export function CreateItem({ btnTitle, children }: ICreateItemProps) {
   const [modalActive, setModalActive] = useState(false);
   return (
     <Container className="flex justify-center mb-6">
-      <Container className="flex justify-center max-w-3xl">
+      <Container className="flex justify-center max-w-xl">
         <CustomButton
-          className="btn-nav text-2xl w-full"
+          className="btn-nav text-xl w-full"
           title={btnTitle}
           onClick={() => setModalActive(true)}
         />

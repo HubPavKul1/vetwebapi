@@ -7,6 +7,7 @@ import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogDrugCard
 import { useGetData } from "../../hooks/useGetData";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
+import { catalogDrugDetailUrl, catalogDrugLink, catalogDrugsUrl } from "../../Urls";
 
 interface DrugCatalogData {
   data?: IDrugCatalogCard[];
@@ -15,9 +16,8 @@ interface DrugCatalogData {
 }
 
 export function DrugCatalog() {
-  const url = "/api/drugs/catalog";
 
-  const { data, isLoading, isError, error } = useGetData("drugCatalog", url);
+  const { data, isLoading, isError, error } = useGetData("drugCatalog", catalogDrugsUrl);
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
@@ -33,12 +33,12 @@ export function DrugCatalog() {
       {data &&
         data.catalog_drugs &&
         data.catalog_drugs.length &&
-        data.catalog_drugs.map((drug) => (
+        data.catalog_drugs.map((drug: IDrugCatalogCard) => (
           <CatalogItem
             key={drug.id}
-            delUrl={`/api/drugs/catalog/${drug.id}`}
-            url={`/drugs/catalog/${drug.id}`}
-            imgSrc={!drug.image ? "drugsCard.jpg" : drug.image}
+            delUrl={catalogDrugDetailUrl(drug.id)}
+            url={catalogDrugLink(drug.id)}
+            imgSrc={!drug.image ? "/drugsCard.jpg" : drug.image}
             invQueryName="drugCatalog"
             cardTitle={drug.name}
             id={drug.id}

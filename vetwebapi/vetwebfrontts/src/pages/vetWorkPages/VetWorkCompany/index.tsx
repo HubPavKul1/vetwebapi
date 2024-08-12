@@ -9,6 +9,7 @@ import { IAnimalInVetwork } from "../../../interfaces/VetWorkInterfaces";
 import { AnimalInVetwork } from "../../../components/vetWorks/AnimalInVetwork";
 import { PageTable } from "../../../components/PageTable";
 import { animalInVetWorkHeaders } from "../../../TableHeaders";
+import { companyLink } from "../../../Urls";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
@@ -33,12 +34,12 @@ export function VetWorkCompany({
   };
 
   return (
-    <Container key={company.id} className={styles.companyWrap}>
+    <Container key={company.id} className="mb-8 border-b-black ">
       <div>
-        <Row className={styles.companyTitle}>
+        <Row className="text-center text-lg font-bold underline">
           <Col sm={6}>
             <h5>
-              <Link to={`/companies/${company.id}`}>{company.full_name}</Link>
+              <Link to={companyLink(company.id)}>{company.full_name}</Link>
             </h5>
           </Col>
           <Col>
@@ -54,9 +55,9 @@ export function VetWorkCompany({
         {company.address && <CompanyAddress address={company.address} />}
       </div>
 
-      <Container className={styles.companyAnimals}>
-        <h5>Животные </h5>
-        <p className={styles.animalCounter}>
+      <Container className="">
+        <h5 className="text-lg underline font-bold">Животные </h5>
+        <p className="text-indigo-700 ">
           Всего голов хозяйства :{" "}
           {animals?.filter((animal) => animal.company_id === company.id).length}
         </p>
@@ -76,28 +77,6 @@ export function VetWorkCompany({
               ))
           }
         />
-        {/* <Row className={styles.tableHead}>
-          <Col>Вид животных</Col>
-          <Col>Пол животных</Col>
-          <Col>Дата рождения</Col>
-          <Col>Кличка</Col>
-          <Col>Идентификация</Col>
-          <Col>Дозировка</Col>
-          <Col>Результат исследования</Col>
-          <Col></Col>
-          <Col></Col>
-        </Row> */}
-
-        {/* {animals?.length &&
-          animals
-            .filter((animal) => animal.company_id === company.id)
-            .map((animal) => (
-              <AnimalInVetwork
-                key={animal.animal_id}
-                animal={animal}
-                workType={workType}
-              />
-            ))} */}
       </Container>
     </Container>
   );

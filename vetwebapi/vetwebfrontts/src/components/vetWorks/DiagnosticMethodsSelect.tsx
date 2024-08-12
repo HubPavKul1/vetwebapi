@@ -1,13 +1,12 @@
-
-import { IQueryData } from "../../interfaces/BaseInterface";
 import { CustomSelect } from "../CustomSelect";
 import { useGetData } from "../../hooks/useGetData";
+import { diagnosticMethodsUrl } from "../../Urls";
 
 export function DiagnosticMethodsSelect() {
-  const url = "/api/vetwork/diagnostic_methods";
-
-  const { data, isLoading }: IQueryData = useGetData("diagnosticMethods", url);
-    
+  const { data, isLoading } = useGetData(
+    "diagnosticMethods",
+    diagnosticMethodsUrl
+  );
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 

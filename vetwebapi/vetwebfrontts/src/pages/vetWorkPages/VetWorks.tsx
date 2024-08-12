@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { Catalog } from "../../components/Catalog";
 import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 
@@ -7,12 +6,7 @@ import { IVetwork } from "../../interfaces/VetWorkInterfaces";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
 import { useGetData } from "../../hooks/useGetData";
-
-interface VetWorkData {
-  data?: IVetwork[];
-  isLoading: boolean;
-  error: Error | null;
-}
+import { vetWorkDetailUrl, vetWorkLink } from "../../Urls";
 
 interface VetWorksProps {
   url: string;
@@ -46,11 +40,11 @@ export function VetWorks({
     >
       {data &&
         data.vetworks.length &&
-        data.vetworks.map((vetWork) => (
+        data.vetworks.map((vetWork: IVetwork) => (
           <CatalogItem
             key={vetWork.id}
-            delUrl={`/api/vetwork/${vetWork.id}`}
-            url={`/vetwork/${vetWork.id}`}
+            delUrl={vetWorkDetailUrl(vetWork.id)}
+            url={vetWorkLink(vetWork.id)}
             imgSrc={imgSrc}
             invQueryName={queryKey}
             cardTitle={

@@ -14,6 +14,9 @@ import {
 } from "../../../interfaces/VetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useGetDataById } from "../../../hooks/useGetDataById";
+import { IAnimal } from "../../../interfaces/AnimalInterfaces";
+import { useCreateItem } from "../../../hooks/useCreateItem";
+import { companyDetailUrl, vetWorkAnimalsUrl } from "../../../Urls";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
@@ -36,6 +39,8 @@ export function AddAnimalsToVetWorkForm({
   const [animalsData, setAnimalsData] = useState<IAnimalInVetworkIn[]>([]);
 
   const { id } = useParams();
+  const compId = Number(companyId);
+  const vetWorkId = Number(id);
 
   const companyUrl = `/api/companies/${companyId}`;
   const url = `/api/vetwork/${id}/animals/`;
@@ -49,20 +54,18 @@ export function AddAnimalsToVetWorkForm({
     mode: "onChange",
   });
 
-  const { mutate } = useMutation({
-    mutationKey: ["add animals"],
-    mutationFn: (data: IAnimalInVetworkIn[]) =>
-      AppService.createItem(url, data),
-    onSuccess: () => {
-      alert("Животное успешно добавлено!");
-      reset();
-      setAnimals(false);
-    },
-  });
+  const { mutate } = useCreateItem(
+    "add animals",
+    vetWorkAnimalsUrl(vetWorkId),
+    "vetwork",
+    "Животное успешно добавлено!",
+    reset,
+    id
+  );
 
   const { isLoading, data }: CompanyData = useGetDataById(
     "vetworkCompany",
-    companyUrl,
+    companyDetailUrl(compId),
     id
   );
 
@@ -73,7 +76,7 @@ export function AddAnimalsToVetWorkForm({
   const animals = data.animals;
 
   const choosenAnimalsIds =
-    choosenAnimals && choosenAnimals.map((animal) => animal.animal_id);
+    choosenAnimals && choosenAnimals.map((animal: IAnimal) => animal.animal_id);
 
   const unchoosenAnimals = choosenAnimalsIds?.length
     ? animals.filter((animal) => !choosenAnimalsIds.includes(animal.id))
@@ -82,6 +85,7 @@ export function AddAnimalsToVetWorkForm({
   const addAnimals: SubmitHandler<IAnimalInVetworkIn[]> = (animalsData) => {
     mutate(animalsData);
     setAnimalsData([]);
+    setAnimals(false);
   };
 
   const backButtonOnClick = () => {

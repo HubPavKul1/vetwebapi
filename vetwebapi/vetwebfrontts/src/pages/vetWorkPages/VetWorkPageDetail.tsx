@@ -14,6 +14,7 @@ import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/Referr
 import { useGetDataById } from "../../hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
+import { vetWorkDetailUrl } from "../../Urls";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
@@ -26,14 +27,18 @@ export function VetWorkPageDetail() {
   const [referral, showReferral] = useState(false);
   const [animals, setAnimals] = useState(false);
   const [companyId, setCompanyId] = useState("");
-  const [referralAnimalList, showReferralAnimalList] = useState(false)
+  const [referralAnimalList, showReferralAnimalList] = useState(false);
 
   const { id } = useParams();
-  const url = `/api/vetwork/${id}`;
+  const vetWorkId = Number(id);
 
-  const { isLoading, data, isError, error }: VetWorkData = useGetDataById("vetwork", url, id);
-    
-  if (isError) return <ErrorLoadDataMessage error={error}/>;
+  const { isLoading, data, isError, error }: VetWorkData = useGetDataById(
+    "vetwork",
+    vetWorkDetailUrl(vetWorkId),
+    id
+  );
+
+  if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
   const date = AppService.convertDateString(data.vetwork_date);
@@ -47,7 +52,7 @@ export function VetWorkPageDetail() {
 
   return (
     <>
-      {!act && !animalsList && !animals && !referral && !referralAnimalList? (
+      {!act && !animalsList && !animals && !referral && !referralAnimalList ? (
         <VetWorkDetail
           pageTitle={`${pageTitle} от ${date.shortDate} г. `}
           imgSrc={imgSrc}

@@ -52,13 +52,13 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(createVetWork)}>
-          <div className="form-group">
+        <form className="text-sm" onSubmit={handleSubmit(createVetWork)}>
+          <div className="">
             <label>Введите дату *</label>
             {inputItems.map((item) => (
               <Input
                 key={item.fieldName}
-                className="form-control"
+                className="form-control w-auto"
                 placeholder={item.placeholder}
                 register={register}
                 fieldName={item.fieldName}
@@ -70,60 +70,63 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
               />
             ))}
           </div>
-          <div className="form-group">
-            <label htmlFor="is_state_assignment">
-              Госзадание *
-              <Input
-                register={register}
-                errors={errors}
-                fieldName="is_state_assignment"
-                type="checkbox"
-                id="is_state_assignment"
-              />
-            </label>
+          <div className="flex justify-between mb-0">
+            <div className="">
+              <label htmlFor="is_state_assignment">
+                Госзадание *
+                <Input
+                  register={register}
+                  errors={errors}
+                  fieldName="is_state_assignment"
+                  type="checkbox"
+                  id="is_state_assignment"
+                />
+              </label>
+            </div>
+            <div className="">
+              <label htmlFor="is_primary">
+                Первичное *
+                <Input
+                  register={register}
+                  errors={errors}
+                  fieldName="is_primary"
+                  type="checkbox"
+                  id="is_primary"
+                />
+              </label>
+            </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="is_primary">
-              Первичное *
-              <Input
-                register={register}
-                errors={errors}
-                fieldName="is_primary"
-                type="checkbox"
-                id="is_primary"
-              />
-            </label>
-          </div>
-          <div className="form-group">
+
+          <div className="">
             <ClinicSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <DiseaseSelect isMulti={true} />
           </div>
-          <div className="form-group">
+          <div className="">
             <DoctorSelect />
           </div>
           {queryKey === "diagnostics" && (
             <>
-              <div className="form-group">
+              <div className="">
                 <LabsSelect />
               </div>
-              <div className="form-group">
+              <div className="">
                 <BiomaterialsSelect />
               </div>
-              <div className="form-group">
+              <div className="">
                 <BiomaterialFixationsSelect />
               </div>
-              <div className="form-group">
+              <div className="">
                 <BiomaterialPackagesSelect />
               </div>
-              <div className="form-group">
+              <div className="">
                 <DiagnosticMethodsSelect />
               </div>
             </>
           )}
 
-          <div className="form-group">
+          <div className="">
             <CustomButton
               className="btn-submit"
               disabled={false}

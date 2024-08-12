@@ -1,3 +1,4 @@
+version: "3.1"
 services:
   app:
     container_name: "vetwebapi"
@@ -23,20 +24,19 @@ services:
   #   networks:
   #     - network
 
-
   # nginx:
   #   container_name: "nginx"
   #   restart: always
   #   build: ./vetwebfrontts/
   #   ports:
   #     - "80:80"
-    # volumes:
-    #   - ./nginx_from_image.conf:/etc/nginx/nginx.conf
-    # networks:
-    #   - network
-    # depends_on:
-    #   - app
-    #   - frontend
+  # volumes:
+  #   - ./nginx_from_image.conf:/etc/nginx/nginx.conf
+  # networks:
+  #   - network
+  # depends_on:
+  #   - app
+  #   - frontend
 
   db:
     image: postgres:15.3-alpine3.18
@@ -51,7 +51,7 @@ services:
     #   - ./db/:/var/lib/postgresql/data
     networks:
       - network
-  
+
   # test_db:
   #   image: postgres:15.3-alpine3.18
   #   container_name: "test_db"

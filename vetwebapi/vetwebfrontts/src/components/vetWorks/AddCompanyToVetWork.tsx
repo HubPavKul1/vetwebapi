@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import { MenuItem } from "../MenuItem";
 import { AddCompanyToVetWorkForm } from "./AddCompanyToVetWorkForm";
 import { BsBuildingAdd } from "react-icons/bs";
+import { vetWorkCompanyUrl } from "../../Urls";
 
 export function AddCompanyToVetWork() {
   const { id } = useParams();
+  const vetWorkId = Number(id);
 
   return (
     <MenuItem
@@ -12,7 +14,7 @@ export function AddCompanyToVetWork() {
       icon={<BsBuildingAdd color="blue" fontSize={30} />}
     >
       <AddCompanyToVetWorkForm
-        url={`/api/vetwork/${id}/company`}
+        url={vetWorkCompanyUrl(vetWorkId)}
         queryKey="vetwork"
       />
     </MenuItem>

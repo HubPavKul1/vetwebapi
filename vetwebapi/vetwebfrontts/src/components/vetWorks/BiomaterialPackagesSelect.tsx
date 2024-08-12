@@ -1,13 +1,12 @@
 import { CustomSelect } from "../CustomSelect";
 import { useGetData } from "../../hooks/useGetData";
-
-
+import { biomaterialPackagesUrl } from "../../Urls";
 
 export function BiomaterialPackagesSelect() {
-  const url = "/api/vetwork/biomaterial_packages";
-
-  const { data, isLoading } = useGetData("biomaterialPackages", url);
-
+  const { data, isLoading } = useGetData(
+    "biomaterialPackages",
+    biomaterialPackagesUrl
+  );
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
