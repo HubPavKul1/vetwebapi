@@ -13,7 +13,7 @@ import { useUpdateItemPartial } from "../../hooks/useUpdateItemPartial";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;
-  updateData?: string | number | boolean;
+  updateData?: string | number | string[];
   updateFieldName: "dosage" | "is_positive";
   updateFieldType: "number" | "checkbox";
   className?: string;
@@ -24,7 +24,7 @@ export function UpdateAnimalInVetWorkForm({
   updateData,
   updateFieldName,
   updateFieldType,
-  className,
+  className
 }: UpdateAnimalFormProps) {
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -34,6 +34,7 @@ export function UpdateAnimalInVetWorkForm({
       fieldName: updateFieldName,
       id: updateFieldName,
       type: updateFieldType,
+      defaultValue: updateData
     },
   ];
 
@@ -74,6 +75,7 @@ export function UpdateAnimalInVetWorkForm({
             fieldName={item.fieldName}
             type={item.type}
             errors={errors}
+            defaultValue={item.defaultValue}
           />
         ))}
 

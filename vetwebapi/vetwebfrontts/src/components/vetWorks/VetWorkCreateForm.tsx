@@ -2,7 +2,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { CustomButton } from "../CustomButton";
 import { Input } from "../Input";
-import { FormInputProps } from "../../interfaces/FormInterface";
+import { FormInputProps, IOption } from "../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../ErrorMessages";
 
 import { IVetworkCreate } from "../../interfaces/VetWorkInterfaces";
@@ -15,6 +15,7 @@ import { BiomaterialFixationsSelect } from "./BiomaterialFixationSelect";
 import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
 import { useCreateItem } from "../../hooks/useCreateItem";
+import { useState } from "react";
 
 interface VetWorkCreateFormProps {
   url: string;
@@ -22,6 +23,7 @@ interface VetWorkCreateFormProps {
 }
 
 export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
+  const [diseases, setDiseases] = useState<IOption[]>([]);
   const inputItems: FormInputProps<IVetworkCreate>[] = [
     { fieldName: "vetwork_date", id: "vetwork_date", type: "date" },
   ];
@@ -47,14 +49,18 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
 
   const createVetWork: SubmitHandler<IVetworkCreate> = (data) => {
     mutate(data);
+    setDiseases([])
   };
+
+  const disease = diseases && diseases[0]?.label.toLowerCase();
+  // console.log("DISEASE>>>", disease)
 
   return (
     <>
       <FormProvider {...methods}>
         <form className="text-sm" onSubmit={handleSubmit(createVetWork)}>
-          <div className="">
-            <label>Введите дату *</label>
+          <div className="flex w-full">
+            <label className="w-auto mr-3">Введите дату *</label>
             {inputItems.map((item) => (
               <Input
                 key={item.fieldName}
@@ -101,12 +107,12 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
             <ClinicSelect />
           </div>
           <div className="">
-            <DiseaseSelect isMulti={true} />
+            <DiseaseSelect isMulti={true} setDiseases={setDiseases} />
           </div>
           <div className="">
             <DoctorSelect />
           </div>
-          {queryKey === "diagnostics" && (
+          {queryKey === "diagnostics" && disease !== "туберкулез" && (
             <>
               <div className="">
                 <LabsSelect />
@@ -120,6 +126,14 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
               <div className="">
                 <BiomaterialPackagesSelect />
               </div>
+              <div className="">
+                <DiagnosticMethodsSelect />
+              </div>
+            </>
+          )}
+
+          {queryKey === "diagnostics" && disease === "туберкулез" && (
+            <>
               <div className="">
                 <DiagnosticMethodsSelect />
               </div>

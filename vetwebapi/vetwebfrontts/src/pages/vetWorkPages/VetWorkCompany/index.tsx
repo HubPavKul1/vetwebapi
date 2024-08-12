@@ -34,7 +34,7 @@ export function VetWorkCompany({
   };
 
   return (
-    <Container key={company.id} className="mb-8 border-b-black ">
+    <Container key={company.id} className="mb-8 border-b-2 border-b-black ">
       <div>
         <Row className="text-center text-lg font-bold underline">
           <Col sm={6}>
@@ -44,7 +44,7 @@ export function VetWorkCompany({
           </Col>
           <Col>
             <CustomButton
-              className="btn-submit"
+              className="btn-nav"
               title="Добавить животных"
               onClick={() => addAnimals(company.id.toString())}
             />
@@ -55,9 +55,9 @@ export function VetWorkCompany({
         {company.address && <CompanyAddress address={company.address} />}
       </div>
 
-      <Container className="">
+      <Container className="text-center">
         <h5 className="text-lg underline font-bold">Животные </h5>
-        <p className="text-indigo-700 ">
+        <p className="text-indigo-700 text-left">
           Всего голов хозяйства :{" "}
           {animals?.filter((animal) => animal.company_id === company.id).length}
         </p>

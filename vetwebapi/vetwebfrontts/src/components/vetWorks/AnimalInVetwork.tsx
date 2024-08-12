@@ -56,6 +56,7 @@ export function AnimalInVetwork({
                 updateData={animal.dosage}
                 updateFieldName="dosage"
                 updateFieldType="number"
+                className="form-control"
               />
             </UpdateItem>
           </td>
@@ -79,28 +80,13 @@ export function AnimalInVetwork({
         </>
       )}
 
-      {workType === "диагностика" && animal.is_positive ? (
+      {workType === "диагностика" && (
         <>
-          <td className="text-red-700 font-bold">Положительный!</td>
+          <td>{animal.is_positive ? <span className="text-red-700 font-bold">Положительный!</span>: <span>Отрицательный</span>}</td>
           <td>
             <UpdateItem>
               <UpdateAnimalInVetWorkForm
                 animal={animal}
-                updateData={animal.is_positive}
-                updateFieldName="is_positive"
-                updateFieldType="checkbox"
-              />
-            </UpdateItem>
-          </td>
-        </>
-      ) : (
-        <>
-          <td>Отрицательный</td>
-          <td>
-            <UpdateItem>
-              <UpdateAnimalInVetWorkForm
-                animal={animal}
-                updateData={animal.is_positive}
                 updateFieldName="is_positive"
                 updateFieldType="checkbox"
               />

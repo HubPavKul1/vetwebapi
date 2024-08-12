@@ -44,9 +44,9 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
         title={props.pageTitle}
       >
         <>
-          <Container>
-            <p>Всего голов: {props.data?.animals?.length}</p>
-            <h5>Предприятия </h5>
+          <Container className="text-center">
+            <p className="text-left text-lg text-indigo-700 font-bold ">Всего голов: {props.data?.animals?.length}</p>
+            <h5 className="text-lg underline font-bold mb-3">Предприятия </h5>
             {props.data.companies?.length &&
               props.data.companies.map((company) => (
                 <VetWorkCompany
@@ -61,8 +61,8 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
               ))}
           </Container>
 
-          <Container>
-            <h5>Препарат </h5>
+          <Container className="text-center">
+            <h5 className="text-lg underline font-bold">Биопрепарат </h5>
 
             <PageTable
               reportHeaders={drugReceiptHeaders}
