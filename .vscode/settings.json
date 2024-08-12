@@ -25,5 +25,9 @@
             "command": "sass styles.scss styles.css ",
             "group": "build",
         }
-    ]
+    ],
+    "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  }
 }

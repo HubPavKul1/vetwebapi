@@ -69,7 +69,7 @@ async def read_clinics_with_options(session: AsyncSession) -> list[Clinic]:
 
 
 async def read_labs_with_options(session: AsyncSession) -> list[Laboratory]:
-   
+
     stmt = (
         select(Laboratory)
         .options(selectinload(Company.employees))
