@@ -7,10 +7,9 @@ import { diseasesUrl } from "../../../Urls";
 
 interface DiseaseSelectProps {
   isMulti: boolean;
-  setDiseases: CallableFunction;
 }
 
-export function DiseaseSelect({ isMulti, setDiseases }: DiseaseSelectProps) {
+export function DiseaseSelect({ isMulti }: DiseaseSelectProps) {
   const { data, isLoading } = useGetData("diseases", diseasesUrl);
 
   const { control } = useFormContext();
@@ -52,7 +51,6 @@ export function DiseaseSelect({ isMulti, setDiseases }: DiseaseSelectProps) {
           placeholder="Введите заболевание *"
           onChange={(newValue) =>
             onChange(
-              // setDiseases(newValue),
               isMulti
                 ? (newValue as IOption[]).map((v) => v.value)
                 : (newValue as IOption).value

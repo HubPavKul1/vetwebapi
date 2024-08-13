@@ -6,7 +6,7 @@ import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
 import { ReportMenu } from "../../../../components/menu/ReportMenu.tsx";
 import { drugReportHeaders } from "../../../../TableHeaders.ts";
-import { ReportPage } from "../../../../components/ReportPage/index.tsx";
+import { ReportPage } from "../../../../components/ReportPage.tsx";
 import { Vet1BPDF } from "../Vet1BPdf/index.tsx";
 
 interface Vet1BProps {

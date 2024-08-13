@@ -50,8 +50,8 @@ export function CreateCatalogDrugForm() {
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(createCatalogDrug)}>
-          <div className="form-group">
+        <form onSubmit={handleSubmit(createCatalogDrug)} className="form-title">
+          <div className="">
             <label>Выберите препарат *</label>
             <DrugSelect />
           </div>
@@ -59,7 +59,7 @@ export function CreateCatalogDrugForm() {
           {inputItems.map((item) => (
             <Input
               key={item.fieldName}
-              className="form-control"
+              className="form-control form-title"
               placeholder={item.placeholder}
               register={register}
               fieldName={item.fieldName}
@@ -71,10 +71,10 @@ export function CreateCatalogDrugForm() {
             />
           ))}
 
-          <div className="form-group">
+          <div className="">
             <label htmlFor="production_date">Введите дату изготовления *</label>
             <Input
-              className="form-control"
+              className="form-control form-title"
               register={register}
               errors={errors}
               fieldName="production_date"
@@ -86,10 +86,10 @@ export function CreateCatalogDrugForm() {
             />
           </div>
 
-          <div className="form-group">
+          <div className="">
             <label htmlFor="expiration_date">Годен до *</label>
             <Input
-              className="form-control"
+              className="form-control form-title"
               register={register}
               errors={errors}
               fieldName="expiration_date"
@@ -101,7 +101,7 @@ export function CreateCatalogDrugForm() {
             />
           </div>
 
-          <div className="form-group">
+          <div className="">
             <CustomButton
               className="btn-submit"
               disabled={false}

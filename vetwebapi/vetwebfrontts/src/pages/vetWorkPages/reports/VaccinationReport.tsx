@@ -3,7 +3,7 @@ import { AppService } from "../../../app.service";
 import { useState } from "react";
 
 import { ReportMenu } from "../../../components/menu/ReportMenu.tsx";
-import { ReportPage } from "../../../components/ReportPage/index.tsx";
+import { ReportPage } from "../../../components/ReportPage.tsx";
 import { VetWorkReportProps } from "../../../interfaces/ReportInterfaces.tsx";
 import { vaccinationHeaders } from "../../../TableHeaders.ts";
 import { VetWorkReportItem } from "./ReportItem.tsx";

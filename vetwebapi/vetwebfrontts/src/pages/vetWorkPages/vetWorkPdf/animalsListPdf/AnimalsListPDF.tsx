@@ -1,4 +1,4 @@
-import { PDF } from "../../../../components/pdf";
+import { PDFWrapper } from "../../../../components/PDFWrapper";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { AnimalsListPDFBody } from "./AnimalsListPDFBody";
 import { AnimalsListPDFFooter } from "./AnimalsListPDFFooter";
@@ -11,10 +11,10 @@ interface AnimalsListPDFProps {
 
 export function AnimalsListPDF({ setPdf, data }: AnimalsListPDFProps) {
   return (
-    <PDF setPdf={setPdf} filename="animalsList.pdf">
+    <PDFWrapper setPdf={setPdf} filename="animalsList.pdf">
       <AnimalsListPDFHeader data={data} />
       <AnimalsListPDFBody data={data} />
       <AnimalsListPDFFooter />
-    </PDF>
+    </PDFWrapper>
   );
 }

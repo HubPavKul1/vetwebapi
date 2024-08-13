@@ -14,7 +14,6 @@ export function Input({
       <input {...props} {...(register && register(fieldName, rules))} />
       <ErrorMessage
         errors={errors}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         name={fieldName as any}
         render={({ message }) => <p className="error-message">{message}</p>}
       />

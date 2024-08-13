@@ -1,5 +1,4 @@
-
-import { PDF } from "../../../../components/pdf";
+import { PDFWrapper } from "../../../../components/PDFWrapper";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { ActPDFBody } from "./ActPDFBody";
 import { ActPDFFooter } from "./ActPDFFooter";
@@ -12,10 +11,10 @@ interface ActPDFProps {
 
 export function ActPDF({ setPdf, data }: ActPDFProps) {
   return (
-    <PDF setPdf={setPdf} filename="act.pdf">
+    <PDFWrapper setPdf={setPdf} filename="act.pdf">
       <ActPDFHeader data={data} />
       <ActPDFBody data={data} />
       <ActPDFFooter data={data} />
-    </PDF>
+    </PDFWrapper>
   );
 }

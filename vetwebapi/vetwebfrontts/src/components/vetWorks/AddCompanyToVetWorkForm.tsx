@@ -45,7 +45,7 @@ export function AddCompanyToVetWorkForm({
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(addCompanyToVetWork)}>
+        <form className="form-title" onSubmit={handleSubmit(addCompanyToVetWork)}>
           <div className="form-group">
             <label>Выберите предприятие *</label>
             <CompanySelect />

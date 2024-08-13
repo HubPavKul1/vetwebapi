@@ -57,23 +57,23 @@ export function AddAnimalForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(createAnimal)}>
-        <div className="form-group">
+      <form onSubmit={handleSubmit(createAnimal)} className="form-title">
+        <div className="">
           <label>Выберите Тип Кормления *</label>
           <TypesOfFeedingSelect />
         </div>
-        <div className="form-group">
+        <div className="">
           <label>Выберите Тип Использования *</label>
           <UsageTypesSelect />
         </div>
 
-        <label htmlFor="date_of_birth" className="form-group">
+        <label htmlFor="date_of_birth" className="">
           Дата рождения *
         </label>
         {inputItems.map((item) => (
           <Input
             key={item.fieldName}
-            className="form-control"
+            className="form-control form-title"
             id={item.id}
             register={register}
             rules={{
@@ -94,7 +94,7 @@ export function AddAnimalForm() {
           />
         ))}
 
-        <div className="form-group">
+        <div className="">
           <CustomButton
             className="btn-submit"
             disabled={false}

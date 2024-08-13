@@ -1,4 +1,4 @@
-import { PDF } from "../../../../components/pdf";
+import { PDFWrapper } from "../../../../components/PDFWrapper";
 import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
 import { ReferralPDFBody } from "./ReferralPDFBody";
 import { ReferralPDFBodyNoBlood } from "./ReferralPDFBodyNoBlood";
@@ -12,7 +12,7 @@ interface ReferralPDFProps {
 
 export function ReferralPDF({ setPdf, data }: ReferralPDFProps) {
   return (
-    <PDF setPdf={setPdf} filename="referral.pdf">
+    <PDFWrapper setPdf={setPdf} filename="referral.pdf">
       <ReferralPDFHeader data={data} />
       {data.biomaterial === ("сыворотка крови" || "цельная кровь") ? (
         <ReferralPDFBody data={data} />
@@ -21,6 +21,6 @@ export function ReferralPDF({ setPdf, data }: ReferralPDFProps) {
       )}
 
       <ReferralPDFFooter data={data} />
-    </PDF>
+    </PDFWrapper>
   );
 }

@@ -23,7 +23,6 @@ interface VetWorkCreateFormProps {
 }
 
 export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
-  const [diseases, setDiseases] = useState<IOption[]>([]);
   const inputItems: FormInputProps<IVetworkCreate>[] = [
     { fieldName: "vetwork_date", id: "vetwork_date", type: "date" },
   ];
@@ -37,6 +36,7 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
     reset,
     handleSubmit,
     formState: { errors },
+    watch,
   } = methods;
 
   const { mutate } = useCreateItem(
@@ -49,16 +49,15 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
 
   const createVetWork: SubmitHandler<IVetworkCreate> = (data) => {
     mutate(data);
-    setDiseases([])
   };
 
-  const disease = diseases && diseases[0]?.label.toLowerCase();
-  // console.log("DISEASE>>>", disease)
+  const diseases = watch("diseases");
+  const diseaseId = diseases && diseases[0];
 
   return (
     <>
       <FormProvider {...methods}>
-        <form className="text-sm" onSubmit={handleSubmit(createVetWork)}>
+        <form className="form-title" onSubmit={handleSubmit(createVetWork)}>
           <div className="flex w-full">
             <label className="w-auto mr-3">Введите дату *</label>
             {inputItems.map((item) => (
@@ -107,12 +106,12 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
             <ClinicSelect />
           </div>
           <div className="">
-            <DiseaseSelect isMulti={true} setDiseases={setDiseases} />
+            <DiseaseSelect isMulti={true} />
           </div>
           <div className="">
             <DoctorSelect />
           </div>
-          {queryKey === "diagnostics" && disease !== "туберкулез" && (
+          {queryKey === "diagnostics" && diseaseId !== 74 && (
             <>
               <div className="">
                 <LabsSelect />
@@ -132,7 +131,7 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
             </>
           )}
 
-          {queryKey === "diagnostics" && disease === "туберкулез" && (
+          {queryKey === "diagnostics" && diseaseId === 74 && (
             <>
               <div className="">
                 <DiagnosticMethodsSelect />

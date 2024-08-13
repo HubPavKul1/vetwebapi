@@ -1,4 +1,3 @@
-
 import { PageDetailTop } from "./PageDetailTop";
 import { PageDetailTitle } from "./PageDetailTitle";
 import { PageDetailAddress } from "./PageDetailAddress";
@@ -15,21 +14,25 @@ interface PageDetailProps {
   menu: React.ReactElement;
   title: string;
   address?: IAddress;
-  employees?: IEmployee[]
+  employees?: IEmployee[];
   companyId?: number;
   animals?: IAnimal[];
   children?: React.ReactElement;
-
 }
 
 export function PageDetail({ ...props }: PageDetailProps) {
   return (
     <PageWrapper>
       <PageDetailTop imgSrc={props.imgSrc} alt={props.alt} menu={props.menu} />
-      <PageDetailTitle title={props.title}/>
+      <PageDetailTitle title={props.title} />
       {props.address && <PageDetailAddress address={props.address} />}
-      {props.employees && <PageDetailEmployees employees={props.employees}/>}
-      {(props.animals && props.companyId) && <PageDetailAnimals animals={props.animals} companyId={props.companyId} /> }
+      {props.employees && <PageDetailEmployees employees={props.employees} />}
+      {props.animals && props.companyId && (
+        <PageDetailAnimals
+          animals={props.animals}
+          companyId={props.companyId}
+        />
+      )}
       {props.children}
     </PageWrapper>
   );

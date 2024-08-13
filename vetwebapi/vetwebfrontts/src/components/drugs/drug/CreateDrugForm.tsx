@@ -57,35 +57,35 @@ export function CreateDrugForm() {
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(createDrug)}>
-          <div className="form-group">
+        <form className="form-title" onSubmit={handleSubmit(createDrug)}>
+          <div className="">
             <DiseaseSelect isMulti={false} />
           </div>
-          <div className="form-group">
+          <div className="">
             <BudgetSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <DrugManufacturerSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <AccountingUnitSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <DisposalMethodSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <DosageSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <PlaceOfAdministrationSelect />
           </div>
-          <div className="form-group">
+          <div className="">
             <AdministrationMethodSelect />
           </div>
           {inputItems.map((item) => (
             <Input
               key={item.fieldName}
-              className="form-control"
+              className="form-control text-sm"
               placeholder={item.placeholder}
               register={register}
               fieldName={item.fieldName}
@@ -97,9 +97,9 @@ export function CreateDrugForm() {
             />
           ))}
 
-          <div className="form-group">
+          <div className="">
             <CustomButton
-              className="btn-submit"
+              className="btn-submit "
               disabled={false}
               title="Добавить"
             />

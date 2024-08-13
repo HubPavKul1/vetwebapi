@@ -1,4 +1,4 @@
-import { PDF } from "../../../../components/pdf";
+import { PDFWrapper } from "../../../../components/PDFWrapper";
 import { IVetWorkReport } from "../../../../interfaces/ReportInterfaces";
 import { VetWorkReportPDFBody } from "./VetWorkReportPDFBody";
 
@@ -18,12 +18,12 @@ export function VetWorkReportPDF({
   fileName,
 }: VetWorkReportPDFProps) {
   return (
-    <PDF setPdf={setPdf} filename={`${fileName}.pdf`}>
+    <PDFWrapper setPdf={setPdf} filename={`${fileName}.pdf`}>
       <VetWorkReportPDFBody
         isDiagnostic={isDiagnostic}
         dateEnd={dateEnd}
         data={data}
       />
-    </PDF>
+    </PDFWrapper>
   );
 }
