@@ -5,7 +5,7 @@ import { CompanyDetail } from "./pages/companyPages/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
 import { DrugReceipts } from "./pages/drugPages/DrugReceipts";
 import { Drugs } from "./pages/drugPages/Drugs";
-import { DrugDetail } from "./pages/drugPages/drugDetail/DrugDetail";
+import { DrugDetail } from "./pages/drugPages/DrugDetail";
 import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
 import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
 import { Vets } from "./pages/companyPages/Vets";
@@ -36,7 +36,6 @@ export function App() {
           <Route path="drugs/:id" element={<DrugDetail />} />
           <Route path="drugs/reports" element={<DrugReportMainPage />} />
           <Route path="vetwork/reports" element={<VetWorkReportMainPage />} />
-          
 
           <Route path="*" element={<div>Not Found</div>} />
         </Route>

@@ -1,19 +1,19 @@
 import { Container } from "react-bootstrap";
-import { IAnimal } from "../../interfaces/AnimalInterfaces";
+import { IAnimal } from "../../../interfaces/AnimalInterfaces";
 
-import { CompanyAnimal } from "../companies/animal/CompanyAnimal";
-import { PageTable } from "../PageTable";
-import { companyAnimalsHeaders } from "../../TableHeaders";
+import { CompanyAnimal } from "./CompanyAnimal";
+import { PageTable } from "../../PageTable";
+import { companyAnimalsHeaders } from "../../../TableHeaders";
 
-interface PageDetailAnimalsProps {
+interface CompanyAnimalsProps {
   animals: IAnimal[];
   companyId: number;
 }
 
-export function PageDetailAnimals({
+export function CompanyAnimals({
   animals,
   companyId,
-}: PageDetailAnimalsProps) {
+}: CompanyAnimalsProps) {
   return (
     <Container className="mb-8 text-center">
       <h5 className="page-detail-title">Животные </h5>

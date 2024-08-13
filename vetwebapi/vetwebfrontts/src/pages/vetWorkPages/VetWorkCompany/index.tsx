@@ -1,7 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { ICompanyCard } from "../../../interfaces/CompanyInterfaces";
 
-import styles from "./VetWorkCompany.module.scss";
 import { Link } from "react-router-dom";
 import { CustomButton } from "../../../components/CustomButton";
 import { CompanyAddress } from "../../../components/companies/address/CompanyAddress";

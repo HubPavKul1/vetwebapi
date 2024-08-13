@@ -1,13 +1,11 @@
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
-import styles from "./DrugDetail.module.scss";
-
-import { IDrugDetail } from "../../../interfaces/DrugInterfaces";
-import { useGetDataById } from "../../../hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
-import { Loader } from "../../../components/Loader";
-import { drugDetailUrl, drugImageUrl, drugInstructionUrl } from "../../../Urls";
+import { IDrugDetail } from "../../interfaces/DrugInterfaces";
+import { useGetDataById } from "../../hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
+import { Loader } from "../../components/Loader";
+import { drugDetailUrl, drugImageUrl, drugInstructionUrl } from "../../Urls";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -36,12 +34,12 @@ export function DrugDetail() {
           </Col>
 
           <Col>
-            <h5 className="text-3xl mb-5">{data.name}</h5>
+            <h5 className="text-3xl underline mb-5">{data.name}</h5>
             <p className="text-2xl">Производитель: {data.drug_manufacturer}</p>
           </Col>
         </Row>
 
-        <Row className={styles.rowBody}>
+        <Row className="min-h-screen">
           {data.instruction && (
             <object
               type="application/pdf"

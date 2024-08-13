@@ -1,13 +1,13 @@
-import { AppService } from "../../../../app.service";
+import { AppService } from "../../../app.service.ts";
 
 import { useState } from "react";
 
-import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
-import { DrugInReport } from "../../../../components/drugs/drugReports/DrugInReport";
-import { ReportMenu } from "../../../../components/menu/ReportMenu.tsx";
-import { DrugReportPDF } from "../drugReportPdf/DrugReportPDF";
-import { drugReportHeaders } from "../../../../TableHeaders.ts";
-import { ReportPage } from "../../../../components/ReportPage.tsx";
+import { IDrugReport } from "../../../interfaces/DrugInterfaces.tsx";
+import { DrugInReport } from "../../../components/drugs/drugReports/DrugInReport.tsx";
+import { ReportMenu } from "../../../components/menu/ReportMenu.tsx";
+import { DrugReportPDF } from "./drugReportPdf/DrugReportPDF.tsx";
+import { drugReportHeaders } from "../../../TableHeaders.ts";
+import { ReportPage } from "../../../components/ReportPage.tsx";
 
 interface DrugReportProps {
   data: IDrugReport[];

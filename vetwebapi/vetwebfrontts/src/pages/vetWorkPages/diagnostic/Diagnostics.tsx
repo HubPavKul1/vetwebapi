@@ -1,8 +1,9 @@
 import { VetWorkCreateForm } from "../../../components/vetWorks/VetWorkCreateForm";
+import { diagnosticsUrl } from "../../../Urls";
 import { VetWorks } from "../VetWorks";
 
 export function Diagnostics() {
-  const url = "/api/vetwork/diagnostics";
+  const url = diagnosticsUrl;
   const queryKey = "diagnostics";
   return (
     <VetWorks

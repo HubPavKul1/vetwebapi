@@ -128,6 +128,9 @@ export const vetWorkLink = (vetWorkId?: number) => {
   return `/vetwork/${vetWorkId}`;
 };
 
+export const diagnosticsUrl = vetWorkBaseUrl + "/diagnostics";
+export const vaccinationsUrl = vetWorkBaseUrl + "/vaccinations";
+
 // vetwork company
 export const vetWorkCompanyUrl = (vetWorkId?: number) => {
   return vetWorkDetailUrl(vetWorkId) + "/company";

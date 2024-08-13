@@ -1,15 +1,15 @@
 import { Container } from "react-bootstrap";
-import { IEmployee } from "../../interfaces/EmployeeInterfaces";
+import { IEmployee } from "../../../interfaces/EmployeeInterfaces";
 
-import { CompanyEmployee } from "../companies/employee/CompanyEmployee";
-import { PageTable } from "../PageTable";
-import { companyEmployeesHeaders } from "../../TableHeaders";
+import { CompanyEmployee } from "./CompanyEmployee";
+import { PageTable } from "../../PageTable";
+import { companyEmployeesHeaders } from "../../../TableHeaders";
 
-interface PageDetailEmployeesProps {
+interface CompanyEmployeesProps {
   employees: IEmployee[];
 }
 
-export function PageDetailEmployees({ employees }: PageDetailEmployeesProps) {
+export function CompanyEmployees({ employees }: CompanyEmployeesProps) {
   return (
     <Container className="mb-8 text-center">
       <h5 className="page-detail-title">Работники</h5>
