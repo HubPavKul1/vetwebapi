@@ -14,7 +14,7 @@ import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/Referr
 import { useGetDataById } from "../../hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
-import { vetWorkDetailUrl } from "../../Urls";
+import { vetWorkDetailUrl } from "../../urls/vetWorkUrls";
 
 interface VetWorkData {
   data?: IVetWorkSchema;

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { CustomButton } from "../../CustomButton";
 import { useUpload } from "../../../hooks/useUpload";
-import { uploadAnimalsUrl } from "../../../Urls";
+import { uploadAnimalsUrl } from "../../../urls/companyUrls";
 
 export function UploadAnimalForm() {
   const { id } = useParams();

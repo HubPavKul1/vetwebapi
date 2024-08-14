@@ -1,6 +1,6 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
-import { administrationMethodsUrl } from "../../../Urls";
+import { administrationMethodsUrl } from "../../../urls/drugUrls";
 
 export function AdministrationMethodSelect() {
   const { data, isLoading } = useGetData(

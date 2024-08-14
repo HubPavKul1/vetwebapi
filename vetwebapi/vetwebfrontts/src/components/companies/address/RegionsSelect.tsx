@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { IOption } from '../../../interfaces/FormInterface';
 import { IBase} from '../../../interfaces/BaseInterface';
 import { useGetData } from '../../../hooks/useGetData';
-import { regionsUrl } from '../../../Urls';
+import { regionsUrl } from '../../../urls/companyUrls';
 
 
 

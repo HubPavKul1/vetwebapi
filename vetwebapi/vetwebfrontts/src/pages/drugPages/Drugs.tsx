@@ -12,7 +12,7 @@ import {
   drugImageUrl,
   drugLink,
   drugsUrl,
-} from "../../Urls";
+} from "../../urls/drugUrls";
 import { IDrugCard } from "../../interfaces/DrugInterfaces";
 
 export function Drugs() {

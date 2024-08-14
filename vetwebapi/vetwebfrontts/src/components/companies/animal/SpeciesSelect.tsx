@@ -6,7 +6,7 @@ import { IOption } from "../../../interfaces/FormInterface";
 import { GendersSelect } from "./GendersSelect";
 
 import { useGetData } from "../../../hooks/useGetData";
-import { speciesUrl } from "../../../Urls";
+import { speciesUrl } from "../../../urls/companyUrls";
 import { IBase } from "../../../interfaces/BaseInterface";
 
 interface SpeciesSelectProps {

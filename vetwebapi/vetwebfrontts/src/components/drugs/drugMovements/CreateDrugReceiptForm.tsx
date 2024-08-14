@@ -7,7 +7,7 @@ import { CustomButton } from "../../CustomButton";
 import { IDrugMovementCreate } from "../../../interfaces/DrugInterfaces";
 
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { drugReceiptsUrl } from "../../../Urls";
+import { drugReceiptsUrl } from "../../../urls/drugUrls";
 
 export function CreateDrugReceiptForm() {
   const inputItems: FormInputProps<IDrugMovementCreate>[] = [

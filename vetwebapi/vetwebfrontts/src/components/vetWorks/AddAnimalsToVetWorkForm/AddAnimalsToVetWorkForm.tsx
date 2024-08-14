@@ -1,7 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { CustomButton } from "../../CustomButton";
 import { useParams } from "react-router-dom";
-import { AppService } from "../../../app.service";
 
 import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
 import { Col, Container, Row } from "react-bootstrap";
@@ -16,7 +14,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useGetDataById } from "../../../hooks/useGetDataById";
 import { IAnimal } from "../../../interfaces/AnimalInterfaces";
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { companyDetailUrl, vetWorkAnimalsUrl } from "../../../Urls";
+import { companyDetailUrl } from "../../../urls/companyUrls";
+import { vetWorkAnimalsUrl } from "../../../urls/vetWorkUrls";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
@@ -41,9 +40,6 @@ export function AddAnimalsToVetWorkForm({
   const { id } = useParams();
   const compId = Number(companyId);
   const vetWorkId = Number(id);
-
-  const companyUrl = `/api/companies/${companyId}`;
-  const url = `/api/vetwork/${id}/animals/`;
 
   console.log("Animals>>>", animalsData);
 

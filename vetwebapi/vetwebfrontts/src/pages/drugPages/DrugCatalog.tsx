@@ -7,17 +7,17 @@ import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogDrugCard
 import { useGetData } from "../../hooks/useGetData";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
-import { catalogDrugDetailUrl, catalogDrugLink, catalogDrugsUrl } from "../../Urls";
-
-interface DrugCatalogData {
-  data?: IDrugCatalogCard[];
-  isLoading: boolean;
-  error?: Error | null;
-}
+import {
+  catalogDrugDetailUrl,
+  catalogDrugLink,
+  catalogDrugsUrl,
+} from "../../urls/drugUrls";
 
 export function DrugCatalog() {
-
-  const { data, isLoading, isError, error } = useGetData("drugCatalog", catalogDrugsUrl);
+  const { data, isLoading, isError, error } = useGetData(
+    "drugCatalog",
+    catalogDrugsUrl
+  );
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;

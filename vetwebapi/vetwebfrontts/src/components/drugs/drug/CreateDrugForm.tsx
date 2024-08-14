@@ -15,7 +15,7 @@ import { DosageSelect } from "./DosageSelect";
 import { PlaceOfAdministrationSelect } from "./PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "./AdministrationMethodSelect";
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { drugsUrl } from "../../../Urls";
+import { drugsUrl } from "../../../urls/drugUrls";
 
 export function CreateDrugForm() {
   const inputItems: FormInputProps<IDrugCreate>[] = [

@@ -10,10 +10,7 @@ interface CompanyAnimalsProps {
   companyId: number;
 }
 
-export function CompanyAnimals({
-  animals,
-  companyId,
-}: CompanyAnimalsProps) {
+export function CompanyAnimals({ animals, companyId }: CompanyAnimalsProps) {
   return (
     <Container className="mb-8 text-center">
       <h5 className="page-detail-title">Животные </h5>

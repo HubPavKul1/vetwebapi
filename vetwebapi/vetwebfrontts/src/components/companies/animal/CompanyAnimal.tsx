@@ -1,10 +1,10 @@
-import { IAnimal } from "../../../../interfaces/AnimalInterfaces";
-import { AppService } from "../../../../app.service";
+import { IAnimal } from "../../../interfaces/AnimalInterfaces";
+import { AppService } from "../../../app.service";
 
-import { UpdateItem } from "../../../UpdateItem";
-import { UpdateAnimalForm } from "../UpdateAnimalForm";
-import { DeleteItem } from "../../../DeleteItem";
-import { companyAnimalUrl } from "../../../../Urls";
+import { UpdateItem } from "../../UpdateItem";
+import { UpdateAnimalForm } from "./UpdateAnimalForm";
+import { DeleteItem } from "../../DeleteItem";
+import { companyAnimalUrl } from "../../../urls/companyUrls";
 
 interface CompanyAnimalProps {
   animal: IAnimal;

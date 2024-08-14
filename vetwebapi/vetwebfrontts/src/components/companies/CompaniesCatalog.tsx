@@ -8,7 +8,7 @@ import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
 import { useGetData } from "../../hooks/useGetData";
 import { ErrorLoadDataMessage } from "../ErrorLoadDataMessage";
 import { Loader } from "../Loader";
-import { companyDetailUrl, companyLink } from "../../Urls";
+import { companyDetailUrl, companyLink } from "../../urls/companyUrls";
 
 interface CompaniesCatalogProps {
   url: string;

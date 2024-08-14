@@ -1,14 +1,12 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { ICompanyCard } from "../../../interfaces/CompanyInterfaces";
+import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
 
 import { Link } from "react-router-dom";
-import { CustomButton } from "../../../components/CustomButton";
-import { CompanyAddress } from "../../../components/companies/address/CompanyAddress";
-import { IAnimalInVetwork } from "../../../interfaces/VetWorkInterfaces";
-import { AnimalInVetwork } from "../../../components/vetWorks/AnimalInVetwork";
-import { PageTable } from "../../../components/PageTable";
-import { animalInVetWorkHeaders } from "../../../TableHeaders";
-import { companyLink } from "../../../Urls";
+import { CustomButton } from "../CustomButton";
+import { CompanyAddress } from "../companies/address/CompanyAddress";
+import { IAnimalInVetwork } from "../../interfaces/VetWorkInterfaces";
+import { companyLink } from "../../urls/companyUrls";
+import AnimalsInVetWork from "./AnimalsInVetWork";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
@@ -60,21 +58,11 @@ export function VetWorkCompany({
           Всего голов хозяйства :{" "}
           {animals?.filter((animal) => animal.company_id === company.id).length}
         </p>
-        <PageTable
-          reportHeaders={animalInVetWorkHeaders(workType, disease)}
-          reportItems={
-            animals?.length &&
-            animals
-              .filter((animal) => animal.company_id === company.id)
-              .map((animal) => (
-                <AnimalInVetwork
-                  key={animal.animal_id}
-                  animal={animal}
-                  workType={workType}
-                  disease={disease}
-                />
-              ))
-          }
+        <AnimalsInVetWork
+          workType={workType}
+          disease={disease}
+          animals={animals}
+          companyId={company.id}
         />
       </Container>
     </Container>

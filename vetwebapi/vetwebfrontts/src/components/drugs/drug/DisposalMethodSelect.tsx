@@ -1,11 +1,9 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
-import { disposalMethodsUrl } from "../../../Urls";
+import { disposalMethodsUrl } from "../../../urls/drugUrls";
 
 export function DisposalMethodSelect() {
-  
   const { data, isLoading } = useGetData("disposalMethods", disposalMethodsUrl);
-
 
   if (isLoading || !data) return <p>...Загрузка</p>;
 

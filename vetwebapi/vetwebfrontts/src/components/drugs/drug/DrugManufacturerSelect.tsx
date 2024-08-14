@@ -1,6 +1,6 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
-import { drugManufacturersUrl } from "../../../Urls";
+import { drugManufacturersUrl } from "../../../urls/drugUrls";
 
 export function DrugManufacturerSelect() {
   const { data, isLoading } = useGetData(

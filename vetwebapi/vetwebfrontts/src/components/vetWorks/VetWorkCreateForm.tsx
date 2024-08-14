@@ -2,7 +2,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { CustomButton } from "../CustomButton";
 import { Input } from "../Input";
-import { FormInputProps, IOption } from "../../interfaces/FormInterface";
+import { FormInputProps } from "../../interfaces/FormInterface";
 import { fieldRequiredMessage } from "../ErrorMessages";
 
 import { IVetworkCreate } from "../../interfaces/VetWorkInterfaces";
@@ -15,7 +15,7 @@ import { BiomaterialFixationsSelect } from "./BiomaterialFixationSelect";
 import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
 import { useCreateItem } from "../../hooks/useCreateItem";
-import { useState } from "react";
+
 
 interface VetWorkCreateFormProps {
   url: string;

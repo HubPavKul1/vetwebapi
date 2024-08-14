@@ -5,7 +5,11 @@ import { IDrugDetail } from "../../interfaces/DrugInterfaces";
 import { useGetDataById } from "../../hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
-import { drugDetailUrl, drugImageUrl, drugInstructionUrl } from "../../Urls";
+import {
+  drugDetailUrl,
+  drugImageUrl,
+  drugInstructionUrl,
+} from "../../urls/drugUrls";
 
 interface DrugData {
   data?: IDrugDetail;

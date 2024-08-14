@@ -12,7 +12,7 @@ import {
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { companyAnimalsUrl } from "../../../Urls";
+import { companyAnimalsUrl } from "../../../urls/companyUrls";
 
 export function AddAnimalForm() {
   const { id } = useParams();

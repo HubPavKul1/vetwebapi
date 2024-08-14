@@ -6,14 +6,11 @@ import { AppService } from "../../app.service";
 import { useGetData } from "../../hooks/useGetData";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
-import { drugReceiptsLink, drugReceiptsUrl } from "../../Urls";
-
-interface DrugReceiptsData {
-  data?: IDrugMovement[];
-  isLoading: boolean;
-  error?: Error | null;
-  isError: boolean;
-}
+import {
+  drugReceiptDetailUrl,
+  drugReceiptsLink,
+  drugReceiptsUrl,
+} from "../../urls/drugUrls";
 
 export function DrugReceipts() {
   const { data, isLoading, isError, error } = useGetData(
@@ -38,7 +35,7 @@ export function DrugReceipts() {
         data.drug_movements.map((drugMovement: IDrugMovement) => (
           <CatalogItem
             key={drugMovement.id}
-            delUrl={`/api/drugs/receipts/${drugMovement.id}`}
+            delUrl={drugReceiptDetailUrl(drugMovement.id)}
             url={drugReceiptsLink(drugMovement.id)}
             imgSrc="/drugsCard.jpg"
             invQueryName="drugReceipts"

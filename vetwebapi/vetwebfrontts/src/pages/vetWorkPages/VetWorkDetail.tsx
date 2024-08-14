@@ -5,7 +5,7 @@ import { IVetWorkSchema } from "../../interfaces/VetWorkInterfaces";
 import { ReceiptDrug } from "../../components/drugs/drugMovements/ReceiptDrug";
 
 import { PageDetail } from "../../components/PageDetail";
-import { VetWorkCompany } from "./VetWorkCompany";
+import { VetWorkCompany } from "../../components/vetWorks/VetWorkCompany";
 import { PageTable } from "../../components/PageTable";
 import { drugReceiptHeaders } from "../../TableHeaders";
 
@@ -45,7 +45,9 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
       >
         <>
           <Container className="text-center">
-            <p className="text-left text-lg text-indigo-700 font-bold ">Всего голов: {props.data?.animals?.length}</p>
+            <p className="text-left text-lg text-indigo-700 font-bold ">
+              Всего голов: {props.data?.animals?.length}
+            </p>
             <h5 className="page-detail-title">Предприятия </h5>
             {props.data.companies?.length &&
               props.data.companies.map((company) => (

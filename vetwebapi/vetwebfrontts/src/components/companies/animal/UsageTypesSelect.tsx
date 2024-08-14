@@ -3,7 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "../../../interfaces/FormInterface";
 
 import { useGetData } from "../../../hooks/useGetData";
-import { usageTypesUrls } from "../../../Urls";
+import { usageTypesUrls } from "../../../urls/companyUrls";
 import { IBase } from "../../../interfaces/BaseInterface";
 
 export function UsageTypesSelect() {

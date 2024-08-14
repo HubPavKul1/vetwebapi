@@ -26,7 +26,6 @@ export function AnimalFormItem({
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<IAnimalInVetworkIn>({
@@ -37,7 +36,6 @@ export function AnimalFormItem({
     data.dosage?.toString() === "" && (data.dosage = 0);
 
     setAnimalsData([...animalsData, data]);
-    console.log("AnimlsData added>>>>", animalsData);
 
     setAnimalChecked(true);
   };
@@ -79,7 +77,7 @@ export function AnimalFormItem({
           />
         </Col>
         {workType === "диагностика" && (
-          <Col>
+          <Col className="flex items-center">
             <CustomCheckBox id="is_positive" register={register} />
           </Col>
         )}

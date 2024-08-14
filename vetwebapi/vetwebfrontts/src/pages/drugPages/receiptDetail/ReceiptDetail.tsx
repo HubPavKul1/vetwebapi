@@ -11,6 +11,7 @@ import { drugReceiptHeaders } from "../../../TableHeaders";
 import { useGetDataById } from "../../../hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
 import { Loader } from "../../../components/Loader";
+import { drugReceiptDetailUrl } from "../../../urls/drugUrls";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -20,7 +21,8 @@ interface ReceiptData {
 export function ReceiptDetail() {
   const [pdf, setPdf] = useState(false);
   const { id } = useParams();
-  const url = `/api/drugs/receipts/${id}`;
+  const receiptId = Number(id);
+  const url = drugReceiptDetailUrl(receiptId);
 
   const { isLoading, data, isError, error }: ReceiptData = useGetDataById(
     "receipt",

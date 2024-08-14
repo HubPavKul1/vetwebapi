@@ -1,6 +1,6 @@
-import { VetWorkCreateForm } from "../../../components/vetWorks/VetWorkCreateForm";
-import { diagnosticsUrl } from "../../../Urls";
-import { VetWorks } from "../VetWorks";
+import { VetWorkCreateForm } from "../../components/vetWorks/VetWorkCreateForm";
+import { diagnosticsUrl } from "../../urls/vetWorkUrls";
+import { VetWorks } from "./VetWorks";
 
 export function Diagnostics() {
   const url = diagnosticsUrl;

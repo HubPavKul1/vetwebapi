@@ -5,7 +5,7 @@ import { IOption } from "../../interfaces/FormInterface";
 import { ICompany } from "../../interfaces/CompanyInterfaces";
 import { Controller, useFormContext } from "react-hook-form";
 import { useGetData } from "../../hooks/useGetData";
-import { companiesUrl } from "../../Urls";
+import { companiesUrl } from "../../urls/companyUrls";
 
 export function CompanySelect() {
   const { data, isLoading } = useGetData("companies", companiesUrl);

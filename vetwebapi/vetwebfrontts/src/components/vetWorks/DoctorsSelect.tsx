@@ -4,7 +4,7 @@ import { IOption } from "../../interfaces/FormInterface";
 
 import { IEmployee } from "../../interfaces/EmployeeInterfaces";
 import { useGetData } from "../../hooks/useGetData";
-import { doctorsUrl } from "../../Urls";
+import { doctorsUrl } from "../../urls/companyUrls";
 
 export function DoctorSelect() {
   const { data, isLoading } = useGetData("doctors", doctorsUrl);

@@ -4,11 +4,11 @@ import { Input } from "../Input";
 import { FormInputProps } from "../../interfaces/FormInterface";
 
 import { useParams } from "react-router-dom";
-import { useUpdateItem } from "../../hooks/useUpdateItem";
+
 import { IAnimalInVetWorkUpdate } from "../../interfaces/VetWorkInterfaces";
-import CustomCheckBox from "../CustomCheckBox";
+
 import { IAnimal } from "../../interfaces/AnimalInterfaces";
-import { vetWorkAnimalDetailUrl } from "../../Urls";
+import { vetWorkAnimalDetailUrl } from "../../urls/vetWorkUrls";
 import { useUpdateItemPartial } from "../../hooks/useUpdateItemPartial";
 
 interface UpdateAnimalFormProps {
@@ -24,7 +24,7 @@ export function UpdateAnimalInVetWorkForm({
   updateData,
   updateFieldName,
   updateFieldType,
-  className
+  className,
 }: UpdateAnimalFormProps) {
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -34,7 +34,7 @@ export function UpdateAnimalInVetWorkForm({
       fieldName: updateFieldName,
       id: updateFieldName,
       type: updateFieldType,
-      defaultValue: updateData
+      defaultValue: updateData,
     },
   ];
 

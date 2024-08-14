@@ -1,12 +1,13 @@
-
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
-import { placesOfAdministrationUrl } from "../../../Urls";
+import { placesOfAdministrationUrl } from "../../../urls/drugUrls";
 
 export function PlaceOfAdministrationSelect() {
- 
-  const { data, isLoading } = useGetData("placeOfAdministration", placesOfAdministrationUrl);
-   
+  const { data, isLoading } = useGetData(
+    "placeOfAdministration",
+    placesOfAdministrationUrl
+  );
+
   if (isLoading || !data) return <p>...Загрузка</p>;
 
   return (

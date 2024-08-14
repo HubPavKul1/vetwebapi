@@ -8,7 +8,7 @@ import { IDrugCatalogCreate } from "../../../interfaces/DrugInterfaces";
 
 import { DrugSelect } from "./DrugSelect";
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { catalogDrugsUrl } from "../../../Urls";
+import { catalogDrugsUrl } from "../../../urls/drugUrls";
 
 export function CreateCatalogDrugForm() {
   const inputItems: FormInputProps<IDrugCatalogCreate>[] = [

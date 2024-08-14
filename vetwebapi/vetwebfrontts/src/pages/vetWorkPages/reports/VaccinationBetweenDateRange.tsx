@@ -1,6 +1,7 @@
 import { CreateItem } from "../../../components/CreateItem";
 import { ReportForm } from "../../../components/ReportForm";
 import { ReportBetweenDateRangeProps } from "../../../interfaces/ReportInterfaces";
+import { vaccinationsUrl } from "../../../urls/vetWorkUrls";
 
 export function VaccinationBetweenDateRange({
   setReportData,
@@ -13,7 +14,7 @@ export function VaccinationBetweenDateRange({
         setReportData={setReportData}
         setDateRange={setDateRange}
         setReportActive={setReportActive}
-        url="/api/vetwork/reports/vaccinations"
+        url={vaccinationsUrl}
       />
     </CreateItem>
   );

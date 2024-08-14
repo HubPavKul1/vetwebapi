@@ -16,7 +16,7 @@ import {
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { addressUrl } from "../../../Urls";
+import { addressUrl } from "../../../urls/companyUrls";
 
 export function AddAddressForm() {
   const { id } = useParams();

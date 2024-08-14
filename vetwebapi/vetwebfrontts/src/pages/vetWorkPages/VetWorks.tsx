@@ -6,7 +6,7 @@ import { IVetwork } from "../../interfaces/VetWorkInterfaces";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";
 import { useGetData } from "../../hooks/useGetData";
-import { vetWorkDetailUrl, vetWorkLink } from "../../Urls";
+import { vetWorkDetailUrl, vetWorkLink } from "../../urls/vetWorkUrls";
 
 interface VetWorksProps {
   url: string;

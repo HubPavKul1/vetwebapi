@@ -1,6 +1,6 @@
 import { CustomSelect } from "../../CustomSelect";
 import { useGetData } from "../../../hooks/useGetData";
-import { budgetsUrl } from "../../../Urls";
+import { budgetsUrl } from "../../../urls/drugUrls";
 
 export function BudgetSelect() {
   

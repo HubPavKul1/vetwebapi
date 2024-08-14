@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
-import { IEmployee } from "../../../../interfaces/EmployeeInterfaces";
-import { DeleteItem } from "../../../DeleteItem";
+import { IEmployee } from "../../../interfaces/EmployeeInterfaces";
+import { DeleteItem } from "../../DeleteItem";
 
-import styles from "./CompanyEmployee.module.scss";
-import { companyEmployeeDetailUrl } from "../../../../Urls";
+import { companyEmployeeDetailUrl } from "../../../urls/companyUrls";
 
 interface CompanyEmployeeProps {
   employee: IEmployee;
@@ -13,7 +12,7 @@ export function CompanyEmployee({ employee }: CompanyEmployeeProps) {
   const { id } = useParams();
   const companyId = Number(id);
   return (
-    <tr key={employee.id} className={styles.tableRow}>
+    <tr key={employee.id}>
       <td>{employee.position}</td>
       <td>{employee.lastname}</td>
       <td>{employee.firstname}</td>

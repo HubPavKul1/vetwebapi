@@ -1,6 +1,6 @@
-import { VetWorkCreateForm } from "../../../components/vetWorks/VetWorkCreateForm";
-import { vaccinationsUrl } from "../../../Urls";
-import { VetWorks } from "../VetWorks";
+import { VetWorkCreateForm } from "../../components/vetWorks/VetWorkCreateForm";
+import { vaccinationsUrl } from "../../urls/vetWorkUrls";
+import { VetWorks } from "./VetWorks";
 
 export function Vaccinations() {
   const url = vaccinationsUrl;

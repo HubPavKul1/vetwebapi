@@ -5,7 +5,7 @@ import { IOption } from "../../interfaces/FormInterface";
 
 import { ICompany } from "../../interfaces/CompanyInterfaces";
 import { useGetData } from "../../hooks/useGetData";
-import { labsUrl } from "../../Urls";
+import { labsUrl } from "../../urls/companyUrls";
 
 export function LabsSelect() {
   const { data, isLoading } = useGetData("labs", labsUrl);

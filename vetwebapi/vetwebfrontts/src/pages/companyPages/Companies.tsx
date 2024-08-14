@@ -1,5 +1,5 @@
 import { CompaniesCatalog } from "../../components/companies/CompaniesCatalog";
-import { companiesUrl } from "../../Urls";
+import { companiesUrl } from "../../urls/companyUrls";
 
 export function Companies() {
   return (

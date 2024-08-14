@@ -11,7 +11,7 @@ import {
 } from "../../ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "../../../hooks/useCreateItem";
-import { companyEmployeesUrl } from "../../../Urls";
+import { companyEmployeesUrl } from "../../../urls/companyUrls";
 
 export function AddEmployeeForm() {
   const { id } = useParams();

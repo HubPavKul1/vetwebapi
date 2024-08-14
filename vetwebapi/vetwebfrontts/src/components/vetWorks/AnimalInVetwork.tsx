@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
 import { UpdateItem } from "../UpdateItem";
-import { vetWorkAnimalDetailUrl } from "../../Urls";
+import { vetWorkAnimalDetailUrl } from "../../urls/vetWorkUrls";
 
 interface AnimalInVetworkProps {
   animal: IAnimal;
@@ -82,7 +82,13 @@ export function AnimalInVetwork({
 
       {workType === "диагностика" && (
         <>
-          <td>{animal.is_positive ? <span className="text-red-700 font-bold">Положительный!</span>: <span>Отрицательный</span>}</td>
+          <td>
+            {animal.is_positive ? (
+              <span className="text-red-700 font-bold">Положительный!</span>
+            ) : (
+              <span>Отрицательный</span>
+            )}
+          </td>
           <td>
             <UpdateItem>
               <UpdateAnimalInVetWorkForm

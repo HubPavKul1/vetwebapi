@@ -6,7 +6,7 @@ import { FormInputProps } from "../../../interfaces/FormInterface";
 
 import { useParams } from "react-router-dom";
 import { useUpdateItemPartial } from "../../../hooks/useUpdateItemPartial";
-import { companyAnimalUrl } from "../../../Urls";
+import { companyAnimalUrl } from "../../../urls/companyUrls";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;
