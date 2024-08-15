@@ -4,7 +4,7 @@ import shutil
 from fastapi import File, UploadFile
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, selectinload
 
 from core.models import (
     AccountingUnit,
@@ -15,6 +15,7 @@ from core.models import (
     Dosage,
     PlaceOfAdministration,
     AdministrationMethod,
+    DrugDisease,
 )
 
 from core.settings import settings, BASE_DIR
@@ -25,11 +26,20 @@ from .schemas import DrugIn
 
 # Create
 async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
-    new_drug = Drug(**body.model_dump())
+    diseases = body.diseases
+    new_drug = Drug(**body.model_dump(exclude={"diseases"}))
     session.add(new_drug)
     await session.commit()
     await session.refresh(new_drug)
+
+    await add_diseases_to_drug(session=session, drug_id=new_drug.id, diseases=diseases)
     return new_drug
+
+
+async def add_diseases_to_drug(session: AsyncSession, drug_id: int, diseases: list[int]) -> None:
+    new_relations = [DrugDisease(drug_id=drug_id, disease_id=item) for item in diseases]
+    session.add_all(new_relations)
+    await session.commit()
 
 
 # Save Files
@@ -63,6 +73,7 @@ async def read_drugs_with_options(session: AsyncSession) -> list[Drug]:
     stmt = (
         select(Drug)
         .options(joinedload(Drug.drug_manufacturer))
+        .options(selectinload(Drug.diseases_details).joinedload(DrugDisease.disease))
         .where(Drug.is_active)
         .order_by(Drug.name)
     )

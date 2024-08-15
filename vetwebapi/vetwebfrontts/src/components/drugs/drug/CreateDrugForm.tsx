@@ -59,7 +59,7 @@ export function CreateDrugForm() {
       <FormProvider {...methods}>
         <form className="form-title" onSubmit={handleSubmit(createDrug)}>
           <div className="">
-            <DiseaseSelect isMulti={false} />
+            <DiseaseSelect isMulti={true} />
           </div>
           <div className="">
             <BudgetSelect />
@@ -75,12 +75,6 @@ export function CreateDrugForm() {
           </div>
           <div className="">
             <DosageSelect />
-          </div>
-          <div className="">
-            <PlaceOfAdministrationSelect />
-          </div>
-          <div className="">
-            <AdministrationMethodSelect />
           </div>
           {inputItems.map((item) => (
             <Input

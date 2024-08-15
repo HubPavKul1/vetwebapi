@@ -18,7 +18,7 @@ from api_v1.drug.schemas import (
     DisposalMethods,
     Dosages,
     PlacesOfAdministration,
-    AdministrationMethods
+    AdministrationMethods,
 )
 from core.database import db_manager
 from core.models import Drug
@@ -61,6 +61,9 @@ async def get_drugs_route(
 ) -> Union[Drugs, dict]:
     try:
         drugs = await crud.read_drugs_with_options(session=session)
+        print("*" * 20)
+        print(drugs)
+        print("*" * 20)
         drug_schemas = [await serialize_drug_card(drug) for drug in drugs]
         return Drugs(drugs=drug_schemas)
     except Exception:
@@ -79,7 +82,8 @@ async def get_drug_route(drug: Drug = Depends(drug_by_id)) -> Union[DrugSchema, 
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
+
+
 @router.get("/{drug_id}/image")
 async def get_drug_image(drug: Drug = Depends(drug_by_id)):
     image_path = Path(f"media/{drug.image}")
@@ -87,12 +91,14 @@ async def get_drug_image(drug: Drug = Depends(drug_by_id)):
         return {"error": "Image not found on the server"}
     return FileResponse(image_path)
 
+
 @router.get("/{drug_id}/instruction")
 async def get_drug_instruction(drug: Drug = Depends(drug_by_id)):
     file_path = Path(f"media/{drug.instruction}")
     if not file_path.is_file():
         return {"error": "Image not found on the server"}
     return FileResponse(file_path)
+
 
 @router.delete("/{drug_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_drug_route(
@@ -150,7 +156,8 @@ async def get_accounting_units_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
+
 @router.get("/disposal_methods", response_model=DisposalMethods)
 async def get_disposal_methods_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -163,7 +170,8 @@ async def get_disposal_methods_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
+
 @router.get("/dosages", response_model=Dosages)
 async def get_dosages_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -176,7 +184,8 @@ async def get_dosages_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
+
 @router.get("/places_of_administration", response_model=PlacesOfAdministration)
 async def get_places_of_administration_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -190,6 +199,7 @@ async def get_places_of_administration_route(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+
 @router.get("/administration_methods", response_model=AdministrationMethods)
 async def get_administration_methods_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -202,7 +212,6 @@ async def get_administration_methods_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-
 
 
 @router.get("/drug_names", response_model=DrugNames)

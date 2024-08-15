@@ -3,7 +3,7 @@ import { CatalogItem } from "../../components/catalogItem/CatalogItem";
 import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
 import { AppService } from "../../app.service";
 import { CreateCatalogDrugForm } from "../../components/drugs/drug/CreateCatalogDrugForm";
-import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogDrugCardBody";
+import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogCardBody";
 import { useGetData } from "../../hooks/useGetData";
 import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
 import { Loader } from "../../components/Loader";

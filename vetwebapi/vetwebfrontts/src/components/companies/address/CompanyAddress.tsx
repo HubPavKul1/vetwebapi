@@ -1,28 +1,21 @@
 import { Container } from "react-bootstrap";
 import { IAddress } from "../../../interfaces/AddressInterfaces";
 
-import styles from "./Address.module.scss"
-
 interface CompanyAddressProps {
-    address: IAddress;
+  address: IAddress;
 }
 
-
-export function CompanyAddress({address}: CompanyAddressProps) {
-    return (
-        
-            <Container className={styles.addressWrap}>
-                <span className={styles.addressItem}>Адрес: </span>
-                <span className={styles.addressItem}>г. {address.city}</span>
-                <span className={styles.addressItem}>{address.street}</span>
-                <span className={styles.addressItem}>{address.house_number}</span>
-                <span className={styles.addressItem}>тел 1: {address.phone_number1}</span>
-                {
-                    address.phone_number2 && 
-                    <span className={styles.addressItem}>тел 2: {address.phone_number2}</span>
-                }
-                
-            </Container>
-
-    )
+export function CompanyAddress({ address }: CompanyAddressProps) {
+  return (
+    <Container className="flex mb-8 text-xl">
+      <span className="mr-3">Адрес: </span>
+      <span className="mr-3">г. {address.city}</span>
+      <span className="mr-3">{address.street}</span>
+      <span className="mr-3">д. {address.house_number}</span>
+      <span className="mr-3">тел 1: {address.phone_number1}</span>
+      {address.phone_number2 && (
+        <span className="mr-3">тел 2: {address.phone_number2}</span>
+      )}
+    </Container>
+  );
 }

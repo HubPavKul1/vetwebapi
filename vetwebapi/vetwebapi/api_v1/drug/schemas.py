@@ -3,14 +3,12 @@ from pydantic import BaseModel, ConfigDict
 
 # Drug
 class DrugIn(BaseModel):
-    disease_id: int
+    diseases: list[int]
     budget_id: int
     drug_manufacturer_id: int
     accounting_unit_id: int
     disposal_method_id: int
     dosage_id: int
-    place_of_administration_id: int
-    administration_method_id: int
     name: str
     packing: int
     image: str | None = None
@@ -19,14 +17,12 @@ class DrugIn(BaseModel):
 
 class DrugSchema(BaseModel):
     id: int
-    disease: str
+    diseases: list[str]
     budget: str
     drug_manufacturer: str
     accounting_unit: str
     disposal_method: str
     dosage: str
-    place_of_administration: str
-    administration_method: str
     name: str
     packing: int
     image: str | None = None
@@ -43,6 +39,7 @@ class DrugCard(BaseModel):
     id: int
     name: str
     drug_manufacturer: str
+    diseases: list[str]
     image: str | None = None
     instruction: str | None = None
 
@@ -73,6 +70,7 @@ class DrugManufacturers(BaseModel):
 class DisposalMethods(BaseModel):
     disposal_methods: list[BaseDrugSchema]
 
+
 class Dosages(BaseModel):
     dosages: list[BaseDrugSchema]
 
@@ -92,5 +90,3 @@ class DrugName(BaseModel):
 
 class DrugNames(BaseModel):
     drugs: list[DrugName]
-
-

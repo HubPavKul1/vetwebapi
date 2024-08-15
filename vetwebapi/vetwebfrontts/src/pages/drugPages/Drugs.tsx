@@ -46,7 +46,10 @@ export function Drugs() {
             fileUploadUrl={drugFileUploadUrl(drug.id)}
             iconSrc="/pdf.jpg"
           >
-            <DrugCardBody drugManufacturer={drug.drug_manufacturer} />
+            <DrugCardBody
+              drugManufacturer={drug.drug_manufacturer}
+              diseases={drug.diseases}
+            />
           </CatalogItem>
         ))}
     </Catalog>

@@ -43,8 +43,8 @@ __all__ = (
     "CompanyInVetWork",
     "Clinic",
     "Laboratory",
-    "BaseNoPk"
-
+    "BaseNoPk",
+    "DrugDisease",
 )
 
 # Animals
@@ -54,7 +54,7 @@ from .animals.gender import Gender
 from .animals.species import Species
 from .animals.type_of_feeding import TypeOfFeeding
 from .animals.usage_type import UsageType
-from .base import Base,  BaseNoPk
+from .base import Base, BaseNoPk
 
 # Companies
 from .companies.address import Address
@@ -81,6 +81,7 @@ from .drugs.drug_movement import DrugMovement
 from .drugs.operation import Operation
 from .drugs.place_of_administration import PlaceOfAdministration
 from .drugs.disposal_method import DisposalMethod
+from .drugs.drug_disease import DrugDisease
 
 # User
 from .users.auth import auth_backend
