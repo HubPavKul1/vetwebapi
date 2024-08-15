@@ -5,7 +5,7 @@ from sqlalchemy.orm import joinedload, selectinload
 # from operator import and_, or_
 from datetime import date
 
-from core.models import DrugInMovement, DrugMovement, Operation, Drug, CatalogDrug
+from core.models import DrugInMovement, DrugMovement, Operation, Drug, CatalogDrug, DrugDisease
 
 from .schemas import DrugInMovementIn, DrugMovementIn
 
@@ -69,7 +69,12 @@ async def read_drugs_in_drug_movement(
 ) -> list[DrugInMovement]:
     stmt = (
         select(DrugInMovement)
-        .options(joinedload(DrugInMovement.catalog_drug))
+        .options(
+            joinedload(DrugInMovement.catalog_drug)
+            .joinedload(CatalogDrug.drug)
+            .selectinload(Drug.diseases_details)
+            .joinedload(DrugDisease.disease)
+        )
         .where(DrugInMovement.drug_movement_id == drug_movement.id)
     )
 

@@ -6,6 +6,7 @@ from ..serializers import get_disease_names
 
 async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSchema:
     diseases = await get_disease_names(drug=item.catalog_drug.drug)
+
     return DrugInMovementSchema(
         id=item.catalog_drug_id,
         diseases=diseases,

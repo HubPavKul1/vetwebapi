@@ -10,6 +10,7 @@ import {
   drugImageUrl,
   drugInstructionUrl,
 } from "../../urls/drugUrls";
+import { AppService } from "../../app.service";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -29,17 +30,20 @@ export function DrugDetail() {
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
+  const diseases = data && data.diseases && AppService.diseasesString(data.diseases)
+
   return (
     <>
       <Container>
-        <Row className="p-3 font-bold text-center items-center">
+        <Row className="p-3 font-bold text-center">
           <Col sm={3} className="">
             <img src={drugImageUrl(drugId)} alt={data.name} />
           </Col>
 
           <Col>
             <h5 className="text-3xl underline mb-5">{data.name}</h5>
-            <p className="text-2xl">Производитель: {data.drug_manufacturer}</p>
+            <p className="text-2xl text-left">Производитель: {data.drug_manufacturer}</p>
+            <p className="text-2xl text-left">Заболевания: {diseases}</p>
           </Col>
         </Row>
 

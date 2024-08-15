@@ -33,8 +33,8 @@ class DrugInMovementSchema(BaseModel):
     units_amount: float
     drug_manufacturer: str
     drug_dosage: str
-    administration_method: str
-    place_of_administration: str
+    administration_method: str | None = None
+    place_of_administration: str | None = None
     disposal_method: str
     packing: int
 

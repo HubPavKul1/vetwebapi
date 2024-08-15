@@ -1,6 +1,5 @@
 import { ICardProps } from "../../interfaces/CardProps";
 
-import styles from "./CatalogItem.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
 import { CatalogCardImage } from "./CatalogCardImage";
 import { CatalogCardTitle } from "./CatalogCardTitle";
@@ -9,8 +8,8 @@ import { CatalogCardFooter } from "./CatalogCardFooter";
 export function CatalogItem({ ...props }: ICardProps) {
   return (
     <Col>
-      <Container className={styles.catalogItem}>
-        <Container className={styles.cardTitle}>
+      <Container className="p-3 mb-5 border rounded-md shadow-md hover:scale-105 transition-transform">
+        <Container className="h-24 mb-2">
           <Row>
             <Col sm={3}>
               <CatalogCardImage
@@ -26,7 +25,7 @@ export function CatalogItem({ ...props }: ICardProps) {
           </Row>
         </Container>
         {props.children && (
-          <Container className={styles.cardBody}>
+          <Container className="h-24">
             <Row>{props.children}</Row>
           </Container>
         )}

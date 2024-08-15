@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IDrugMovementDetail } from "../../../../interfaces/DrugInterfaces";
 
 import styles from "./ReceiptPDF.module.scss"
+import { AppService } from "../../../../app.service";
 
 
 interface ReceiptPDFBodyProps {
@@ -9,7 +10,8 @@ interface ReceiptPDFBodyProps {
 }
 
 export function ReceiptPDFBody({data}: ReceiptPDFBodyProps) {
-    const diseases = new Set(data.drugs?.map(drug => drug.disease.toLowerCase() + ", "));
+    
+    const diseases = new Set(data.drugs?.map(drug => AppService.diseasesString(drug.diseases)));
 
     return (
         <Container>

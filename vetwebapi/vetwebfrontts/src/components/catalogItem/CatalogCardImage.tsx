@@ -1,7 +1,5 @@
-import { FileUpload } from "../../FileUpload";
+import { FileUpload } from "../FileUpload";
 import { Link } from "react-router-dom";
-
-import styles from "./CatalogCardImage.module.scss";
 
 interface CatalogCardImageProps {
   url: string;
@@ -14,9 +12,9 @@ export function CatalogCardImage({ ...props }: CatalogCardImageProps) {
   return (
     <>
       {props.imgSrc ? (
-        <Link className={styles.cardImageLink} to={props.url}>
+        <Link className="h-12" to={props.url}>
           <img
-            className={styles.cardImage}
+            className="w-24 hover:scale-125 transition-transform"
             src={props.imgSrc}
             alt={props.cardTitle}
           />

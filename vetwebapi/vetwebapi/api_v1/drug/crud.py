@@ -66,7 +66,14 @@ async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(.
 
 # Read
 async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
-    return await session.get(Drug, drug_id)
+    stmt = (
+        select(Drug)
+        .options(selectinload(Drug.diseases_details)
+        .joinedload(DrugDisease.disease
+        ))
+        .where(Drug.id == drug_id)
+    )
+    return await session.scalar(stmt)
 
 
 async def read_drugs_with_options(session: AsyncSession) -> list[Drug]:

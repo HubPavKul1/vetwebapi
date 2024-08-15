@@ -61,9 +61,6 @@ async def get_drugs_route(
 ) -> Union[Drugs, dict]:
     try:
         drugs = await crud.read_drugs_with_options(session=session)
-        print("*" * 20)
-        print(drugs)
-        print("*" * 20)
         drug_schemas = [await serialize_drug_card(drug) for drug in drugs]
         return Drugs(drugs=drug_schemas)
     except Exception:

@@ -29,8 +29,8 @@ export interface IDrugInMovement {
   packs_amount: number;
   units_amount: number;
   drug_dosage: string;
-  administration_method: string;
-  place_of_administration: string;
+  administration_method?: string;
+  place_of_administration?: string;
   disposal_method: string;
   packing: number;
 }

@@ -4,7 +4,7 @@ from .schemas import DrugCard, DrugName, DrugSchema
 
 
 async def serialize_drug(drug: Drug) -> DrugSchema:
-    diseases = await get_disease_names(drug=Drug)
+    diseases = await get_disease_names(drug=drug)
     return DrugSchema(
         id=drug.id,
         diseases=diseases,
