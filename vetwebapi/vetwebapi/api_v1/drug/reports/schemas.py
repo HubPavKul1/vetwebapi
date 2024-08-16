@@ -28,7 +28,7 @@ class DrugReportItemSchema(BaseModel):
     
 class Report1VetBItemSchema(BaseModel):
     id: int
-    disease: str
+    diseases: list[str]
     drug_name: str
     batch: str
     packing: float

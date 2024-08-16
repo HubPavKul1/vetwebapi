@@ -55,7 +55,11 @@ async def read_receipts_with_drugs(session: AsyncSession) -> list[DrugMovement]:
     stmt = (
         select(DrugMovement)
         .options(
-            selectinload(DrugMovement.catalog_drugs_details).joinedload(DrugInMovement.catalog_drug)
+            selectinload(DrugMovement.catalog_drugs_details)
+            .joinedload(DrugInMovement.catalog_drug)
+            .joinedload(CatalogDrug.drug)
+            .selectinload(Drug.diseases_details)
+            .joinedload(DrugDisease.disease)
         )
         .where(DrugMovement.operation_id == 1)
         .order_by(desc(DrugMovement.operation_date))
@@ -94,7 +98,7 @@ async def delete_drug_movement(session: AsyncSession, drug_movement: DrugMovemen
     drugs_in_movement = await read_drugs_in_drug_movement_relation(
         session=session, drug_movement=drug_movement
     )
-    
+
     [await session.delete(drug) for drug in drugs_in_movement]
     await session.delete(drug_movement)
     await session.commit()
