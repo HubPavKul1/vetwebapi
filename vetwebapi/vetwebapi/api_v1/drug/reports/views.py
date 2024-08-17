@@ -39,11 +39,10 @@ async def get_drugs_report(
 
 @router.post("/test", response_model=SuccessMessage)
 async def get_drugs_report(
-    # body: DateRangeIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    body: DateRangeIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[SuccessMessage, dict]:
     try:
-        drugs: list[tuple] = await crud.catalog_drug_with_diseases(session=session)
+        drugs: list[tuple] = await crud.report_1B(session=session, body=body)
         print("*" * 20)
         print(drugs)
         print("*" * 20)
@@ -63,7 +62,7 @@ async def vet_1B_report(
     try:
         drugs: list[tuple] = await crud.report_1B(session=session, body=body)
         drug_schema: list[Report1VetBItemSchema] = [
-            await serialize_drug_in_report_1B(item=drug) for drug in drugs
+            await serialize_drug_in_report_1B(session=session, item=drug) for drug in drugs
         ]
         return Report1VetBSchema(vet1B_report=drug_schema)
     except Exception:

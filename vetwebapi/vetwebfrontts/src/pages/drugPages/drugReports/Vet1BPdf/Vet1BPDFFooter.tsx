@@ -8,11 +8,11 @@ export function Vet1BPDFFooter() {
   const reportDate = AppService.convertDateString(today).shortDate;
 
   return (
-    <Container>
+    <Container className="report-text">
       <Row>
         <Col md={3}>Начальник:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1} ></Col>
+        <Col md={1}></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
         <Col md={1}></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
@@ -44,7 +44,9 @@ export function Vet1BPDFFooter() {
       <Row>
         <Col md={3} className="pdf-report-underlined"></Col>
         <Col md={6}></Col>
-        <Col md={3} className="pdf-report-underlined text-center">{reportDate}</Col>
+        <Col md={3} className="pdf-report-underlined text-center">
+          {reportDate}
+        </Col>
       </Row>
       <Row className="text-center mb-4">
         <Col md={3}>(номер контактного телефона)</Col>

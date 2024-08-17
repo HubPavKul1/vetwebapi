@@ -10,7 +10,7 @@ export function DrugReportPDFHeader({ dateEnd }: DrugReportPDFHeaderProps) {
   const endDate = AppService.convertDateString(dateEnd);
 
   return (
-    <Container className="report-header">
+    <Container className="report-title">
       <Row className="mb-8">
         <Col sm={7}></Col>
         <Col>

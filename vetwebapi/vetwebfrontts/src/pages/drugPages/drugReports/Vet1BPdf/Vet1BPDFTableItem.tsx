@@ -1,3 +1,4 @@
+import { AppService } from "../../../../app.service";
 import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
 
 interface Vet1BPDFTableItemProps {
@@ -5,9 +6,10 @@ interface Vet1BPDFTableItemProps {
 }
 
 export function Vet1BTableItem({ drug }: Vet1BPDFTableItemProps) {
+  const diseases = drug.diseases && AppService.diseasesString(drug.diseases);
   return (
     <tr key={drug.id}>
-      <td>{drug.disease}</td>
+      <td>{diseases}</td>
       <td>{drug.drug_name}</td>
       <td>{drug.batch}</td>
       <td>тыс.доз</td>

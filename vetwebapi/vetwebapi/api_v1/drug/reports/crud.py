@@ -34,19 +34,21 @@ async def catalog_drug_info() -> Subquery:
     return query
 
 
-async def drug_diseases() -> Subquery:
+async def drug_diseases(session: AsyncSession, drug_id: int) -> list[str]:
     query = (
-        select(DrugDisease.drug_id.label("drug_id"), Disease.name.label("disease"))
-        .join(Disease, Disease.id == DrugDisease.disease_id)
-        .subquery("drug_diseases")
+        select(Disease.name.label("disease"))
+        .where(DrugDisease.drug_id == drug_id)
+        .join(DrugDisease, DrugDisease.disease_id == Disease.id)
     )
+    result = list(await session.execute(query))
+    diseases: list[str] = [disease[0] for disease in result]
 
-    return query
+    return diseases
 
 
 async def catalog_drug_with_diseases(session: AsyncSession) -> Subquery:
     catalog_drug = await catalog_drug_info()
-    # diseases = await drug_diseases()
+    diseases = await drug_diseases(catalog_drug.c.drug_id)
 
     query = (
         select(
@@ -57,13 +59,13 @@ async def catalog_drug_with_diseases(session: AsyncSession) -> Subquery:
             catalog_drug.c.control.label("control"),
             catalog_drug.c.production_date.label("production_date"),
             catalog_drug.c.expiration_date.label("expiration_date"),
-            Disease.name.label("disease"),
-            # diseases.c.disease("disease"),
+            # Disease.name.label("disease"),
+            diseases.c.disease.label("disease"),
         )
         # .join(catalog_drug, catalog_drug.c.drug_id == diseases.c.drug_id)
-        .join(DrugDisease, DrugDisease.drug_id == catalog_drug.c.drug_id).join(
-            Disease, Disease.id == DrugDisease.disease_id
-        )
+        # .join(DrugDisease, DrugDisease.drug_id == catalog_drug.c.drug_id).join(
+        #     Disease, Disease.id == DrugDisease.disease_id
+        # )
         # .subquery("drug_diseases")
     )
 
@@ -378,7 +380,7 @@ async def catalog_drugs_movement_for_1vetB(session: AsyncSession, body: DateRang
         select(
             c_d_info.c.cd_id.label("cd_id"),
             c_d_info.c.drug_name.label("drug_name"),
-            c_d_info.c.disease.label("disease"),
+            c_d_info.c.drug_id.label("drug_id"),
             c_d_info.c.batch.label("batch"),
             c_d_info.c.control.label("control"),
             c_d_info.c.production_date.label("production_date"),
@@ -432,8 +434,8 @@ async def report_1B(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
 
     stmt = select(
         c_d_movement.c.cd_id.label("cd_id"),
-        c_d_movement.c.disease.label("disease"),
         c_d_movement.c.drug_name.label("drug_name"),
+        c_d_movement.c.drug_id.label("drug_id"),
         c_d_movement.c.batch.label("batch"),
         c_d_movement.c.packing.label("packing"),
         c_d_movement.c.units_rest_start.label("units_rest_start"),

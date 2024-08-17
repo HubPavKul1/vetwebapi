@@ -10,8 +10,8 @@ export function Vet1BPDFHeader({ dateEnd }: Vet1BPDFHeaderProps) {
   const endDate = AppService.convertDateString(dateEnd);
 
   return (
-    <Container className="report-title pt-5">
-      <Row >
+    <Container className="report-title">
+      <Row>
         <h5>
           Информация о расходовании продукции на противоэпизоотические
           мероприятия, оплачиваемые за счет федерального бюджета по г. Иваново

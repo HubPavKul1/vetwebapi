@@ -49,5 +49,5 @@ export const administrationMethodsUrl = drugsUrl + "/administration_methods";
 export const accountingUnitsUrl = drugsUrl + "/accounting_units";
 
 // drug reports
-export const drugReportsUrl = drugsUrl + "/reports/drug_movement";
-export const Vet1BReportUrl = drugsUrl + "/reports/1Vet_B";
+export const drugReportsUrl = drugsUrl + "/reports/drugs_movement";
+export const Vet1BReportUrl = drugsUrl + "/reports/1vet_B";

@@ -1,4 +1,6 @@
 from .schemas import DrugReportItemSchema, Report1VetBItemSchema
+from sqlalchemy.ext.asyncio import AsyncSession
+from .crud import drug_diseases
 
 
 async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
@@ -19,14 +21,16 @@ async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
         disposed_units=item[13],
         units_spent_disposed=item[14],
         packs_rest=item[15],
-        units_rest=item[16]
+        units_rest=item[16],
     )
-    
-async def serialize_drug_in_report_1B(item: tuple) -> Report1VetBItemSchema:
+
+
+async def serialize_drug_in_report_1B(session: AsyncSession, item: tuple) -> Report1VetBItemSchema:
+    diseases = await drug_diseases(session=session, drug_id=item[2])
     return Report1VetBItemSchema(
         id=item[0],
-        disease=item[1],
-        drug_name=item[2],
+        diseases=diseases,
+        drug_name=item[1],
         batch=item[3],
         packing=item[4],
         units_start=item[5],
@@ -35,5 +39,5 @@ async def serialize_drug_in_report_1B(item: tuple) -> Report1VetBItemSchema:
         animals_count=item[8],
         disposed_units=item[9],
         units_spent_disposed=item[10],
-        units_rest=item[11]
+        units_rest=item[11],
     )

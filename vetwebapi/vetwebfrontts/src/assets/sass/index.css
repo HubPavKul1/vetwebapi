@@ -226,3 +226,23 @@ body {
 .form-title {
   @apply text-sm;
 }
+
+.table-head th {
+  @apply border border-black align-middle font-bold text-center;
+}
+
+.table-body td {
+  @apply border border-black align-middle text-center;
+}
+
+.pdf-report-underlined {
+  @apply border-b border-b-black;
+}
+
+.report-title {
+  @apply text-center text-sm font-bold mb-3;
+}
+
+.report-text {
+  @apply text-sm;
+}

@@ -14,8 +14,8 @@ export function DrugReportPDFBody({data}: DrugReportPDFBodyProps) {
 
     return (
         <Container >
-            <Table className="table-report text-sm">
-                <thead>
+            <Table className="text-sm">
+                <thead className="table-head">
                     <tr>
                         <th rowSpan={3}>Наименование продукции</th>
                         <th rowSpan={3}>Серия</th>
@@ -45,7 +45,7 @@ export function DrugReportPDFBody({data}: DrugReportPDFBodyProps) {
                         <th>сумма</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-body">
                     {data.map(drug => <DrugReportTableItem key={drug.id} drug={drug} />)}
                 </tbody>
             </Table>    
