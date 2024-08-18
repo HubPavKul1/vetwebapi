@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Catalog } from "../../../components/Catalog";
-import { DrugMovementBetweenDateRange } from "../../../components/drugs/drugReports/reportMenuItems/DrugMovementBetweenDateRange";
-import { IDateRange } from "../../../interfaces/BaseInterface";
+import { Catalog } from "components/Catalog";
+import { DrugMovementBetweenDateRange } from "components/drugs/drugReports/reportMenuItems/DrugMovementBetweenDateRange";
+import { IDateRange } from "interfaces/BaseInterface";
 import { DrugReport } from "./DrugReport";
-import { Vet1BMenu } from "../../../components/drugs/drugReports/reportMenuItems/Vet1BMenu";
+import { Vet1BMenu } from "components/drugs/drugReports/reportMenuItems/Vet1BMenu";
 import { Vet1B } from "./Vet1B";
 
 export function DrugReportMainPage() {

@@ -1,10 +1,10 @@
 import Select, { SingleValue } from "react-select";
 import { useState } from "react";
 import { StreetsSelect } from "./StreetsSelect";
-import { IOption } from "../../../interfaces/FormInterface";
-import { useGetData } from "../../../hooks/useGetData";
-import { IBase } from "../../../interfaces/BaseInterface";
-import { citiesUrl } from "../../../urls/companyUrls";
+import { IOption } from "interfaces/FormInterface";
+import { useGetData } from "hooks/useGetData";
+import { IBase } from "interfaces/BaseInterface";
+import { citiesUrl } from "urls/companyUrls";
 
 interface CitiesSelectProps {
   districtId: string;

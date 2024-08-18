@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "../../../../app.service";
+import { AppService } from "services/app.service";
 
 interface DrugReportPDFHeaderProps {
   dateEnd: string;

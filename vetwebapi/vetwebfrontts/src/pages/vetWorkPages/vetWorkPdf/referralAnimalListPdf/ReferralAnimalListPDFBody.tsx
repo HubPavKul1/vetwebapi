@@ -1,8 +1,8 @@
 import { Container, Row, Col, Table } from "react-bootstrap";
 
-import { AppService } from "../../../../app.service";
-import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
-import NoData from "../../../../components/NoData";
+import { AppService } from "services/app.service";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import NoData from "components/NoData";
 
 interface ReferralAnimalListPDFBodyProps {
   data: IVetWorkSchema;

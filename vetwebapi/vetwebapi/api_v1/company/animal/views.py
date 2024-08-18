@@ -14,7 +14,7 @@ from .schemas import AnimalIn, AnimalUpdate, AnimalUpdatePartial
 router = APIRouter(prefix="/{company_id}/animals")
 
 
-@router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_animal_route(
     body: AnimalIn,
     company_id: int,
@@ -35,7 +35,7 @@ async def create_animal_route(
 #     return await serialize_animal(animal=animal)
 
 
-@router.delete("/{animal_id}/", status_code=status.HTTP_202_ACCEPTED)
+@router.delete("/{animal_id}", status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     animal: Animal = Depends(animal_by_id),
@@ -50,7 +50,7 @@ async def delete_animal_route(
         )
 
 
-@router.put("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.put("/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def update_animal_api(
     body: AnimalUpdate,
     animal: Animal = Depends(animal_by_id),
@@ -66,7 +66,7 @@ async def update_animal_api(
         )
 
 
-@router.patch("/{animal_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.patch("/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def update_animal_api_partial(
     body: AnimalUpdatePartial,
     animal: Animal = Depends(animal_by_id),
@@ -82,7 +82,7 @@ async def update_animal_api_partial(
         )
 
 
-@router.post("/upload/", status_code=status.HTTP_201_CREATED)
+@router.post("/upload", status_code=status.HTTP_201_CREATED)
 async def upload_animals(
     company_id: int,
     file: UploadFile,

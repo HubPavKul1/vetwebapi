@@ -30,7 +30,7 @@ export function ReceiptPDFFooter() {
         <Col></Col>
         <Col></Col>
       </Row>
-      <Row>
+      <Row className="mb-2">
         <Col md={5}>
           <h5>Ветврач-исполнитель</h5>
         </Col>

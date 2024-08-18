@@ -1,4 +1,4 @@
-import { IVetWorkReport } from "../../../interfaces/ReportInterfaces";
+import { IVetWorkReport } from "interfaces/ReportInterfaces";
 
 interface VetWorkReportItemProps {
   data: IVetWorkReport;

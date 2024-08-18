@@ -1,11 +1,11 @@
 import { BsFillTrash3Fill } from "react-icons/bs";
-import { AppService } from "../../app.service";
-import { IAnimal } from "../../interfaces/AnimalInterfaces";
+import { AppService } from "services/app.service";
+import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useParams } from "react-router-dom";
-import { useDeleteItem } from "../../hooks/useDeleteItem";
+import { useDeleteItem } from "hooks/useDeleteItem";
 import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
-import { UpdateItem } from "../UpdateItem";
-import { vetWorkAnimalDetailUrl } from "../../urls/vetWorkUrls";
+import { UpdateItem } from "components/UpdateItem";
+import { vetWorkAnimalDetailUrl } from "urls/vetWorkUrls";
 
 interface AnimalInVetworkProps {
   animal: IAnimal;

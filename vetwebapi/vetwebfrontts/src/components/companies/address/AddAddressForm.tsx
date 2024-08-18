@@ -5,18 +5,18 @@ import {
   RegisterOptions,
 } from "react-hook-form";
 import { RegionsSelect } from "./RegionsSelect";
-import { IAddressIn } from "../../../interfaces/AddressInterfaces";
-import { CustomButton } from "../../CustomButton";
-import { Input } from "../../Input";
-import { FormInputProps } from "../../../interfaces/FormInterface";
+import { IAddressIn } from "interfaces/AddressInterfaces";
+import { CustomButton } from "components/CustomButton";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,
   minLenErrorMessage,
-} from "../../ErrorMessages";
+} from "components/ErrorMessages";
 import { useParams } from "react-router-dom";
-import { useCreateItem } from "../../../hooks/useCreateItem";
-import { addressUrl } from "../../../urls/companyUrls";
+import { useCreateItem } from "hooks/useCreateItem";
+import { addressUrl } from "urls/companyUrls";
 
 export function AddAddressForm() {
   const { id } = useParams();

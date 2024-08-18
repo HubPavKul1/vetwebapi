@@ -1,6 +1,6 @@
-import { CustomSelect } from "../CustomSelect";
-import { useGetData } from "../../hooks/useGetData";
-import { diagnosticMethodsUrl } from "../../urls/vetWorkUrls";
+import { CustomSelect } from "components/CustomSelect";
+import { useGetData } from "hooks/useGetData";
+import { diagnosticMethodsUrl } from "urls/vetWorkUrls";
 
 export function DiagnosticMethodsSelect() {
   const { data, isLoading } = useGetData(

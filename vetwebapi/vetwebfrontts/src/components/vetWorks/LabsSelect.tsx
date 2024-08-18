@@ -1,11 +1,11 @@
 import Select from "react-select";
 
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../interfaces/FormInterface";
+import { IOption } from "interfaces/FormInterface";
 
-import { ICompany } from "../../interfaces/CompanyInterfaces";
-import { useGetData } from "../../hooks/useGetData";
-import { labsUrl } from "../../urls/companyUrls";
+import { ICompany } from "interfaces/CompanyInterfaces";
+import { useGetData } from "hooks/useGetData";
+import { labsUrl } from "urls/companyUrls";
 
 export function LabsSelect() {
   const { data, isLoading } = useGetData("labs", labsUrl);

@@ -1,16 +1,16 @@
-import { Catalog } from "../../components/Catalog";
-import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { CreateDrugReceiptForm } from "../../components/drugs/drugMovements/CreateDrugReceiptForm";
-import { IDrugMovement } from "../../interfaces/DrugInterfaces";
-import { AppService } from "../../app.service";
-import { useGetData } from "../../hooks/useGetData";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-import { Loader } from "../../components/Loader";
+import { Catalog } from "components/Catalog";
+import { CatalogItem } from "components/catalogItem/CatalogItem";
+import { CreateDrugReceiptForm } from "components/drugs/drugMovements/CreateDrugReceiptForm";
+import { IDrugMovement } from "interfaces/DrugInterfaces";
+import { AppService } from "services/app.service";
+import { useGetData } from "hooks/useGetData";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
 import {
   drugReceiptDetailUrl,
   drugReceiptsLink,
   drugReceiptsUrl,
-} from "../../urls/drugUrls";
+} from "urls/drugUrls";
 
 export function DrugReceipts() {
   const { data, isLoading, isError, error } = useGetData(

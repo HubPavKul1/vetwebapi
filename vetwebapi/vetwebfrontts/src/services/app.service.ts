@@ -1,8 +1,8 @@
 import axios from "axios";
-import { IAddress } from "./interfaces/AddressInterfaces";
-import { IEmployee } from "./interfaces/EmployeeInterfaces";
-import { ICompanyCard } from "./interfaces/CompanyInterfaces";
-import { IAnimalInVetwork } from "./interfaces/VetWorkInterfaces";
+import { IAddress } from "interfaces/AddressInterfaces";
+import { IEmployee } from "interfaces/EmployeeInterfaces";
+import { ICompanyCard } from "interfaces/CompanyInterfaces";
+import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
 
 
 export const AppService = {

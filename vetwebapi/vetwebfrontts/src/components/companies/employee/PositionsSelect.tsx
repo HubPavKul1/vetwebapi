@@ -1,6 +1,6 @@
-import { CustomSelect } from "../../CustomSelect";
-import { useGetData } from "../../../hooks/useGetData";
-import { positionsUrl } from "../../../urls/companyUrls";
+import { CustomSelect } from "components/CustomSelect";
+import { useGetData } from "hooks/useGetData";
+import { positionsUrl } from "urls/companyUrls";
 
 export function PositionsSelect() {
   const { data, isLoading } = useGetData("positions", positionsUrl);

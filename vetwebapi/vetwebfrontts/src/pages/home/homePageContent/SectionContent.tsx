@@ -1,7 +1,7 @@
-import { contentData } from "../../../components/data/HomeContent";
+import { contentData } from "data/HomeContent";
 import { HomePageCard } from "../homePageCard/HomePageCard";
 
-import { Catalog } from "../../../components/Catalog";
+import { Catalog } from "components/Catalog";
 
 export function SectionContent() {
   return (

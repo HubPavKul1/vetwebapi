@@ -1,6 +1,6 @@
-import { CustomSelect } from "../CustomSelect";
-import { useGetData } from "../../hooks/useGetData";
-import { biomaterialPackagesUrl } from "../../urls/vetWorkUrls";
+import { CustomSelect } from "components/CustomSelect";
+import { useGetData } from "hooks/useGetData";
+import { biomaterialPackagesUrl } from "urls/vetWorkUrls";
 
 export function BiomaterialPackagesSelect() {
   const { data, isLoading } = useGetData(

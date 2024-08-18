@@ -1,11 +1,11 @@
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 
-import { IOption } from "../../interfaces/FormInterface";
+import { IOption } from "interfaces/FormInterface";
 
-import { ICompany } from "../../interfaces/CompanyInterfaces";
+import { ICompany } from "interfaces/CompanyInterfaces";
 import { Controller, useFormContext } from "react-hook-form";
-import { useGetData } from "../../hooks/useGetData";
-import { companiesUrl } from "../../urls/companyUrls";
+import { useGetData } from "hooks/useGetData";
+import { companiesUrl } from "urls/companyUrls";
 
 export function CompanySelect() {
   const { data, isLoading } = useGetData("companies", companiesUrl);

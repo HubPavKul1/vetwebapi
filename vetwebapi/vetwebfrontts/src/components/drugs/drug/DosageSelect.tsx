@@ -1,6 +1,6 @@
-import { CustomSelect } from "../../CustomSelect";
-import { useGetData } from "../../../hooks/useGetData";
-import { dosagesUrl } from "../../../urls/drugUrls";
+import { CustomSelect } from "components/CustomSelect";
+import { useGetData } from "hooks/useGetData";
+import { dosagesUrl } from "urls/drugUrls";
 
 export function DosageSelect() {
   const { data, isLoading } = useGetData("dosages", dosagesUrl);

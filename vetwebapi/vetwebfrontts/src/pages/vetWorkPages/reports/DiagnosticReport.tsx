@@ -1,11 +1,11 @@
-import { AppService } from "../../../app.service";
+import { AppService } from "services/app.service";
 
 import { useState } from "react";
 
-import { ReportMenu } from "../../../components/menu/ReportMenu.tsx";
-import { ReportPage } from "../../../components/ReportPage.tsx";
-import { VetWorkReportProps } from "../../../interfaces/ReportInterfaces.tsx";
-import { diagnosticHeaders } from "../../../TableHeaders.ts";
+import { ReportMenu } from "components/menu/ReportMenu.tsx";
+import { ReportPage } from "components/ReportPage.tsx";
+import { VetWorkReportProps } from "interfaces/ReportInterfaces.tsx";
+import { diagnosticHeaders } from "data/TableHeaders.ts";
 import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
 
@@ -27,8 +27,8 @@ export function DiagnosticReport({
           menu={
             <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
           }
-          reportHeaders={diagnosticHeaders}
-          reportItems={data.map((item, index) => (
+          tableHeaders={diagnosticHeaders}
+          tableItems={data.map((item, index) => (
             <VetWorkReportItem
               key={index}
               data={item}

@@ -1,6 +1,6 @@
-import { CustomSelect } from "../../CustomSelect";
-import { useGetData } from "../../../hooks/useGetData";
-import { disposalMethodsUrl } from "../../../urls/drugUrls";
+import { CustomSelect } from "components/CustomSelect";
+import { useGetData } from "hooks/useGetData";
+import { disposalMethodsUrl } from "urls/drugUrls";
 
 export function DisposalMethodSelect() {
   const { data, isLoading } = useGetData("disposalMethods", disposalMethodsUrl);

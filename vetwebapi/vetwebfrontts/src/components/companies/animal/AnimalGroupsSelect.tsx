@@ -1,10 +1,10 @@
 import Select, { SingleValue } from "react-select";
 import { useState } from "react";
 import { SpeciesSelect } from "./SpeciesSelect";
-import { IOption } from "../../../interfaces/FormInterface";
-import { useGetData } from "../../../hooks/useGetData";
-import { animalGroupsUrl } from "../../../urls/companyUrls";
-import { IBase } from "../../../interfaces/BaseInterface";
+import { IOption } from "interfaces/FormInterface";
+import { useGetData } from "hooks/useGetData";
+import { animalGroupsUrl } from "urls/companyUrls";
+import { IBase } from "interfaces/BaseInterface";
 
 interface AnimalGroupsSelectProps {
   typeOfFeedingId: string;

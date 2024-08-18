@@ -1,11 +1,11 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "../CustomButton";
+import { CustomButton } from "components/CustomButton";
 
 import { useParams } from "react-router-dom";
 import { CompanySelect } from "./CompanySelect";
-import { ICompanyInVetWorkIn } from "../../interfaces/CompanyInterfaces";
-import { useCreateItem } from "../../hooks/useCreateItem";
+import { ICompanyInVetWorkIn } from "interfaces/CompanyInterfaces";
+import { useCreateItem } from "hooks/useCreateItem";
 
 interface AddCompanyToVetWorkFormProps {
   url: string;

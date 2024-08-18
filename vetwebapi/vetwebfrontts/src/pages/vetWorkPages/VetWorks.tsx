@@ -1,12 +1,11 @@
-import { Catalog } from "../../components/Catalog";
-import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-
-import { AppService } from "../../app.service";
-import { IVetwork } from "../../interfaces/VetWorkInterfaces";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-import { Loader } from "../../components/Loader";
-import { useGetData } from "../../hooks/useGetData";
-import { vetWorkDetailUrl, vetWorkLink } from "../../urls/vetWorkUrls";
+import { IVetwork } from "interfaces/VetWorkInterfaces";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
+import { useGetData } from "hooks/useGetData";
+import { vetWorkDetailUrl, vetWorkLink } from "urls/vetWorkUrls";
+import { CatalogItem } from "components/catalogItem/CatalogItem";
+import { Catalog } from "components/Catalog";
+import { AppService } from "services/app.service";
 
 interface VetWorksProps {
   url: string;

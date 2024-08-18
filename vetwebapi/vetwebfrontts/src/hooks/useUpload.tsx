@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AppService } from "../app.service";
 import { UseFormReset } from "react-hook-form";
+import { AppService } from "services/app.service";
 
 
 export function useUpload(

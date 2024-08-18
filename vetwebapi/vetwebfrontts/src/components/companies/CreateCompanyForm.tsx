@@ -1,14 +1,14 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ICompanyCreate } from "../../interfaces/CompanyInterfaces";
-import { Input } from "../Input";
-import { FormInputProps } from "../../interfaces/FormInterface";
+import { ICompanyCreate } from "interfaces/CompanyInterfaces";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,
   minLenErrorMessage,
-} from "../ErrorMessages";
-import { CustomButton } from "../CustomButton";
-import { useCreateItem } from "../../hooks/useCreateItem";
+} from "components/ErrorMessages";
+import { CustomButton } from "components/CustomButton";
+import { useCreateItem } from "hooks/useCreateItem";
 
 interface CreateCompanyFormProps {
   url: string;

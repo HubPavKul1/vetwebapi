@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
-import { CompanyPageMenu } from "../../components/menu/CompanyPageMenu";
-import { ICompanyDetail } from "../../interfaces/CompanyInterfaces";
-import { PageDetail } from "../../components/PageDetail";
-import { useGetDataById } from "../../hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-import { Loader } from "../../components/Loader";
-import { companyDetailUrl } from "../../urls/companyUrls";
-import { CompanyAddress } from "../../components/companies/address/CompanyAddress";
-import { CompanyEmployees } from "../../components/companies/employee/CompanyEmployees";
-import { CompanyAnimals } from "../../components/companies/animal/CompanyAnimals";
+import { CompanyPageMenu } from "components/menu/CompanyPageMenu";
+import { ICompanyDetail } from "interfaces/CompanyInterfaces";
+import { PageDetail } from "components/PageDetail";
+import { useGetDataById } from "hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
+import { companyDetailUrl } from "urls/companyUrls";
+import { CompanyAddress } from "components/companies/address/CompanyAddress";
+import { CompanyEmployees } from "components/companies/employee/CompanyEmployees";
+import { CompanyAnimals } from "components/companies/animal/CompanyAnimals";
 
 interface CompanyData {
   data?: ICompanyDetail;

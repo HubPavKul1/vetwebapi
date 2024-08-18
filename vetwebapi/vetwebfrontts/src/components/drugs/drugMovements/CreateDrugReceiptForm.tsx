@@ -1,13 +1,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Input } from "../../Input";
-import { FormInputProps } from "../../../interfaces/FormInterface";
-import { fieldRequiredMessage } from "../../ErrorMessages";
-import { CustomButton } from "../../CustomButton";
-import { IDrugMovementCreate } from "../../../interfaces/DrugInterfaces";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
+import { fieldRequiredMessage } from "components/ErrorMessages";
+import { CustomButton } from "components/CustomButton";
+import { IDrugMovementCreate } from "interfaces/DrugInterfaces";
 
-import { useCreateItem } from "../../../hooks/useCreateItem";
-import { drugReceiptsUrl } from "../../../urls/drugUrls";
+import { useCreateItem } from "hooks/useCreateItem";
+import { drugReceiptsUrl } from "urls/drugUrls";
 
 export function CreateDrugReceiptForm() {
   const inputItems: FormInputProps<IDrugMovementCreate>[] = [

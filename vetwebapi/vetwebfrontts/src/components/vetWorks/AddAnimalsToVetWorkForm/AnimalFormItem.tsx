@@ -1,5 +1,5 @@
-import { IAnimal } from "../../../interfaces/AnimalInterfaces";
-import { IAnimalInVetworkIn } from "../../../interfaces/VetWorkInterfaces";
+import { IAnimal } from "interfaces/AnimalInterfaces";
+import { IAnimalInVetworkIn } from "interfaces/VetWorkInterfaces";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -7,13 +7,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
-import CustomCheckBox from "../../CustomCheckBox";
+import CustomCheckBox from "components/CustomCheckBox";
 
 interface AnimalFormItemProps {
   animal: IAnimal;
   setAnimalsData: CallableFunction;
   animalsData: IAnimalInVetworkIn[];
   workType: string;
+  disease: string;
 }
 
 export function AnimalFormItem({
@@ -21,6 +22,7 @@ export function AnimalFormItem({
   setAnimalsData,
   animalsData,
   workType,
+  disease,
 }: AnimalFormItemProps) {
   const [animalChecked, setAnimalChecked] = useState(false);
 
@@ -65,17 +67,32 @@ export function AnimalFormItem({
             />
           </label>
         </Col>
+        {workType === "вакцинация" && (
+          <Col>
+            <input
+              className="border-2 w-auto text-center"
+              type="number"
+              step="any"
+              id="dosage"
+              placeholder="Доза"
+              {...register("dosage")}
+            />
+          </Col>
+        )}
 
-        <Col>
-          <input
-            className="border-2 w-auto text-center"
-            type="number"
-            step="any"
-            id="dosage"
-            placeholder="Доза"
-            {...register("dosage")}
-          />
-        </Col>
+        {disease === "туберкулез" && (
+          <Col>
+            <input
+              className="border-2 w-auto text-center"
+              type="number"
+              step="any"
+              id="dosage"
+              placeholder="Доза"
+              {...register("dosage")}
+            />
+          </Col>
+        )}
+
         {workType === "диагностика" && (
           <Col className="flex items-center">
             <CustomCheckBox id="is_positive" register={register} />

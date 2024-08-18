@@ -1,19 +1,19 @@
-import { Catalog } from "../../components/Catalog";
-import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { CreateDrugForm } from "../../components/drugs/drug/CreateDrugForm";
+import { Catalog } from "components/Catalog";
+import { CatalogItem } from "components/catalogItem/CatalogItem";
+import { CreateDrugForm } from "components/drugs/drug/CreateDrugForm";
 
-import { DrugCardBody } from "../../components/drugs/drug/DrugCardBody";
-import { useGetData } from "../../hooks/useGetData";
-import { Loader } from "../../components/Loader";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
+import { DrugCardBody } from "components/drugs/drug/DrugCardBody";
+import { useGetData } from "hooks/useGetData";
+import { Loader } from "components/Loader";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import {
   drugDetailUrl,
   drugFileUploadUrl,
   drugImageUrl,
   drugLink,
   drugsUrl,
-} from "../../urls/drugUrls";
-import { IDrugCard } from "../../interfaces/DrugInterfaces";
+} from "urls/drugUrls";
+import { IDrugCard } from "interfaces/DrugInterfaces";
 
 export function Drugs() {
   const { data, isLoading, isError, error } = useGetData("drugs", drugsUrl);

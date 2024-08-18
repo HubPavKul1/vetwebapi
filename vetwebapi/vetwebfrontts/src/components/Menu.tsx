@@ -1,4 +1,4 @@
-import { IReactElement } from "../interfaces/BaseInterface";
+import { IReactElement } from "interfaces/BaseInterface";
 
 interface MenuProps {
   children?: React.ReactElement | React.ReactNode;

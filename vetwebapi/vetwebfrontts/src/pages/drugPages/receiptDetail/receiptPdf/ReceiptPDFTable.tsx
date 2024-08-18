@@ -1,9 +1,9 @@
 import { Container } from "react-bootstrap";
-import { IDrugMovementDetail } from "../../../../interfaces/DrugInterfaces";
+import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
 
-import { PageTable } from "../../../../components/PageTable";
-import { drugReceiptHeaders } from "../../../../TableHeaders";
-import { ReceiptDrug } from "../../../../components/drugs/drugMovements/ReceiptDrug";
+import { PageTable } from "components/PageTable";
+import { drugReceiptHeaders } from "data/TableHeaders";
+import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 
 interface ReceiptPDFTableProps {
   data: IDrugMovementDetail;
@@ -14,8 +14,8 @@ export function ReceiptPDFTable({ data }: ReceiptPDFTableProps) {
   return (
     <Container>
       <PageTable
-        reportHeaders={drugReceiptHeaders}
-        reportItems={
+        tableHeaders={drugReceiptHeaders}
+        tableItems={
           data.drugs?.length &&
           data.drugs.map((drug) => <ReceiptDrug key={drug.id} drug={drug} />)
         }

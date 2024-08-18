@@ -19,7 +19,10 @@ from core.models import (
     Biomaterial,
     BiomaterialFixation,
     BiomaterialPackage,
-    DiagnosticMethod
+    DiagnosticMethod,
+    CatalogDrug,
+    Drug,
+    DrugDisease
     )
 
 from api_v1.drug.receipts.schemas import DrugInMovementIn
@@ -183,7 +186,11 @@ async def read_doctors_in_vetwork(session: AsyncSession, vetwork: VetWork) -> li
 async def read_drug_in_vetwork(session: AsyncSession, vetwork: VetWork) -> DrugInMovement:
     stmt = (
         select(DrugInMovement)
-        .options(joinedload(DrugInMovement.catalog_drug))
+        .options(joinedload(DrugInMovement.catalog_drug)
+                 .joinedload(CatalogDrug.drug)
+                 .selectinload(Drug.diseases_details)
+                 .joinedload(DrugDisease.disease)
+                 )
         .where(DrugInMovement.drug_movement_id == vetwork.drug_movement_id)
         )
     return await session.scalar(stmt)

@@ -1,11 +1,8 @@
 import { Container } from "react-bootstrap";
-import { AppService } from "../../../../app.service";
-import { PageTable } from "../../../../components/PageTable";
-import {
-  diagnosticHeaders,
-  vaccinationHeaders,
-} from "../../../../TableHeaders";
-import { IVetWorkReport } from "../../../../interfaces/ReportInterfaces";
+import { AppService } from "services/app.service";
+import { PageTable } from "components/PageTable";
+import { diagnosticHeaders, vaccinationHeaders } from "data/TableHeaders";
+import { IVetWorkReport } from "interfaces/ReportInterfaces";
 import { VetWorkReportItem } from "../ReportItem";
 
 interface VetWorkReportPDFBodyProps {
@@ -28,8 +25,8 @@ export function VetWorkReportPDFBody({
     <Container className="text-center text-xl">
       <h1 className="mb-3">{title}</h1>
       <PageTable
-        reportHeaders={reportHeaders}
-        reportItems={data.map((item, index) => (
+        tableHeaders={reportHeaders}
+        tableItems={data.map((item, index) => (
           <VetWorkReportItem
             key={index}
             data={item}

@@ -1,20 +1,20 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "../CustomButton";
-import { Input } from "../Input";
-import { FormInputProps } from "../../interfaces/FormInterface";
-import { fieldRequiredMessage } from "../ErrorMessages";
+import { CustomButton } from "components/CustomButton";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
+import { fieldRequiredMessage } from "components/ErrorMessages";
 
-import { IVetworkCreate } from "../../interfaces/VetWorkInterfaces";
+import { IVetworkCreate } from "interfaces/VetWorkInterfaces";
 import { ClinicSelect } from "./ClinicSelect";
-import { DiseaseSelect } from "../drugs/drug/DiseaseSelect";
+import { DiseaseSelect } from "components/drugs/drug/DiseaseSelect";
 import { DoctorSelect } from "./DoctorsSelect";
 import { LabsSelect } from "./LabsSelect";
 import { BiomaterialsSelect } from "./BiomaterialsSelect";
 import { BiomaterialFixationsSelect } from "./BiomaterialFixationSelect";
 import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
-import { useCreateItem } from "../../hooks/useCreateItem";
+import { useCreateItem } from "hooks/useCreateItem";
 
 
 interface VetWorkCreateFormProps {

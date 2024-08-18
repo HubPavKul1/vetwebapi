@@ -2,7 +2,7 @@ import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { Container } from "react-bootstrap";
 import { LiaFileDownloadSolid } from "react-icons/lia";
-import { useUpload } from "../hooks/useUpload";
+import { useUpload } from "hooks/useUpload";
 
 interface FileUploadProps {
   accept?: string;

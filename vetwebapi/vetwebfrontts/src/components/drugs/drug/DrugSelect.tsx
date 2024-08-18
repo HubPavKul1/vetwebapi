@@ -1,10 +1,10 @@
 import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../../interfaces/FormInterface";
+import { IOption } from "interfaces/FormInterface";
 
-import { useGetData } from "../../../hooks/useGetData";
-import { IBase } from "../../../interfaces/BaseInterface";
-import { drugNamesUrl } from "../../../urls/drugUrls";
+import { useGetData } from "hooks/useGetData";
+import { IBase } from "interfaces/BaseInterface";
+import { drugNamesUrl } from "urls/drugUrls";
 
 export function DrugSelect() {
   const { data, isLoading } = useGetData("drugNames", drugNamesUrl);

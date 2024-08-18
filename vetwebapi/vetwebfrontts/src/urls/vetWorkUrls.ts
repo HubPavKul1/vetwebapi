@@ -40,3 +40,7 @@ export const biomaterialFixationsUrl =
 export const vetWorkDrugUrl = (vetWorkId?: number) => {
   return vetWorkDetailUrl(vetWorkId) + "/drug";
 };
+
+// vetwork reports
+export const diagnosticsReportUrl = vetWorkBaseUrl + "/reports/diagnostics"
+export const vaccinationsReportUrl = vetWorkBaseUrl + "/reports/vaccinations"

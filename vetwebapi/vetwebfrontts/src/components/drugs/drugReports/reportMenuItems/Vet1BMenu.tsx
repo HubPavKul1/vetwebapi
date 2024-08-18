@@ -1,7 +1,7 @@
-import { ReportBetweenDateRangeProps } from "../../../../interfaces/ReportInterfaces";
-import { Vet1BReportUrl } from "../../../../urls/drugUrls";
-import { CreateItem } from "../../../CreateItem";
-import { ReportForm } from "../../../ReportForm";
+import { ReportBetweenDateRangeProps } from "interfaces/ReportInterfaces";
+import { Vet1BReportUrl } from "urls/drugUrls";
+import { CreateItem } from "components/CreateItem";
+import { ReportForm } from "components/ReportForm";
 
 export function Vet1BMenu({
   setReportData,

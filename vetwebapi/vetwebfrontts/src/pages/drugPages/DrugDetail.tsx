@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IDrugDetail } from "../../interfaces/DrugInterfaces";
-import { useGetDataById } from "../../hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-import { Loader } from "../../components/Loader";
+import { IDrugDetail } from "interfaces/DrugInterfaces";
+import { useGetDataById } from "hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
 import {
   drugDetailUrl,
   drugImageUrl,
   drugInstructionUrl,
-} from "../../urls/drugUrls";
-import { AppService } from "../../app.service";
+} from "urls/drugUrls";
+import { AppService } from "services/app.service";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -37,7 +37,7 @@ export function DrugDetail() {
       <Container>
         <Row className="p-3 font-bold text-center">
           <Col sm={3} className="">
-            <img src={drugImageUrl(drugId)} alt={data.name} />
+            <img src={data.image ? drugImageUrl(drugId): "/drugsCard.jpg"} alt={data.name} />
           </Col>
 
           <Col>

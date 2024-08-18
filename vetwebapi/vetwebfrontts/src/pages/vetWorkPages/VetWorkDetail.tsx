@@ -1,15 +1,15 @@
 import { Container } from "react-bootstrap";
 
-import { IVetWorkSchema } from "../../interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
-import { ReceiptDrug } from "../../components/drugs/drugMovements/ReceiptDrug";
+import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 
-import { PageDetail } from "../../components/PageDetail";
-import { VetWorkCompany } from "../../components/vetWorks/VetWorkCompany";
-import { PageTable } from "../../components/PageTable";
-import { drugReceiptHeaders } from "../../TableHeaders";
+import { PageDetail } from "components/PageDetail";
+import { VetWorkCompany } from "components/vetWorks/VetWorkCompany";
+import { PageTable } from "components/PageTable";
+import { drugReceiptHeaders } from "data/TableHeaders";
 
-import { VetWorkPageMenu } from "../../components/menu/VetWorkPageMenu";
+import { VetWorkPageMenu } from "components/menu/VetWorkPageMenu";
 
 interface VetWorkDetailProps {
   pageTitle: string;
@@ -67,8 +67,8 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
             <h5 className="page-detail-title">Биопрепарат </h5>
 
             <PageTable
-              reportHeaders={drugReceiptHeaders}
-              reportItems={
+              tableHeaders={drugReceiptHeaders}
+              tableItems={
                 props.data.drug && <ReceiptDrug drug={props.data.drug} />
               }
             />

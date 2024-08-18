@@ -1,7 +1,7 @@
-import { CustomButton } from "../../CustomButton";
+import { CustomButton } from "components/CustomButton";
 import { useParams } from "react-router-dom";
 
-import { ICompanyDetail } from "../../../interfaces/CompanyInterfaces";
+import { ICompanyDetail } from "interfaces/CompanyInterfaces";
 import { Col, Container, Row } from "react-bootstrap";
 
 import { AnimalFormItem } from "./AnimalFormItem";
@@ -9,19 +9,20 @@ import { useState } from "react";
 import {
   IAnimalInVetwork,
   IAnimalInVetworkIn,
-} from "../../../interfaces/VetWorkInterfaces";
+} from "interfaces/VetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useGetDataById } from "../../../hooks/useGetDataById";
-import { IAnimal } from "../../../interfaces/AnimalInterfaces";
-import { useCreateItem } from "../../../hooks/useCreateItem";
-import { companyDetailUrl } from "../../../urls/companyUrls";
-import { vetWorkAnimalsUrl } from "../../../urls/vetWorkUrls";
+import { useGetDataById } from "hooks/useGetDataById";
+import { IAnimal } from "interfaces/AnimalInterfaces";
+import { useCreateItem } from "hooks/useCreateItem";
+import { companyDetailUrl } from "urls/companyUrls";
+import { vetWorkAnimalsUrl } from "urls/vetWorkUrls";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
   setAnimals: CallableFunction;
   workType: string;
   choosenAnimals?: IAnimalInVetwork[];
+  disease: string;
 }
 
 interface CompanyData {
@@ -34,6 +35,7 @@ export function AddAnimalsToVetWorkForm({
   setAnimals,
   workType,
   choosenAnimals,
+  disease,
 }: AddAnimalsToVetWorkFormProps) {
   const [animalsData, setAnimalsData] = useState<IAnimalInVetworkIn[]>([]);
 
@@ -102,7 +104,10 @@ export function AddAnimalsToVetWorkForm({
         <Row className="border-2 border-black font-bold">
           <Col>Вид животного</Col>
           <Col>Кличка</Col>
-          <Col>Дозировка препарата</Col>
+          {workType === "вакцинация" && <Col>Дозировка препарата</Col>}
+
+          {disease === "туберкулез" && <Col>Дозировка препарата</Col>}
+
           {workType === "диагностика" && <Col>Положительная реакция</Col>}
           <Col>Выбрать / отменить</Col>
         </Row>
@@ -114,6 +119,7 @@ export function AddAnimalsToVetWorkForm({
               setAnimalsData={setAnimalsData}
               animalsData={animalsData}
               workType={workType}
+              disease={disease}
             />
           </Container>
         ))}

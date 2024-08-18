@@ -1,9 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "../../../../app.service";
-import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
+import { AppService } from "services/app.service";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
-import { StateAssignment } from "../../../../components/StateAssignment";
+import { StateAssignment } from "components/StateAssignment";
 
 interface ActPDFBodyProps {
   data: IVetWorkSchema;

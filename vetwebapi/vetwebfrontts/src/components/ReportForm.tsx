@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
-import { Input } from "./Input";
-import { fieldRequiredMessage } from "./ErrorMessages";
-import { CustomButton } from "./CustomButton";
+import { Input } from "components/Input";
+import { fieldRequiredMessage } from "components/ErrorMessages";
+import { CustomButton } from "components/CustomButton";
 
-import { AppService } from "../app.service";
-import { IDateRange } from "../interfaces/BaseInterface";
+import { AppService } from "services/app.service";
+import { IDateRange } from "interfaces/BaseInterface";
 
 interface ReportFormProps {
   setReportData: CallableFunction;

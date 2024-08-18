@@ -1,9 +1,9 @@
 import { MouseEventHandler, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { CustomButton } from "../../CustomButton";
-import { useUpload } from "../../../hooks/useUpload";
-import { uploadAnimalsUrl } from "../../../urls/companyUrls";
+import { CustomButton } from "components/CustomButton";
+import { useUpload } from "hooks/useUpload";
+import { uploadAnimalsUrl } from "urls/companyUrls";
 
 export function UploadAnimalForm() {
   const { id } = useParams();

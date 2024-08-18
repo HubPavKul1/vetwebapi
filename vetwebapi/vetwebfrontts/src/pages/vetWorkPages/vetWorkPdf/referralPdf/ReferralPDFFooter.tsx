@@ -1,6 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
-import NoData from "../../../../components/NoData";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
 interface ReferralPDFFooterProps {
   data: IVetWorkSchema;
@@ -9,7 +8,6 @@ interface ReferralPDFFooterProps {
 export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
   if (!data.animals) return;
   if (!data.companies?.length) return;
-  
 
   const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
 
@@ -194,7 +192,9 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="mb-4">
-        <Col md={1} className="font-bold">Примечание: </Col>
+        <Col md={1} className="font-bold">
+          Примечание:{" "}
+        </Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="mb-2">

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { AppService } from "../app.service";
+import { AppService } from "services/app.service";
 
 export function useGetData(queryKey: string, url: string) {
   const getData = () => AppService.getAll(url);

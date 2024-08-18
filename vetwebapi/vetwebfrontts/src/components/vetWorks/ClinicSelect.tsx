@@ -1,9 +1,9 @@
 import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../interfaces/FormInterface";
-import { ICompany } from "../../interfaces/CompanyInterfaces";
-import { useGetData } from "../../hooks/useGetData";
-import { vetsUrl } from "../../urls/companyUrls";
+import { IOption } from "interfaces/FormInterface";
+import { ICompany } from "interfaces/CompanyInterfaces";
+import { useGetData } from "hooks/useGetData";
+import { vetsUrl } from "urls/companyUrls";
 
 export function ClinicSelect() {
   const { data, isLoading } = useGetData("clinics", vetsUrl);

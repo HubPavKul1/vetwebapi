@@ -1,14 +1,14 @@
-import { Catalog } from "../Catalog";
+import { Catalog } from "components/Catalog";
 import { CreateCompanyForm } from "./CreateCompanyForm";
 
-import { AppService } from "../../app.service";
-import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
-import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { CompanyCardBody } from "../../components/companies/CompanyCardBody";
-import { useGetData } from "../../hooks/useGetData";
-import { ErrorLoadDataMessage } from "../ErrorLoadDataMessage";
-import { Loader } from "../Loader";
-import { companyDetailUrl, companyLink } from "../../urls/companyUrls";
+import { AppService } from "services/app.service";
+import { ICompanyCard } from "interfaces/CompanyInterfaces";
+import { CatalogItem } from "components/catalogItem/CatalogItem";
+import { CompanyCardBody } from "components/companies/CompanyCardBody";
+import { useGetData } from "hooks/useGetData";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
+import { companyDetailUrl, companyLink } from "urls/companyUrls";
 
 interface CompaniesCatalogProps {
   url: string;

@@ -1,4 +1,4 @@
-import { FormInputProps } from "../interfaces/FormInterface";
+import { FormInputProps } from "interfaces/FormInterface";
 import { ErrorMessage } from "@hookform/error-message";
 import { Container } from "react-bootstrap";
 

@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { usePDF } from "react-to-pdf";
 
-import { CustomButton } from "./CustomButton";
+import { CustomButton } from "components/CustomButton";
 
 interface PDFWrapperProps {
   setPdf: CallableFunction;

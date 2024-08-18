@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "../../../../app.service";
+import { AppService } from "services/app.service";
 
 export function DrugReportPDFFooter() {
   const today = new Date().toISOString().slice(0, 10);
@@ -57,7 +57,7 @@ export function DrugReportPDFFooter() {
         <Col md={1}></Col>
         <Col md={2}>(подпись)</Col>
       </Row>
-      <Row>
+      <Row className="text-center">
         <Col md={3} className="pdf-report-underlined"></Col>
         <Col md={6}></Col>
         <Col md={3} className="pdf-report-underlined">

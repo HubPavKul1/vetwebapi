@@ -1,10 +1,10 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "../../CustomButton";
-import { Input } from "../../Input";
-import { FormInputProps } from "../../../interfaces/FormInterface";
-import { fieldRequiredMessage } from "../../ErrorMessages";
-import { IDrugCreate } from "../../../interfaces/DrugInterfaces";
+import { CustomButton } from "components/CustomButton";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
+import { fieldRequiredMessage } from "components/ErrorMessages";
+import { IDrugCreate } from "interfaces/DrugInterfaces";
 
 import { DiseaseSelect } from "./DiseaseSelect";
 import { BudgetSelect } from "./BudgetSelect";
@@ -12,10 +12,9 @@ import { DrugManufacturerSelect } from "./DrugManufacturerSelect";
 import { AccountingUnitSelect } from "./AccountingUnitSelect";
 import { DisposalMethodSelect } from "./DisposalMethodSelect";
 import { DosageSelect } from "./DosageSelect";
-import { PlaceOfAdministrationSelect } from "./PlaceOfAdministrationSelect";
-import { AdministrationMethodSelect } from "./AdministrationMethodSelect";
-import { useCreateItem } from "../../../hooks/useCreateItem";
-import { drugsUrl } from "../../../urls/drugUrls";
+
+import { useCreateItem } from "hooks/useCreateItem";
+import { drugsUrl } from "urls/drugUrls";
 
 export function CreateDrugForm() {
   const inputItems: FormInputProps<IDrugCreate>[] = [

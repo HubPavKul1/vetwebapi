@@ -1,8 +1,8 @@
 import { Table } from "react-bootstrap";
 
 interface PageTableProps {
-  reportHeaders: string[];
-  reportItems?: React.ReactElement | React.ReactNode;
+  tableHeaders: string[];
+  tableItems?: React.ReactElement | React.ReactNode;
 }
 
 export function PageTable({ ...props }: PageTableProps) {
@@ -11,12 +11,12 @@ export function PageTable({ ...props }: PageTableProps) {
       <Table>
         <thead className="table-head text-xs">
           <tr>
-            {props.reportHeaders.map((item, i) => (
+            {props.tableHeaders.map((item, i) => (
               <th key={i}>{item}</th>
             ))}
           </tr>
         </thead>
-        <tbody className="table-body text-xs ">{props.reportItems}</tbody>
+        <tbody className="table-body text-xs ">{props.tableItems}</tbody>
       </Table>
     </>
   );

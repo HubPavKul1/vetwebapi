@@ -1,11 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { ICompanyCard } from "../../interfaces/CompanyInterfaces";
+import { ICompanyCard } from "interfaces/CompanyInterfaces";
 
 import { Link } from "react-router-dom";
-import { CustomButton } from "../CustomButton";
-import { CompanyAddress } from "../companies/address/CompanyAddress";
-import { IAnimalInVetwork } from "../../interfaces/VetWorkInterfaces";
-import { companyLink } from "../../urls/companyUrls";
+import { CustomButton } from "components/CustomButton";
+import { CompanyAddress } from "components/companies/address/CompanyAddress";
+import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
+import { companyLink } from "urls/companyUrls";
 import AnimalsInVetWork from "./AnimalsInVetWork";
 
 interface VetWorkCompanyProps {

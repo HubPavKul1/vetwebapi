@@ -1,15 +1,15 @@
 import { Container } from "react-bootstrap";
 
-import { PageDetail } from "./PageDetail";
+import { PageDetail } from "components/PageDetail";
 
-import { PageTable } from "./PageTable";
+import { PageTable } from "components/PageTable";
 
 interface ReportPageMainProps {
   reportTitle: string;
   imgSrc: string;
-  reportHeaders: string[];
+  tableHeaders: string[];
   menu: React.ReactElement;
-  reportItems: React.ReactNode;
+  tableItems: React.ReactNode;
 }
 
 export function ReportPage({ ...props }: ReportPageMainProps) {
@@ -24,8 +24,8 @@ export function ReportPage({ ...props }: ReportPageMainProps) {
         <Container>
           <Container>
             <PageTable
-              reportHeaders={props.reportHeaders}
-              reportItems={props.reportItems}
+              tableHeaders={props.tableHeaders}
+              tableItems={props.tableItems}
             />
           </Container>
         </Container>

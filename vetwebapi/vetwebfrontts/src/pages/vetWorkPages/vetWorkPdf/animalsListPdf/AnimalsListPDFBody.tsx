@@ -1,9 +1,9 @@
 import { Container, Table } from "react-bootstrap";
 
-import { AppService } from "../../../../app.service";
-import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
+import { AppService } from "services/app.service";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
-import { animalListHeaders } from "../../../../TableHeaders";
+import { animalListHeaders } from "data/TableHeaders";
 
 interface AnimalsListPDFBodyProps {
   data: IVetWorkSchema;

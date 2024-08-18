@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AppService } from "../app.service";
+import { AppService } from "services/app.service";
 
 export function useUpdateItemPartial(
   mutationKey: string,

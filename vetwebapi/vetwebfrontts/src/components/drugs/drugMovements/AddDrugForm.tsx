@@ -1,13 +1,13 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "../../CustomButton";
-import { Input } from "../../Input";
-import { fieldRequiredMessage } from "../../ErrorMessages";
-import { IDrugInMovementIn } from "../../../interfaces/DrugInterfaces";
+import { CustomButton } from "components/CustomButton";
+import { Input } from "components/Input";
+import { fieldRequiredMessage } from "components/ErrorMessages";
+import { IDrugInMovementIn } from "interfaces/DrugInterfaces";
 
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
-import { useCreateItem } from "../../../hooks/useCreateItem";
+import { useCreateItem } from "hooks/useCreateItem";
 import { PlaceOfAdministrationSelect } from "../drug/PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "../drug/AdministrationMethodSelect";
 

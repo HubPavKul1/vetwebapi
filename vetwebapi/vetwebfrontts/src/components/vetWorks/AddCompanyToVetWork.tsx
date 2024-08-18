@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { MenuItem } from "../MenuItem";
+import { MenuItem } from "components/MenuItem";
 import { AddCompanyToVetWorkForm } from "./AddCompanyToVetWorkForm";
 import { BsBuildingAdd } from "react-icons/bs";
-import { vetWorkCompanyUrl } from "../../urls/vetWorkUrls";
+import { vetWorkCompanyUrl } from "urls/vetWorkUrls";
 
 export function AddCompanyToVetWork() {
   const { id } = useParams();

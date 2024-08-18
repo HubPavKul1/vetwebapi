@@ -1,12 +1,12 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { IAnimal, IAnimalUpdate } from "../../../interfaces/AnimalInterfaces";
-import { CustomButton } from "../../CustomButton";
-import { Input } from "../../Input";
-import { FormInputProps } from "../../../interfaces/FormInterface";
+import { IAnimal, IAnimalUpdate } from "interfaces/AnimalInterfaces";
+import { CustomButton } from "components/CustomButton";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
 
 import { useParams } from "react-router-dom";
-import { useUpdateItemPartial } from "../../../hooks/useUpdateItemPartial";
-import { companyAnimalUrl } from "../../../urls/companyUrls";
+import { useUpdateItemPartial } from "hooks/useUpdateItemPartial";
+import { companyAnimalUrl } from "urls/companyUrls";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;

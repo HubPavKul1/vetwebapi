@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
+import { IDrugReport } from "interfaces/DrugInterfaces";
 import Table from 'react-bootstrap/Table';
 
 import { DrugReportTableItem } from "./DrugReportTableItem";

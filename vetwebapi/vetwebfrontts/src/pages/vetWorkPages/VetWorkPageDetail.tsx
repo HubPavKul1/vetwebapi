@@ -1,20 +1,20 @@
 import { useParams } from "react-router-dom";
 
-import { AppService } from "../../app.service";
+import { AppService } from "services/app.service";
 
 import { useState } from "react";
-import { IVetWorkSchema } from "../../interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
-import { AddAnimalsToVetWorkForm } from "../../components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
+import { AddAnimalsToVetWorkForm } from "components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
 import { ActPDF } from "./vetWorkPdf/actPdf/ActPDF";
 import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
 import { ReferralPDF } from "./vetWorkPdf/referralPdf/ReferralPDF";
+import { useGetDataById } from "hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
+import { vetWorkDetailUrl } from "urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
-import { useGetDataById } from "../../hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-import { Loader } from "../../components/Loader";
-import { vetWorkDetailUrl } from "../../urls/vetWorkUrls";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
@@ -43,6 +43,7 @@ export function VetWorkPageDetail() {
 
   const date = AppService.convertDateString(data.vetwork_date);
   const diseases = data.diseases;
+  const disease = diseases[0].toLowerCase()
   const pageTitle =
     data.work_type === "вакцинация"
       ? `Вакцинация: ${diseases}`
@@ -79,6 +80,7 @@ export function VetWorkPageDetail() {
             companyId={companyId}
             workType={data.work_type}
             choosenAnimals={data.animals}
+            disease={disease}
           />
         )
       )}

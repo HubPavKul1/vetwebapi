@@ -1,5 +1,5 @@
 import { BsFillTrash3Fill } from "react-icons/bs";
-import { useDeleteItem } from "../hooks/useDeleteItem";
+import { useDeleteItem } from "hooks/useDeleteItem";
 
 interface DeleteItemProps {
   queryKeyId?: string;

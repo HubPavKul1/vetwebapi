@@ -1,9 +1,9 @@
 import AsyncSelect from "react-select/async";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../../interfaces/FormInterface";
-import { useGetData } from "../../../hooks/useGetData";
-import { streetsUrl } from "../../../urls/companyUrls";
-import { IBase } from "../../../interfaces/BaseInterface";
+import { IOption } from "interfaces/FormInterface";
+import { useGetData } from "hooks/useGetData";
+import { streetsUrl } from "urls/companyUrls";
+import { IBase } from "interfaces/BaseInterface";
 
 
 interface StreetsSelectProps {

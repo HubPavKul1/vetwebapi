@@ -1,6 +1,6 @@
-import { IAnimalInVetwork } from "../../interfaces/VetWorkInterfaces";
-import { animalInVetWorkHeaders } from "../../TableHeaders";
-import { PageTable } from "../PageTable";
+import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
+import { animalInVetWorkHeaders } from "data/TableHeaders";
+import { PageTable } from "components/PageTable";
 import { AnimalInVetwork } from "./AnimalInVetwork";
 
 interface AnimalsInVetWorkProps {
@@ -18,8 +18,8 @@ export default function AnimalsInVetWork({
   return (
     <div>
       <PageTable
-        reportHeaders={animalInVetWorkHeaders(workType, disease)}
-        reportItems={
+        tableHeaders={animalInVetWorkHeaders(workType, disease)}
+        tableItems={
           animals?.length &&
           animals
             .filter((animal) => animal.company_id === companyId)

@@ -1,5 +1,5 @@
-import { CompaniesCatalog } from "../../components/companies/CompaniesCatalog";
-import { vetsUrl } from "../../urls/companyUrls";
+import { CompaniesCatalog } from "components/companies/CompaniesCatalog";
+import { vetsUrl } from "urls/companyUrls";
 
 export function Vets() {
   return (

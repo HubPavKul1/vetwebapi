@@ -1,14 +1,14 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "../../CustomButton";
-import { Input } from "../../Input";
-import { FormInputProps } from "../../../interfaces/FormInterface";
-import { fieldRequiredMessage } from "../../ErrorMessages";
-import { IDrugCatalogCreate } from "../../../interfaces/DrugInterfaces";
+import { CustomButton } from "components/CustomButton";
+import { Input } from "components/Input";
+import { FormInputProps } from "interfaces/FormInterface";
+import { fieldRequiredMessage } from "components/ErrorMessages";
+import { IDrugCatalogCreate } from "interfaces/DrugInterfaces";
 
 import { DrugSelect } from "./DrugSelect";
-import { useCreateItem } from "../../../hooks/useCreateItem";
-import { catalogDrugsUrl } from "../../../urls/drugUrls";
+import { useCreateItem } from "hooks/useCreateItem";
+import { catalogDrugsUrl } from "urls/drugUrls";
 
 export function CreateCatalogDrugForm() {
   const inputItems: FormInputProps<IDrugCatalogCreate>[] = [

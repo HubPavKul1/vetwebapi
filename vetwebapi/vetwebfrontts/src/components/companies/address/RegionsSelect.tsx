@@ -1,10 +1,10 @@
 import Select, { SingleValue } from 'react-select';
 import { DistrictsSelect } from './DistrictsSelect';
 import { useState } from 'react';
-import { IOption } from '../../../interfaces/FormInterface';
-import { IBase} from '../../../interfaces/BaseInterface';
-import { useGetData } from '../../../hooks/useGetData';
-import { regionsUrl } from '../../../urls/companyUrls';
+import { IOption } from 'interfaces/FormInterface';
+import { IBase} from 'interfaces/BaseInterface';
+import { useGetData } from 'hooks/useGetData';
+import { regionsUrl } from 'urls/companyUrls';
 
 
 

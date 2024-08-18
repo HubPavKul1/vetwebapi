@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { IDrugMovementDetail } from "../../../../interfaces/DrugInterfaces";
+import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
 
-import { AppService } from "../../../../app.service";
+import { AppService } from "services/app.service";
 
 interface ReceiptPDFBodyProps {
   data: IDrugMovementDetail;
@@ -30,6 +30,7 @@ export function ReceiptPDFBody({ data }: ReceiptPDFBodyProps) {
       <Row className="pdf-report-underlined report-text mb-2 text-left">
         <Col>диагностических исследований / обработок против:</Col>
         <Col className="flex">{diseasesUnique}</Col>
+        <Col></Col>
       </Row>
       <Row className="pdf-report-underlined report-text">
         <Col>

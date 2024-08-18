@@ -1,17 +1,18 @@
-import { Catalog } from "../../components/Catalog";
-import { CatalogItem } from "../../components/catalogItem/CatalogItem";
-import { IDrugCatalogCard } from "../../interfaces/DrugInterfaces";
-import { AppService } from "../../app.service";
-import { CreateCatalogDrugForm } from "../../components/drugs/drug/CreateCatalogDrugForm";
-import { CatalogDrugCardBody } from "../../components/drugs/drug/CatalogCardBody";
-import { useGetData } from "../../hooks/useGetData";
-import { ErrorLoadDataMessage } from "../../components/ErrorLoadDataMessage";
-import { Loader } from "../../components/Loader";
+import { Catalog } from "components/Catalog";
+import { CatalogItem } from "components/catalogItem/CatalogItem";
+import { IDrugCatalogCard } from "interfaces/DrugInterfaces";
+import { AppService } from "services/app.service";
+import { CreateCatalogDrugForm } from "components/drugs/drug/CreateCatalogDrugForm";
+import { CatalogDrugCardBody } from "components/drugs/drug/CatalogCardBody";
+import { useGetData } from "hooks/useGetData";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
 import {
   catalogDrugDetailUrl,
   catalogDrugLink,
   catalogDrugsUrl,
-} from "../../urls/drugUrls";
+  drugImageUrl,
+} from "urls/drugUrls";
 
 export function DrugCatalog() {
   const { data, isLoading, isError, error } = useGetData(
@@ -38,7 +39,7 @@ export function DrugCatalog() {
             key={drug.id}
             delUrl={catalogDrugDetailUrl(drug.id)}
             url={catalogDrugLink(drug.id)}
-            imgSrc={!drug.image ? "/drugsCard.jpg" : drug.image}
+            imgSrc={!drug.image ? "/drugsCard.jpg" : drugImageUrl(drug.drug_id)}
             invQueryName="drugCatalog"
             cardTitle={drug.name}
             id={drug.id}

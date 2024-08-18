@@ -1,10 +1,10 @@
 import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../../interfaces/FormInterface";
+import { IOption } from "interfaces/FormInterface";
 
-import { useGetData } from "../../../hooks/useGetData";
-import { usageTypesUrls } from "../../../urls/companyUrls";
-import { IBase } from "../../../interfaces/BaseInterface";
+import { useGetData } from "hooks/useGetData";
+import { usageTypesUrls } from "urls/companyUrls";
+import { IBase } from "interfaces/BaseInterface";
 
 export function UsageTypesSelect() {
   const { data, isLoading } = useGetData("usage_types", usageTypesUrls);

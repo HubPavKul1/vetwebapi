@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "../../../../app.service";
+import { AppService } from "services/app.service";
 
 interface ReceiptPdfHeaderProps {
   operationDate: string;
@@ -16,7 +16,6 @@ export function ReceiptPDFHeader({ operationDate }: ReceiptPdfHeaderProps) {
         <Col></Col>
         <Col className="text-left mb-3">
           <p>
-            {" "}
             Приложение № 4 к Порядку учета, хранения, использования и списания
             лекарственных средств и препаратов для ветеринарного применения,
             поступающих за счет средств федерального и областного бюджетов,

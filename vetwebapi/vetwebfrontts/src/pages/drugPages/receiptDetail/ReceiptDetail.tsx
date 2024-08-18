@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
 
-import { AppService } from "../../../app.service";
-import { IDrugMovementDetail } from "../../../interfaces/DrugInterfaces";
-import { ReceiptDrug } from "../../../components/drugs/drugMovements/ReceiptDrug";
+import { AppService } from "services/app.service";
+import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
+import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 import { useState } from "react";
 import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
-import { ReceiptPageMenu } from "../../../components/menu/ReceiptPageMenu";
-import { ReportPage } from "../../../components/ReportPage";
-import { drugReceiptHeaders } from "../../../TableHeaders";
-import { useGetDataById } from "../../../hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "../../../components/ErrorLoadDataMessage";
-import { Loader } from "../../../components/Loader";
-import { drugReceiptDetailUrl } from "../../../urls/drugUrls";
+import { ReceiptPageMenu } from "components/menu/ReceiptPageMenu";
+import { ReportPage } from "components/ReportPage";
+import { drugReceiptHeaders } from "data/TableHeaders";
+import { useGetDataById } from "hooks/useGetDataById";
+import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { Loader } from "components/Loader";
+import { drugReceiptDetailUrl } from "urls/drugUrls";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -42,8 +42,8 @@ export function ReceiptDetail() {
           reportTitle={`Поступление от ${date.fullDate}`}
           imgSrc="/drugsBg.jpg"
           menu={<ReceiptPageMenu url={url} setPdf={setPdf} />}
-          reportHeaders={drugReceiptHeaders}
-          reportItems={
+          tableHeaders={drugReceiptHeaders}
+          tableItems={
             data.drugs?.length &&
             data.drugs.map((drug) => <ReceiptDrug key={drug.id} drug={drug} />)
           }

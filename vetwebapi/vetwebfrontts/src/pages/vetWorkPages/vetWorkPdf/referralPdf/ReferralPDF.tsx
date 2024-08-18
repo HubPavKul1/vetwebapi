@@ -1,5 +1,5 @@
-import { PDFWrapper } from "../../../../components/PDFWrapper";
-import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
+import { PDFWrapper } from "components/PDFWrapper";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 import { ReferralPDFBody } from "./ReferralPDFBody";
 import { ReferralPDFBodyNoBlood } from "./ReferralPDFBodyNoBlood";
 import { ReferralPDFFooter } from "./ReferralPDFFooter";

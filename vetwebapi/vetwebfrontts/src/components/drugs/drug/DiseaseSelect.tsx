@@ -1,9 +1,9 @@
 import AsyncSelect from "react-select/async";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "../../../interfaces/FormInterface";
-import { IBase } from "../../../interfaces/BaseInterface";
-import { useGetData } from "../../../hooks/useGetData";
-import { diseasesUrl } from "../../../urls/vetWorkUrls";
+import { IOption } from "interfaces/FormInterface";
+import { IBase } from "interfaces/BaseInterface";
+import { useGetData } from "hooks/useGetData";
+import { diseasesUrl } from "urls/vetWorkUrls";
 
 interface DiseaseSelectProps {
   isMulti: boolean;

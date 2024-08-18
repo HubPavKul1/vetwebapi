@@ -1,6 +1,6 @@
-import { CustomSelect } from "../../CustomSelect";
-import { useGetData } from "../../../hooks/useGetData";
-import { administrationMethodsUrl } from "../../../urls/drugUrls";
+import { CustomSelect } from "components/CustomSelect";
+import { useGetData } from "hooks/useGetData";
+import { administrationMethodsUrl } from "urls/drugUrls";
 
 export function AdministrationMethodSelect() {
   const { data, isLoading } = useGetData(
@@ -13,8 +13,9 @@ export function AdministrationMethodSelect() {
   return (
     <CustomSelect
       data={data.administration_methods}
-      fieldName="administration_method_id"
+      fieldName="administration_method"
       placeholder="Выберите способ введения *"
+      isValueString={true}
     />
   );
 }

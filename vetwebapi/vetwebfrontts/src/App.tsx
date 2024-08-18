@@ -1,20 +1,20 @@
-import { Layout } from "./components/Layout";
-import { Home } from "./pages/home/Home";
-import { Companies } from "./pages/companyPages/Companies";
-import { CompanyDetail } from "./pages/companyPages/CompanyDetail";
+import { Layout } from "components/Layout";
+import { Home } from "pages/home/Home";
+import { Companies } from "pages/companyPages/Companies";
+import { CompanyDetail } from "pages/companyPages/CompanyDetail";
 import { Routes, Route } from "react-router-dom";
-import { DrugReceipts } from "./pages/drugPages/DrugReceipts";
-import { Drugs } from "./pages/drugPages/Drugs";
-import { DrugDetail } from "./pages/drugPages/DrugDetail";
-import { DrugCatalog } from "./pages/drugPages/DrugCatalog";
-import { ReceiptDetail } from "./pages/drugPages/receiptDetail/ReceiptDetail";
-import { Vets } from "./pages/companyPages/Vets";
-import { Vaccinations } from "./pages/vetWorkPages/Vaccinations";
-import { DrugReportMainPage } from "./pages/drugPages/drugReports/DrugReportMainPage";
-import { Diagnostics } from "./pages/vetWorkPages/Diagnostics";
-import { VetWorkPageDetail } from "./pages/vetWorkPages/VetWorkPageDetail";
-import { Labs } from "./pages/companyPages/Labs";
-import { VetWorkReportMainPage } from "./pages/vetWorkPages/reports/vetWorkReportMainPage";
+import { DrugReceipts } from "pages/drugPages/DrugReceipts";
+import { Drugs } from "pages/drugPages/Drugs";
+import { DrugDetail } from "pages/drugPages/DrugDetail";
+import { DrugCatalog } from "pages/drugPages/DrugCatalog";
+import { ReceiptDetail } from "pages/drugPages/receiptDetail/ReceiptDetail";
+import { Vets } from "pages/companyPages/Vets";
+import { Vaccinations } from "pages/vetWorkPages/Vaccinations";
+import { DrugReportMainPage } from "pages/drugPages/drugReports/DrugReportMainPage";
+import { Diagnostics } from "pages/vetWorkPages/Diagnostics";
+import { VetWorkPageDetail } from "pages/vetWorkPages/VetWorkPageDetail";
+import { Labs } from "pages/companyPages/Labs";
+import { VetWorkReportMainPage } from "pages/vetWorkPages/reports/vetWorkReportMainPage";
 
 export function App() {
   return (

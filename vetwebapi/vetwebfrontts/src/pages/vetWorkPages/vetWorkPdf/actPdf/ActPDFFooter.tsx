@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IVetWorkSchema } from "../../../../interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
 
 interface ActPDFFooterProps {

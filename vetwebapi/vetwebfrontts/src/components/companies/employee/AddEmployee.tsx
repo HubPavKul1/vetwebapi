@@ -1,5 +1,5 @@
 import { AddEmployeeForm } from "./AddEmployeeForm";
-import { MenuItem } from "../../MenuItem";
+import { MenuItem } from "components/MenuItem";
 import { GrUserManager } from "react-icons/gr";
 
 export function AddEmployee() {

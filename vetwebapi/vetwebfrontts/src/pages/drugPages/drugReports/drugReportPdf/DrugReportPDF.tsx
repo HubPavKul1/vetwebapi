@@ -1,5 +1,5 @@
-import { PDFWrapper } from "../../../../components/PDFWrapper";
-import { IDrugReport } from "../../../../interfaces/DrugInterfaces";
+import { PDFWrapper } from "components/PDFWrapper";
+import { IDrugReport } from "interfaces/DrugInterfaces";
 import { DrugReportPDFBody } from "./DrugReportPDFBody";
 import { DrugReportPDFFooter } from "./DrugReportPDFFooter";
 import { DrugReportPDFHeader } from "./drugReportPDFHeader";

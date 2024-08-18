@@ -1,13 +1,14 @@
-import { AppService } from "../../../app.service.ts";
+import { AppService } from "services/app.service.ts";
 
 import { useState } from "react";
 
-import { IDrugReport } from "../../../interfaces/DrugInterfaces.tsx";
-import { DrugInReport } from "../../../components/drugs/drugReports/DrugInReport.tsx";
-import { ReportMenu } from "../../../components/menu/ReportMenu.tsx";
-import { drugReportHeaders } from "../../../TableHeaders.ts";
-import { ReportPage } from "../../../components/ReportPage.tsx";
+import { IDrugReport } from "interfaces/DrugInterfaces.tsx";
+import { DrugInReport } from "components/drugs/drugReports/DrugInReport.tsx";
+import { ReportMenu } from "components/menu/ReportMenu.tsx";
+
+import { ReportPage } from "components/ReportPage.tsx";
 import { Vet1BPDF } from "./Vet1BPdf/index.tsx";
+import { drugReportHeaders } from "data/TableHeaders.ts";
 
 interface Vet1BProps {
   data: IDrugReport[];
@@ -29,8 +30,8 @@ export function Vet1B({ data, dateEnd, setReportActive }: Vet1BProps) {
           menu={
             <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
           }
-          reportHeaders={drugReportHeaders}
-          reportItems={data.map((drug) => (
+          tableHeaders={drugReportHeaders}
+          tableItems={data.map((drug) => (
             <DrugInReport key={drug.id} drug={drug} />
           ))}
         />

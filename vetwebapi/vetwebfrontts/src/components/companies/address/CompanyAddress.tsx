@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { IAddress } from "../../../interfaces/AddressInterfaces";
+import { IAddress } from "interfaces/AddressInterfaces";
 
 interface CompanyAddressProps {
   address: IAddress;
