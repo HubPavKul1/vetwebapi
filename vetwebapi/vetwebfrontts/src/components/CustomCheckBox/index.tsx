@@ -17,7 +17,7 @@ export default function CustomCheckBox({
   
 
   return (
-    <div className="">
+    <div className="pb-3">
       <label className="" htmlFor={id}>
         <input
           className={styles.custom_checkbox} 

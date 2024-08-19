@@ -101,7 +101,7 @@ export function AddAnimalsToVetWorkForm({
       <Container className="mb-8 text-center">
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
 
-        <Row className="border-2 border-black font-bold">
+        <Row className="border border-black font-bold p-2">
           <Col>Вид животного</Col>
           <Col>Кличка</Col>
           {workType === "вакцинация" && <Col>Дозировка препарата</Col>}
@@ -113,7 +113,7 @@ export function AddAnimalsToVetWorkForm({
         </Row>
 
         {unchoosenAnimals.map((animal) => (
-          <Container key={animal.id}>
+          <Row key={animal.id} className="border border-black">
             <AnimalFormItem
               animal={animal}
               setAnimalsData={setAnimalsData}
@@ -121,7 +121,7 @@ export function AddAnimalsToVetWorkForm({
               workType={workType}
               disease={disease}
             />
-          </Container>
+          </Row>
         ))}
       </Container>
       <Container className="w-96">

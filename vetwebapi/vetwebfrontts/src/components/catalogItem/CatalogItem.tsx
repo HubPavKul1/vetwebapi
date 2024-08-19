@@ -34,9 +34,9 @@ export function CatalogItem({ ...props }: ICardProps) {
           fileUploadUrl={props.fileUploadUrl}
           accept={props.accept}
           mutationName={props.mutationName}
-          invQueryName={props.invQueryName}
+          invQueryName={props.invQueryName ? props.invQueryName : ""}
           iconSrc={props.iconSrc}
-          delUrl={props.delUrl}
+          delUrl={props.delUrl ? props.delUrl: ""}
           cardTitle={props.cardTitle}
         />
       </Container>

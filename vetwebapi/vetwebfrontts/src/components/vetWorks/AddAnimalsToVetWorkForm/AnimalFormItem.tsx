@@ -54,7 +54,7 @@ export function AnimalFormItem({
 
   return (
     <form onSubmit={handleSubmit(addAnimalData)}>
-      <Row className="flex items-center justify-center border-b-2 border-b-black">
+      <Row className="flex items-center justify-center">
         <Col>{animal.species}</Col>
         <Col>
           <label htmlFor="animal_id">
@@ -94,7 +94,7 @@ export function AnimalFormItem({
         )}
 
         {workType === "диагностика" && (
-          <Col className="flex items-center">
+          <Col className="flex items-center justify-center">
             <CustomCheckBox id="is_positive" register={register} />
           </Col>
         )}
