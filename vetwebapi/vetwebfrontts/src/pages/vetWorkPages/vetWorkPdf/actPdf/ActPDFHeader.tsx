@@ -4,6 +4,7 @@ import { AppService } from "services/app.service";
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
 import NoData from "components/NoData";
+import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 
 interface ActPDFHeaderProps {
   data: IVetWorkSchema;
@@ -23,13 +24,7 @@ export function ActPDFHeader({ data }: ActPDFHeaderProps) {
       <Row className="mb-5">
         <Col sm={6}></Col>
         <Col>
-          <p>
-            Приложение № {disease !== "туберкулез" ? 6 : 5} к Порядку учета,
-            хранения, использования и списания лекарственных средств и
-            препаратов для ветеринарного применения, поступающих за счет средств
-            федерального и областного бюджетов, бюджетными государственными
-            учреждениями ветеринарии Ивановской области
-          </p>
+          <DrugReportTopText textNumber={disease !== "туберкулез" ? 6 : 5} />
         </Col>
       </Row>
       <Row className="text-center text-lg font-bold">
@@ -46,11 +41,13 @@ export function ActPDFHeader({ data }: ActPDFHeaderProps) {
           <Col className="text-center italic">
             о проведении туберкулинизации лошадей
           </Col>
-        ) : disease === "туберкулез" && animals === "лошади" && !data.is_primary ? (
+        ) : disease === "туберкулез" &&
+          animals === "лошади" &&
+          !data.is_primary ? (
           <Col className="text-center italic">
             о проведении туберкулинизации лошадей (повторно)
           </Col>
-        ) :disease === "туберкулез" && animals === "крупный рогатый скот" ? (
+        ) : disease === "туберкулез" && animals === "крупный рогатый скот" ? (
           <Col className="text-center italic">
             о проведении туберкулинизации крупного рогатого скота
           </Col>

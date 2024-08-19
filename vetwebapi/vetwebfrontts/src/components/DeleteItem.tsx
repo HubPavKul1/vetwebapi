@@ -29,7 +29,7 @@ export function DeleteItem({
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       <BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal} />
     </div>
   );

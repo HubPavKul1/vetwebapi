@@ -10,7 +10,7 @@ export function UpdateItem({ children }: UpdateItemProps) {
   const [modalActive, setModalActive] = useState(false);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <BsPencilSquare
         className="edit-icon"
         onClick={() => setModalActive(true)}

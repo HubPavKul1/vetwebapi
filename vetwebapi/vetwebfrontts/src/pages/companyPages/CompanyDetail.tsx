@@ -39,13 +39,7 @@ export function CompanyDetail() {
         title={data.full_name}
       >
         <>
-          {data.address ? (
-            <CompanyAddress address={data.address} />
-          ) : (
-            <span className="text-xl underline font-bold text-red-700">
-              Добавьте адрес!
-            </span>
-          )}
+          {data.address && <CompanyAddress address={data.address} />}
           {data.employees && <CompanyEmployees employees={data.employees} />}
           {data.animals && data.animals.length && (
             <CompanyAnimals animals={data.animals} companyId={data.id} />

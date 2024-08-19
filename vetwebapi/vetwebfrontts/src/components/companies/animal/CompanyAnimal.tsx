@@ -21,7 +21,6 @@ export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
   return (
     <tr
       key={animal.id}
-      className="border-b border-black text-center items-center justify-center"
     >
       <td>{animal.species}</td>
       <td>{animal.gender}</td>

@@ -4,12 +4,19 @@ export const diseasesUrl = vetWorkBaseUrl + "/diseases";
 export const vetWorkDetailUrl = (vetWorkId?: number) => {
   return vetWorkBaseUrl + `/${vetWorkId}`;
 };
-export const vetWorkLink = (vetWorkId?: number) => {
-  return `/vetwork/${vetWorkId}`;
-};
+
 
 export const diagnosticsUrl = vetWorkBaseUrl + "/diagnostics";
 export const vaccinationsUrl = vetWorkBaseUrl + "/vaccinations";
+
+// vetwork links
+export const vaccinationsLink = "/vetwork/vaccinations"
+export const diagnosticsLink = "/vetwork/diagnostics"
+export const vetWorkLink = (vetWorkId?: number) => {
+  return `/vetwork/${vetWorkId}`;
+};
+export const vetWorkReportsLink = "/vetwork/reports";
+
 
 // vetwork company
 export const vetWorkCompanyUrl = (vetWorkId?: number) => {

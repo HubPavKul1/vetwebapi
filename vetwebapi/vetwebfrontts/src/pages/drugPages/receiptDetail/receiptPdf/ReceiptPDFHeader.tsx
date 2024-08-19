@@ -1,3 +1,4 @@
+import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { AppService } from "services/app.service";
@@ -15,13 +16,7 @@ export function ReceiptPDFHeader({ operationDate }: ReceiptPdfHeaderProps) {
         <Col></Col>
         <Col></Col>
         <Col className="text-left mb-3">
-          <p>
-            Приложение № 4 к Порядку учета, хранения, использования и списания
-            лекарственных средств и препаратов для ветеринарного применения,
-            поступающих за счет средств федерального и областного бюджетов,
-            бюджетными государственными учреждениями ветеринарии Ивановской
-            области
-          </p>
+        <DrugReportTopText textNumber={4} />
         </Col>
       </Row>
       <Row className="mb-24">

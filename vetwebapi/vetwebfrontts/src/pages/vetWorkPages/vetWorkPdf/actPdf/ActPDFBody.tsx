@@ -27,7 +27,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
   const animal = data.animals[0].animal_group.toLowerCase();
 
   const doctor1 = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
-  const doctor2 = `${data.doctors[1].position} ${data.clinic} ${data.doctors[1].fullname}`;
+  const doctor2 = data.doctors.length > 1 && `${data.doctors[1].position} ${data.clinic} ${data.doctors[1].fullname}`;
   const companyDoctor = `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`;
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")

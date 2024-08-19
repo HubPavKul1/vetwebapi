@@ -8,7 +8,7 @@ import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import { Loader } from "components/Loader";
 import {
   drugReceiptDetailUrl,
-  drugReceiptsLink,
+  drugReceiptLink,
   drugReceiptsUrl,
 } from "urls/drugUrls";
 
@@ -36,7 +36,7 @@ export function DrugReceipts() {
           <CatalogItem
             key={drugMovement.id}
             delUrl={drugReceiptDetailUrl(drugMovement.id)}
-            url={drugReceiptsLink(drugMovement.id)}
+            url={drugReceiptLink(drugMovement.id)}
             imgSrc="/drugsCard.jpg"
             invQueryName="drugReceipts"
             cardTitle={

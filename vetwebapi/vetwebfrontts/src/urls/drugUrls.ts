@@ -3,10 +3,6 @@ export const drugDetailUrl = (id?: number) => {
   return `/api/drugs/${id}`;
 };
 
-export const drugLink = (id?: number) => {
-  return `/drugs/${id}`;
-};
-
 export const drugFileUploadUrl = (id?: number) => {
   return drugDetailUrl(id) + "/upload/";
 };
@@ -21,6 +17,18 @@ export const drugInstructionUrl = (id?: number) => {
 
 export const drugNamesUrl = drugsUrl + "/drug_names";
 
+// drugs links
+export const drugsLink = "/drugs";
+export const drugLink = (id?: number) => {
+  return drugsLink + `/${id}`;
+};
+export const drugCatalogLink = drugsLink + "/catalog";
+export const drugReceiptsLink = drugsLink + "/receipts";
+export const drugReceiptLink = (receiptId?: number) => {
+  return `/drugs/receipts/${receiptId}`;
+};
+export const drugReportsLink = drugsLink + "/reports";
+
 // catalog drugs
 export const catalogDrugsUrl = drugsUrl + "/catalog";
 export const catalogDrugDetailUrl = (drugId?: number) => {
@@ -34,9 +42,6 @@ export const catalogDrugLink = (drugId?: number) => {
 export const drugReceiptsUrl = drugsUrl + "/receipts";
 export const drugReceiptDetailUrl = (receiptId?: number) => {
   return drugReceiptsUrl + `/${receiptId}`;
-};
-export const drugReceiptsLink = (receiptId?: number) => {
-  return `/drugs/receipts/${receiptId}`;
 };
 
 // create drug selects urls

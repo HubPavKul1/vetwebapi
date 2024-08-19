@@ -220,7 +220,7 @@ body {
 } /*# sourceMappingURL=index.css.map */
 
 .page-detail-title {
-  @apply text-lg underline font-bold mb-3;
+  @apply text-center text-lg underline font-bold mb-8;
 }
 
 .form-title {

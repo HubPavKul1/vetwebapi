@@ -4,9 +4,16 @@ export const companyDetailUrl = (id?: number) => {
 };
 export const labsUrl = companiesUrl + "labs";
 export const vetsUrl = companiesUrl + "vets";
+
+
+// company links
+export const companiesLink = "/companies/";
 export const companyLink = (id?: number) => {
-  return `/companies/${id}`;
+  return companiesLink + `${id}`;
 };
+export const vetsLink = companiesLink + "vets";
+export const labsLink = companiesLink + "labs";
+
 
 // Company Address
 

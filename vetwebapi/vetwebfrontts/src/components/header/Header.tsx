@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
-import { LogoLink } from "./logo/Logo";
+import { LogoLink } from "./Logo";
 
-import { NavList } from "./navList/NavList";
+import { NavList } from "./NavList";
 import { CustomButton } from "../CustomButton";
 
 export function Header() {
