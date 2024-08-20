@@ -219,6 +219,82 @@ body {
   transform: scale(1.1);
 } /*# sourceMappingURL=index.css.map */
 
+/* title style */
+.title-base {
+  @apply m-0 mb-5 text-center font-bold text-black;
+}
+
+.card-title {
+  @apply title-base underline text-sm cursor-pointer hover:text-violet-600 transition-colors;
+}
+
+.page-title {
+  @apply title-base text-3xl underline;
+}
+
+.text-base {
+  @apply m-0 mb-2 text-center text-xs text-black;
+}
+/* end title style */
+
+/* Carousel styles */
+.carousel {
+  @apply h-screen;
+}
+
+.carousel img {
+  @apply h-full text-center my-0 mx-auto hover:opacity-70 transition-opacity;
+}
+
+.carousel-caption {
+  @apply rounded-md bg-white bg-opacity-50 shadow-md shadow-gray-400;
+}
+
+.carousel-caption h1 {
+  @apply title-base text-6xl;
+}
+
+.carousel-caption p {
+  @apply text-xl;
+}
+/* end carousel styles */
+
+/* card styles */
+.vertical-card {
+  @apply flex flex-col p-3 h-full w-full drop-shadow-md hover:scale-105 transition-transform;
+}
+
+.catalog-card {
+  @apply p-3 mb-5 border rounded-md shadow-lg hover:scale-105 transition-transform;
+}
+/* end card style */
+
+/* menu style */
+.page-menu {
+  @apply text-left p-4 mb-5 border rounded-md shadow-md;
+}
+
+.page-menu-top {
+  @apply flex flex-col items-center w-full;
+}
+
+.page-menu-top h2 {
+  @apply title-base underline text-2xl;
+}
+
+.page-menu-top ul {
+  @apply p-0 flex flex-col;
+}
+
+.page-menu-buttons {
+  @apply flex flex-col p-1;
+}
+
+.page-menu-item {
+  @apply list-none m-0 mb-4 border-b border-b-black text-2xl hover:text-violet-600 transition-colors;
+}
+/* end menu style */
+
 .page-detail-title {
   @apply text-center text-lg underline font-bold mb-8;
 }

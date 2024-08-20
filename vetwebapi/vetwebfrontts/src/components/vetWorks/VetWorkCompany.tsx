@@ -33,7 +33,7 @@ export function VetWorkCompany({
   return (
     <Container key={company.id} className="mb-8 border-b-2 border-b-black ">
       <div>
-        <Row className="text-center text-lg font-bold underline mb-5">
+        <Row className="title-base underline text-sm">
           <Col sm={6}>
             <h5>
               <Link to={companyLink(company.id)}>{company.full_name}</Link>

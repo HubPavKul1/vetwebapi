@@ -7,15 +7,15 @@ interface MenuProps {
 
 export function Menu({ children, buttons }: MenuProps) {
   return (
-    <div className="text-left p-4 border border-gray-800 rounded-md shadow-md mb-5">
-      <div className="flex flex-col items-center w-full ">
-        <h2 className="text-2xl text-center font-bold mb-4">Меню</h2>
-        <ul className="p-0 flex flex-col">{children}</ul>
+    <div className="page-menu">
+      <div className="page-menu-top">
+        <h2>Меню</h2>
+        <ul>{children}</ul>
       </div>
-      <div className="flex flex-col p-1">
+      <div className="page-menu-buttons">
         {buttons &&
           buttons.map((item) => (
-            <div className="w-full mb-4" key={item.id}>
+            <div className="w-full mb-2" key={item.id}>
               {item.element}
             </div>
           ))}

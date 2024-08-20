@@ -1,46 +1,39 @@
 import { Card, Col, Container } from "react-bootstrap";
 import { ICardProps } from "interfaces/CardProps";
 
-import styles from "./HomePageCard.module.scss"
-
-
 interface HomePageCardProps {
-    item: ICardProps
+  item: ICardProps;
 }
 
-export function HomePageCard({item}: HomePageCardProps) {
+export function HomePageCard({ item }: HomePageCardProps) {
   return (
-            <Col>
-                <a href={item.url}>
-                    <Card className={styles.card}>
-                        <Container className="max-w-45">
-                            <Card.Img variant="top"
-                                src={item.imgSrc}
-                                alt={item.imgAlt}
-                                className={styles.cardImage}
-                            />
-                        </Container>
-                        
-                                            
-                        <Card.Body>
-                            <Card.Title>
-                                <h5 className={styles.cardTitle}>{item.cardTitle}</h5>
-                            </Card.Title>
-                            <Card.Text className={styles.cardText}>
-                                {item.cardText}
-                            </Card.Text>
-                        </Card.Body>
-                            {
-                                item.hasContacts && 
-                                <Card.Footer>
-                                    <span className={styles.cardFooterItem}>{item.address}</span><br />
-                                    <span className={styles.cardFooterItem}>{item.phone}</span> <br />
-                                    <span className={styles.cardFooterItem}>{item.phone2}</span>
-                                </Card.Footer>
-                            }
-                                    
-                    </Card>
-                </a>
-            </Col>
-  )
+    <Col>
+      <a href={item.url}>
+        <Card className="vertical-card">
+          <Container className="w-full h-44">
+            <Card.Img
+              variant="top"
+              src={item.imgSrc}
+              alt={item.imgAlt}
+              className="mb-8 w-full h-full"
+            />
+          </Container>
+
+          <Card.Body>
+            <Card.Title>
+              <h5 className="title-base text-lg underline">{item.cardTitle}</h5>
+            </Card.Title>
+            <Card.Text className="text-base">{item.cardText}</Card.Text>
+          </Card.Body>
+          {item.hasContacts && (
+            <Card.Footer className="flex flex-col text-xs">
+              <span>{item.address}</span>
+              <span>тел. {item.phone}</span>
+              {item.phone2 && <span>тел. {item.phone2}</span>}
+            </Card.Footer>
+          )}
+        </Card>
+      </a>
+    </Col>
+  );
 }

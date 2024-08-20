@@ -20,7 +20,7 @@ export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
         {props.hasFileUploader && props.fileUploadUrl ? (
           <>
             <Col sm={8} className="text-right">
-              <h5>Загрузите инструкцию </h5>
+              <h5>Загрузите инструкцию</h5>
             </Col>
             <Col sm={2}>
               <Container className="w-20">

@@ -8,7 +8,7 @@ import { CatalogCardFooter } from "./CatalogCardFooter";
 export function CatalogItem({ ...props }: ICardProps) {
   return (
     <Col>
-      <Container className="p-3 mb-5 border rounded-md shadow-md hover:scale-105 transition-transform">
+      <Container className="catalog-card">
         <Container className="h-24 mb-2">
           <Row>
             <Col sm={3}>
@@ -36,7 +36,7 @@ export function CatalogItem({ ...props }: ICardProps) {
           mutationName={props.mutationName}
           invQueryName={props.invQueryName ? props.invQueryName : ""}
           iconSrc={props.iconSrc}
-          delUrl={props.delUrl ? props.delUrl: ""}
+          delUrl={props.delUrl ? props.delUrl : ""}
           cardTitle={props.cardTitle}
         />
       </Container>

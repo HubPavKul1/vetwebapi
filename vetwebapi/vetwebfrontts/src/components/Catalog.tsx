@@ -23,9 +23,7 @@ export function Catalog({
 }: CatalogProps) {
   return (
     <PageWrapper>
-      <h1 className="text-center text-3xl font-bold underline mb-5 ">
-        {title}
-      </h1>
+      <h1 className="page-title">{title}</h1>
       {createForm && <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>}
       {dataLength > 0 ? (
         <Row xs={1} md={cardsInRow} lg={cardsInRow}>

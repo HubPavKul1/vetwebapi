@@ -11,7 +11,7 @@ export default function NoData({ title }: NoDataProps) {
   const lastLetter = firstWord.slice(-1).toLowerCase();
 
   return (
-    <Container className="p-10 text-center border-2 w-auto drop-shadow-md shadow-md shadow-red-900">
+    <Container className="p-10 text-center border-2 w-auto shadow-md shadow-red-900">
       <h1 className="text-3xl text-red-600 ">
         {firstWord}{" "}
         {letters.includes(lastLetter) ? "ОТСУТСТВУЮТ!!!" : "ОТСУТСТВУЕТ!!!"}

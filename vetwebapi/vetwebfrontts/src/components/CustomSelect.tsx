@@ -7,19 +7,21 @@ interface ICustomSelectProps {
   data: IBase[];
   fieldName: string;
   placeholder: string;
-  isValueString?: boolean
-
+  isValueString?: boolean;
 }
 
 export function CustomSelect({
   data,
   fieldName,
   placeholder,
-  isValueString
+  isValueString,
 }: ICustomSelectProps) {
   const { control } = useFormContext();
 
-  const options = data.map((item) => ({ value: (isValueString ? item.name : item.id), label: item.name }));
+  const options = data.map((item) => ({
+    value: isValueString ? item.name : item.id,
+    label: item.name,
+  }));
 
   const getValue = (value: number | string) =>
     value ? options?.find((option) => option.value === value) : "";
@@ -30,7 +32,7 @@ export function CustomSelect({
       name={fieldName}
       render={({ field: { onChange, value } }) => (
         <Select
-          className="custom-select"
+          className="mb-2"
           isSearchable
           isClearable
           options={options}
