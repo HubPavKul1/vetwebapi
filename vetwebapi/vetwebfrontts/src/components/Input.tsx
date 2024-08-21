@@ -7,6 +7,7 @@ export function Input({
   rules,
   register,
   errors,
+  onChange,
   ...props
 }: FormInputProps<TFormValues>) {
   return (

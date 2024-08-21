@@ -5,6 +5,7 @@ import {
   RegisterOptions,
   FieldValues,
   UseFormRegister,
+  ChangeHandler,
 } from "react-hook-form";
 
 export interface IOption {
@@ -24,12 +25,14 @@ export interface InputProps {
   style?: React.CSSProperties;
   defaultValue?: string | number | readonly string[];
   step?: any;
+  value?: string | number | readonly string[];
 }
 
 export interface FormInputProps<TFormValues extends FieldValues>
   extends InputProps {
-  fieldName: Path<TFormValues>;
+  fieldName?: Path<TFormValues>;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
   errors?: Partial<DeepMap<TFormValues, FieldError>>;
+  onChange?: (...event: any[]) => void;
 }

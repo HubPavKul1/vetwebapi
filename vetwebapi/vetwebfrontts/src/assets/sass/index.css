@@ -303,6 +303,7 @@ body {
   @apply text-sm;
 }
 
+/* table styles */
 .table-head th {
   @apply border border-black align-middle font-bold text-center;
 }
@@ -311,6 +312,7 @@ body {
   @apply border border-black align-middle text-center;
 }
 
+/* report style */
 .pdf-report-underlined {
   @apply border-b border-b-black;
 }
@@ -321,4 +323,9 @@ body {
 
 .report-text {
   @apply text-sm;
+}
+
+/* form styles */
+.text-input {
+  @apply w-full py-2 border outline-slate-400 focus:outline-indigo-300 rounded-md text-center;
 }
