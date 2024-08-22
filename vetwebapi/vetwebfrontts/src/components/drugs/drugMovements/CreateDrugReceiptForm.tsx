@@ -47,8 +47,7 @@ export function CreateDrugReceiptForm() {
       {inputItems.map((item) => (
         <Input
           key={item.fieldName}
-          className="form-control"
-          style={{ textAlign: "center" }}
+          className="text-input text-center"
           register={register}
           fieldName={item.fieldName}
           type={item.type}

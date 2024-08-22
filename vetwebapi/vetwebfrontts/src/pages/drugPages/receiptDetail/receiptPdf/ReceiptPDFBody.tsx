@@ -28,7 +28,7 @@ export function ReceiptPDFBody({ data }: ReceiptPDFBodyProps) {
         </Col>
       </Row>
       <Row className="pdf-report-underlined report-text mb-2 text-left">
-        <Col>диагностических исследований / обработок против:</Col>
+        <Col md={5}>диагностических исследований / обработок против:</Col>
         <Col className="flex">{diseasesUnique}</Col>
         <Col></Col>
       </Row>

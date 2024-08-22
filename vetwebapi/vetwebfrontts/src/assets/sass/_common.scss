@@ -2,175 +2,157 @@
 @import "./mixins";
 @import "./templates";
 
-
-
-
 @font-face {
-	font-family: 'HelveticaNeueCyr';
-	src: local('HelveticaNeueCyr-Light'),
-		url('../fonts/HelveticaNeueCyrLight.woff2') format('woff2'),
-		url('../fonts/HelveticaNeueCyrLight.woff') format('woff');
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
+  font-family: "HelveticaNeueCyr";
+  src: local("HelveticaNeueCyr-Light"),
+    url("../fonts/HelveticaNeueCyrLight.woff2") format("woff2"),
+    url("../fonts/HelveticaNeueCyrLight.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: 'HelveticaNeueCyr';
-	src: local('HelveticaNeueCyr-Medium'), 
-		url('../fonts/HelveticaNeueCyrMedium.woff2') format('woff2'),
-		url('../fonts/HelveticaNeueCyrMedium.woff') format('woff');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
+  font-family: "HelveticaNeueCyr";
+  src: local("HelveticaNeueCyr-Medium"),
+    url("../fonts/HelveticaNeueCyrMedium.woff2") format("woff2"),
+    url("../fonts/HelveticaNeueCyrMedium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: 'HelveticaNeueCyr';
-	src: local('HelveticaNeueCyr-Bold'),
-		url('../fonts/HelveticaNeueCyrBold.woff2') format('woff2'),
-		url('../fonts/HelveticaNeueCyrBold.woff') format('woff');
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
+  font-family: "HelveticaNeueCyr";
+  src: local("HelveticaNeueCyr-Bold"),
+    url("../fonts/HelveticaNeueCyrBold.woff2") format("woff2"),
+    url("../fonts/HelveticaNeueCyrBold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
-
 
 html {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
-	cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
-
 
 img {
-	max-width: 100%;
+  max-width: 100%;
 }
 
-
 body {
-	min-width: 320px;
-	font-family: $fontFamily;
-	font-weight: 500;
+  min-width: 320px;
+  font-family: $fontFamily;
+  font-weight: 500;
 }
 
 :root {
-	--gap: 30px;
+  --gap: 30px;
 }
-
-
 
 /* global */
 
 .form-group {
-	margin-bottom: 15px;
-	font-size: 16px;
-	color:rgb(0, 0, 0)
-	
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
 }
 
 .form-group label {
-	font-weight: 700;
+  font-weight: 700;
 }
 
-
 .input-wrap {
-	margin-bottom: 15px;
-	width: 100%;
-
+  margin-bottom: 15px;
+  width: 100%;
 }
 
 .error-message {
-	color: red;
-	font-size: .8em;
+  color: red;
+  font-size: 0.8em;
 }
 
 .custom-select {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .delete-icon {
-	color: red;
-	font-size: 16px;
-	transition: transform .3s ease-in-out;
+  color: red;
+  font-size: 16px;
+  transition: transform 0.3s ease-in-out;
 
-	&:hover {
-		transform: scale(1.5);
-		cursor: pointer;
-	}
+  &:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+  }
 }
 
 .edit-icon {
-	color: blueviolet;
-	font-size: 16px;
-	transition: transform .3s ease-in-out;
+  color: blueviolet;
+  font-size: 16px;
+  transition: transform 0.3s ease-in-out;
 
-	&:hover {
-		transform: scale(1.5);
-		cursor: pointer;
-	}
+  &:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+  }
 }
 
 .pdf-icon {
-	color: blueviolet;
-	font-size: 16px;
-	transition: transform .3s ease-in-out;
+  color: blueviolet;
+  font-size: 16px;
+  transition: transform 0.3s ease-in-out;
 
-	&:hover {
-		transform: scale(1.5);
-		cursor: pointer;
-	}
+  &:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+  }
 }
 
-
 .btn-large {
-	@extend %btn;
-	@include btn-size(15px, 30px, 5px, 1em);
-	
+  @extend %btn;
+  @include btn-size(15px, 30px, 5px, 1em);
 }
 
 .btn-submit {
-	@extend %btn;
-	@include btn-size(10px, 20px, 5px, 1em);
-	width: 100%;
+  @extend %btn;
+  @include btn-size(10px, 20px, 5px, 1em);
+  width: 100%;
 }
 
 .btn-nav {
-	@extend %btn;
-	@include btn-size(5px, 10px, 5px, 1em);
+  @extend %btn;
+  @include btn-size(5px, 10px, 5px, 1em);
 }
 
 .btn-upload {
-	@extend %btn;
-	@include btn-size(2px, 10px, 5px, .7em);
+  @extend %btn;
+  @include btn-size(2px, 10px, 5px, 0.7em);
 }
 
 .btn-default {
-	width: 100%;
-	text-align: center;
-	font-size: .7em;
-	background-color: #fff;
-	border-radius: 5px;
-	transition: transform .3s ease-in-out;
-	margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.7em;
+  background-color: #fff;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+  cursor: pointer;
 
-	&:hover {
-		transform: scale(1.1);
-		
-	}
-
+  &:hover {
+    transform: scale(1.1);
+  }
 }
-
-
-
-

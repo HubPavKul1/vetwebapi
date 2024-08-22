@@ -40,7 +40,7 @@ export function PDFWrapper({
         />
       </div>
 
-      <Container className="py-10 px-20 overflow-auto" ref={targetRef}>
+      <Container className="py-3 px-20 overflow-auto" ref={targetRef}>
         {children}
       </Container>
     </Container>

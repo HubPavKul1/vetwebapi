@@ -16,7 +16,6 @@ import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
 import { useCreateItem } from "hooks/useCreateItem";
 
-
 interface VetWorkCreateFormProps {
   url: string;
   queryKey: string;
@@ -63,7 +62,7 @@ export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
             {inputItems.map((item) => (
               <Input
                 key={item.fieldName}
-                className="form-control w-auto"
+                className="text-input"
                 placeholder={item.placeholder}
                 register={register}
                 fieldName={item.fieldName}

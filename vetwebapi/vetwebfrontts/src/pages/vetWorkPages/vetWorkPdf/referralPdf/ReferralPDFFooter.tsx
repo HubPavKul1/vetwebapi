@@ -36,7 +36,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col>
           <div className="w-10 h-10 border-2 border-black"></div>
         </Col>
-        <Col sm={2}></Col>
+        <Col></Col>
         <Col>нет</Col>
         <Col>
           <div className="w-10 h-10 border-2 border-black"></div>
@@ -64,17 +64,17 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
       <Row>
         <Col sm={2}>Выдать на руки:</Col>
         <Col sm={1}>
-          <div className="w-20 h-10 border-2 border-black text-center">V</div>
+          <div className="w-12 h-7 border-2 border-black text-center">V</div>
         </Col>
         <Col sm={9}></Col>
       </Row>
       <Row>
-        <Col sm={3}>Отправить по электронной почте:</Col>
-        <Col sm={1}>
-          <div className="w-20 h-10 border-2 border-black text-center">V</div>
+        <Col sm={4}>Отправить по электронной почте:</Col>
+        <Col>
+          <div className="w-12 h-7 border-2 border-black text-center">V</div>
         </Col>
         <Col></Col>
-        <Col sm={7} className="pdf-report-underlined"></Col>
+        <Col sm={6} className="pdf-report-underlined"></Col>
       </Row>
       <Row>
         <Col sm={5}>Количество необходимых результатов исследований:</Col>
@@ -83,7 +83,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
       <Row className="font-bold">
         <Col>Заказчик уведомлен и дает свое согласие на: </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col>
           <p className="text-xs">
             Обработку персональных данных <br />
@@ -125,51 +125,51 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         </Col>
       </Row>
       <Row>
-        <Col md={4}>Представитель заказчика ознакомлен и согласен:</Col>
+        <Col md={5}>Представитель заказчика ознакомлен и согласен:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center mb-4">
-        <Col md={4}></Col>
+      <Row className="text-center text-xs mb-2 ">
+        <Col md={5}></Col>
         <Col md={2}>(подпись)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(расшифровка подписи)</Col>
         <Col></Col>
         <Col md={2}>(дата)</Col>
       </Row>
       <Row>
-        <Col md={3}>Подпись лица, сдавшего пробы, дата:</Col>
+        <Col md={5}>Подпись лица, сдавшего пробы, дата:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center mb-4">
-        <Col md={3}></Col>
+      <Row className="text-center text-xs mb-2">
+        <Col md={5}></Col>
         <Col md={2}>(подпись)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(расшифровка подписи)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(дата)</Col>
       </Row>
       <Row>
-        <Col md={3}>Сотрудник, принявший пробы:</Col>
+        <Col md={5}>Сотрудник, принявший пробы:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center mb-4">
-        <Col md={3}></Col>
+      <Row className="text-center text-xs mb-3">
+        <Col md={5}></Col>
         <Col md={2}>(подпись)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(расшифровка подписи)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(дата)</Col>
       </Row>
       <Row>
@@ -182,20 +182,20 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={3}>Забраковано проб (кол-во):</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="mb-4">
+      <Row className="mb-2">
         <Col className="font-bold">Причина браковки проб: </Col>
       </Row>
-      <Row className="mb-4">
+      <Row className="mb-3">
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="mb-4">
-        <Col md={1} className="font-bold">
-          Примечание:{" "}
+      <Row className="mb-3">
+        <Col md={2} className="font-bold">
+          Примечание:
         </Col>
-        <Col className="pdf-report-underlined"></Col>
+        <Col md={10} className="pdf-report-underlined"></Col>
       </Row>
       <Row className="mb-2">
         <Col className="pdf-report-underlined"></Col>
@@ -209,27 +209,26 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={1}></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center mb-4">
+      <Row className="text-center text-xs mb-2">
         <Col md={3}></Col>
         <Col md={2}>(ФИО)</Col>
         <Col md={1}></Col>
         <Col md={2}>(подпись)</Col>
       </Row>
-
       <Row>
-        <Col md={4}>Представитель БГУ «Ивоблветлаборатория»:</Col>
+        <Col md={5}>Представитель БГУ «Ивоблветлаборатория»:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center mb-4">
-        <Col md={4}></Col>
+      <Row className="text-center text-xs">
+        <Col md={5}></Col>
         <Col md={2}>(должность)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(подпись)</Col>
-        <Col md={1}></Col>
+        <Col></Col>
         <Col md={2}>(расшифровка подписи)</Col>
       </Row>
     </Container>

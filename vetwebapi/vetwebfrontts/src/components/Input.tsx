@@ -11,7 +11,7 @@ export function Input({
   ...props
 }: FormInputProps<TFormValues>) {
   return (
-    <Container className="p-0 mx-0 mb-3 w-auto">
+    <Container className="p-0 mx-0 mb-2 w-auto">
       <input {...props} {...(register && register(fieldName, rules))} />
       <ErrorMessage
         errors={errors}

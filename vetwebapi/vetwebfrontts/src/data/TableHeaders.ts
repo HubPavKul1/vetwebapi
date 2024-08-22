@@ -85,8 +85,8 @@ export const animalInVetWorkHeaders = (workType: string, disease: string) => {
       "",
       "",
     ];
-    return headers
-  };
+    return headers;
+  }
 
   if (workType === "диагностика" && disease === "туберкулез") {
     headers = [
@@ -101,8 +101,8 @@ export const animalInVetWorkHeaders = (workType: string, disease: string) => {
       "",
       "",
     ];
-    return headers
-  };
+    return headers;
+  }
 
   headers = [
     "Вид животного",
@@ -116,3 +116,12 @@ export const animalInVetWorkHeaders = (workType: string, disease: string) => {
   ];
   return headers;
 };
+
+export const referralAnimalsHeaders = [
+  "№ п/п",
+  "Инвентарный номер/ кличка",
+  "Пол",
+  "Возраст",
+  "Шифр пробы",
+  "Результат исследования",
+];

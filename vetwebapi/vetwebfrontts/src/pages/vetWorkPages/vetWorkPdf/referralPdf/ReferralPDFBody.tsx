@@ -3,7 +3,6 @@ import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 import { AppService } from "services/app.service";
 import { StateAssignment } from "components/StateAssignment";
 
-
 interface ReferralPDFBodyProps {
   data: IVetWorkSchema;
 }
@@ -34,7 +33,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={5}>проб крови/сыворотки крови (ненужное зачеркнуть) от</Col>
         <Col className="pdf-report-underlined">{animals}</Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col></Col>
         <Col>(количество)</Col>
         <Col sm={5}></Col>
@@ -46,7 +45,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
           {data.companies[0].full_name}
         </Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col sm={2}></Col>
         <Col sm={10}>
           (наименование хозяйства, предприятия, ФИО владельца животного)
@@ -57,7 +56,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
           {companyAddress}
         </Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col sm={12}>(фактический / юридический адрес)</Col>
       </Row>
       <Row>
@@ -70,17 +69,17 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         </Col>
         <Col className="pdf-report-underlined">{diseases}</Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col sm={1}></Col>
         <Col sm={4}>(вид исследований)</Col>
         <Col sm={2}></Col>
         <Col>(наименование болезни)</Col>
       </Row>
       <Row>
-        <Col sm={3}>Хозяйство, бригада, отара, гурт, табун</Col>
+        <Col sm={4}>Хозяйство, бригада, отара, гурт, табун</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col sm={3}></Col>
         <Col>(благополучное, неблагополучное)</Col>
       </Row>
@@ -88,12 +87,12 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={2}>Животное</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col sm={2}></Col>
         <Col>(вакцинировано, указать вакцину, дату вакцинации)</Col>
       </Row>
       <Row>
-        <Col>Дата, время взятия крови</Col>
+        <Col sm={3}>Дата, время взятия крови</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
         <Col>№ акта</Col>
@@ -101,7 +100,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
       </Row>
       {data.is_state_assignment && <StateAssignment />}
       <Row>
-        <Col>Дата, отправки материала</Col>
+        <Col sm={3}>Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
         <Col>вид упаковки</Col>
@@ -111,7 +110,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={4}>Материал собран, упакован и отправлен</Col>
         <Col className="pdf-report-underlined">{doctor}</Col>
       </Row>
-      <Row className="text-center text-sm">
+      <Row className="text-center text-xs">
         <Col sm={4}></Col>
         <Col>(должность, подпись, ФИО)</Col>
       </Row>

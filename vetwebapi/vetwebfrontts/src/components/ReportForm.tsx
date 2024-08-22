@@ -55,7 +55,7 @@ export function ReportForm({
       <div className="form-group">
         <label htmlFor="date_start">Введите начальную дату отчета*</label>
         <Input
-          className="form-control"
+          className="text-input"
           register={register}
           errors={errors}
           fieldName="date_start"
@@ -70,7 +70,7 @@ export function ReportForm({
       <div className="form-group">
         <label htmlFor="date_end">Введите конечную дату отчета*</label>
         <Input
-          className="form-control"
+          className="text-input"
           register={register}
           errors={errors}
           fieldName="date_end"

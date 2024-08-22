@@ -78,7 +78,7 @@ export function CreateDrugForm() {
           {inputItems.map((item) => (
             <Input
               key={item.fieldName}
-              className="form-control text-sm"
+              className="text-input"
               placeholder={item.placeholder}
               register={register}
               fieldName={item.fieldName}

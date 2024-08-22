@@ -11,10 +11,9 @@ interface ReferralAnimalListPDFHeaderProps {
 export function ReferralAnimalListPDFHeader({
   data,
 }: ReferralAnimalListPDFHeaderProps) {
-
   if (!data.companies) return <NoData title="Данные о предприятиях" />;
   if (!data.animals) return <NoData title="Данные о животных" />;
-  
+
   const date = AppService.convertDateString(data.vetwork_date).fullDate;
 
   return (
@@ -24,7 +23,7 @@ export function ReferralAnimalListPDFHeader({
         <Col></Col>
         <Col md={6}>Опись* проб к сопроводительному документу-заявке:</Col>
       </Row>
-      <Row className="text-center text-sm mb-4">
+      <Row className="text-center text-sm mb-3">
         <Col md={4}>(регистрационный номер заявки)</Col>
         <Col></Col>
         <Col></Col>
@@ -41,12 +40,12 @@ export function ReferralAnimalListPDFHeader({
         <Col></Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-sm mb-4">
+      <Row className="text-center text-sm mb-3">
         <Col md={4}>(дата поступления)</Col>
         <Col></Col>
         <Col></Col>
       </Row>
-      <Row className="text-center text-sm mb-4">
+      <Row className="text-center text-sm mb-3">
         <Col md={4} className="pdf-report-underlined"></Col>
       </Row>
     </Container>

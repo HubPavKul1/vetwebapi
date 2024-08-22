@@ -32,7 +32,7 @@ export function CustomSelect({
       name={fieldName}
       render={({ field: { onChange, value } }) => (
         <Select
-          className="mb-2"
+          className="custom-select"
           isSearchable
           isClearable
           options={options}

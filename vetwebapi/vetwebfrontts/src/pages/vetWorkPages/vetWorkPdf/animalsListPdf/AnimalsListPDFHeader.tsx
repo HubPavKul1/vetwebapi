@@ -45,7 +45,7 @@ export function AnimalsListPDFHeader({ data }: AnimalsListPDFHeaderProps) {
         <Col sm={6}></Col>
       </Row>
       <Row>
-        <Col sm={3}>подвергнутых обработке против</Col>
+        <Col sm={4}>подвергнутых обработке против</Col>
         <Col sm={4} className="pdf-report-underlined p-1 italic">
           {diseases}
         </Col>

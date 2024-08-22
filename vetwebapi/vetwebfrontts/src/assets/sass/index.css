@@ -308,13 +308,21 @@ body {
   @apply border border-black align-middle font-bold text-center;
 }
 
+.table-head-report {
+  @apply pb-2 table-head text-xs;
+}
+
 .table-body td {
   @apply border border-black align-middle text-center;
 }
 
+.table-body-report {
+  @apply pb-2 table-body text-xs;
+}
+
 /* report style */
 .pdf-report-underlined {
-  @apply border-b border-b-black;
+  @apply pb-2 border-b border-b-black;
 }
 
 .report-title {
@@ -327,5 +335,25 @@ body {
 
 /* form styles */
 .text-input {
-  @apply w-full py-2 border outline-slate-400 focus:outline-indigo-300 rounded-md text-center;
+  @apply w-full p-2 border border-slate-300 hover:border-slate-400 focus:outline-blue-600 transition-colors rounded-sm text-xs cursor-default;
+}
+
+.form-group {
+  @apply mb-2 text-xs text-black;
+}
+
+.form-group label {
+  @apply font-bold;
+}
+
+.input-wrap {
+  @apply mb-2 w-full;
+}
+
+.custom-select {
+  @apply mb-2 text-xs;
+}
+
+.error-message {
+  @apply text-center text-red-600 text-[0.6em];
 }

@@ -35,7 +35,7 @@ export function UploadAnimalForm() {
   };
 
   return (
-    <div className="container p-2">
+    <div className="container p-2 ">
       <div className="container text-md">
         <label className="btn-default">
           <input className="text-sm" type="file" onChange={selectFile} />

@@ -58,7 +58,7 @@ export function AddEmployeeForm() {
         {inputItems.map((item) => (
           <Input
             key={item.fieldName}
-            className="form-control"
+            className="text-input"
             placeholder={item.placeholder}
             register={register}
             fieldName={item.fieldName}

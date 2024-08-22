@@ -59,7 +59,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
           <div className="form-group">
             <label htmlFor="packs_amount">Введите количество упаковок *</label>
             <Input
-              className="form-control"
+              className="text-input"
               register={register}
               errors={errors}
               fieldName="packs_amount"
@@ -76,7 +76,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
               Введите количество единиц учета *
             </label>
             <Input
-              className="form-control"
+              className="text-input"
               register={register}
               errors={errors}
               fieldName="units_amount"
