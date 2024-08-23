@@ -13,10 +13,9 @@ export function ReceiptPDFHeader({ operationDate }: ReceiptPdfHeaderProps) {
   return (
     <Container className="report-title">
       <Row>
-        <Col></Col>
-        <Col></Col>
+        <Col sm={7}></Col>
         <Col className="text-left mb-3">
-        <DrugReportTopText textNumber={4} />
+          <DrugReportTopText textNumber={4} />
         </Col>
       </Row>
       <Row className="mb-24">

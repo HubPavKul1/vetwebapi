@@ -1,4 +1,5 @@
 import { Table } from "react-bootstrap";
+import clsx from "clsx";
 
 interface PageTableProps {
   tableHeaders: string[];
@@ -17,14 +18,24 @@ export function PageTable({ ...props }: PageTableProps) {
   return (
     <>
       <Table>
-        <thead className={tableHeadStyle}>
+        <thead
+          className={clsx(
+            props.isDrugReport ? "table-head-report" : "table-head"
+          )}
+        >
           <tr>
             {props.tableHeaders.map((item, i) => (
               <th key={i}>{item}</th>
             ))}
           </tr>
         </thead>
-        <tbody className={tableBodyStyle}>{props.tableItems}</tbody>
+        <tbody
+          className={clsx(
+            props.isDrugReport ? "table-body-report" : "table-body"
+          )}
+        >
+          {props.tableItems}
+        </tbody>
       </Table>
     </>
   );

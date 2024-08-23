@@ -43,7 +43,7 @@ export function VetWorkPageDetail() {
 
   const date = AppService.convertDateString(data.vetwork_date);
   const diseases = data.diseases;
-  const disease = diseases[0].toLowerCase()
+  const disease = diseases[0].toLowerCase();
   const pageTitle =
     data.work_type === "вакцинация"
       ? `Вакцинация: ${diseases}`

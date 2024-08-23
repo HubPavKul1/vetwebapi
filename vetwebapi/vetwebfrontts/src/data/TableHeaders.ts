@@ -119,6 +119,7 @@ export const animalInVetWorkHeaders = (workType: string, disease: string) => {
 
 export const referralAnimalsHeaders = [
   "№ п/п",
+  "Вид животного",
   "Инвентарный номер/ кличка",
   "Пол",
   "Возраст",

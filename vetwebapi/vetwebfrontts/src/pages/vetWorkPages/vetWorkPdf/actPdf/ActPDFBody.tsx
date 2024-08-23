@@ -26,8 +26,10 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
   const disease = data.diseases[0].toLowerCase();
   const animal = data.animals[0].animal_group.toLowerCase();
 
-  const doctor1 = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
-  const doctor2 = data.doctors.length > 1 && `${data.doctors[1].position} ${data.clinic} ${data.doctors[1].fullname}`;
+  const doctors = data.doctors.map(
+    (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
+  );
+
   const companyDoctor = `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`;
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
@@ -44,9 +46,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
     <Container className="mb-5">
       <Row>
         <Col sm={2}>Мы, нижеподписавшиеся</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 italic">
-          {doctor1}, {doctor2}
-        </Col>
+        <Col className="pdf-report-underlined mb-2 p-1 italic">{doctors}</Col>
       </Row>
       <Row>
         <Col sm={2}>в присутствии</Col>
@@ -134,21 +134,27 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
 
       <Row>
         <Col sm={3}>применяли препарат</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 italic">
+        <Col className="pdf-report-underlined mb-2 p-1 italic text-sm">
           {data.drug?.name}
         </Col>
       </Row>
       <Row>
         <Col>серия №</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{data.drug?.batch}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
+          {data.drug?.batch}
+        </Col>
         <Col>контроль №</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
           {data.drug?.control}
         </Col>
         <Col>изготовлен</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{productionDate}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
+          {productionDate}
+        </Col>
         <Col>годен до</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{expirationDate}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
+          {expirationDate}
+        </Col>
       </Row>
       <Row>
         <Col>изготовитель</Col>
@@ -156,7 +162,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
           {data.drug.drug_manufacturer}
         </Col>
         <Col>применялась путем</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
           {data.drug.administration_method}
         </Col>
         <Col>введения в область</Col>
@@ -185,39 +191,45 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
       </Row>
       <Row>
         <Col sm={3}>1. Препарата</Col>
-        <Col sm={6} className="pdf-report-underlined mb-2 p- italic">
+        <Col sm={6} className="pdf-report-underlined mb-2 p- italic text-sm">
           {data.drug.name}
         </Col>
         <Col></Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{dosage / 1000}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
+          {dosage / 1000}
+        </Col>
         <Col>тыс. доз</Col>
       </Row>
       <Row>
         <Col sm={3}>2. 70% этилового спирта</Col>
-        <Col sm={3} className="pdf-report-underlined mb-2 p-1">
+        <Col sm={3} className="pdf-report-underlined mb-2 p-1 text-center">
           {data.animals.length / 2}
         </Col>
         <Col>мл</Col>
       </Row>
       <Row>
         <Col sm={3}>3. Вата гигроскопическая</Col>
-        <Col sm={3} className="pdf-report-underlined mb-2 p-1">
+        <Col sm={3} className="pdf-report-underlined mb-2 p-1 text-center">
           {data.animals.length}
         </Col>
         <Col>г</Col>
       </Row>
       <Row>
         <Col sm={3}>4. Шприцы одноразовые</Col>
-        <Col sm={3} className="pdf-report-underlined mb-2 p-1">
+        <Col sm={3} className="pdf-report-underlined mb-2 p-1 text-center">
           {data.animals.length}
         </Col>
         <Col>штук</Col>
       </Row>
       <Row>
         <Col sm={4}>Остаток биопрепарата в количестве</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{drugRest}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
+          {drugRest}
+        </Col>
         <Col>тыс.доз</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">{drugPacks}</Col>
+        <Col className="pdf-report-underlined mb-2 p-1 text-center">
+          {drugPacks}
+        </Col>
         <Col sm={3}>ампул/флаконов, шприцы</Col>
         <Col sm={2} l></Col>
       </Row>

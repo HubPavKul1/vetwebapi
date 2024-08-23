@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { CustomButton } from "components/CustomButton";
 import { useUpload } from "hooks/useUpload";
 import { uploadAnimalsUrl } from "urls/companyUrls";
+import clsx from "clsx";
 
 export function UploadAnimalForm() {
   const { id } = useParams();
@@ -44,7 +45,9 @@ export function UploadAnimalForm() {
 
       <div className="container">
         <CustomButton
-          className="btn-upload w-full"
+          className={clsx(
+            !currentFile ? "btn-upload-disabled" : "btn-upload w-full"
+          )}
           disabled={!currentFile}
           onClick={upload}
           title="Загрузить"
