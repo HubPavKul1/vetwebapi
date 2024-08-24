@@ -25,7 +25,7 @@ from .serializers import (
     serialize_vetworks,
     serialize_vetwork_detail
     )
-from .dependencies import vetwork_by_id, animal_in_vetwork_by_id
+from .dependencies import vetwork_by_id, animal_in_vetwork_by_id, company_in_vetwork_by_id
 from core.database import db_manager
 
 from . import crud
@@ -178,7 +178,7 @@ async def delete_vetwork_route(
     
 
 @router.delete("/{vetwork_id}/animals/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
-async def delete_vetwork_route(
+async def delete_vetwork_animal_route(
     animal: AnimalInVetWork = Depends(animal_in_vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
@@ -190,6 +190,24 @@ async def delete_vetwork_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+
+@router.delete("/{vetwork_id}/company/{company_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+async def delete_vetwork_company_route(
+    company: CompanyInVetWork = Depends(company_in_vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, SuccessMessage]:
+    try:
+        await crud.delete_company_in_vetwork(session=session, company=company)
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
+
+
     
 # Data for diagnostic create:
 

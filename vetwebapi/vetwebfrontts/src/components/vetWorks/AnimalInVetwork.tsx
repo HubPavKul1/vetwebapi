@@ -1,11 +1,10 @@
-import { BsFillTrash3Fill } from "react-icons/bs";
 import { AppService } from "services/app.service";
 import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useParams } from "react-router-dom";
-import { useDeleteItem } from "hooks/useDeleteItem";
 import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
 import { UpdateItem } from "components/UpdateItem";
 import { vetWorkAnimalDetailUrl } from "urls/vetWorkUrls";
+import { DeleteItem } from "components/DeleteItem";
 
 interface AnimalInVetworkProps {
   animal: IAnimal;
@@ -24,17 +23,6 @@ export function AnimalInVetwork({
   console.log("WORKTYPE>>>>>", workType);
   console.log("DESEASE", disease);
 
-  const { mutate } = useDeleteItem(
-    "delete animal",
-    vetWorkAnimalDetailUrl(vetWorkId, animal.animal_id),
-    "vetwork",
-    "Животное успешно удалено!",
-    id
-  );
-
-  const deleteAnimal = () => {
-    mutate();
-  };
   const date_of_birth = AppService.convertDateString(
     animal.date_of_birth
   ).shortDate;
@@ -102,7 +90,13 @@ export function AnimalInVetwork({
       )}
 
       <td>
-        <BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal} />
+        <DeleteItem
+          queryKeyId={id}
+          url={vetWorkAnimalDetailUrl(vetWorkId, animal.animal_id)}
+          mutationKey="deleteAnimalInVetWork"
+          queryKey="vetwork"
+          alertMessage="Животное успешно удалено!"
+        />
       </td>
     </tr>
   );

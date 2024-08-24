@@ -4,6 +4,10 @@ import { AppService } from "services/app.service";
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
 import { StateAssignment } from "components/StateAssignment";
+import ActTBCHorses from "./ActTBCHorses";
+import ActVaccination from "./ActVaccination";
+import DrugSection from "./DrugSection";
+import ActTBCCows from "./ActTBCCows";
 
 interface ActPDFBodyProps {
   data: IVetWorkSchema;
@@ -14,13 +18,6 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
   if (!data.drug) return;
   if (!data.companies) return;
 
-  const productionDate = AppService.convertDateString(
-    data.drug.production_date
-  ).shortDate;
-  const expirationDate = AppService.convertDateString(
-    data.drug.expiration_date
-  ).shortDate;
-
   const vetworkDate = AppService.convertDateString(data.vetwork_date);
 
   const disease = data.diseases[0].toLowerCase();
@@ -30,17 +27,13 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
     (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
   );
 
-  const companyDoctor = `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`;
+  const companyDoctor = new Set(`${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`);
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
   );
   const diseases = new Set(
     data.diseases.map((disease) => disease.toLowerCase() + ", ")
   );
-  let dosage = 0;
-  data.animals.map((animal) => (animal.dosage ? (dosage += animal.dosage) : 0));
-  const drugPacks = data.drug.packs_amount;
-  const drugRest = (drugPacks * data.drug.packing - dosage) / 1000;
 
   return (
     <Container className="mb-5">
@@ -57,188 +50,18 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
         <Col>(указать должность, Ф.И.О. представителя хозяйства, фермы)</Col>
       </Row>
       {disease === "туберкулез" && animal === "лошади" ? (
-        <>
-          <Row>
-            <Col>Составили настоящий акт о том, что</Col>
-            <Col className="pdf-report-underlined mb-2 p-1">
-              {vetworkDate.shortDate}
-            </Col>
-            <Col>нами проведены клинический осмотр и</Col>
-          </Row>
-          <Row>
-            <Col sm={6}>
-              аллергическое исследование на туберкулез методом офтальмопробы
-            </Col>
-            <Col className="pdf-report-underlined mb-2 p-1">
-              {data.animals.length}
-            </Col>
-            <Col>голов лошадей</Col>
-            <Col sm={2}></Col>
-          </Row>
-          <Row>
-            <Col sm={2}>Туберкулин введен</Col>
-            <Col sm={2} className="pdf-report-underlined mb-2 p-1">
-              {vetworkDate.shortDate}
-            </Col>
-            <Col>в</Col>
-            <Col className="pdf-report-underlined mb-2 p-1">8 - 00</Col>
-            <Col sm={6}></Col>
-          </Row>
-          <Row>
-            {!data.is_primary ? (
-              <Col>
-                Учет реакции провести через 3, 6, 9, 12 часов после введения
-                туберкулина.
-              </Col>
-            ) : (
-              <Col>
-                Учет реакции провести через 6, 9, 12 и 24 часа после введения
-                туберкулина.
-              </Col>
-            )}
-          </Row>
-        </>
+        <ActTBCHorses data={data} vetworkDate={vetworkDate.shortDate} />
       ) : disease === "туберкулез" && animal === "крупный рогатый скот" ? (
-        <Row>
-          <Col></Col>
-          <Col></Col>
-        </Row>
+        <ActTBCCows data={data} vetworkDate={vetworkDate.shortDate}/>
       ) : (
-        <>
-          <Row>
-            <Col sm={2}>провели вакцинацию</Col>
-            <Col sm={3} className="pdf-report-underlined p-1 italic">
-              {animals}
-            </Col>
-            <Col>против</Col>
-            <Col sm={4} className="pdf-report-underlined p-1 italic">
-              {diseases}
-            </Col>
-            <Col></Col>
-            <Col className="pdf-report-underlined p-1">
-              {data.animals?.length}
-            </Col>
-            <Col>голов</Col>
-          </Row>
-          {data.is_state_assignment && <StateAssignment />}
-          <Row className="text-sm">
-            <Col sm={3}></Col>
-            <Col sm={3}>(вид животных)</Col>
-            <Col></Col>
-            <Col sm={4}>(название заболевания)</Col>
-            <Col>(количество)</Col>
-            <Col></Col>
-          </Row>
-        </>
+        <ActVaccination data={data} animals={animals} diseases={diseases} />
       )}
-
       <Row>
-        <Col sm={3}>применяли препарат</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 italic text-sm">
-          {data.drug?.name}
-        </Col>
-      </Row>
-      <Row>
-        <Col>серия №</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {data.drug?.batch}
-        </Col>
-        <Col>контроль №</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {data.drug?.control}
-        </Col>
-        <Col>изготовлен</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {productionDate}
-        </Col>
-        <Col>годен до</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {expirationDate}
-        </Col>
-      </Row>
-      <Row>
-        <Col>изготовитель</Col>
-        <Col sm={4} className="pdf-report-underlined mb-2 p-1 italic">
-          {data.drug.drug_manufacturer}
-        </Col>
-        <Col>применялась путем</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {data.drug.administration_method}
-        </Col>
-        <Col>введения в область</Col>
-      </Row>
-      <Row>
-        <Col sm={4} className="pdf-report-underlined mb-2 p-1">
-          {data.drug.place_of_administration}
-        </Col>
-        <Col>в дозе</Col>
-        <Col sm={7} className="pdf-report-underlined mb-2 p-1">
-          {data.drug.drug_dosage}
-        </Col>
-      </Row>
-      <Row>
-        <Col>место инъекции дезинфицировали</Col>
-        <Col sm={9} className="pdf-report-underlined p-1">
-          70% этиловым спиртом
-        </Col>
-      </Row>
-      <Row className="text-sm text-center">
         <Col></Col>
-        <Col sm={8}>(согласно инструкции по применению вакцины)</Col>
-      </Row>
-      <Row>
-        <Col className="font-bold">Для проведения обработки израсходовано:</Col>
-      </Row>
-      <Row>
-        <Col sm={3}>1. Препарата</Col>
-        <Col sm={6} className="pdf-report-underlined mb-2 p- italic text-sm">
-          {data.drug.name}
-        </Col>
+        <Col sm={7}>{data.is_state_assignment && <StateAssignment />}</Col>
         <Col></Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {dosage / 1000}
-        </Col>
-        <Col>тыс. доз</Col>
       </Row>
-      <Row>
-        <Col sm={3}>2. 70% этилового спирта</Col>
-        <Col sm={3} className="pdf-report-underlined mb-2 p-1 text-center">
-          {data.animals.length / 2}
-        </Col>
-        <Col>мл</Col>
-      </Row>
-      <Row>
-        <Col sm={3}>3. Вата гигроскопическая</Col>
-        <Col sm={3} className="pdf-report-underlined mb-2 p-1 text-center">
-          {data.animals.length}
-        </Col>
-        <Col>г</Col>
-      </Row>
-      <Row>
-        <Col sm={3}>4. Шприцы одноразовые</Col>
-        <Col sm={3} className="pdf-report-underlined mb-2 p-1 text-center">
-          {data.animals.length}
-        </Col>
-        <Col>штук</Col>
-      </Row>
-      <Row>
-        <Col sm={4}>Остаток биопрепарата в количестве</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {drugRest}
-        </Col>
-        <Col>тыс.доз</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {drugPacks}
-        </Col>
-        <Col sm={3}>ампул/флаконов, шприцы</Col>
-        <Col sm={2} l></Col>
-      </Row>
-      <Row>
-        <Col sm={3}>обезврежены методом</Col>
-        <Col className="pdf-report-underlined mb-2 p-1">
-          {data.drug.disposal_method}
-        </Col>
-      </Row>
+      <DrugSection data={data} />
       <Row>
         <Col sm={6}>Опись на обработанных прилагается.</Col>
       </Row>

@@ -1,6 +1,8 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { FileUpload } from "components/FileUpload";
 import { DeleteItem } from "components/DeleteItem";
+import { useState } from "react";
+import clsx from "clsx";
 
 interface CatalogCardFooterProps {
   hasFileUploader?: boolean;
@@ -14,22 +16,33 @@ interface CatalogCardFooterProps {
 }
 
 export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
+  const [open, setOpen] = useState(false);
   return (
     <Container>
       <Row>
         {props.hasFileUploader && props.fileUploadUrl ? (
           <>
-            <Col sm={8} className="text-right">
-              <h5>Загрузите инструкцию</h5>
-            </Col>
+            <Col sm={8}></Col>
             <Col sm={2}>
-              <Container className="w-20">
+              <Container
+                className="w-20 relative"
+                onMouseEnter={() => setOpen(true)}
+                onMouseLeave={() => setOpen(false)}
+              >
                 <FileUpload
                   uploadUrl={props.fileUploadUrl}
                   accept={props.accept}
                   mutationName={props.mutationName}
                   invQueryName={props.invQueryName}
                 />
+                <div
+                  className={clsx(
+                    "absolute top-6 right-1 p-3 w-32 border rounded-md bg-white shadow-md text-center",
+                    !open && "hidden"
+                  )}
+                >
+                  Загрузите инструкцию!
+                </div>
               </Container>
             </Col>
           </>

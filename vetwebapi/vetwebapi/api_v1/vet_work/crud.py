@@ -172,7 +172,10 @@ async def read_companies_in_vetwork(session: AsyncSession, vetwork: VetWork) -> 
         .where(CompanyInVetWork.vetwork_id == vetwork.id)
         )
     return list(await session.scalars(stmt))
-    
+
+async def read_company_in_vetwork_by_id(session: AsyncSession, vetwork: VetWork, company_id: int) -> CompanyInVetWork | None:
+    stmt = select(CompanyInVetWork).where(and_(CompanyInVetWork.company_id == company_id, CompanyInVetWork.vetwork_id == vetwork.id))
+    return await session.scalar(stmt)
     
 async def read_doctors_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[DoctorInVetWork]:
     stmt = (
@@ -246,6 +249,11 @@ async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
 
 async def delete_animal_in_vetwork(session: AsyncSession, animal: AnimalInVetWork) -> None:
     await session.delete(animal)
+    await session.commit()
+
+
+async def delete_company_in_vetwork(session: AsyncSession, company: CompanyInVetWork) -> None:
+    await session.delete(company)
     await session.commit()
 
 

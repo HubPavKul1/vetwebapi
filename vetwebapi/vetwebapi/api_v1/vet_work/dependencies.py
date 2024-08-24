@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, Path, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import db_manager
-from core.models import VetWork, AnimalInVetWork
+from core.models import VetWork, AnimalInVetWork, CompanyInVetWork
 
 from . import crud
 
@@ -34,3 +34,18 @@ async def animal_in_vetwork_by_id(
             detail={"result": False, "error_message": "Animal Not Found"},
         )
     return animal
+
+async def company_in_vetwork_by_id(
+        company_id: Annotated[int, Path()],
+        vetwork: VetWork = Depends(vetwork_by_id),
+        session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> CompanyInVetWork:
+    
+    company = await crud.read_company_in_vetwork_by_id(session=session, vetwork=vetwork, company_id=company_id)
+    if company is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"result": False, "error_message": "Company Not Found"},
+        )
+    return company
+    

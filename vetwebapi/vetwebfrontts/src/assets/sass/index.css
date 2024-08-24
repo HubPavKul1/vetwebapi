@@ -243,7 +243,7 @@ body {
 
 /* Carousel styles */
 .carousel {
-  @apply h-screen;
+  @apply h-[600px];
 }
 
 .carousel img {

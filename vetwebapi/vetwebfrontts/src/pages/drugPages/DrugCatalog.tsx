@@ -48,7 +48,7 @@ export function DrugCatalog() {
               batch={drug.batch}
               control={drug.control}
               expiration_date={
-                AppService.convertDateString(drug.expiration_date).shortDate
+                drug.expiration_date
               }
               production_date={
                 AppService.convertDateString(drug.production_date).shortDate

@@ -23,6 +23,10 @@ export const vetWorkCompanyUrl = (vetWorkId?: number) => {
   return vetWorkDetailUrl(vetWorkId) + "/company";
 };
 
+export const vetWorkCompanyDetailUrl = (vetWorkId?: number, companyId?: number) => {
+  return vetWorkCompanyUrl(vetWorkId) + `/${companyId}`
+}
+
 // vetwork animals
 
 export const vetWorkAnimalsUrl = (vetWorkId?: number) => {

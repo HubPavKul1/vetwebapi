@@ -1,12 +1,14 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { ICompanyCard } from "interfaces/CompanyInterfaces";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CustomButton } from "components/CustomButton";
 import { CompanyAddress } from "components/companies/address/CompanyAddress";
 import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
 import { companyLink } from "urls/companyUrls";
 import AnimalsInVetWork from "./AnimalsInVetWork";
+import { DeleteItem } from "components/DeleteItem";
+import { vetWorkCompanyDetailUrl } from "urls/vetWorkUrls";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
@@ -25,6 +27,8 @@ export function VetWorkCompany({
   workType,
   disease,
 }: VetWorkCompanyProps) {
+  const { id } = useParams();
+  const vetWorkId = Number(id);
   const addAnimals = (company_id: string) => {
     setAnimals(true);
     setCompanyId(company_id);
@@ -33,8 +37,8 @@ export function VetWorkCompany({
   return (
     <Container key={company.id} className="mb-8 border-b-2 border-b-black ">
       <div>
-        <Row className="title-base underline text-sm">
-          <Col sm={6}>
+        <Row className="title-base underline text-lg">
+          <Col sm={10}>
             <h5>
               <Link to={companyLink(company.id)}>{company.full_name}</Link>
             </h5>
@@ -46,7 +50,17 @@ export function VetWorkCompany({
               onClick={() => addAnimals(company.id.toString())}
             />
           </Col>
-          <Col></Col>
+          <Col className=" flex items-center">
+            <DeleteItem
+              queryKeyId={id}
+              url={vetWorkCompanyDetailUrl(vetWorkId, company.id)}
+              mutationKey="deleteVetworkCompany"
+              queryKey="vetwork"
+              alertMessage={`${company.short_name} успешно удалено!`}
+              size={30}
+            />
+          </Col>
+          
         </Row>
 
         {company.address && <CompanyAddress address={company.address} />}

@@ -7,6 +7,7 @@ interface DeleteItemProps {
   mutationKey: string;
   queryKey: string;
   alertMessage: string;
+  size?: number
 }
 
 export function DeleteItem({
@@ -15,6 +16,8 @@ export function DeleteItem({
   mutationKey,
   queryKey,
   alertMessage,
+  size
+
 }: DeleteItemProps) {
   const { mutate } = useDeleteItem(
     mutationKey,
@@ -30,7 +33,7 @@ export function DeleteItem({
 
   return (
     <div className="flex justify-center">
-      <BsFillTrash3Fill className="delete-icon" onClick={deleteAnimal} />
+      <BsFillTrash3Fill size={size} className="delete-icon" onClick={deleteAnimal} />
     </div>
   );
 }
