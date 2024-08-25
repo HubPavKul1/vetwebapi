@@ -15,6 +15,7 @@ import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import { Loader } from "components/Loader";
 import { vetWorkDetailUrl } from "urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
+import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
@@ -28,6 +29,7 @@ export function VetWorkPageDetail() {
   const [animals, setAnimals] = useState(false);
   const [companyId, setCompanyId] = useState("");
   const [referralAnimalList, showReferralAnimalList] = useState(false);
+  const [accountingAct, showAccountingAct] = useState(false)
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -53,7 +55,7 @@ export function VetWorkPageDetail() {
 
   return (
     <>
-      {!act && !animalsList && !animals && !referral && !referralAnimalList ? (
+      {!act && !animalsList && !animals && !referral && !referralAnimalList && !accountingAct ? (
         <VetWorkDetail
           pageTitle={`${pageTitle} от ${date.shortDate} г. `}
           imgSrc={imgSrc}
@@ -62,11 +64,14 @@ export function VetWorkPageDetail() {
           showAct={showAct}
           showAnimalsList={showAnimalsList}
           showReferral={showReferral}
+          showAccountingAct={showAccountingAct}
           showReferralAnimalList={showReferralAnimalList}
           data={data}
         />
       ) : act ? (
         <ActPDF setPdf={showAct} data={data} />
+      ) : accountingAct ? (
+        <AccountingActPDF setPdf={showAccountingAct} data={data} />
       ) : referral ? (
         <ReferralPDF setPdf={showReferral} data={data} />
       ) : referralAnimalList ? (

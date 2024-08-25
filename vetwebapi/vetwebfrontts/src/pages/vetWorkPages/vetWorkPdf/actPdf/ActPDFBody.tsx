@@ -27,7 +27,10 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
     (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
   );
 
-  const companyDoctor = new Set(`${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`);
+  const companyDoctor =
+    data.companies[0].employee?.position !== "ИП"
+      ? `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`
+      : `${data.companies[0].employee?.fullname}`;
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
   );
@@ -52,7 +55,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
       {disease === "туберкулез" && animal === "лошади" ? (
         <ActTBCHorses data={data} vetworkDate={vetworkDate.shortDate} />
       ) : disease === "туберкулез" && animal === "крупный рогатый скот" ? (
-        <ActTBCCows data={data} vetworkDate={vetworkDate.shortDate}/>
+        <ActTBCCows data={data} vetworkDate={vetworkDate.shortDate} />
       ) : (
         <ActVaccination data={data} animals={animals} diseases={diseases} />
       )}

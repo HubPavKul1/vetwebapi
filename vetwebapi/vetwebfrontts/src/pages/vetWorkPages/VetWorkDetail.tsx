@@ -20,6 +20,7 @@ interface VetWorkDetailProps {
   showAct: CallableFunction;
   showReferral: CallableFunction;
   showAnimalsList: CallableFunction;
+  showAccountingAct: CallableFunction;
   setCompanyId: CallableFunction;
   showReferralAnimalList: CallableFunction;
 }
@@ -36,6 +37,7 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
             showAct={props.showAct}
             showAnimalsList={props.showAnimalsList}
             showReferral={props.showReferral}
+            showAccountingAct={props.showAccountingAct}
             workType={props.data.work_type}
             disease={disease}
             showReferralAnimalList={props.showReferralAnimalList}

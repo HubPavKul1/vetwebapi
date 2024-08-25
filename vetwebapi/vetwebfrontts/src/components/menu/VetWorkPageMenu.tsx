@@ -8,6 +8,7 @@ interface VetWorkPageMenuProps {
   showAnimalsList: CallableFunction;
   showReferral: CallableFunction;
   showReferralAnimalList: CallableFunction;
+  showAccountingAct: CallableFunction;
   workType: string;
   disease: string;
 }
@@ -17,6 +18,7 @@ export function VetWorkPageMenu({
   showAnimalsList,
   showReferral,
   showReferralAnimalList,
+  showAccountingAct,
   workType,
   disease,
 }: VetWorkPageMenuProps) {
@@ -37,11 +39,19 @@ export function VetWorkPageMenu({
             onClick={() => showReferral(true)}
           />
         ) : (
-          <CustomButton
-            className="btn-submit"
-            title="Акт на туберкулинизацию"
-            onClick={() => showAct(true)}
-          />
+          <>
+            <CustomButton
+              className="btn-submit mb-3"
+              title="Акт на туберкулинизацию"
+              onClick={() => showAct(true)}
+            />
+
+            <CustomButton
+              className="btn-submit mb-2"
+              title="Акт учета реакции"
+              onClick={() => showAccountingAct(true)}
+            />
+          </>
         ),
     },
 

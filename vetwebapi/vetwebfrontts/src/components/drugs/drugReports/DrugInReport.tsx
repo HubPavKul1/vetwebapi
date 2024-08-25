@@ -1,11 +1,11 @@
 import { IDrugReport } from "interfaces/DrugInterfaces";
 import { AppService } from "services/app.service";
 
-interface ReceiptDrugProps {
+interface DrugInReportProps {
   drug: IDrugReport;
 }
 
-export function DrugInReport({ drug }: ReceiptDrugProps) {
+export function DrugInReport({ drug }: DrugInReportProps) {
   return (
     <tr key={drug.id} className="border-bottom border-black">
       <td>{drug.drug_name}</td>
