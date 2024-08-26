@@ -17,11 +17,10 @@ async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> Cat
 
 
 async def read_catalog(session: AsyncSession) -> list[CatalogDrug]:
-    curDate = datetime.today().date()
     stmt = (
         select(CatalogDrug)
         .options(joinedload(CatalogDrug.drug))
-        .where(and_(CatalogDrug.is_active == True, CatalogDrug.expiration_date >= curDate))
+        .where(CatalogDrug.is_active == True)
     )
     return list(await session.scalars(stmt))
 
@@ -38,6 +37,8 @@ async def change_drug_activity(session: AsyncSession) -> None:
     drugs_expired: list[CatalogDrug] = await read_catalog_expired(session=session)
     for drug in drugs_expired:
         drug.is_active = False
+        session.add(drug)
+        await session.commit()
 
 
 async def read_catalog_drug_by_id(session: AsyncSession, id: int) -> CatalogDrug | None:

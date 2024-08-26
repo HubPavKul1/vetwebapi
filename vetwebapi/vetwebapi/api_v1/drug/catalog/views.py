@@ -42,7 +42,6 @@ async def get_catalog_drugs(
 async def get_drugs_overdue(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
     try:
         await crud.change_drug_activity(session=session)
-        # drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs]
         return SuccessMessage()
     except Exception:
         raise HTTPException(

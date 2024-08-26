@@ -1,5 +1,6 @@
 from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
 from sqlalchemy.ext.asyncio import AsyncSession
+from datetime import datetime
 
 from core.models import (
     DrugInMovement,
@@ -59,17 +60,9 @@ async def catalog_drug_with_diseases(session: AsyncSession) -> Subquery:
             catalog_drug.c.control.label("control"),
             catalog_drug.c.production_date.label("production_date"),
             catalog_drug.c.expiration_date.label("expiration_date"),
-            # Disease.name.label("disease"),
             diseases.c.disease.label("disease"),
         )
-        # .join(catalog_drug, catalog_drug.c.drug_id == diseases.c.drug_id)
-        # .join(DrugDisease, DrugDisease.drug_id == catalog_drug.c.drug_id).join(
-        #     Disease, Disease.id == DrugDisease.disease_id
-        # )
-        # .subquery("drug_diseases")
     )
-
-    # return query
     return list(await session.execute(query))
 
 
@@ -311,6 +304,55 @@ async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateR
     )
     return query
 
+# catalog_drug_rest
+async def catalog_drug_rest(session: AsyncSession, body: DateRangeIn, drug_id: int):
+    c_d_info = await catalog_drug_info()
+    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
+    received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
+    spent_drugs = await catalog_drugs_spent_between_date_range(session=session, body=body)
+
+    query = (
+        select(
+            c_d_info.c.cd_id.label("cd_id"),
+            received_drugs.c.packs_received.label("packs_received"),
+            received_drugs.c.units_received.label("units_received"),
+            spent_drugs.c.packs_spent.label("packs_spent"),
+            spent_drugs.c.units_spent.label("units_spent"),
+            (
+                (c_d_info.c.packing * func.coalesce(spent_drugs.c.packs_spent, 0))
+                - func.coalesce(spent_drugs.c.units_spent, 0)
+            )
+            .cast(Float)
+            .label("disposed_units"),
+            (c_d_info.c.packing * func.coalesce(spent_drugs.c.packs_spent, 0))
+            .cast(Float)
+            .label("units_spent_disposed"),
+            (
+                func.coalesce(c_d_rest_start.c.packs_rest, 0)
+                + func.coalesce(received_drugs.c.packs_received, 0)
+                - func.coalesce(spent_drugs.c.packs_spent, 0)
+            )
+            .cast(Integer)
+            .label("packs_rest_end"),
+            (
+                c_d_info.c.packing
+                * (
+                    func.coalesce(c_d_rest_start.c.packs_rest, 0)
+                    + func.coalesce(received_drugs.c.packs_received, 0)
+                    - func.coalesce(spent_drugs.c.packs_spent, 0)
+                )
+            )
+            .cast(Float)
+            .label("units_rest_end"),
+        )
+        .filter(c_d_info.c.cd_id == drug_id)
+        .join(c_d_rest_start, c_d_rest_start.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(received_drugs, received_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
+        .join(spent_drugs, spent_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
+
+    )
+    return list(await session.execute(query))[0]
+
 
 # catalog_drugs movement main query
 async def catalog_drugs_movement_report(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
@@ -367,6 +409,7 @@ async def catalog_drugs_movement_report(session: AsyncSession, body: DateRangeIn
     )
 
     return list(await session.execute(query))
+
 
 
 # 1 VetB queries

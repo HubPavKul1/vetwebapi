@@ -39,7 +39,13 @@ class Report1VetBItemSchema(BaseModel):
     disposed_units: float | None
     units_spent_disposed: float | None
     units_rest: float | None
-    
+
+
+class DrugRestSchema(BaseModel):
+    id: int
+    packs_rest: int | None
+    units_rest: float | None
+
     
 class DrugReportSchema(BaseModel):
     drugs_report: list[DrugReportItemSchema]

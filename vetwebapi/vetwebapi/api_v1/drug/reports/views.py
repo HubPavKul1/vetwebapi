@@ -1,4 +1,5 @@
 from typing import Union
+from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,6 +15,7 @@ from .schemas import (
     DateRangeIn,
     Report1VetBSchema,
     Report1VetBItemSchema,
+    DrugRestSchema
 )
 from .serializers import serialize_drug_in_report, serialize_drug_in_report_1B
 
@@ -35,6 +37,23 @@ async def get_drugs_report(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+
+@router.get("/drugs_movement/{drug_id}", response_model=DrugRestSchema)
+async def get_drug_rests(
+    drug_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> Union[DrugRestSchema, dict]:
+    curDate = datetime.today().date()
+    body = DateRangeIn(date_start=curDate, date_end=curDate)
+    try:
+        drug_rest: tuple = await crud.catalog_drug_rest(session=session, body=body, drug_id=drug_id)
+        return DrugRestSchema(id=drug_rest[0], packs_rest=drug_rest[7], units_rest=drug_rest[8])
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+    
 
 
 @router.post("/test", response_model=SuccessMessage)
