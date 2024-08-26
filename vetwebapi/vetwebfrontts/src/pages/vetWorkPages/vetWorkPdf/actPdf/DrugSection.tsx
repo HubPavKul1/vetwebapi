@@ -25,7 +25,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
   return (
     <>
       <Row>
-        <Col sm={2}>применяли препарат</Col>
+        <Col sm={3}>применяли препарат</Col>
         <Col className="pdf-report-underlined mb-2 p-1 italic text-sm">
           {data.drug.name}
         </Col>
@@ -71,8 +71,8 @@ export default function DrugSection({ data }: DrugSectionProps) {
       </Row>
       {data.drug.administration_method !== "инстилляции" && (
         <Row>
-          <Col>место инъекции дезинфицировали</Col>
-          <Col sm={9} className="pdf-report-underlined p-1">
+          <Col sm={4}>место инъекции дезинфицировали</Col>
+          <Col sm={7} className="pdf-report-underlined p-1">
             70% этиловым спиртом
           </Col>
         </Row>
@@ -92,7 +92,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
         </Col>
         <Col></Col>
         <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {dosage / 1000}
+          {(dosage / 1000).toFixed(4)}
         </Col>
         <Col>тыс. доз</Col>
       </Row>
@@ -120,7 +120,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
       <Row>
         <Col sm={4}>Остаток биопрепарата в количестве</Col>
         <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {drugRest}
+          {drugRest.toFixed(4)}
         </Col>
         <Col>тыс.доз</Col>
         <Col className="pdf-report-underlined mb-2 p-1 text-center">

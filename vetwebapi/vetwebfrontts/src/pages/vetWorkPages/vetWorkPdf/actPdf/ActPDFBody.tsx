@@ -24,7 +24,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
   const animal = data.animals[0].animal_group.toLowerCase();
 
   const doctors = data.doctors.map(
-    (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
+    (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}, `
   );
 
   const companyDoctor =

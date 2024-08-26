@@ -38,14 +38,14 @@ export function VetWorkCompany({
     <Container key={company.id} className="mb-8 border-b-2 border-b-black ">
       <div>
         <Row className="title-base underline text-lg">
-          <Col sm={10}>
+          <Col sm={8}>
             <h5>
               <Link to={companyLink(company.id)}>{company.full_name}</Link>
             </h5>
           </Col>
           <Col>
             <CustomButton
-              className="btn-nav"
+              className="btn-nav text-sm"
               title="Добавить животных"
               onClick={() => addAnimals(company.id.toString())}
             />
@@ -60,7 +60,6 @@ export function VetWorkCompany({
               size={30}
             />
           </Col>
-          
         </Row>
 
         {company.address && <CompanyAddress address={company.address} />}

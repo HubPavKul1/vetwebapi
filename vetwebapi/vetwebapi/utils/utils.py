@@ -277,7 +277,7 @@ async def add_biomaterial(session: AsyncSession) -> None:
 
 
 async def add_work_types(session: AsyncSession) -> None:
-    items = ["вакцинация", "диагностика", "обработка", "учет реакции", "дезинфекция", "дезинсекция", "дератизация"]
+    items = ["вакцинация", "диагностика", "обработка", "дезинфекция", "дезинсекция", "дератизация"]
 
     session.add_all([WorkType(name=name) for name in items])
     await session.commit()

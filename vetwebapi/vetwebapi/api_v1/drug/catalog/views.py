@@ -38,6 +38,19 @@ async def get_catalog_drugs(
         )
 
 
+@router.get("/overdue", response_model=SuccessMessage)
+async def get_drugs_overdue(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
+    try:
+        await crud.change_drug_activity(session=session)
+        # drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs]
+        return SuccessMessage()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
 @router.get("/{id}/", response_model=CatalogDrugSchema)
 async def get_catalog_drug_route(
     drug: CatalogDrug = Depends(catalog_drug_by_id),

@@ -1,8 +1,9 @@
-from sqlalchemy import desc, select
+from datetime import datetime
+from sqlalchemy import desc, select, and_, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from core.models import CatalogDrug
+from core.models import CatalogDrug, Drug
 
 from .schemas import CatalogDrugIn
 
@@ -16,8 +17,27 @@ async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> Cat
 
 
 async def read_catalog(session: AsyncSession) -> list[CatalogDrug]:
-    stmt = select(CatalogDrug).options(joinedload(CatalogDrug.drug)).where(CatalogDrug.is_active)
+    curDate = datetime.today().date()
+    stmt = (
+        select(CatalogDrug)
+        .options(joinedload(CatalogDrug.drug))
+        .where(and_(CatalogDrug.is_active == True, CatalogDrug.expiration_date >= curDate))
+    )
     return list(await session.scalars(stmt))
+
+
+async def read_catalog_expired(session: AsyncSession) -> list[CatalogDrug]:
+    curDate = datetime.today().date()
+    stmt = select(CatalogDrug).where(
+        and_(CatalogDrug.is_active == True, CatalogDrug.expiration_date < curDate)
+    )
+    return list(await session.scalars(stmt))
+
+
+async def change_drug_activity(session: AsyncSession) -> None:
+    drugs_expired: list[CatalogDrug] = await read_catalog_expired(session=session)
+    for drug in drugs_expired:
+        drug.is_active = False
 
 
 async def read_catalog_drug_by_id(session: AsyncSession, id: int) -> CatalogDrug | None:

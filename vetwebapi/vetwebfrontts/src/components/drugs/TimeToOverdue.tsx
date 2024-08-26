@@ -10,10 +10,10 @@ export function TimeToOverdue({ expirationDate }: TimeToOverdueProps) {
   const timeToExp =
     "Срок годности истечет " + timeToExpiration(expirationDate).result;
 
-  
-
-  return <Container className="flex text-center justify-between border-2 border-red-700 p-1 text-red-700 font-bold">
-  <RiCalendarScheduleLine size={30} />
-  <span>{timeToExp}</span>
-</Container>
+  return (
+    <Container className="absolute top-20 left-5 w-[340px] flex p-1 justify-between border-2 rounded-md bg-white bg-opacity-50 border-red-700 text-center text-red-700 font-bold">
+      <RiCalendarScheduleLine size={30} />
+      <span>{timeToExp}</span>
+    </Container>
+  );
 }

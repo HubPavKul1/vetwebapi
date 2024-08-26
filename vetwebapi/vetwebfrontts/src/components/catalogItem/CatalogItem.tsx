@@ -8,7 +8,7 @@ import { CatalogCardFooter } from "./CatalogCardFooter";
 export function CatalogItem({ ...props }: ICardProps) {
   return (
     <Col>
-      <Container className="catalog-card">
+      <Container className="catalog-card relative">
         <Container className="h-24 mb-2">
           <Row>
             <Col sm={3}>

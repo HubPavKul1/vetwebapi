@@ -24,7 +24,7 @@ export function CatalogDrugCardBody({
 
   return (
     <Container className="mb-3">
-      <div className="relative">
+      <div className="">
         {diffDays > 0 && 60 > diffDays && (
           <TimeToOverdue expirationDate={expDate} />
         )}
@@ -32,7 +32,7 @@ export function CatalogDrugCardBody({
           <span>Серия: {batch}</span>
           <span>Контроль: {control}</span>
         </Container>
-        {diffDays <= 0 && <Overdue />}
+        {diffDays < 0 && <Overdue />}
 
         <Container className="flex justify-between">
           <span>Изготовлен: {production_date}</span>

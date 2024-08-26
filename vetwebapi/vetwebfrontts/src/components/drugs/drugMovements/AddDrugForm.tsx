@@ -61,6 +61,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
             <Input
               className="text-input"
               register={register}
+              step="any"
               errors={errors}
               fieldName="packs_amount"
               type="number"
@@ -81,6 +82,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
               errors={errors}
               fieldName="units_amount"
               type="number"
+              step="any"
               id="units_amount"
               rules={{
                 required: fieldRequiredMessage,
