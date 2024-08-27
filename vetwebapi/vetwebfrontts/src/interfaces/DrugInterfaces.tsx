@@ -137,3 +137,9 @@ export interface IDrugReport {
   packs_rest?: number;
   units_rest?: number;
 }
+
+export interface IDrugRest {
+  id: number;
+  packs_rest?: number;
+  units_rest?: number;
+}

@@ -8,7 +8,9 @@ import { IDrugCatalogCreate } from "interfaces/DrugInterfaces";
 
 import { DrugSelect } from "./DrugSelect";
 import { useCreateItem } from "hooks/useCreateItem";
-import { catalogDrugsUrl } from "urls/drugUrls";
+import { catalogDrugsExpiredUrl, catalogDrugsUrl } from "urls/drugUrls";
+import { AppService } from "services/app.service";
+import { Container } from "react-bootstrap";
 
 export function CreateCatalogDrugForm() {
   const inputItems: FormInputProps<IDrugCatalogCreate>[] = [
@@ -46,6 +48,7 @@ export function CreateCatalogDrugForm() {
   const createCatalogDrug: SubmitHandler<IDrugCatalogCreate> = (data) => {
     mutate(data);
   };
+  const delExpired = () => AppService.getAll(catalogDrugsExpiredUrl);
 
   return (
     <>

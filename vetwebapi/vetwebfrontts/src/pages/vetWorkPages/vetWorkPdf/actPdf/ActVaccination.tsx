@@ -17,19 +17,20 @@ export default function ActVaccination({
     <>
       <Row>
         <Col sm={3}>провели вакцинацию</Col>
-        <Col sm={2} className="pdf-report-underlined p-1 italic">
+        <Col sm={3} className="pdf-report-underlined p-1 italic text-center">
           {animals}
         </Col>
         <Col>против</Col>
-        <Col sm={4} className="pdf-report-underlined p-1 italic">
+        <Col sm={3} className="pdf-report-underlined p-1 italic text-center">
           {diseases}
         </Col>
         <Col></Col>
-        <Col className="pdf-report-underlined p-1">{data.animals.length}</Col>
+        <Col className="pdf-report-underlined p-1 text-center">
+          {data.animals.length}
+        </Col>
         <Col>голов</Col>
       </Row>
-
-      <Row className="text-sm">
+      <Row className="text-sm text-center">
         <Col sm={3}></Col>
         <Col sm={3}>(вид животных)</Col>
         <Col></Col>

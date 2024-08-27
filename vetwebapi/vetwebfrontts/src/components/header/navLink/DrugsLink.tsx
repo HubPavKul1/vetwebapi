@@ -4,13 +4,29 @@ import { DropdownWrapper } from "components/dropdown/Dropdown";
 import { NavDropdown } from "react-bootstrap";
 import styles from "./NavLink.module.scss";
 import {
+  catalogDrugsExpiredUrl,
   drugCatalogLink,
   drugReceiptsLink,
   drugReportsLink,
   drugsLink,
 } from "urls/drugUrls";
+import { AppService } from "services/app.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function DrugsLink() {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationKey: ["deleteExpired"],
+    mutationFn: () => AppService.getAll(catalogDrugsExpiredUrl),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["drugCatalog"] }),
+        alert("Препараты успешно удалены!");
+    },
+  });
+
+  const delExpired = () => {
+    mutate();
+  };
   return (
     <>
       {" "}
@@ -29,7 +45,12 @@ export function DrugsLink() {
             Отчеты
           </NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          <NavDropdown.Item
+            onClick={delExpired}
+            className="text-red-700 font-bold hover:text-red-500 transition-colors"
+          >
+            <span>Удалить просроченные препараты</span>
+          </NavDropdown.Item>
         </DropdownWrapper>
       </li>
     </>

@@ -47,12 +47,11 @@ export function DrugCatalog() {
             <CatalogDrugCardBody
               batch={drug.batch}
               control={drug.control}
-              expiration_date={
-                drug.expiration_date
-              }
+              expiration_date={drug.expiration_date}
               production_date={
                 AppService.convertDateString(drug.production_date).shortDate
               }
+              drugId={drug.id}
             />
           </CatalogItem>
         ))}

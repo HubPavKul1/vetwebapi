@@ -51,17 +51,15 @@ async def catalog_drug_with_diseases(session: AsyncSession) -> Subquery:
     catalog_drug = await catalog_drug_info()
     diseases = await drug_diseases(catalog_drug.c.drug_id)
 
-    query = (
-        select(
-            catalog_drug.c.drug_name.label("drug_name"),
-            catalog_drug.c.packing.label("packing"),
-            catalog_drug.c.cd_id.label("cd_id"),
-            catalog_drug.c.batch.label("batch"),
-            catalog_drug.c.control.label("control"),
-            catalog_drug.c.production_date.label("production_date"),
-            catalog_drug.c.expiration_date.label("expiration_date"),
-            diseases.c.disease.label("disease"),
-        )
+    query = select(
+        catalog_drug.c.drug_name.label("drug_name"),
+        catalog_drug.c.packing.label("packing"),
+        catalog_drug.c.cd_id.label("cd_id"),
+        catalog_drug.c.batch.label("batch"),
+        catalog_drug.c.control.label("control"),
+        catalog_drug.c.production_date.label("production_date"),
+        catalog_drug.c.expiration_date.label("expiration_date"),
+        diseases.c.disease.label("disease"),
     )
     return list(await session.execute(query))
 
@@ -304,8 +302,9 @@ async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateR
     )
     return query
 
+
 # catalog_drug_rest
-async def catalog_drug_rest(session: AsyncSession, body: DateRangeIn, drug_id: int):
+async def catalog_drug_rest(session: AsyncSession, body: DateRangeIn, drug_id: int) -> tuple:
     c_d_info = await catalog_drug_info()
     c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
     received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
@@ -349,7 +348,6 @@ async def catalog_drug_rest(session: AsyncSession, body: DateRangeIn, drug_id: i
         .join(c_d_rest_start, c_d_rest_start.c.cd_id == c_d_info.c.cd_id, isouter=True)
         .join(received_drugs, received_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
         .join(spent_drugs, spent_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
-
     )
     return list(await session.execute(query))[0]
 
@@ -409,7 +407,6 @@ async def catalog_drugs_movement_report(session: AsyncSession, body: DateRangeIn
     )
 
     return list(await session.execute(query))
-
 
 
 # 1 VetB queries

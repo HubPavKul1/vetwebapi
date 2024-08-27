@@ -27,6 +27,12 @@ interface VetWorkDetailProps {
 
 export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
   const disease = props.data.diseases[0].toLowerCase();
+  let dosages = 0;
+  const animalsDoses =
+    props.data.animals &&
+    props.data.animals.map((animal) =>
+      animal.dosage ? (dosages += animal.dosage) : (dosages += 0)
+    );
   return (
     <>
       <PageDetail
@@ -47,9 +53,13 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
       >
         <>
           <Container className="text-center">
-            <p className="text-left text-lg text-indigo-700 font-bold ">
-              Всего голов: {props.data?.animals?.length}
-            </p>
+            <div className="flex text-left text-lg text-indigo-700 font-bold ">
+              <span className="mr-5">
+                Всего голов: {props.data?.animals?.length}
+              </span>
+              <span>Израсходовано препарата: {dosages.toFixed(3)} доз</span>
+            </div>
+
             <h5 className="page-detail-title">Предприятия </h5>
             {props.data.companies?.length &&
               props.data.companies.map((company) => (
