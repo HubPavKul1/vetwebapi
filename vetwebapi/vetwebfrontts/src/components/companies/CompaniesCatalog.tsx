@@ -31,14 +31,15 @@ export function CompaniesCatalog({
       btnTitle={btnTitle}
       cardsInRow={3}
       createForm={<CreateCompany url={url} invQueryName={invQueryName} />}
-      dataLength={data && data.companies && data.companies.length}
+      dataLength={data.length}
     >
       {data && data.companies && data.companies.length && (
         <CompanyCards
           companies={data.companies}
           invQueryName={invQueryName}
           imgSrc={imgSrc}
-        />
+          />
+      
       )}
     </Catalog>
   );

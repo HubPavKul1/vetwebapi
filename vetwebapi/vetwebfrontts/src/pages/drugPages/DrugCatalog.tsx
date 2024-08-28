@@ -14,11 +14,11 @@ import {
   drugImageUrl,
 } from "urls/drugUrls";
 import { useState } from "react";
-import { useGetDataPage } from "hooks/useGetDataPage";
+import { useGetPageData } from "hooks/useGetPageData";
 
 export function DrugCatalog() {
   const [pageNum, setPageNum] = useState(1);
-  const { data, isLoading, isError, error } = useGetDataPage(
+  const { data, isLoading, isError, error } = useGetPageData(
     "drugCatalog",
     catalogDrugsUrl,
     pageNum
@@ -34,10 +34,8 @@ export function DrugCatalog() {
       btnTitle="Добавить препарат"
       createForm={<CreateCatalogDrugForm />}
       cardsInRow={3}
-      dataTotal={data && data.total_count && data.total_count}
-      dataPerPage={data && data.per_page && data.per_page}
-      setPageNum={setPageNum}
-      pageNum={pageNum}
+      dataLength={data.length}
+      
     >
       {data &&
         data.catalog_drugs &&

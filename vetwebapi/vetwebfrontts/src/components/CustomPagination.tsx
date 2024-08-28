@@ -1,25 +1,22 @@
 import Pagination from "react-bootstrap/Pagination";
 
 interface CustomPaginationProps {
-  setPageNum: CallableFunction;
-  dataTotal: number;
-  dataPerPage: number;
-  pageNum: number;
+  setPageNumber: CallableFunction;
+  dataTotal?: number;
+  dataPerPage?: number;
 }
 
 export function CustomPagination({
-  setPageNum,
+  setPageNumber,
   dataTotal,
-  dataPerPage,
-  pageNum,
+  dataPerPage
 }: CustomPaginationProps) {
-  const pageNums = Array.from(
+  const pageNums = dataTotal && dataPerPage ? Array.from(
     Array(Math.ceil(dataTotal / dataPerPage)).keys(),
     (n) => n + 1
-  );
+  ): [1];
   const clickHandler = (page: number) => {
-    pageNum = page;
-    setPageNum(pageNum);
+    setPageNumber(page);
   };
   return (
     <Pagination>

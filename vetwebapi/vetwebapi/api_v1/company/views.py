@@ -3,6 +3,7 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api_v1.dependencies import get_pagination_params
 from core.database import db_manager
 from core.models import Address, Animal, Company, Employee
 
@@ -96,12 +97,19 @@ async def create_lab_route(
 
 @router.get("/", response_model=Companies)
 async def get_companies(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Companies, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         companies = await crud.read_companies_with_options(session=session)
-        comp_schemas = [await serialize_company_card(company) for company in companies]
-        return Companies(companies=comp_schemas)
+        comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        return Companies(companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -111,12 +119,19 @@ async def get_companies(
 
 @router.get("/vets", response_model=Companies)
 async def get_clinics(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Companies, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         companies = await crud.read_clinics_with_options(session=session)
-        comp_schemas = [await serialize_company_card(company) for company in companies]
-        return Companies(companies=comp_schemas)
+        comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        return Companies(companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -126,12 +141,19 @@ async def get_clinics(
 
 @router.get("/labs", response_model=Companies)
 async def get_labs(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Companies, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         companies = await crud.read_labs_with_options(session=session)
-        comp_schemas = [await serialize_company_card(company) for company in companies]
-        return Companies(companies=comp_schemas)
+        comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        return Companies(companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

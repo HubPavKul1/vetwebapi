@@ -36,6 +36,9 @@ class CompanyOut(SuccessMessage):
 
 class Companies(BaseModel):
     companies: list[CompanyCard]
+    total_count: int
+    page: int
+    per_page: int
 
 
 class CompanyDetail(CompanySchema):
