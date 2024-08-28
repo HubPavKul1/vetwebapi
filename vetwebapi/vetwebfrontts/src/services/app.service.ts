@@ -9,6 +9,10 @@ export const AppService = {
     return await axios.get(url);
   },
 
+  async getPagination(url: string, pageNum: number) {
+    return await axios.get(url, { params: { page: pageNum } });
+  },
+
   async get(url: string) {
     return (await axios.get(url)).data;
   },
@@ -20,11 +24,14 @@ export const AppService = {
       .catch((err) => console.log(err));
   },
 
-  async createReport(url: string, data: object) {
-    return await axios
-      .post<object>(url, data)
-      .then((response) => response.data)
-      .catch((err) => console.log(err));
+  async createReport(
+    url: string,
+    dateStart?: Date | string,
+    dateEnd?: Date | string
+  ) {
+    return await axios.get(url, {
+      params: { date_start: dateStart, date_end: dateEnd },
+    });
   },
 
   async deleteItem(url: string) {
@@ -92,9 +99,7 @@ export const AppService = {
   },
 };
 
-
-export const timeToExpiration = ( date: Date | number) => {
-  
+export const timeToExpiration = (date: Date | number) => {
   const timeMs = typeof date === "number" ? date : date.getTime();
   const deltaSeconds = Math.round((timeMs - Date.now()) / 1000);
   const cutoffs = [
@@ -115,8 +120,10 @@ export const timeToExpiration = ( date: Date | number) => {
     "month",
     "year",
   ];
-  const unitIndex = cutoffs.findIndex(cutoff => cutoff > Math.abs(deltaSeconds))
-  const divisor = unitIndex ? cutoffs[unitIndex - 1] : 1
+  const unitIndex = cutoffs.findIndex(
+    (cutoff) => cutoff > Math.abs(deltaSeconds)
+  );
+  const divisor = unitIndex ? cutoffs[unitIndex - 1] : 1;
 
   const rtf = new Intl.RelativeTimeFormat("ru", {
     numeric: "auto",
@@ -124,7 +131,10 @@ export const timeToExpiration = ( date: Date | number) => {
     localeMatcher: "best fit",
   });
 
-  const result = rtf.format(Math.floor(deltaSeconds / divisor), units[unitIndex])
+  const result = rtf.format(
+    Math.floor(deltaSeconds / divisor),
+    units[unitIndex]
+  );
 
-  return {result, deltaSeconds}
+  return { result, deltaSeconds };
 };

@@ -1,3 +1,5 @@
+import { IDateRange } from "./BaseInterface";
+
 export interface IVetWorkReport {
   disease: string;
   animal_group: string;
@@ -16,4 +18,5 @@ export interface ReportBetweenDateRangeProps {
   setReportData: CallableFunction;
   setDateRange: CallableFunction;
   setReportActive: CallableFunction;
+  dateRange?: IDateRange;
 }

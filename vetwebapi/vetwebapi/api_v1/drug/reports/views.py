@@ -1,5 +1,5 @@
 from typing import Union
-from datetime import datetime
+from datetime import datetime, date
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -24,10 +24,13 @@ from .serializers import serialize_drug_in_report, serialize_drug_in_report_1B
 router = APIRouter(prefix="/reports")
 
 
-@router.post("/drugs_movement", response_model=DrugReportSchema)
+@router.get("/drugs_movement", response_model=DrugReportSchema)
 async def get_drugs_report(
-    body: DateRangeIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    date_start: date,
+    date_end: date,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DrugReportSchema, dict]:
+    body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
         drugs: list[tuple] = await crud.catalog_drugs_movement_report(session=session, body=body)
         drug_schema: list[DrugReportItemSchema] = [
@@ -58,10 +61,13 @@ async def get_drug_rests(
         )
 
 
-@router.post("/test", response_model=SuccessMessage)
+@router.get("/test", response_model=SuccessMessage)
 async def get_drugs_report(
-    body: DateRangeIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    date_start: date,
+    date_end: date, 
+    session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[SuccessMessage, dict]:
+    body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
         drugs: list[tuple] = await crud.report_1B(session=session, body=body)
         print("*" * 20)
@@ -76,10 +82,13 @@ async def get_drugs_report(
         )
 
 
-@router.post("/1vet_B", response_model=Report1VetBSchema)
+@router.get("/1vet_B", response_model=Report1VetBSchema)
 async def vet_1B_report(
-    body: DateRangeIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    date_start: date,
+    date_end: date,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Report1VetBSchema, dict]:
+    body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
         drugs: list[tuple] = await crud.report_1B(session=session, body=body)
         drug_schema: list[Report1VetBItemSchema] = [

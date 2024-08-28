@@ -1,9 +1,10 @@
 from typing import Union
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
+from api_v1.dependencies import get_pagination_params
 from core.database import db_manager
 from core.models import CatalogDrug
 
@@ -25,12 +26,29 @@ async def create_catalog_drug(
 
 @router.get("/", response_model=Catalog)
 async def get_catalog_drugs(
+    # response: Response,
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Catalog, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         drugs = await crud.read_catalog(session=session)
-        drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs]
-        return Catalog(catalog_drugs=drug_schemas)
+
+        # Send some extra information in the response headers
+        # so the client can retrieve it as needed
+        # response.headers["x-total-count"] = str(len(drugs))
+        # response.headers["x-page"] = str(page)
+        # response.headers["x-per-page"] = str(per_page)
+
+        drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs[start:end]]
+        return Catalog(
+            catalog_drugs=drug_schemas, total_count=len(drugs), page=page, per_page=per_page
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

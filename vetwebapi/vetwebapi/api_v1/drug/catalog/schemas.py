@@ -19,3 +19,6 @@ class CatalogDrugSchema(CatalogDrugIn):
 
 class Catalog(BaseModel):
     catalog_drugs: list[CatalogDrugSchema]
+    total_count: int
+    page: int
+    per_page: int

@@ -1,8 +1,9 @@
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import { CreateItem } from "components/CreateItem";
 import { PageWrapper } from "components/PageWrapper";
 import NoData from "components/NoData";
+import { CustomPagination } from "./CustomPagination";
 
 interface CatalogProps {
   title: string;
@@ -10,7 +11,10 @@ interface CatalogProps {
   children: React.ReactElement | React.ReactNode;
   btnTitle?: string;
   cardsInRow: number;
-  dataLength: number;
+  dataTotal: number;
+  dataPerPage: number;
+  setPageNum: CallableFunction;
+  pageNum: number;
 }
 
 export function Catalog({
@@ -19,16 +23,33 @@ export function Catalog({
   children,
   btnTitle,
   cardsInRow,
-  dataLength,
+  dataTotal,
+  dataPerPage,
+  setPageNum,
+  pageNum,
 }: CatalogProps) {
   return (
     <PageWrapper>
       <h1 className="page-title">{title}</h1>
       {createForm && <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>}
-      {dataLength > 0 ? (
-        <Row xs={1} md={cardsInRow} lg={cardsInRow}>
-          {children}
-        </Row>
+      {dataTotal > 0 ? (
+        <>
+          <Row xs={1} md={cardsInRow} lg={cardsInRow}>
+            {children}
+          </Row>
+          <Row>
+            <Col></Col>
+            <Col>
+              <CustomPagination
+                setPageNum={setPageNum}
+                dataTotal={dataTotal}
+                dataPerPage={dataPerPage}
+                pageNum={pageNum}
+              />
+            </Col>
+            <Col></Col>
+          </Row>
+        </>
       ) : (
         <NoData title={title} />
       )}

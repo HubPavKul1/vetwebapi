@@ -19,6 +19,7 @@ export function DrugReportMainPage() {
             setReportData={setDrugReportData}
             setDateRange={setDateRange}
             setReportActive={setReportActive}
+            dateRange={dateRange}
           />
           <Vet1BMenu
             setReportData={setDrugReportData}

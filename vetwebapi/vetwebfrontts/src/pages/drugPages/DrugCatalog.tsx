@@ -13,15 +13,20 @@ import {
   catalogDrugsUrl,
   drugImageUrl,
 } from "urls/drugUrls";
+import { useState } from "react";
+import { useGetDataPage } from "hooks/useGetDataPage";
 
 export function DrugCatalog() {
-  const { data, isLoading, isError, error } = useGetData(
+  const [pageNum, setPageNum] = useState(1);
+  const { data, isLoading, isError, error } = useGetDataPage(
     "drugCatalog",
-    catalogDrugsUrl
+    catalogDrugsUrl,
+    pageNum
   );
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
+  console.log("DATA>>>>>", data);
 
   return (
     <Catalog
@@ -29,7 +34,10 @@ export function DrugCatalog() {
       btnTitle="Добавить препарат"
       createForm={<CreateCatalogDrugForm />}
       cardsInRow={3}
-      dataLength={data && data.catalog_drugs && data.catalog_drugs.length}
+      dataTotal={data && data.total_count && data.total_count}
+      dataPerPage={data && data.per_page && data.per_page}
+      setPageNum={setPageNum}
+      pageNum={pageNum}
     >
       {data &&
         data.catalog_drugs &&

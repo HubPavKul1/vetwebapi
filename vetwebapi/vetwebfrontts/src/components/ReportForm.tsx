@@ -33,11 +33,16 @@ export function ReportForm({
   const { mutate } = useMutation({
     mutationKey: ["createReport"],
     mutationFn: (dateRange: IDateRange) =>
-      AppService.createReport(url, dateRange),
+      AppService.createReport(
+        url,
+        new Date(dateRange.date_start),
+        new Date(dateRange.date_end)
+      ),
     onSuccess: (data, dateRange) => {
       alert("Отчет успешно выполнен!");
+      console.log("DATA", data);
       reset();
-      setReportData(data);
+      setReportData(data.data);
       setDateRange(dateRange);
       setReportActive(true);
     },

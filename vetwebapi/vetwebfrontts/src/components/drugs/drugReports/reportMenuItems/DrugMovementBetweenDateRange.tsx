@@ -7,6 +7,7 @@ export function DrugMovementBetweenDateRange({
   setReportData,
   setDateRange,
   setReportActive,
+  dateRange,
 }: ReportBetweenDateRangeProps) {
   return (
     <CreateItem btnTitle="Движение биопрепаратов за период времени">
@@ -15,6 +16,7 @@ export function DrugMovementBetweenDateRange({
         setDateRange={setDateRange}
         setReportActive={setReportActive}
         url={drugReportsUrl}
+        dateRange={dateRange}
       />
     </CreateItem>
   );
