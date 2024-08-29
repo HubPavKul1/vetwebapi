@@ -8,7 +8,7 @@ export function SectionContent() {
     <Catalog
       title="Полезная информация"
       cardsInRow={4}
-      dataLength={contentData.length}
+      dataTotal={contentData.length}
     >
       {contentData.map((item) => (
         <HomePageCard key={item.id} item={item} />

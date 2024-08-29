@@ -4,7 +4,6 @@ import { IDrugCatalogCard } from "interfaces/DrugInterfaces";
 import { AppService } from "services/app.service";
 import { CreateCatalogDrugForm } from "components/drugs/drug/CreateCatalogDrugForm";
 import { CatalogDrugCardBody } from "components/drugs/drug/CatalogCardBody";
-import { useGetData } from "hooks/useGetData";
 import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import { Loader } from "components/Loader";
 import {
@@ -34,8 +33,7 @@ export function DrugCatalog() {
       btnTitle="Добавить препарат"
       createForm={<CreateCatalogDrugForm />}
       cardsInRow={3}
-      dataLength={data.length}
-      
+      dataTotal={data.total_count}
     >
       {data &&
         data.catalog_drugs &&

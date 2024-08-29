@@ -27,7 +27,7 @@ export function DrugReceipts() {
       btnTitle="Добавить поступление препарата"
       cardsInRow={4}
       createForm={<CreateDrugReceiptForm />}
-      dataLength={data.drug_movements && data.drug_movements.length}
+      dataTotal={data.total_count}
     >
       {data &&
         data.drug_movements &&

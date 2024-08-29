@@ -27,7 +27,7 @@ export function Drugs() {
       btnTitle="Добавить препарат"
       cardsInRow={3}
       createForm={<CreateDrugForm />}
-      dataLength={data.length}
+      dataTotal={data.total_count}
     >
       {data &&
         data.drugs.length &&

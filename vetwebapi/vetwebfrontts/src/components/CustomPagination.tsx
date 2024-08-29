@@ -1,46 +1,65 @@
 import Pagination from "react-bootstrap/Pagination";
 
 interface CustomPaginationProps {
-  setPageNumber: CallableFunction;
-  dataTotal?: number;
-  dataPerPage?: number;
+  setPageNum: CallableFunction;
+  pageNum: number;
+  dataTotal: number;
+  dataPerPage: number;
 }
 
 export function CustomPagination({
-  setPageNumber,
+  setPageNum,
+  pageNum,
   dataTotal,
-  dataPerPage
+  dataPerPage,
 }: CustomPaginationProps) {
-  const pageNums = dataTotal && dataPerPage ? Array.from(
+  const pageNums = Array.from(
     Array(Math.ceil(dataTotal / dataPerPage)).keys(),
     (n) => n + 1
-  ): [1];
+  );
   const clickHandler = (page: number) => {
-    setPageNumber(page);
+    setPageNum(page);
   };
+
+  const toStartPage = () => {
+    setPageNum(1);
+  };
+
+  const toPrevPage = () => {
+    pageNum > 1 ? --pageNum : pageNum;
+    setPageNum(pageNum);
+  };
+
+  const toNextPage = () => {
+    pageNum < pageNums.length ? ++pageNum : pageNum;
+    setPageNum(pageNum);
+  };
+
+  const toLastPage = () => {
+    setPageNum(pageNums.length);
+  };
+
   return (
     <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      {pageNums.map((page, index) => (
-        <Pagination.Item key={index} onClick={() => clickHandler(page)}>
+      <Pagination.First onClick={toStartPage} disabled={pageNum === 1} />
+      <Pagination.Prev onClick={toPrevPage} disabled={pageNum === 1} />
+      {pageNums.map((page) => (
+        <Pagination.Item
+          key={page}
+          active={page === pageNum}
+          onClick={() => clickHandler(page)}
+        >
           {page}
         </Pagination.Item>
       ))}
-
-      {/* <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{10}</Pagination.Item>
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-      <Pagination.Item disabled>{14}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item> */}
-      <Pagination.Next />
-      <Pagination.Last />
+      <Pagination.Next
+        onClick={toNextPage}
+        disabled={pageNum === pageNums.length}
+      />
+      <Pagination.Last
+        onClick={toLastPage}
+        disabled={pageNum === pageNums.length}
+      />
     </Pagination>
   );
 }

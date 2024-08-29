@@ -1,26 +1,28 @@
 import { Catalog } from "components/Catalog";
 import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import { Loader } from "components/Loader";
-import { CreateCompany } from "./CreateCompany";
-import { CompanyCards } from "./CompanyCards";
 import { useState } from "react";
 import { useGetPageData } from "hooks/useGetPageData";
+import { CompanyCards } from "./companies/CompanyCards";
 
-interface CompaniesCatalogProps {
+interface CatalogPageProps {
   url: string;
   title: string;
   btnTitle: string;
   imgSrc: string;
   invQueryName: string;
+  createForm: React.ReactElement;
+  catalogItems: React.ReactElement;
 }
 
-export function CompaniesCatalog({
+export function CatalogPage({
   url,
   title,
   btnTitle,
   imgSrc,
   invQueryName,
-}: CompaniesCatalogProps) {
+  createForm,
+}: CatalogPageProps) {
   const [pageNum, setPageNum] = useState(1);
 
   const { data, isLoading, isError, error } = useGetPageData(
@@ -37,17 +39,17 @@ export function CompaniesCatalog({
       title={title}
       btnTitle={btnTitle}
       cardsInRow={3}
-      createForm={<CreateCompany url={url} invQueryName={invQueryName} />}
+      createForm={createForm}
       pageNum={pageNum}
       setPageNum={setPageNum}
       dataTotal={data.total_count}
       dataPerPage={data.per_page}
     >
-      {data && data.companies && data.companies.length && (
+      {data.companies && (
         <CompanyCards
-          companies={data.companies}
           invQueryName={invQueryName}
           imgSrc={imgSrc}
+          companies={data.companies}
         />
       )}
     </Catalog>

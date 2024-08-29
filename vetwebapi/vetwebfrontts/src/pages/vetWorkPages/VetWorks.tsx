@@ -35,7 +35,7 @@ export function VetWorks({
       btnTitle={btnTitle}
       createForm={createForm}
       cardsInRow={4}
-      dataLength={data && data.vetworks && data.vetworks.length}
+      dataTotal={data.total_count}
     >
       {data &&
         data.vetworks.length &&
