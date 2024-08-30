@@ -67,6 +67,20 @@ async def create_company_route(
         )
 
 
+@router.post("/test", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+async def create_test_companies_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[SuccessMessage, dict]:
+    try:
+        await crud.create_test_companies(session=session)
+        return SuccessMessage
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
 @router.post("/vets", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_clinic_route(
     body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
@@ -109,7 +123,9 @@ async def get_companies(
     try:
         companies = await crud.read_companies_with_options(session=session)
         comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
-        return Companies(companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page)
+        return Companies(
+            companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -131,7 +147,9 @@ async def get_clinics(
     try:
         companies = await crud.read_clinics_with_options(session=session)
         comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
-        return Companies(companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page)
+        return Companies(
+            companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -153,7 +171,9 @@ async def get_labs(
     try:
         companies = await crud.read_labs_with_options(session=session)
         comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
-        return Companies(companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page)
+        return Companies(
+            companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -369,5 +389,3 @@ async def get_genders_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
-

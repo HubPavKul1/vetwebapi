@@ -22,9 +22,10 @@ export function CompaniesCatalog({
   invQueryName,
 }: CompaniesCatalogProps) {
   const [pageNum, setPageNum] = useState(1);
+  const pageQueryKey = invQueryName + pageNum.toString();
 
   const { data, isLoading, isError, error } = useGetPageData(
-    invQueryName + pageNum.toString(),
+    pageQueryKey,
     url,
     pageNum
   );
@@ -46,7 +47,7 @@ export function CompaniesCatalog({
       {data && data.companies && data.companies.length && (
         <CompanyCards
           companies={data.companies}
-          invQueryName={invQueryName}
+          invQueryName={pageQueryKey}
           imgSrc={imgSrc}
         />
       )}

@@ -18,6 +18,14 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
     return new_company
 
 
+async def create_test_companies(session: AsyncSession) -> None:
+    companies: list[Company] = [
+        Company(full_name=f"company{i}", short_name=f"comp{i}") for i in range(30)
+    ]
+    session.add_all(companies)
+    await session.commit()
+
+
 async def create_clinic(session: AsyncSession, body: CompanyIn) -> Clinic:
     clinic = Clinic(**body.model_dump())
     session.add(clinic)
