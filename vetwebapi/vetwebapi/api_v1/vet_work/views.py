@@ -3,6 +3,7 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api_v1.dependencies import get_pagination_params
 from api_v1.company.schemas import SuccessMessage
 from api_v1.drug.receipts.schemas import DrugInMovementIn
 from core.models import VetWork, AnimalInVetWork, DoctorInVetWork, CompanyInVetWork
@@ -119,11 +120,18 @@ async def add_company_to_vetwork_route(
 
 @router.get("/vaccinations", response_model=VetWorks)
 async def get_vaccinations_route(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         vaccinations = await crud.read_vaccinations(session=session) 
-        return await serialize_vetworks(vetworks=vaccinations)
+        return await serialize_vetworks(vetworks=vaccinations[start:end], total_count=len(vaccinations), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -133,11 +141,18 @@ async def get_vaccinations_route(
 
 @router.get("/diagnostics", response_model=VetWorks)
 async def get_diagnostics_route(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         diagnostics = await crud.read_diagnostics(session=session)  
-        return await serialize_vetworks(vetworks=diagnostics)
+        return await serialize_vetworks(vetworks=diagnostics[start:end], total_count=len(diagnostics), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

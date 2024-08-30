@@ -38,7 +38,7 @@ export function CompaniesCatalog({
       title={title}
       btnTitle={btnTitle}
       cardsInRow={3}
-      createForm={<CreateCompany url={url} invQueryName={invQueryName} />}
+      createForm={<CreateCompany url={url} queryKey={pageQueryKey} />}
       pageNum={pageNum}
       setPageNum={setPageNum}
       dataTotal={data.total_count}

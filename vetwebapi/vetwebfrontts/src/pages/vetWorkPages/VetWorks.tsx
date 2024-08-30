@@ -1,15 +1,16 @@
 import { IVetwork } from "interfaces/VetWorkInterfaces";
 import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import { Loader } from "components/Loader";
-import { useGetData } from "hooks/useGetData";
 import { vetWorkDetailUrl, vetWorkLink } from "urls/vetWorkUrls";
 import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { Catalog } from "components/Catalog";
 import { AppService } from "services/app.service";
+import { useState } from "react";
+import { useGetPageData } from "hooks/useGetPageData";
+import { VetWorkCreateForm } from "components/vetWorks/VetWorkCreateForm";
 
 interface VetWorksProps {
   url: string;
-  createForm: React.ReactElement;
   title: string;
   btnTitle: string;
   imgSrc: string;
@@ -18,13 +19,18 @@ interface VetWorksProps {
 
 export function VetWorks({
   url,
-  createForm,
   title,
   btnTitle,
   imgSrc,
   queryKey,
 }: VetWorksProps) {
-  const { data, isLoading, error, isError } = useGetData(queryKey, url);
+  const [pageNum, setPageNum] = useState(1);
+  const pageQueryKey = queryKey + pageNum.toString();
+  const { data, isLoading, error, isError } = useGetPageData(
+    pageQueryKey,
+    url,
+    pageNum
+  );
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
@@ -33,9 +39,12 @@ export function VetWorks({
     <Catalog
       title={title}
       btnTitle={btnTitle}
-      createForm={createForm}
+      createForm={<VetWorkCreateForm url={url} queryKey={pageQueryKey} />}
       cardsInRow={4}
       dataTotal={data.total_count}
+      dataPerPage={data.per_page}
+      pageNum={pageNum}
+      setPageNum={setPageNum}
     >
       {data &&
         data.vetworks.length &&
@@ -45,7 +54,7 @@ export function VetWorks({
             delUrl={vetWorkDetailUrl(vetWork.id)}
             url={vetWorkLink(vetWork.id)}
             imgSrc={imgSrc}
-            invQueryName={queryKey}
+            invQueryName={pageQueryKey}
             cardTitle={
               AppService.convertDateString(vetWork.vetwork_date).fullDate +
               " " +

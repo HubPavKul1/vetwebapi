@@ -26,7 +26,6 @@ async def create_catalog_drug(
 
 @router.get("/", response_model=Catalog)
 async def get_catalog_drugs(
-    # response: Response,
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Catalog, dict]:
@@ -38,13 +37,6 @@ async def get_catalog_drugs(
     end = start + per_page
     try:
         drugs = await crud.read_catalog(session=session)
-
-        # Send some extra information in the response headers
-        # so the client can retrieve it as needed
-        # response.headers["x-total-count"] = str(len(drugs))
-        # response.headers["x-page"] = str(page)
-        # response.headers["x-per-page"] = str(per_page)
-
         drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs[start:end]]
         return Catalog(
             catalog_drugs=drug_schemas, total_count=len(drugs), page=page, per_page=per_page

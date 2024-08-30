@@ -32,3 +32,8 @@ export interface ITableHeaders {
     id: number;
     title: string
 }
+
+export interface ICreateItemFormInterface {
+    url: string;
+    queryKey: string
+}

@@ -45,3 +45,6 @@ class DrugMovementDetail(DrugMovementOut):
 
 class DrugMovements(BaseModel):
     drug_movements: list[DrugMovementDetail]
+    total_count: int
+    page: int
+    per_page: int

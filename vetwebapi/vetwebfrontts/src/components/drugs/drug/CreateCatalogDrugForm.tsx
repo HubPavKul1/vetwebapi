@@ -8,11 +8,13 @@ import { IDrugCatalogCreate } from "interfaces/DrugInterfaces";
 
 import { DrugSelect } from "./DrugSelect";
 import { useCreateItem } from "hooks/useCreateItem";
-import { catalogDrugsExpiredUrl, catalogDrugsUrl } from "urls/drugUrls";
-import { AppService } from "services/app.service";
-import { Container } from "react-bootstrap";
 
-export function CreateCatalogDrugForm() {
+import { ICreateItemFormInterface } from "interfaces/BaseInterface";
+
+export function CreateCatalogDrugForm({
+  url,
+  queryKey,
+}: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IDrugCatalogCreate>[] = [
     {
       fieldName: "batch",
@@ -39,8 +41,8 @@ export function CreateCatalogDrugForm() {
 
   const { mutate } = useCreateItem(
     "create catalogDrug",
-    catalogDrugsUrl,
-    "drugCatalog",
+    url,
+    queryKey,
     "Препарат успешно добавлен!",
     reset
   );
@@ -48,7 +50,6 @@ export function CreateCatalogDrugForm() {
   const createCatalogDrug: SubmitHandler<IDrugCatalogCreate> = (data) => {
     mutate(data);
   };
-  const delExpired = () => AppService.getAll(catalogDrugsExpiredUrl);
 
   return (
     <>

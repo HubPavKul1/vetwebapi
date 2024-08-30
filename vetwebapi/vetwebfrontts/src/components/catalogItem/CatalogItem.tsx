@@ -25,7 +25,7 @@ export function CatalogItem({ ...props }: ICardProps) {
           </Row>
         </Container>
         {props.children && (
-          <Container className="h-24">
+          <Container className="h-24 mb-2">
             <Row>{props.children}</Row>
           </Container>
         )}

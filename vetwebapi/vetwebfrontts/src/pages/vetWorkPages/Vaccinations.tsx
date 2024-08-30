@@ -1,4 +1,3 @@
-import { VetWorkCreateForm } from "../../components/vetWorks/VetWorkCreateForm";
 import { vaccinationsUrl } from "../../urls/vetWorkUrls";
 import { VetWorks } from "./VetWorks";
 
@@ -8,7 +7,6 @@ export function Vaccinations() {
   return (
     <VetWorks
       url={url}
-      createForm={<VetWorkCreateForm url={url} queryKey={queryKey} />}
       imgSrc="/vetworkBg.jpg"
       title="Вакцинации"
       btnTitle="Добавить вакцинацию"

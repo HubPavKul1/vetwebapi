@@ -14,9 +14,11 @@ import { DisposalMethodSelect } from "./DisposalMethodSelect";
 import { DosageSelect } from "./DosageSelect";
 
 import { useCreateItem } from "hooks/useCreateItem";
-import { drugsUrl } from "urls/drugUrls";
+import { ICreateItemFormInterface } from "interfaces/BaseInterface";
 
-export function CreateDrugForm() {
+
+
+export function CreateDrugForm({url, queryKey}: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IDrugCreate>[] = [
     {
       fieldName: "name",
@@ -43,8 +45,8 @@ export function CreateDrugForm() {
 
   const { mutate } = useCreateItem(
     "create drug",
-    drugsUrl,
-    "drugs",
+    url,
+    queryKey,
     "Препарат успешно добавлен!",
     reset
   );

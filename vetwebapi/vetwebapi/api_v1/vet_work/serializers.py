@@ -75,9 +75,9 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
 async def get_disease_names(vetwork: VetWork) -> list[str]:
     return [item.disease.name for item in vetwork.diseases_details]
 
-async def serialize_vetworks(vetworks: list[VetWork]) -> VetWorks:
+async def serialize_vetworks(vetworks: list[VetWork], total_count: int, page: int, per_page: int) -> VetWorks:
     vetwork_schemas = [await serialize_vetwork(vetwork=vetwork) for vetwork in vetworks]
-    return VetWorks(vetworks=vetwork_schemas)
+    return VetWorks(vetworks=vetwork_schemas, total_count=total_count, page=page, per_page=per_page)
 
 
 async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkSchema:

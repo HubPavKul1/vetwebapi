@@ -46,6 +46,9 @@ class DrugCard(BaseModel):
 
 class Drugs(BaseModel):
     drugs: list[DrugCard]
+    total_count: int
+    page: int
+    per_page: int
 
 
 # Drug Select

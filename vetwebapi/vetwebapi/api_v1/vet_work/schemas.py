@@ -95,7 +95,10 @@ class VetWorkSchema(BaseModel):
 
 
 class VetWorks(BaseModel):
-    vetworks: list[VetWorkSchema]    
+    vetworks: list[VetWorkSchema] 
+    total_count: int
+    page: int
+    per_page: int   
 
 
 class VetWorkDetail(VetWorkSchema):

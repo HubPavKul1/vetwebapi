@@ -3,14 +3,11 @@ import { CustomButton } from "components/CustomButton";
 import { useCreateItem } from "hooks/useCreateItem";
 import { CompanyInputs } from "./CompanyInputs";
 import { ICompanyCreate } from "interfaces/CompanyInterfaces";
+import { ICreateItemFormInterface } from "interfaces/BaseInterface";
 
-interface CreateCompanyProps {
-  children?: React.ReactElement | React.ReactNode;
-  url: string;
-  invQueryName: string;
-}
 
-export function CreateCompany({ url, invQueryName }: CreateCompanyProps) {
+
+export function CreateCompany({ url, queryKey }: ICreateItemFormInterface) {
   const methods = useForm<ICompanyCreate>({
     mode: "onChange",
   });
@@ -18,9 +15,9 @@ export function CreateCompany({ url, invQueryName }: CreateCompanyProps) {
   const { handleSubmit, reset } = methods;
 
   const { mutate } = useCreateItem(
-    invQueryName,
+    "createCompany",
     url,
-    invQueryName,
+    queryKey,
     "Предприятие успешно добавлено!",
     reset
   );

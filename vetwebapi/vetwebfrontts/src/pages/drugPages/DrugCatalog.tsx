@@ -17,8 +17,9 @@ import { useGetPageData } from "hooks/useGetPageData";
 
 export function DrugCatalog() {
   const [pageNum, setPageNum] = useState(1);
+  const pageQueryKey = "drugCatalog" + pageNum.toString()
   const { data, isLoading, isError, error } = useGetPageData(
-    "drugCatalog",
+    pageQueryKey,
     catalogDrugsUrl,
     pageNum
   );
@@ -31,9 +32,12 @@ export function DrugCatalog() {
     <Catalog
       title="Каталог биопрепаратов"
       btnTitle="Добавить препарат"
-      createForm={<CreateCatalogDrugForm />}
+      createForm={<CreateCatalogDrugForm url={catalogDrugsUrl} queryKey={pageQueryKey}/>}
       cardsInRow={3}
       dataTotal={data.total_count}
+      pageNum={pageNum}
+      setPageNum={setPageNum}
+      dataPerPage={data.per_page}
     >
       {data &&
         data.catalog_drugs &&
@@ -44,7 +48,7 @@ export function DrugCatalog() {
             delUrl={catalogDrugDetailUrl(drug.id)}
             url={catalogDrugLink(drug.id)}
             imgSrc={!drug.image ? "/drugsCard.jpg" : drugImageUrl(drug.drug_id)}
-            invQueryName="drugCatalog"
+            invQueryName={pageQueryKey}
             cardTitle={drug.name}
             id={drug.id}
           >

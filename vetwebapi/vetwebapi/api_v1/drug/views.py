@@ -6,6 +6,7 @@ from pathlib import Path
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
+from api_v1.dependencies import get_pagination_params
 from api_v1.drug.dependencies import drug_by_id
 from api_v1.drug.schemas import (
     AccountingUnits,
@@ -57,12 +58,19 @@ async def upload_drug_file_route(
 
 @router.get("/", response_model=Drugs)
 async def get_drugs_route(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[Drugs, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         drugs = await crud.read_drugs_with_options(session=session)
-        drug_schemas = [await serialize_drug_card(drug) for drug in drugs]
-        return Drugs(drugs=drug_schemas)
+        drug_schemas = [await serialize_drug_card(drug) for drug in drugs[start:end]]
+        return Drugs(drugs=drug_schemas, total_count=len(drugs), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

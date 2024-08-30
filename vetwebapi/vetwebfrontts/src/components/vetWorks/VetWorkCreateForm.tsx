@@ -15,13 +15,11 @@ import { BiomaterialFixationsSelect } from "./BiomaterialFixationSelect";
 import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
 import { useCreateItem } from "hooks/useCreateItem";
+import { ICreateItemFormInterface } from "interfaces/BaseInterface";
 
-interface VetWorkCreateFormProps {
-  url: string;
-  queryKey: string;
-}
 
-export function VetWorkCreateForm({ url, queryKey }: VetWorkCreateFormProps) {
+
+export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IVetworkCreate>[] = [
     { fieldName: "vetwork_date", id: "vetwork_date", type: "date" },
   ];

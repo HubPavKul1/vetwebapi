@@ -3,7 +3,6 @@ import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { CreateDrugForm } from "components/drugs/drug/CreateDrugForm";
 
 import { DrugCardBody } from "components/drugs/drug/DrugCardBody";
-import { useGetData } from "hooks/useGetData";
 import { Loader } from "components/Loader";
 import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
 import {
@@ -14,9 +13,14 @@ import {
   drugsUrl,
 } from "urls/drugUrls";
 import { IDrugCard } from "interfaces/DrugInterfaces";
+import { useGetPageData } from "hooks/useGetPageData";
+import { useState } from "react";
 
 export function Drugs() {
-  const { data, isLoading, isError, error } = useGetData("drugs", drugsUrl);
+  const[pageNum, setPageNum] = useState(1)
+  const pageQueryKey = "drugs" + pageNum.toString()
+  const url = drugsUrl
+  const { data, isLoading, isError, error } = useGetPageData(pageQueryKey, url, pageNum);
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
@@ -26,8 +30,11 @@ export function Drugs() {
       title="Справочник биопрепаратов"
       btnTitle="Добавить препарат"
       cardsInRow={3}
-      createForm={<CreateDrugForm />}
+      createForm={<CreateDrugForm url={url} queryKey={pageQueryKey}/>}
       dataTotal={data.total_count}
+      dataPerPage={data.per_page}
+      pageNum={pageNum}
+      setPageNum={setPageNum}
     >
       {data &&
         data.drugs.length &&
@@ -37,7 +44,7 @@ export function Drugs() {
             delUrl={drugDetailUrl(drug.id)}
             url={drugLink(drug.id)}
             imgSrc={drug.image && drugImageUrl(drug.id)}
-            invQueryName="drugs"
+            invQueryName={pageQueryKey}
             cardTitle={drug.name}
             id={drug.id}
             hasFileUploader={!drug.instruction}

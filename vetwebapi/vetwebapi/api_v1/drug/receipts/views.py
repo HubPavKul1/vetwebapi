@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
+from api_v1.dependencies import get_pagination_params
 from core.database import db_manager
 from core.models import DrugMovement, DrugInMovement
 
@@ -46,12 +47,19 @@ async def add_drug_to_movement_route(
 
 @router.get("/", response_model=DrugMovements)
 async def get_receipts(
+    pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[DrugMovements, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
     try:
         receipts: list[DrugMovement] = await crud.read_receipts_with_drugs(session=session)
-        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts]
-        return DrugMovements(drug_movements=receipt_schemas)
+        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts[start:end]]
+        return DrugMovements(drug_movements=receipt_schemas, total_count=len(receipts), page=page, per_page=per_page)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

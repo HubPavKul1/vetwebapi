@@ -7,9 +7,10 @@ import { CustomButton } from "components/CustomButton";
 import { IDrugMovementCreate } from "interfaces/DrugInterfaces";
 
 import { useCreateItem } from "hooks/useCreateItem";
-import { drugReceiptsUrl } from "urls/drugUrls";
+import { ICreateItemFormInterface } from "interfaces/BaseInterface";
 
-export function CreateDrugReceiptForm() {
+
+export function CreateDrugReceiptForm({url, queryKey}: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IDrugMovementCreate>[] = [
     { fieldName: "operation_date", id: "operation_date", type: "date" },
   ];
@@ -25,8 +26,8 @@ export function CreateDrugReceiptForm() {
 
   const { mutate } = useCreateItem(
     "createReceipt",
-    drugReceiptsUrl,
-    "drugReceipts",
+    url,
+    queryKey,
     "Поступление успешно добавлено!",
     reset
   );
