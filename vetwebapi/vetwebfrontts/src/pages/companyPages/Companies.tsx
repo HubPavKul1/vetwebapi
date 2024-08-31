@@ -1,14 +1,25 @@
-import { CompaniesCatalog } from "components/companies/CompaniesCatalog";
+import { CatalogWrapper } from "components/CatalogWrapper";
+import { CreateCompany } from "components/companies/CreateCompany";
 import { companiesUrl } from "urls/companyUrls";
 
 export function Companies() {
   return (
-    <CompaniesCatalog
-      url={companiesUrl}
+    <CatalogWrapper
       title="Предприятия"
-      btnTitle="Добавить предприятие"
+      cardsInRow={3}
+      queryKey="companies"
+      url={companiesUrl}
       imgSrc="/animals.jpg"
-      invQueryName="companies"
+      btnTitle="Добавить предприятие"
+      createForm={<CreateCompany url={companiesUrl} queryKey="companies1" />}
     />
   );
+  //   <CompaniesCatalog
+  //     url={companiesUrl}
+  //     title="Предприятия"
+  //     btnTitle="Добавить предприятие"
+  //     imgSrc="/animals.jpg"
+  //     invQueryName="companies"
+  //   />
+  // );
 }

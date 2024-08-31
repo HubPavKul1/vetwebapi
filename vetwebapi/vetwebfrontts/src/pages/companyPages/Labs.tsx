@@ -1,14 +1,26 @@
+import { CatalogWrapper } from "components/CatalogWrapper";
 import { CompaniesCatalog } from "components/companies/CompaniesCatalog";
+import { CreateCompany } from "components/companies/CreateCompany";
 import { labsUrl } from "urls/companyUrls";
 
 export function Labs() {
   return (
-    <CompaniesCatalog
-      url={labsUrl}
+    <CatalogWrapper
       title="Лаборатории"
-      btnTitle="Добавить лабораторию"
+      cardsInRow={3}
+      queryKey="labs"
+      url={labsUrl}
       imgSrc="/diagnostic.jpg"
-      invQueryName="labs"
+      btnTitle="Добавить лабораторию"
+      createForm={<CreateCompany url={labsUrl} queryKey="labs1" />}
     />
+
+    // <CompaniesCatalog
+    //   url={labsUrl}
+    //   title="Лаборатории"
+    //   btnTitle="Добавить лабораторию"
+    //   imgSrc="/diagnostic.jpg"
+    //   invQueryName="labs"
+    // />
   );
 }

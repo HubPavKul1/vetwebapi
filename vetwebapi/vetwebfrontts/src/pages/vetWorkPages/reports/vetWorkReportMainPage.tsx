@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { IDateRange } from "interfaces/BaseInterface";
-import { Catalog } from "components/Catalog";
 import { DiagnosticBetweenDateRange } from "./DiagnosticBetweenDateRange";
 import { DiagnosticReport } from "./DiagnosticReport";
 import { VaccinationReport } from "./VaccinationReport";
 import { VaccinationBetweenDateRange } from "./VaccinationBetweenDateRange";
+import { CatalogWrapper } from "components/CatalogWrapper";
 
 export function VetWorkReportMainPage() {
   const [vetWorkReportData, setVetWorkReportData] = useState<object>({});
@@ -14,10 +14,9 @@ export function VetWorkReportMainPage() {
   return (
     <>
       {!reportActive ? (
-        <Catalog
+        <CatalogWrapper
           title="Отчеты по противоэпизоотической работе"
           cardsInRow={3}
-          dataLength={1}
         >
           <DiagnosticBetweenDateRange
             setReportData={setVetWorkReportData}
@@ -30,7 +29,7 @@ export function VetWorkReportMainPage() {
             setDateRange={setDateRange}
             setReportActive={setReportActive}
           />
-        </Catalog>
+        </CatalogWrapper>
       ) : dateRange && vetWorkReportData.diagnostics ? (
         <DiagnosticReport
           data={vetWorkReportData.diagnostics}
