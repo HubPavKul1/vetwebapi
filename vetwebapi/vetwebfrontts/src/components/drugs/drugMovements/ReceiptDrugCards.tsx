@@ -1,9 +1,7 @@
 import { CreateItem } from "components/CreateItem";
 import { IDrugMovement } from "interfaces/DrugInterfaces";
 import { CreateDrugReceiptForm } from "./CreateDrugReceiptForm";
-import { CatalogItem } from "components/catalogItem/CatalogItem";
-import { drugReceiptDetailUrl, drugReceiptLink } from "urls/drugUrls";
-import { AppService } from "services/app.service";
+import { ReceiptDrugCard } from "./ReceiptDrugCard";
 
 interface ReceiptDrugCardsProps {
   drugMovements: IDrugMovement[];
@@ -27,16 +25,10 @@ export function ReceiptDrugCards({
         children={<CreateDrugReceiptForm url={url} queryKey={invQueryName} />}
       />
       {drugMovements.map((drugMovement: IDrugMovement) => (
-        <CatalogItem
-          key={drugMovement.id}
-          delUrl={drugReceiptDetailUrl(drugMovement.id)}
-          url={drugReceiptLink(drugMovement.id)}
-          imgSrc={imgSrc}
+        <ReceiptDrugCard
+          drugMovement={drugMovement}
           invQueryName={invQueryName}
-          cardTitle={
-            AppService.convertDateString(drugMovement.operation_date).fullDate
-          }
-          id={drugMovement.id}
+          imgSrc={imgSrc}
         />
       ))}
     </>

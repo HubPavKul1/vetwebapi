@@ -6,19 +6,17 @@ import { FormInputProps } from "interfaces/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 import { IDrugCreate } from "interfaces/DrugInterfaces";
 
-import { DiseaseSelect } from "./DiseaseSelect";
-import { BudgetSelect } from "./BudgetSelect";
-import { DrugManufacturerSelect } from "./DrugManufacturerSelect";
-import { AccountingUnitSelect } from "./AccountingUnitSelect";
-import { DisposalMethodSelect } from "./DisposalMethodSelect";
-import { DosageSelect } from "./DosageSelect";
+import { DiseaseSelect } from "./selectData/DiseaseSelect";
+import { BudgetSelect } from "./selectData/BudgetSelect";
+import { DrugManufacturerSelect } from "./selectData/DrugManufacturerSelect";
+import { AccountingUnitSelect } from "./selectData/AccountingUnitSelect";
+import { DisposalMethodSelect } from "./selectData/DisposalMethodSelect";
+import { DosageSelect } from "./selectData/DosageSelect";
 
 import { useCreateItem } from "hooks/useCreateItem";
 import { ICreateItemFormInterface } from "interfaces/BaseInterface";
 
-
-
-export function CreateDrugForm({url, queryKey}: ICreateItemFormInterface) {
+export function CreateDrugForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IDrugCreate>[] = [
     {
       fieldName: "name",

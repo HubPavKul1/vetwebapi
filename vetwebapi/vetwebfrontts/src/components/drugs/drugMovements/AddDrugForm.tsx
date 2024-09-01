@@ -8,8 +8,8 @@ import { IDrugInMovementIn } from "interfaces/DrugInterfaces";
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "hooks/useCreateItem";
-import { PlaceOfAdministrationSelect } from "../drug/PlaceOfAdministrationSelect";
-import { AdministrationMethodSelect } from "../drug/AdministrationMethodSelect";
+import { PlaceOfAdministrationSelect } from "../drug/selectData/PlaceOfAdministrationSelect";
+import { AdministrationMethodSelect } from "../drug/selectData/AdministrationMethodSelect";
 
 interface AddDrugFormProps {
   url: string;

@@ -6,6 +6,7 @@ interface CatalogCardImageProps {
   imgSrc?: string;
   cardTitle: string;
   fileUploadUrl?: string;
+  invQueryName?: string
 }
 
 export function CatalogCardImage({ ...props }: CatalogCardImageProps) {
@@ -21,12 +22,12 @@ export function CatalogCardImage({ ...props }: CatalogCardImageProps) {
         </Link>
       ) : (
         <div>
-          {props.fileUploadUrl && (
+          {props.fileUploadUrl && props.invQueryName && (
             <FileUpload
               uploadUrl={props.fileUploadUrl}
               accept="image/*"
               mutationName="drugImage upload"
-              invQueryName="drugs"
+              invQueryName={props.invQueryName}
               iconSrc="/emptyImage.jpg"
             />
           )}

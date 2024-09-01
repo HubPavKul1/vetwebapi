@@ -6,10 +6,10 @@ import { FormInputProps } from "interfaces/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 import { IDrugCatalogCreate } from "interfaces/DrugInterfaces";
 
-import { DrugSelect } from "./DrugSelect";
 import { useCreateItem } from "hooks/useCreateItem";
 
 import { ICreateItemFormInterface } from "interfaces/BaseInterface";
+import { DrugSelect } from "./DrugSelect";
 
 export function CreateCatalogDrugForm({
   url,

@@ -20,6 +20,9 @@ import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 interface VetWorkData {
   data?: IVetWorkSchema;
   isLoading: boolean;
+  isError: boolean;
+  error: Error;
+  
 }
 
 export function VetWorkPageDetail() {

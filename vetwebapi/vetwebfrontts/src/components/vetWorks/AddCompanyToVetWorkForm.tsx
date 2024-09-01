@@ -3,7 +3,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { CustomButton } from "components/CustomButton";
 
 import { useParams } from "react-router-dom";
-import { CompanySelect } from "./CompanySelect";
+import { CompanySelect } from "./selectData/CompanySelect";
 import { ICompanyInVetWorkIn } from "interfaces/CompanyInterfaces";
 import { useCreateItem } from "hooks/useCreateItem";
 

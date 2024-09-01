@@ -17,6 +17,7 @@ export function CatalogItem({ ...props }: ICardProps) {
                 imgSrc={props.imgSrc}
                 cardTitle={props.cardTitle}
                 fileUploadUrl={props.fileUploadUrl}
+                invQueryName={props.invQueryName ? props.invQueryName: ""}
               />
             </Col>
             <Col>

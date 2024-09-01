@@ -6,18 +6,16 @@ import { FormInputProps } from "interfaces/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 
 import { IVetworkCreate } from "interfaces/VetWorkInterfaces";
-import { ClinicSelect } from "./ClinicSelect";
-import { DiseaseSelect } from "components/drugs/drug/DiseaseSelect";
-import { DoctorSelect } from "./DoctorsSelect";
-import { LabsSelect } from "./LabsSelect";
-import { BiomaterialsSelect } from "./BiomaterialsSelect";
-import { BiomaterialFixationsSelect } from "./BiomaterialFixationSelect";
-import { BiomaterialPackagesSelect } from "./BiomaterialPackagesSelect";
-import { DiagnosticMethodsSelect } from "./DiagnosticMethodsSelect";
+import { ClinicSelect } from "./selectData/ClinicSelect";
+import { DiseaseSelect } from "components/drugs/drug/selectData/DiseaseSelect";
+import { DoctorSelect } from "./selectData/DoctorsSelect";
+import { LabsSelect } from "./selectData/LabsSelect";
+import { BiomaterialsSelect } from "./selectData/BiomaterialsSelect";
+import { BiomaterialFixationsSelect } from "./selectData/BiomaterialFixationSelect";
+import { BiomaterialPackagesSelect } from "./selectData/BiomaterialPackagesSelect";
+import { DiagnosticMethodsSelect } from "./selectData/DiagnosticMethodsSelect";
 import { useCreateItem } from "hooks/useCreateItem";
 import { ICreateItemFormInterface } from "interfaces/BaseInterface";
-
-
 
 export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IVetworkCreate>[] = [

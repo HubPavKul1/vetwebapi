@@ -1,9 +1,6 @@
-import { CreateCatalogDrugForm } from "components/drugs/drug/CreateCatalogDrugForm";
-
 import { catalogDrugsUrl } from "urls/drugUrls";
-import { useState } from "react";
-import { useGetPageData } from "hooks/useGetPageData";
 import { CatalogWrapper } from "components/CatalogWrapper";
+import { CreateCatalogDrugForm } from "components/drugs/catalogDrug/CreateCatalogDrugForm";
 
 export function DrugCatalog() {
   return (
