@@ -14,7 +14,6 @@ interface CompanyCardProps {
 export function CompanyCard({company, invQueryName, imgSrc}: CompanyCardProps) {
   return (
     <CatalogItem
-          key={company.id}
           delUrl={companyDetailUrl(company.id)}
           url={companyLink(company.id)}
           imgSrc={imgSrc}

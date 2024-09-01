@@ -27,6 +27,7 @@ export function VetWorkCards({
 
       {vetWorks.map((vetWork: IVetwork) => (
         <VetWorkCard
+          key={vetWork.id}
           vetWork={vetWork}
           invQueryName={invQueryName}
           imgSrc={imgSrc}

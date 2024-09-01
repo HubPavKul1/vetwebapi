@@ -23,7 +23,7 @@ export function DrugCards({
         children={<CreateDrugForm url={url} queryKey={invQueryName} />}
       />
       {drugs.map((drug: IDrugCard) => (
-        <DrugCard drug={drug} invQueryName={invQueryName} />
+        <DrugCard key={drug.id} drug={drug} invQueryName={invQueryName} />
       ))}
     </>
   );

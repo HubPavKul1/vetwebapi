@@ -16,7 +16,6 @@ interface DrugCardProps {
 export function DrugCard({ drug, invQueryName }: DrugCardProps) {
   return (
     <CatalogItem
-      key={drug.id}
       delUrl={drugDetailUrl(drug.id)}
       url={drugLink(drug.id)}
       imgSrc={drug.image && drugImageUrl(drug.id)}

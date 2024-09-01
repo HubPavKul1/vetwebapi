@@ -26,6 +26,7 @@ export function ReceiptDrugCards({
       />
       {drugMovements.map((drugMovement: IDrugMovement) => (
         <ReceiptDrugCard
+          key={drugMovement.id}
           drugMovement={drugMovement}
           invQueryName={invQueryName}
           imgSrc={imgSrc}

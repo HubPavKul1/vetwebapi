@@ -16,7 +16,6 @@ export function VetWorkCard({
 }: VetWorkCardProps) {
   return (
     <CatalogItem
-      key={vetWork.id}
       delUrl={vetWorkDetailUrl(vetWork.id)}
       url={vetWorkLink(vetWork.id)}
       imgSrc={imgSrc}

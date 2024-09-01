@@ -27,6 +27,7 @@ export function CompanyCards({
 
       {companies.map((company: ICompanyCard) => (
         <CompanyCard
+          key={company.id}
           company={company}
           invQueryName={invQueryName}
           imgSrc={imgSrc}

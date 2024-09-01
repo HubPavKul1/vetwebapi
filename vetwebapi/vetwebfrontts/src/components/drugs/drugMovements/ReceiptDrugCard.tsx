@@ -16,7 +16,6 @@ export function ReceiptDrugCard({
 }: ReceiptDrugCardProps) {
   return (
     <CatalogItem
-      key={drugMovement.id}
       delUrl={drugReceiptDetailUrl(drugMovement.id)}
       url={drugReceiptLink(drugMovement.id)}
       imgSrc={imgSrc}
