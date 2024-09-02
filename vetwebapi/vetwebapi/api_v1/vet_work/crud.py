@@ -1,4 +1,6 @@
 import csv
+import os
+import shutil
 from io import StringIO
 from operator import and_
 
@@ -6,6 +8,8 @@ from fastapi import File, UploadFile
 from sqlalchemy import select, desc
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
+from utils import utils
+from core.settings import settings
 
 from core.models import (
     Disease, 
@@ -22,7 +26,8 @@ from core.models import (
     DiagnosticMethod,
     CatalogDrug,
     Drug,
-    DrugDisease
+    DrugDisease,
+    VetWorkFile
     )
 
 from api_v1.drug.receipts.schemas import DrugInMovementIn
@@ -33,6 +38,23 @@ from .schemas import VaccinationIn, AnimalInVetWorkIn, CompanyInVetWorkIn, Diagn
 async def create_disease(session: AsyncSession, name: str) -> None:
     new_disease = Disease(name=name)
     session.add(new_disease)
+    await session.commit()
+
+
+async def save_file(session: AsyncSession, vetwork: VetWork, file: UploadFile = File(...)) -> None:
+    filename = await utils.prepare_filename(str(file.filename))
+
+    vetwork_file = VetWorkFile()
+    vetwork_file.vetwork_id = vetwork.id
+    vetwork_file.file_path = vetwork_file.create_file_path(filename=filename)
+    
+    dest = os.path.join(settings.media_dir, vetwork_file.file_path)
+    print(dest)
+
+    with open(dest, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    session.add(vetwork_file)
     await session.commit()
     
     
@@ -109,6 +131,10 @@ async def add_drug_to_vetwork(session: AsyncSession, vetwork: VetWork, body: Dru
 # Read
 async def read_diseases(session: AsyncSession) -> list[Disease]:
     stmt = select(Disease).order_by(Disease.name)
+    return list(await session.scalars(stmt))
+
+async def read_vetwork_files(session: AsyncSession, vetwork: VetWork) -> list[VetWorkFile]:
+    stmt = select(VetWorkFile).where(VetWorkFile.vetwork_id == vetwork.id)
     return list(await session.scalars(stmt))
 
 

@@ -45,6 +45,7 @@ __all__ = (
     "Laboratory",
     "BaseNoPk",
     "DrugDisease",
+    "VetWorkFile",
 )
 
 # Animals
@@ -101,3 +102,4 @@ from .vet_work.doctor_in_vetwork import DoctorInVetWork
 from .vet_work.diagnostic_method import DiagnosticMethod
 from .vet_work.disease_in_vetwork import DiseaseInVetWork
 from .vet_work.company_in_vetwork import CompanyInVetWork
+from.vet_work.vetwork_file import VetWorkFile

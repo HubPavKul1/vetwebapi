@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from .disease import Disease
     from .disease_in_vetwork import DiseaseInVetWork
     from .company_in_vetwork import CompanyInVetWork
+    from .vetwork_file import VetWorkFile
 
 
 class VetWork(Base):
@@ -65,6 +66,11 @@ class VetWork(Base):
     animals: Mapped[list["Animal"]] = relationship(
         back_populates="vetworks", secondary="animals_in_vetwork"
     )
+
+    vetwork_files: Mapped[list["VetWorkFile"]] = relationship(
+        back_populates="vetwork"
+    )
+
     animals_details: Mapped[list["AnimalInVetWork"]] = relationship(
         back_populates="vetwork", cascade="all, delete"
     )

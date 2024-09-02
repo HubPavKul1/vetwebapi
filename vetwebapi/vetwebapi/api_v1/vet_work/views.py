@@ -1,7 +1,9 @@
 from typing import Union
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile
+from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
+from pathlib import Path
 
 from api_v1.dependencies import get_pagination_params
 from api_v1.company.schemas import SuccessMessage
@@ -48,6 +50,8 @@ async def get_diseases_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
+    
+
         
         
 @router.post("/vaccinations", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
@@ -77,6 +81,17 @@ async def add_drug_to_vetwork_route(
     await crud.add_drug_to_vetwork(
         session=session, body=body, vetwork=vetwork
     )
+
+
+@router.post("/{vetwork_id}/upload/", status_code=status.HTTP_201_CREATED)
+async def upload_vetwork_file_route(
+    file: UploadFile,
+    vetwork: VetWork = Depends(vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    if file.content_type not in ["image/jpeg", "image/png", "image/jpg"]:
+        raise HTTPException(status_code=400, detail="Invalid file type")
+    await crud.save_file(session=session, vetwork=vetwork, file=file)
 
 
 @router.post("/{vetwork_id}/animals", status_code=status.HTTP_201_CREATED)
@@ -176,6 +191,18 @@ async def get_vetwork_detail(
         doctors=doctors,
         drug=drug
         )
+
+@router.get("/{vetwork_id}/files")
+async def get_vetwork_files(
+    vetwork: VetWork = Depends(vetwork_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
+    files = await crud.read_vetwork_files(session=session, vetwork=vetwork)
+    file_paths = [Path(f"media/{file.file_path}") for file in files]
+    return FileResponse(file_paths[1])
+    # for file in file_paths:
+    #     return FileResponse(file)
+
 
 @router.delete("/{vetwork_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
 async def delete_vetwork_route(
