@@ -45,7 +45,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
           {data.companies[0].full_name}
         </Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-xs mb-3">
         <Col sm={2}></Col>
         <Col sm={10}>
           (наименование хозяйства, предприятия, ФИО владельца животного)

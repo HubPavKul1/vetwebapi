@@ -43,8 +43,6 @@ export function AddAnimalsToVetWorkForm({
   const compId = Number(companyId);
   const vetWorkId = Number(id);
 
-  console.log("Animals>>>", animalsData);
-
   const {
     reset,
     formState: { errors },
@@ -102,8 +100,8 @@ export function AddAnimalsToVetWorkForm({
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
 
         <Row className="border border-black font-bold p-2">
-          <Col>Вид животного</Col>
-          <Col>Кличка</Col>
+          <Col md={4}>Вид животного</Col>
+          <Col md={4}>Кличка</Col>
           {workType === "вакцинация" && <Col>Дозировка препарата</Col>}
 
           {disease === "туберкулез" && <Col>Дозировка препарата</Col>}

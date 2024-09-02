@@ -37,8 +37,6 @@ export function CatalogDrugCardBody({
     drugRestUrl(drugId),
     drugId.toString()
   );
-  console.log("DATA>>>>", data);
-  console.log("URL", drugRestUrl(drugId));
 
   return (
     <Container className="mb-3">

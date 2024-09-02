@@ -64,14 +64,14 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
       <Row>
         <Col sm={2}>Выдать на руки:</Col>
         <Col sm={1}>
-          <div className="w-12 h-7 border-2 border-black text-center">V</div>
+          <div className="w-12 h-7 border-2 border-black text-center"></div>
         </Col>
         <Col sm={9}></Col>
       </Row>
       <Row>
         <Col sm={4}>Отправить по электронной почте:</Col>
         <Col>
-          <div className="w-12 h-7 border-2 border-black text-center">V</div>
+          <div className="w-12 h-7 border-2 border-black text-center"></div>
         </Col>
         <Col></Col>
         <Col sm={6} className="pdf-report-underlined"></Col>

@@ -42,14 +42,14 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
               {data.is_state_assignment ? clinic : companyName}
             </Col>
           </Row>
-          <Row className="mb-2 text-center text-xs">
+          <Row className="mb-5 text-center text-xs">
             <Col sm={2}></Col>
             <Col sm={10}>(наименование организации,</Col>
           </Row>
           <Row>
             <Col sm={12} className="pdf-report-underlined"></Col>
           </Row>
-          <Row className="mb-2 text-center text-xs">
+          <Row className="mb-5 text-center text-xs">
             <Col sm={2}></Col>
             <Col sm={10}>ФИО владельца животного,</Col>
           </Row>
@@ -58,7 +58,7 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
               {!data.is_state_assignment && companyAddress}
             </Col>
           </Row>
-          <Row className="mb-2 text-center text-xs">
+          <Row className="mb-5 text-center text-xs">
             <Col sm={2}></Col>
             <Col sm={10}>юридический адрес, контактный телефон)</Col>
           </Row>

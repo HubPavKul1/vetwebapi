@@ -55,8 +55,8 @@ export function AnimalFormItem({
   return (
     <form onSubmit={handleSubmit(addAnimalData)}>
       <Row className="flex items-center justify-center">
-        <Col>{animal.species}</Col>
-        <Col>
+        <Col md={4}>{animal.species}</Col>
+        <Col md={4}>
           <label htmlFor="animal_id">
             {animal.nickname}
             <input

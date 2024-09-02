@@ -21,7 +21,9 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IVetworkCreate>[] = [
     { fieldName: "vetwork_date", id: "vetwork_date", type: "date" },
   ];
-
+  const urlArrey = url.split("/")
+  const vetWorkType = urlArrey[urlArrey.length - 1]
+  
   const methods = useForm<IVetworkCreate>({
     mode: "onChange",
   });
@@ -106,7 +108,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
           <div className="">
             <DoctorSelect />
           </div>
-          {queryKey === "diagnostics" && diseaseId !== 74 && (
+          {vetWorkType === "diagnostics" && diseaseId !== 74 && (
             <>
               <div className="">
                 <LabsSelect />
@@ -126,7 +128,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
             </>
           )}
 
-          {queryKey === "diagnostics" && diseaseId === 74 && (
+          {vetWorkType === "diagnostics" && diseaseId === 74 && (
             <>
               <div className="">
                 <DiagnosticMethodsSelect />

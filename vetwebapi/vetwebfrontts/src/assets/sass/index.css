@@ -309,7 +309,7 @@ body {
 
 /* table styles */
 .table-head th {
-  @apply border border-black align-middle font-bold text-center;
+  @apply border border-black font-bold text-center;
 }
 
 .table-head-report {
@@ -317,7 +317,7 @@ body {
 }
 
 .table-body td {
-  @apply border border-black align-middle text-center;
+  @apply border border-black text-center;
 }
 
 .table-body-report {

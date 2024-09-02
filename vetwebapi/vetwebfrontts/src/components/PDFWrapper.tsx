@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { usePDF } from "react-to-pdf";
+import { Margin, usePDF } from "react-to-pdf";
 
 import { CustomButton } from "components/CustomButton";
 
@@ -17,8 +17,9 @@ export function PDFWrapper({
   children,
 }: PDFWrapperProps) {
   const { toPDF, targetRef } = usePDF({
+    method: "open",
     filename: `${filename}`,
-    page: { orientation: `${orientation}` },
+    page: {margin: Margin.SMALL, orientation: `${orientation}` },
   });
 
   const onClick = () => {
@@ -30,7 +31,7 @@ export function PDFWrapper({
       <div className="flex p-3">
         <CustomButton
           className="btn-upload mr-5"
-          title="Загрузить PDF"
+          title="Открыть PDF"
           onClick={() => toPDF()}
         />
         <CustomButton
