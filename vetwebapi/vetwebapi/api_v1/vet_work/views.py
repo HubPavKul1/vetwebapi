@@ -83,13 +83,13 @@ async def add_drug_to_vetwork_route(
     )
 
 
-@router.post("/{vetwork_id}/upload/", status_code=status.HTTP_201_CREATED)
+@router.post("/{vetwork_id}/upload", status_code=status.HTTP_201_CREATED)
 async def upload_vetwork_file_route(
     file: UploadFile,
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    if file.content_type not in ["image/jpeg", "image/png", "image/jpg"]:
+    if file.content_type not in ["application/pdf"]:
         raise HTTPException(status_code=400, detail="Invalid file type")
     await crud.save_file(session=session, vetwork=vetwork, file=file)
 
@@ -192,16 +192,15 @@ async def get_vetwork_detail(
         drug=drug
         )
 
-@router.get("/{vetwork_id}/files")
+@router.get("/{vetwork_id}/file")
 async def get_vetwork_files(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    files = await crud.read_vetwork_files(session=session, vetwork=vetwork)
-    file_paths = [Path(f"media/{file.file_path}") for file in files]
-    return FileResponse(file_paths[1])
-    # for file in file_paths:
-    #     return FileResponse(file)
+    file = await crud.read_vetwork_file(session=session, vetwork=vetwork)
+    file_path = Path(f"media/{file.file_path}")
+    return FileResponse(file_path)
+    
 
 
 @router.delete("/{vetwork_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)

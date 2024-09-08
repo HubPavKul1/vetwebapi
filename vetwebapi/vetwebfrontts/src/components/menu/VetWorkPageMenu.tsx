@@ -2,6 +2,10 @@ import { Menu } from "../Menu";
 import { AddCompanyToVetWork } from "../vetWorks/AddCompanyToVetWork";
 import { AddDrugToVetWork } from "../vetWorks/AddDrugToVetWork";
 import { CustomButton } from "../CustomButton";
+import { Container } from "react-bootstrap";
+import { FileUpload } from "components/FileUpload";
+import { vetWorkFileUploadUrl } from "urls/vetWorkUrls";
+import { useParams } from "react-router-dom";
 
 interface VetWorkPageMenuProps {
   showAct: CallableFunction;
@@ -21,7 +25,10 @@ export function VetWorkPageMenu({
   showAccountingAct,
   workType,
   disease,
+
 }: VetWorkPageMenuProps) {
+  const {id} = useParams()
+  const vetWorkId = Number(id)
   const menuButtons = [
     {
       id: 1,
@@ -71,6 +78,25 @@ export function VetWorkPageMenu({
             onClick={() => showAnimalsList(true)}
           />
         ),
+    },
+    {
+      id: 3,
+      element: (
+        <Container className="flex justify-center items-center w-full pt-2 pb-4  border-2 border-violet-400 rounded-md text-lg text-violet-400 uppercase font-bold">
+          <div>Загрузите документ</div>
+          <div>
+            <FileUpload
+              uploadUrl={vetWorkFileUploadUrl(vetWorkId)}
+              accept=".pdf"
+              mutationName="uploadVetWorkFile"
+              invQueryName="vetwork"
+              fontSize={40}
+              color="violet"
+              id={id}
+            />
+          </div>
+        </Container>
+      ),
     },
   ];
 

@@ -5,27 +5,28 @@ export const vetWorkDetailUrl = (vetWorkId?: number) => {
   return vetWorkBaseUrl + `/${vetWorkId}`;
 };
 
-
 export const diagnosticsUrl = vetWorkBaseUrl + "/diagnostics";
 export const vaccinationsUrl = vetWorkBaseUrl + "/vaccinations";
 
 // vetwork links
-export const vaccinationsLink = "/vetwork/vaccinations"
-export const diagnosticsLink = "/vetwork/diagnostics"
+export const vaccinationsLink = "/vetwork/vaccinations";
+export const diagnosticsLink = "/vetwork/diagnostics";
 export const vetWorkLink = (vetWorkId?: number) => {
   return `/vetwork/${vetWorkId}`;
 };
 export const vetWorkReportsLink = "/vetwork/reports";
-
 
 // vetwork company
 export const vetWorkCompanyUrl = (vetWorkId?: number) => {
   return vetWorkDetailUrl(vetWorkId) + "/company";
 };
 
-export const vetWorkCompanyDetailUrl = (vetWorkId?: number, companyId?: number) => {
-  return vetWorkCompanyUrl(vetWorkId) + `/${companyId}`
-}
+export const vetWorkCompanyDetailUrl = (
+  vetWorkId?: number,
+  companyId?: number
+) => {
+  return vetWorkCompanyUrl(vetWorkId) + `/${companyId}`;
+};
 
 // vetwork animals
 
@@ -53,5 +54,14 @@ export const vetWorkDrugUrl = (vetWorkId?: number) => {
 };
 
 // vetwork reports
-export const diagnosticsReportUrl = vetWorkBaseUrl + "/reports/diagnostics"
-export const vaccinationsReportUrl = vetWorkBaseUrl + "/reports/vaccinations"
+export const diagnosticsReportUrl = vetWorkBaseUrl + "/reports/diagnostics";
+export const vaccinationsReportUrl = vetWorkBaseUrl + "/reports/vaccinations";
+
+// vetwork files
+export const vetWorkFileUploadUrl = (vetWorkId?: number) => {
+  return vetWorkDetailUrl(vetWorkId) + "/upload";
+};
+
+export const vetWorkFileUrl = (vetWorkId?: number) => {
+  return vetWorkDetailUrl(vetWorkId) + "/file";
+};

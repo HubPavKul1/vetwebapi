@@ -9,7 +9,6 @@ export function useUpload(
   mutationKey?: string,
   queryKey?: string,
   alertMessage?: string,
-  
   id?: string
 ) {
   const queryClient = useQueryClient();

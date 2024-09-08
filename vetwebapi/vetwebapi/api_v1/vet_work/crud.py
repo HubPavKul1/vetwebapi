@@ -133,9 +133,9 @@ async def read_diseases(session: AsyncSession) -> list[Disease]:
     stmt = select(Disease).order_by(Disease.name)
     return list(await session.scalars(stmt))
 
-async def read_vetwork_files(session: AsyncSession, vetwork: VetWork) -> list[VetWorkFile]:
+async def read_vetwork_file(session: AsyncSession, vetwork: VetWork) -> VetWorkFile:
     stmt = select(VetWorkFile).where(VetWorkFile.vetwork_id == vetwork.id)
-    return list(await session.scalars(stmt))
+    return await session.scalar(stmt)
 
 
 async def read_vaccinations(session: AsyncSession) -> list[VetWork]:

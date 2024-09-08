@@ -10,6 +10,9 @@ interface FileUploadProps {
   mutationName?: string;
   invQueryName: string;
   iconSrc?: string;
+  fontSize: number;
+  color: string;
+  id?: string
 }
 
 export function FileUpload({
@@ -18,8 +21,11 @@ export function FileUpload({
   mutationName,
   invQueryName,
   iconSrc,
+  fontSize=20,
+  color="red",
+  id
 }: FileUploadProps) {
-  const id = useId();
+  // const id = useId();
 
   const { reset } = useForm<FileList>();
 
@@ -28,7 +34,8 @@ export function FileUpload({
     uploadUrl,
     mutationName,
     invQueryName,
-    "Файл успешно загружен!"
+    "Файл успешно загружен!",
+    id
   );
 
   const upload = async (currentFile: File) => {
@@ -58,7 +65,7 @@ export function FileUpload({
           onChange={selectFile}
         />
         <img src={iconSrc} />
-        <LiaFileDownloadSolid fontSize={20} color="red" />
+        <LiaFileDownloadSolid fontSize={fontSize} color={color} />
       </label>
     </Container>
   );
