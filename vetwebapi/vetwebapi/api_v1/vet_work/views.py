@@ -10,10 +10,10 @@ from api_v1.company.schemas import SuccessMessage
 from api_v1.drug.receipts.schemas import DrugInMovementIn
 from core.models import VetWork, AnimalInVetWork, DoctorInVetWork, CompanyInVetWork
 from .schemas import (
-    Diseases, 
-    VetWorkOut, 
-    VaccinationIn, 
-    VetWorks, 
+    Diseases,
+    VetWorkOut,
+    VaccinationIn,
+    VetWorks,
     AnimalInVetWorkIn,
     CompanyInVetWorkIn,
     DiagnosticIn,
@@ -22,12 +22,10 @@ from .schemas import (
     BiomaterialPackages,
     Biomaterials,
     DiagnosticMethods,
-    AnimalInVetWorkUpdatePartial
-    )
-from .serializers import (
-    serialize_vetworks,
-    serialize_vetwork_detail
-    )
+    AnimalInVetWorkUpdatePartial,
+    VetWorkFileOut,
+)
+from .serializers import serialize_vetworks, serialize_vetwork_detail
 from .dependencies import vetwork_by_id, animal_in_vetwork_by_id, company_in_vetwork_by_id
 from core.database import db_manager
 
@@ -50,24 +48,20 @@ async def get_diseases_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
 
-        
-        
+
 @router.post("/vaccinations", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
 async def create_vaccination(
-    body: VaccinationIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-    ) -> VetWorkOut:
+    body: VaccinationIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> VetWorkOut:
     vaccination = await crud.create_vetwork(session=session, body=body)
     return VetWorkOut(id=vaccination.id, vetwork_date=vaccination.vetwork_date)
 
 
 @router.post("/diagnostics", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
 async def create_diagnostic(
-    body: DiagnosticIn,
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-    ) -> VetWorkOut:
+    body: DiagnosticIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+) -> VetWorkOut:
     diagnostic = await crud.create_diagnostic(session=session, body=body)
     return VetWorkOut(id=diagnostic.id, vetwork_date=diagnostic.vetwork_date)
 
@@ -78,9 +72,7 @@ async def add_drug_to_vetwork_route(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    await crud.add_drug_to_vetwork(
-        session=session, body=body, vetwork=vetwork
-    )
+    await crud.add_drug_to_vetwork(session=session, body=body, vetwork=vetwork)
 
 
 @router.post("/{vetwork_id}/upload", status_code=status.HTTP_201_CREATED)
@@ -88,10 +80,13 @@ async def upload_vetwork_file_route(
     file: UploadFile,
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-):
+) -> Union[VetWorkFileOut, dict]:
     if file.content_type not in ["application/pdf"]:
         raise HTTPException(status_code=400, detail="Invalid file type")
-    await crud.save_file(session=session, vetwork=vetwork, file=file)
+    vetwork_file_id = await crud.save_file(session=session, vetwork=vetwork, file=file)
+    if vetwork_file_id == 0:
+        raise HTTPException(status_code=400, detail="No more files")
+    return VetWorkFileOut(file_id=vetwork_file_id)
 
 
 @router.post("/{vetwork_id}/animals", status_code=status.HTTP_201_CREATED)
@@ -100,19 +95,23 @@ async def add_animals_to_vetwork_route(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    await crud.add_animals_to_vetwork(
-        session=session, body=body, vetwork=vetwork
-    )
+    await crud.add_animals_to_vetwork(session=session, body=body, vetwork=vetwork)
 
 
-@router.patch("/{vetwork_id}/animals/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.patch(
+    "/{vetwork_id}/animals/{animal_id}",
+    response_model=SuccessMessage,
+    status_code=status.HTTP_202_ACCEPTED,
+)
 async def update_animal_in_vetwork_api_partial(
     body: AnimalInVetWorkUpdatePartial,
     animal: AnimalInVetWork = Depends(animal_in_vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.update_animal_in_vetwork(session=session, animal=animal, animal_update=body, partial=True)
+        await crud.update_animal_in_vetwork(
+            session=session, animal=animal, animal_update=body, partial=True
+        )
         return SuccessMessage()
     except Exception:
         raise HTTPException(
@@ -121,16 +120,13 @@ async def update_animal_in_vetwork_api_partial(
         )
 
 
-
 @router.post("/{vetwork_id}/company", status_code=status.HTTP_201_CREATED)
 async def add_company_to_vetwork_route(
     body: CompanyInVetWorkIn,
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    await crud.add_company_to_vetwork(
-        session=session, body=body, vetwork=vetwork
-    )
+    await crud.add_company_to_vetwork(session=session, body=body, vetwork=vetwork)
 
 
 @router.get("/vaccinations", response_model=VetWorks)
@@ -145,14 +141,19 @@ async def get_vaccinations_route(
     start = (page - 1) * per_page
     end = start + per_page
     try:
-        vaccinations = await crud.read_vaccinations(session=session) 
-        return await serialize_vetworks(vetworks=vaccinations[start:end], total_count=len(vaccinations), page=page, per_page=per_page)
+        vaccinations = await crud.read_vaccinations(session=session)
+        return await serialize_vetworks(
+            vetworks=vaccinations[start:end],
+            total_count=len(vaccinations),
+            page=page,
+            per_page=per_page,
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
+
 
 @router.get("/diagnostics", response_model=VetWorks)
 async def get_diagnostics_route(
@@ -166,31 +167,40 @@ async def get_diagnostics_route(
     start = (page - 1) * per_page
     end = start + per_page
     try:
-        diagnostics = await crud.read_diagnostics(session=session)  
-        return await serialize_vetworks(vetworks=diagnostics[start:end], total_count=len(diagnostics), page=page, per_page=per_page)
+        diagnostics = await crud.read_diagnostics(session=session)
+        return await serialize_vetworks(
+            vetworks=diagnostics[start:end],
+            total_count=len(diagnostics),
+            page=page,
+            per_page=per_page,
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-        
+
+
 @router.get("/{vetwork_id}/", response_model=VetWorkDetail)
 async def get_vetwork_detail(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorkDetail | dict]:
 
-    companies: list[CompanyInVetWork] = await crud.read_companies_in_vetwork(session=session, vetwork=vetwork)
-    animals: list[AnimalInVetWork] = await crud.read_animals_in_vetwork(session=session, vetwork=vetwork)
-    doctors: list[DoctorInVetWork] = await crud.read_doctors_in_vetwork(session=session, vetwork=vetwork)
+    companies: list[CompanyInVetWork] = await crud.read_companies_in_vetwork(
+        session=session, vetwork=vetwork
+    )
+    animals: list[AnimalInVetWork] = await crud.read_animals_in_vetwork(
+        session=session, vetwork=vetwork
+    )
+    doctors: list[DoctorInVetWork] = await crud.read_doctors_in_vetwork(
+        session=session, vetwork=vetwork
+    )
     drug: DrugInMovementIn = await crud.read_drug_in_vetwork(session=session, vetwork=vetwork)
     return await serialize_vetwork_detail(
-        vetwork=vetwork, 
-        companies=companies,
-        animals=animals,
-        doctors=doctors,
-        drug=drug
-        )
+        vetwork=vetwork, companies=companies, animals=animals, doctors=doctors, drug=drug
+    )
+
 
 @router.get("/{vetwork_id}/file")
 async def get_vetwork_files(
@@ -200,10 +210,11 @@ async def get_vetwork_files(
     file = await crud.read_vetwork_file(session=session, vetwork=vetwork)
     file_path = Path(f"media/{file.file_path}")
     return FileResponse(file_path)
-    
 
 
-@router.delete("/{vetwork_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete(
+    "/{vetwork_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_vetwork_route(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -216,9 +227,13 @@ async def delete_vetwork_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
 
-@router.delete("/{vetwork_id}/animals/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+
+@router.delete(
+    "/{vetwork_id}/animals/{animal_id}",
+    response_model=SuccessMessage,
+    status_code=status.HTTP_202_ACCEPTED,
+)
 async def delete_vetwork_animal_route(
     animal: AnimalInVetWork = Depends(animal_in_vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -231,9 +246,13 @@ async def delete_vetwork_animal_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
 
-@router.delete("/{vetwork_id}/company/{company_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+
+@router.delete(
+    "/{vetwork_id}/company/{company_id}",
+    response_model=SuccessMessage,
+    status_code=status.HTTP_202_ACCEPTED,
+)
 async def delete_vetwork_company_route(
     company: CompanyInVetWork = Depends(company_in_vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -246,16 +265,15 @@ async def delete_vetwork_company_route(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
 
 
-    
 # Data for diagnostic create:
+
 
 @router.get("/biomaterial_fixations", response_model=BiomaterialFixations)
 async def get_biomaterial_fixations(
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
-    ) -> Union[dict, BiomaterialFixations]:
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, BiomaterialFixations]:
 
     try:
         biomaterial_fixations = await crud.read_biomaterial_fixations(session=session)
@@ -266,10 +284,11 @@ async def get_biomaterial_fixations(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+
 @router.get("/biomaterials", response_model=Biomaterials)
 async def get_biomaterials(
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
-    ) -> Union[dict, Biomaterials]:
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, Biomaterials]:
 
     try:
         biomaterials = await crud.read_biomaterials(session=session)
@@ -279,12 +298,12 @@ async def get_biomaterials(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-    
-    
+
+
 @router.get("/biomaterial_packages", response_model=BiomaterialPackages)
 async def get_biomaterial_packages(
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
-    ) -> Union[dict, BiomaterialPackages]:
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, BiomaterialPackages]:
 
     try:
         biomaterial_packages = await crud.read_biomaterial_packages(session=session)
@@ -295,10 +314,11 @@ async def get_biomaterial_packages(
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
+
 @router.get("/diagnostic_methods", response_model=DiagnosticMethods)
 async def get_diagnostic_methods(
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
-    ) -> Union[dict, DiagnosticMethods]:
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[dict, DiagnosticMethods]:
 
     try:
         diagnostic_methods = await crud.read_diagnosic_methods(session=session)
@@ -308,5 +328,3 @@ async def get_diagnostic_methods(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
-
-

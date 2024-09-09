@@ -16,13 +16,13 @@ import { Loader } from "components/Loader";
 import { vetWorkDetailUrl } from "urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
 import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
+import { VetWorkFile } from "./VetWorkFile";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
   isLoading: boolean;
   isError: boolean;
   error: Error;
-  
 }
 
 export function VetWorkPageDetail() {
@@ -32,7 +32,8 @@ export function VetWorkPageDetail() {
   const [animals, setAnimals] = useState(false);
   const [companyId, setCompanyId] = useState("");
   const [referralAnimalList, showReferralAnimalList] = useState(false);
-  const [accountingAct, showAccountingAct] = useState(false)
+  const [accountingAct, showAccountingAct] = useState(false);
+  const [vetWorkFile, showVetWorkFile] = useState(false);
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -58,7 +59,13 @@ export function VetWorkPageDetail() {
 
   return (
     <>
-      {!act && !animalsList && !animals && !referral && !referralAnimalList && !accountingAct ? (
+      {!act &&
+      !animalsList &&
+      !animals &&
+      !referral &&
+      !referralAnimalList &&
+      !accountingAct &&
+      !vetWorkFile ? (
         <VetWorkDetail
           pageTitle={`${pageTitle} от ${date.shortDate} г. `}
           imgSrc={imgSrc}
@@ -69,6 +76,7 @@ export function VetWorkPageDetail() {
           showReferral={showReferral}
           showAccountingAct={showAccountingAct}
           showReferralAnimalList={showReferralAnimalList}
+          showVetWorkFile={showVetWorkFile}
           data={data}
         />
       ) : act ? (
@@ -81,6 +89,8 @@ export function VetWorkPageDetail() {
         <ReferralAnimalListPDF setPdf={showReferralAnimalList} data={data} />
       ) : animalsList ? (
         <AnimalsListPDF setPdf={showAnimalsList} data={data} />
+      ) : vetWorkFile ? (
+        <VetWorkFile setPdf={showVetWorkFile} />
       ) : (
         animals && (
           <AddAnimalsToVetWorkForm

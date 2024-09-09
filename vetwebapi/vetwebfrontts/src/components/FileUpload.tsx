@@ -10,9 +10,9 @@ interface FileUploadProps {
   mutationName?: string;
   invQueryName: string;
   iconSrc?: string;
-  fontSize: number;
-  color: string;
-  id?: string
+  fontSize?: number;
+  color?: string;
+  id?: string;
 }
 
 export function FileUpload({
@@ -21,9 +21,9 @@ export function FileUpload({
   mutationName,
   invQueryName,
   iconSrc,
-  fontSize=20,
-  color="red",
-  id
+  fontSize = 20,
+  color = "red",
+  id,
 }: FileUploadProps) {
   // const id = useId();
 

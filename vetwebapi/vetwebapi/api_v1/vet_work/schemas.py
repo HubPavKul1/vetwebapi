@@ -29,6 +29,7 @@ class VetWorkIn(BaseModel):
     diseases: list[int]
     doctors: list[int]
 
+
 class VaccinationIn(VetWorkIn):
     work_type_id: int = 1
 
@@ -36,8 +37,8 @@ class VaccinationIn(VetWorkIn):
 class VetWorkOut(BaseModel):
     id: int
     vetwork_date: date
-    
-    
+
+
 class DiagnosticIn(VetWorkIn):
     work_type_id: int = 2
     laboratory_id: int | None = None
@@ -55,15 +56,15 @@ class AnimalInVetWorkIn(BaseModel):
     animal_id: int
     dosage: float | None = None
     is_positive: bool | None = None
-    
+
     # model_config = ConfigDict(from_attributes=True)
 
 
 class AnimalInVetWorkUpdatePartial(BaseModel):
     dosage: float | None = None
     is_positive: bool | None = None
-    
-    
+
+
 class AnimalsInVetWorkIn(BaseModel):
     animals: list[AnimalInVetWorkIn]
 
@@ -95,10 +96,10 @@ class VetWorkSchema(BaseModel):
 
 
 class VetWorks(BaseModel):
-    vetworks: list[VetWorkSchema] 
+    vetworks: list[VetWorkSchema]
     total_count: int
     page: int
-    per_page: int   
+    per_page: int
 
 
 class VetWorkDetail(VetWorkSchema):
@@ -113,20 +114,26 @@ class BaseVetWorkSchema(BaseModel):
     name: str
     model_config = ConfigDict(from_attributes=True)
 
+
 class BiomaterialFixations(BaseModel):
     biomaterial_fixations: list[BaseVetWorkSchema]
+
 
 class BiomaterialPackages(BaseModel):
     biomaterial_packages: list[BaseVetWorkSchema]
 
+
 class Biomaterials(BaseModel):
     biomaterials: list[BaseVetWorkSchema]
 
+
 class DiagnosticMethods(BaseModel):
     diagnostic_methods: list[BaseVetWorkSchema]
+
 
 class WorkTypes(BaseModel):
     work_types: list[BaseVetWorkSchema]
 
 
-
+class VetWorkFileOut(BaseModel):
+    file_id: int

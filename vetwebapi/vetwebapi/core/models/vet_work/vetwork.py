@@ -67,7 +67,7 @@ class VetWork(Base):
         back_populates="vetworks", secondary="animals_in_vetwork"
     )
 
-    vetwork_files: Mapped[list["VetWorkFile"]] = relationship(
+    vetwork_file: Mapped["VetWorkFile"] = relationship(
         back_populates="vetwork"
     )
 
