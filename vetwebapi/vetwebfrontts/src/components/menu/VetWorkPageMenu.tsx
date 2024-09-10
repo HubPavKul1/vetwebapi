@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 import { FileUpload } from "components/FileUpload";
 import { vetWorkFileUploadUrl } from "urls/vetWorkUrls";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 
 interface VetWorkPageMenuProps {
   showAct: CallableFunction;
@@ -17,6 +16,7 @@ interface VetWorkPageMenuProps {
   workType: string;
   disease: string;
   showVetWorkFile: CallableFunction;
+  fileId?: number;
 }
 
 export function VetWorkPageMenu({
@@ -28,8 +28,8 @@ export function VetWorkPageMenu({
   showVetWorkFile,
   workType,
   disease,
+  fileId,
 }: VetWorkPageMenuProps) {
-  const [fileId, setFileId] = useState(0);
   const { id } = useParams();
   const vetWorkId = Number(id);
   const menuButtons = [
@@ -84,7 +84,7 @@ export function VetWorkPageMenu({
     },
     {
       id: 3,
-      element: (
+      element: !fileId ? (
         <Container className="flex justify-center items-center w-full pt-2 pb-4  border-2 border-violet-400 rounded-md text-lg text-violet-400 uppercase font-bold">
           <div>Загрузите документ</div>
           <div>
@@ -99,11 +99,7 @@ export function VetWorkPageMenu({
             />
           </div>
         </Container>
-      ),
-    },
-    {
-      id: 4,
-      element: (
+      ) : (
         <CustomButton
           className="btn-submit"
           title="Открыть документ"

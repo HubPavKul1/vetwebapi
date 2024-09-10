@@ -19,7 +19,7 @@ class VetWorkFile(Base):
 
     file_path: Mapped[str] = mapped_column(String(300))
 
-    vetwork: Mapped["VetWork"] = relationship(back_populates="vetwork_file")
+    vetwork: Mapped["VetWork"] = relationship(back_populates="vetwork_file", lazy="joined")
 
     def create_file_path(self, filename: str) -> str:
         """Create relative path for file"""

@@ -49,6 +49,7 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
             disease={disease}
             showReferralAnimalList={props.showReferralAnimalList}
             showVetWorkFile={props.showVetWorkFile}
+            fileId={props.data.file_id}
           />
         }
         title={props.pageTitle}

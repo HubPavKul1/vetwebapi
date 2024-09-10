@@ -149,7 +149,7 @@ async def read_diseases(session: AsyncSession) -> list[Disease]:
     return list(await session.scalars(stmt))
 
 
-async def read_vetwork_file(session: AsyncSession, vetwork: VetWork) -> VetWorkFile:
+async def read_vetwork_file(session: AsyncSession, vetwork: VetWork) -> VetWorkFile | None:
     stmt = select(VetWorkFile).where(VetWorkFile.vetwork_id == vetwork.id)
     return await session.scalar(stmt)
 

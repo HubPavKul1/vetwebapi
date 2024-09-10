@@ -197,8 +197,18 @@ async def get_vetwork_detail(
         session=session, vetwork=vetwork
     )
     drug: DrugInMovementIn = await crud.read_drug_in_vetwork(session=session, vetwork=vetwork)
+    vetwork_file = await crud.read_vetwork_file(session=session, vetwork=vetwork)
+    vetwork_file_id = None
+    if vetwork_file is not None:
+        vetwork_file_id = vetwork_file.id
+
     return await serialize_vetwork_detail(
-        vetwork=vetwork, companies=companies, animals=animals, doctors=doctors, drug=drug
+        vetwork=vetwork,
+        companies=companies,
+        animals=animals,
+        doctors=doctors,
+        drug=drug,
+        file_id=vetwork_file_id,
     )
 
 

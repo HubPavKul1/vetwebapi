@@ -14,12 +14,4 @@ export function Companies() {
       createForm={<CreateCompany url={companiesUrl} queryKey="companies1" />}
     />
   );
-  //   <CompaniesCatalog
-  //     url={companiesUrl}
-  //     title="Предприятия"
-  //     btnTitle="Добавить предприятие"
-  //     imgSrc="/animals.jpg"
-  //     invQueryName="companies"
-  //   />
-  // );
 }

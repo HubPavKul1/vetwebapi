@@ -131,6 +131,7 @@ async def serialize_vetwork_detail(
     animals: list[AnimalInVetWork], 
     doctors: list[DoctorInVetWork],
     drug: DrugInMovement = None,
+    file_id: int | None = None
 
     ) -> VetWorkDetail:
 
@@ -155,6 +156,7 @@ async def serialize_vetwork_detail(
         animals=animal_schemas,
         doctors=doctor_schemas,
         drug=drug_schema,
+        file_id=file_id
     )
 
 

@@ -107,6 +107,7 @@ class VetWorkDetail(VetWorkSchema):
     animals: list[AnimalInVetWorkSchema] = []
     doctors: list[EmployeeSchema] = []
     drug: DrugInMovementSchema | None = None
+    file_id: int | None = None
 
 
 class BaseVetWorkSchema(BaseModel):
