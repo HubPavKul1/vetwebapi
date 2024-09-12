@@ -4,8 +4,9 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { CustomButton } from "components/CustomButton";
+
 import { useCreateItem } from "hooks/useCreateItem";
+import { CustomButton } from "shared/index";
 
 interface FormWrapperProps {
   children?: React.ReactElement | React.ReactNode;

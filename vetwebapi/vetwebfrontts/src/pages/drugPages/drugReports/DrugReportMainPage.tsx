@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DrugMovementBetweenDateRange } from "components/drugs/drugReports/reportMenuItems/DrugMovementBetweenDateRange";
-import { IDateRange } from "interfaces/BaseInterface";
+import { IDateRange } from "shared/model/BaseInterface";
 import { DrugReport } from "./DrugReport";
 import { Vet1BMenu } from "components/drugs/drugReports/reportMenuItems/Vet1BMenu";
 import { Vet1B } from "./Vet1B";

@@ -1,12 +1,12 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { IAnimal, IAnimalUpdate } from "interfaces/AnimalInterfaces";
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+
+import { FormInputProps } from "shared/model/FormInterface";
 
 import { useParams } from "react-router-dom";
 import { useUpdateItemPartial } from "hooks/useUpdateItemPartial";
 import { companyAnimalUrl } from "urls/companyUrls";
+import { CustomButton, CustomInput } from "shared/index";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;
@@ -62,7 +62,7 @@ export function UpdateAnimalForm({
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(updateAnimal)}>
         {inputItems.map((item) => (
-          <Input
+          <CustomInput
             key={item.fieldName}
             className="form-control"
             id={item.id}

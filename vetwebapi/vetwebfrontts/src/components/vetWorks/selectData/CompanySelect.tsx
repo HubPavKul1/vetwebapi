@@ -1,6 +1,6 @@
 import Select from "react-select";
 
-import { IOption } from "interfaces/FormInterface";
+import { IOption } from "shared/model/FormInterface";
 
 import { ICompany } from "interfaces/CompanyInterfaces";
 import { Controller, useFormContext } from "react-hook-form";

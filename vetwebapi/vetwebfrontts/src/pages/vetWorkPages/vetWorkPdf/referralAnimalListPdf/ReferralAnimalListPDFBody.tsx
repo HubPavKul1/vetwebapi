@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
-import NoData from "components/NoData";
+import NoData from "shared/ui/NoData";
 import { PageTable } from "components/PageTable";
 import { referralAnimalsHeaders } from "data/TableHeaders";
 import { ReferralAnimalItem } from "./ReferralAnimalItem";

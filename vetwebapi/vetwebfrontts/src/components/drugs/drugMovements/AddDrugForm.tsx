@@ -1,7 +1,5 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 import { IDrugInMovementIn } from "interfaces/DrugInterfaces";
 
@@ -10,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useCreateItem } from "hooks/useCreateItem";
 import { PlaceOfAdministrationSelect } from "../drug/selectData/PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "../drug/selectData/AdministrationMethodSelect";
+import { CustomButton, CustomInput } from "shared/index";
 
 interface AddDrugFormProps {
   url: string;
@@ -58,7 +57,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
 
           <div className="form-group">
             <label htmlFor="packs_amount">Введите количество упаковок *</label>
-            <Input
+            <CustomInput
               className="text-input"
               register={register}
               step="any"
@@ -76,7 +75,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
             <label htmlFor="units_amount">
               Введите количество единиц учета *
             </label>
-            <Input
+            <CustomInput
               className="text-input"
               register={register}
               errors={errors}

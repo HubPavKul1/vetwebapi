@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 import { AppService } from "services/app.service";
 import { StateAssignment } from "components/StateAssignment";
-import NoData from "components/NoData";
+import NoData from "shared/ui/NoData";
 
 interface ReferralPDFBodyNoBloodProps {
   data: IVetWorkSchema;
@@ -40,7 +40,10 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="mb-2">
-        <Col className="font-bold">Патологический (биологический) материал (указать наименование материала, количество материала):</Col>
+        <Col className="font-bold">
+          Патологический (биологический) материал (указать наименование
+          материала, количество материала):
+        </Col>
       </Row>
       <Row className="mb-3">
         <Col className="pdf-report-underlined">{data.biomaterial}</Col>
@@ -55,12 +58,15 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
       </Row>
       <Row className="font-bold">
         <Col md={2}>Принадлежащего:</Col>
-        <Col className="pdf-report-underlined">{data.companies[0].short_name}</Col>
+        <Col className="pdf-report-underlined">
+          {data.companies[0].short_name}
+        </Col>
       </Row>
       <Row className="text-center text-sm mb-2">
         <Col sm={2}></Col>
         <Col>
-          (наименование организации, хозяйства, предприятия, ФИО владельца животного)
+          (наименование организации, хозяйства, предприятия, ФИО владельца
+          животного)
         </Col>
       </Row>
       <Row>
@@ -73,8 +79,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
       </Row>
       <Row className="font-bold mb-2">
         <Col sm={3}>Дата заболевания животного</Col>
-        <Col sm={3} className="pdf-report-underlined">
-        </Col>
+        <Col sm={3} className="pdf-report-underlined"></Col>
         <Col sm={2} className="text-center">
           Дата падежа
         </Col>
@@ -85,14 +90,14 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="pdf-report-underlined mb-2">
-        <Col ></Col>
+        <Col></Col>
       </Row>
       <Row className="font-bold mb-4">
         <Col sm={4}>Данные патологоанатомического вскрытия</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="pdf-report-underlined mb-2">
-        <Col ></Col>
+        <Col></Col>
       </Row>
       <Row className="font-bold mb-3">
         <Col sm={3}>Предположительный диагноз</Col>
@@ -114,7 +119,9 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>
       <Row>
-        <Col sm={4} className="font-bold">Материал собран, упакован и отправлен</Col>
+        <Col sm={4} className="font-bold">
+          Материал собран, упакован и отправлен
+        </Col>
         <Col className="pdf-report-underlined">{doctor}</Col>
       </Row>
       <Row className="text-center text-sm">

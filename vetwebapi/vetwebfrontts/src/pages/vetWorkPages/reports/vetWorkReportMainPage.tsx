@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IDateRange } from "interfaces/BaseInterface";
+import { IDateRange } from "shared/model/BaseInterface";
 import { DiagnosticBetweenDateRange } from "./DiagnosticBetweenDateRange";
 import { DiagnosticReport } from "./DiagnosticReport";
 import { VaccinationReport } from "./VaccinationReport";

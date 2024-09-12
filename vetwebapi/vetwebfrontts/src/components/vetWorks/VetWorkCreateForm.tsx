@@ -1,8 +1,6 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+import { FormInputProps } from "shared/model/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 
 import { IVetworkCreate } from "interfaces/VetWorkInterfaces";
@@ -15,15 +13,16 @@ import { BiomaterialFixationsSelect } from "./selectData/BiomaterialFixationSele
 import { BiomaterialPackagesSelect } from "./selectData/BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./selectData/DiagnosticMethodsSelect";
 import { useCreateItem } from "hooks/useCreateItem";
-import { ICreateItemFormInterface } from "interfaces/BaseInterface";
+import { ICreateItemFormInterface } from "shared/model/BaseInterface";
+import { CustomButton, CustomInput } from "shared/index";
 
 export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IVetworkCreate>[] = [
     { fieldName: "vetwork_date", id: "vetwork_date", type: "date" },
   ];
-  const urlArrey = url.split("/")
-  const vetWorkType = urlArrey[urlArrey.length - 1]
-  
+  const urlArrey = url.split("/");
+  const vetWorkType = urlArrey[urlArrey.length - 1];
+
   const methods = useForm<IVetworkCreate>({
     mode: "onChange",
   });
@@ -58,7 +57,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
           <div className="flex w-full">
             <label className="w-auto mr-3">Введите дату *</label>
             {inputItems.map((item) => (
-              <Input
+              <CustomInput
                 key={item.fieldName}
                 className="text-input"
                 placeholder={item.placeholder}
@@ -76,7 +75,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
             <div className="">
               <label htmlFor="is_state_assignment">
                 Госзадание *
-                <Input
+                <CustomInput
                   register={register}
                   errors={errors}
                   fieldName="is_state_assignment"
@@ -88,7 +87,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
             <div className="">
               <label htmlFor="is_primary">
                 Первичное *
-                <Input
+                <CustomInput
                   register={register}
                   errors={errors}
                   fieldName="is_primary"

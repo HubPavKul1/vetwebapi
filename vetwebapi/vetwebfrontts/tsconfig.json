@@ -18,13 +18,17 @@
       "components/*": ["components/*"],
       "hooks/*": ["hooks/*"],
       "interfaces/*": ["interfaces/*"],
-      "pages/*": ["pages/*"],  
+      "pages/*": ["pages/*"],
       "urls/*": ["urls/*"],
       "assets/*": ["assets/*"],
       "services/*": ["services/*"],
-      "data/*": ["data/*"]
+      "data/*": ["data/*"],
+      "shared/*": ["shared/*"],
+      "app/*": ["app/*"],
+      "entities/*": ["entities/*"],
+      "features/*": ["features/*"],
+      "widgets/*": ["widgets/*"]
     },
-
 
     /* Linting */
     "strict": true,

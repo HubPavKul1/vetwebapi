@@ -1,9 +1,9 @@
 import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "interfaces/FormInterface";
+import { IOption } from "shared/model/FormInterface";
 
 import { useGetData } from "hooks/useGetData";
-import { IBase } from "interfaces/BaseInterface";
+import { IBase } from "shared/model/BaseInterface";
 import { drugNamesUrl } from "urls/drugUrls";
 
 export function DrugSelect() {

@@ -1,4 +1,4 @@
-import { IBase } from "./BaseInterface";
+import { IBase } from "../shared/model/BaseInterface";
 
 export interface IAddressIn {
   street_id: number;

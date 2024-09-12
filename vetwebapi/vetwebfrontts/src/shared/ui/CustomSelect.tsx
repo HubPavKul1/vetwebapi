@@ -1,7 +1,7 @@
 import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "interfaces/FormInterface";
-import { IBase } from "interfaces/BaseInterface";
+import { IOption } from "shared/model/FormInterface";
+import { IBase } from "shared/model/BaseInterface";
 
 interface ICustomSelectProps {
   data: IBase[];

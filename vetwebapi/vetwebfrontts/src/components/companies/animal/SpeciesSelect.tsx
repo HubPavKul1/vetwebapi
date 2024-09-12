@@ -2,12 +2,12 @@ import Select from "react-select";
 import { useState } from "react";
 
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "interfaces/FormInterface";
+import { IOption } from "shared/model/FormInterface";
 import { GendersSelect } from "./GendersSelect";
 
 import { useGetData } from "hooks/useGetData";
 import { speciesUrl } from "urls/companyUrls";
-import { IBase } from "interfaces/BaseInterface";
+import { IBase } from "shared/model/BaseInterface";
 
 interface SpeciesSelectProps {
   animalGroupId: string;

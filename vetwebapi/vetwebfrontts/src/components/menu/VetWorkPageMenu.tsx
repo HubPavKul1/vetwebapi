@@ -1,7 +1,7 @@
 import { Menu } from "../Menu";
 import { AddCompanyToVetWork } from "../vetWorks/AddCompanyToVetWork";
 import { AddDrugToVetWork } from "../vetWorks/AddDrugToVetWork";
-import { CustomButton } from "../CustomButton";
+import { CustomButton } from "../../shared/ui/CustomButton";
 import { Container } from "react-bootstrap";
 import { FileUpload } from "components/FileUpload";
 import { vetWorkFileUploadUrl } from "urls/vetWorkUrls";

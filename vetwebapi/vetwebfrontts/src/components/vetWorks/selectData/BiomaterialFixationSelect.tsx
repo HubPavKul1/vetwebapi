@@ -1,4 +1,4 @@
-import { CustomSelect } from "components/CustomSelect";
+import { CustomSelect } from "shared/ui/CustomSelect";
 import { useGetData } from "hooks/useGetData";
 import { biomaterialFixationsUrl } from "urls/vetWorkUrls";
 

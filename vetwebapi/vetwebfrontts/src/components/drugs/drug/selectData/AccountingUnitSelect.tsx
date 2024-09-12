@@ -1,8 +1,8 @@
 import Select from "react-select";
 
 import { useFormContext, Controller } from "react-hook-form";
-import { IOption } from "interfaces/FormInterface";
-import { IBase } from "interfaces/BaseInterface";
+import { IOption } from "shared/model/FormInterface";
+import { IBase } from "shared/model/BaseInterface";
 
 import { useGetData } from "hooks/useGetData";
 import { accountingUnitsUrl } from "urls/drugUrls";

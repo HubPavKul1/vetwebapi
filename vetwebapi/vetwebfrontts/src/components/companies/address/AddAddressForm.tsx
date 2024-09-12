@@ -6,9 +6,8 @@ import {
 } from "react-hook-form";
 import { RegionsSelect } from "./RegionsSelect";
 import { IAddressIn } from "interfaces/AddressInterfaces";
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+
+import { FormInputProps } from "shared/model/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,
@@ -17,6 +16,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "hooks/useCreateItem";
 import { addressUrl } from "urls/companyUrls";
+import { CustomButton, CustomInput } from "shared/index";
 
 export function AddAddressForm() {
   const { id } = useParams();
@@ -78,7 +78,7 @@ export function AddAddressForm() {
           <RegionsSelect />
         </div>
         {inputItems.map((item) => (
-          <Input
+          <CustomInput
             key={item.fieldName}
             className="form-control"
             placeholder={item.placeholder}

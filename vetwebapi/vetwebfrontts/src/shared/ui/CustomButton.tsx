@@ -1,4 +1,4 @@
-import { IButtonProps } from "interfaces/ButtonInterface";
+import { IButtonProps } from "shared/model/ButtonInterface";
 
 export function CustomButton({
   disabled,

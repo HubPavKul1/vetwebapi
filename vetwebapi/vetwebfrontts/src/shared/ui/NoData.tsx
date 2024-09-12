@@ -5,7 +5,7 @@ interface NoDataProps {
   title: string;
 }
 
-export default function NoData({ title }: NoDataProps) {
+export function NoData({ title }: NoDataProps) {
   const firstWord = title.toUpperCase();
   const letters = ["и", "ы", "я"];
   const lastLetter = firstWord.slice(-1).toLowerCase();

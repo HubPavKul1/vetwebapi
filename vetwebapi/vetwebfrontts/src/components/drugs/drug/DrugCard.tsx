@@ -7,7 +7,6 @@ import {
   drugLink,
 } from "urls/drugUrls";
 import { DrugCardBody } from "./DrugCardBody";
-import { TimeToOverdue } from "../TimeToOverdue";
 
 interface DrugCardProps {
   drug: IDrugCard;

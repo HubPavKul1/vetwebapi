@@ -1,4 +1,3 @@
-import { CustomButton } from "components/CustomButton";
 import { useParams } from "react-router-dom";
 
 import { ICompanyDetail } from "interfaces/CompanyInterfaces";
@@ -16,6 +15,7 @@ import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useCreateItem } from "hooks/useCreateItem";
 import { companyDetailUrl } from "urls/companyUrls";
 import { vetWorkAnimalsUrl } from "urls/vetWorkUrls";
+import { CustomButton } from "shared/index";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;

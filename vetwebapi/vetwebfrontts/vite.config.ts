@@ -25,7 +25,10 @@ export default defineConfig({
       urls: "/src/urls",
       assets: "/src/assets",
       services: "/src/services",
-      data: "/src/data"
+      data: "/src/data",
+      shared: "/src/shared",
+      app: "/src/app",
+      widgets: "src/widgets",
     },
   },
 });

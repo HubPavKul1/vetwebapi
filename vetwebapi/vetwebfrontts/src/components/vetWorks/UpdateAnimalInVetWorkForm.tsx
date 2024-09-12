@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+
+import { FormInputProps } from "shared/model/FormInterface";
 
 import { useParams } from "react-router-dom";
 
@@ -10,6 +9,7 @@ import { IAnimalInVetWorkUpdate } from "interfaces/VetWorkInterfaces";
 import { IAnimal } from "interfaces/AnimalInterfaces";
 import { vetWorkAnimalDetailUrl } from "urls/vetWorkUrls";
 import { useUpdateItemPartial } from "hooks/useUpdateItemPartial";
+import { CustomButton, CustomInput } from "shared/index";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;
@@ -67,7 +67,7 @@ export function UpdateAnimalInVetWorkForm({
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(updateAnimal)}>
         {inputItems.map((item) => (
-          <Input
+          <CustomInput
             key={item.fieldName}
             className={className}
             id={item.id}

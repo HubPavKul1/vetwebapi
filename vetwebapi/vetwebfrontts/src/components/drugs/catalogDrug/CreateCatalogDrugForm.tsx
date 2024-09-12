@@ -1,15 +1,14 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+import { FormInputProps } from "shared/model/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 import { IDrugCatalogCreate } from "interfaces/DrugInterfaces";
 
 import { useCreateItem } from "hooks/useCreateItem";
 
-import { ICreateItemFormInterface } from "interfaces/BaseInterface";
+import { ICreateItemFormInterface } from "shared/model/BaseInterface";
 import { DrugSelect } from "./DrugSelect";
+import { CustomButton, CustomInput } from "shared/index";
 
 export function CreateCatalogDrugForm({
   url,
@@ -61,7 +60,7 @@ export function CreateCatalogDrugForm({
           </div>
 
           {inputItems.map((item) => (
-            <Input
+            <CustomInput
               key={item.fieldName}
               className="form-control form-title"
               placeholder={item.placeholder}
@@ -77,7 +76,7 @@ export function CreateCatalogDrugForm({
 
           <div className="">
             <label htmlFor="production_date">Введите дату изготовления *</label>
-            <Input
+            <CustomInput
               className="form-control form-title"
               register={register}
               errors={errors}
@@ -92,7 +91,7 @@ export function CreateCatalogDrugForm({
 
           <div className="">
             <label htmlFor="expiration_date">Годен до *</label>
-            <Input
+            <CustomInput
               className="form-control form-title"
               register={register}
               errors={errors}

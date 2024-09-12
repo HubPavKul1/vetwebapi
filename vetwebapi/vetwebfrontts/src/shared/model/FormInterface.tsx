@@ -5,7 +5,6 @@ import {
   RegisterOptions,
   FieldValues,
   UseFormRegister,
-  ChangeHandler,
 } from "react-hook-form";
 
 export interface IOption {

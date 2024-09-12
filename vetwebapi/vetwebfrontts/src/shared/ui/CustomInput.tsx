@@ -1,8 +1,8 @@
-import { FormInputProps } from "interfaces/FormInterface";
+import { FormInputProps } from "shared/model/FormInterface";
 import { ErrorMessage } from "@hookform/error-message";
 import { Container } from "react-bootstrap";
 
-export function Input({
+export function CustomInput({
   fieldName,
   rules,
   register,

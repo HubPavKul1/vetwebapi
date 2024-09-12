@@ -1,9 +1,8 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { PositionsSelect } from "./PositionsSelect";
 import { IEmployeeCreate } from "interfaces/EmployeeInterfaces";
-import { CustomButton } from "components/CustomButton";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+
+import { FormInputProps } from "shared/model/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,
@@ -12,6 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "hooks/useCreateItem";
 import { companyEmployeesUrl } from "urls/companyUrls";
+import { CustomButton, CustomInput } from "shared/index";
 
 export function AddEmployeeForm() {
   const { id } = useParams();
@@ -56,7 +56,7 @@ export function AddEmployeeForm() {
           <PositionsSelect />
         </div>
         {inputItems.map((item) => (
-          <Input
+          <CustomInput
             key={item.fieldName}
             className="text-input"
             placeholder={item.placeholder}

@@ -1,5 +1,5 @@
 import { Menu } from "../Menu";
-import { CustomButton } from "../CustomButton";
+import { CustomButton } from "../../shared/ui/CustomButton";
 import { CreateItem } from "../CreateItem";
 import { AddDrugForm } from "../drugs/drugMovements/AddDrugForm";
 

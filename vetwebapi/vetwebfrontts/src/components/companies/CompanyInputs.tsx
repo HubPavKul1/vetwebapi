@@ -1,7 +1,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { ICompanyCreate } from "interfaces/CompanyInterfaces";
-import { Input } from "components/Input";
-import { FormInputProps } from "interfaces/FormInterface";
+import { Input } from "shared/ui/CustomInput";
+import { FormInputProps } from "shared/model/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,

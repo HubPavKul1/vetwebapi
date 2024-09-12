@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { AppService } from "services/app.service";
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
-import NoData from "components/NoData";
+import NoData from "shared/ui/NoData";
 import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 
 interface ActPDFHeaderProps {

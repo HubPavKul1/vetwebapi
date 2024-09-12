@@ -1,7 +1,7 @@
 import { MouseEventHandler, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { CustomButton } from "components/CustomButton";
+import { CustomButton } from "shared/ui/CustomButton";
 import { useUpload } from "hooks/useUpload";
 import { uploadAnimalsUrl } from "urls/companyUrls";
 import clsx from "clsx";

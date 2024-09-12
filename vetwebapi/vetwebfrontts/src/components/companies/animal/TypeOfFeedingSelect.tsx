@@ -1,8 +1,8 @@
 import Select, { SingleValue } from "react-select";
 import { AnimalGroupsSelect } from "./AnimalGroupsSelect";
 import { useState } from "react";
-import { IOption } from "interfaces/FormInterface";
-import { IBase } from "interfaces/BaseInterface";
+import { IOption } from "shared/model/FormInterface";
+import { IBase } from "shared/model/BaseInterface";
 import { useGetData } from "hooks/useGetData";
 import { typesOfFeedingUrl } from "urls/companyUrls";
 

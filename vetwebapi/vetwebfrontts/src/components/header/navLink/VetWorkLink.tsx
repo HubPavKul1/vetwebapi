@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { DropdownWrapper } from "components/dropdown/Dropdown";
+import { DropdownWrapper } from "shared/ui/DropdownWrapper";
 
 import { NavDropdown } from "react-bootstrap";
 import styles from "./NavLink.module.scss";

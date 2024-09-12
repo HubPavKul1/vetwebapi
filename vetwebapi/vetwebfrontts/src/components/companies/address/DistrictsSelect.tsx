@@ -1,9 +1,9 @@
 import Select, { SingleValue } from "react-select";
 import { useState } from "react";
 import { CitiesSelect } from "./CitiesSelect";
-import { IOption } from "interfaces/FormInterface";
+import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "hooks/useGetData";
-import { IBase } from "interfaces/BaseInterface";
+import { IBase } from "shared/model/BaseInterface";
 import { districtsUrl } from "urls/companyUrls";
 
 interface DistrictsSelectProps {

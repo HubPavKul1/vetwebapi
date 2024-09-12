@@ -1,4 +1,4 @@
-import { IDateRange } from "./BaseInterface";
+import { IDateRange } from "../shared/model/BaseInterface";
 
 export interface IVetWorkReport {
   disease: string;
