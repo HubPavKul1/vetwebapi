@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SpeciesSelect } from "./SpeciesSelect";
 import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "hooks/useGetData";
-import { animalGroupsUrl } from "urls/companyUrls";
+import { animalGroupsUrl } from "shared/urls/companyUrls";
 import { IBase } from "shared/model/BaseInterface";
 
 interface AnimalGroupsSelectProps {

@@ -1,6 +1,6 @@
 import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
 import { animalInVetWorkHeaders } from "data/TableHeaders";
-import { PageTable } from "components/PageTable";
+import { PageTable } from "widgets/PageTable";
 import { AnimalInVetwork } from "./AnimalInVetwork";
 
 interface AnimalsInVetWorkProps {

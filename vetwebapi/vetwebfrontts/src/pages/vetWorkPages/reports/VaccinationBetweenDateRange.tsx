@@ -1,7 +1,7 @@
 import { CreateItem } from "components/CreateItem";
 import { ReportForm } from "components/ReportForm";
 import { ReportBetweenDateRangeProps } from "interfaces/ReportInterfaces";
-import { vaccinationsReportUrl } from "urls/vetWorkUrls";
+import { vaccinationsReportUrl } from "shared/urls/vetWorkUrls";
 
 export function VaccinationBetweenDateRange({
   setReportData,

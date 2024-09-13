@@ -6,10 +6,11 @@ import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 
 import { PageDetail } from "components/PageDetail";
 import { VetWorkCompany } from "components/vetWorks/VetWorkCompany";
-import { PageTable } from "components/PageTable";
+
 import { drugReceiptHeaders } from "data/TableHeaders";
 
 import { VetWorkPageMenu } from "components/menu/VetWorkPageMenu";
+import { PageTable } from "widgets/PageTable";
 
 interface VetWorkDetailProps {
   pageTitle: string;

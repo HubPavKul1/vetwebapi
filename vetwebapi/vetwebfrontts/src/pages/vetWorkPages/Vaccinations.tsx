@@ -1,5 +1,5 @@
 import { CatalogWrapper } from "components/CatalogWrapper";
-import { vaccinationsUrl } from "../../urls/vetWorkUrls";
+import { vaccinationsUrl } from "../../shared/urls/vetWorkUrls";
 import { VetWorkCreateForm } from "components/vetWorks/VetWorkCreateForm";
 
 export function Vaccinations() {
@@ -13,7 +13,7 @@ export function Vaccinations() {
       btnTitle="Добавить вакцинацию"
       queryKey={queryKey}
       cardsInRow={3}
-      createForm={<VetWorkCreateForm url={url} queryKey={`${queryKey}1`}/>}
+      createForm={<VetWorkCreateForm url={url} queryKey={`${queryKey}1`} />}
     />
   );
 }

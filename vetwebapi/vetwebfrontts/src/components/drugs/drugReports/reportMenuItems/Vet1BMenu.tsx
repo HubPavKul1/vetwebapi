@@ -1,5 +1,5 @@
 import { ReportBetweenDateRangeProps } from "interfaces/ReportInterfaces";
-import { Vet1BReportUrl } from "urls/drugUrls";
+import { Vet1BReportUrl } from "shared/urls/drugUrls";
 import { CreateItem } from "components/CreateItem";
 import { ReportForm } from "components/ReportForm";
 

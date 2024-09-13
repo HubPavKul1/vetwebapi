@@ -3,7 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 
 import { useGetData } from "hooks/useGetData";
-import { catalogDrugsUrl } from "urls/drugUrls";
+import { catalogDrugsUrl } from "shared/urls/drugUrls";
 import { IDrugCatalogCard } from "interfaces/DrugInterfaces";
 
 export function CatalogDrugSelect() {

@@ -1,7 +1,7 @@
 import { AddAnimalForm } from "./AddAnimalForm";
 import { UploadAnimalForm } from "./UploadAnimalForm";
 
-import { MenuItem } from "components/MenuItem";
+import { MenuItem } from "widgets/MenuItem";
 import { LiaHorseHeadSolid } from "react-icons/lia";
 
 export function AddAnimal() {

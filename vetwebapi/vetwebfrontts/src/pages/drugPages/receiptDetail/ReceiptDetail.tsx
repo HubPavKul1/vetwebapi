@@ -10,8 +10,8 @@ import { ReportPage } from "components/ReportPage";
 import { drugReceiptHeaders } from "data/TableHeaders";
 import { useGetDataById } from "hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
-import { Loader } from "components/Loader";
-import { drugReceiptDetailUrl } from "urls/drugUrls";
+import { Loader } from "shared/ui/Loader";
+import { drugReceiptDetailUrl } from "shared/urls/drugUrls";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;

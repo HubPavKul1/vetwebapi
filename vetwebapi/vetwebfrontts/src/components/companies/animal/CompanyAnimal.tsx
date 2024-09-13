@@ -4,7 +4,7 @@ import { AppService } from "services/app.service";
 import { UpdateItem } from "components/UpdateItem";
 import { UpdateAnimalForm } from "./UpdateAnimalForm";
 import { DeleteItem } from "components/DeleteItem";
-import { companyAnimalUrl } from "urls/companyUrls";
+import { companyAnimalUrl } from "shared/urls/companyUrls";
 
 interface CompanyAnimalProps {
   animal: IAnimal;
@@ -19,9 +19,7 @@ export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
   ).shortDate;
 
   return (
-    <tr
-      key={animal.id}
-    >
+    <tr key={animal.id}>
       <td>{animal.species}</td>
       <td>{animal.gender}</td>
       <td>{date_of_birth}</td>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { IOption } from "shared/model/FormInterface";
 import { IBase } from "shared/model/BaseInterface";
 import { useGetData } from "hooks/useGetData";
-import { typesOfFeedingUrl } from "urls/companyUrls";
+import { typesOfFeedingUrl } from "shared/urls/companyUrls";
 
 export function TypesOfFeedingSelect() {
   const [typeOfFeedingId, setTypeOfFeedingId] = useState<string | undefined>();

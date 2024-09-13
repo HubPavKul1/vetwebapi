@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { NavList } from "components/header/NavList";
+import { NavList } from "widgets/header/NavList";
 
 export function Footer() {
   return (

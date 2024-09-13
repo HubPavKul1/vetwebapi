@@ -3,7 +3,7 @@ import { AppService, timeToExpiration } from "services/app.service";
 import { Overdue } from "../Overdue";
 import { TimeToOverdue } from "../TimeToOverdue";
 import { useGetDataById } from "hooks/useGetDataById";
-import { drugRestUrl } from "urls/drugUrls";
+import { drugRestUrl } from "shared/urls/drugUrls";
 import { IDrugRest } from "interfaces/DrugInterfaces";
 
 interface CatalogDrugCardBodyProps {

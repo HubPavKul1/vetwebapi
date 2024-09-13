@@ -15,7 +15,7 @@ import {
 } from "components/ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "hooks/useCreateItem";
-import { addressUrl } from "urls/companyUrls";
+import { addressUrl } from "shared/urls/companyUrls";
 import { CustomButton, CustomInput } from "shared/index";
 
 export function AddAddressForm() {

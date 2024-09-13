@@ -1,4 +1,4 @@
-import { catalogDrugsUrl } from "urls/drugUrls";
+import { catalogDrugsUrl } from "shared/urls/drugUrls";
 import { CatalogWrapper } from "components/CatalogWrapper";
 import { CreateCatalogDrugForm } from "components/drugs/catalogDrug/CreateCatalogDrugForm";
 

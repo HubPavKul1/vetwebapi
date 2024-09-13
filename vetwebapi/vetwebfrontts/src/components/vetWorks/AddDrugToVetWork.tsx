@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { AddDrugForm } from "components/drugs/drugMovements/AddDrugForm";
-import { MenuItem } from "components/MenuItem";
+import { MenuItem } from "widgets/MenuItem";
 import { GiMedicinePills } from "react-icons/gi";
-import { vetWorkDrugUrl } from "urls/vetWorkUrls";
+import { vetWorkDrugUrl } from "shared/urls/vetWorkUrls";
 
 export function AddDrugToVetWork() {
   const { id } = useParams();

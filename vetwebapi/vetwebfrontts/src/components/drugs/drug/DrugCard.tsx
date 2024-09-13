@@ -5,7 +5,7 @@ import {
   drugFileUploadUrl,
   drugImageUrl,
   drugLink,
-} from "urls/drugUrls";
+} from "shared/urls/drugUrls";
 import { DrugCardBody } from "./DrugCardBody";
 
 interface DrugCardProps {

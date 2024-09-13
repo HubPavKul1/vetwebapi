@@ -1,6 +1,6 @@
 import { AddAddressForm } from "./AddAddressForm";
 
-import { MenuItem } from "components/MenuItem";
+import { MenuItem } from "widgets/MenuItem";
 import { BsBuildingAdd } from "react-icons/bs";
 
 export function AddAddress() {

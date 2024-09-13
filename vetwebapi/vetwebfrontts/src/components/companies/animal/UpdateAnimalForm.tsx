@@ -5,7 +5,7 @@ import { FormInputProps } from "shared/model/FormInterface";
 
 import { useParams } from "react-router-dom";
 import { useUpdateItemPartial } from "hooks/useUpdateItemPartial";
-import { companyAnimalUrl } from "urls/companyUrls";
+import { companyAnimalUrl } from "shared/urls/companyUrls";
 import { CustomButton, CustomInput } from "shared/index";
 
 interface UpdateAnimalFormProps {

@@ -3,7 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 import { IBase } from "shared/model/BaseInterface";
 import { useGetData } from "hooks/useGetData";
-import { diseasesUrl } from "urls/vetWorkUrls";
+import { diseasesUrl } from "shared/urls/vetWorkUrls";
 
 interface DiseaseSelectProps {
   isMulti: boolean;

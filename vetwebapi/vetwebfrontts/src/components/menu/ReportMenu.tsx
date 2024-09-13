@@ -1,5 +1,5 @@
-import { Menu } from "../Menu";
-import { CustomButton } from "../../shared/ui/CustomButton";
+import { CustomButton } from "shared/index";
+import { Menu } from "../../widgets/Menu";
 
 interface ReportMenuProps {
   setPdf: CallableFunction;

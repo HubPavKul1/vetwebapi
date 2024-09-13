@@ -5,7 +5,7 @@ import { IOption } from "shared/model/FormInterface";
 import { IBase } from "shared/model/BaseInterface";
 
 import { useGetData } from "hooks/useGetData";
-import { accountingUnitsUrl } from "urls/drugUrls";
+import { accountingUnitsUrl } from "shared/urls/drugUrls";
 
 export function AccountingUnitSelect() {
   const { data, isLoading } = useGetData("accountingUnits", accountingUnitsUrl);

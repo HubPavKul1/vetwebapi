@@ -1,12 +1,11 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
-import { Input } from "shared/ui/CustomInput";
-import { fieldRequiredMessage } from "components/ErrorMessages";
-import { CustomButton } from "shared/ui/CustomButton";
+
 
 import { AppService } from "services/app.service";
 import { IDateRange } from "shared/model/BaseInterface";
+import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
 
 interface ReportFormProps {
   setReportData: CallableFunction;
@@ -59,7 +58,7 @@ export function ReportForm({
     >
       <div className="form-group">
         <label htmlFor="date_start">Введите начальную дату отчета*</label>
-        <Input
+        <CustomInput
           className="text-input"
           register={register}
           errors={errors}
@@ -74,7 +73,7 @@ export function ReportForm({
 
       <div className="form-group">
         <label htmlFor="date_end">Введите конечную дату отчета*</label>
-        <Input
+        <CustomInput
           className="text-input"
           register={register}
           errors={errors}

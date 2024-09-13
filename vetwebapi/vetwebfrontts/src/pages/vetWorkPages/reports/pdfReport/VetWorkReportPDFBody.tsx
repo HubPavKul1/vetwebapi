@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { AppService } from "services/app.service";
-import { PageTable } from "components/PageTable";
+import { PageTable } from "widgets/PageTable";
 import { diagnosticHeaders, vaccinationHeaders } from "data/TableHeaders";
 import { IVetWorkReport } from "interfaces/ReportInterfaces";
 import { VetWorkReportItem } from "../ReportItem";

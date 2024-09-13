@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { LogoLink } from "./Logo";
 
 import { NavList } from "./NavList";
-import { CustomButton } from "../../shared/ui/CustomButton";
+import { CustomButton } from "shared/index";
 
 export function Header() {
   return (

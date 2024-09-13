@@ -1,6 +1,6 @@
 import { CatalogWrapper } from "components/CatalogWrapper";
 import { CreateCompany } from "components/companies/CreateCompany";
-import { vetsUrl } from "urls/companyUrls";
+import { vetsUrl } from "shared/urls/companyUrls";
 
 export function Vets() {
   return (

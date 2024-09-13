@@ -1,6 +1,6 @@
-import { CustomSelect } from "components/CustomSelect";
 import { useGetData } from "hooks/useGetData";
-import { placesOfAdministrationUrl } from "urls/drugUrls";
+import { CustomSelect } from "shared/index";
+import { placesOfAdministrationUrl } from "shared/urls/drugUrls";
 
 export function PlaceOfAdministrationSelect() {
   const { data, isLoading } = useGetData(

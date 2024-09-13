@@ -1,6 +1,6 @@
 import { PageDetailTop } from "./PageDetailTop";
 import { PageDetailTitle } from "./PageDetailTitle";
-import { PageWrapper } from "../PageWrapper";
+import { PageWrapper } from "../../shared/ui/PageWrapper";
 import { PageDetailBody } from "./PageDetailBody";
 
 interface PageDetailProps {

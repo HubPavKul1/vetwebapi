@@ -1,7 +1,7 @@
 import { AddAddress } from "../companies/address/AddAddress";
 import { AddEmployee } from "../companies/employee/AddEmployee";
 import { AddAnimal } from "../companies/animal/AddAnimal";
-import { Menu } from "../Menu";
+import { Menu } from "../../widgets/Menu";
 
 export function CompanyPageMenu() {
   return (

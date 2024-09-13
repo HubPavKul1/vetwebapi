@@ -1,5 +1,5 @@
 import { CreateDrugForm } from "components/drugs/drug/CreateDrugForm";
-import { drugsUrl } from "urls/drugUrls";
+import { drugsUrl } from "shared/urls/drugUrls";
 import { CatalogWrapper } from "components/CatalogWrapper";
 
 export function Drugs() {

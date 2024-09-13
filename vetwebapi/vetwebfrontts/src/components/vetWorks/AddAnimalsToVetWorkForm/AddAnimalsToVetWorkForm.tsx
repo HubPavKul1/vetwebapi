@@ -13,8 +13,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useGetDataById } from "hooks/useGetDataById";
 import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useCreateItem } from "hooks/useCreateItem";
-import { companyDetailUrl } from "urls/companyUrls";
-import { vetWorkAnimalsUrl } from "urls/vetWorkUrls";
+import { companyDetailUrl } from "shared/urls/companyUrls";
+import { vetWorkAnimalsUrl } from "shared/urls/vetWorkUrls";
 import { CustomButton } from "shared/index";
 
 interface AddAnimalsToVetWorkFormProps {

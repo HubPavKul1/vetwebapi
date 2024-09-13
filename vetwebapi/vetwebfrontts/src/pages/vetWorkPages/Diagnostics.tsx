@@ -1,5 +1,5 @@
 import { CatalogWrapper } from "components/CatalogWrapper";
-import { diagnosticsUrl } from "../../urls/vetWorkUrls";
+import { diagnosticsUrl } from "../../shared/urls/vetWorkUrls";
 import { VetWorkCreateForm } from "components/vetWorks/VetWorkCreateForm";
 
 export function Diagnostics() {
@@ -7,14 +7,14 @@ export function Diagnostics() {
   const queryKey = "diagnostics";
 
   return (
-    <CatalogWrapper 
+    <CatalogWrapper
       url={url}
       imgSrc="/diagnostic.jpg"
       title="Диагностические исследования"
       btnTitle="Добавить диагностику"
       queryKey={queryKey}
       cardsInRow={3}
-      createForm={<VetWorkCreateForm url={url} queryKey={`${queryKey}1`}/>}
+      createForm={<VetWorkCreateForm url={url} queryKey={`${queryKey}1`} />}
     />
   );
 }

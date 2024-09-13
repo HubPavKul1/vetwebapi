@@ -4,7 +4,7 @@ import { IOption } from "shared/model/FormInterface";
 
 import { useGetData } from "hooks/useGetData";
 import { IBase } from "shared/model/BaseInterface";
-import { drugNamesUrl } from "urls/drugUrls";
+import { drugNamesUrl } from "shared/urls/drugUrls";
 
 export function DrugSelect() {
   const { data, isLoading } = useGetData("drugNames", drugNamesUrl);

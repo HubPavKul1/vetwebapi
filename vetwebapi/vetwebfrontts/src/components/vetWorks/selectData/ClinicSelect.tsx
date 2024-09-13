@@ -3,7 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 import { ICompany } from "interfaces/CompanyInterfaces";
 import { useGetData } from "hooks/useGetData";
-import { vetsUrl } from "urls/companyUrls";
+import { vetsUrl } from "shared/urls/companyUrls";
 
 export function ClinicSelect() {
   const { data, isLoading } = useGetData("clinics", vetsUrl);

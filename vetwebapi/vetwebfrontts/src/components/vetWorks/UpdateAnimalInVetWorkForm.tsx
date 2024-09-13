@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { IAnimalInVetWorkUpdate } from "interfaces/VetWorkInterfaces";
 
 import { IAnimal } from "interfaces/AnimalInterfaces";
-import { vetWorkAnimalDetailUrl } from "urls/vetWorkUrls";
+import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
 import { useUpdateItemPartial } from "hooks/useUpdateItemPartial";
 import { CustomButton, CustomInput } from "shared/index";
 

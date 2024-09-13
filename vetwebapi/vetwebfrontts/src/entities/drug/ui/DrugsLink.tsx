@@ -1,17 +1,10 @@
-import { Link } from "react-router-dom";
-import { DropdownWrapper } from "shared/ui/DropdownWrapper";
-
 import { NavDropdown } from "react-bootstrap";
-import styles from "./NavLink.module.scss";
-import {
-  catalogDrugsExpiredUrl,
-  drugCatalogLink,
-  drugReceiptsLink,
-  drugReportsLink,
-  drugsLink,
-} from "urls/drugUrls";
+
+import { catalogDrugsExpiredUrl } from "shared/urls/drugUrls";
 import { AppService } from "services/app.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { DropdownWrapper, NavDropdownItem } from "shared/index";
+import { drugNavDropdownItems } from "./drugNavDropdownItems";
 
 export function DrugsLink() {
   const queryClient = useQueryClient();
@@ -30,20 +23,11 @@ export function DrugsLink() {
   return (
     <>
       {" "}
-      <li className={styles.navLink}>
+      <li className="navLink">
         <DropdownWrapper title="Биопрепараты" id="basic-nav-dropdown">
-          <NavDropdown.Item as={Link} id="RouterNavLink" to={drugReceiptsLink}>
-            Поступление
-          </NavDropdown.Item>
-          <NavDropdown.Item as={Link} id="RouterNavLink" to={drugsLink}>
-            Справочник препаратов
-          </NavDropdown.Item>
-          <NavDropdown.Item as={Link} id="RouterNavLink" to={drugCatalogLink}>
-            Каталог препаратов
-          </NavDropdown.Item>
-          <NavDropdown.Item as={Link} id="RouterNavLink" to={drugReportsLink}>
-            Отчеты
-          </NavDropdown.Item>
+          {drugNavDropdownItems.map((item) => (
+            <NavDropdownItem key={item.id} url={item.url} title={item.title} />
+          ))}
           <NavDropdown.Divider />
           <NavDropdown.Item
             onClick={delExpired}

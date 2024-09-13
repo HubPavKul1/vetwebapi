@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 
 import { animalListHeaders } from "data/TableHeaders";
-import { PageTable } from "components/PageTable";
+import { PageTable } from "widgets/PageTable";
 import AnimalsListPDFItem from "./AnimalsListPDFItem";
 import { AppService } from "services/app.service";
 
@@ -24,7 +24,10 @@ export function AnimalsListPDFBody({ data }: AnimalsListPDFBodyProps) {
               <tr>
                 <td colSpan={8}>
                   <h5>{company.full_name}</h5>
-                  <p>{company.address && AppService.addressString(company.address)}</p>
+                  <p>
+                    {company.address &&
+                      AppService.addressString(company.address)}
+                  </p>
                 </td>
               </tr>
               {data.animals &&

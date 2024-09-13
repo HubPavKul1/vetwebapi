@@ -1,7 +1,8 @@
-import { Menu } from "../Menu";
-import { CustomButton } from "../../shared/ui/CustomButton";
+import { Menu } from "../../widgets/Menu";
+
 import { CreateItem } from "../CreateItem";
 import { AddDrugForm } from "../drugs/drugMovements/AddDrugForm";
+import { CustomButton } from "shared/index";
 
 interface ReceiptPageMenuProps {
   url: string;

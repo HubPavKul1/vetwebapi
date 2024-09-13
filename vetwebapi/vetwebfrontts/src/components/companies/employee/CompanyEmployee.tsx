@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { IEmployee } from "interfaces/EmployeeInterfaces";
 import { DeleteItem } from "components/DeleteItem";
 
-import { companyEmployeeDetailUrl } from "urls/companyUrls";
+import { companyEmployeeDetailUrl } from "shared/urls/companyUrls";
 
 interface CompanyEmployeeProps {
   employee: IEmployee;

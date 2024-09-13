@@ -361,3 +361,48 @@ body {
 .error-message {
   @apply text-center text-red-600 text-[0.6em];
 }
+
+.navLink {
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.navLink:focus {
+  outline-offset: 2px;
+  outline: 1px solid rgb(114, 114, 233);
+}
+
+.navLink:hover {
+  color: rgb(114, 114, 233);
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(19, 19, 27);
+  opacity: 0;
+}
+
+.navLink:active {
+  color: darkorchid;
+  outline: none;
+}
+
+.navLink:active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(19, 19, 27);
+  opacity: 1;
+}
+
+.navLink:not(:last-child) {
+  margin-right: 52px;
+} /*# sourceMappingURL=NavLink.module.css.map */

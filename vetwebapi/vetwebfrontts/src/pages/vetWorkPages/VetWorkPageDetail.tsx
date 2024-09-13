@@ -11,12 +11,12 @@ import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
 import { ReferralPDF } from "./vetWorkPdf/referralPdf/ReferralPDF";
 import { useGetDataById } from "hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
-import { Loader } from "components/Loader";
-import { vetWorkDetailUrl } from "urls/vetWorkUrls";
+import { Loader } from "shared/ui/Loader";
+import { vetWorkDetailUrl } from "shared/urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
 import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 import { VetWorkFile } from "./VetWorkFile";
+import { ErrorLoadDataMessage } from "shared/index";
 
 interface VetWorkData {
   data?: IVetWorkSchema;

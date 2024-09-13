@@ -1,6 +1,15 @@
-import { companiesLink, labsLink, vetsLink } from "urls/companyUrls";
-import { drugCatalogLink, drugReceiptsLink, drugReportsLink, drugsLink } from "urls/drugUrls";
-import { diagnosticsLink, vaccinationsLink, vetWorkReportsLink } from "urls/vetWorkUrls";
+import { companiesLink, labsLink, vetsLink } from "shared/urls/companyUrls";
+import {
+  drugCatalogLink,
+  drugReceiptsLink,
+  drugReportsLink,
+  drugsLink,
+} from "shared/urls/drugUrls";
+import {
+  diagnosticsLink,
+  vaccinationsLink,
+  vetWorkReportsLink,
+} from "shared/urls/vetWorkUrls";
 
 export interface ICarouselItem {
   id: number;

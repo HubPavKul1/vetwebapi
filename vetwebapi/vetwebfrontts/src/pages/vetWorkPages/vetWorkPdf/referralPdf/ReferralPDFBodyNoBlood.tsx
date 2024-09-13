@@ -2,7 +2,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 import { AppService } from "services/app.service";
 import { StateAssignment } from "components/StateAssignment";
-import NoData from "shared/ui/NoData";
+import { NoData } from "shared/index";
+
 
 interface ReferralPDFBodyNoBloodProps {
   data: IVetWorkSchema;

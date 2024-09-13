@@ -7,7 +7,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
-import CustomCheckBox from "components/CustomCheckBox";
+import CustomCheckBox from "shared/ui/CustomCheckBox";
 
 interface AnimalFormItemProps {
   animal: IAnimal;

@@ -1,5 +1,5 @@
 import { CreateDrugReceiptForm } from "components/drugs/drugMovements/CreateDrugReceiptForm";
-import { drugReceiptsUrl } from "urls/drugUrls";
+import { drugReceiptsUrl } from "shared/urls/drugUrls";
 
 import { CatalogWrapper } from "components/CatalogWrapper";
 

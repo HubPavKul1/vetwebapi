@@ -3,7 +3,7 @@ import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useParams } from "react-router-dom";
 import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
 import { UpdateItem } from "components/UpdateItem";
-import { vetWorkAnimalDetailUrl } from "urls/vetWorkUrls";
+import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
 import { DeleteItem } from "components/DeleteItem";
 
 interface AnimalInVetworkProps {

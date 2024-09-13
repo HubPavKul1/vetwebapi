@@ -4,7 +4,7 @@ import { StreetsSelect } from "./StreetsSelect";
 import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "hooks/useGetData";
 import { IBase } from "shared/model/BaseInterface";
-import { citiesUrl } from "urls/companyUrls";
+import { citiesUrl } from "shared/urls/companyUrls";
 
 interface CitiesSelectProps {
   districtId: string;

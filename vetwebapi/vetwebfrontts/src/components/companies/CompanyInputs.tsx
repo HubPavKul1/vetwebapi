@@ -1,12 +1,13 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { ICompanyCreate } from "interfaces/CompanyInterfaces";
-import { Input } from "shared/ui/CustomInput";
+
 import { FormInputProps } from "shared/model/FormInterface";
 import {
   fieldRequiredMessage,
   maxLenErrorMessage,
   minLenErrorMessage,
 } from "components/ErrorMessages";
+import { CustomInput } from "shared/index";
 
 export function CompanyInputs() {
   const inputItems: FormInputProps<ICompanyCreate>[] = [
@@ -26,7 +27,7 @@ export function CompanyInputs() {
       key={index}
       name={item.fieldName ? item.fieldName : ""}
       render={({ field: { onChange, value } }) => (
-        <Input
+        <CustomInput
           value={value}
           onChange={onChange}
           placeholder={item.placeholder}

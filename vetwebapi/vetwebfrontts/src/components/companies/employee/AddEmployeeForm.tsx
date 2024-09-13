@@ -10,7 +10,7 @@ import {
 } from "components/ErrorMessages";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "hooks/useCreateItem";
-import { companyEmployeesUrl } from "urls/companyUrls";
+import { companyEmployeesUrl } from "shared/urls/companyUrls";
 import { CustomButton, CustomInput } from "shared/index";
 
 export function AddEmployeeForm() {

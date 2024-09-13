@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
 
-import { PageTable } from "components/PageTable";
+import { PageTable } from "widgets/PageTable";
 import { drugReceiptHeaders } from "data/TableHeaders";
 import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 

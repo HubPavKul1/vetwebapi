@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { vetWorkFileUrl } from "urls/vetWorkUrls";
+import { vetWorkFileUrl } from "shared/urls/vetWorkUrls";
 
 interface VetWorkFileProps {
   setPdf: CallableFunction;

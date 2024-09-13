@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "components/Modal";
+import { Modal } from "shared/ui/Modal";
 import { BsPencilSquare } from "react-icons/bs";
 import clsx from "clsx";
 
@@ -30,7 +30,7 @@ export function UpdateItem({ children }: UpdateItemProps) {
         className={clsx(
           "absolute top-6 z-10 right-1 p-3 w-auto border rounded-md bg-white shadow-md text-center",
           !open && "hidden"
-        )} 
+        )}
       >
         Редактировать!
       </div>

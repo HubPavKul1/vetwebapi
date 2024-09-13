@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { IAnimal } from "interfaces/AnimalInterfaces";
 
 import { CompanyAnimal } from "./CompanyAnimal";
-import { PageTable } from "components/PageTable";
+import { PageTable } from "widgets/PageTable";
 import { companyAnimalsHeaders } from "data/TableHeaders";
 
 interface CompanyAnimalsProps {

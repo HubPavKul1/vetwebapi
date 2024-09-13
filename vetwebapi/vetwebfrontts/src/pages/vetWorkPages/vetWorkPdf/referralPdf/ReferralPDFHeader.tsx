@@ -2,8 +2,9 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
 import { AppService } from "services/app.service";
-import NoData from "shared/ui/NoData";
+
 import LabTitle from "./LabTitle";
+import { NoData } from "shared/index";
 
 interface ReferralPDFHeaderProps {
   data: IVetWorkSchema;

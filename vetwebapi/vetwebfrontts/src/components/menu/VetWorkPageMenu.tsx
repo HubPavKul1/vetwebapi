@@ -1,11 +1,12 @@
-import { Menu } from "../Menu";
+import { Menu } from "../../widgets/Menu";
 import { AddCompanyToVetWork } from "../vetWorks/AddCompanyToVetWork";
 import { AddDrugToVetWork } from "../vetWorks/AddDrugToVetWork";
-import { CustomButton } from "../../shared/ui/CustomButton";
+
 import { Container } from "react-bootstrap";
 import { FileUpload } from "components/FileUpload";
-import { vetWorkFileUploadUrl } from "urls/vetWorkUrls";
+import { vetWorkFileUploadUrl } from "shared/urls/vetWorkUrls";
 import { useParams } from "react-router-dom";
+import { CustomButton } from "shared/index";
 
 interface VetWorkPageMenuProps {
   showAct: CallableFunction;

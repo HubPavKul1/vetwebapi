@@ -4,8 +4,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IDrugDetail } from "interfaces/DrugInterfaces";
 import { useGetDataById } from "hooks/useGetDataById";
 import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
-import { Loader } from "components/Loader";
-import { drugDetailUrl, drugImageUrl, drugInstructionUrl } from "urls/drugUrls";
+import { Loader } from "shared/ui/Loader";
+import {
+  drugDetailUrl,
+  drugImageUrl,
+  drugInstructionUrl,
+} from "shared/urls/drugUrls";
 import { AppService } from "services/app.service";
 
 interface DrugData {
