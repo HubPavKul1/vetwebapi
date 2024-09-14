@@ -1,9 +1,9 @@
 import { Container } from "react-bootstrap";
-import { AppService } from "shared/services/app.service";
-import { PageTable } from "widgets/PageTable";
 import { diagnosticHeaders, vaccinationHeaders } from "data/TableHeaders";
 import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
 import { VetWorkReportItem } from "../ReportItem";
+import { convertDateString } from "shared/helpers";
+import { PageTable } from "shared/index";
 
 interface VetWorkReportPDFBodyProps {
   isDiagnostic: boolean;
@@ -17,7 +17,7 @@ export function VetWorkReportPDFBody({
   data,
 }: VetWorkReportPDFBodyProps) {
   const reportHeaders = isDiagnostic ? diagnosticHeaders : vaccinationHeaders;
-  const date = AppService.convertDateString(dateEnd);
+  const date = convertDateString(dateEnd);
   const title = isDiagnostic
     ? `I. Диагностические исследования ${date.month} ${date.year}`
     : `II. Лечебно-профилактические обработки ${date.month} ${date.year}`;

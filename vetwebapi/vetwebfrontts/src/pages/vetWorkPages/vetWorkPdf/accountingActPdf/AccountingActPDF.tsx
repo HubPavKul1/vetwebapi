@@ -1,7 +1,5 @@
 import { PDFWrapper } from "components/PDFWrapper";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-import { ActPDFHeader } from "../actPdf/ActPDFHeader";
-import { ActPDFBody } from "../actPdf/ActPDFBody";
 import { ActPDFFooter } from "../actPdf/ActPDFFooter";
 import { AccountingActHeader } from "./AccountingActHeader";
 import AccountingActBody from "./AccountingActBody";

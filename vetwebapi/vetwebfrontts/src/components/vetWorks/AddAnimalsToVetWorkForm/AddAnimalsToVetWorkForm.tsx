@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 
-import { ICompanyDetail } from "interfaces/CompanyInterfaces";
 import { Col, Container, Row } from "react-bootstrap";
 
 import { AnimalFormItem } from "./AnimalFormItem";
@@ -11,11 +10,12 @@ import {
 } from "entities/vetWork/model/vetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useGetDataById } from "shared/hooks/useGetDataById";
-import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { companyDetailUrl } from "shared/urls/companyUrls";
 import { vetWorkAnimalsUrl } from "shared/urls/vetWorkUrls";
 import { CustomButton } from "shared/index";
+import { ICompanyDetail } from "entities/company/model/companyInterfaces";
+import { IAnimal } from "entities/animal/model/animalInterfaces";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;

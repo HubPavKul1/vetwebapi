@@ -2,7 +2,7 @@ import { ICardProps } from "../../shared/model/CardProps";
 
 import { Col, Container, Row } from "react-bootstrap";
 import { CatalogCardImage } from "./CatalogCardImage";
-import { CatalogCardTitle } from "./CatalogCardTitle";
+import { CatalogCardTitle } from "../../shared/ui/CatalogCardTitle";
 import { CatalogCardFooter } from "./CatalogCardFooter";
 
 export function CatalogItem({ ...props }: ICardProps) {

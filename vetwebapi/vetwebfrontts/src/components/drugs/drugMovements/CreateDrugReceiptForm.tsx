@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { FormInputProps } from "shared/model/FormInterface";
-import { fieldRequiredMessage } from "components/ErrorMessages";
-import { IDrugMovementCreate } from "interfaces/DrugInterfaces";
+
 
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { ICreateItemFormInterface } from "shared/model/BaseInterface";
-import { CustomButton, CustomInput } from "shared/index";
+import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
+import { IDrugMovementCreate } from "entities/drugMovements/model/drugMovementInterfaces";
 
 export function CreateDrugReceiptForm({
   url,

@@ -1,8 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "shared/services/app.service";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { NoData } from "shared/index";
+import { convertDateString } from "shared/helpers";
 
 interface ReferralAnimalListPDFHeaderProps {
   data: IVetWorkSchema;
@@ -14,7 +14,7 @@ export function ReferralAnimalListPDFHeader({
   if (!data.companies) return <NoData title="Данные о предприятиях" />;
   if (!data.animals) return <NoData title="Данные о животных" />;
 
-  const date = AppService.convertDateString(data.vetwork_date).fullDate;
+  const date = convertDateString(data.vetwork_date).fullDate;
 
   return (
     <Container>

@@ -12,7 +12,7 @@ interface CatalogItemsProps {
   btnTitle?: string;
 }
 
-export default function CatalogItems({
+export function CatalogItems({
   data,
   queryKey,
   imgSrc,

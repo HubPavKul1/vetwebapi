@@ -1,4 +1,4 @@
-export default function LabTitle() {
+export function LabTitle() {
   return (
     <div className="text-center text-sm font-bold">
       <p>

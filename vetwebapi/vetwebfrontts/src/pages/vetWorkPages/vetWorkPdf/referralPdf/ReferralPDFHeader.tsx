@@ -1,10 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-import { AppService } from "shared/services/app.service";
 
-import LabTitle from "./LabTitle";
+import { LabTitle } from "./LabTitle";
 import { NoData } from "shared/index";
+import { addressString } from "entities/address/addressHelper";
 
 interface ReferralPDFHeaderProps {
   data: IVetWorkSchema;
@@ -24,7 +24,7 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
   const clinic = data.clinic;
   const companyAddress =
     data.companies[0].address &&
-    AppService.addressString(data.companies[0].address);
+    addressString(data.companies[0].address);
 
   return (
     <Container className="mb-2">

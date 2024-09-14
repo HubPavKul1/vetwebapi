@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 
 import { IAnimalInVetWorkUpdate } from "entities/vetWork/model/vetWorkInterfaces";
 
-import { IAnimal } from "interfaces/AnimalInterfaces";
 import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
 import { useUpdateItemPartial } from "shared/hooks/useUpdateItemPartial";
 import { CustomButton, CustomInput } from "shared/index";
+import { IAnimal } from "entities/animal/model/animalInterfaces";
 
 interface UpdateAnimalFormProps {
   animal: IAnimal;

@@ -1,6 +1,6 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
-import { IDrugMovement } from "interfaces/DrugInterfaces";
-import { AppService } from "shared/services/app.service";
+import { IDrugMovement } from "entities/drugMovements/model/drugMovementInterfaces";
+import { convertDateString } from "shared/helpers";
 import { drugReceiptDetailUrl, drugReceiptLink } from "shared/urls/drugUrls";
 
 interface ReceiptDrugCardProps {
@@ -21,7 +21,7 @@ export function ReceiptDrugCard({
       imgSrc={imgSrc}
       invQueryName={invQueryName}
       cardTitle={
-        AppService.convertDateString(drugMovement.operation_date).fullDate
+        convertDateString(drugMovement.operation_date).fullDate
       }
       id={drugMovement.id}
     />

@@ -1,7 +1,6 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { FormInputProps } from "shared/model/FormInterface";
-import { fieldRequiredMessage } from "components/ErrorMessages";
 
 import { IVetworkCreate } from "entities/vetWork/model/vetWorkInterfaces";
 import { ClinicSelect } from "./selectData/ClinicSelect";
@@ -14,7 +13,7 @@ import { BiomaterialPackagesSelect } from "./selectData/BiomaterialPackagesSelec
 import { DiagnosticMethodsSelect } from "./selectData/DiagnosticMethodsSelect";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { ICreateItemFormInterface } from "shared/model/BaseInterface";
-import { CustomButton, CustomInput } from "shared/index";
+import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
 
 export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IVetworkCreate>[] = [

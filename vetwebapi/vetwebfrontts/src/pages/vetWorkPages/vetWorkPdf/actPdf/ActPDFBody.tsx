@@ -1,13 +1,13 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "shared/services/app.service";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
-import { StateAssignment } from "components/StateAssignment";
 import ActTBCHorses from "./ActTBCHorses";
 import ActVaccination from "./ActVaccination";
 import DrugSection from "./DrugSection";
 import ActTBCCows from "./ActTBCCows";
+import { convertDateString } from "shared/helpers";
+import { StateAssignment } from "shared/index";
 
 interface ActPDFBodyProps {
   data: IVetWorkSchema;
@@ -18,7 +18,7 @@ export function ActPDFBody({ data }: ActPDFBodyProps) {
   if (!data.drug) return;
   if (!data.companies) return;
 
-  const vetworkDate = AppService.convertDateString(data.vetwork_date);
+  const vetworkDate = convertDateString(data.vetwork_date);
 
   const disease = data.diseases[0].toLowerCase();
   const animal = data.animals[0].animal_group.toLowerCase();

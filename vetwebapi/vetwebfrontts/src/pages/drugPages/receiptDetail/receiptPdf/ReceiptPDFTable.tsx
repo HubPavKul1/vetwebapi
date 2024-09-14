@@ -1,9 +1,9 @@
 import { Container } from "react-bootstrap";
-import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
 
-import { PageTable } from "widgets/PageTable";
 import { drugReceiptHeaders } from "data/TableHeaders";
 import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
+import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
+import { PageTable } from "shared/index";
 
 interface ReceiptPDFTableProps {
   data: IDrugMovementDetail;

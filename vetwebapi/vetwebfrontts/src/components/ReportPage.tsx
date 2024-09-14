@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap";
 
 import { PageDetail } from "components/PageDetail";
+import { PageTable } from "shared/index";
 
-import { PageTable } from "widgets/PageTable";
 
 interface ReportPageMainProps {
   reportTitle: string;

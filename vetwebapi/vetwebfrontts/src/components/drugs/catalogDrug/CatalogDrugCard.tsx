@@ -1,12 +1,12 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
-import { IDrugCatalogCard } from "interfaces/DrugInterfaces";
 import {
   catalogDrugDetailUrl,
   catalogDrugLink,
   drugImageUrl,
 } from "shared/urls/drugUrls";
 import { CatalogDrugCardBody } from "./CatalogDrugCardBody";
-import { AppService } from "shared/services/app.service";
+import { convertDateString } from "shared/helpers";
+import { IDrugCatalogCard } from "entities/drugCatalog/model/drugCatalogInterfaces";
 
 interface CatalogDrugCardProps {
   drug: IDrugCatalogCard;
@@ -28,7 +28,7 @@ export function CatalogDrugCard({ drug, invQueryName }: CatalogDrugCardProps) {
         control={drug.control}
         expiration_date={drug.expiration_date}
         production_date={
-          AppService.convertDateString(drug.production_date).shortDate
+          convertDateString(drug.production_date).shortDate
         }
         drugId={drug.id}
       />

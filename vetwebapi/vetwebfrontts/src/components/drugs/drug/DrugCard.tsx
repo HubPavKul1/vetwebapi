@@ -1,5 +1,4 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
-import { IDrugCard } from "interfaces/DrugInterfaces";
 import {
   drugDetailUrl,
   drugFileUploadUrl,
@@ -7,6 +6,7 @@ import {
   drugLink,
 } from "shared/urls/drugUrls";
 import { DrugCardBody } from "./DrugCardBody";
+import { IDrugCard } from "entities/drug/model/drugInterfaces";
 
 interface DrugCardProps {
   drug: IDrugCard;

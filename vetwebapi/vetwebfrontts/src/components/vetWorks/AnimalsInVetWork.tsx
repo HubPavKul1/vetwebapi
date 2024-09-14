@@ -1,7 +1,7 @@
 import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { animalInVetWorkHeaders } from "data/TableHeaders";
-import { PageTable } from "widgets/PageTable";
 import { AnimalInVetwork } from "./AnimalInVetwork";
+import { PageTable } from "shared/index";
 
 interface AnimalsInVetWorkProps {
   workType: string;
@@ -9,7 +9,7 @@ interface AnimalsInVetWorkProps {
   animals?: IAnimalInVetwork[];
   companyId: number;
 }
-export default function AnimalsInVetWork({
+export function AnimalsInVetWork({
   workType,
   disease,
   animals,

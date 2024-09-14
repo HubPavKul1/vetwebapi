@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { AppService } from "shared/services/app.service";
+import { diseasesString } from "shared/helpers";
 
 interface DrugCardBodyProps {
   drugManufacturer: string;
@@ -10,7 +10,7 @@ export function DrugCardBody({
   drugManufacturer,
   diseases,
 }: DrugCardBodyProps) {
-  const drugDiseases = AppService.diseasesString(diseases);
+  const drugDiseases = diseasesString(diseases);
   return (
     <>
       <Container className="flex justify-left text-sm mb-2">

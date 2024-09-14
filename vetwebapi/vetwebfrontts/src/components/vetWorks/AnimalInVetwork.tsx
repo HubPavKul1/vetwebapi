@@ -1,10 +1,11 @@
-import { AppService } from "shared/services/app.service";
-import { IAnimal } from "interfaces/AnimalInterfaces";
+
 import { useParams } from "react-router-dom";
 import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
 import { UpdateItem } from "shared/ui/UpdateItem";
 import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
 import { DeleteItem } from "shared/ui/DeleteItem";
+import { IAnimal } from "entities/animal/model/animalInterfaces";
+import { convertDateString } from "shared/helpers";
 
 interface AnimalInVetworkProps {
   animal: IAnimal;
@@ -23,7 +24,7 @@ export function AnimalInVetwork({
   console.log("WORKTYPE>>>>>", workType);
   console.log("DESEASE", disease);
 
-  const date_of_birth = AppService.convertDateString(
+  const date_of_birth = convertDateString(
     animal.date_of_birth
   ).shortDate;
 

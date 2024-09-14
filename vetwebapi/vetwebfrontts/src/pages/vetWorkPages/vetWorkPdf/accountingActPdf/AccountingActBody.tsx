@@ -1,7 +1,6 @@
-import { StateAssignment } from "components/StateAssignment";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { Col, Container, Row } from "react-bootstrap";
-import { AppService } from "shared/services/app.service";
+import { convertDateString } from "shared/helpers";
 
 interface AccountingActBodyProps {
   data: IVetWorkSchema;
@@ -12,7 +11,7 @@ export default function AccountingActBody({ data }: AccountingActBodyProps) {
   if (!data.drug) return;
   if (!data.companies) return;
 
-  const vetworkDate = AppService.convertDateString(data.vetwork_date);
+  const vetworkDate = convertDateString(data.vetwork_date);
 
   const disease = data.diseases[0].toLowerCase();
   const animal = data.animals[0].animal_group.toLowerCase();

@@ -1,6 +1,6 @@
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { Col, Row } from "react-bootstrap";
-import { AppService } from "shared/services/app.service";
+import { convertDateString } from "shared/helpers";
 
 interface DrugSectionProps {
   data: IVetWorkSchema;
@@ -10,10 +10,10 @@ export default function DrugSection({ data }: DrugSectionProps) {
   if (!data.drug) return;
   if (!data.animals) return;
 
-  const productionDate = AppService.convertDateString(
+  const productionDate = convertDateString(
     data.drug.production_date
   ).shortDate;
-  const expirationDate = AppService.convertDateString(
+  const expirationDate = convertDateString(
     data.drug.expiration_date
   ).shortDate;
 

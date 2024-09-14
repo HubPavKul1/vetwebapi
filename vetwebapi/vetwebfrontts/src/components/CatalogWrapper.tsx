@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useGetPageData } from "shared/hooks/useGetPageData";
 import { ErrorLoadDataMessage } from "../shared/ui/ErrorLoadDataMessage";
 import { Loader } from "../shared/ui/Loader";
-import CatalogItems from "./CatalogItems";
+import { CatalogItems } from "./CatalogItems";
 import { CreateItem } from "./CreateItem";
 import { CustomPagination, NoData, PageWrapper } from "shared/index";
 

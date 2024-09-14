@@ -1,15 +1,15 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "shared/services/app.service";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
+import { convertDateString } from "shared/helpers";
 
 interface AnimalsListPDFHeaderProps {
   data: IVetWorkSchema;
 }
 
 export function AnimalsListPDFHeader({ data }: AnimalsListPDFHeaderProps) {
-  const date = AppService.convertDateString(data.vetwork_date).fullDate;
+  const date = convertDateString(data.vetwork_date).fullDate;
   const animals = new Set(
     data.animals?.map((animal) => animal.animal_group.toLowerCase() + ", ")
   );

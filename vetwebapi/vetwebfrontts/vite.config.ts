@@ -28,7 +28,9 @@ export default defineConfig({
       data: "/src/data",
       shared: "/src/shared",
       app: "/src/app",
-      widgets: "src/widgets",
+      widgets: "/src/widgets",
+      features: "/src/features",
+      entities: "/src/entities",
     },
   },
 });

@@ -1,7 +1,8 @@
-import { ICompanyCard } from "interfaces/CompanyInterfaces";
+
 import { CreateItem } from "components/CreateItem";
 import { CreateCompany } from "../../features/company/ui/CreateCompany";
 import { CompanyCard } from "./CompanyCard";
+import { ICompanyCard } from "entities/company/model/companyInterfaces";
 
 interface CompanyCardsProps {
   companies: ICompanyCard[];

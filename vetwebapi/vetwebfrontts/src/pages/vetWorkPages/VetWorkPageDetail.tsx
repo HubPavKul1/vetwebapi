@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 
-import { AppService } from "shared/services/app.service";
-
 import { useState } from "react";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
@@ -17,6 +15,7 @@ import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/Referr
 import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 import { VetWorkFile } from "./VetWorkFile";
 import { ErrorLoadDataMessage } from "shared/index";
+import { convertDateString } from "shared/helpers";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
@@ -47,7 +46,7 @@ export function VetWorkPageDetail() {
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
-  const date = AppService.convertDateString(data.vetwork_date);
+  const date = convertDateString(data.vetwork_date);
   const diseases = data.diseases;
   const disease = diseases[0].toLowerCase();
   const pageTitle =

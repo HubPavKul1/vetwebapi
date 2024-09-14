@@ -1,4 +1,3 @@
-// import styles from "./Modal.module.css"
 import "./Modal.css"
 
 interface ModalProps {

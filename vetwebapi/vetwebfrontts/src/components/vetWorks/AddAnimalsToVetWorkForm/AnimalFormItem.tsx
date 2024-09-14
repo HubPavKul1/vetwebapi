@@ -1,4 +1,4 @@
-import { IAnimal } from "interfaces/AnimalInterfaces";
+
 import { IAnimalInVetworkIn } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -7,7 +7,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
-import CustomCheckBox from "shared/ui/CustomCheckBox";
+import { IAnimal } from "entities/animal/model/animalInterfaces";
+import { CustomCheckBox } from "shared/index";
 
 interface AnimalFormItemProps {
   animal: IAnimal;

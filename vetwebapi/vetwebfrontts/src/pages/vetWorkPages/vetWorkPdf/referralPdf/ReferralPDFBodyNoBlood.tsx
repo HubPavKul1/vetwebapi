@@ -1,8 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-import { AppService } from "shared/services/app.service";
-import { StateAssignment } from "components/StateAssignment";
-import { NoData } from "shared/index";
+import { NoData, StateAssignment } from "shared/index";
+import { convertDateString } from "shared/helpers";
+import { addressString } from "entities/address/addressHelper";
 
 interface ReferralPDFBodyNoBloodProps {
   data: IVetWorkSchema;
@@ -12,7 +12,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
   if (!data.animals) return <NoData title="Данные о животных" />;
   if (!data.companies?.length) return <NoData title="Данные о предприятиях" />;
 
-  const date = AppService.convertDateString(data.vetwork_date);
+  const date = convertDateString(data.vetwork_date);
 
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
@@ -24,7 +24,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
 
   const companyAddress =
     data.companies[0].address &&
-    AppService.addressString(data.companies[0].address);
+    addressString(data.companies[0].address);
 
   return (
     <Container>

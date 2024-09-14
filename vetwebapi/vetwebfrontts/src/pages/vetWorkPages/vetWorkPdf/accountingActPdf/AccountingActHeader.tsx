@@ -1,17 +1,17 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "shared/services/app.service";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 import { NoData } from "shared/index";
+import { convertDateString } from "shared/helpers";
 
 interface AccountinActHeaderProps {
   data: IVetWorkSchema;
 }
 
 export function AccountingActHeader({ data }: AccountinActHeaderProps) {
-  const date = AppService.convertDateString(data.vetwork_date);
+  const date = convertDateString(data.vetwork_date);
   if (!data.animals) return <NoData title="Данные о животных" />;
   if (!data.drug) return <NoData title="Данные о препаратах" />;
   if (!data.companies) return <NoData title="Данные о предприятиях" />;

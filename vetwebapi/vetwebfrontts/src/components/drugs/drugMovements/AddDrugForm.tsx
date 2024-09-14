@@ -1,14 +1,13 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-import { fieldRequiredMessage } from "components/ErrorMessages";
-import { IDrugInMovementIn } from "interfaces/DrugInterfaces";
 
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { PlaceOfAdministrationSelect } from "../drug/selectData/PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "../drug/selectData/AdministrationMethodSelect";
-import { CustomButton, CustomInput } from "shared/index";
+import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
+import { IDrugInMovementIn } from "entities/drugMovements/model/drugMovementInterfaces";
 
 interface AddDrugFormProps {
   url: string;

@@ -1,10 +1,11 @@
 import { Container } from "react-bootstrap";
-import { AppService, timeToExpiration } from "shared/services/app.service";
-import { Overdue } from "../Overdue";
-import { TimeToOverdue } from "../TimeToOverdue";
+import { AppService } from "shared/services/app.service";
+import { Overdue } from "../../../shared/ui/Overdue";
+import { TimeToOverdue } from "../../../features/drug/ui/TimeToOverdue";
 import { useGetDataById } from "shared/hooks/useGetDataById";
 import { drugRestUrl } from "shared/urls/drugUrls";
-import { IDrugRest } from "interfaces/DrugInterfaces";
+import { IDrugRest } from "entities/drugReport/model/drugReportInterfaces";
+import { convertDateString, timeToExpiration } from "shared/helpers";
 
 interface CatalogDrugCardBodyProps {
   batch: string;
@@ -30,7 +31,7 @@ export function CatalogDrugCardBody({
 
   const diffDays = timeToExpiration(expDate).deltaSeconds / 86400;
 
-  const expDateString = AppService.convertDateString(expiration_date).shortDate;
+  const expDateString = convertDateString(expiration_date).shortDate;
 
   const { data, isLoading }: DataProps = useGetDataById(
     "drugRest",

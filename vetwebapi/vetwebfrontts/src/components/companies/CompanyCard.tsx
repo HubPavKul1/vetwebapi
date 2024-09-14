@@ -1,8 +1,9 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { CompanyCardBody } from "./CompanyCardBody";
-import { ICompanyCard } from "interfaces/CompanyInterfaces";
 import { companyDetailUrl, companyLink } from "shared/urls/companyUrls";
-import { AppService } from "shared/services/app.service";
+import { addressString } from "entities/address/addressHelper";
+import { employeeString } from "entities/employee/employeeHelper";
+import { ICompanyCard } from "entities/company/model/companyInterfaces";
 
 interface CompanyCardProps {
   company: ICompanyCard;
@@ -25,11 +26,11 @@ export function CompanyCard({
       id={company.id}
     >
       <CompanyCardBody
-        address={company.address && AppService.addressString(company.address)}
+        address={company.address && addressString(company.address)}
         phone={company.address && `${company.address.phone_number1}`}
         phone2={company.address && `${company.address.phone_number2}`}
         employee={
-          company.employee && AppService.employeeString(company.employee)
+          company.employee && employeeString(company.employee)
         }
       />
     </CatalogItem>

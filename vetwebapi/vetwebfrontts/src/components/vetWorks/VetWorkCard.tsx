@@ -1,6 +1,6 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { IVetwork } from "entities/vetWork/model/vetWorkInterfaces";
-import { AppService } from "shared/services/app.service";
+import { convertDateString } from "shared/helpers";
 import { vetWorkDetailUrl, vetWorkLink } from "shared/urls/vetWorkUrls";
 
 interface VetWorkCardProps {
@@ -21,7 +21,7 @@ export function VetWorkCard({
       imgSrc={imgSrc}
       invQueryName={invQueryName}
       cardTitle={
-        AppService.convertDateString(vetWork.vetwork_date).fullDate +
+        convertDateString(vetWork.vetwork_date).fullDate +
         " " +
         vetWork.diseases
       }

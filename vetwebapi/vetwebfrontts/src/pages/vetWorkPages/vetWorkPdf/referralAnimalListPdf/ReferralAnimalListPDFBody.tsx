@@ -2,10 +2,9 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
-import { PageTable } from "widgets/PageTable";
 import { referralAnimalsHeaders } from "data/TableHeaders";
 import { ReferralAnimalItem } from "./ReferralAnimalItem";
-import { NoData } from "shared/index";
+import { NoData, PageTable } from "shared/index";
 
 interface ReferralAnimalListPDFBodyProps {
   data: IVetWorkSchema;

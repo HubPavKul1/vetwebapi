@@ -1,5 +1,5 @@
 import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
-import { AppService } from "shared/services/app.service";
+import { convertDateString } from "shared/helpers";
 
 interface AnimalsListPDFItemProps {
   animal: IAnimalInVetwork;
@@ -16,7 +16,7 @@ export default function AnimalsListPDFItem({
       <td>{animal.animal_group}</td>
       <td>{animal.nickname}</td>
       <td>{animal.identification}</td>
-      <td>{AppService.convertDateString(animal.date_of_birth).year}</td>
+      <td>{convertDateString(animal.date_of_birth).year}</td>
       <td></td>
       <td>{animal.dosage && animal.dosage / 1000}</td>
       <td></td>

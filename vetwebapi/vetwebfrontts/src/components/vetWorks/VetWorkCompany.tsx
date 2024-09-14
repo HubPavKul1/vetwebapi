@@ -1,14 +1,14 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { ICompanyCard } from "interfaces/CompanyInterfaces";
 
 import { Link, useParams } from "react-router-dom";
 import { CustomButton } from "shared/index";
-import { CompanyAddress } from "components/companies/address/CompanyAddress";
 import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { companyLink } from "shared/urls/companyUrls";
-import AnimalsInVetWork from "./AnimalsInVetWork";
+import { AnimalsInVetWork } from "./AnimalsInVetWork";
 import { DeleteItem } from "shared/ui/DeleteItem";
 import { vetWorkCompanyDetailUrl } from "shared/urls/vetWorkUrls";
+import { ICompanyCard } from "entities/company/model/companyInterfaces";
+import { CompanyAddress } from "entities/address/ui/CompanyAddress";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;

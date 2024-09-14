@@ -1,5 +1,5 @@
 import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
-import { AppService } from "shared/services/app.service";
+import { convertDateString } from "shared/helpers";
 
 interface ReferralAnimalItemProps {
   animal: IAnimalInVetwork;
@@ -16,7 +16,7 @@ export function ReferralAnimalItem({ animal, index }: ReferralAnimalItemProps) {
         {animal.nickname}
       </td>
       <td>{animal.gender}</td>
-      <td>{AppService.convertDateString(animal.date_of_birth).year}</td>
+      <td>{convertDateString(animal.date_of_birth).year}</td>
       <td></td>
       <td></td>
     </tr>

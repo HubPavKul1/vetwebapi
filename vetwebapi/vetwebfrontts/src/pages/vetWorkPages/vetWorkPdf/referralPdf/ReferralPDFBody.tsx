@@ -1,7 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-import { AppService } from "shared/services/app.service";
-import { StateAssignment } from "components/StateAssignment";
+import { convertDateString } from "shared/helpers";
+import { addressString } from "entities/address/addressHelper";
+import { StateAssignment } from "shared/index";
 
 interface ReferralPDFBodyProps {
   data: IVetWorkSchema;
@@ -11,7 +12,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
   if (!data.animals) return;
   if (!data.companies?.length) return;
 
-  const date = AppService.convertDateString(data.vetwork_date);
+  const date = convertDateString(data.vetwork_date);
 
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
@@ -23,7 +24,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
 
   const companyAddress =
     data.companies[0]?.address &&
-    AppService.addressString(data.companies[0].address);
+    addressString(data.companies[0].address);
 
   return (
     <Container>
