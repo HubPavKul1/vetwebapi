@@ -2,7 +2,7 @@ import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { IBase } from "shared/model/BaseInterface";
 import { drugNamesUrl } from "shared/urls/drugUrls";
 

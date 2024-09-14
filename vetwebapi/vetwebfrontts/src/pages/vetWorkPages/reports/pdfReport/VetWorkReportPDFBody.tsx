@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 import { PageTable } from "widgets/PageTable";
 import { diagnosticHeaders, vaccinationHeaders } from "data/TableHeaders";
-import { IVetWorkReport } from "interfaces/ReportInterfaces";
+import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
 import { VetWorkReportItem } from "../ReportItem";
 
 interface VetWorkReportPDFBodyProps {

@@ -5,7 +5,7 @@ import {
   useForm,
 } from "react-hook-form";
 
-import { useCreateItem } from "hooks/useCreateItem";
+import { useCreateItem } from "shared/hooks/useCreateItem";
 import { CustomButton } from "shared/index";
 
 interface FormWrapperProps {

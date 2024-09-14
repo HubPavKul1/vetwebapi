@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface DrugCardBodyProps {
   drugManufacturer: string;

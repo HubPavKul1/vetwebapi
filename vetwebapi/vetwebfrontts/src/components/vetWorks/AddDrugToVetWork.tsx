@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { AddDrugForm } from "components/drugs/drugMovements/AddDrugForm";
-import { MenuItem } from "widgets/MenuItem";
+import { MenuItem } from "shared/ui/MenuItem";
 import { GiMedicinePills } from "react-icons/gi";
 import { vetWorkDrugUrl } from "shared/urls/vetWorkUrls";
 

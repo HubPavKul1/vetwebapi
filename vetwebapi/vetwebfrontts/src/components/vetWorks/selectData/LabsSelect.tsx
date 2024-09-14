@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 
 import { ICompany } from "interfaces/CompanyInterfaces";
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { labsUrl } from "shared/urls/companyUrls";
 
 export function LabsSelect() {

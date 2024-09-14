@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { FileUpload } from "components/FileUpload";
-import { DeleteItem } from "components/DeleteItem";
+import { FileUpload } from "shared/ui/FileUpload";
+import { DeleteItem } from "shared/ui/DeleteItem";
 import { useState } from "react";
 import clsx from "clsx";
 

@@ -1,16 +1,17 @@
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IDrugDetail } from "interfaces/DrugInterfaces";
-import { useGetDataById } from "hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { useGetDataById } from "shared/hooks/useGetDataById";
+
 import { Loader } from "shared/ui/Loader";
 import {
   drugDetailUrl,
   drugImageUrl,
   drugInstructionUrl,
 } from "shared/urls/drugUrls";
-import { AppService } from "services/app.service";
+import { ErrorLoadDataMessage } from "shared/index";
+import { IDrugDetail } from "entities/drug/model/drugInterfaces";
+import { diseasesString } from "shared/helpers";
 
 interface DrugData {
   data?: IDrugDetail;
@@ -30,8 +31,7 @@ export function DrugDetail() {
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
-  const diseases =
-    data && data.diseases && AppService.diseasesString(data.diseases);
+  const diseases = data && data.diseases && diseasesString(data.diseases);
 
   return (
     <>

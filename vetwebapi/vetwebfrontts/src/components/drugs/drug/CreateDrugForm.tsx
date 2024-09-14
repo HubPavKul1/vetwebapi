@@ -1,8 +1,6 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { FormInputProps } from "shared/model/FormInterface";
-import { fieldRequiredMessage } from "components/ErrorMessages";
-import { IDrugCreate } from "interfaces/DrugInterfaces";
 
 import { DiseaseSelect } from "./selectData/DiseaseSelect";
 import { BudgetSelect } from "./selectData/BudgetSelect";
@@ -11,9 +9,10 @@ import { AccountingUnitSelect } from "./selectData/AccountingUnitSelect";
 import { DisposalMethodSelect } from "./selectData/DisposalMethodSelect";
 import { DosageSelect } from "./selectData/DosageSelect";
 
-import { useCreateItem } from "hooks/useCreateItem";
+import { useCreateItem } from "shared/hooks/useCreateItem";
 import { ICreateItemFormInterface } from "shared/model/BaseInterface";
-import { CustomButton, CustomInput } from "shared/index";
+import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
+import { IDrugCreate } from "entities/drug/model/drugInterfaces";
 
 export function CreateDrugForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IDrugCreate>[] = [

@@ -4,7 +4,7 @@ import { FormInputProps } from "shared/model/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 import { IDrugCatalogCreate } from "interfaces/DrugInterfaces";
 
-import { useCreateItem } from "hooks/useCreateItem";
+import { useCreateItem } from "shared/hooks/useCreateItem";
 
 import { ICreateItemFormInterface } from "shared/model/BaseInterface";
 import { DrugSelect } from "./DrugSelect";

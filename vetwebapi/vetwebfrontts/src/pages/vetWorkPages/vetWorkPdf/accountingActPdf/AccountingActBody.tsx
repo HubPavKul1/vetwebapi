@@ -1,7 +1,7 @@
 import { StateAssignment } from "components/StateAssignment";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { Col, Container, Row } from "react-bootstrap";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface AccountingActBodyProps {
   data: IVetWorkSchema;
@@ -35,10 +35,13 @@ export default function AccountingActBody({ data }: AccountingActBodyProps) {
   const administrMethod =
     animal !== "лошади" ? "внутрикожно" : "методом офтальмопробы";
 
-  let accountingTime = ""
+  let accountingTime = "";
 
-  animal === "лошади" && !data.is_primary ? accountingTime = "3, 6, 9, 12" :
-  animal === "лошади" && data.is_primary ? accountingTime = "6, 9, 12, 24" : accountingTime = "72"
+  animal === "лошади" && !data.is_primary
+    ? (accountingTime = "3, 6, 9, 12")
+    : animal === "лошади" && data.is_primary
+    ? (accountingTime = "6, 9, 12, 24")
+    : (accountingTime = "72");
 
   return (
     <Container className="mb-5">
@@ -77,7 +80,10 @@ export default function AccountingActBody({ data }: AccountingActBodyProps) {
         <Col sm={6}></Col>
       </Row>
       <Row className="mb-3">
-        <Col>Учет реакции проведен через {accountingTime} ч после введения туберкулина</Col>
+        <Col>
+          Учет реакции проведен через {accountingTime} ч после введения
+          туберкулина
+        </Col>
       </Row>
       <Row>
         <Col sm={3}>Выявлено положительных</Col>
@@ -85,7 +91,6 @@ export default function AccountingActBody({ data }: AccountingActBodyProps) {
         <Col sm={6}>Опись прилагается.</Col>
         <Col sm={2}></Col>
       </Row>
-
     </Container>
   );
 }

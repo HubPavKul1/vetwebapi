@@ -1,5 +1,5 @@
-import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
-import { AppService } from "services/app.service";
+import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
+import { AppService } from "shared/services/app.service";
 
 interface AnimalsListPDFItemProps {
   animal: IAnimalInVetwork;

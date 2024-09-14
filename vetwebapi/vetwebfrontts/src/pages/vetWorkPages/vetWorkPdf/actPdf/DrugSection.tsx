@@ -1,6 +1,6 @@
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { Col, Row } from "react-bootstrap";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface DrugSectionProps {
   data: IVetWorkSchema;

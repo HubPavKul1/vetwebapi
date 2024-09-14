@@ -1,5 +1,5 @@
 import { CatalogWrapper } from "components/CatalogWrapper";
-import { CreateCompany } from "components/companies/CreateCompany";
+import { CreateCompany } from "features/company/ui/CreateCompany";
 import { companiesUrl } from "shared/urls/companyUrls";
 
 export function Companies() {

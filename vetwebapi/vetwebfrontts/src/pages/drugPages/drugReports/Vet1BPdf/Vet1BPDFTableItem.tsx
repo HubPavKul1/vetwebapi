@@ -1,4 +1,4 @@
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 import { IDrugReport } from "interfaces/DrugInterfaces";
 
 interface Vet1BPDFTableItemProps {

@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface Vet1BPDFHeaderProps {
   dateEnd: string;

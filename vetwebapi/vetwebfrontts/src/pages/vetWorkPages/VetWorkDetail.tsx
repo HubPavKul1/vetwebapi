@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 
@@ -10,7 +10,7 @@ import { VetWorkCompany } from "components/vetWorks/VetWorkCompany";
 import { drugReceiptHeaders } from "data/TableHeaders";
 
 import { VetWorkPageMenu } from "components/menu/VetWorkPageMenu";
-import { PageTable } from "widgets/PageTable";
+import { PageTable } from "shared/index";
 
 interface VetWorkDetailProps {
   pageTitle: string;

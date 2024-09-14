@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { PageTable } from "widgets/PageTable";
 import { referralAnimalsHeaders } from "data/TableHeaders";

@@ -1,9 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
-
-
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 import { IDateRange } from "shared/model/BaseInterface";
 import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
 

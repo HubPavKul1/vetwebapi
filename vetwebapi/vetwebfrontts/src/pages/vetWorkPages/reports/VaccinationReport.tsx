@@ -1,10 +1,10 @@
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service.ts";
 
 import { useState } from "react";
 
 import { ReportMenu } from "components/menu/ReportMenu.tsx";
 import { ReportPage } from "components/ReportPage.tsx";
-import { VetWorkReportProps } from "interfaces/ReportInterfaces.tsx";
+import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
 import { vaccinationHeaders } from "data/TableHeaders.ts";
 import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";

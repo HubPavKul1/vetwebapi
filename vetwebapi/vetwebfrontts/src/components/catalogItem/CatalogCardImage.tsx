@@ -1,4 +1,4 @@
-import { FileUpload } from "../FileUpload";
+import { FileUpload } from "../../shared/ui/FileUpload";
 import { Link } from "react-router-dom";
 
 interface CatalogCardImageProps {
@@ -6,7 +6,7 @@ interface CatalogCardImageProps {
   imgSrc?: string;
   cardTitle: string;
   fileUploadUrl?: string;
-  invQueryName?: string
+  invQueryName?: string;
 }
 
 export function CatalogCardImage({ ...props }: CatalogCardImageProps) {

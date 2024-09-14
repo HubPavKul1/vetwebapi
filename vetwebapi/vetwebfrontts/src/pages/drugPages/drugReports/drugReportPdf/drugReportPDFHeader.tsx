@@ -1,7 +1,7 @@
 import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface DrugReportPDFHeaderProps {
   dateEnd: string;
@@ -15,7 +15,7 @@ export function DrugReportPDFHeader({ dateEnd }: DrugReportPDFHeaderProps) {
       <Row className="mb-8">
         <Col sm={7}></Col>
         <Col>
-          <DrugReportTopText textNumber={2}/>
+          <DrugReportTopText textNumber={2} />
         </Col>
       </Row>
       <Container className="report-title italic">

@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "services/app.service";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { AppService } from "shared/services/app.service";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { StateAssignment } from "components/StateAssignment";
 import ActTBCHorses from "./ActTBCHorses";

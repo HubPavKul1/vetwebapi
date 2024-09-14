@@ -1,5 +1,5 @@
 import { IDrugReport } from "interfaces/DrugInterfaces";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface DrugInReportProps {
   drug: IDrugReport;

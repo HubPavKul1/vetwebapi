@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { RiCalendarScheduleLine } from "react-icons/ri";
-import { timeToExpiration } from "services/app.service";
+import { timeToExpiration } from "shared/services/app.service";
 
 interface TimeToOverdueProps {
   expirationDate: Date;

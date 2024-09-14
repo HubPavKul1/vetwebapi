@@ -1,5 +1,5 @@
 import { PDFWrapper } from "components/PDFWrapper";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { ReferralAnimalListPDFBody } from "./ReferralAnimalListPDFBody";
 import { ReferralAnimalListPDFHeader } from "./ReferralAnimalListPDFHeader";
 

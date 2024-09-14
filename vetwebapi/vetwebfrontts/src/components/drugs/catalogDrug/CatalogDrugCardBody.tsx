@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap";
-import { AppService, timeToExpiration } from "services/app.service";
+import { AppService, timeToExpiration } from "shared/services/app.service";
 import { Overdue } from "../Overdue";
 import { TimeToOverdue } from "../TimeToOverdue";
-import { useGetDataById } from "hooks/useGetDataById";
+import { useGetDataById } from "shared/hooks/useGetDataById";
 import { drugRestUrl } from "shared/urls/drugUrls";
 import { IDrugRest } from "interfaces/DrugInterfaces";
 

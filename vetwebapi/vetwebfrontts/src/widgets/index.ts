@@ -1,4 +1,2 @@
-export { Menu } from "./Menu";
-export { PageTable } from "./PageTable";
-export { Header } from "./header/Header";
-export { MenuItem } from "./MenuItem";
+export { Header } from "./Header";
+export { Footer } from "./Footer";

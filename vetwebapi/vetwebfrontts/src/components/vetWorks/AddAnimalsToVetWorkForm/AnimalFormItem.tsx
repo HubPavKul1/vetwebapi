@@ -1,5 +1,5 @@
 import { IAnimal } from "interfaces/AnimalInterfaces";
-import { IAnimalInVetworkIn } from "interfaces/VetWorkInterfaces";
+import { IAnimalInVetworkIn } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 

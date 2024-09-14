@@ -1,6 +1,6 @@
 import { CreateItem } from "components/CreateItem";
 import { ReportForm } from "components/ReportForm";
-import { ReportBetweenDateRangeProps } from "interfaces/ReportInterfaces";
+import { ReportBetweenDateRangeProps } from "entities/vetWorkReport/model/reportInterfaces";
 import { diagnosticsReportUrl } from "shared/urls/vetWorkUrls";
 
 export function DiagnosticBetweenDateRange({

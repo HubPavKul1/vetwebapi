@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "services/app.service";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { AppService } from "shared/services/app.service";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 
 interface AnimalsListPDFHeaderProps {

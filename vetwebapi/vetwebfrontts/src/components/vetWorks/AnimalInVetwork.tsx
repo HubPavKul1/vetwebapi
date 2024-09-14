@@ -1,10 +1,10 @@
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 import { IAnimal } from "interfaces/AnimalInterfaces";
 import { useParams } from "react-router-dom";
 import { UpdateAnimalInVetWorkForm } from "./UpdateAnimalInVetWorkForm";
-import { UpdateItem } from "components/UpdateItem";
+import { UpdateItem } from "shared/ui/UpdateItem";
 import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
-import { DeleteItem } from "components/DeleteItem";
+import { DeleteItem } from "shared/ui/DeleteItem";
 
 interface AnimalInVetworkProps {
   animal: IAnimal;

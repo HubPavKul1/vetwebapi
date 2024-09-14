@@ -1,7 +1,7 @@
 import { NavDropdown } from "react-bootstrap";
 
 import { catalogDrugsExpiredUrl } from "shared/urls/drugUrls";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DropdownWrapper, NavDropdownItem } from "shared/index";
 import { drugNavDropdownItems } from "./drugNavDropdownItems";

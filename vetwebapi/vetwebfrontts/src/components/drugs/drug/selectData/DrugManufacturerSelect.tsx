@@ -1,4 +1,4 @@
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { CustomSelect } from "shared/index";
 import { drugManufacturersUrl } from "shared/urls/drugUrls";
 

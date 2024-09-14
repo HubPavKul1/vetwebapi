@@ -1,4 +1,4 @@
-import { ReportBetweenDateRangeProps } from "interfaces/ReportInterfaces";
+import { ReportBetweenDateRangeProps } from "entities/vetWorkReport/model/reportInterfaces";
 import { drugReportsUrl } from "shared/urls/drugUrls";
 import { CreateItem } from "components/CreateItem";
 import { ReportForm } from "components/ReportForm";

@@ -4,10 +4,10 @@ import { ICompanyCard } from "interfaces/CompanyInterfaces";
 import { Link, useParams } from "react-router-dom";
 import { CustomButton } from "shared/index";
 import { CompanyAddress } from "components/companies/address/CompanyAddress";
-import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
+import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { companyLink } from "shared/urls/companyUrls";
 import AnimalsInVetWork from "./AnimalsInVetWork";
-import { DeleteItem } from "components/DeleteItem";
+import { DeleteItem } from "shared/ui/DeleteItem";
 import { vetWorkCompanyDetailUrl } from "shared/urls/vetWorkUrls";
 
 interface VetWorkCompanyProps {

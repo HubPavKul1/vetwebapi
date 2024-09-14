@@ -1,6 +1,6 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
-import { IVetwork } from "interfaces/VetWorkInterfaces";
-import { AppService } from "services/app.service";
+import { IVetwork } from "entities/vetWork/model/vetWorkInterfaces";
+import { AppService } from "shared/services/app.service";
 import { vetWorkDetailUrl, vetWorkLink } from "shared/urls/vetWorkUrls";
 
 interface VetWorkCardProps {

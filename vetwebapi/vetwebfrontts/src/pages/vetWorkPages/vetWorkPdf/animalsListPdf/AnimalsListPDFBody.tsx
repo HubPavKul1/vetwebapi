@@ -1,10 +1,10 @@
 import { Container } from "react-bootstrap";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { animalListHeaders } from "data/TableHeaders";
 import { PageTable } from "widgets/PageTable";
 import AnimalsListPDFItem from "./AnimalsListPDFItem";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface AnimalsListPDFBodyProps {
   data: IVetWorkSchema;

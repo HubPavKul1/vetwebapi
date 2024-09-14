@@ -1,4 +1,4 @@
-import { IAnimalInVetwork } from "interfaces/VetWorkInterfaces";
+import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { animalInVetWorkHeaders } from "data/TableHeaders";
 import { PageTable } from "widgets/PageTable";
 import { AnimalInVetwork } from "./AnimalInVetwork";

@@ -1,4 +1,4 @@
-import { AppService } from "services/app.service.ts";
+import { AppService } from "shared/services/app.service.ts";
 
 import { useState } from "react";
 

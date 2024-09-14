@@ -1,6 +1,6 @@
 import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { IDrugMovement } from "interfaces/DrugInterfaces";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 import { drugReceiptDetailUrl, drugReceiptLink } from "shared/urls/drugUrls";
 
 interface ReceiptDrugCardProps {

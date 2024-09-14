@@ -6,7 +6,7 @@ import {
   drugImageUrl,
 } from "shared/urls/drugUrls";
 import { CatalogDrugCardBody } from "./CatalogDrugCardBody";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface CatalogDrugCardProps {
   drug: IDrugCatalogCard;

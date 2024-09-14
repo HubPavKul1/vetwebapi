@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 import { IBase } from "shared/model/BaseInterface";
 
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { accountingUnitsUrl } from "shared/urls/drugUrls";
 
 export function AccountingUnitSelect() {

@@ -3,7 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 
 import { IEmployee } from "interfaces/EmployeeInterfaces";
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { doctorsUrl } from "shared/urls/companyUrls";
 
 export function DoctorSelect() {

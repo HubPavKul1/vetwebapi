@@ -2,7 +2,7 @@ import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { CompanyCardBody } from "./CompanyCardBody";
 import { ICompanyCard } from "interfaces/CompanyInterfaces";
 import { companyDetailUrl, companyLink } from "shared/urls/companyUrls";
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 interface CompanyCardProps {
   company: ICompanyCard;

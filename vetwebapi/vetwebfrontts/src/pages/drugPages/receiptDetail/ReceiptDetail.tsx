@@ -1,17 +1,18 @@
 import { useParams } from "react-router-dom";
 
-import { AppService } from "services/app.service";
-import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
 import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 import { useState } from "react";
 import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
 import { ReceiptPageMenu } from "components/menu/ReceiptPageMenu";
 import { ReportPage } from "components/ReportPage";
 import { drugReceiptHeaders } from "data/TableHeaders";
-import { useGetDataById } from "hooks/useGetDataById";
-import { ErrorLoadDataMessage } from "components/ErrorLoadDataMessage";
+import { useGetDataById } from "shared/hooks/useGetDataById";
+
 import { Loader } from "shared/ui/Loader";
 import { drugReceiptDetailUrl } from "shared/urls/drugUrls";
+import { ErrorLoadDataMessage } from "shared/index";
+import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
+import { convertDateString } from "shared/helpers";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -33,7 +34,7 @@ export function ReceiptDetail() {
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
-  const date = AppService.convertDateString(data.operation_date);
+  const date = convertDateString(data.operation_date);
 
   return (
     <>

@@ -4,11 +4,11 @@ import { FormInputProps } from "shared/model/FormInterface";
 
 import { useParams } from "react-router-dom";
 
-import { IAnimalInVetWorkUpdate } from "interfaces/VetWorkInterfaces";
+import { IAnimalInVetWorkUpdate } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { IAnimal } from "interfaces/AnimalInterfaces";
 import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
-import { useUpdateItemPartial } from "hooks/useUpdateItemPartial";
+import { useUpdateItemPartial } from "shared/hooks/useUpdateItemPartial";
 import { CustomButton, CustomInput } from "shared/index";
 
 interface UpdateAnimalFormProps {

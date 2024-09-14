@@ -5,7 +5,7 @@ import { IDrugInMovementIn } from "interfaces/DrugInterfaces";
 
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
-import { useCreateItem } from "hooks/useCreateItem";
+import { useCreateItem } from "shared/hooks/useCreateItem";
 import { PlaceOfAdministrationSelect } from "../drug/selectData/PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "../drug/selectData/AdministrationMethodSelect";
 import { CustomButton, CustomInput } from "shared/index";

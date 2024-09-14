@@ -1,12 +1,16 @@
-import { IVetWorkReport } from "interfaces/ReportInterfaces";
+import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
 
 interface VetWorkReportItemProps {
   data: IVetWorkReport;
   isDiagnostic: boolean;
-  rowNum: number
+  rowNum: number;
 }
 
-export function VetWorkReportItem({ data, isDiagnostic, rowNum }: VetWorkReportItemProps) {
+export function VetWorkReportItem({
+  data,
+  isDiagnostic,
+  rowNum,
+}: VetWorkReportItemProps) {
   return (
     <tr key={rowNum} className="border-bottom border-black align-middle">
       <td>{data.animal_group}</td>

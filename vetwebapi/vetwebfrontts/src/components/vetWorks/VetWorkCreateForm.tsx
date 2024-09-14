@@ -3,7 +3,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { FormInputProps } from "shared/model/FormInterface";
 import { fieldRequiredMessage } from "components/ErrorMessages";
 
-import { IVetworkCreate } from "interfaces/VetWorkInterfaces";
+import { IVetworkCreate } from "entities/vetWork/model/vetWorkInterfaces";
 import { ClinicSelect } from "./selectData/ClinicSelect";
 import { DiseaseSelect } from "components/drugs/drug/selectData/DiseaseSelect";
 import { DoctorSelect } from "./selectData/DoctorsSelect";
@@ -12,7 +12,7 @@ import { BiomaterialsSelect } from "./selectData/BiomaterialsSelect";
 import { BiomaterialFixationsSelect } from "./selectData/BiomaterialFixationSelect";
 import { BiomaterialPackagesSelect } from "./selectData/BiomaterialPackagesSelect";
 import { DiagnosticMethodsSelect } from "./selectData/DiagnosticMethodsSelect";
-import { useCreateItem } from "hooks/useCreateItem";
+import { useCreateItem } from "shared/hooks/useCreateItem";
 import { ICreateItemFormInterface } from "shared/model/BaseInterface";
 import { CustomButton, CustomInput } from "shared/index";
 

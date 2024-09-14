@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 export function Vet1BPDFFooter() {
   const today = new Date().toISOString().slice(0, 10);

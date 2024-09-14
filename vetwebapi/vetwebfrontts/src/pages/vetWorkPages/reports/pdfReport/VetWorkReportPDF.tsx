@@ -1,5 +1,5 @@
 import { PDFWrapper } from "components/PDFWrapper";
-import { IVetWorkReport } from "interfaces/ReportInterfaces";
+import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
 import { VetWorkReportPDFBody } from "./VetWorkReportPDFBody";
 
 interface VetWorkReportPDFProps {

@@ -1,13 +1,12 @@
 import { Row, Col } from "react-bootstrap";
 
-import { PageWrapper } from "components/PageWrapper";
 import React, { useState } from "react";
-import { useGetPageData } from "hooks/useGetPageData";
+import { useGetPageData } from "shared/hooks/useGetPageData";
 import { ErrorLoadDataMessage } from "../shared/ui/ErrorLoadDataMessage";
 import { Loader } from "../shared/ui/Loader";
 import CatalogItems from "./CatalogItems";
 import { CreateItem } from "./CreateItem";
-import { CustomPagination, NoData } from "shared/index";
+import { CustomPagination, NoData, PageWrapper } from "shared/index";
 
 interface CatalogWrapperProps {
   title: string;

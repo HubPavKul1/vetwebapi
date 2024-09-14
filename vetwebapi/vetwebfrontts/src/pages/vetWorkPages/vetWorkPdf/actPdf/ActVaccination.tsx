@@ -1,4 +1,4 @@
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { Col, Row } from "react-bootstrap";
 
 interface ActVaccinationProps {

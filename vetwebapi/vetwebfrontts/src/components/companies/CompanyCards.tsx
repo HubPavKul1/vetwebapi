@@ -1,6 +1,6 @@
 import { ICompanyCard } from "interfaces/CompanyInterfaces";
 import { CreateItem } from "components/CreateItem";
-import { CreateCompany } from "./CreateCompany";
+import { CreateCompany } from "../../features/company/ui/CreateCompany";
 import { CompanyCard } from "./CompanyCard";
 
 interface CompanyCardsProps {

@@ -8,11 +8,11 @@ import { useState } from "react";
 import {
   IAnimalInVetwork,
   IAnimalInVetworkIn,
-} from "interfaces/VetWorkInterfaces";
+} from "entities/vetWork/model/vetWorkInterfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useGetDataById } from "hooks/useGetDataById";
+import { useGetDataById } from "shared/hooks/useGetDataById";
 import { IAnimal } from "interfaces/AnimalInterfaces";
-import { useCreateItem } from "hooks/useCreateItem";
+import { useCreateItem } from "shared/hooks/useCreateItem";
 import { companyDetailUrl } from "shared/urls/companyUrls";
 import { vetWorkAnimalsUrl } from "shared/urls/vetWorkUrls";
 import { CustomButton } from "shared/index";

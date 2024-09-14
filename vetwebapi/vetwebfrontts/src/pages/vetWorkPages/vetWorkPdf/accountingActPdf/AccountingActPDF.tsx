@@ -1,5 +1,5 @@
 import { PDFWrapper } from "components/PDFWrapper";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { ActPDFHeader } from "../actPdf/ActPDFHeader";
 import { ActPDFBody } from "../actPdf/ActPDFBody";
 import { ActPDFFooter } from "../actPdf/ActPDFFooter";
@@ -17,7 +17,7 @@ export default function AccountingActPDF({
 }: AccountingActPDFProps) {
   return (
     <PDFWrapper setPdf={setPdf} filename="accountingAct.pdf">
-     <AccountingActHeader data={data}/>
+      <AccountingActHeader data={data} />
       <AccountingActBody data={data} />
       <ActPDFFooter data={data} />
     </PDFWrapper>

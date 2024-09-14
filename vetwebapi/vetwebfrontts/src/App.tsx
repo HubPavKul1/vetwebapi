@@ -1,4 +1,4 @@
-import { Layout } from "pages/Layout";
+import { Layout } from "app/Layout";
 import { Home } from "pages/home/Home";
 import { Companies } from "pages/companyPages/Companies";
 import { CompanyDetail } from "pages/companyPages/CompanyDetail";

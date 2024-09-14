@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
-import { AppService } from "services/app.service";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
+import { AppService } from "shared/services/app.service";
 import { StateAssignment } from "components/StateAssignment";
 
 interface ReferralPDFBodyProps {

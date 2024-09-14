@@ -1,4 +1,4 @@
-import { ICardProps } from "../../interfaces/CardProps";
+import { ICardProps } from "../../shared/model/CardProps";
 
 import { Col, Container, Row } from "react-bootstrap";
 import { CatalogCardImage } from "./CatalogCardImage";
@@ -17,7 +17,7 @@ export function CatalogItem({ ...props }: ICardProps) {
                 imgSrc={props.imgSrc}
                 cardTitle={props.cardTitle}
                 fileUploadUrl={props.fileUploadUrl}
-                invQueryName={props.invQueryName ? props.invQueryName: ""}
+                invQueryName={props.invQueryName ? props.invQueryName : ""}
               />
             </Col>
             <Col>

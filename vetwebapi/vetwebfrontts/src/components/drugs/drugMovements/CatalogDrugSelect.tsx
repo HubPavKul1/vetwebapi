@@ -2,7 +2,7 @@ import Select from "react-select";
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { catalogDrugsUrl } from "shared/urls/drugUrls";
 import { IDrugCatalogCard } from "interfaces/DrugInterfaces";
 

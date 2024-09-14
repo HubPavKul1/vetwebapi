@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { MenuItem } from "widgets/MenuItem";
+import { MenuItem } from "shared/ui/MenuItem";
 import { AddCompanyToVetWorkForm } from "./AddCompanyToVetWorkForm";
 import { BsBuildingAdd } from "react-icons/bs";
 import { vetWorkCompanyUrl } from "shared/urls/vetWorkUrls";

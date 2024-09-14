@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 
-import { AppService } from "services/app.service";
+import { AppService } from "shared/services/app.service";
 
 import { useState } from "react";
-import { IVetWorkSchema } from "interfaces/VetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { AddAnimalsToVetWorkForm } from "components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
 import { ActPDF } from "./vetWorkPdf/actPdf/ActPDF";
 import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
 import { ReferralPDF } from "./vetWorkPdf/referralPdf/ReferralPDF";
-import { useGetDataById } from "hooks/useGetDataById";
+import { useGetDataById } from "shared/hooks/useGetDataById";
 import { Loader } from "shared/ui/Loader";
 import { vetWorkDetailUrl } from "shared/urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";

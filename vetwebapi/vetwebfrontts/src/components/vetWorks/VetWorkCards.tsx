@@ -1,5 +1,5 @@
 import { CreateItem } from "components/CreateItem";
-import { IVetwork } from "interfaces/VetWorkInterfaces";
+import { IVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { VetWorkCreateForm } from "./VetWorkCreateForm";
 import { VetWorkCard } from "./VetWorkCard";
 

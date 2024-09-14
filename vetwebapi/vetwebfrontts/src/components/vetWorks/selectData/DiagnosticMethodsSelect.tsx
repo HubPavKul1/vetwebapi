@@ -1,4 +1,4 @@
-import { useGetData } from "hooks/useGetData";
+import { useGetData } from "shared/hooks/useGetData";
 import { CustomSelect } from "shared/index";
 import { diagnosticMethodsUrl } from "shared/urls/vetWorkUrls";
 
