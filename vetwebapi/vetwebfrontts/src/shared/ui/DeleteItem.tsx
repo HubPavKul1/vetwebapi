@@ -4,7 +4,6 @@ import { useDeleteItem } from "shared/hooks/useDeleteItem";
 interface DeleteItemProps {
   queryKeyId?: string;
   url: string;
-  mutationKey: string;
   queryKey: string;
   alertMessage: string;
   size?: number;
@@ -13,13 +12,11 @@ interface DeleteItemProps {
 export function DeleteItem({
   queryKeyId,
   url,
-  mutationKey,
   queryKey,
   alertMessage,
   size,
 }: DeleteItemProps) {
   const { mutate } = useDeleteItem(
-    mutationKey,
     url,
     queryKey,
     alertMessage,

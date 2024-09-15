@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AppService } from "shared/services/app.service";
 
 export function useDeleteItem(
-  mutationKey: string,
   url: string,
   queryKey: string,
   alertMessage: string,
@@ -11,7 +10,7 @@ export function useDeleteItem(
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationKey: [mutationKey],
+    mutationKey: ["deleteItem"],
     mutationFn: () => AppService.deleteItem(url),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [queryKey, id] }),

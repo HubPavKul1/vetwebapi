@@ -1,4 +1,4 @@
-import { IBase } from "../../../shared/model/BaseInterface";
+import { IBase } from "../../../shared/model/BaseInterfaces";
 import { ICompanyCard } from "../../company/model/companyInterfaces";
 import { IDrugInMovement } from "./DrugInterfaces";
 import { IEmployee } from "./EmployeeInterfaces";

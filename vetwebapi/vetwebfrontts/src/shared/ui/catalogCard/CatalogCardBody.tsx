@@ -1,7 +1,8 @@
 import { Container, Row } from "react-bootstrap";
-import { ICardProps } from "shared/model/CardProps";
+import { IWrapperProps } from "shared/model/WrapperProps";
 
-export function CatalogCardTop({ ...props }: ICardProps) {
+
+export function CatalogCardBody({ ...props }: IWrapperProps) {
   return (
     <Container className="h-24 mb-2">
       <Row>{props.children}</Row>

@@ -53,7 +53,6 @@ export function CatalogCardFooter({ ...props }: CatalogCardFooterProps) {
           <DeleteItem
             queryKey={props.invQueryName}
             url={props.delUrl}
-            mutationKey="deleteItem"
             alertMessage={`${props.cardTitle} успешно удалено!`}
           />
         </Col>

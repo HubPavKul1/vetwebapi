@@ -5,3 +5,4 @@ export { VetsLink } from "./vetclinic/ui/VetsLink";
 export { HomeLink } from "./home/ui/HomeLink";
 export { AdminLink } from "./user/ui/AdminLink";
 export { VetWorkLink } from "./vetWork/ui/VetWorkLink";
+export { CompanyCardBody } from "./company/ui/CompanyCardBody";

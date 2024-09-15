@@ -2,7 +2,7 @@ import { ICardProps } from "../../shared/model/CardProps";
 
 import { Col, Container, Row } from "react-bootstrap";
 import { CatalogCardImage } from "./CatalogCardImage";
-import { CatalogCardTitle } from "../../shared/ui/CatalogCardTitle";
+import { CatalogCardTitle } from "../../shared/ui/catalogCard/CatalogCardTitle";
 import { CatalogCardFooter } from "./CatalogCardFooter";
 
 export function CatalogItem({ ...props }: ICardProps) {
@@ -21,7 +21,7 @@ export function CatalogItem({ ...props }: ICardProps) {
               />
             </Col>
             <Col>
-              <CatalogCardTitle url={props.url} cardTitle={props.cardTitle} />
+              <CatalogCardTitle itemDetailUrl={props.url} cardTitle={props.cardTitle} />
             </Col>
           </Row>
         </Container>
