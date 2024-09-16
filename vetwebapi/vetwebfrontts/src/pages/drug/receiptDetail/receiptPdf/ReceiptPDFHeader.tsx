@@ -1,14 +1,14 @@
 import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
 import { Container, Row, Col } from "react-bootstrap";
+import { convertDateString } from "shared/helpers";
 
-import { AppService } from "shared/services/app.service";
 
 interface ReceiptPdfHeaderProps {
   operationDate: string;
 }
 
 export function ReceiptPDFHeader({ operationDate }: ReceiptPdfHeaderProps) {
-  const date = AppService.convertDateString(operationDate);
+  const date = convertDateString(operationDate);
 
   return (
     <Container className="report-title">

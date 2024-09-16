@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { CompanyPageMenu } from "widgets/company/CompanyPageMenu";
 
-import { PageDetail } from "components/PageDetail";
 import { useGetDataById } from "shared/hooks/useGetDataById";
 
 import { Loader } from "shared/ui/Loader";
@@ -12,6 +11,7 @@ import { CompanyAnimals } from "entities/animal/ui/CompanyAnimals";
 import { ErrorLoadDataMessage } from "shared/index";
 import { ICompanyDetail } from "entities/company/model/companyInterfaces";
 import { CompanyAddress } from "entities/address/ui/CompanyAddress";
+import { PageDetail } from "widgets/PageDetail";
 
 interface CompanyData {
   data?: ICompanyDetail;

@@ -1,7 +1,7 @@
-import { PageDetailTop } from "./PageDetailTop";
-import { PageDetailTitle } from "./PageDetailTitle";
-import { PageWrapper } from "../../shared/ui/PageWrapper";
-import { PageDetailBody } from "./PageDetailBody";
+
+import { PageDetailBody, PageDetailTitle, PageDetailTop } from "shared/index";
+import { PageWrapper } from "../shared/ui/PageWrapper";
+
 
 interface PageDetailProps {
   imgSrc: string;

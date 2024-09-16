@@ -51,3 +51,6 @@ export { CatalogCardTop } from "./ui/catalogCard/CatalogCardTop";
 export { CatalogCardBody } from "./ui/catalogCard/CatalogCardBody";
 export { CatalogCardImage } from "./ui/catalogCard/CatalogCardImage";
 export { CatalogCardFooter } from "./ui/catalogCard/CatalogCardFooter";
+export { PageDetailBody } from "./ui/pageDetail/PageDetailBody";
+export { PageDetailTitle } from "./ui/pageDetail/PageDetailTitle";
+export { PageDetailTop } from "./ui/pageDetail/PageDetailTop";

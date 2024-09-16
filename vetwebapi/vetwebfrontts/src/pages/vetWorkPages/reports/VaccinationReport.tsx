@@ -5,9 +5,10 @@ import { useState } from "react";
 import { ReportMenu } from "components/menu/ReportMenu.tsx";
 import { ReportPage } from "components/ReportPage.tsx";
 import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
-import { vaccinationHeaders } from "data/TableHeaders.ts";
 import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
+import { convertDateString } from "shared/helpers.ts";
+import { vaccinationHeaders } from "shared/model/tableHeaders.ts";
 
 export function VaccinationReport({
   data,
@@ -16,7 +17,7 @@ export function VaccinationReport({
 }: VetWorkReportProps) {
   const [pdf, setPdf] = useState(false);
 
-  const date2 = AppService.convertDateString(dateEnd);
+  const date2 = convertDateString(dateEnd);
 
   return (
     <>

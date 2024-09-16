@@ -1,4 +1,5 @@
-import { ICardProps } from "interfaces/CardProps";
+import { ICardProps } from "shared/model/CardProps";
+
 
 export const contentData: ICardProps[] = [
   {

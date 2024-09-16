@@ -1,7 +1,7 @@
 import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
-import { animalInVetWorkHeaders } from "data/TableHeaders";
 import { AnimalInVetwork } from "./AnimalInVetwork";
 import { PageTable } from "shared/index";
+import { animalInVetWorkHeaders } from "shared/model/tableHeaders";
 
 interface AnimalsInVetWorkProps {
   workType: string;

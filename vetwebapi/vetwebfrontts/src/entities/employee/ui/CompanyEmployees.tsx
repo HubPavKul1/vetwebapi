@@ -2,9 +2,9 @@ import { Container } from "react-bootstrap";
 
 import { CompanyEmployee } from "./CompanyEmployee";
 
-import { companyEmployeesHeaders } from "data/TableHeaders";
 import { IEmployee } from "../model/employeeInterfaces";
 import { PageTable } from "shared/index";
+import { companyEmployeesHeaders } from "shared/model/tableHeaders";
 
 interface CompanyEmployeesProps {
   employees: IEmployee[];

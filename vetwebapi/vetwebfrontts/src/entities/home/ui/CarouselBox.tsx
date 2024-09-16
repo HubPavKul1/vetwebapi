@@ -1,6 +1,6 @@
 import { Carousel, CarouselItem, CarouselCaption } from "react-bootstrap";
 
-import { carouselItems } from "./carouselItems";
+import { carouselItems } from "../model/carouselItems";
 import { Link } from "react-router-dom";
 
 export function CarouselBox() {

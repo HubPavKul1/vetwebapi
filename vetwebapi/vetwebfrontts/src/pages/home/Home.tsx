@@ -1,5 +1,5 @@
-import { CarouselBox } from "components/carousel/CarouselBox";
-import { SectionContent } from "./homePageCard/SectionContent";
+import { CarouselBox } from "entities/home/ui/CarouselBox";
+import { SectionContent } from "widgets/home/ui/SectionContent";
 
 export function Home() {
   return (

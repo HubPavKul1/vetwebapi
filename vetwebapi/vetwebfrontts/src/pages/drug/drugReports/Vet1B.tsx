@@ -2,13 +2,14 @@ import { AppService } from "shared/services/app.service.ts";
 
 import { useState } from "react";
 
-import { IDrugReport } from "interfaces/DrugInterfaces.tsx";
 import { DrugInReport } from "components/drugs/drugReports/DrugInReport.tsx";
 import { ReportMenu } from "components/menu/ReportMenu.tsx";
 
 import { ReportPage } from "components/ReportPage.tsx";
 import { Vet1BPDF } from "./Vet1BPdf/index.tsx";
-import { drugReportHeaders } from "data/TableHeaders.ts";
+import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces.ts";
+import { convertDateString } from "shared/helpers.ts";
+import { drugReportHeaders } from "shared/model/tableHeaders.ts";
 
 interface Vet1BProps {
   data: IDrugReport[];
@@ -19,7 +20,7 @@ interface Vet1BProps {
 export function Vet1B({ data, dateEnd, setReportActive }: Vet1BProps) {
   const [pdf, setPdf] = useState(false);
 
-  const reportDate = AppService.convertDateString(dateEnd);
+  const reportDate = convertDateString(dateEnd);
 
   return (
     <>

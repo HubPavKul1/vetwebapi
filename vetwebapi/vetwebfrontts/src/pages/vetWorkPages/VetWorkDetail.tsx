@@ -4,13 +4,12 @@ import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 
-import { PageDetail } from "components/PageDetail";
 import { VetWorkCompany } from "components/vetWorks/VetWorkCompany";
-
-import { drugReceiptHeaders } from "data/TableHeaders";
 
 import { VetWorkPageMenu } from "components/menu/VetWorkPageMenu";
 import { PageTable } from "shared/index";
+import { drugReceiptHeaders } from "shared/model/tableHeaders";
+import { PageDetail } from "widgets/PageDetail";
 
 interface VetWorkDetailProps {
   pageTitle: string;

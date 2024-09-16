@@ -1,6 +1,6 @@
-import { contentData } from "data/HomeContent";
-import { HomePageCard } from "../homePageCard/HomePageCard";
+import { contentData } from "entities/home/model/homeContent";
 import { CatalogWrapper } from "components/CatalogWrapper";
+import { HomePageCard } from "entities/home/ui/HomePageCard";
 
 export function SectionContent() {
   return (

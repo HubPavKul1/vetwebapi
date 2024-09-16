@@ -1,9 +1,10 @@
-import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
+
 import { ReceiptPDFHeader } from "./ReceiptPDFHeader";
 import { ReceiptPDFBody } from "./ReceiptPDFBody";
 import { ReceiptPDFTable } from "./ReceiptPDFTable";
 import { ReceiptPDFFooter } from "./ReceiptPDFFooter";
 import { PDFWrapper } from "components/PDFWrapper";
+import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
 
 interface ReceiptPDFProps {
   setPdf: CallableFunction;

@@ -1,4 +1,5 @@
-import { ICardProps } from "../shared/model/CardProps";
+import { ICardProps } from "shared/model/CardProps";
+
 
 export const catalogItemData: ICardProps[] = [
   {

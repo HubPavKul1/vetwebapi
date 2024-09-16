@@ -1,7 +1,7 @@
+import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
 import { Container, Row, Col } from "react-bootstrap";
-import { IDrugMovementDetail } from "interfaces/DrugInterfaces";
+import { diseasesString } from "shared/helpers";
 
-import { AppService } from "shared/services/app.service";
 
 interface ReceiptPDFBodyProps {
   data: IDrugMovementDetail;
@@ -12,7 +12,7 @@ export function ReceiptPDFBody({ data }: ReceiptPDFBodyProps) {
   const diseases = data.drugs.map((drug) => drug.diseases);
   const newDiseases = [].concat(...diseases);
 
-  const diseasesUnique = AppService.diseasesString(newDiseases);
+  const diseasesUnique = diseasesString(newDiseases);
 
   return (
     <Container className="mb-5">

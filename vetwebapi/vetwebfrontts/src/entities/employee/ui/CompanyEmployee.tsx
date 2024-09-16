@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { IEmployee } from "interfaces/EmployeeInterfaces";
 import { DeleteItem } from "shared/ui/DeleteItem";
 
 import { companyEmployeeDetailUrl } from "shared/urls/companyUrls";
+import { IEmployee } from "../model/employeeInterfaces";
 
 interface CompanyEmployeeProps {
   employee: IEmployee;
@@ -22,7 +22,6 @@ export function CompanyEmployee({ employee }: CompanyEmployeeProps) {
           queryKey="company"
           queryKeyId={id}
           url={companyEmployeeDetailUrl(companyId, employee.id)}
-          mutationKey="deleteEmployee"
           alertMessage={`${employee.fullname} успешно удален!`}
         />
       </td>

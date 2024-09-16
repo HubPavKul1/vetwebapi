@@ -1,9 +1,9 @@
 import { Container } from "react-bootstrap";
 
 import { CompanyAnimal } from "./CompanyAnimal";
-import { companyAnimalsHeaders } from "data/TableHeaders";
 import { IAnimal } from "../model/animalInterfaces";
 import { PageTable } from "shared/index";
+import { companyAnimalsHeaders } from "shared/model/tableHeaders";
 
 interface CompanyAnimalsProps {
   animals: IAnimal[];

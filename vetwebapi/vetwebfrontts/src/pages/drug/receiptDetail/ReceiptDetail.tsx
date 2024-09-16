@@ -5,7 +5,6 @@ import { useState } from "react";
 import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
 import { ReceiptPageMenu } from "components/menu/ReceiptPageMenu";
 import { ReportPage } from "components/ReportPage";
-import { drugReceiptHeaders } from "data/TableHeaders";
 import { useGetDataById } from "shared/hooks/useGetDataById";
 
 import { Loader } from "shared/ui/Loader";
@@ -13,6 +12,7 @@ import { drugReceiptDetailUrl } from "shared/urls/drugUrls";
 import { ErrorLoadDataMessage } from "shared/index";
 import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
 import { convertDateString } from "shared/helpers";
+import { drugReceiptHeaders } from "shared/model/tableHeaders";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
