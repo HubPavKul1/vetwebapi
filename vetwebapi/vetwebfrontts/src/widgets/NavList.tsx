@@ -1,12 +1,10 @@
-import {
-  AdminLink,
-  CompaniesLink,
-  DrugsLink,
-  HomeLink,
-  LabsLink,
-  VetsLink,
-  VetWorkLink,
-} from "entities/index";
+import { CompaniesLink } from "entities/company";
+import { DrugsLink } from "entities/drug/intex";
+import { HomeLink } from "entities/home";
+import { LabsLink } from "entities/lab";
+import { AdminLink } from "entities/user";
+import { VetsLink } from "entities/vetclinic";
+import { VetWorkLink } from "entities/vetWork";
 
 export function NavList() {
   return (

@@ -15,6 +15,9 @@ export interface ICompanyCard extends ICompany {
 
 export interface ICompanies {
   companies: ICompanyCard[];
+  total_count: number;
+  page: number;
+  per_page: number;
 }
 
 export interface ICompanyCreate extends Omit<ICompany, "id"> {}

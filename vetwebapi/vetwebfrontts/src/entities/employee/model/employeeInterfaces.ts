@@ -1,4 +1,4 @@
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 interface IEmployeeBase {
   lastname: string;

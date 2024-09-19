@@ -3,7 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "shared/hooks/useGetData";
 import { streetsUrl } from "shared/urls/companyUrls";
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 interface StreetsSelectProps {
   cityId: string;

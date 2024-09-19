@@ -2,9 +2,9 @@ import Select, { SingleValue } from "react-select";
 import { DistrictsSelect } from "./DistrictsSelect";
 import { useState } from "react";
 import { IOption } from "shared/model/FormInterface";
-import { IBase } from "shared/model/BaseInterface";
 import { useGetData } from "shared/hooks/useGetData";
 import { regionsUrl } from "shared/urls/companyUrls";
+import { IBase } from "shared/index";
 
 export function RegionsSelect() {
   const [regionId, setRegionId] = useState<string | undefined>();

@@ -30,16 +30,10 @@ export function CatalogWrapper({
   createForm,
 }: CatalogWrapperProps) {
   const [pageNum, setPageNum] = useState(1);
-  if (!url || !queryKey)
-    return (
-      <PageWrapper>
-        <h1 className="page-title">{title}</h1>
-        <Row xs={1} md={cardsInRow} lg={cardsInRow} className="mb-10">
-          {children}
-        </Row>
-      </PageWrapper>
-    );
+
   const pageQueryKey = `${queryKey}${pageNum}`;
+
+  if (!url) return;
 
   const { data, isLoading, isError, error } = useGetPageData(
     pageQueryKey,

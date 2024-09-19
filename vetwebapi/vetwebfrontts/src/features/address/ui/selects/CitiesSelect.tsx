@@ -3,9 +3,9 @@ import { useState } from "react";
 
 import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "shared/hooks/useGetData";
-import { IBase } from "shared/model/BaseInterface";
 import { citiesUrl } from "shared/urls/companyUrls";
 import { StreetsSelect } from "./StreetsSelect";
+import { IBase } from "shared/index";
 
 interface CitiesSelectProps {
   districtId: string;

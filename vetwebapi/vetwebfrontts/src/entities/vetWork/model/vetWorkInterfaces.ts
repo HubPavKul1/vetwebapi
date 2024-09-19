@@ -1,7 +1,7 @@
+import { IEmployee } from "entities/employee/model/employeeInterfaces";
 import { IBase } from "../../../shared/model/BaseInterfaces";
 import { ICompanyCard } from "../../company/model/companyInterfaces";
-import { IDrugInMovement } from "./DrugInterfaces";
-import { IEmployee } from "./EmployeeInterfaces";
+import { IDrugInMovement } from "entities/drugMovements/model/drugMovementInterfaces";
 
 export interface IDiseases {
   diseases?: IBase[];
@@ -27,6 +27,9 @@ export interface IVetwork extends IVetworkCreate {
 
 export interface IVetworks {
   vetworks?: IVetwork[];
+  total_count: number;
+  page: number;
+  per_page: number;
 }
 
 export interface IVetWorkSchema {

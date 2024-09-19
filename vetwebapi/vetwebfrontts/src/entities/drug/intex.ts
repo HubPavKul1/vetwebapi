@@ -1,0 +1,1 @@
+export { DrugsLink } from "./ui/DrugsLink";

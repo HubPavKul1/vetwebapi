@@ -1,5 +1,5 @@
-import { CarouselBox } from "entities/home/ui/CarouselBox";
-import { SectionContent } from "widgets/home/ui/SectionContent";
+import { CarouselBox } from "entities/home";
+import { SectionContent } from "widgets/home";
 
 export function Home() {
   return (

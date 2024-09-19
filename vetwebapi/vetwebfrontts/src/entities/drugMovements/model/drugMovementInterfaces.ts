@@ -39,4 +39,7 @@ export interface IDrugMovementDetail extends IDrugMovement {
 
 export interface IDrugMovements {
   drug_movements?: IDrugMovement[];
+  total_count: number;
+  page: number;
+  per_page: number;
 }

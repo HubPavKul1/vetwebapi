@@ -1,4 +1,4 @@
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 export interface IDrugCreate {
   diseases: number[];
@@ -28,6 +28,9 @@ export interface IDrugCard {
 
 export interface IDrugs {
   drugs?: IDrugCard[];
+  total_count: number;
+  page: number;
+  per_page: number;
 }
 
 export interface IBudgets {
