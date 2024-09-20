@@ -1,2 +1,2 @@
-export { CompanyCards } from "./CompanyCards";
-export { CompanyPageMenu } from "./CompanyPageMenu";
+export { CompanyCatalog } from "./CompanyCatalog"; 
+export { CompanyPageMenu } from "./ui/CompanyPageMenu";

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { CompanyPageMenu } from "widgets/company/CompanyPageMenu";
+import { CompanyPageMenu } from "widgets/company/ui/CompanyPageMenu";
 
 import { useGetDataById } from "shared/hooks/useGetDataById";
 

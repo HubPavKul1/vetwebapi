@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 interface CatalogCardImageProps {
   itemDetailUrl: string;
-  imgSrc?: string;
+  imgSrc: string;
   cardTitle: string;
 }
 

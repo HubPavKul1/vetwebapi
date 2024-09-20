@@ -1,17 +1,14 @@
-import { CatalogWrapper } from "components/CatalogWrapper";
-import { CreateCompany } from "features/index";
 import { vetsUrl } from "shared/urls/companyUrls";
+import { CompanyCatalog } from "widgets/company";
 
 export function Vets() {
   return (
-    <CatalogWrapper
+    <CompanyCatalog
       title="Ветклиники"
-      cardsInRow={3}
+      btnTitle="Добавить ветклинику"
       queryKey="vets"
       url={vetsUrl}
       imgSrc="/gosvet.jpg"
-      btnTitle="Добавить ветклинику"
-      createForm={<CreateCompany url={vetsUrl} queryKey="vets1" />}
     />
   );
 }

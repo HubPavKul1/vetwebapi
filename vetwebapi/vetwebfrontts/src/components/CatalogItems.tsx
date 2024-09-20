@@ -1,4 +1,3 @@
-import { CompanyCards } from "./companies/CompanyCards";
 import { CatalogDrugCards } from "./drugs/catalogDrug/CatalogDrugCards";
 import { DrugCards } from "./drugs/drug/DrugCards";
 import { ReceiptDrugCards } from "./drugs/drugMovements/ReceiptDrugCards";
@@ -22,15 +21,6 @@ export function CatalogItems({
   if (!btnTitle) return;
   return (
     <>
-      {data.companies && imgSrc && (
-        <CompanyCards
-          companies={data.companies}
-          invQueryName={queryKey}
-          imgSrc={imgSrc}
-          url={url}
-          btnTitle={btnTitle}
-        />
-      )}
       {data.drugs && (
         <DrugCards
           drugs={data.drugs}

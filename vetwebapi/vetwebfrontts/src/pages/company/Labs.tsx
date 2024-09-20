@@ -1,17 +1,14 @@
-import { CatalogWrapper } from "components/CatalogWrapper";
-import { CreateCompany } from "features/index";
 import { labsUrl } from "shared/urls/companyUrls";
+import { CompanyCatalog } from "widgets/company";
 
 export function Labs() {
   return (
-    <CatalogWrapper
+    <CompanyCatalog
       title="Лаборатории"
-      cardsInRow={3}
+      btnTitle="Добавить лабораторию"
       queryKey="labs"
       url={labsUrl}
       imgSrc="/diagnostic.jpg"
-      btnTitle="Добавить лабораторию"
-      createForm={<CreateCompany url={labsUrl} queryKey="labs1" />}
     />
   );
 }

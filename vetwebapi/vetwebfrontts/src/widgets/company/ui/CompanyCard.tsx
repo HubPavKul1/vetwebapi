@@ -7,6 +7,7 @@ interface CompanyCardProps {
   cardTitle: string;
   company: ICompanyCard;
   invQueryName: string;
+  imgSrc: string;
 }
 
 export function CompanyCard({ ...props }: CompanyCardProps) {
@@ -16,7 +17,7 @@ export function CompanyCard({ ...props }: CompanyCardProps) {
       cardTitle={props.company.short_name}
       invQueryName={props.invQueryName}
       delUrl={companyDetailUrl(props.company.id)}
-      imgSrc="/animals.jpg"
+      imgSrc={props.imgSrc}
     >
       <CompanyCardBody
         address={props.company.address && props.company.address}

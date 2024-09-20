@@ -1,5 +1,5 @@
 import { CompaniesLink } from "entities/company";
-import { DrugsLink } from "entities/drug/intex";
+import { DrugsLink } from "entities/drug";
 import { HomeLink } from "entities/home";
 import { LabsLink } from "entities/lab";
 import { AdminLink } from "entities/user";

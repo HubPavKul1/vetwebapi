@@ -30,6 +30,7 @@ export function CatalogCard({ ...props }: CatalogCardProps) {
             <CatalogCardImage
               itemDetailUrl={props.itemDetailUrl}
               cardTitle={props.cardTitle}
+              imgSrc={props.imgSrc}
             />
           )}
           {props.isDrugCard && props.drugId && (
