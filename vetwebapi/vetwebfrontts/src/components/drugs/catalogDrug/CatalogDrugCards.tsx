@@ -1,7 +1,7 @@
 import { CreateItem } from "components/CreateItem";
-import { IDrugCatalogCard } from "interfaces/DrugInterfaces";
 import { CatalogDrugCard } from "./CatalogDrugCard";
 import { CreateCatalogDrugForm } from "./CreateCatalogDrugForm";
+import { IDrugCatalogCard } from "entities/drugCatalog/model/drugCatalogInterfaces";
 
 interface CatalogDrugCardsProps {
   drugs: IDrugCatalogCard[];

@@ -1,7 +1,7 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 import { useCreateItem } from "shared/hooks/useCreateItem";
-import { CompanyInputs } from "./CompanyInputs";
+import { CompanyInputs } from "./ui/CompanyInputs";
 import { CustomButton, ICreateItemFormInterface } from "shared/index";
 import { ICompanyCreate } from "entities/company/model/companyInterfaces";
 

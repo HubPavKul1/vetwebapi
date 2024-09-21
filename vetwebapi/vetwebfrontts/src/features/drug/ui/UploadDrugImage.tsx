@@ -1,4 +1,4 @@
-import { drugImageUrl, FileUpload } from "shared/index";
+import { drugFileUploadUrl, FileUpload } from "shared/index";
 
 interface UploadDrugImageProps {
   drugId: number;
@@ -9,7 +9,7 @@ export function UploadDrugImage({ ...props }: UploadDrugImageProps) {
   return (
     <div>
       <FileUpload
-        uploadUrl={drugImageUrl(props.drugId)}
+        uploadUrl={drugFileUploadUrl(props.drugId)}
         accept="image/*"
         mutationName="drugImage upload"
         invQueryName={props.invQueryName}

@@ -2,8 +2,9 @@ import { drugsUrl } from "shared/urls/drugUrls";
 import { useState } from "react";
 import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
-import { DrugCards } from "widgets/drug";
+import { DrugCard } from "widgets/drug";
 import { CreateDrugForm } from "features/drug";
+import { IDrugCard } from "entities/drug/model/drugInterfaces";
 
 export function Drugs() {
   const [pageNum, setPageNum] = useState(1);
@@ -28,15 +29,10 @@ export function Drugs() {
       pageNum={pageNum}
       setPageNum={setPageNum}
     >
-      <DrugCards drugs={data.drugs} invQueryName={pageQueryKey} />
+      {data.drugs.map((drug: IDrugCard) => (
+        <DrugCard key={drug.id} drug={drug} invQueryName={pageQueryKey} />
+      ))}
     </CatalogPageWrapper>
-    // <CatalogWrapper
-    //   title="Справочник биопрепаратов"
-    //   btnTitle="Добавить препарат"
-    //   cardsInRow={3}
-    //   queryKey="drugs"
-    //   createForm={<CreateDrugForm url={drugsUrl} queryKey="drugs1" />}
-    //   url={drugsUrl}
-    // />
+   
   );
 }

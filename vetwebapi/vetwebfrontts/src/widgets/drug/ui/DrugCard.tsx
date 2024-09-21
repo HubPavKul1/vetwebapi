@@ -17,31 +17,15 @@ export function DrugCard({ ...props }: DrugCardProps) {
       invQueryName={props.invQueryName}
       delUrl={drugDetailUrl(props.drug.id)}
       imgSrc={props.drug.image && drugImageUrl(props.drug.id)}
-      isDrugCard
+      isDrugCard={true}
       drugId={props.drug.id}
+      isDrugInstr={!!props.drug.instruction}
     >
       <DrugCardBody
         drugManufacturer={props.drug.drug_manufacturer}
         diseases={props.drug.diseases}
       />
     </CatalogCard>
-    // <CatalogItem
-    //   delUrl={drugDetailUrl(drug.id)}
-    //   url={drugLink(drug.id)}
-    //   imgSrc={drug.image && drugImageUrl(drug.id)}
-    //   invQueryName={invQueryName}
-    //   cardTitle={drug.name}
-    //   id={drug.id}
-    //   hasFileUploader={!drug.instruction}
-    //   accept=".pdf"
-    //   mutationName="drugInstr upload"
-    //   fileUploadUrl={drugFileUploadUrl(drug.id)}
-    //   iconSrc="/pdf.jpg"
-    // >
-    //   <DrugCardBody
-    //     drugManufacturer={drug.drug_manufacturer}
-    //     diseases={drug.diseases}
-    //   />
-    // </CatalogItem>
+   
   );
 }

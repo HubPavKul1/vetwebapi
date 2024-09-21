@@ -20,6 +20,7 @@ interface CatalogCardProps {
   isDrugCard?: boolean;
   children: React.ReactElement | React.ReactNode;
   delUrl: string;
+  isDrugInstr: boolean
 }
 export function CatalogCard({ ...props }: CatalogCardProps) {
   return (
@@ -33,7 +34,7 @@ export function CatalogCard({ ...props }: CatalogCardProps) {
               imgSrc={props.imgSrc}
             />
           )}
-          {props.isDrugCard && props.drugId && (
+          {props.isDrugCard && props.drugId && !props.imgSrc && (
             <UploadDrugImage
               drugId={props.drugId}
               invQueryName={props.invQueryName}
@@ -51,7 +52,7 @@ export function CatalogCard({ ...props }: CatalogCardProps) {
       <CatalogCardFooter>
         <Col sm={8}></Col>
         <Col sm={2}>
-          {props.isDrugCard && props.drugId && (
+          {props.isDrugCard && props.drugId && !props.isDrugInstr && (
             <UploadInstruction
               drugId={props.drugId}
               invQueryName={props.invQueryName}

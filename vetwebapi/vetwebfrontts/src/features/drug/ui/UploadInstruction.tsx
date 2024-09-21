@@ -14,7 +14,7 @@ export function UploadInstruction({...props}: UploadInstructionProps) {
     const [open, setOpen] = useState(false);
   return (
     <Container
-      className="w-20 relative"
+      className="w-20 relative mb-2"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >

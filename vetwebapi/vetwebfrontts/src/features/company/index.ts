@@ -1,1 +1,1 @@
-export { CreateCompany } from "./ui/CreateCompany";
+export { CreateCompany } from "./CreateCompany";

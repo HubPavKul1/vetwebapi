@@ -62,7 +62,7 @@ export function FileUpload({
           onChange={selectFile}
         />
         <img src={iconSrc} />
-        <LiaFileDownloadSolid fontSize={fontSize} color={color} />
+        <LiaFileDownloadSolid fontSize={fontSize} color={color}/>
       </label>
     </Container>
   );

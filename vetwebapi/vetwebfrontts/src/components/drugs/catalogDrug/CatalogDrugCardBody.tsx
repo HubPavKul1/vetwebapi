@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import { AppService } from "shared/services/app.service";
 import { Overdue } from "../../../shared/ui/Overdue";
 import { TimeToOverdue } from "../../../features/drug/ui/TimeToOverdue";
 import { useGetDataById } from "shared/hooks/useGetDataById";
