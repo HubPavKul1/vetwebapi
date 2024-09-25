@@ -20,7 +20,7 @@ interface CatalogCardProps {
   isDrugCard?: boolean;
   children: React.ReactElement | React.ReactNode;
   delUrl: string;
-  isDrugInstr: boolean
+  isDrugInstr?: boolean;
 }
 export function CatalogCard({ ...props }: CatalogCardProps) {
   return (

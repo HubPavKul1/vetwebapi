@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
 
-import { ReceiptDrug } from "components/drugs/drugMovements/ReceiptDrug";
 import { useState } from "react";
 import { ReceiptPDF } from "./receiptPdf/ReceiptPDF";
-import { ReceiptPageMenu } from "components/menu/ReceiptPageMenu";
+
 import { ReportPage } from "components/ReportPage";
 import { useGetDataById } from "shared/hooks/useGetDataById";
 
@@ -13,6 +12,8 @@ import { ErrorLoadDataMessage } from "shared/index";
 import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
 import { convertDateString } from "shared/helpers";
 import { drugReceiptHeaders } from "shared/model/tableHeaders";
+import { ReceiptPageMenu } from "widgets/drugMovement";
+import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;

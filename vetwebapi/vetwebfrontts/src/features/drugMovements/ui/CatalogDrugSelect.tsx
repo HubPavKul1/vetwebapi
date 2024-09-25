@@ -1,23 +1,24 @@
 import Select from "react-select";
-
 import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
-import { IBase } from "shared/model/BaseInterface";
 
 import { useGetData } from "shared/hooks/useGetData";
-import { accountingUnitsUrl } from "shared/urls/drugUrls";
+import { catalogDrugsUrl } from "shared/urls/drugUrls";
+import { IDrugCatalogCard } from "entities/catalogDrug/model/drugCatalogInterfaces";
 
-export function AccountingUnitSelect() {
-  const { data, isLoading } = useGetData("accountingUnits", accountingUnitsUrl);
+
+export function CatalogDrugSelect() {
+  const { data, isLoading } = useGetData("catalogNames", catalogDrugsUrl);
 
   const { control } = useFormContext();
+
   if (isLoading || !data) return <p>...Загрузка</p>;
 
   const options =
-    data.accounting_units &&
-    data.accounting_units.map((unit: IBase) => ({
-      value: unit.id,
-      label: unit.name,
+    data.catalog_drugs &&
+    data.catalog_drugs.map((drug: IDrugCatalogCard) => ({
+      value: drug.id,
+      label: `${drug.name}:${drug.batch}`,
     }));
 
   const getValue = (value: number) =>
@@ -26,15 +27,14 @@ export function AccountingUnitSelect() {
   return (
     <Controller
       control={control}
-      name="accounting_unit_id"
-      rules={{ required: "Field is required!" }}
+      name="catalog_drug_id"
+      rules={{ required: "Drug is required!" }}
       render={({ field: { onChange, value } }) => (
         <Select
           className="custom-select"
           isSearchable
           isClearable
           options={options}
-          placeholder="Выберите единицу учета *"
           value={getValue(value)}
           onChange={(newValue) => onChange((newValue as IOption).value)}
         />

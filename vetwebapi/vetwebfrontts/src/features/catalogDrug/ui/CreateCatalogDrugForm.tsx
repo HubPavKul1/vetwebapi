@@ -2,12 +2,16 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { FormInputProps } from "shared/model/FormInterface";
 
-
 import { useCreateItem } from "shared/hooks/useCreateItem";
 
 import { DrugSelect } from "./DrugSelect";
-import { CustomButton, CustomInput, fieldRequiredMessage, ICreateItemFormInterface } from "shared/index";
-import { IDrugCatalogCreate } from "entities/drugCatalog/model/drugCatalogInterfaces";
+import {
+  CustomButton,
+  CustomInput,
+  fieldRequiredMessage,
+  ICreateItemFormInterface,
+} from "shared/index";
+import { IDrugCatalogCreate } from "entities/catalogDrug/model/drugCatalogInterfaces";
 
 export function CreateCatalogDrugForm({
   url,

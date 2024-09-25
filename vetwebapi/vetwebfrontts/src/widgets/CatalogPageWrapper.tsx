@@ -1,11 +1,11 @@
-import { CreateItem } from "components/CreateItem";
 import { ICompanies } from "entities/company/model/companyInterfaces";
 import { IDrugs } from "entities/drug/model/drugInterfaces";
-import { ICatalogDrugs } from "entities/drugCatalog/model/drugCatalogInterfaces";
+import { ICatalogDrugs } from "entities/catalogDrug/model/drugCatalogInterfaces";
 import { IDrugMovements } from "entities/drugMovements/model/drugMovementInterfaces";
 import { IVetworks } from "entities/vetWork/model/vetWorkInterfaces";
 import { Col, Row } from "react-bootstrap";
 import { CustomPagination, NoData, PageWrapper } from "shared/index";
+import { CreateItem } from "features/CreateItem";
 
 interface CatalogPageWrapperProps {
   title: string;

@@ -1,6 +1,6 @@
-import { CreateItem } from "components/CreateItem";
 import { ReportForm } from "components/ReportForm";
 import { ReportBetweenDateRangeProps } from "entities/vetWorkReport/model/reportInterfaces";
+import { CreateItem } from "features/CreateItem";
 import { vaccinationsReportUrl } from "shared/urls/vetWorkUrls";
 
 export function VaccinationBetweenDateRange({

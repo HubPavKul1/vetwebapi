@@ -1,7 +1,8 @@
 import { ReportBetweenDateRangeProps } from "entities/vetWorkReport/model/reportInterfaces";
 import { Vet1BReportUrl } from "shared/urls/drugUrls";
-import { CreateItem } from "components/CreateItem";
+
 import { ReportForm } from "components/ReportForm";
+import { CreateItem } from "features/CreateItem";
 
 export function Vet1BMenu({
   setReportData,

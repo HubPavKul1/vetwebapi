@@ -1,7 +1,7 @@
-import { CreateItem } from "components/CreateItem";
 import { IVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { VetWorkCreateForm } from "./VetWorkCreateForm";
 import { VetWorkCard } from "./VetWorkCard";
+import { CreateItem } from "features/CreateItem";
 
 interface VetWorkCardsProps {
   vetWorks: IVetwork[];

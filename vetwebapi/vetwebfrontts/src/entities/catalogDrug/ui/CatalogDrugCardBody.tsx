@@ -1,10 +1,11 @@
 import { Container } from "react-bootstrap";
-import { Overdue } from "../../../shared/ui/Overdue";
-import { TimeToOverdue } from "../../../features/drug/ui/TimeToOverdue";
+
 import { useGetDataById } from "shared/hooks/useGetDataById";
 import { drugRestUrl } from "shared/urls/drugUrls";
 import { IDrugRest } from "entities/drugReport/model/drugReportInterfaces";
 import { convertDateString, timeToExpiration } from "shared/helpers";
+import { TimeToOverdue } from "features/drug";
+import { Overdue } from "shared/index";
 
 interface CatalogDrugCardBodyProps {
   batch: string;

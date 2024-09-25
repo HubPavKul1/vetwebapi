@@ -1,13 +1,12 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
-
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
-import { PlaceOfAdministrationSelect } from "../drug/selectData/PlaceOfAdministrationSelect";
-import { AdministrationMethodSelect } from "../drug/selectData/AdministrationMethodSelect";
 import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
 import { IDrugInMovementIn } from "entities/drugMovements/model/drugMovementInterfaces";
+import { PlaceOfAdministrationSelect } from "features/drug/ui/selectData/PlaceOfAdministrationSelect";
+import { AdministrationMethodSelect } from "features/drug/ui/selectData/AdministrationMethodSelect";
 
 interface AddDrugFormProps {
   url: string;

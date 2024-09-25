@@ -1,14 +1,12 @@
-import { IDrugInMovement } from "interfaces/DrugInterfaces";
-import { AppService } from "shared/services/app.service";
+import { IDrugInMovement } from "entities/drugMovements/model/drugMovementInterfaces";
+import { convertDateString } from "shared/helpers";
 
 interface ReceiptDrugProps {
   drug: IDrugInMovement;
 }
 
 export function ReceiptDrug({ drug }: ReceiptDrugProps) {
-  const productionDate = AppService.convertDateString(
-    drug.production_date
-  ).shortDate;
+  const productionDate = convertDateString(drug.production_date).shortDate;
 
   return (
     <tr key={drug.id}>

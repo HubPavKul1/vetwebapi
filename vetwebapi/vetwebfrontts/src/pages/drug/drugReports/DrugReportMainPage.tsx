@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { DrugMovementBetweenDateRange } from "components/drugs/drugReports/reportMenuItems/DrugMovementBetweenDateRange";
-import { IDateRange } from "shared/model/BaseInterface";
 import { DrugReport } from "./DrugReport";
 import { Vet1BMenu } from "components/drugs/drugReports/reportMenuItems/Vet1BMenu";
 import { Vet1B } from "./Vet1B";
 import { CatalogWrapper } from "components/CatalogWrapper";
+import { IDateRange } from "shared/index";
 
 export function DrugReportMainPage() {
   const [drugReportData, setDrugReportData] = useState<object>({});

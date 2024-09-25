@@ -1,5 +1,5 @@
-import { IDrugReport } from "interfaces/DrugInterfaces";
-import { AppService } from "shared/services/app.service";
+import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces";
+import { convertDateString } from "shared/helpers";
 
 interface DrugInReportProps {
   drug: IDrugReport;
@@ -11,7 +11,7 @@ export function DrugInReport({ drug }: DrugInReportProps) {
       <td>{drug.drug_name}</td>
       <td>{drug.batch}</td>
       {drug.expiration_date ? (
-        <td>{AppService.convertDateString(drug.expiration_date).shortDate}</td>
+        <td>{convertDateString(drug.expiration_date).shortDate}</td>
       ) : (
         <td></td>
       )}

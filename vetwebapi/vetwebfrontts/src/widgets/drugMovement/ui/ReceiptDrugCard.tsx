@@ -1,5 +1,5 @@
-import { CatalogItem } from "components/catalogItem/CatalogItem";
 import { IDrugMovement } from "entities/drugMovements/model/drugMovementInterfaces";
+import { CatalogCard } from "features/index";
 import { convertDateString } from "shared/helpers";
 import { drugReceiptDetailUrl, drugReceiptLink } from "shared/urls/drugUrls";
 
@@ -9,21 +9,17 @@ interface ReceiptDrugCardProps {
   imgSrc: string;
 }
 
-export function ReceiptDrugCard({
-  drugMovement,
-  invQueryName,
-  imgSrc,
-}: ReceiptDrugCardProps) {
+export function ReceiptDrugCard({ ...props }: ReceiptDrugCardProps) {
+  const { drugMovement, invQueryName, imgSrc } = props;
   return (
-    <CatalogItem
-      delUrl={drugReceiptDetailUrl(drugMovement.id)}
-      url={drugReceiptLink(drugMovement.id)}
-      imgSrc={imgSrc}
+    <CatalogCard
+      itemDetailUrl={drugReceiptLink(drugMovement.id)}
+      cardTitle={convertDateString(drugMovement.operation_date).fullDate}
       invQueryName={invQueryName}
-      cardTitle={
-        convertDateString(drugMovement.operation_date).fullDate
-      }
-      id={drugMovement.id}
-    />
+      delUrl={drugReceiptDetailUrl(drugMovement.id)}
+      imgSrc={imgSrc}
+    >
+      <h5>ReceiptDrugCardBody</h5>
+    </CatalogCard>
   );
 }
