@@ -3,8 +3,8 @@ import { DiagnosticBetweenDateRange } from "./DiagnosticBetweenDateRange";
 import { DiagnosticReport } from "./DiagnosticReport";
 import { VaccinationReport } from "./VaccinationReport";
 import { VaccinationBetweenDateRange } from "./VaccinationBetweenDateRange";
-import { CatalogWrapper } from "components/CatalogWrapper";
 import { IDateRange } from "shared/index";
+import { HomeContentWrapper } from "entities/home";
 
 export function VetWorkReportMainPage() {
   const [vetWorkReportData, setVetWorkReportData] = useState<object>({});
@@ -14,10 +14,7 @@ export function VetWorkReportMainPage() {
   return (
     <>
       {!reportActive ? (
-        <CatalogWrapper
-          title="Отчеты по противоэпизоотической работе"
-          cardsInRow={3}
-        >
+        <HomeContentWrapper title="Отчеты по противоэпизоотической работе">
           <DiagnosticBetweenDateRange
             setReportData={setVetWorkReportData}
             setDateRange={setDateRange}
@@ -29,7 +26,7 @@ export function VetWorkReportMainPage() {
             setDateRange={setDateRange}
             setReportActive={setReportActive}
           />
-        </CatalogWrapper>
+        </HomeContentWrapper>
       ) : dateRange && vetWorkReportData.diagnostics ? (
         <DiagnosticReport
           data={vetWorkReportData.diagnostics}

@@ -1,9 +1,12 @@
 import { Container } from "react-bootstrap";
 import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
-import { VetWorkReportItem } from "../ReportItem";
+import { VetWorkReportItem } from "../../../../widgets/vetWork/ui/VetWorkReportItem";
 import { convertDateString } from "shared/helpers";
 import { PageTable } from "shared/index";
-import { diagnosticHeaders, vaccinationHeaders } from "shared/model/tableHeaders";
+import {
+  diagnosticHeaders,
+  vaccinationHeaders,
+} from "shared/model/tableHeaders";
 
 interface VetWorkReportPDFBodyProps {
   isDiagnostic: boolean;

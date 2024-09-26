@@ -1,4 +1,4 @@
-import { PDFWrapper } from "components/PDFWrapper";
+import { PDFWrapper } from "shared/ui/PDFWrapper";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { AnimalsListPDFBody } from "./AnimalsListPDFBody";
 import { AnimalsListPDFFooter } from "./AnimalsListPDFFooter";

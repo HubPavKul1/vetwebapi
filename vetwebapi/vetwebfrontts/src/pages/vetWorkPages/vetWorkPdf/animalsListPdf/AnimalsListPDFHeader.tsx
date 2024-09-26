@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-import { DrugReportTopText } from "components/drugs/drugReports/DrugReportTopText";
+import { DrugReportTopText } from "entities/drugReport/ui/DrugReportTopText";
 import { convertDateString } from "shared/helpers";
 
 interface AnimalsListPDFHeaderProps {

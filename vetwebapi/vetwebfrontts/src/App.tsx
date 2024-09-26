@@ -7,7 +7,7 @@ import { DrugReceipts } from "pages/drug/DrugReceipts";
 import { Drugs } from "pages/drug/Drugs";
 import { DrugDetail } from "pages/drug/DrugDetail";
 import { DrugCatalog } from "pages/drug/DrugCatalog";
-import { ReceiptDetail } from "pages/drug/receiptDetail/ReceiptDetail";
+import { ReceiptDetail } from "pages/drug/ReceiptDetail";
 import { Vets } from "pages/company/Vets";
 import { Vaccinations } from "pages/vetWorkPages/Vaccinations";
 import { DrugReportMainPage } from "pages/drug/drugReports/DrugReportMainPage";

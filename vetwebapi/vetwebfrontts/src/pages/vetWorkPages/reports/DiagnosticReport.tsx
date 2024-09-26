@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-import { ReportMenu } from "components/menu/ReportMenu.tsx";
-import { ReportPage } from "components/ReportPage.tsx";
+import { ReportMenu } from "widgets/ReportMenu.tsx";
 import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
 
-import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
 import { convertDateString } from "shared/helpers.ts";
 import { diagnosticHeaders } from "shared/model/tableHeaders.ts";
+import { ReportPage } from "widgets/ReportPage.tsx";
+import { VetWorkReportItem } from "widgets/vetWork/index.ts";
+
 
 export function DiagnosticReport({
   data,

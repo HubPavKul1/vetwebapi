@@ -1,4 +1,4 @@
-import { PDFWrapper } from "components/PDFWrapper";
+import { PDFWrapper } from "shared/ui/PDFWrapper";
 import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
 import { VetWorkReportPDFBody } from "./VetWorkReportPDFBody";
 

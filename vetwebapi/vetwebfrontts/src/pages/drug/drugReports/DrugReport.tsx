@@ -1,13 +1,11 @@
-import { AppService } from "shared/services/app.service.ts";
-
 import { useState } from "react";
-
-import { IDrugReport } from "interfaces/DrugInterfaces.tsx";
-import { DrugInReport } from "components/drugs/drugReports/DrugInReport.tsx";
-import { ReportMenu } from "components/menu/ReportMenu.tsx";
-import { DrugReportPDF } from "./drugReportPdf/DrugReportPDF.tsx";
-import { drugReportHeaders } from "../../../shared/model/tableHeaders.ts";
-import { ReportPage } from "components/ReportPage.tsx";
+import { ReportMenu } from "widgets/ReportMenu.tsx";
+import { DrugReportPDF } from "./DrugReportPDF.tsx";
+import { convertDateString } from "shared/helpers.ts";
+import { ReportPage } from "widgets/ReportPage.tsx";
+import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces.ts";
+import { DrugInReport } from "widgets/drugReport/index.ts";
+import { drugReportHeaders } from "shared/model/tableHeaders.ts";
 
 interface DrugReportProps {
   data: IDrugReport[];
@@ -24,8 +22,8 @@ export function DrugReport({
 }: DrugReportProps) {
   const [pdf, setPdf] = useState(false);
 
-  const date1 = AppService.convertDateString(dateStart);
-  const date2 = AppService.convertDateString(dateEnd);
+  const date1 = convertDateString(dateStart);
+  const date2 = convertDateString(dateEnd);
 
   return (
     <>

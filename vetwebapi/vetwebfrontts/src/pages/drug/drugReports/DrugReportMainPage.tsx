@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { DrugMovementBetweenDateRange } from "components/drugs/drugReports/reportMenuItems/DrugMovementBetweenDateRange";
 import { DrugReport } from "./DrugReport";
-import { Vet1BMenu } from "components/drugs/drugReports/reportMenuItems/Vet1BMenu";
+import { Vet1BMenu } from "widgets/drugReport/ui/Vet1BMenu";
 import { Vet1B } from "./Vet1B";
-import { CatalogWrapper } from "components/CatalogWrapper";
 import { IDateRange } from "shared/index";
+import { HomeContentWrapper } from "entities/home";
+import { DrugMovementBetweenDateRange } from "widgets/drugReport";
 
 export function DrugReportMainPage() {
   const [drugReportData, setDrugReportData] = useState<object>({});
@@ -14,7 +14,7 @@ export function DrugReportMainPage() {
   return (
     <>
       {!reportActive ? (
-        <CatalogWrapper title="Отчеты по биопрепаратам" cardsInRow={3}>
+        <HomeContentWrapper title="Отчеты по биопрепаратам">
           <DrugMovementBetweenDateRange
             setReportData={setDrugReportData}
             setDateRange={setDateRange}
@@ -26,7 +26,7 @@ export function DrugReportMainPage() {
             setDateRange={setDateRange}
             setReportActive={setReportActive}
           />
-        </CatalogWrapper>
+        </HomeContentWrapper>
       ) : dateRange && drugReportData.drugs_report ? (
         <DrugReport
           data={drugReportData.drugs_report}

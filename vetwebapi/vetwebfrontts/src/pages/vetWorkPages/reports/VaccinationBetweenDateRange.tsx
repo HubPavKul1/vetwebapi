@@ -1,4 +1,4 @@
-import { ReportForm } from "components/ReportForm";
+import { ReportForm } from "features/ReportForm";
 import { ReportBetweenDateRangeProps } from "entities/vetWorkReport/model/reportInterfaces";
 import { CreateItem } from "features/CreateItem";
 import { vaccinationsReportUrl } from "shared/urls/vetWorkUrls";

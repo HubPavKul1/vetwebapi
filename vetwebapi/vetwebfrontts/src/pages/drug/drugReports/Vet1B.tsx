@@ -1,15 +1,13 @@
-import { AppService } from "shared/services/app.service.ts";
-
 import { useState } from "react";
 
-import { DrugInReport } from "components/drugs/drugReports/DrugInReport.tsx";
-import { ReportMenu } from "components/menu/ReportMenu.tsx";
+import { DrugInReport } from "widgets/drugReport/ui/DrugInReport";
+import { ReportMenu } from "widgets/ReportMenu";
 
-import { ReportPage } from "components/ReportPage.tsx";
-import { Vet1BPDF } from "./Vet1BPdf/index.tsx";
 import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces.ts";
 import { convertDateString } from "shared/helpers.ts";
 import { drugReportHeaders } from "shared/model/tableHeaders.ts";
+import { Vet1BPDF } from "./Vet1BPDF";
+import { ReportPage } from "widgets/ReportPage";
 
 interface Vet1BProps {
   data: IDrugReport[];

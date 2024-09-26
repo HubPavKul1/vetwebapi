@@ -1,19 +1,16 @@
-import { CatalogWrapper } from "components/CatalogWrapper";
-import { vaccinationsUrl } from "../../shared/urls/vetWorkUrls";
-import { VetWorkCreateForm } from "components/vetWorks/VetWorkCreateForm";
+import { vaccinationsUrl } from "shared/index";
+import { VetWorks } from "widgets/vetWork";
 
 export function Vaccinations() {
   const url = vaccinationsUrl;
   const queryKey = "vaccinations";
   return (
-    <CatalogWrapper
+    <VetWorks
       url={url}
       imgSrc="/vetworkBg.jpg"
       title="Вакцинации"
       btnTitle="Добавить вакцинацию"
       queryKey={queryKey}
-      cardsInRow={3}
-      createForm={<VetWorkCreateForm url={url} queryKey={`${queryKey}1`} />}
     />
   );
 }

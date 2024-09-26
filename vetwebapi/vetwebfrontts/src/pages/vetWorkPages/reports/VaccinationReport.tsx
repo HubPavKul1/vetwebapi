@@ -1,14 +1,11 @@
-import { AppService } from "shared/services/app.service.ts";
-
 import { useState } from "react";
-
-import { ReportMenu } from "components/menu/ReportMenu.tsx";
-import { ReportPage } from "components/ReportPage.tsx";
 import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
-import { VetWorkReportItem } from "./ReportItem.tsx";
 import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
 import { convertDateString } from "shared/helpers.ts";
 import { vaccinationHeaders } from "shared/model/tableHeaders.ts";
+import { ReportPage } from "widgets/ReportPage.tsx";
+import { ReportMenu } from "widgets/ReportMenu.tsx";
+import { VetWorkReportItem } from "widgets/vetWork/index.ts";
 
 export function VaccinationReport({
   data,

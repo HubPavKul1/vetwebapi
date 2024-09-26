@@ -1,11 +1,9 @@
-import { AppService } from "shared/services/app.service";
-
 import { UpdateItem } from "shared/ui/UpdateItem";
-import { UpdateAnimalForm } from "../../../features/animal/ui/UpdateAnimalForm";
 import { DeleteItem } from "shared/ui/DeleteItem";
 import { companyAnimalUrl } from "shared/urls/companyUrls";
-import { IAnimal } from "../model/animalInterfaces";
 import { convertDateString } from "shared/helpers";
+import { UpdateAnimalForm } from "features/animal/ui/UpdateAnimalForm";
+import { IAnimal } from "../model/animalInterfaces";
 
 interface CompanyAnimalProps {
   animal: IAnimal;
@@ -58,7 +56,6 @@ export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
         <DeleteItem
           queryKeyId={id}
           queryKey="company"
-          mutationKey="deleteAnimal"
           alertMessage="Животное успешно удалено!"
           url={companyAnimalUrl(companyId, animal.id)}
         />

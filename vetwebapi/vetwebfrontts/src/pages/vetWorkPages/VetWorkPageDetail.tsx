@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
-import { AddAnimalsToVetWorkForm } from "components/vetWorks/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
+import { AddAnimalsToVetWorkForm } from "features/vetWork/ui/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
 import { ActPDF } from "./vetWorkPdf/actPdf/ActPDF";
 import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
 import { VetWorkDetail } from "./VetWorkDetail";
