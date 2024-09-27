@@ -1,4 +1,4 @@
-import { companiesUrl } from "shared/urls/companyUrls";
+import { companiesUrl } from "shared/index";
 import { CompanyCatalog } from "widgets/company";
 
 export function Companies() {

@@ -1,9 +1,9 @@
-import { ICompanyCard } from "entities/company/model/companyInterfaces";
 import { CreateCompany } from "features/company";
 import { useState } from "react";
 import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
 import { CompanyCard } from "./ui/CompanyCard";
+import { ICompanyCard } from "entities/company";
 
 interface CompanyCatalogProps {
   url: string;

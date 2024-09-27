@@ -1,23 +1,24 @@
 import { useParams } from "react-router-dom";
-import { CompanyPageMenu } from "widgets/company/ui/CompanyPageMenu";
 
-import { useGetDataById } from "shared/hooks/useGetDataById";
+import {
+  companyDetailUrl,
+  ErrorLoadDataMessage,
+  Loader,
+  useGetDataById,
+} from "shared/index";
 
-import { Loader } from "shared/ui/Loader";
-import { companyDetailUrl } from "shared/urls/companyUrls";
 
-import { CompanyEmployees } from "entities/employee/ui/CompanyEmployees";
-import { CompanyAnimals } from "entities/animal/ui/CompanyAnimals";
-import { ErrorLoadDataMessage } from "shared/index";
-import { ICompanyDetail } from "entities/company/model/companyInterfaces";
-import { CompanyAddress } from "entities/address/ui/CompanyAddress";
-import { PageDetail } from "widgets/PageDetail";
+import { CompanyPageMenu, PageDetail } from "widgets/index";
+import { CompanyEmployees } from "entities/employee";
+import { CompanyAnimals } from "entities/animal";
+import { CompanyAddress } from "entities/address";
+import { ICompanyDetail } from "entities/company";
 
 interface CompanyData {
   data?: ICompanyDetail;
   isLoading: boolean;
   isError: boolean;
-  error: Error;
+  error: Error | null;
 }
 
 export function CompanyDetail() {

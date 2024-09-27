@@ -1,12 +1,12 @@
+import { convertDateString } from "shared/helpers";
+
+import { CatalogCard } from "features/index";
+import { CatalogDrugCardBody, IDrugCatalogCard } from "entities/catalogDrug";
 import {
   catalogDrugDetailUrl,
   catalogDrugLink,
   drugImageUrl,
-} from "shared/urls/drugUrls";
-import { convertDateString } from "shared/helpers";
-import { IDrugCatalogCard } from "entities/catalogDrug/model/drugCatalogInterfaces";
-import { CatalogDrugCardBody } from "entities/catalogDrug/ui/CatalogDrugCardBody";
-import { CatalogCard } from "features/index";
+} from "shared/index";
 
 interface CatalogDrugCardProps {
   drug: IDrugCatalogCard;
@@ -31,16 +31,5 @@ export function CatalogDrugCard({ ...props }: CatalogDrugCardProps) {
         drugId={drug.id}
       />
     </CatalogCard>
-
-    // <CatalogItem
-    //   delUrl={catalogDrugDetailUrl(drug.id)}
-    //   url={catalogDrugLink(drug.id)}
-    //   imgSrc={!drug.image ? "/drugsCard.jpg" : drugImageUrl(drug.drug_id)}
-    //   invQueryName={invQueryName}
-    //   cardTitle={drug.name}
-    //   id={drug.id}
-    // >
-
-    // </CatalogItem>
   );
 }

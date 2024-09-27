@@ -1,7 +1,6 @@
 import { Card, Col, Container } from "react-bootstrap";
 import { ICardProps } from "shared/model/CardProps";
 
-
 interface HomePageCardProps {
   item: ICardProps;
 }

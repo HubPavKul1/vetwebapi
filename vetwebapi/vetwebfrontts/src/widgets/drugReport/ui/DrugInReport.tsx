@@ -1,4 +1,4 @@
-import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces";
+import { IDrugReport } from "entities/drugReport";
 import { convertDateString } from "shared/helpers";
 
 interface DrugInReportProps {

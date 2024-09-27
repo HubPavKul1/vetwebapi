@@ -18,14 +18,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      components: "/src/components",
-      hooks: "/src/hooks",
-      interfaces: "/src/interfaces",
       pages: "/src/pages",
-      urls: "/src/urls",
       assets: "/src/assets",
-      services: "/src/services",
-      data: "/src/data",
       shared: "/src/shared",
       app: "/src/app",
       widgets: "/src/widgets",

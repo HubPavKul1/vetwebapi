@@ -22,6 +22,7 @@ export * from "./urls/drugUrls";
 export * from "./urls/vetWorkUrls";
 export * from "./model/BaseInterfaces";
 export * from "./model/WrapperProps";
+export * from "./helpers";
 export { HeaderWrapper } from "./ui/HeaderWrapper";
 export { FooterWrapper } from "./ui/FooterWrapper";
 
