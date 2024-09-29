@@ -5,6 +5,7 @@ from sqlalchemy import Boolean, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models.base import Base
+from core.settings import settings
 
 if TYPE_CHECKING:
     from vetwebapi.core.models import Disease
@@ -60,10 +61,16 @@ class Drug(Base):
 
     def image_path(self, filename: str) -> str:
         """Create relative path for drug_image"""
+        drug_image_dir = os.path.join(settings.media_dir, "drugs", "images")
+        if not os.path.isdir(drug_image_dir):
+            os.mkdir(drug_image_dir)
         return os.path.join("drugs", "images", filename)
 
     def instruction_path(self, filename: str) -> str:
         """Create relative path for drug_instruction"""
+        drug_instr_dir = os.path.join(settings.media_dir, "drugs", "instr")
+        if not os.path.isdir(drug_instr_dir):
+            os.mkdir(drug_instr_dir)
         return os.path.join("drugs", "instr", filename)
 
     def __repr__(self) -> str:

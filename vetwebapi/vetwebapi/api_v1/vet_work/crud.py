@@ -281,8 +281,55 @@ async def update_animal_in_vetwork(
 
 # DELETE
 
+async def remove_vetwork_file(session: AsyncSession, vetwork: VetWork) -> None:
+    vetworkFile = await read_vetwork_file(session=session, vetwork=vetwork)
+    if vetworkFile is not None:
+        file_path = os.path.join(settings.media_dir, vetworkFile.file_path)
+        os.remove(file_path)
+
+async def delete_vetwork_animals(session: AsyncSession, vetwork: VetWork) -> None:
+    stmt = (
+        select(AnimalInVetWork).where(AnimalInVetWork.vetwork_id == vetwork.id)
+    )
+    animals = list(await session.scalars(stmt))
+    
+    [await delete_animal_in_vetwork(session=session, animal=animal) for animal in animals if animals]
+
+async def delete_vetwork_companies(session: AsyncSession, vetwork: VetWork) -> None:
+    stmt = (
+        select(CompanyInVetWork)
+        .where(CompanyInVetWork.vetwork_id == vetwork.id)
+    )
+    companies = list(await session.scalars(stmt))
+    [await delete_company_in_vetwork(session=session, company=company) for company in companies if companies]
+
+async def delete_vetwork_diseases(session: AsyncSession, vetwork: VetWork) -> None:
+    stmt = (
+        select(DiseaseInVetWork).where(DiseaseInVetWork.vetwork_id == vetwork.id)
+    )
+    diseases = list(await session.scalars(stmt))
+    if diseases:
+        for disease in diseases:
+            await session.delete(disease)
+            await session.commit()
+
+async def delete_vetwork_doctors(session: AsyncSession, vetwork: VetWork) -> None:
+    stmt = (
+        select(DoctorInVetWork)
+        .where(DoctorInVetWork.vetwork_id == vetwork.id)
+    )
+    doctors = list(await session.scalars(stmt))
+    if doctors:
+        for doctor in doctors:
+            await session.delete(doctor)
+            await session.commit()
 
 async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
+    await remove_vetwork_file(session=session, vetwork=vetwork)
+    await delete_vetwork_animals(session=session, vetwork=vetwork)
+    await delete_vetwork_companies(session=session, vetwork=vetwork)
+    await delete_vetwork_diseases(session=session, vetwork=vetwork)
+    await delete_vetwork_doctors(session=session, vetwork=vetwork)
     await session.delete(vetwork)
     await session.commit()
 

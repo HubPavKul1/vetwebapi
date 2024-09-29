@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
-import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
+import { VetWorkReportPDF } from "./VetWorkReportPDF.tsx";
 import { convertDateString } from "shared/helpers.ts";
 import { vaccinationHeaders } from "shared/model/tableHeaders.ts";
 import { ReportPage } from "widgets/ReportPage.tsx";
 import { ReportMenu } from "widgets/ReportMenu.tsx";
-import { VetWorkReportItem } from "widgets/vetWork/index.ts";
+import { VetWorkReportItem } from "entities/vetWorkReport/index.ts";
 
 export function VaccinationReport({
   data,

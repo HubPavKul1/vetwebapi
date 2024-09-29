@@ -12,7 +12,7 @@ export function DrugsLink() {
     mutationKey: ["deleteExpired"],
     mutationFn: () => AppService.getAll(catalogDrugsExpiredUrl),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["drugCatalog"] }),
+      queryClient.invalidateQueries({ queryKey: ["drugCatalog1"] }),
         alert("Препараты успешно удалены!");
     },
   });

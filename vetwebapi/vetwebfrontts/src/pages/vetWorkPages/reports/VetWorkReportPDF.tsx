@@ -1,6 +1,7 @@
+import { IVetWorkReport } from "entities/vetWorkReport";
 import { PDFWrapper } from "shared/ui/PDFWrapper";
-import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
-import { VetWorkReportPDFBody } from "./VetWorkReportPDFBody";
+import { VetWorkReportPDFBody } from "widgets/vetWorkReport";
+
 
 interface VetWorkReportPDFProps {
   setPdf: CallableFunction;

@@ -16,7 +16,7 @@ export function ReportMenu({ setPdf, setReportActive }: ReportMenuProps) {
       id: 1,
       element: (
         <CustomButton
-          className="btn-submit"
+          className="btn-submit mb-2"
           title="Отчет PDF"
           onClick={() => setPdf(true)}
         />

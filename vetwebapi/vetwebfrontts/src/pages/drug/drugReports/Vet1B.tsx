@@ -3,11 +3,11 @@ import { useState } from "react";
 import { DrugInReport } from "widgets/drugReport/ui/DrugInReport";
 import { ReportMenu } from "widgets/ReportMenu";
 
-import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces.ts";
 import { convertDateString } from "shared/helpers.ts";
 import { drugReportHeaders } from "shared/model/tableHeaders.ts";
 import { Vet1BPDF } from "./Vet1BPDF";
 import { ReportPage } from "widgets/ReportPage";
+import { IDrugReport } from "entities/drugReport";
 
 interface Vet1BProps {
   data: IDrugReport[];

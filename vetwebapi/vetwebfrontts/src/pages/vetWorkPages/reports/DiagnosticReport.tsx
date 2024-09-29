@@ -3,12 +3,11 @@ import { useState } from "react";
 import { ReportMenu } from "widgets/ReportMenu.tsx";
 import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
 
-import { VetWorkReportPDF } from "./pdfReport/VetWorkReportPDF.tsx";
+import { VetWorkReportPDF } from "./VetWorkReportPDF.tsx";
 import { convertDateString } from "shared/helpers.ts";
 import { diagnosticHeaders } from "shared/model/tableHeaders.ts";
 import { ReportPage } from "widgets/ReportPage.tsx";
-import { VetWorkReportItem } from "widgets/vetWork/index.ts";
-
+import { VetWorkReportItem } from "entities/vetWorkReport/index.ts";
 
 export function DiagnosticReport({
   data,

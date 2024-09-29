@@ -1,4 +1,4 @@
-import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces";
+import { IVetWorkReport } from "../model/reportInterfaces";
 
 interface VetWorkReportItemProps {
   data: IVetWorkReport;

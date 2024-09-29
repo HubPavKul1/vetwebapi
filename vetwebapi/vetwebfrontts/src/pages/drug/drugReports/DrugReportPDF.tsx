@@ -1,5 +1,5 @@
+import { IDrugReport } from "entities/drugReport";
 import { PDFWrapper } from "shared/ui/PDFWrapper";
-import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces";
 import {
   DrugReportPDFBody,
   DrugReportPDFFooter,

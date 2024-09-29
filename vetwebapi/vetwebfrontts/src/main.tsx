@@ -7,8 +7,8 @@ import "assets/css/bootstrap.min.css";
 import "assets/css/style.css";
 import "assets/sass/index.css";
 
-import { App } from "./App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { App } from "app/App";
 
 const queryClient = new QueryClient();
 

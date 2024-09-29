@@ -3,9 +3,9 @@ import { ReportMenu } from "widgets/ReportMenu.tsx";
 import { DrugReportPDF } from "./DrugReportPDF.tsx";
 import { convertDateString } from "shared/helpers.ts";
 import { ReportPage } from "widgets/ReportPage.tsx";
-import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces.ts";
 import { DrugInReport } from "widgets/drugReport/index.ts";
 import { drugReportHeaders } from "shared/model/tableHeaders.ts";
+import { IDrugReport } from "entities/drugReport/index.ts";
 
 interface DrugReportProps {
   data: IDrugReport[];

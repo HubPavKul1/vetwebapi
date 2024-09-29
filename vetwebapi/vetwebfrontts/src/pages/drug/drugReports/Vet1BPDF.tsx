@@ -1,8 +1,7 @@
+import { IDrugReport } from "entities/drugReport";
 import { PDFWrapper } from "shared/ui/PDFWrapper";
-import { Vet1BPDFBody } from "../../../widgets/drugReport/ui/vet1BPDF/Vet1BPDFBody";
-import { Vet1BPDFFooter } from "../../../widgets/drugReport/ui/vet1BPDF/Vet1BPDFFooter";
-import { Vet1BPDFHeader } from "../../../widgets/drugReport/ui/vet1BPDF/Vet1BPDFHeader";
-import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces";
+import { Vet1BPDFBody, Vet1BPDFFooter, Vet1BPDFHeader } from "widgets/drugReport";
+
 
 interface Vet1BPDFProps {
   setPdf: CallableFunction;

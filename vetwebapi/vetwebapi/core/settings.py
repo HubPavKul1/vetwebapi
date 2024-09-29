@@ -12,10 +12,6 @@ class Settings(BaseSettings):
     
     media_dir: str = os.path.join(BASE_DIR, "media")
 
-    # media_dir: str = os.path.join(
-    #     BASE_DIR, "vetwebfrontts", "public"
-    # )  # директория для статики react app
-
     db_user: str
     db_pass: str
     db_name: str
