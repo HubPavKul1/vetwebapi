@@ -282,47 +282,58 @@ async def update_animal_in_vetwork(
 # DELETE
 
 async def remove_vetwork_file(session: AsyncSession, vetwork: VetWork) -> None:
-    vetworkFile = await read_vetwork_file(session=session, vetwork=vetwork)
+    vetworkFile: VetWorkFile = await read_vetwork_file(session=session, vetwork=vetwork)
     if vetworkFile is not None:
         file_path = os.path.join(settings.media_dir, vetworkFile.file_path)
         os.remove(file_path)
+        await delete_item_in_vetwork(session=session, item=vetworkFile)
+
 
 async def delete_vetwork_animals(session: AsyncSession, vetwork: VetWork) -> None:
     stmt = (
         select(AnimalInVetWork).where(AnimalInVetWork.vetwork_id == vetwork.id)
     )
-    animals = list(await session.scalars(stmt))
-    
-    [await delete_animal_in_vetwork(session=session, animal=animal) for animal in animals if animals]
+    animals: list[AnimalInVetWork] = list(await session.scalars(stmt))
+    if len(animals) > 1:
+        [await delete_item_in_vetwork(session=session, item=animal) for animal in animals]
+    elif len(animals) == 1:
+        await delete_item_in_vetwork(session=session, item=animals[0])
+
 
 async def delete_vetwork_companies(session: AsyncSession, vetwork: VetWork) -> None:
     stmt = (
         select(CompanyInVetWork)
         .where(CompanyInVetWork.vetwork_id == vetwork.id)
     )
-    companies = list(await session.scalars(stmt))
-    [await delete_company_in_vetwork(session=session, company=company) for company in companies if companies]
+    companies: list[CompanyInVetWorkIn] = list(await session.scalars(stmt))
+    if len(companies) > 1:
+        [await delete_item_in_vetwork(session=session, item=company) for company in companies]
+    elif len(companies) == 1:
+        await delete_item_in_vetwork(session=session, item=companies[0])
+
 
 async def delete_vetwork_diseases(session: AsyncSession, vetwork: VetWork) -> None:
     stmt = (
         select(DiseaseInVetWork).where(DiseaseInVetWork.vetwork_id == vetwork.id)
     )
-    diseases = list(await session.scalars(stmt))
-    if diseases:
-        for disease in diseases:
-            await session.delete(disease)
-            await session.commit()
+    diseases: list[DiseaseInVetWork] = list(await session.scalars(stmt))
+    if len(diseases) > 1:
+        [await delete_item_in_vetwork(session=session, item=disease) for disease in diseases]
+    elif len(diseases) == 1:
+        await delete_item_in_vetwork(session=session, item=diseases[0])
+
 
 async def delete_vetwork_doctors(session: AsyncSession, vetwork: VetWork) -> None:
     stmt = (
         select(DoctorInVetWork)
         .where(DoctorInVetWork.vetwork_id == vetwork.id)
     )
-    doctors = list(await session.scalars(stmt))
-    if doctors:
-        for doctor in doctors:
-            await session.delete(doctor)
-            await session.commit()
+    doctors: list[DoctorInVetWork] = list(await session.scalars(stmt))
+    if len(doctors) > 1:
+        [await delete_item_in_vetwork(session=session, item=doctor) for doctor in doctors]
+    elif len(doctors) == 1:
+        await delete_item_in_vetwork(session=session, item=doctors[0])
+
 
 async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
     await remove_vetwork_file(session=session, vetwork=vetwork)
@@ -334,11 +345,8 @@ async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
     await session.commit()
 
 
-async def delete_animal_in_vetwork(session: AsyncSession, animal: AnimalInVetWork) -> None:
-    await session.delete(animal)
+async def delete_item_in_vetwork(session: AsyncSession, item: CompanyInVetWork | AnimalInVetWork | DiseaseInVetWork | DoctorInVetWork | VetWorkFile) -> None:
+    await session.delete(item)
     await session.commit()
 
 
-async def delete_company_in_vetwork(session: AsyncSession, company: CompanyInVetWork) -> None:
-    await session.delete(company)
-    await session.commit()
