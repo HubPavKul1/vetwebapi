@@ -22,3 +22,14 @@ class Catalog(BaseModel):
     total_count: int
     page: int
     per_page: int
+
+
+class CatalogDrugDetail(BaseModel):
+    catalog_drug_id: int
+    operation_date: date
+    packs_amount: int
+    units_amount: float
+
+
+class CatalogDrugDetails(BaseModel):
+    catalog_drugs: list[CatalogDrugDetail]

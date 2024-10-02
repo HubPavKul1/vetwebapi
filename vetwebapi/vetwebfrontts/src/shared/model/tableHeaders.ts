@@ -7,6 +7,12 @@ export const drugReceiptHeaders = [
   "Количество единиц учета",
 ];
 
+export const catalogDrugMovementHeaders = [
+  "Дата операции",
+  "Количество упаковок",
+  "Количество единиц учета",
+];
+
 export const drugReportHeaders = [
   "Наименование продукции",
   "Серия",

@@ -22,7 +22,8 @@ export function VetWorkFile({ setPdf }: VetWorkFileProps) {
         type="application/pdf"
         data={vetWorkFileUrl(vetWorkId)}
         width="100%"
-        height="700"
+        // height="700"
+        className="min-h-screen"
       ></object>
     </Container>
   );

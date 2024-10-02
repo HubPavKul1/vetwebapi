@@ -15,6 +15,7 @@ import { Diagnostics } from "pages/vetWorkPages/Diagnostics";
 import { VetWorkPageDetail } from "pages/vetWorkPages/VetWorkPageDetail";
 import { Labs } from "pages/company/Labs";
 import { VetWorkReportMainPage } from "pages/vetWorkPages/reports/vetWorkReportMainPage";
+import { DrugCatalogDetail } from "pages/drug/DrugCatalogDetail";
 
 export function App() {
   return (
@@ -29,6 +30,7 @@ export function App() {
           <Route path="drugs/receipts/:id" element={<ReceiptDetail />} />
           <Route path="drugs" element={<Drugs />} />
           <Route path="drugs/catalog" element={<DrugCatalog />} />
+          <Route path="drugs/catalog/:id" element={<DrugCatalogDetail />} />
           <Route path="vetwork/vaccinations" element={<Vaccinations />} />
           <Route path="vetwork/diagnostics" element={<Diagnostics />} />
           <Route path="vetwork/:id" element={<VetWorkPageDetail />} />

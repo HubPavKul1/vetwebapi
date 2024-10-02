@@ -19,3 +19,14 @@ export interface ICatalogDrugs {
   page: number;
   per_page: number;
 }
+
+export interface ICatalogDrugDetail {
+  catalog_drug_id: number;
+  operation_date: string;
+  packs_amount: number;
+  units_amount: number;
+}
+
+export interface ICatalogDrugDetails {
+  catalog_drugs: ICatalogDrugDetail[];
+}

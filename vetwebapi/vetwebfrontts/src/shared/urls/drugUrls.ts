@@ -38,6 +38,14 @@ export const catalogDrugLink = (drugId?: number) => {
   return `/drugs/catalog/${drugId}`;
 };
 
+export const catalogDrugReceiptsUrl = (drugId?: number) => {
+  return catalogDrugDetailUrl(drugId) + "/receipts";
+};
+
+export const catalogDrugSpentUrl = (drugId?: number) => {
+  return catalogDrugDetailUrl(drugId) + "/spent";
+};
+
 export const catalogDrugsExpiredUrl = catalogDrugsUrl + "/overdue";
 
 // drug receipts

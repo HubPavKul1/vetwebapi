@@ -6,12 +6,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api_v1.company.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
 from core.database import db_manager
-from core.models import CatalogDrug
+from core.models import CatalogDrug, DrugInMovement
 
 from . import crud
 from .dependencies import catalog_drug_by_id
-from .schemas import Catalog, CatalogDrugIn, CatalogDrugSchema
-from .serializers import serialize_catalog_drug
+from .schemas import Catalog, CatalogDrugIn, CatalogDrugSchema, CatalogDrugDetails
+from .serializers import serialize_catalog_drug, serialize_catalog_drug_details
 
 router = APIRouter(prefix="/catalog")
 
@@ -66,6 +66,42 @@ async def get_catalog_drug_route(
 ) -> Union[CatalogDrugSchema, dict]:
     try:
         return await serialize_catalog_drug(drug=drug)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/{id}/receipts", response_model=CatalogDrugDetails)
+async def get_catalog_drug_receipts(
+    drug: CatalogDrug = Depends(catalog_drug_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[CatalogDrugDetails, dict]:
+    try:
+        drug_receipts: list[DrugInMovement] = await crud.read_catalog_drug_receipts(
+            session=session, catalog_drug=drug
+        )
+
+        return await serialize_catalog_drug_details(drugs=drug_receipts)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/{id}/spent", response_model=CatalogDrugDetails)
+async def get_catalog_drug_spent(
+    drug: CatalogDrug = Depends(catalog_drug_by_id),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[CatalogDrugDetails, dict]:
+    try:
+        drug_spent: list[DrugInMovement] = await crud.read_catalog_drug_spent(
+            session=session, catalog_drug=drug
+        )
+
+        return await serialize_catalog_drug_details(drugs=drug_spent)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
