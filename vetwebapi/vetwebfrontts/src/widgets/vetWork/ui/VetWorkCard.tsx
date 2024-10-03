@@ -14,16 +14,12 @@ export function VetWorkCard({ ...props }: VetWorkCardProps) {
   return (
     <CatalogCard
       itemDetailUrl={vetWorkLink(vetWork.id)}
-      cardTitle={
-        convertDateString(vetWork.vetwork_date).fullDate +
-        " " +
-        vetWork.diseases
-      }
+      cardTitle={convertDateString(vetWork.vetwork_date).fullDate}
       invQueryName={invQueryName}
       delUrl={vetWorkDetailUrl(vetWork.id)}
       imgSrc={imgSrc}
     >
-      <div>VetWorkCardBody</div>
+      <div>{vetWork.diseases}</div>
     </CatalogCard>
   );
 }

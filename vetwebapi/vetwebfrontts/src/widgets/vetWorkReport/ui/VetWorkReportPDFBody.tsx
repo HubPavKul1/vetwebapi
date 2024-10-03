@@ -13,11 +13,8 @@ interface VetWorkReportPDFBodyProps {
   data: IVetWorkReport[];
 }
 
-export function VetWorkReportPDFBody({
-  isDiagnostic,
-  dateEnd,
-  data,
-}: VetWorkReportPDFBodyProps) {
+export function VetWorkReportPDFBody({ ...props }: VetWorkReportPDFBodyProps) {
+  const { isDiagnostic, dateEnd, data } = props;
   const reportHeaders = isDiagnostic ? diagnosticHeaders : vaccinationHeaders;
   const date = convertDateString(dateEnd);
   const title = isDiagnostic

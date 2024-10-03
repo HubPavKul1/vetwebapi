@@ -10,22 +10,22 @@ interface DrugCardProps {
 }
 
 export function DrugCard({ ...props }: DrugCardProps) {
+  const { drug, invQueryName } = props;
   return (
     <CatalogCard
-      itemDetailUrl={drugLink(props.drug.id)}
-      cardTitle={props.drug.name}
-      invQueryName={props.invQueryName}
+      itemDetailUrl={drugLink(drug.id)}
+      cardTitle={drug.name}
+      invQueryName={invQueryName}
       delUrl={drugDetailUrl(props.drug.id)}
-      imgSrc={props.drug.image && drugImageUrl(props.drug.id)}
+      imgSrc={drug.image && drugImageUrl(drug.id)}
       isDrugCard={true}
-      drugId={props.drug.id}
-      isDrugInstr={!!props.drug.instruction}
+      drugId={drug.id}
+      isDrugInstr={!!drug.instruction}
     >
       <DrugCardBody
-        drugManufacturer={props.drug.drug_manufacturer}
-        diseases={props.drug.diseases}
+        drugManufacturer={drug.drug_manufacturer}
+        diseases={drug.diseases}
       />
     </CatalogCard>
-   
   );
 }

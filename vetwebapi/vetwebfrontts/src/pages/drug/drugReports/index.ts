@@ -1,0 +1,1 @@
+export { DrugReportMainPage } from "./DrugReportMainPage";

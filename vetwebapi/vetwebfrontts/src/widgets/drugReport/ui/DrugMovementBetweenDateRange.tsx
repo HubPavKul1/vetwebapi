@@ -5,10 +5,9 @@ import { ReportForm } from "features/ReportForm";
 import { CreateItem } from "features/CreateItem";
 
 export function DrugMovementBetweenDateRange({
-  setReportData,
-  setDateRange,
-  setReportActive,
+  ...props
 }: ReportBetweenDateRangeProps) {
+  const { setReportData, setDateRange, setReportActive } = props;
   return (
     <CreateItem btnTitle="Движение биопрепаратов за период времени">
       <ReportForm

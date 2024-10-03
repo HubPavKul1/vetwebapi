@@ -13,7 +13,6 @@ import { VetWorkPageMenu } from "widgets/vetWork";
 interface VetWorkDetailProps {
   pageTitle: string;
   imgSrc: string;
-  alt?: string;
   data: IVetWorkSchema;
   setAnimals: CallableFunction;
   showAct: CallableFunction;
@@ -26,52 +25,63 @@ interface VetWorkDetailProps {
 }
 
 export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
-  const disease = props.data.diseases[0].toLowerCase();
+  const {
+    pageTitle,
+    imgSrc,
+    data,
+    setAnimals,
+    showAct,
+    showReferral,
+    showAnimalsList,
+    showAccountingAct,
+    setCompanyId,
+    showReferralAnimalList,
+    showVetWorkFile,
+  } = props;
+  const disease = data.diseases[0].toLowerCase();
   let dosages = 0;
   const animalsDoses =
-    props.data.animals &&
-    props.data.animals.map((animal) =>
+    data.animals &&
+    data.animals.map((animal) =>
       animal.dosage ? (dosages += animal.dosage) : (dosages += 0)
     );
   return (
     <>
       <PageDetail
-        imgSrc={props.imgSrc}
-        alt={props.pageTitle}
+        imgSrc={imgSrc}
+        alt={pageTitle}
         menu={
           <VetWorkPageMenu
-            showAct={props.showAct}
-            showAnimalsList={props.showAnimalsList}
-            showReferral={props.showReferral}
-            showAccountingAct={props.showAccountingAct}
-            workType={props.data.work_type}
+            showAct={showAct}
+            showAnimalsList={showAnimalsList}
+            showReferral={showReferral}
+            showAccountingAct={showAccountingAct}
+            workType={data.work_type}
             disease={disease}
-            showReferralAnimalList={props.showReferralAnimalList}
-            showVetWorkFile={props.showVetWorkFile}
-            fileId={props.data.file_id}
+            showReferralAnimalList={showReferralAnimalList}
+            showVetWorkFile={showVetWorkFile}
+            fileId={data.file_id}
           />
         }
-        title={props.pageTitle}
+        title={pageTitle}
       >
         <>
           <Container className="text-center">
             <div className="flex text-left text-lg text-indigo-700 font-bold ">
-              <span className="mr-5">
-                Всего голов: {props.data?.animals?.length}
-              </span>
+              <span className="mr-5">Всего голов: {data?.animals?.length}</span>
               <span>Израсходовано препарата: {dosages.toFixed(3)} доз</span>
             </div>
 
             <h5 className="page-detail-title">Предприятия </h5>
-            {props.data.companies?.length &&
-              props.data.companies.map((company) => (
+            {data.companies?.length &&
+              data.companies.map((company) => (
                 <VetWorkCompany
                   key={company.id}
                   company={company}
-                  setAnimals={props.setAnimals}
-                  setCompanyId={props.setCompanyId}
-                  animals={props.data.animals}
-                  workType={props.data.work_type.toLowerCase()}
+                  setAnimals={setAnimals}
+                  setCompanyId={setCompanyId}
+                  animals={data.animals}
+                  workType={data.work_type.toLowerCase()}
                   disease={disease}
                 />
               ))}
@@ -82,9 +92,7 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
 
             <PageTable
               tableHeaders={drugReceiptHeaders}
-              tableItems={
-                props.data.drug && <ReceiptDrug drug={props.data.drug} />
-              }
+              tableItems={data.drug && <ReceiptDrug drug={data.drug} />}
             />
           </Container>
         </>

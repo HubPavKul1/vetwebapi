@@ -1,10 +1,11 @@
-import { IDrugMovement } from "entities/drugMovements/model/drugMovementInterfaces";
+import { ReceiptDrugCardBody } from "entities/drugMovements";
+import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
 import { CatalogCard } from "features/index";
 import { convertDateString } from "shared/helpers";
 import { drugReceiptDetailUrl, drugReceiptLink } from "shared/urls/drugUrls";
 
 interface ReceiptDrugCardProps {
-  drugMovement: IDrugMovement;
+  drugMovement: IDrugMovementDetail;
   invQueryName: string;
   imgSrc: string;
 }
@@ -19,7 +20,10 @@ export function ReceiptDrugCard({ ...props }: ReceiptDrugCardProps) {
       delUrl={drugReceiptDetailUrl(drugMovement.id)}
       imgSrc={imgSrc}
     >
-      <h5>ReceiptDrugCardBody</h5>
+      {drugMovement.drugs &&
+        drugMovement.drugs.map((drug) => (
+          <ReceiptDrugCardBody key={drug.id} drug={drug} />
+        ))}
     </CatalogCard>
   );
 }

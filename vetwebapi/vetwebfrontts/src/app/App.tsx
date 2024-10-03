@@ -1,21 +1,23 @@
 import { Layout } from "app/Layout";
-import { Home } from "pages/home/Home";
-import { Companies } from "pages/company/Companies";
-import { CompanyDetail } from "pages/company/CompanyDetail";
+import { Companies, CompanyDetail, Labs, Vets } from "pages/company";
+import {
+  DrugCatalog,
+  DrugCatalogDetail,
+  DrugDetail,
+  DrugReceipts,
+  Drugs,
+  ReceiptDetail,
+} from "pages/drug";
+import { DrugReportMainPage } from "pages/drug/drugReports";
+import { Home } from "pages/home";
+import {
+  Diagnostics,
+  Vaccinations,
+  VetWorkPageDetail,
+} from "pages/vetWorkPages";
+import { VetWorkReportMainPage } from "pages/vetWorkPages/reports";
+
 import { Routes, Route } from "react-router-dom";
-import { DrugReceipts } from "pages/drug/DrugReceipts";
-import { Drugs } from "pages/drug/Drugs";
-import { DrugDetail } from "pages/drug/DrugDetail";
-import { DrugCatalog } from "pages/drug/DrugCatalog";
-import { ReceiptDetail } from "pages/drug/ReceiptDetail";
-import { Vets } from "pages/company/Vets";
-import { Vaccinations } from "pages/vetWorkPages/Vaccinations";
-import { DrugReportMainPage } from "pages/drug/drugReports/DrugReportMainPage";
-import { Diagnostics } from "pages/vetWorkPages/Diagnostics";
-import { VetWorkPageDetail } from "pages/vetWorkPages/VetWorkPageDetail";
-import { Labs } from "pages/company/Labs";
-import { VetWorkReportMainPage } from "pages/vetWorkPages/reports/vetWorkReportMainPage";
-import { DrugCatalogDetail } from "pages/drug/DrugCatalogDetail";
 
 export function App() {
   return (

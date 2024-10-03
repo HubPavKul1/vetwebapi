@@ -1,7 +1,9 @@
-
-import { PageDetailBody, PageDetailTitle, PageDetailTop } from "shared/index";
-import { PageWrapper } from "../shared/ui/PageWrapper";
-
+import {
+  PageDetailBody,
+  PageDetailTitle,
+  PageDetailTop,
+  PageWrapper,
+} from "shared/index";
 
 interface PageDetailProps {
   imgSrc: string;
@@ -12,11 +14,12 @@ interface PageDetailProps {
 }
 
 export function PageDetail({ ...props }: PageDetailProps) {
+  const { imgSrc, alt, menu, title, children } = props;
   return (
     <PageWrapper>
-      <PageDetailTop imgSrc={props.imgSrc} alt={props.alt} menu={props.menu} />
-      <PageDetailTitle title={props.title} />
-      <PageDetailBody>{props.children}</PageDetailBody>
+      <PageDetailTop imgSrc={imgSrc} alt={alt} menu={menu} />
+      <PageDetailTitle title={title} />
+      <PageDetailBody>{children}</PageDetailBody>
     </PageWrapper>
   );
 }

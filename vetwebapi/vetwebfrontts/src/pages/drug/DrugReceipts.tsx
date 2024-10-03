@@ -2,7 +2,7 @@ import { drugReceiptsUrl } from "shared/urls/drugUrls";
 import { useState } from "react";
 import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
-import { IDrugMovement } from "entities/drugMovements/model/drugMovementInterfaces";
+import { IDrugMovementDetail } from "entities/drugMovements/model/drugMovementInterfaces";
 import { ReceiptDrugCard } from "widgets/drugMovement";
 import { CreateDrugReceiptForm } from "features/drugMovements/ui/CreateDrugReceiptForm";
 
@@ -30,7 +30,7 @@ export function DrugReceipts() {
       pageNum={pageNum}
       setPageNum={setPageNum}
     >
-      {data.drug_movements.map((drugMovement: IDrugMovement) => (
+      {data.drug_movements.map((drugMovement: IDrugMovementDetail) => (
         <ReceiptDrugCard
           key={drugMovement.id}
           drugMovement={drugMovement}

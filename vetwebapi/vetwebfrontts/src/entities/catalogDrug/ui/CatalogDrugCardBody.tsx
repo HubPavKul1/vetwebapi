@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 import { useGetDataById } from "shared/hooks/useGetDataById";
 import { drugRestUrl } from "shared/urls/drugUrls";
@@ -20,13 +20,8 @@ interface DataProps {
   isLoading: boolean;
 }
 
-export function CatalogDrugCardBody({
-  batch,
-  control,
-  production_date,
-  expiration_date,
-  drugId,
-}: CatalogDrugCardBodyProps) {
+export function CatalogDrugCardBody({ ...props }: CatalogDrugCardBodyProps) {
+  const { batch, control, production_date, expiration_date, drugId } = props;
   const expDate = new Date(expiration_date);
 
   const diffDays = timeToExpiration(expDate).deltaSeconds / 86400;
@@ -40,32 +35,44 @@ export function CatalogDrugCardBody({
   );
 
   return (
-    <Container className="mb-3">
-      <div className="">
+    <Container className="mb-2">
+      <Row>
         {diffDays > 0 && 60 > diffDays && (
           <TimeToOverdue expirationDate={expDate} />
         )}
-        <Container className="flex justify-between mb-1">
-          <span>Серия: {batch}</span>
-          <span>Контроль: {control}</span>
-        </Container>
-        {diffDays < 0 && <Overdue />}
-
-        <Container className="flex justify-between">
-          <span>Изготовлен: {production_date}</span>
-          <p>Годен до: {expDateString}</p>
-        </Container>
+      </Row>
+      <Row sm={1} md={2} className="text-sm">
+        <Col>
+          <span className="font-bold mr-1">Серия:</span>
+          {batch}
+        </Col>
+        <Col>
+          <span className="font-bold mr-1">Контроль:</span>
+          {control}
+        </Col>
+      </Row>
+      {diffDays < 0 && <Overdue />}
+      <Row sm={1} md={2} className="text-sm">
+        <Col>
+          <span className="font-bold mr-1">Изготовлен:</span>
+          {production_date}
+        </Col>
+        <Col>
+          <span className="font-bold mr-1">Годен до:</span>
+          {expDateString}
+        </Col>
+      </Row>
+      <Row className="text-sm">
         {data &&
           (data.units_rest && data.units_rest > 0 ? (
-            <Container className="flex justify-between">
-              <span>Осталось: {data.units_rest} доз</span>
-            </Container>
+            <div>
+              <span className="font-bold mr-1">Осталось: </span>{" "}
+              {data.units_rest} доз
+            </div>
           ) : (
-            <Container className="flex justify-between text-red-700 font-bold text-center">
-              <span>Нет в наличии!!!</span>
-            </Container>
+            <span className="text-red-700 font-bold">Нет в наличии!!!</span>
           ))}
-      </div>
+      </Row>
     </Container>
   );
 }

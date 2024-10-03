@@ -14,9 +14,9 @@ interface CompanyCatalogProps {
 }
 
 export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
+  const { url, queryKey, title, btnTitle, imgSrc } = props;
   const [pageNum, setPageNum] = useState(1);
-  const url = props.url;
-  const pageQueryKey = `${props.queryKey}${pageNum}`;
+  const pageQueryKey = `${queryKey}${pageNum}`;
   const { data, isLoading, isError, error } = useGetPageData(
     pageQueryKey,
     url,
@@ -28,9 +28,9 @@ export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
   return (
     <CatalogPageWrapper
       data={data}
-      title={props.title}
+      title={title}
       cardsInRow={3}
-      btnTitle={props.btnTitle}
+      btnTitle={btnTitle}
       createForm={<CreateCompany url={url} queryKey={pageQueryKey} />}
       pageNum={pageNum}
       setPageNum={setPageNum}
@@ -40,8 +40,7 @@ export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
           key={company.id}
           company={company}
           invQueryName={pageQueryKey}
-          cardTitle={company.short_name}
-          imgSrc={props.imgSrc}
+          imgSrc={imgSrc}
         />
       ))}
     </CatalogPageWrapper>

@@ -22,17 +22,18 @@ interface VetWorkPageMenuProps {
   fileId?: number;
 }
 
-export function VetWorkPageMenu({
-  showAct,
-  showAnimalsList,
-  showReferral,
-  showReferralAnimalList,
-  showAccountingAct,
-  showVetWorkFile,
-  workType,
-  disease,
-  fileId,
-}: VetWorkPageMenuProps) {
+export function VetWorkPageMenu({ ...props }: VetWorkPageMenuProps) {
+  const {
+    showAct,
+    showAnimalsList,
+    showReferral,
+    showReferralAnimalList,
+    showAccountingAct,
+    showVetWorkFile,
+    workType,
+    disease,
+    fileId,
+  } = props;
   const { id } = useParams();
   const vetWorkId = Number(id);
   const menuButtons = [
