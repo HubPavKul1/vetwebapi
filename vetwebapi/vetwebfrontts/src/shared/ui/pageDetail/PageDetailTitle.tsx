@@ -7,9 +7,7 @@ interface PageDetailTitleProps {
 export function PageDetailTitle({ title }: PageDetailTitleProps) {
   return (
     <Container className="page-title">
-      <h1>
-        <a href="#">{title}</a>
-      </h1>
+      <h1>{title}</h1>
     </Container>
   );
 }

@@ -57,3 +57,4 @@ export { PageDetailTitle } from "./ui/pageDetail/PageDetailTitle";
 export { PageDetailTop } from "./ui/pageDetail/PageDetailTop";
 export { DropdownMessage } from "./ui/DropdownMessage";
 export { PDFWrapper } from "./ui/PDFWrapper";
+export { PageMenuButton } from "./ui/PageMenuButton";

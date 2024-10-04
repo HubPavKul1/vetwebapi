@@ -1,4 +1,3 @@
-
 import { IAnimalInVetworkIn } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -84,7 +83,7 @@ export function AnimalFormItem({
         {disease === "туберкулез" && (
           <Col>
             <input
-              className="border-2 w-auto text-center"
+              className="border-2 w-28 text-center"
               type="number"
               step="any"
               id="dosage"

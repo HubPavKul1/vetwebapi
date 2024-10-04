@@ -5,8 +5,7 @@ import {
   PageMenuWrapper,
 } from "shared/index";
 
-import { AddDrugForm } from "features/drugMovements/ui/AddDrugForm";
-import { CreateItem } from "features/CreateItem";
+import AddDrugToReceipt from "features/drugMovements/AddDrugToReceipt";
 
 interface ReceiptPageMenuProps {
   url: string;
@@ -14,29 +13,17 @@ interface ReceiptPageMenuProps {
 }
 
 export function ReceiptPageMenu({ url, setPdf }: ReceiptPageMenuProps) {
-  const menuButtons = [
-    {
-      id: 1,
-      element: (
+  return (
+    <PageMenuWrapper>
+      <PageMenuTop>
+        <AddDrugToReceipt url={url} queryKey="receipt" />
+      </PageMenuTop>
+      <PageMenuButtonsBlock>
         <CustomButton
           className="btn-submit"
           title="Требование-заявка"
           onClick={() => setPdf(true)}
         />
-      ),
-    },
-  ];
-
-  return (
-    <PageMenuWrapper>
-      <PageMenuTop></PageMenuTop>
-      <PageMenuButtonsBlock>
-        <CreateItem btnTitle="Добавить препарат">
-          <AddDrugForm url={url} queryKey="receipt" />
-        </CreateItem>
-        {menuButtons.map((item) => (
-          <div key={item.id}>{item.element}</div>
-        ))}
       </PageMenuButtonsBlock>
     </PageMenuWrapper>
   );
