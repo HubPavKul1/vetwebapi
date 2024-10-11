@@ -11,7 +11,7 @@ export const convertDateString = (date: string) => {
 };
 
 export const diseasesString = (diseases: string[]) => {
-  return new Set(diseases.map((disease) => disease.toLowerCase() + ", "));
+  return new Set(diseases.map((disease) => disease.toLowerCase() + " "));
 };
 
 export const timeToExpiration = (date: Date | number) => {

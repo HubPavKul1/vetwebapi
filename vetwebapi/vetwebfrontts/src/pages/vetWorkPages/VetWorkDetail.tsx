@@ -9,35 +9,39 @@ import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { PageDetail } from "widgets/PageDetail";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 import { VetWorkPageMenu } from "widgets/vetWork";
+import { VetWorkPageContext } from "features/vetWork/VetWorkPageContextProvider";
+import { useContext } from "react";
 
-interface VetWorkDetailProps {
-  pageTitle: string;
-  imgSrc: string;
-  data: IVetWorkSchema;
-  setAnimals: CallableFunction;
-  showAct: CallableFunction;
-  showReferral: CallableFunction;
-  showAnimalsList: CallableFunction;
-  showAccountingAct: CallableFunction;
-  setCompanyId: CallableFunction;
-  showReferralAnimalList: CallableFunction;
-  showVetWorkFile: CallableFunction;
-}
+// interface VetWorkDetailProps {
+//   pageTitle: string;
+//   imgSrc: string;
+//   data: IVetWorkSchema;
+//   setAnimals: CallableFunction;
+//   showAct: CallableFunction;
+//   showReferral: CallableFunction;
+//   showAnimalsList: CallableFunction;
+//   showAccountingAct: CallableFunction;
+//   setCompanyId: CallableFunction;
+//   showReferralAnimalList: CallableFunction;
+//   showVetWorkFile: CallableFunction;
+// }
 
-export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
-  const {
-    pageTitle,
-    imgSrc,
-    data,
-    setAnimals,
-    showAct,
-    showReferral,
-    showAnimalsList,
-    showAccountingAct,
-    setCompanyId,
-    showReferralAnimalList,
-    showVetWorkFile,
-  } = props;
+export function VetWorkDetail() {
+  const context = useContext(VetWorkPageContext);
+  const data = context.data;
+  // const {
+  //   pageTitle,
+  //   imgSrc,
+  //   data,
+  //   setAnimals,
+  //   showAct,
+  //   showReferral,
+  //   showAnimalsList,
+  //   showAccountingAct,
+  //   setCompanyId,
+  //   showReferralAnimalList,
+  //   showVetWorkFile,
+  // } = props;
   const disease = data.diseases[0].toLowerCase();
   let dosages = 0;
   const animalsDoses =
@@ -48,22 +52,22 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
   return (
     <>
       <PageDetail
-        imgSrc={imgSrc}
-        alt={pageTitle}
+        imgSrc={context.imgSrc}
+        alt={context.pageTitle}
         menu={
           <VetWorkPageMenu
-            showAct={showAct}
-            showAnimalsList={showAnimalsList}
-            showReferral={showReferral}
-            showAccountingAct={showAccountingAct}
+            showAct={context.setShowAct}
+            showAnimalsList={context.setShowAnimalsList}
+            showReferral={context.setShowReferral}
+            showAccountingAct={context.setShowAccountingAct}
             workType={data.work_type}
             disease={disease}
-            showReferralAnimalList={showReferralAnimalList}
-            showVetWorkFile={showVetWorkFile}
+            showReferralAnimalList={context.setShowReferralAnimalList}
+            showVetWorkFile={context.setShowVetWorkFile}
             fileId={data.file_id}
           />
         }
-        title={pageTitle}
+        title={context.pageTitle}
       >
         <>
           <Container className="text-center">
@@ -78,8 +82,8 @@ export function VetWorkDetail({ ...props }: VetWorkDetailProps) {
                 <VetWorkCompany
                   key={company.id}
                   company={company}
-                  setAnimals={setAnimals}
-                  setCompanyId={setCompanyId}
+                  setAnimals={context.setAnimals}
+                  setCompanyId={context.setCompanyId}
                   animals={data.animals}
                   workType={data.work_type.toLowerCase()}
                   disease={disease}

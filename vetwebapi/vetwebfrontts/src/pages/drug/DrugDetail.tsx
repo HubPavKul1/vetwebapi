@@ -38,7 +38,7 @@ export function DrugDetail() {
       <Container>
         <Row className="p-3 font-bold text-center">
           <Col sm={3} className="">
-            <a href={drugImageUrl(drugId)}>
+            <a href={data.image ? drugImageUrl(drugId) : "#"}>
               <img
                 className="hover:scale-110 transition-transform duration-500 ease-in-out"
                 src={data.image ? drugImageUrl(drugId) : "/drugsCard.jpg"}

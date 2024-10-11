@@ -1,4 +1,4 @@
-import { IVetwork } from "entities/vetWork/model/vetWorkInterfaces";
+import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { VetWorkCreateForm } from "features/vetWork";
 import { useState } from "react";
 import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
@@ -35,7 +35,7 @@ export function VetWorks({ ...props }: VetWorksProps) {
       pageNum={pageNum}
       setPageNum={setPageNum}
     >
-      {data.vetworks.map((vetWork: IVetwork) => (
+      {data.vetworks.map((vetWork: IVetWorkSchema) => (
         <VetWorkCard
           key={vetWork.id}
           vetWork={vetWork}

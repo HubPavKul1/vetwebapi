@@ -1,17 +1,15 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-
 import { DrugReportTopText } from "entities/drugReport/ui/DrugReportTopText";
 import { NoData } from "shared/index";
 import { convertDateString } from "shared/helpers";
+import { useContext } from "react";
+import { VetWorkPageContext } from "features/vetWork/VetWorkPageContextProvider";
 
-interface ActPDFHeaderProps {
-  data: IVetWorkSchema;
-}
-
-export function ActPDFHeader({ data }: ActPDFHeaderProps) {
+export function ActPDFHeader() {
+  const data = useContext(VetWorkPageContext).data;
   const date = convertDateString(data.vetwork_date);
+
   if (!data.animals) return <NoData title="Данные о животных" />;
   if (!data.drug) return <NoData title="Данные о препаратах" />;
   if (!data.companies) return <NoData title="Данные о предприятиях" />;

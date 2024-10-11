@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 
 import { AddAnimalsToVetWorkForm } from "features/vetWork/ui/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
@@ -15,7 +15,8 @@ import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/Referr
 import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 import { VetWorkFile } from "./VetWorkFile";
 import { ErrorLoadDataMessage } from "shared/index";
-import { convertDateString } from "shared/helpers";
+import { convertDateString, diseasesString } from "shared/helpers";
+import { VetWorkPageContextProvider } from "features/vetWork";
 
 interface VetWorkData {
   data?: IVetWorkSchema;
@@ -24,15 +25,33 @@ interface VetWorkData {
   error: Error;
 }
 
+interface IVetWorkPageContext {
+  setShowAct: CallableFunction;
+  setShowAnimalsList: CallableFunction;
+  setShowReferral: CallableFunction;
+  setAnimals: CallableFunction;
+  setCompanyId: CallableFunction;
+  setShowReferralAnimalList: CallableFunction;
+  setShowAccountingAct: CallableFunction;
+  setShowVetWorkFile: CallableFunction;
+  pageTitle: string;
+  imgSrc: string;
+  data: IVetWorkSchema;
+  companyId: string;
+  disease: string;
+}
+
+export const VetWorkPageDetailContext: React.Context<{}> = createContext({});
+
 export function VetWorkPageDetail() {
-  const [act, showAct] = useState(false);
-  const [animalsList, showAnimalsList] = useState(false);
-  const [referral, showReferral] = useState(false);
+  const [act, setShowAct] = useState(false);
+  const [animalsList, setShowAnimalsList] = useState(false);
+  const [referral, setShowReferral] = useState(false);
   const [animals, setAnimals] = useState(false);
   const [companyId, setCompanyId] = useState("");
-  const [referralAnimalList, showReferralAnimalList] = useState(false);
-  const [accountingAct, showAccountingAct] = useState(false);
-  const [vetWorkFile, showVetWorkFile] = useState(false);
+  const [referralAnimalList, setShowReferralAnimalList] = useState(false);
+  const [accountingAct, setShowAccountingAct] = useState(false);
+  const [vetWorkFile, setShowVetWorkFile] = useState(false);
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -47,8 +66,8 @@ export function VetWorkPageDetail() {
   if (isLoading || !data) return <Loader />;
 
   const date = convertDateString(data.vetwork_date);
-  const diseases = data.diseases;
-  const disease = diseases[0].toLowerCase();
+  const diseases = [...diseasesString(data.diseases)];
+  const disease = data.diseases[0].toLowerCase();
   const pageTitle =
     data.work_type === "вакцинация"
       ? `Вакцинация: ${diseases}`
@@ -56,8 +75,24 @@ export function VetWorkPageDetail() {
   const imgSrc =
     data.work_type === "вакцинация" ? "/vetworkBg.jpg" : "/diagnostic.jpg";
 
+  const vetWorkPageValues: IVetWorkPageContext = {
+    setShowAct: setShowAct,
+    setShowAnimalsList: setShowAnimalsList,
+    setShowReferral: setShowReferral,
+    setAnimals: setAnimals,
+    setCompanyId: setCompanyId,
+    setShowReferralAnimalList: setShowReferralAnimalList,
+    setShowAccountingAct: setShowAccountingAct,
+    setShowVetWorkFile: setShowVetWorkFile,
+    pageTitle: `${pageTitle} от ${date.shortDate} г. `,
+    imgSrc: imgSrc,
+    data: data,
+    companyId: companyId,
+    disease: disease,
+  };
+
   return (
-    <>
+    <VetWorkPageContextProvider>
       {!act &&
       !animalsList &&
       !animals &&
@@ -70,26 +105,26 @@ export function VetWorkPageDetail() {
           imgSrc={imgSrc}
           setAnimals={setAnimals}
           setCompanyId={setCompanyId}
-          showAct={showAct}
-          showAnimalsList={showAnimalsList}
-          showReferral={showReferral}
-          showAccountingAct={showAccountingAct}
-          showReferralAnimalList={showReferralAnimalList}
-          showVetWorkFile={showVetWorkFile}
+          showAct={setShowAct}
+          showAnimalsList={setShowAnimalsList}
+          showReferral={setShowReferral}
+          showAccountingAct={setShowAccountingAct}
+          showReferralAnimalList={setShowReferralAnimalList}
+          showVetWorkFile={setShowVetWorkFile}
           data={data}
         />
       ) : act ? (
-        <ActPDF setPdf={showAct} data={data} />
+        <ActPDF setPdf={setShowAct} data={data} />
       ) : accountingAct ? (
-        <AccountingActPDF setPdf={showAccountingAct} data={data} />
+        <AccountingActPDF setPdf={setShowAccountingAct} data={data} />
       ) : referral ? (
-        <ReferralPDF setPdf={showReferral} data={data} />
+        <ReferralPDF setPdf={setShowReferral} data={data} />
       ) : referralAnimalList ? (
-        <ReferralAnimalListPDF setPdf={showReferralAnimalList} data={data} />
+        <ReferralAnimalListPDF setPdf={setShowReferralAnimalList} data={data} />
       ) : animalsList ? (
-        <AnimalsListPDF setPdf={showAnimalsList} data={data} />
+        <AnimalsListPDF setPdf={setShowAnimalsList} data={data} />
       ) : vetWorkFile ? (
-        <VetWorkFile setPdf={showVetWorkFile} />
+        <VetWorkFile setPdf={setShowVetWorkFile} />
       ) : (
         animals && (
           <AddAnimalsToVetWorkForm
@@ -101,6 +136,6 @@ export function VetWorkPageDetail() {
           />
         )
       )}
-    </>
+    </VetWorkPageContextProvider>
   );
 }
