@@ -1,7 +1,5 @@
 import { Container } from "react-bootstrap";
 
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-
 import { VetWorkCompany } from "entities/vetWork/ui/VetWorkCompany";
 
 import { PageTable } from "shared/index";
@@ -9,39 +7,15 @@ import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { PageDetail } from "widgets/PageDetail";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 import { VetWorkPageMenu } from "widgets/vetWork";
-import { VetWorkPageContext } from "features/vetWork/VetWorkPageContextProvider";
 import { useContext } from "react";
-
-// interface VetWorkDetailProps {
-//   pageTitle: string;
-//   imgSrc: string;
-//   data: IVetWorkSchema;
-//   setAnimals: CallableFunction;
-//   showAct: CallableFunction;
-//   showReferral: CallableFunction;
-//   showAnimalsList: CallableFunction;
-//   showAccountingAct: CallableFunction;
-//   setCompanyId: CallableFunction;
-//   showReferralAnimalList: CallableFunction;
-//   showVetWorkFile: CallableFunction;
-// }
+import { VetWorkPageContext } from "features/vetWork";
+import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
 
 export function VetWorkDetail() {
-  const context = useContext(VetWorkPageContext);
+  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
+  if (!context.data) return;
   const data = context.data;
-  // const {
-  //   pageTitle,
-  //   imgSrc,
-  //   data,
-  //   setAnimals,
-  //   showAct,
-  //   showReferral,
-  //   showAnimalsList,
-  //   showAccountingAct,
-  //   setCompanyId,
-  //   showReferralAnimalList,
-  //   showVetWorkFile,
-  // } = props;
+
   const disease = data.diseases[0].toLowerCase();
   let dosages = 0;
   const animalsDoses =
@@ -52,22 +26,12 @@ export function VetWorkDetail() {
   return (
     <>
       <PageDetail
-        imgSrc={context.imgSrc}
-        alt={context.pageTitle}
+        imgSrc={context.imgSrc ? context.imgSrc: ""}
+        alt={context.pageTitle ? context.pageTitle: ""}
         menu={
-          <VetWorkPageMenu
-            showAct={context.setShowAct}
-            showAnimalsList={context.setShowAnimalsList}
-            showReferral={context.setShowReferral}
-            showAccountingAct={context.setShowAccountingAct}
-            workType={data.work_type}
-            disease={disease}
-            showReferralAnimalList={context.setShowReferralAnimalList}
-            showVetWorkFile={context.setShowVetWorkFile}
-            fileId={data.file_id}
-          />
+          <VetWorkPageMenu/>
         }
-        title={context.pageTitle}
+        title={context.pageTitle ? context.pageTitle: ""}
       >
         <>
           <Container className="text-center">

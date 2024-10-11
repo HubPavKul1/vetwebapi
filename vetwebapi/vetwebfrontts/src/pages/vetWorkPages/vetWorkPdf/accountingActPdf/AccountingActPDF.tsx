@@ -3,21 +3,21 @@ import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { ActPDFFooter } from "../actPdf/ActPDFFooter";
 import { AccountingActHeader } from "./AccountingActHeader";
 import AccountingActBody from "./AccountingActBody";
+import { useContext } from "react";
+import { VetWorkPageContext } from "features/vetWork";
+import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
 
-interface AccountingActPDFProps {
-  setPdf: CallableFunction;
-  data: IVetWorkSchema;
-}
 
-export default function AccountingActPDF({
-  data,
-  setPdf,
-}: AccountingActPDFProps) {
+
+export function AccountingActPDF() {
+  const context: IVetWorkPageContext = useContext(VetWorkPageContext)
+
+
   return (
-    <PDFWrapper setPdf={setPdf} filename="accountingAct.pdf">
-      <AccountingActHeader data={data} />
-      <AccountingActBody data={data} />
-      <ActPDFFooter data={data} />
+    <PDFWrapper setPdf={context.setShowAccountingAct} filename="accountingAct.pdf">
+      <AccountingActHeader  />
+      <AccountingActBody />
+      <ActPDFFooter />
     </PDFWrapper>
   );
 }

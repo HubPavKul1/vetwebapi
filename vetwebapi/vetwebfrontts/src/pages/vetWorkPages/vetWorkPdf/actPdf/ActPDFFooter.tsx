@@ -1,12 +1,12 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
+import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
+import { useContext } from "react";
+import { VetWorkPageContext } from "features/vetWork";
 
-interface ActPDFFooterProps {
-  data: IVetWorkSchema;
-}
-
-export function ActPDFFooter({ data }: ActPDFFooterProps) {
+export function ActPDFFooter() {
+  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
+  const data = context.data;
   if (!data.animals) return;
   if (!data.drug) return;
   if (!data.companies) return;

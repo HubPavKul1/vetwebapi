@@ -1,8 +1,5 @@
 import { useParams } from "react-router-dom";
 
-import { createContext, useState } from "react";
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-
 import { AddAnimalsToVetWorkForm } from "features/vetWork/ui/AddAnimalsToVetWorkForm/AddAnimalsToVetWorkForm";
 import { ActPDF } from "./vetWorkPdf/actPdf/ActPDF";
 import { AnimalsListPDF } from "./vetWorkPdf/animalsListPdf/AnimalsListPDF";
@@ -12,36 +9,16 @@ import { useGetDataById } from "shared/hooks/useGetDataById";
 import { Loader } from "shared/ui/Loader";
 import { vetWorkDetailUrl } from "shared/urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
-import AccountingActPDF from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 import { VetWorkFile } from "./VetWorkFile";
 import { ErrorLoadDataMessage } from "shared/index";
 import { convertDateString, diseasesString } from "shared/helpers";
-import { VetWorkPageContextProvider } from "features/vetWork";
-
-interface VetWorkData {
-  data?: IVetWorkSchema;
-  isLoading: boolean;
-  isError: boolean;
-  error: Error;
-}
-
-interface IVetWorkPageContext {
-  setShowAct: CallableFunction;
-  setShowAnimalsList: CallableFunction;
-  setShowReferral: CallableFunction;
-  setAnimals: CallableFunction;
-  setCompanyId: CallableFunction;
-  setShowReferralAnimalList: CallableFunction;
-  setShowAccountingAct: CallableFunction;
-  setShowVetWorkFile: CallableFunction;
-  pageTitle: string;
-  imgSrc: string;
-  data: IVetWorkSchema;
-  companyId: string;
-  disease: string;
-}
-
-export const VetWorkPageDetailContext: React.Context<{}> = createContext({});
+import {
+  IVetWorkPageContext,
+  VetWorkData,
+} from "features/vetWork/models/interfaces";
+import { VetWorkPageContext } from "features/vetWork";
+import { useState } from "react";
+import { AccountingActPDF } from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 
 export function VetWorkPageDetail() {
   const [act, setShowAct] = useState(false);
@@ -92,7 +69,7 @@ export function VetWorkPageDetail() {
   };
 
   return (
-    <VetWorkPageContextProvider>
+    <VetWorkPageContext.Provider value={vetWorkPageValues}>
       {!act &&
       !animalsList &&
       !animals &&
@@ -100,23 +77,11 @@ export function VetWorkPageDetail() {
       !referralAnimalList &&
       !accountingAct &&
       !vetWorkFile ? (
-        <VetWorkDetail
-          pageTitle={`${pageTitle} от ${date.shortDate} г. `}
-          imgSrc={imgSrc}
-          setAnimals={setAnimals}
-          setCompanyId={setCompanyId}
-          showAct={setShowAct}
-          showAnimalsList={setShowAnimalsList}
-          showReferral={setShowReferral}
-          showAccountingAct={setShowAccountingAct}
-          showReferralAnimalList={setShowReferralAnimalList}
-          showVetWorkFile={setShowVetWorkFile}
-          data={data}
-        />
+        <VetWorkDetail/>
       ) : act ? (
-        <ActPDF setPdf={setShowAct} data={data} />
+        <ActPDF />
       ) : accountingAct ? (
-        <AccountingActPDF setPdf={setShowAccountingAct} data={data} />
+        <AccountingActPDF />
       ) : referral ? (
         <ReferralPDF setPdf={setShowReferral} data={data} />
       ) : referralAnimalList ? (
@@ -136,6 +101,6 @@ export function VetWorkPageDetail() {
           />
         )
       )}
-    </VetWorkPageContextProvider>
+    </VetWorkPageContext.Provider>
   );
 }

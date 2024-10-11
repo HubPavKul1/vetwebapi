@@ -4,21 +4,19 @@ import { ActPDFBody } from "./ActPDFBody";
 import { ActPDFFooter } from "./ActPDFFooter";
 import { ActPDFHeader } from "./ActPDFHeader";
 import { useContext } from "react";
-import { VetWorkPageContext } from "features/vetWork/VetWorkPageContextProvider";
+import { VetWorkPageContext } from "features/vetWork";
+import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
 
-interface ActPDFProps {
-  setPdf: CallableFunction;
-  data: IVetWorkSchema;
-}
+
 
 export function ActPDF() {
-  const context = useContext(VetWorkPageContext);
+  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
   const data = context.data;
   return (
     <PDFWrapper setPdf={context.setShowAct} filename="act.pdf">
       <ActPDFHeader />
-      <ActPDFBody data={data} />
-      <ActPDFFooter data={data} />
+      <ActPDFBody />
+      <ActPDFFooter />
     </PDFWrapper>
   );
 }

@@ -9,13 +9,6 @@ export interface IVetWorkPageContext {
   setShowReferralAnimalList: CallableFunction;
   setShowAccountingAct: CallableFunction;
   setShowVetWorkFile: CallableFunction;
-  isAct: boolean;
-  isAnimalsList: boolean;
-  isReferral: boolean;
-  isAnimals: boolean;
-  isReferralAnimalList: boolean;
-  isAccountingAct: boolean;
-  isVetWorkFile: boolean;
   pageTitle: string;
   imgSrc: string;
   data: IVetWorkSchema;

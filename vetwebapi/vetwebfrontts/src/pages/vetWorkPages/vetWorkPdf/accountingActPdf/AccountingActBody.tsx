@@ -1,12 +1,14 @@
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
+import { VetWorkPageContext } from "features/vetWork";
+import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
+import { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { convertDateString } from "shared/helpers";
 
-interface AccountingActBodyProps {
-  data: IVetWorkSchema;
-}
 
-export default function AccountingActBody({ data }: AccountingActBodyProps) {
+
+export default function AccountingActBody() {
+  const context: IVetWorkPageContext = useContext(VetWorkPageContext)
+  const data = context.data
   if (!data.animals) return;
   if (!data.drug) return;
   if (!data.companies) return;

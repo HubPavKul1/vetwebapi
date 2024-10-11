@@ -3,4 +3,4 @@ export { AddAnimalsToVetWorkForm } from "./ui/AddAnimalsToVetWorkForm/AddAnimals
 export { AddCompanyToVetWork } from "./ui/AddCompanyToVetWork/AddCompanyToVetWork";
 export { AddDrugToVetWork } from "./ui/AddDrugToVetWork";
 export { UpdateAnimalInVetWorkForm } from "./ui/UpdateAnimalInVetWorkForm";
-export { VetWorkPageContextProvider } from "./VetWorkPageContextProvider";
+export { VetWorkPageContext } from "./VetWorkPageContext";

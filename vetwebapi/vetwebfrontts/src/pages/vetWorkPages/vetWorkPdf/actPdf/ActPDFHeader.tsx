@@ -4,7 +4,7 @@ import { DrugReportTopText } from "entities/drugReport/ui/DrugReportTopText";
 import { NoData } from "shared/index";
 import { convertDateString } from "shared/helpers";
 import { useContext } from "react";
-import { VetWorkPageContext } from "features/vetWork/VetWorkPageContextProvider";
+import { VetWorkPageContext } from "features/vetWork";
 
 export function ActPDFHeader() {
   const data = useContext(VetWorkPageContext).data;

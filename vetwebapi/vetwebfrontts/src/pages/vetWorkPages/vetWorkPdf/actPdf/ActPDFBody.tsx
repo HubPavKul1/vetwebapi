@@ -1,19 +1,20 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-
 import ActTBCHorses from "./ActTBCHorses";
 import ActVaccination from "./ActVaccination";
 import DrugSection from "./DrugSection";
 import ActTBCCows from "./ActTBCCows";
 import { convertDateString } from "shared/helpers";
 import { StateAssignment } from "shared/index";
+import { useContext } from "react";
+import { VetWorkPageContext } from "features/vetWork";
+import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
 
-interface ActPDFBodyProps {
-  data: IVetWorkSchema;
-}
 
-export function ActPDFBody({ data }: ActPDFBodyProps) {
+
+export function ActPDFBody() {
+  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
+  const data = context.data
   if (!data.animals) return;
   if (!data.drug) return;
   if (!data.companies) return;
