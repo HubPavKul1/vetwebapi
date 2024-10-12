@@ -9,7 +9,7 @@ export interface IVetWorkPageContext {
   setShowReferralAnimalList: CallableFunction;
   setShowAccountingAct: CallableFunction;
   setShowVetWorkFile: CallableFunction;
-  pageTitle: string;
+  fullPageTitle: string;
   imgSrc: string;
   data: IVetWorkSchema;
   companyId: string;

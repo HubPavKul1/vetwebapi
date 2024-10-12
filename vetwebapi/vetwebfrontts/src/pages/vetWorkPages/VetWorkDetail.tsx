@@ -7,14 +7,12 @@ import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { PageDetail } from "widgets/PageDetail";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 import { VetWorkPageMenu } from "widgets/vetWork";
-import { useContext } from "react";
-import { VetWorkPageContext } from "features/vetWork";
-import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
+import { useVetWorkPageContext } from "features/vetWork/useVetWorkPageContext";
 
 export function VetWorkDetail() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
-  if (!context.data) return;
-  const data = context.data;
+  const { data, imgSrc, fullPageTitle, setAnimals, setCompanyId } =
+    useVetWorkPageContext();
+  if (!data) return;
 
   const disease = data.diseases[0].toLowerCase();
   let dosages = 0;
@@ -26,12 +24,10 @@ export function VetWorkDetail() {
   return (
     <>
       <PageDetail
-        imgSrc={context.imgSrc ? context.imgSrc: ""}
-        alt={context.pageTitle ? context.pageTitle: ""}
-        menu={
-          <VetWorkPageMenu/>
-        }
-        title={context.pageTitle ? context.pageTitle: ""}
+        imgSrc={imgSrc ? imgSrc : ""}
+        alt={fullPageTitle ? fullPageTitle : ""}
+        menu={<VetWorkPageMenu />}
+        title={fullPageTitle ? fullPageTitle : ""}
       >
         <>
           <Container className="text-center">
@@ -46,8 +42,8 @@ export function VetWorkDetail() {
                 <VetWorkCompany
                   key={company.id}
                   company={company}
-                  setAnimals={context.setAnimals}
-                  setCompanyId={context.setCompanyId}
+                  setAnimals={setAnimals}
+                  setCompanyId={setCompanyId}
                   animals={data.animals}
                   workType={data.work_type.toLowerCase()}
                   disease={disease}

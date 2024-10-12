@@ -4,7 +4,7 @@ import {
   PageMenuTop,
   PageMenuWrapper,
 } from "shared/index";
-import { AddCompanyToVetWork, AddDrugToVetWork, VetWorkPageContext } from "features/vetWork";
+import { AddCompanyToVetWork, AddDrugToVetWork } from "features/vetWork";
 import {
   accountingActBtn,
   actBtn,
@@ -15,14 +15,22 @@ import {
   tubercActBtn,
   UploadFileMenuItem,
 } from "entities/vetWork";
-import { useContext } from "react";
-import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
 
+import { useVetWorkPageContext } from "features/vetWork/useVetWorkPageContext";
 
 export function VetWorkPageMenu() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext)
-  const data = context.data;
-  if (!data) return
+  const {
+    data,
+    setShowAct,
+    disease,
+    setShowReferral,
+    setShowAccountingAct,
+    setShowReferralAnimalList,
+    setShowAnimalsList,
+    setShowVetWorkFile,
+  } = useVetWorkPageContext();
+
+  if (!data) return;
   const { id } = useParams();
   const vetWorkId = Number(id);
   const menuButtons = [
@@ -30,22 +38,23 @@ export function VetWorkPageMenu() {
       id: 1,
       element:
         data.work_type !== "диагностика"
-          ? actBtn(context.setShowAct)
-          : context.disease !== "туберкулез"
-          ? referralBtn(context.setShowReferral)
-          : tubercActBtn(context.setShowAct),
+          ? actBtn(setShowAct)
+          : disease !== "туберкулез"
+          ? referralBtn(setShowReferral)
+          : tubercActBtn(setShowAct),
     },
     {
       id: 2,
-      element: context.disease === "туберкулез" && accountingActBtn(context.setShowAccountingAct),
+      element:
+        disease === "туберкулез" && accountingActBtn(setShowAccountingAct),
     },
 
     {
       id: 3,
       element:
-        data.work_type === "диагностика" && context.disease !== "туберкулез"
-          ? referralAnimalListBtn(context.setShowReferralAnimalList)
-          : animalListBtn(context.setShowAnimalsList),
+        data.work_type === "диагностика" && disease !== "туберкулез"
+          ? referralAnimalListBtn(setShowReferralAnimalList)
+          : animalListBtn(setShowAnimalsList),
     },
     {
       id: 4,
@@ -53,7 +62,7 @@ export function VetWorkPageMenu() {
         !data.file_id && id ? (
           <UploadFileMenuItem vetWorkId={vetWorkId} id={id} />
         ) : (
-          openFileBtn(context.setShowVetWorkFile)
+          openFileBtn(setShowVetWorkFile)
         ),
     },
   ];

@@ -21,14 +21,14 @@ import { useState } from "react";
 import { AccountingActPDF } from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 
 export function VetWorkPageDetail() {
-  const [act, setShowAct] = useState(false);
-  const [animalsList, setShowAnimalsList] = useState(false);
-  const [referral, setShowReferral] = useState(false);
-  const [animals, setAnimals] = useState(false);
+  const [isAct, setShowAct] = useState(false);
+  const [isAnimalsList, setShowAnimalsList] = useState(false);
+  const [isReferral, setShowReferral] = useState(false);
+  const [isAnimals, setAnimals] = useState(false);
   const [companyId, setCompanyId] = useState("");
-  const [referralAnimalList, setShowReferralAnimalList] = useState(false);
-  const [accountingAct, setShowAccountingAct] = useState(false);
-  const [vetWorkFile, setShowVetWorkFile] = useState(false);
+  const [isReferralAnimalList, setShowReferralAnimalList] = useState(false);
+  const [isAccountingAct, setShowAccountingAct] = useState(false);
+  const [isVetWorkFile, setShowVetWorkFile] = useState(false);
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -49,49 +49,51 @@ export function VetWorkPageDetail() {
     data.work_type === "вакцинация"
       ? `Вакцинация: ${diseases}`
       : `Диагностические исследования на: ${diseases}`;
+  const fullPageTitle = `${pageTitle} от ${date.shortDate} г. `;
+
   const imgSrc =
     data.work_type === "вакцинация" ? "/vetworkBg.jpg" : "/diagnostic.jpg";
 
   const vetWorkPageValues: IVetWorkPageContext = {
-    setShowAct: setShowAct,
-    setShowAnimalsList: setShowAnimalsList,
-    setShowReferral: setShowReferral,
-    setAnimals: setAnimals,
-    setCompanyId: setCompanyId,
-    setShowReferralAnimalList: setShowReferralAnimalList,
-    setShowAccountingAct: setShowAccountingAct,
-    setShowVetWorkFile: setShowVetWorkFile,
-    pageTitle: `${pageTitle} от ${date.shortDate} г. `,
-    imgSrc: imgSrc,
-    data: data,
-    companyId: companyId,
-    disease: disease,
+    setShowAct,
+    setShowAnimalsList,
+    setShowReferral,
+    setAnimals,
+    setCompanyId,
+    setShowReferralAnimalList,
+    setShowAccountingAct,
+    setShowVetWorkFile,
+    fullPageTitle,
+    imgSrc,
+    data,
+    companyId,
+    disease,
   };
 
   return (
     <VetWorkPageContext.Provider value={vetWorkPageValues}>
-      {!act &&
-      !animalsList &&
-      !animals &&
-      !referral &&
-      !referralAnimalList &&
-      !accountingAct &&
-      !vetWorkFile ? (
-        <VetWorkDetail/>
-      ) : act ? (
+      {!isAct &&
+      !isAnimalsList &&
+      !isAnimals &&
+      !isReferral &&
+      !isReferralAnimalList &&
+      !isAccountingAct &&
+      !isVetWorkFile ? (
+        <VetWorkDetail />
+      ) : isAct ? (
         <ActPDF />
-      ) : accountingAct ? (
+      ) : isAccountingAct ? (
         <AccountingActPDF />
-      ) : referral ? (
+      ) : isReferral ? (
         <ReferralPDF setPdf={setShowReferral} data={data} />
-      ) : referralAnimalList ? (
+      ) : isReferralAnimalList ? (
         <ReferralAnimalListPDF setPdf={setShowReferralAnimalList} data={data} />
-      ) : animalsList ? (
+      ) : isAnimalsList ? (
         <AnimalsListPDF setPdf={setShowAnimalsList} data={data} />
-      ) : vetWorkFile ? (
+      ) : isVetWorkFile ? (
         <VetWorkFile setPdf={setShowVetWorkFile} />
       ) : (
-        animals && (
+        isAnimals && (
           <AddAnimalsToVetWorkForm
             setAnimals={setAnimals}
             companyId={companyId}
