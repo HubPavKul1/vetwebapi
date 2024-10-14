@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import actSliceReducer from '../features/vetWork/redux/actSlice'
+import isActOpen from '../features/vetWork/slices/actSlice'
+import vetWork from "../features/vetWork/slices/vetWorkSlice"
 
 export const store = configureStore({
   reducer: {
-    isActOpen: actSliceReducer
+    isActOpen,
+    vetWork,
+
   }
 })
 

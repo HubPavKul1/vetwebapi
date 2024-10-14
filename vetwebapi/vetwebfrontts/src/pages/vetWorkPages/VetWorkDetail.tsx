@@ -2,23 +2,39 @@ import { Container } from "react-bootstrap";
 
 import { VetWorkCompany } from "entities/vetWork/ui/VetWorkCompany";
 
-import { PageTable } from "shared/index";
+import { convertDateString, diseasesString, PageTable } from "shared/index";
 import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { PageDetail } from "widgets/PageDetail";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 import { VetWorkPageMenu } from "widgets/vetWork";
 import { useVetWorkPageContext } from "features/vetWork/useVetWorkPageContext";
+import { IAnimalInVetwork, IVetWorkSchema } from "entities/vetWork";
+import { ICompany, ICompanyInVetWorkIn } from "entities/company";
+import { useSelector } from "react-redux";
+import { RootState } from "app/store";
 
-export function VetWorkDetail() {
-  const { data, imgSrc, fullPageTitle, setAnimals, setCompanyId } =
-    useVetWorkPageContext();
+export function VetWorkDetail({...data}: IVetWorkSchema) {
+  // const data = useSelector((state: RootState) => state.vetWork.vetWork)
+  // console.log(data)
   if (!data) return;
 
+  const date = convertDateString(data.vetwork_date);
+  const diseases = [...diseasesString(data.diseases)];
   const disease = data.diseases[0].toLowerCase();
+  
+  const pageTitle =
+    data.work_type === "вакцинация"
+      ? `Вакцинация: ${data.diseases}`
+      : `Диагностические исследования на: ${diseases}`;
+  const fullPageTitle = `${pageTitle} от ${date.shortDate} г. `;
+
+  const imgSrc =
+    data.work_type === "вакцинация" ? "/vetworkBg.jpg" : "/diagnostic.jpg";
+
   let dosages = 0;
   const animalsDoses =
     data.animals &&
-    data.animals.map((animal) =>
+    data.animals.map((animal: IAnimalInVetwork) =>
       animal.dosage ? (dosages += animal.dosage) : (dosages += 0)
     );
   return (
@@ -37,8 +53,8 @@ export function VetWorkDetail() {
             </div>
 
             <h5 className="page-detail-title">Предприятия </h5>
-            {data.companies?.length &&
-              data.companies.map((company) => (
+            {/* {data.companies?.length &&
+              data.companies.map((company: ICompany) => (
                 <VetWorkCompany
                   key={company.id}
                   company={company}
@@ -48,7 +64,7 @@ export function VetWorkDetail() {
                   workType={data.work_type.toLowerCase()}
                   disease={disease}
                 />
-              ))}
+              ))} */}
           </Container>
 
           <Container className="text-center">

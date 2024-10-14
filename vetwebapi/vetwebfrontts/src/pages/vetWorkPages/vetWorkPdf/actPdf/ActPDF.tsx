@@ -6,14 +6,16 @@ import { ActPDFHeader } from "./ActPDFHeader";
 import { useContext } from "react";
 import { VetWorkPageContext } from "features/vetWork";
 import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
+import { actClose } from "features/vetWork/slices/actSlice";
 
 
 
-export function ActPDF() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
-  const data = context.data;
+export function ActPDF({data}: IVetWorkSchema) {
+  // const context: IVetWorkPageContext = useContext(VetWorkPageContext);
+  // const data = context.data;
+  
   return (
-    <PDFWrapper setPdf={context.setShowAct} filename="act.pdf">
+    <PDFWrapper setPdf={actClose} filename="act.pdf">
       <ActPDFHeader />
       <ActPDFBody />
       <ActPDFFooter />
