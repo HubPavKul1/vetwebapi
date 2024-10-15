@@ -17,12 +17,12 @@ import {
 } from "entities/vetWork";
 
 import { useVetWorkPageContext } from "features/vetWork/useVetWorkPageContext";
-import { useDispatch } from "react-redux";
 import { actOpen } from "features/vetWork/slices/actSlice";
+import { useAppDispatch } from "app/hooks/redux";
 
-export function VetWorkPageMenu({...props}) {
-  const { data} = props
-  const dispatch = useDispatch()
+export function VetWorkPageMenu({ ...props }) {
+  const { data } = props;
+  const dispatch = useAppDispatch();
   //   setShowAct,
   //   disease,
   //   setShowReferral,
@@ -35,39 +35,39 @@ export function VetWorkPageMenu({...props}) {
   if (!data) return;
   const { id } = useParams();
   const vetWorkId = Number(id);
-  // const menuButtons = [
-  //   {
-  //     id: 1,
-  //     element:
-  //       data.work_type !== "диагностика"
-  //         ? actBtn(() => dispatch(actOpen()))
-  //         : disease !== "туберкулез"
-  //         ? referralBtn()
-  //         : tubercActBtn(),
-  //   },
-  //   {
-  //     id: 2,
-  //     element:
-  //       disease === "туберкулез" && accountingActBtn(setShowAccountingAct),
-  //   },
+  const menuButtons = [
+    {
+      id: 1,
+      element:
+        data.work_type !== "диагностика" && actBtn(() => dispatch(actOpen())),
+      // :
+      // disease !== "туберкулез"
+      // ? referralBtn()
+      // : tubercActBtn(),
+    },
+    // {
+    //   id: 2,
+    //   element:
+    //     disease === "туберкулез" && accountingActBtn(setShowAccountingAct),
+    // },
 
-  //   {
-  //     id: 3,
-  //     element:
-  //       data.work_type === "диагностика" && disease !== "туберкулез"
-  //         ? referralAnimalListBtn(setShowReferralAnimalList)
-  //         : animalListBtn(setShowAnimalsList),
-  //   },
-  //   {
-  //     id: 4,
-  //     element:
-  //       !data.file_id && id ? (
-  //         <UploadFileMenuItem vetWorkId={vetWorkId} id={id} />
-  //       ) : (
-  //         openFileBtn(setShowVetWorkFile)
-  //       ),
-  //   },
-  // ];
+    // {
+    //   id: 3,
+    //   element:
+    //     data.work_type === "диагностика" && disease !== "туберкулез"
+    //       ? referralAnimalListBtn(setShowReferralAnimalList)
+    //       : animalListBtn(setShowAnimalsList),
+    // },
+    // {
+    //   id: 4,
+    //   element:
+    //     !data.file_id && id ? (
+    //       <UploadFileMenuItem vetWorkId={vetWorkId} id={id} />
+    //     ) : (
+    //       openFileBtn(setShowVetWorkFile)
+    //     ),
+    // },
+  ];
 
   return (
     <PageMenuWrapper>
@@ -75,11 +75,11 @@ export function VetWorkPageMenu({...props}) {
         <AddCompanyToVetWork />
         <AddDrugToVetWork />
       </PageMenuTop>
-      {/* <PageMenuButtonsBlock>
+      <PageMenuButtonsBlock>
         {menuButtons.map((item) => (
           <div key={item.id}>{item.element}</div>
         ))}
-      </PageMenuButtonsBlock> */}
+      </PageMenuButtonsBlock>
     </PageMenuWrapper>
   );
 }

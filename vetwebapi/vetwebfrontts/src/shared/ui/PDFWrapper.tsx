@@ -1,8 +1,9 @@
+import { useAppDispatch } from "app/hooks/redux";
+import { actClose } from "features/vetWork/slices/actSlice";
 import { Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Margin, usePDF } from "react-to-pdf";
 import { CustomButton } from "shared/index";
-
-
 
 interface PDFWrapperProps {
   setPdf: CallableFunction;
@@ -20,11 +21,13 @@ export function PDFWrapper({
   const { toPDF, targetRef } = usePDF({
     method: "open",
     filename: `${filename}`,
-    page: {margin: Margin.SMALL, orientation: `${orientation}` },
+    page: { margin: Margin.SMALL, orientation: `${orientation}` },
   });
 
+  const dispatch = useAppDispatch();
+
   const onClick = () => {
-    setPdf(false);
+    dispatch(actClose());
   };
 
   return (

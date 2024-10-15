@@ -1,25 +1,25 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IVetWorkSchema } from 'entities/vetWork';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IVetWorkSchema } from "entities/vetWork";
 
 export interface VetWorkState {
-  vetWork: IVetWorkSchema | null
+  vetWork: IVetWorkSchema | null;
 }
 
 const initialState: VetWorkState = {
-  vetWork: null
-}
+  vetWork: null,
+};
 
 export const vetWorkSlice = createSlice({
-  name: 'vetWork',
+  name: "vetWork",
   initialState,
   reducers: {
     setVetWork: (state, action: PayloadAction<IVetWorkSchema>) => {
-      state.vetWork == action.payload
-    }    
-  }
-})
+      state.vetWork = action.payload;
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { setVetWork } = vetWorkSlice.actions
+export const { setVetWork } = vetWorkSlice.actions;
 
-export default vetWorkSlice.reducer
+export default vetWorkSlice.reducer;

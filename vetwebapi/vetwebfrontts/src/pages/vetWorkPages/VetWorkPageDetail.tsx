@@ -22,19 +22,22 @@ import { AccountingActPDF } from "./vetWorkPdf/accountingActPdf/AccountingActPDF
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "app/store";
 import { setVetWork } from "features/vetWork/slices/vetWorkSlice";
+import { IVetWorkSchema } from "entities/vetWork";
+import { useAppDispatch, useAppSelector } from "app/hooks/redux";
 
 export function VetWorkPageDetail() {
   // const [isAct, setShowAct] = useState(false);
-  const [isAnimalsList, setShowAnimalsList] = useState(false);
-  const [isReferral, setShowReferral] = useState(false);
-  const [isAnimals, setAnimals] = useState(false);
-  const [companyId, setCompanyId] = useState("");
-  const [isReferralAnimalList, setShowReferralAnimalList] = useState(false);
-  const [isAccountingAct, setShowAccountingAct] = useState(false);
-  const [isVetWorkFile, setShowVetWorkFile] = useState(false);
+  // const [vetWorkData, setVetWorkData] = useState<IVetWorkSchema>();
+  // const [isAnimalsList, setShowAnimalsList] = useState(false);
+  // const [isReferral, setShowReferral] = useState(false);
+  // const [isAnimals, setAnimals] = useState(false);
+  // const [companyId, setCompanyId] = useState("");
+  // const [isReferralAnimalList, setShowReferralAnimalList] = useState(false);
+  // const [isAccountingAct, setShowAccountingAct] = useState(false);
+  // const [isVetWorkFile, setShowVetWorkFile] = useState(false);
 
-  const {isActOpen} = useSelector((state: RootState) => state.isActOpen);
-  const dispatch = useDispatch();
+  const { isActOpen } = useAppSelector((state) => state.isActOpen);
+  const dispatch = useAppDispatch();
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -44,12 +47,15 @@ export function VetWorkPageDetail() {
     vetWorkDetailUrl(vetWorkId),
     id
   );
+
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
-  
-  
-  
+  dispatch(setVetWork(data));
+
+  // useEffect(() => {
+  //   dispatch(setVetWork(data));
+  // }, [data]);
 
   // const vetWorkPageValues: IVetWorkPageContext = {
   //   setShowAct,
@@ -67,7 +73,7 @@ export function VetWorkPageDetail() {
   //   disease,
   // };
 
-  return isActOpen ? <ActPDF {...data} /> : <VetWorkDetail {...data}/>;
+  return isActOpen ? <ActPDF {...data} /> : <VetWorkDetail />;
   // <VetWorkPageContext.Provider value={vetWorkPageValues}>
   //   {!isAct &&
   //   !isAnimalsList &&

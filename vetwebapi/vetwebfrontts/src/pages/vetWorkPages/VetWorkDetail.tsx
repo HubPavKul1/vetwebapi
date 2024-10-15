@@ -12,16 +12,17 @@ import { IAnimalInVetwork, IVetWorkSchema } from "entities/vetWork";
 import { ICompany, ICompanyInVetWorkIn } from "entities/company";
 import { useSelector } from "react-redux";
 import { RootState } from "app/store";
+import { useAppSelector } from "app/hooks/redux";
 
-export function VetWorkDetail({...data}: IVetWorkSchema) {
-  // const data = useSelector((state: RootState) => state.vetWork.vetWork)
-  // console.log(data)
+export function VetWorkDetail() {
+  const data = useAppSelector((state) => state.vetWork.vetWork);
+  console.log("VETWORK>>>>>", data);
   if (!data) return;
 
   const date = convertDateString(data.vetwork_date);
   const diseases = [...diseasesString(data.diseases)];
   const disease = data.diseases[0].toLowerCase();
-  
+
   const pageTitle =
     data.work_type === "вакцинация"
       ? `Вакцинация: ${data.diseases}`
@@ -42,7 +43,7 @@ export function VetWorkDetail({...data}: IVetWorkSchema) {
       <PageDetail
         imgSrc={imgSrc ? imgSrc : ""}
         alt={fullPageTitle ? fullPageTitle : ""}
-        menu={<VetWorkPageMenu />}
+        menu={<VetWorkPageMenu data />}
         title={fullPageTitle ? fullPageTitle : ""}
       >
         <>
@@ -53,18 +54,18 @@ export function VetWorkDetail({...data}: IVetWorkSchema) {
             </div>
 
             <h5 className="page-detail-title">Предприятия </h5>
-            {/* {data.companies?.length &&
+            {data.companies?.length &&
               data.companies.map((company: ICompany) => (
                 <VetWorkCompany
                   key={company.id}
                   company={company}
-                  setAnimals={setAnimals}
-                  setCompanyId={setCompanyId}
+                  // setAnimals={setAnimals}
+                  // setCompanyId={setCompanyId}
                   animals={data.animals}
                   workType={data.work_type.toLowerCase()}
                   disease={disease}
                 />
-              ))} */}
+              ))}
           </Container>
 
           <Container className="text-center">

@@ -12,8 +12,8 @@ import { AnimalsInVetWork } from "./AnimalsInVetWork";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
-  setAnimals: CallableFunction;
-  setCompanyId: CallableFunction;
+  // setAnimals: CallableFunction;
+  // setCompanyId: CallableFunction;
   animals?: IAnimalInVetwork[];
   workType: string;
   disease: string;
@@ -21,8 +21,8 @@ interface VetWorkCompanyProps {
 
 export function VetWorkCompany({
   company,
-  setAnimals,
-  setCompanyId,
+  // setAnimals,
+  // setCompanyId,
   animals,
   workType,
   disease,
@@ -30,8 +30,8 @@ export function VetWorkCompany({
   const { id } = useParams();
   const vetWorkId = Number(id);
   const addAnimals = (company_id: string) => {
-    setAnimals(true);
-    setCompanyId(company_id);
+    // setAnimals(true);
+    // setCompanyId(company_id);
   };
 
   return (
