@@ -7,16 +7,13 @@ import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { PageDetail } from "widgets/PageDetail";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 import { VetWorkPageMenu } from "widgets/vetWork";
-import { useVetWorkPageContext } from "features/vetWork/useVetWorkPageContext";
-import { IAnimalInVetwork, IVetWorkSchema } from "entities/vetWork";
-import { ICompany, ICompanyInVetWorkIn } from "entities/company";
-import { useSelector } from "react-redux";
-import { RootState } from "app/store";
-import { useAppSelector } from "app/hooks/redux";
+import { IAnimalInVetwork } from "entities/vetWork";
+import { ICompanyCard } from "entities/company";
+import { useGetVetWorkData } from "features/vetWork";
 
 export function VetWorkDetail() {
-  const data = useAppSelector((state) => state.vetWork.vetWork);
-  console.log("VETWORK>>>>>", data);
+  const data = useGetVetWorkData();
+  console.log("VETWORKDATA>>>>>", data);
   if (!data) return;
 
   const date = convertDateString(data.vetwork_date);
@@ -43,7 +40,7 @@ export function VetWorkDetail() {
       <PageDetail
         imgSrc={imgSrc ? imgSrc : ""}
         alt={fullPageTitle ? fullPageTitle : ""}
-        menu={<VetWorkPageMenu data />}
+        menu={<VetWorkPageMenu />}
         title={fullPageTitle ? fullPageTitle : ""}
       >
         <>
@@ -55,7 +52,7 @@ export function VetWorkDetail() {
 
             <h5 className="page-detail-title">Предприятия </h5>
             {data.companies?.length &&
-              data.companies.map((company: ICompany) => (
+              data.companies.map((company: ICompanyCard) => (
                 <VetWorkCompany
                   key={company.id}
                   company={company}

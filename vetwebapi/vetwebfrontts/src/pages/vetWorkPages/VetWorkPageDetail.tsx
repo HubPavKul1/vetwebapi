@@ -21,7 +21,6 @@ import { useEffect, useState } from "react";
 import { AccountingActPDF } from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "app/store";
-import { setVetWork } from "features/vetWork/slices/vetWorkSlice";
 import { IVetWorkSchema } from "entities/vetWork";
 import { useAppDispatch, useAppSelector } from "app/hooks/redux";
 
@@ -37,7 +36,6 @@ export function VetWorkPageDetail() {
   // const [isVetWorkFile, setShowVetWorkFile] = useState(false);
 
   const { isActOpen } = useAppSelector((state) => state.isActOpen);
-  const dispatch = useAppDispatch();
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -50,8 +48,6 @@ export function VetWorkPageDetail() {
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
-
-  dispatch(setVetWork(data));
 
   // useEffect(() => {
   //   dispatch(setVetWork(data));

@@ -9,6 +9,7 @@ import {
   accountingActBtn,
   actBtn,
   animalListBtn,
+  IVetWorkSchema,
   openFileBtn,
   referralAnimalListBtn,
   referralBtn,
@@ -16,12 +17,16 @@ import {
   UploadFileMenuItem,
 } from "entities/vetWork";
 
-import { useVetWorkPageContext } from "features/vetWork/useVetWorkPageContext";
 import { actOpen } from "features/vetWork/slices/actSlice";
 import { useAppDispatch } from "app/hooks/redux";
+import { useQueryClient } from "@tanstack/react-query";
 
-export function VetWorkPageMenu({ ...props }) {
-  const { data } = props;
+export function VetWorkPageMenu() {
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  if (!id) return;
+  const vetWorkId = Number(id);
+  const data = queryClient.getQueryData<IVetWorkSchema>(["vetwork", id]);
   const dispatch = useAppDispatch();
   //   setShowAct,
   //   disease,
@@ -33,8 +38,7 @@ export function VetWorkPageMenu({ ...props }) {
   // } = useVetWorkPageContext();
 
   if (!data) return;
-  const { id } = useParams();
-  const vetWorkId = Number(id);
+
   const menuButtons = [
     {
       id: 1,
