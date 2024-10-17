@@ -6,15 +6,12 @@ import DrugSection from "./DrugSection";
 import ActTBCCows from "./ActTBCCows";
 import { convertDateString } from "shared/helpers";
 import { StateAssignment } from "shared/index";
-import { useContext } from "react";
-import { VetWorkPageContext } from "features/vetWork";
-import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
 
-
+import { useGetVetWorkData } from "features/vetWork";
 
 export function ActPDFBody() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
-  const data = context.data
+  const data = useGetVetWorkData();
+  if (!data) return;
   if (!data.animals) return;
   if (!data.drug) return;
   if (!data.companies) return;

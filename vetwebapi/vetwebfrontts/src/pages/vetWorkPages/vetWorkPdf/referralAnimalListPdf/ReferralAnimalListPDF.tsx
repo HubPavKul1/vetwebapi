@@ -1,19 +1,20 @@
 import { PDFWrapper } from "shared/ui/PDFWrapper";
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { ReferralAnimalListPDFBody } from "./ReferralAnimalListPDFBody";
 import { ReferralAnimalListPDFHeader } from "./ReferralAnimalListPDFHeader";
+import { useGetVetWorkData } from "features/vetWork";
+import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalList";
 
-interface ReferralAnimalListPDFProps {
-  setPdf: CallableFunction;
-  data: IVetWorkSchema;
-}
-
-export function ReferralAnimalListPDF({
-  setPdf,
-  data,
-}: ReferralAnimalListPDFProps) {
+export function ReferralAnimalListPDF() {
+  const data = useGetVetWorkData();
+  if (!data) return;
+  const referralAnimalListClose = useReferralAnimalListStore(
+    (set) => set.referralAnimalListClose
+  );
   return (
-    <PDFWrapper setPdf={setPdf} filename="referralAnimalList.pdf">
+    <PDFWrapper
+      closePdf={referralAnimalListClose}
+      filename="referralAnimalList.pdf"
+    >
       <ReferralAnimalListPDFHeader data={data} />
       <ReferralAnimalListPDFBody data={data} />
     </PDFWrapper>

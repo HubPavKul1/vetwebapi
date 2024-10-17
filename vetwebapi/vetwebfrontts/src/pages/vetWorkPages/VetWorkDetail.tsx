@@ -13,7 +13,6 @@ import { useGetVetWorkData } from "features/vetWork";
 
 export function VetWorkDetail() {
   const data = useGetVetWorkData();
-  console.log("VETWORKDATA>>>>>", data);
   if (!data) return;
 
   const date = convertDateString(data.vetwork_date);

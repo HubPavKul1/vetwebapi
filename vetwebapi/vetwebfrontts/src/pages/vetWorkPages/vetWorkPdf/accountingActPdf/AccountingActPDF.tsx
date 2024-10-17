@@ -5,15 +5,13 @@ import AccountingActBody from "./AccountingActBody";
 import { useContext } from "react";
 import { VetWorkPageContext } from "features/vetWork";
 import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
+import useAccountingActStore from "features/vetWork/stores/useAccountingActStore";
 
 export function AccountingActPDF() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext);
+  const actClose = useAccountingActStore((state) => state.actClose);
 
   return (
-    <PDFWrapper
-      setPdf={context.setShowAccountingAct}
-      filename="accountingAct.pdf"
-    >
+    <PDFWrapper closePdf={actClose} filename="accountingAct.pdf">
       <AccountingActHeader />
       <AccountingActBody />
       <ActPDFFooter />

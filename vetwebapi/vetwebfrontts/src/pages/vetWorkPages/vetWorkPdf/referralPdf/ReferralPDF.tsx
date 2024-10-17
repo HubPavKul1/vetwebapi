@@ -1,18 +1,18 @@
 import { PDFWrapper } from "shared/ui/PDFWrapper";
-import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
 import { ReferralPDFBody } from "./ReferralPDFBody";
 import { ReferralPDFBodyNoBlood } from "./ReferralPDFBodyNoBlood";
 import { ReferralPDFFooter } from "./ReferralPDFFooter";
 import { ReferralPDFHeader } from "./ReferralPDFHeader";
+import { useGetVetWorkData } from "features/vetWork";
+import useReferralStore from "features/vetWork/stores/useReferralStore";
 
-interface ReferralPDFProps {
-  setPdf: CallableFunction;
-  data: IVetWorkSchema;
-}
+export function ReferralPDF() {
+  const data = useGetVetWorkData();
+  if (!data) return;
+  const referralClose = useReferralStore((set) => set.referralClose);
 
-export function ReferralPDF({ setPdf, data }: ReferralPDFProps) {
   return (
-    <PDFWrapper setPdf={setPdf} filename="referral.pdf">
+    <PDFWrapper closePdf={referralClose} filename="referral.pdf">
       <ReferralPDFHeader data={data} />
       {data.biomaterial === ("сыворотка крови" || "цельная кровь") ? (
         <ReferralPDFBody data={data} />

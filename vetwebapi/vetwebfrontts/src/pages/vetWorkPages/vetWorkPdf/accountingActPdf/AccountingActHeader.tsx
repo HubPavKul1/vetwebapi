@@ -1,18 +1,13 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-
 import { DrugReportTopText } from "entities/drugReport/ui/DrugReportTopText";
 import { NoData } from "shared/index";
 import { convertDateString } from "shared/helpers";
-import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
-import { useContext } from "react";
-import { VetWorkPageContext } from "features/vetWork";
-
-
+import { useGetVetWorkData } from "features/vetWork";
 
 export function AccountingActHeader() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext)
-  const data = context.data
+  const data = useGetVetWorkData();
+  if (!data) return;
 
   const date = convertDateString(data.vetwork_date);
   if (!data.animals) return <NoData title="Данные о животных" />;

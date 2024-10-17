@@ -1,19 +1,16 @@
-import { useAppDispatch } from "app/hooks/redux";
-import { actClose } from "features/vetWork/slices/actSlice";
 import { Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import { Margin, usePDF } from "react-to-pdf";
 import { CustomButton } from "shared/index";
 
 interface PDFWrapperProps {
-  setPdf: CallableFunction;
+  closePdf: CallableFunction;
   children?: React.ReactElement | React.ReactNode;
   filename: string;
   orientation?: "p" | "l";
 }
 
 export function PDFWrapper({
-  setPdf,
+  closePdf,
   filename,
   orientation = "p",
   children,
@@ -24,10 +21,8 @@ export function PDFWrapper({
     page: { margin: Margin.SMALL, orientation: `${orientation}` },
   });
 
-  const dispatch = useAppDispatch();
-
   const onClick = () => {
-    dispatch(actClose());
+    closePdf();
   };
 
   return (

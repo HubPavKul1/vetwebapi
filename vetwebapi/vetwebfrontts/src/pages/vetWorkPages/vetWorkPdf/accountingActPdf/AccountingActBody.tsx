@@ -1,14 +1,11 @@
-import { VetWorkPageContext } from "features/vetWork";
-import { IVetWorkPageContext } from "features/vetWork/models/interfaces";
-import { useContext } from "react";
+import { useGetVetWorkData } from "features/vetWork";
+
 import { Col, Container, Row } from "react-bootstrap";
 import { convertDateString } from "shared/helpers";
 
-
-
 export default function AccountingActBody() {
-  const context: IVetWorkPageContext = useContext(VetWorkPageContext)
-  const data = context.data
+  const data = useGetVetWorkData();
+  if (!data) return;
   if (!data.animals) return;
   if (!data.drug) return;
   if (!data.companies) return;

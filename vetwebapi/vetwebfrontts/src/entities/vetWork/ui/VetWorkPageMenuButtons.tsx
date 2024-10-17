@@ -1,44 +1,51 @@
+import useAccountingActStore from "features/vetWork/stores/useAccountingActStore";
+import useActStore from "features/vetWork/stores/useActStore";
+import useAnimalListStore from "features/vetWork/stores/useAnimalListStore";
+import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalList";
+import useReferralStore from "features/vetWork/stores/useReferralStore";
+import useVetWorkFileStore from "features/vetWork/stores/useVetWorkFileStore";
 import { PageMenuButton } from "shared/index";
 
-export const actBtn = (showAct: CallableFunction) => {
-  return <PageMenuButton title="Акт на обработку" showContent={showAct} />;
+export const actBtn = () => {
+  const actOpen = useActStore((state) => state.actOpen);
+  return <PageMenuButton title="Акт на обработку" showContent={actOpen} />;
 };
 
-export const referralBtn = (showReferral: CallableFunction) => {
-  return <PageMenuButton title="Сопроводительная" showContent={showReferral} />;
+export const referralBtn = () => {
+  const referralOpen = useReferralStore((state) => state.referralOpen);
+  return <PageMenuButton title="Сопроводительная" showContent={referralOpen} />;
 };
 
-export const tubercActBtn = (showAct: CallableFunction) => {
+export const tubercActBtn = () => {
+  const actOpen = useActStore((state) => state.actOpen);
   return (
-    <PageMenuButton title="Акт на туберкулинизацию" showContent={showAct} />
+    <PageMenuButton title="Акт на туберкулинизацию" showContent={actOpen} />
   );
 };
 
-export const accountingActBtn = (showAccountingAct: CallableFunction) => {
-  return (
-    <PageMenuButton title="Акт учета реакции" showContent={showAccountingAct} />
-  );
+export const accountingActBtn = () => {
+  const actOpen = useAccountingActStore((state) => state.actOpen);
+  return <PageMenuButton title="Акт учета реакции" showContent={actOpen} />;
 };
 
-export const referralAnimalListBtn = (
-  showReferralAnimalList: CallableFunction
-) => {
+export const referralAnimalListBtn = () => {
+  const referralAnimalListOpen = useReferralAnimalListStore(
+    (state) => state.referralAnimalListOpen
+  );
   return (
     <PageMenuButton
       title="Опись к сопроводительной"
-      showContent={showReferralAnimalList}
+      showContent={referralAnimalListOpen}
     />
   );
 };
 
-export const animalListBtn = (showAnimalsList: CallableFunction) => {
-  return (
-    <PageMenuButton title="Опись животных" showContent={showAnimalsList} />
-  );
+export const animalListBtn = () => {
+  const animalListOpen = useAnimalListStore((state) => state.animalListOpen);
+  return <PageMenuButton title="Опись животных" showContent={animalListOpen} />;
 };
 
-export const openFileBtn = (showVetWorkFile: CallableFunction) => {
-  return (
-    <PageMenuButton title="Открыть документ" showContent={showVetWorkFile} />
-  );
+export const openFileBtn = () => {
+  const fileOpen = useVetWorkFileStore((state) => state.fileOpen);
+  return <PageMenuButton title="Открыть документ" showContent={fileOpen} />;
 };
