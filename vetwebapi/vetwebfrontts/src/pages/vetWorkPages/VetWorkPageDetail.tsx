@@ -11,21 +11,17 @@ import { vetWorkDetailUrl } from "shared/urls/vetWorkUrls";
 import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/ReferralAnimalListPDF";
 import { VetWorkFile } from "./VetWorkFile";
 import { ErrorLoadDataMessage } from "shared/index";
-import { convertDateString, diseasesString } from "shared/helpers";
 import { VetWorkData } from "features/vetWork/models/interfaces";
-import { VetWorkPageContext } from "features/vetWork";
 import { useEffect, useState } from "react";
 import { AccountingActPDF } from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
-import { RootState } from "app/store";
-import { IVetWorkSchema } from "entities/vetWork";
-import { useAppDispatch, useAppSelector } from "app/hooks/redux";
 import useActStore from "features/vetWork/stores/useActStore";
 import useAccountingActStore from "features/vetWork/stores/useAccountingActStore";
 import useReferralStore from "features/vetWork/stores/useReferralStore";
-import useTubercActStore from "features/vetWork/stores/useTubercActStore";
 import useAnimalListStore from "features/vetWork/stores/useAnimalListStore";
 import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalList";
 import useVetWorkFileStore from "features/vetWork/stores/useVetWorkFileStore";
+import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
+import useVetWorkCompanyStore from "features/vetWork/stores/useVetWorkCompanyStore";
 
 export function VetWorkPageDetail() {
   // const [isAct, setShowAct] = useState(false);
@@ -47,6 +43,8 @@ export function VetWorkPageDetail() {
     (state) => state.isReferralAnimalList
   );
   const isVetWorkFile = useVetWorkFileStore((state) => state.isFile);
+  const isAnimals = useVetWorkAnimalsStore((state) => state.isAnimals);
+  const companyId = useVetWorkCompanyStore((state) => state.companyId);
 
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -59,22 +57,7 @@ export function VetWorkPageDetail() {
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
-
-  // const vetWorkPageValues: IVetWorkPageContext = {
-  //   setShowAct,
-  //   setShowAnimalsList,
-  //   setShowReferral,
-  //   setAnimals,
-  //   setCompanyId,
-  //   setShowReferralAnimalList,
-  //   setShowAccountingAct,
-  //   setShowVetWorkFile,
-  //   fullPageTitle,
-  //   imgSrc,
-  //   data,
-  //   companyId,
-  //   disease,
-  // };
+  const disease = data.diseases[0].toLowerCase();
 
   return isAct ? (
     <ActPDF />
@@ -88,40 +71,14 @@ export function VetWorkPageDetail() {
     <AnimalsListPDF />
   ) : isVetWorkFile ? (
     <VetWorkFile />
+  ) : isAnimals ? (
+    <AddAnimalsToVetWorkForm
+      companyId={companyId}
+      workType={data.work_type}
+      choosenAnimals={data.animals}
+      disease={disease}
+    />
   ) : (
     <VetWorkDetail />
   );
-  // <VetWorkPageContext.Provider value={vetWorkPageValues}>
-  //   {!isAct &&
-  //   !isAnimalsList &&
-  //   !isAnimals &&
-  //   !isReferral &&
-  //   !isReferralAnimalList &&
-  //   !isAccountingAct &&
-  //   !isVetWorkFile ? (
-  //     <VetWorkDetail />
-  //   ) : isAct ? (
-  //     <ActPDF />
-  //   ) : isAccountingAct ? (
-  //     <AccountingActPDF />
-  //   ) : isReferral ? (
-  //     <ReferralPDF setPdf={setShowReferral} data={data} />
-  //   ) : isReferralAnimalList ? (
-  //     <ReferralAnimalListPDF setPdf={setShowReferralAnimalList} data={data} />
-  //   ) : isAnimalsList ? (
-  //     <AnimalsListPDF setPdf={setShowAnimalsList} data={data} />
-  //   ) : isVetWorkFile ? (
-  //     <VetWorkFile setPdf={setShowVetWorkFile} />
-  //   ) : (
-  //     isAnimals && (
-  //       <AddAnimalsToVetWorkForm
-  //         setAnimals={setAnimals}
-  //         companyId={companyId}
-  //         workType={data.work_type}
-  //         choosenAnimals={data.animals}
-  //         disease={disease}
-  //       />
-  //     )
-  //   )}
-  // </VetWorkPageContext.Provider>
 }

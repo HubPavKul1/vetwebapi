@@ -13,6 +13,7 @@ import { PageMenuButtonsBlock } from "shared/index";
 
 export function VetWorkMenuButtonBlock() {
   const data = useGetVetWorkData();
+  const queryKey = "vetwork";
   if (!data) return;
   const disease = data.diseases[0].toLowerCase();
   const menuButtons = [
@@ -39,7 +40,11 @@ export function VetWorkMenuButtonBlock() {
     },
     {
       id: 4,
-      element: !data.file_id ? <UploadFileMenuItem /> : openFileBtn(),
+      element: !data.file_id ? (
+        <UploadFileMenuItem vetWorkId={data.id} />
+      ) : (
+        openFileBtn()
+      ),
     },
   ];
   return (

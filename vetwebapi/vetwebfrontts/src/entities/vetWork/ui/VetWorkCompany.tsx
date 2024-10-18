@@ -9,11 +9,11 @@ import { vetWorkCompanyDetailUrl } from "shared/urls/vetWorkUrls";
 import { ICompanyCard } from "entities/company/model/companyInterfaces";
 import { CompanyAddress } from "entities/address/ui/CompanyAddress";
 import { AnimalsInVetWork } from "./AnimalsInVetWork";
+import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
+import useVetWorkCompanyStore from "features/vetWork/stores/useVetWorkCompanyStore";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
-  // setAnimals: CallableFunction;
-  // setCompanyId: CallableFunction;
   animals?: IAnimalInVetwork[];
   workType: string;
   disease: string;
@@ -21,17 +21,17 @@ interface VetWorkCompanyProps {
 
 export function VetWorkCompany({
   company,
-  // setAnimals,
-  // setCompanyId,
   animals,
   workType,
   disease,
 }: VetWorkCompanyProps) {
   const { id } = useParams();
   const vetWorkId = Number(id);
+  const setAnimals = useVetWorkAnimalsStore((state) => state.setAnimals);
+  const setCompanyId = useVetWorkCompanyStore((state) => state.setCompanyId);
   const addAnimals = (company_id: string) => {
-    // setAnimals(true);
-    // setCompanyId(company_id);
+    setAnimals();
+    setCompanyId(company_id);
   };
 
   return (

@@ -16,10 +16,10 @@ import { vetWorkAnimalsUrl } from "shared/urls/vetWorkUrls";
 import { CustomButton } from "shared/index";
 import { ICompanyDetail } from "entities/company/model/companyInterfaces";
 import { IAnimal } from "entities/animal/model/animalInterfaces";
+import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
-  setAnimals: CallableFunction;
   workType: string;
   choosenAnimals?: IAnimalInVetwork[];
   disease: string;
@@ -32,7 +32,6 @@ interface CompanyData {
 
 export function AddAnimalsToVetWorkForm({
   companyId,
-  setAnimals,
   workType,
   choosenAnimals,
   disease,
@@ -42,6 +41,7 @@ export function AddAnimalsToVetWorkForm({
   const { id } = useParams();
   const compId = Number(companyId);
   const vetWorkId = Number(id);
+  const unsetAnimals = useVetWorkAnimalsStore((state) => state.unsetAnimals);
 
   const {
     reset,
@@ -81,12 +81,12 @@ export function AddAnimalsToVetWorkForm({
   const addAnimals: SubmitHandler<IAnimalInVetworkIn[]> = (animalsData) => {
     mutate(animalsData);
     setAnimalsData([]);
-    setAnimals(false);
+    unsetAnimals();
   };
 
   const backButtonOnClick = () => {
     setAnimalsData([]);
-    setAnimals(false);
+    unsetAnimals();
   };
 
   return (

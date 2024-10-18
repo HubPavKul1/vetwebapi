@@ -6,8 +6,8 @@ import { useUpload } from "shared/hooks/useUpload";
 interface FileUploadProps {
   accept?: string;
   uploadUrl: string;
-  mutationName?: string;
   invQueryName: string;
+  mutationName: string;
   iconSrc?: string;
   fontSize?: number;
   color?: string;

@@ -55,8 +55,6 @@ export function VetWorkDetail() {
                 <VetWorkCompany
                   key={company.id}
                   company={company}
-                  // setAnimals={setAnimals}
-                  // setCompanyId={setCompanyId}
                   animals={data.animals}
                   workType={data.work_type.toLowerCase()}
                   disease={disease}

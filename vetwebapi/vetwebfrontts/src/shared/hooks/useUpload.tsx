@@ -5,8 +5,8 @@ import { AppService } from "shared/services/app.service";
 export function useUpload(
   reset: UseFormReset<TFieldValues>,
   url: string,
-  mutationKey?: string,
-  queryKey?: string,
+  queryKey: string,
+  mutationKey: string,
   alertMessage?: string,
   id?: string
 ) {
@@ -18,7 +18,8 @@ export function useUpload(
     onSuccess: () => {
       alert(alertMessage);
       queryClient.invalidateQueries({
-        queryKey: !id ? [queryKey] : [queryKey, id],
+        queryKey: [queryKey, id],
+        // queryKey: !id ? [queryKey] : [queryKey, id],
       }),
         reset();
     },

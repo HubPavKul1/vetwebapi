@@ -1,11 +1,12 @@
 import { Container } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import { FileUpload, vetWorkFileUploadUrl } from "shared/index";
 
-export function UploadFileMenuItem() {
-  const { id } = useParams();
-  if (!id) return;
-  const vetWorkId = parseInt(id);
+interface UploadFileMenuItemProps {
+  vetWorkId: number;
+}
+export function UploadFileMenuItem({ vetWorkId }: UploadFileMenuItemProps) {
+  const id = vetWorkId.toString();
+  const queryKey = "vetwork";
 
   return (
     <Container className="flex justify-center items-center w-full pt-2 pb-4  border-2 border-violet-400 rounded-md text-lg text-violet-400 uppercase font-bold">
@@ -15,7 +16,7 @@ export function UploadFileMenuItem() {
           uploadUrl={vetWorkFileUploadUrl(vetWorkId)}
           accept=".pdf"
           mutationName="uploadVetWorkFile"
-          invQueryName="vetwork"
+          invQueryName={queryKey}
           fontSize={40}
           color="violet"
           id={id}

@@ -18,11 +18,6 @@ const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => alert(error.message),
   }),
-  defaultOptions: {
-    queries: {
-      staleTime: Infinity,
-    },
-  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
