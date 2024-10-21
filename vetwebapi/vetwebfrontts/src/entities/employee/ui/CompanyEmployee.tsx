@@ -12,7 +12,7 @@ export function CompanyEmployee({ employee }: CompanyEmployeeProps) {
   const { id } = useParams();
   const companyId = Number(id);
   return (
-    <tr key={employee.id}>
+    <tr>
       <td>{employee.position}</td>
       <td>{employee.lastname}</td>
       <td>{employee.firstname}</td>
