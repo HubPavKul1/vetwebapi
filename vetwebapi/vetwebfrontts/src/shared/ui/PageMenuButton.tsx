@@ -11,7 +11,7 @@ export function PageMenuButton({ ...props }: PageMenuButtonProps) {
     <CustomButton
       className="btn-submit mb-2"
       title={title}
-      onClick={() => showContent(true)}
+      onClick={() => showContent()}
     />
   );
 }

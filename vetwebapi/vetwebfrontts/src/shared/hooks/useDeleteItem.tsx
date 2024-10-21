@@ -1,5 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { AppService } from "shared/services/app.service";
+import { queryClient } from "shared/services/queryClient";
 
 export function useDeleteItem(
   url: string,
@@ -7,8 +8,6 @@ export function useDeleteItem(
   alertMessage: string,
   id?: string
 ) {
-  const queryClient = useQueryClient();
-
   const { mutate } = useMutation({
     mutationKey: ["deleteItem"],
     mutationFn: () => AppService.deleteItem(url),

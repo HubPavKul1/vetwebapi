@@ -19,6 +19,7 @@ import { IAnimalCreate } from "entities/animal/model/animalInterfaces";
 
 export function AddAnimalForm() {
   const { id } = useParams();
+  if (!id) return;
   const companyId = Number(id);
 
   const inputItems: FormInputProps<IAnimalCreate>[] = [
@@ -51,7 +52,8 @@ export function AddAnimalForm() {
     companyAnimalsUrl(companyId),
     "company",
     "Животное успешно добавлено!",
-    reset
+    reset,
+    id
   );
 
   const createAnimal: SubmitHandler<IAnimalCreate> = (data) => {

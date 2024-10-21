@@ -16,7 +16,7 @@ export function CompanyAnimal({ animal, companyId }: CompanyAnimalProps) {
   const date_of_birth = convertDateString(animal.date_of_birth).shortDate;
 
   return (
-    <tr key={animal.id}>
+    <tr>
       <td>{animal.species}</td>
       <td>{animal.gender}</td>
       <td>{date_of_birth}</td>

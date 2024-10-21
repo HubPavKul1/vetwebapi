@@ -1,5 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { AppService } from "shared/services/app.service";
+import { queryClient } from "shared/services/queryClient";
 
 export function useUpdateItemPartial(
   mutationKey: string,
@@ -9,8 +10,6 @@ export function useUpdateItemPartial(
   reset: UseFormReset<TFieldValues>,
   id?: string
 ) {
-  const queryClient = useQueryClient();
-
   const { mutate } = useMutation({
     mutationKey: [mutationKey],
     mutationFn: (data: object) => AppService.updateItemPartial(url, data),

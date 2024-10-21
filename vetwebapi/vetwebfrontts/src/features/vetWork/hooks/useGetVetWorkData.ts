@@ -1,12 +1,10 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { IVetWorkSchema } from "entities/vetWork";
 import { useParams } from "react-router-dom";
+import { queryClient } from "shared/services/queryClient";
 
 export function useGetVetWorkData() {
-  const queryClient = useQueryClient();
   const { id } = useParams();
   if (!id) return;
   const data = queryClient.getQueryData<IVetWorkSchema>(["vetwork", id]);
-  if (!data) return;
   return data;
 }

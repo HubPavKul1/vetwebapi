@@ -9,12 +9,13 @@ import {
   UploadFileMenuItem,
 } from "entities/vetWork";
 import { useGetVetWorkData } from "../hooks/useGetVetWorkData";
-import { PageMenuButtonsBlock } from "shared/index";
+import { Loader, PageMenuButtonsBlock } from "shared/index";
 
 export function VetWorkMenuButtonBlock() {
   const data = useGetVetWorkData();
-  const queryKey = "vetwork";
-  if (!data) return;
+  if (!data) return <Loader />;
+  console.log("DATA", data);
+  console.log("FileId", data.file_id);
   const disease = data.diseases[0].toLowerCase();
   const menuButtons = [
     {
@@ -40,10 +41,10 @@ export function VetWorkMenuButtonBlock() {
     },
     {
       id: 4,
-      element: !data.file_id ? (
-        <UploadFileMenuItem vetWorkId={data.id} />
-      ) : (
+      element: data.file_id ? (
         openFileBtn()
+      ) : (
+        <UploadFileMenuItem vetWorkId={data.id} />
       ),
     },
   ];

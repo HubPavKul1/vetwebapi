@@ -29,8 +29,8 @@ export function FileUpload({
   const { mutate } = useUpload(
     reset,
     uploadUrl,
-    mutationName,
     invQueryName,
+    mutationName,
     "Файл успешно загружен!",
     id
   );

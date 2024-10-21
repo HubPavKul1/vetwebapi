@@ -12,7 +12,6 @@ import { ReferralAnimalListPDF } from "./vetWorkPdf/referralAnimalListPdf/Referr
 import { VetWorkFile } from "./VetWorkFile";
 import { ErrorLoadDataMessage } from "shared/index";
 import { VetWorkData } from "features/vetWork/models/interfaces";
-import { useEffect, useState } from "react";
 import { AccountingActPDF } from "./vetWorkPdf/accountingActPdf/AccountingActPDF";
 import useActStore from "features/vetWork/stores/useActStore";
 import useAccountingActStore from "features/vetWork/stores/useAccountingActStore";
@@ -24,15 +23,6 @@ import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsSto
 import useVetWorkCompanyStore from "features/vetWork/stores/useVetWorkCompanyStore";
 
 export function VetWorkPageDetail() {
-  // const [isAct, setShowAct] = useState(false);
-  // const [isAnimalsList, setShowAnimalsList] = useState(false);
-  // const [isReferral, setShowReferral] = useState(false);
-  // const [isAnimals, setAnimals] = useState(false);
-  // const [companyId, setCompanyId] = useState("");
-  // const [isReferralAnimalList, setShowReferralAnimalList] = useState(false);
-  // const [isAccountingAct, setShowAccountingAct] = useState(false);
-  // const [isVetWorkFile, setShowVetWorkFile] = useState(false);
-
   const isAct = useActStore((state) => state.isAct);
   const isAccountingAct = useAccountingActStore(
     (state) => state.isAccountingAct

@@ -9,6 +9,7 @@ import { CustomButton } from "shared/index";
 
 export function UploadAnimalForm() {
   const { id } = useParams();
+  if (!id) return;
   const companyId = Number(id);
 
   const [currentFile, setCurrentFile] = useState<File>();
@@ -17,8 +18,8 @@ export function UploadAnimalForm() {
   const { mutate } = useUpload(
     reset,
     uploadAnimalsUrl(companyId),
-    "uploadAnimals",
     "company",
+    "uploadAnimals",
     "Животные успешно добавлены!",
     id
   );
