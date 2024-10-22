@@ -6,29 +6,29 @@ import useReferralStore from "features/vetWork/stores/useReferralStore";
 import useVetWorkFileStore from "features/vetWork/stores/useVetWorkFileStore";
 import { PageMenuButton } from "shared/index";
 
-export const actBtn = () => {
+export function ActBtn() {
   const actOpen = useActStore((state) => state.actOpen);
   return <PageMenuButton title="Акт на обработку" showContent={actOpen} />;
 };
 
-export const referralBtn = () => {
+export function ReferralBtn() {
   const referralOpen = useReferralStore((state) => state.referralOpen);
   return <PageMenuButton title="Сопроводительная" showContent={referralOpen} />;
 };
 
-export const tubercActBtn = () => {
+export function TubercActBtn() {
   const actOpen = useActStore((state) => state.actOpen);
   return (
     <PageMenuButton title="Акт на туберкулинизацию" showContent={actOpen} />
   );
 };
 
-export const accountingActBtn = () => {
+export function AccountingActBtn() {
   const actOpen = useAccountingActStore((state) => state.actOpen);
   return <PageMenuButton title="Акт учета реакции" showContent={actOpen} />;
 };
 
-export const referralAnimalListBtn = () => {
+export function ReferralAnimalListBtn() {
   const referralAnimalListOpen = useReferralAnimalListStore(
     (state) => state.referralAnimalListOpen
   );
@@ -40,12 +40,12 @@ export const referralAnimalListBtn = () => {
   );
 };
 
-export const animalListBtn = () => {
+export function AnimalListBtn() {
   const animalListOpen = useAnimalListStore((state) => state.animalListOpen);
   return <PageMenuButton title="Опись животных" showContent={animalListOpen} />;
 };
 
-export const openFileBtn = () => {
+export function OpenFileBtn() {
   const fileOpen = useVetWorkFileStore((state) => state.fileOpen);
   return <PageMenuButton title="Открыть документ" showContent={fileOpen} />;
-};
+}

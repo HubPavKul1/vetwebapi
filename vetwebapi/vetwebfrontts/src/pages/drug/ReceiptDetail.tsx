@@ -1,6 +1,4 @@
 import { useParams } from "react-router-dom";
-
-import { useState } from "react";
 import { ReceiptPDF } from "./ReceiptPDF";
 
 import { useGetDataById } from "shared/hooks/useGetDataById";
@@ -14,6 +12,7 @@ import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { ReceiptPageMenu } from "widgets/drugMovement";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
 import { ReportPage } from "widgets/ReportPage";
+import useReceiptPDFStore from "features/drugMovements/stores/useReceiptPDFStore";
 
 interface ReceiptData {
   data?: IDrugMovementDetail;
@@ -21,7 +20,7 @@ interface ReceiptData {
 }
 
 export function ReceiptDetail() {
-  const [pdf, setPdf] = useState(false);
+  const isReceiptPdf = useReceiptPDFStore((state) => state.isReceiptPDF);
   const { id } = useParams();
   const receiptId = Number(id);
   const url = drugReceiptDetailUrl(receiptId);
@@ -39,11 +38,11 @@ export function ReceiptDetail() {
 
   return (
     <>
-      {!pdf ? (
+      {!isReceiptPdf ? (
         <ReportPage
           reportTitle={`Поступление от ${date.shortDate}`}
           imgSrc="/drugsBg.jpg"
-          menu={<ReceiptPageMenu url={url} setPdf={setPdf} />}
+          menu={<ReceiptPageMenu url={url} />}
           tableHeaders={drugReceiptHeaders}
           tableItems={
             data.drugs?.length &&
@@ -51,7 +50,7 @@ export function ReceiptDetail() {
           }
         />
       ) : (
-        <ReceiptPDF setPdf={setPdf} data={data} />
+        <ReceiptPDF data={data} />
       )}
     </>
   );

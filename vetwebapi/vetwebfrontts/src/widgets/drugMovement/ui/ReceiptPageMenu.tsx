@@ -1,28 +1,28 @@
 import {
-  CustomButton,
+  PageMenuButton,
   PageMenuButtonsBlock,
   PageMenuTop,
   PageMenuWrapper,
 } from "shared/index";
 
 import AddDrugToReceipt from "features/drugMovements/AddDrugToReceipt";
+import useReceiptPDFStore from "features/drugMovements/stores/useReceiptPDFStore";
 
 interface ReceiptPageMenuProps {
   url: string;
-  setPdf: CallableFunction;
 }
 
-export function ReceiptPageMenu({ url, setPdf }: ReceiptPageMenuProps) {
+export function ReceiptPageMenu({ url }: ReceiptPageMenuProps) {
+  const receiptPDFOpen = useReceiptPDFStore((state) => state.receiptPdfOpen);
   return (
     <PageMenuWrapper>
       <PageMenuTop>
         <AddDrugToReceipt url={url} queryKey="receipt" />
       </PageMenuTop>
       <PageMenuButtonsBlock>
-        <CustomButton
-          className="btn-submit"
+        <PageMenuButton
           title="Требование-заявка"
-          onClick={() => setPdf(true)}
+          showContent={receiptPDFOpen}
         />
       </PageMenuButtonsBlock>
     </PageMenuWrapper>

@@ -6,15 +6,16 @@ import {
   ReceiptPDFHeader,
   ReceiptPDFTable,
 } from "widgets/drugMovement";
+import useReceiptPDFStore from "features/drugMovements/stores/useReceiptPDFStore";
 
 interface ReceiptPDFProps {
-  setPdf: CallableFunction;
   data: IDrugMovementDetail;
 }
 
-export function ReceiptPDF({ setPdf, data }: ReceiptPDFProps) {
+export function ReceiptPDF({ data }: ReceiptPDFProps) {
+  const receiptPDFClose = useReceiptPDFStore((state) => state.receiptPdfClose);
   return (
-    <PDFWrapper setPdf={setPdf} filename="receipt.pdf">
+    <PDFWrapper closePdf={receiptPDFClose} filename="receipt.pdf">
       <ReceiptPDFHeader operationDate={data.operation_date} />
       <ReceiptPDFBody data={data} />
       <ReceiptPDFTable data={data} />

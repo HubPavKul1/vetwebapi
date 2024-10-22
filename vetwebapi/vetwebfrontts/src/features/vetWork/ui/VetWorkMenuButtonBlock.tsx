@@ -1,11 +1,11 @@
 import {
-  accountingActBtn,
-  actBtn,
-  animalListBtn,
-  openFileBtn,
-  referralAnimalListBtn,
-  referralBtn,
-  tubercActBtn,
+  AccountingActBtn,
+  ActBtn,
+  AnimalListBtn,
+  OpenFileBtn,
+  ReferralAnimalListBtn,
+  ReferralBtn,
+  TubercActBtn,
   UploadFileMenuItem,
 } from "entities/vetWork";
 import { useGetVetWorkData } from "../hooks/useGetVetWorkData";
@@ -21,31 +21,35 @@ export function VetWorkMenuButtonBlock() {
     {
       id: 1,
       element:
-        data.work_type !== "диагностика"
-          ? actBtn()
-          : disease !== "туберкулез"
-          ? referralBtn()
-          : tubercActBtn(),
+        data.work_type !== "диагностика" ? (
+          <ActBtn />
+        ) : disease !== "туберкулез" ? (
+          <ReferralBtn />
+        ) : (
+          <TubercActBtn />
+        ),
     },
     {
       id: 2,
-      element: disease === "туберкулез" && accountingActBtn(),
+      element: disease === "туберкулез" && <AccountingActBtn />,
     },
 
     {
       id: 3,
       element:
-        data.work_type === "диагностика" && disease !== "туберкулез"
-          ? referralAnimalListBtn()
-          : animalListBtn(),
+        data.work_type === "диагностика" && disease !== "туберкулез" ? (
+          <ReferralAnimalListBtn />
+        ) : (
+          <AnimalListBtn />
+        ),
     },
     {
       id: 4,
-      element: data.file_id ? (
-        openFileBtn()
-      ) : (
-        <UploadFileMenuItem vetWorkId={data.id} />
-      ),
+      element: !data.file_id && <UploadFileMenuItem vetWorkId={data.id} />,
+    },
+    {
+      id: 5,
+      element: data.file_id && <OpenFileBtn />,
     },
   ];
   return (
