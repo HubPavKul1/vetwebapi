@@ -10,20 +10,19 @@ import {
 } from "entities/vetWork";
 import { useGetVetWorkData } from "../hooks/useGetVetWorkData";
 import { Loader, PageMenuButtonsBlock } from "shared/index";
+import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
 
 export function VetWorkMenuButtonBlock() {
   const data = useGetVetWorkData();
   if (!data) return <Loader />;
-  console.log("DATA", data);
-  console.log("FileId", data.file_id);
   const disease = data.diseases[0].toLowerCase();
   const menuButtons = [
     {
       id: 1,
       element:
-        data.work_type !== "диагностика" ? (
+        data.work_type !== WORKTYPES.diagnostic ? (
           <ActBtn />
-        ) : disease !== "туберкулез" ? (
+        ) : disease !== DISEASES.tbc ? (
           <ReferralBtn />
         ) : (
           <TubercActBtn />
@@ -31,13 +30,13 @@ export function VetWorkMenuButtonBlock() {
     },
     {
       id: 2,
-      element: disease === "туберкулез" && <AccountingActBtn />,
+      element: disease === DISEASES.tbc && <AccountingActBtn />,
     },
 
     {
       id: 3,
       element:
-        data.work_type === "диагностика" && disease !== "туберкулез" ? (
+        data.work_type === WORKTYPES.diagnostic && disease !== DISEASES.tbc ? (
           <ReferralAnimalListBtn />
         ) : (
           <AnimalListBtn />

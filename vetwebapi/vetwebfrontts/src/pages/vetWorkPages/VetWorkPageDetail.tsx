@@ -17,18 +17,21 @@ import useActStore from "features/vetWork/stores/useActStore";
 import useAccountingActStore from "features/vetWork/stores/useAccountingActStore";
 import useReferralStore from "features/vetWork/stores/useReferralStore";
 import useAnimalListStore from "features/vetWork/stores/useAnimalListStore";
-import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalList";
 import useVetWorkFileStore from "features/vetWork/stores/useVetWorkFileStore";
 import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
 import useVetWorkCompanyStore from "features/vetWork/stores/useVetWorkCompanyStore";
+import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalListStore";
+import { VetWorkQueryKeys } from "shared/constants/vetworkConst";
 
 export function VetWorkPageDetail() {
   const isAct = useActStore((state) => state.isAct);
+
   const isAccountingAct = useAccountingActStore(
     (state) => state.isAccountingAct
   );
   const isReferral = useReferralStore((state) => state.isReferral);
   const isAnimalList = useAnimalListStore((state) => state.isAnimalList);
+
   const isReferralAnimalList = useReferralAnimalListStore(
     (state) => state.isReferralAnimalList
   );
@@ -38,9 +41,10 @@ export function VetWorkPageDetail() {
 
   const { id } = useParams();
   const vetWorkId = Number(id);
+  const queryKey = VetWorkQueryKeys.vetWorkDetail;
 
   const { isLoading, data, isError, error }: VetWorkData = useGetDataById(
-    "vetwork",
+    queryKey,
     vetWorkDetailUrl(vetWorkId),
     id
   );

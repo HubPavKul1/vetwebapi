@@ -1,4 +1,5 @@
 import { IDrugReport } from "entities/drugReport";
+import useReportStore from "features/vetWork/stores/useReportStore";
 import { PDFWrapper } from "shared/ui/PDFWrapper";
 import {
   DrugReportPDFBody,
@@ -7,14 +8,18 @@ import {
 } from "widgets/drugReport";
 
 interface DrugReportPDFProps {
-  setPdf: CallableFunction;
   data: IDrugReport[];
   dateEnd: string;
 }
 
-export function DrugReportPDF({ setPdf, data, dateEnd }: DrugReportPDFProps) {
+export function DrugReportPDF({ data, dateEnd }: DrugReportPDFProps) {
+  const closeReportPDF = useReportStore((state) => state.closeReportPDF);
   return (
-    <PDFWrapper setPdf={setPdf} filename="drugReport.pdf" orientation="l">
+    <PDFWrapper
+      closePdf={closeReportPDF}
+      filename="drugReport.pdf"
+      orientation="l"
+    >
       <DrugReportPDFHeader dateEnd={dateEnd} />
       <DrugReportPDFBody data={data} />
       <DrugReportPDFFooter />

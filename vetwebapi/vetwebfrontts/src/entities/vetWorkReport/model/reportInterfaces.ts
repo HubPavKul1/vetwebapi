@@ -11,7 +11,6 @@ export interface VetWorkReportProps {
   data: IVetWorkReport[];
   dateEnd: string;
   dateStart: string;
-  setReportActive: CallableFunction;
 }
 
 export interface ReportBetweenDateRangeProps {

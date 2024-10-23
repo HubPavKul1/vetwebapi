@@ -1,49 +1,27 @@
-import { useState } from "react";
 import { DiagnosticBetweenDateRange } from "./DiagnosticBetweenDateRange";
 import { DiagnosticReport } from "./DiagnosticReport";
 import { VaccinationReport } from "./VaccinationReport";
 import { VaccinationBetweenDateRange } from "./VaccinationBetweenDateRange";
-import { IDateRange } from "shared/index";
+
 import { HomeContentWrapper } from "entities/home";
+import useReportStore from "features/vetWork/stores/useReportStore";
 
 export function VetWorkReportMainPage() {
-  const [vetWorkReportData, setVetWorkReportData] = useState<object>({});
-  const [dateRange, setDateRange] = useState<IDateRange>();
-  const [reportActive, setReportActive] = useState(false);
+  const dateRange = useReportStore((state) => state.dateRange);
+  const isReportActive = useReportStore((state) => state.isReportActive);
+  const reportData = useReportStore((state) => state.reportData);
 
   return (
     <>
-      {!reportActive ? (
+      {!isReportActive ? (
         <HomeContentWrapper title="Отчеты по противоэпизоотической работе">
-          <DiagnosticBetweenDateRange
-            setReportData={setVetWorkReportData}
-            setDateRange={setDateRange}
-            setReportActive={setReportActive}
-          />
-
-          <VaccinationBetweenDateRange
-            setReportData={setVetWorkReportData}
-            setDateRange={setDateRange}
-            setReportActive={setReportActive}
-          />
+          <DiagnosticBetweenDateRange />
+          <VaccinationBetweenDateRange />
         </HomeContentWrapper>
-      ) : dateRange && vetWorkReportData.diagnostics ? (
-        <DiagnosticReport
-          data={vetWorkReportData.diagnostics}
-          dateStart={dateRange?.date_start}
-          dateEnd={dateRange?.date_end}
-          setReportActive={setReportActive}
-        />
+      ) : dateRange && reportData.diagnostics ? (
+        <DiagnosticReport />
       ) : (
-        dateRange &&
-        vetWorkReportData.vaccinations && (
-          <VaccinationReport
-            data={vetWorkReportData.vaccinations}
-            dateStart={dateRange?.date_start}
-            dateEnd={dateRange?.date_end}
-            setReportActive={setReportActive}
-          />
-        )
+        dateRange && reportData.vaccinations && <VaccinationReport />
       )}
     </>
   );

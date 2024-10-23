@@ -291,6 +291,7 @@ async def add_diagnostic_methods(session: AsyncSession) -> None:
         "гематологический",
         "ПЦР",
         "люмдиагностика",
+        "вирусологический",
     ]
     session.add_all([DiagnosticMethod(name=name) for name in methods])
     await session.commit()

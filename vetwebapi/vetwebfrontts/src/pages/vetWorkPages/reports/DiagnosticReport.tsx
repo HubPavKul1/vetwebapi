@@ -1,34 +1,29 @@
-import { useState } from "react";
-
 import { ReportMenu } from "widgets/ReportMenu.tsx";
-import { VetWorkReportProps } from "entities/vetWorkReport/model/reportInterfaces.ts";
+import { IVetWorkReport } from "entities/vetWorkReport/model/reportInterfaces.ts";
 
 import { VetWorkReportPDF } from "./VetWorkReportPDF.tsx";
 import { convertDateString } from "shared/helpers.ts";
 import { diagnosticHeaders } from "shared/model/tableHeaders.ts";
 import { ReportPage } from "widgets/ReportPage.tsx";
 import { VetWorkReportItem } from "entities/vetWorkReport/index.ts";
+import useReportStore from "features/vetWork/stores/useReportStore.ts";
 
-export function DiagnosticReport({
-  data,
-  dateEnd,
-  setReportActive,
-}: VetWorkReportProps) {
-  const [pdf, setPdf] = useState(false);
-
-  const date2 = convertDateString(dateEnd);
+export function DiagnosticReport() {
+  const isReportPDf = useReportStore((state) => state.isReportPDF);
+  const reportData = useReportStore((state) => state.reportData);
+  const dateRange = useReportStore((state) => state.dateRange);
+  const diagnosticReport: IVetWorkReport[] = reportData.diagnostics;
+  const date2 = convertDateString(dateRange.date_end);
 
   return (
     <>
-      {!pdf ? (
+      {!isReportPDf ? (
         <ReportPage
           reportTitle={`Отчет по диагностическим исследованиям за ${date2.month} ${date2.year}`}
           imgSrc="/diagnostic.jpg"
-          menu={
-            <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
-          }
+          menu={<ReportMenu />}
           tableHeaders={diagnosticHeaders}
-          tableItems={data.map((item, index) => (
+          tableItems={diagnosticReport.map((item, index) => (
             <VetWorkReportItem
               key={index}
               data={item}
@@ -39,10 +34,9 @@ export function DiagnosticReport({
         />
       ) : (
         <VetWorkReportPDF
-          setPdf={setPdf}
-          data={data}
+          data={diagnosticReport}
           isDiagnostic={true}
-          dateEnd={dateEnd}
+          dateEnd={dateRange.date_end}
           fileName="diagnostic"
         />
       )}

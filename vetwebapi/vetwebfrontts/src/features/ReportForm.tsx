@@ -8,20 +8,13 @@ import {
   fieldRequiredMessage,
   IDateRange,
 } from "shared/index";
+import useReportStore from "./vetWork/stores/useReportStore";
 
 interface ReportFormProps {
-  setReportData: CallableFunction;
-  setDateRange: CallableFunction;
-  setReportActive: CallableFunction;
   url: string;
 }
 
-export function ReportForm({
-  setReportData,
-  setDateRange,
-  setReportActive,
-  url,
-}: ReportFormProps) {
+export function ReportForm({ url }: ReportFormProps) {
   const {
     register,
     reset,
@@ -30,6 +23,10 @@ export function ReportForm({
   } = useForm<IDateRange>({
     mode: "onChange",
   });
+
+  const setDateRange = useReportStore((state) => state.setDateRange);
+  const setReportActive = useReportStore((state) => state.setReportActive);
+  const setReportData = useReportStore((state) => state.setReportData);
 
   const { mutate } = useMutation({
     mutationKey: ["createReport"],
@@ -42,10 +39,11 @@ export function ReportForm({
     onSuccess: (data, dateRange) => {
       alert("Отчет успешно выполнен!");
       console.log("DATA", data);
+      console.log("DateRange>>>", dateRange.date_start, dateRange.date_end);
       reset();
       setReportData(data.data);
       setDateRange(dateRange);
-      setReportActive(true);
+      setReportActive();
     },
   });
 

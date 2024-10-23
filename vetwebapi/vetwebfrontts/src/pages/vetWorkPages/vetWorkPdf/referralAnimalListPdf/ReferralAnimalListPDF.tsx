@@ -2,7 +2,7 @@ import { PDFWrapper } from "shared/ui/PDFWrapper";
 import { ReferralAnimalListPDFBody } from "./ReferralAnimalListPDFBody";
 import { ReferralAnimalListPDFHeader } from "./ReferralAnimalListPDFHeader";
 import { useGetVetWorkData } from "features/vetWork";
-import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalList";
+import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalListStore";
 
 export function ReferralAnimalListPDF() {
   const data = useGetVetWorkData();

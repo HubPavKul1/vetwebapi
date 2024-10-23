@@ -1,9 +1,10 @@
+import { VetWorkQueryKeys } from "shared/constants/vetworkConst";
 import { diagnosticsUrl } from "shared/index";
 import { VetWorks } from "widgets/vetWork";
 
 export function Diagnostics() {
   const url = diagnosticsUrl;
-  const queryKey = "diagnostics";
+  const queryKey = VetWorkQueryKeys.diagnostics;
 
   return (
     <VetWorks

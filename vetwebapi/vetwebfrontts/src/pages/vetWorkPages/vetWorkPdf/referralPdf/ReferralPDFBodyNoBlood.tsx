@@ -23,8 +23,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
   const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
 
   const companyAddress =
-    data.companies[0].address &&
-    addressString(data.companies[0].address);
+    data.companies[0].address && addressString(data.companies[0].address);
 
   return (
     <Container>
@@ -50,7 +49,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
       </Row>
       <Row className="font-bold">
         <Col md={1}>От:</Col>
-        <Col className="pdf-report-underlined"></Col>
+        <Col className="pdf-report-underlined">Опись прилагается</Col>
       </Row>
       <Row className="text-center text-sm mb-2">
         <Col md={1}></Col>

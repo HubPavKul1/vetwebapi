@@ -6,8 +6,6 @@ import { ActPDFHeader } from "./ActPDFHeader";
 import useActStore from "features/vetWork/stores/useActStore";
 
 export function ActPDF() {
-  // const context: IVetWorkPageContext = useContext(VetWorkPageContext);
-  // const data = context.data;
   const actClose = useActStore((state) => state.actClose);
 
   return (

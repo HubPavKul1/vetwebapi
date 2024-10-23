@@ -1,34 +1,25 @@
+import useReportStore from "features/vetWork/stores/useReportStore";
 import {
-  CustomButton,
+  PageMenuButton,
   PageMenuButtonsBlock,
   PageMenuTop,
   PageMenuWrapper,
 } from "shared/index";
 
-interface ReportMenuProps {
-  setPdf: CallableFunction;
-  setReportActive: CallableFunction;
-}
-
-export function ReportMenu({ setPdf, setReportActive }: ReportMenuProps) {
+export function ReportMenu() {
+  const showReportPDF = useReportStore((state) => state.showReportPDF);
+  const setReportInactive = useReportStore((state) => state.setReportInactive);
   const menuButtons = [
     {
       id: 1,
-      element: (
-        <CustomButton
-          className="btn-submit mb-2"
-          title="Отчет PDF"
-          onClick={() => setPdf(true)}
-        />
-      ),
+      element: <PageMenuButton title="Отчет PDF" showContent={showReportPDF} />,
     },
     {
       id: 2,
       element: (
-        <CustomButton
-          className="btn-submit"
+        <PageMenuButton
           title="Выйти из отчета"
-          onClick={() => setReportActive(false)}
+          showContent={setReportInactive}
         />
       ),
     },

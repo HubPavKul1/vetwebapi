@@ -10,6 +10,7 @@ import { VetWorkPageMenu } from "widgets/vetWork";
 import { IAnimalInVetwork } from "entities/vetWork";
 import { ICompanyCard } from "entities/company";
 import { useGetVetWorkData } from "features/vetWork";
+import { WORKTYPES } from "shared/constants/vetworkConst";
 
 export function VetWorkDetail() {
   const data = useGetVetWorkData();
@@ -20,13 +21,15 @@ export function VetWorkDetail() {
   const disease = data.diseases[0].toLowerCase();
 
   const pageTitle =
-    data.work_type === "вакцинация"
+    data.work_type === WORKTYPES.vaccination
       ? `Вакцинация: ${data.diseases}`
       : `Диагностические исследования на: ${diseases}`;
   const fullPageTitle = `${pageTitle} от ${date.shortDate} г. `;
 
   const imgSrc =
-    data.work_type === "вакцинация" ? "/vetworkBg.jpg" : "/diagnostic.jpg";
+    data.work_type === WORKTYPES.vaccination
+      ? "/vetworkBg.jpg"
+      : "/diagnostic.jpg";
 
   let dosages = 0;
   const animalsDoses =

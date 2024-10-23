@@ -1,48 +1,26 @@
-import { useState } from "react";
 import { DrugReport } from "./DrugReport";
 import { Vet1BMenu } from "widgets/drugReport/ui/Vet1BMenu";
 import { Vet1B } from "./Vet1B";
-import { IDateRange } from "shared/index";
 import { HomeContentWrapper } from "entities/home";
 import { DrugMovementBetweenDateRange } from "widgets/drugReport";
+import useReportStore from "features/vetWork/stores/useReportStore";
 
 export function DrugReportMainPage() {
-  const [drugReportData, setDrugReportData] = useState<object>({});
-  const [dateRange, setDateRange] = useState<IDateRange>();
-  const [reportActive, setReportActive] = useState(false);
+  const dateRange = useReportStore((state) => state.dateRange);
+  const reportData = useReportStore((state) => state.reportData);
+  const isReportActive = useReportStore((state) => state.isReportActive);
 
   return (
     <>
-      {!reportActive ? (
+      {!isReportActive ? (
         <HomeContentWrapper title="Отчеты по биопрепаратам">
-          <DrugMovementBetweenDateRange
-            setReportData={setDrugReportData}
-            setDateRange={setDateRange}
-            setReportActive={setReportActive}
-            dateRange={dateRange}
-          />
-          <Vet1BMenu
-            setReportData={setDrugReportData}
-            setDateRange={setDateRange}
-            setReportActive={setReportActive}
-          />
+          <DrugMovementBetweenDateRange />
+          <Vet1BMenu />
         </HomeContentWrapper>
-      ) : dateRange && drugReportData.drugs_report ? (
-        <DrugReport
-          data={drugReportData.drugs_report}
-          dateStart={dateRange?.date_start}
-          dateEnd={dateRange?.date_end}
-          setReportActive={setReportActive}
-        />
+      ) : dateRange && reportData.drugs_report ? (
+        <DrugReport />
       ) : (
-        dateRange &&
-        drugReportData.vet1B_report && (
-          <Vet1B
-            data={drugReportData.vet1B_report}
-            dateEnd={dateRange?.date_end}
-            setReportActive={setReportActive}
-          />
-        )
+        dateRange && reportData.vet1B_report && <Vet1B />
       )}
     </>
   );

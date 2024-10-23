@@ -13,6 +13,7 @@ import { CompanyEmployees } from "entities/employee";
 import { CompanyAnimals } from "entities/animal";
 import { CompanyAddress } from "entities/address";
 import { ICompanyDetail } from "entities/company";
+import { CompanyQueryKeys } from "shared/constants/companyConst";
 
 interface CompanyData {
   data?: ICompanyDetail;
@@ -24,9 +25,10 @@ interface CompanyData {
 export function CompanyDetail() {
   const { id } = useParams();
   const companyId = Number(id);
+  const queryKey = CompanyQueryKeys.companyDetail
 
   const { isLoading, data, isError, error }: CompanyData = useGetDataById(
-    "company",
+    queryKey,
     companyDetailUrl(companyId),
     id
   );

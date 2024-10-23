@@ -5,6 +5,7 @@ import { ReferralPDFFooter } from "./ReferralPDFFooter";
 import { ReferralPDFHeader } from "./ReferralPDFHeader";
 import { useGetVetWorkData } from "features/vetWork";
 import useReferralStore from "features/vetWork/stores/useReferralStore";
+import { BIOMATERIAL } from "shared/constants/vetworkConst";
 
 export function ReferralPDF() {
   const data = useGetVetWorkData();
@@ -14,7 +15,7 @@ export function ReferralPDF() {
   return (
     <PDFWrapper closePdf={referralClose} filename="referral.pdf">
       <ReferralPDFHeader data={data} />
-      {data.biomaterial === ("сыворотка крови" || "цельная кровь") ? (
+      {data.biomaterial === (BIOMATERIAL.bloodSerum || BIOMATERIAL.blood) ? (
         <ReferralPDFBody data={data} />
       ) : (
         <ReferralPDFBodyNoBlood data={data} />

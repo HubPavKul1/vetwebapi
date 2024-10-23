@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { DrugInReport } from "widgets/drugReport/ui/DrugInReport";
 import { ReportMenu } from "widgets/ReportMenu";
 
@@ -8,34 +6,30 @@ import { drugReportHeaders } from "shared/model/tableHeaders.ts";
 import { Vet1BPDF } from "./Vet1BPDF";
 import { ReportPage } from "widgets/ReportPage";
 import { IDrugReport } from "entities/drugReport";
+import useReportStore from "features/vetWork/stores/useReportStore";
 
-interface Vet1BProps {
-  data: IDrugReport[];
-  dateEnd: string;
-  setReportActive: CallableFunction;
-}
+export function Vet1B() {
+  const isReportPDF = useReportStore((state) => state.isReportPDF);
+  const dateRange = useReportStore((state) => state.dateRange);
+  const reportData = useReportStore((state) => state.reportData);
+  const drugReport: IDrugReport[] = reportData.vet1B_report;
 
-export function Vet1B({ data, dateEnd, setReportActive }: Vet1BProps) {
-  const [pdf, setPdf] = useState(false);
-
-  const reportDate = convertDateString(dateEnd);
+  const reportDate = convertDateString(dateRange.date_end);
 
   return (
     <>
-      {!pdf ? (
+      {!isReportPDF ? (
         <ReportPage
           reportTitle={`Отчет 1-вет В за ${reportDate.quarter} квартал ${reportDate.year} г.`}
           imgSrc="/drugsBg.jpg"
-          menu={
-            <ReportMenu setPdf={setPdf} setReportActive={setReportActive} />
-          }
+          menu={<ReportMenu />}
           tableHeaders={drugReportHeaders}
-          tableItems={data.map((drug) => (
+          tableItems={drugReport.map((drug) => (
             <DrugInReport key={drug.id} drug={drug} />
           ))}
         />
       ) : (
-        <Vet1BPDF setPdf={setPdf} data={data} dateEnd={dateEnd} />
+        <Vet1BPDF data={drugReport} dateEnd={dateRange.date_end} />
       )}
     </>
   );

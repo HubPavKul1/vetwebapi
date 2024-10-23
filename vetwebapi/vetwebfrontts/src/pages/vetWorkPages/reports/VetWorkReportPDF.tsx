@@ -1,10 +1,9 @@
 import { IVetWorkReport } from "entities/vetWorkReport";
+import useReportStore from "features/vetWork/stores/useReportStore";
 import { PDFWrapper } from "shared/ui/PDFWrapper";
 import { VetWorkReportPDFBody } from "widgets/vetWorkReport";
 
-
 interface VetWorkReportPDFProps {
-  setPdf: CallableFunction;
   data: IVetWorkReport[];
   dateEnd: string;
   isDiagnostic: boolean;
@@ -12,14 +11,14 @@ interface VetWorkReportPDFProps {
 }
 
 export function VetWorkReportPDF({
-  setPdf,
   data,
   dateEnd,
   isDiagnostic,
   fileName,
 }: VetWorkReportPDFProps) {
+  const closeReportPDF = useReportStore((state) => state.closeReportPDF);
   return (
-    <PDFWrapper setPdf={setPdf} filename={`${fileName}.pdf`}>
+    <PDFWrapper closePdf={closeReportPDF} filename={`${fileName}.pdf`}>
       <VetWorkReportPDFBody
         isDiagnostic={isDiagnostic}
         dateEnd={dateEnd}
