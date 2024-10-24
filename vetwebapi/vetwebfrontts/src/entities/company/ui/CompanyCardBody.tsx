@@ -23,20 +23,20 @@ export function CompanyCardBody({
     <>
       <Container className="text-base text-left mb-1">
         <Row>
-          <Col>
+          <Col md={2}>
             <h6 className="underline">Адрес:</h6>
           </Col>
-          <Col md={9}>
+          <Col md={10}>
             <h6>{companyAddress}</h6>
           </Col>
         </Row>
       </Container>
       <Container className="text-base text-left mb-2">
         <Row>
-          <Col>
+          <Col md={2}>
             <h6 className="underline">Персонал:</h6>
           </Col>
-          <Col md={9}>
+          <Col md={10}>
             <h6>{companyEmployee}</h6>
           </Col>
         </Row>

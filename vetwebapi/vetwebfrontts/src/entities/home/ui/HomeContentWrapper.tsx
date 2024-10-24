@@ -11,7 +11,7 @@ export function HomeContentWrapper({ ...props }: HomeContentWrapperProps) {
   return (
     <PageWrapper>
       <h1 className="page-title">{title}</h1>
-      <Row xs={1} md={4} lg={4} className="mb-10">
+      <Row xs={1} sm={2} md={3} lg={3} xl={4} className="mb-10">
         {children}
       </Row>
     </PageWrapper>

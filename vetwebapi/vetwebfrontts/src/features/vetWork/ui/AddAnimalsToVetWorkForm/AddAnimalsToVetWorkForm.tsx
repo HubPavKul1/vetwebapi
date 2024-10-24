@@ -17,6 +17,7 @@ import { CustomButton } from "shared/index";
 import { ICompanyDetail } from "entities/company/model/companyInterfaces";
 import { IAnimal } from "entities/animal/model/animalInterfaces";
 import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
+import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
 
 interface AddAnimalsToVetWorkFormProps {
   companyId: string;
@@ -102,11 +103,13 @@ export function AddAnimalsToVetWorkForm({
         <Row className="border border-black font-bold p-2">
           <Col md={4}>Вид животного</Col>
           <Col md={4}>Кличка</Col>
-          {workType === "вакцинация" && <Col>Дозировка препарата</Col>}
+          {workType === WORKTYPES.vaccination && <Col>Дозировка препарата</Col>}
 
-          {disease === "туберкулез" && <Col>Дозировка препарата</Col>}
+          {disease === DISEASES.tbc && <Col>Дозировка препарата</Col>}
 
-          {workType === "диагностика" && <Col>Положительная реакция</Col>}
+          {workType === WORKTYPES.diagnostic && (
+            <Col>Положительная реакция</Col>
+          )}
           <Col>Выбрать / отменить</Col>
         </Row>
 

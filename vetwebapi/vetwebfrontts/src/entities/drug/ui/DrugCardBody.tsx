@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { diseasesString } from "shared/helpers";
 
 interface DrugCardBodyProps {
@@ -13,13 +13,25 @@ export function DrugCardBody({
   const drugDiseases = diseasesString(diseases);
   return (
     <>
-      <Container className="flex justify-left text-sm mb-2">
-        <h5 className="underline font-bold mr-2">Производитель:</h5>
-        <h6>{drugManufacturer}</h6>
+      <Container className="text-base text-left mb-1">
+        <Row>
+          <Col md={3}>
+            <h6 className="underline">Производитель:</h6>
+          </Col>
+          <Col md={9}>
+            <h6>{drugManufacturer}</h6>
+          </Col>
+        </Row>
       </Container>
-      <Container className="flex justify-left text-sm">
-        <h5 className="underline font-bold mr-2">Заболевания:</h5>
-        <h6>{drugDiseases}</h6>
+      <Container className="text-base text-left mb-2">
+        <Row>
+          <Col md={2}>
+            <h6 className="underline">Заболевания:</h6>
+          </Col>
+          <Col md={10}>
+            <h6>{drugDiseases}</h6>
+          </Col>
+        </Row>
       </Container>
     </>
   );

@@ -37,7 +37,7 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
 
       {data.total_count > 0 ? (
         <>
-          <Row xs={1} md={cardsInRow} lg={cardsInRow} className="mb-10">
+          <Row xs={1} sm={2} md={2} lg={2} xl={cardsInRow} className="mb-10">
             {children}
           </Row>
           {pageNum && data.per_page && (

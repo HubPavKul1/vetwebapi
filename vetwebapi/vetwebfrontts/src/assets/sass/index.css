@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 .btn-upload,
 .btn-nav,
 .btn-submit,
@@ -265,7 +268,7 @@ body {
 
 /* card styles */
 .vertical-card {
-  @apply flex flex-col p-3 h-full w-full drop-shadow-md hover:scale-105 transition-transform;
+  @apply flex flex-col p-3 mb-5 h-full w-full drop-shadow-md hover:scale-105 transition-transform;
 }
 
 .catalog-card {
@@ -405,4 +408,4 @@ body {
 
 .navLink:not(:last-child) {
   margin-right: 52px;
-} 
+}
