@@ -55,6 +55,7 @@ from .animals.gender import Gender
 from .animals.species import Species
 from .animals.type_of_feeding import TypeOfFeeding
 from .animals.usage_type import UsageType
+
 from .base import Base, BaseNoPk
 
 # Companies
@@ -102,4 +103,4 @@ from .vet_work.doctor_in_vetwork import DoctorInVetWork
 from .vet_work.diagnostic_method import DiagnosticMethod
 from .vet_work.disease_in_vetwork import DiseaseInVetWork
 from .vet_work.company_in_vetwork import CompanyInVetWork
-from.vet_work.vetwork_file import VetWorkFile
+from .vet_work.vetwork_file import VetWorkFile

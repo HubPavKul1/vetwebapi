@@ -1,17 +1,17 @@
 version: "3.1"
 services:
-  app:
-    container_name: "vetwebapi"
-    build: ./vetwebapi/
-    stop_signal: SIGKILL
-    env_file:
-      - ./vetwebapi/.env
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    networks:
-      - network
+  # app:
+  #   container_name: "vetwebapi"
+  #   build: ./vetwebapi/
+  #   stop_signal: SIGKILL
+  #   env_file:
+  #     - ./vetwebapi/.env
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - network
 
   # frontend:
   #   container_name: "vetwebfront"
@@ -52,16 +52,16 @@ services:
     networks:
       - network
 
-  # test_db:
-  #   image: postgres:15.3-alpine3.18
-  #   container_name: "test_db"
-  #   restart: always
-  #   env_file:
-  #     - ./blog_project/.test.env
-  #   ports:
-  #     - "5433:5432"
-  #   networks:
-  #     - network
+  test_db:
+    image: postgres:15.3-alpine3.18
+    container_name: "test_db"
+    restart: always
+    env_file:
+      - ./vetwebapi/.test.env
+    ports:
+      - "5433:5432"
+    networks:
+      - network
 
 networks:
   network:

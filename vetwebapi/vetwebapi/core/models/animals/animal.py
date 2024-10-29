@@ -18,6 +18,7 @@ class Animal(Base):
     """Класс Животное"""
 
     __tablename__ = "animals"
+    # __table_args__ = {"extend_existing": True}
 
     species_id: Mapped[int] = mapped_column(ForeignKey("species.id", ondelete="CASCADE"))
     company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
@@ -36,9 +37,7 @@ class Animal(Base):
     vetworks: Mapped[list["VetWork"]] = relationship(
         back_populates="animals", secondary="animals_in_vetwork"
     )
-    vetworks_details: Mapped[list["AnimalInVetWork"]] = relationship(
-        back_populates="animal"
-    )
+    vetworks_details: Mapped[list["AnimalInVetWork"]] = relationship(back_populates="animal")
 
     def __repr__(self) -> str:
         return f"{self.species.name}: {self.nickname}"

@@ -24,6 +24,7 @@ fastapi-users = {extras = ["sqlalchemy"], version = "^12.1.2"}
 gunicorn = "^21.2.0"
 jinja2 = "^3.1.2"
 pandas = "^2.1.4"
+httpx = "^0.27.2"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -44,6 +45,17 @@ pytest-cov = "^4.1.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+addopts = "-v -s --cov"
+testpaths = ["tests"]
+filterwarnings = "ignore::DeprecationWarning"
+env_files = [".test.env"]
+asyncio_mode = "auto"
+
 
 
 [tool.mypy]
