@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api"
     files_dir: str = os.path.join(BASE_DIR, "files")
-    
+
     media_dir: str = os.path.join(BASE_DIR, "media")
 
     db_user: str
@@ -33,5 +33,6 @@ class Settings(BaseSettings):
         env_file = ".env"
         # env_file = ".dev.env"
         env_file_encoding = "utf-8"
+
 
 settings = Settings(_env_file=os.path.join(BASE_DIR, ".env"), _env_file_encoding="utf-8")

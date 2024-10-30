@@ -50,7 +50,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 pythonpath = ["."]
 python_files = ["test_*.py"]
-addopts = "-v -s --cov"
+addopts = "-v -s"
 testpaths = ["tests"]
 filterwarnings = "ignore::DeprecationWarning"
 env_files = [".test.env"]
