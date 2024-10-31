@@ -1,4 +1,6 @@
 from typing import Union
+from loguru import logger
+
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -6,6 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api_v1.dependencies import get_pagination_params
 from core.database import db_manager
 from core.models import Address, Animal, Company, Employee
+from core.hawkcatcher import hawk
+
 
 from . import crud
 from .address.crud import (
@@ -53,20 +57,25 @@ router.include_router(address_router)
 router.include_router(employee_router)
 
 
+@logger.catch
 @router.post("/", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_company_route(
     body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[CompanyOut, dict]:
     try:
         company = await crud.create_company(session=session, body=body)
+        logger.debug("Company with company_id: {company_id} created!", company_id=company.id)
         return CompanyOut(company_id=company.id)
+
     except Exception:
+        hawk.send()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
 
+# Create many companies for pagination test
 @router.post("/test", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_test_companies_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -81,12 +90,14 @@ async def create_test_companies_route(
         )
 
 
+@logger.catch
 @router.post("/vets", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_clinic_route(
     body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[CompanyOut, dict]:
     try:
         company = await crud.create_clinic(session=session, body=body)
+        logger.debug("VetClinic with company_id: {company_id} created!", company_id=company.id)
         return CompanyOut(company_id=company.id)
     except Exception:
         raise HTTPException(
@@ -95,12 +106,14 @@ async def create_clinic_route(
         )
 
 
+@logger.catch
 @router.post("/labs", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_lab_route(
     body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> Union[CompanyOut, dict]:
     try:
         company = await crud.create_lab(session=session, body=body)
+        logger.debug("Lab with company_id: {company_id} created!", company_id=company.id)
         return CompanyOut(company_id=company.id)
     except Exception:
         raise HTTPException(
@@ -109,6 +122,7 @@ async def create_lab_route(
         )
 
 
+@logger.catch
 @router.get("/", response_model=Companies)
 async def get_companies(
     pagination: dict = Depends(get_pagination_params),
@@ -122,17 +136,21 @@ async def get_companies(
     end = start + per_page
     try:
         companies = await crud.read_companies_with_options(session=session)
+        logger.debug("The companies data is obtained from the database!")
         comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        logger.debug("The companies data serialized!")
         return Companies(
             companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
         )
     except Exception:
+        hawk.send()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
 
+@logger.catch
 @router.get("/vets", response_model=Companies)
 async def get_clinics(
     pagination: dict = Depends(get_pagination_params),
@@ -146,7 +164,9 @@ async def get_clinics(
     end = start + per_page
     try:
         companies = await crud.read_clinics_with_options(session=session)
+        logger.debug("The vets data is obtained from the database!")
         comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        logger.debug("The vets data serialized!")
         return Companies(
             companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
         )
@@ -157,6 +177,7 @@ async def get_clinics(
         )
 
 
+@logger.catch
 @router.get("/labs", response_model=Companies)
 async def get_labs(
     pagination: dict = Depends(get_pagination_params),
@@ -170,7 +191,9 @@ async def get_labs(
     end = start + per_page
     try:
         companies = await crud.read_labs_with_options(session=session)
+        logger.debug("The labs data is obtained from the database!")
         comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        logger.debug("The labs data serialized!")
         return Companies(
             companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
         )
@@ -181,6 +204,7 @@ async def get_labs(
         )
 
 
+@logger.catch
 @router.delete(
     "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
 )
@@ -190,14 +214,17 @@ async def delete_company(
 ) -> Union[dict, SuccessMessage]:
     try:
         await crud.delete_company(session=session, company=company)
+        logger.debug("The company with company_id: {company_id}", company_id=company.id)
         return SuccessMessage()
     except Exception:
+        hawk.send()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
         )
 
 
+@logger.catch
 @router.get("/{company_id}/", response_model=CompanyDetail)
 async def get_company_detail(
     company: Company = Depends(company_by_id),
@@ -206,9 +233,11 @@ async def get_company_detail(
     animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, CompanyDetail]:
     try:
-        return await serialize_company_detail(
+        company_schema = await serialize_company_detail(
             company=company, address=address, employees=employees, animals=animals
         )
+        logger.debug("Got CompanyDetail with company_id: {company_id}", company_id=company.id)
+        return company_schema
 
     except Exception:
         raise HTTPException(
@@ -217,13 +246,16 @@ async def get_company_detail(
         )
 
 
+@logger.catch
 @router.get("/{company_id}/animals", response_model=Animals)
 async def get_company_detail(
     animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, Animals]:
 
     try:
-        return await serialize_animals(animals=animals)
+        animals_schema = await serialize_animals(animals=animals)
+        logger.debug("Get company animals")
+        return animals_schema
 
     except Exception:
         raise HTTPException(
@@ -241,6 +273,7 @@ async def get_regions_route(
         regions = await read_regions(session=session)
         return RegionSchemas(regions=regions)
     except Exception:
+        hawk.send()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={"result": False, "error_message": "Internal Server Error"},
