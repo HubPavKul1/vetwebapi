@@ -11,7 +11,6 @@ from core.database import DBManager, db_manager, db_url
 from main import app
 
 test_db_manager = DBManager(url=db_url, echo=True)
-url = db_url
 
 
 @pytest.fixture(scope="session")

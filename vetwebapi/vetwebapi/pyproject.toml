@@ -42,7 +42,6 @@ mypy-extensions = "^1.0.0"
 pytest-dotenv = "^0.5.2"
 pytest-cov = "^4.1.0"
 loguru = "^0.7.2"
-hawkcatcher = "^3.4.1"
 
 [build-system]
 requires = ["poetry-core"]

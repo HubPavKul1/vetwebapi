@@ -23,7 +23,6 @@ class Settings(BaseSettings):
     postgres_user: str
     postgres_password: str
     postgres_db: str
-    hawk_token: str
     db_echo: bool = False
 
     @property
