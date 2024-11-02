@@ -1,6 +1,6 @@
 from core.models import CatalogDrug, DrugInMovement
 
-from .schemas import CatalogDrugSchema, CatalogDrugDetail, CatalogDrugDetails
+from .schemas import CatalogDrugDetail, CatalogDrugDetails, CatalogDrugSchema
 
 
 async def serialize_catalog_drug(drug: CatalogDrug) -> CatalogDrugSchema:

@@ -6,10 +6,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.models.base import Base
 
 if TYPE_CHECKING:
+    from .administration_method import AdministrationMethod
     from .catalog_drug import CatalogDrug
     from .drug_movement import DrugMovement
     from .place_of_administration import PlaceOfAdministration
-    from .administration_method import AdministrationMethod
 
 
 class DrugInMovement(Base):
@@ -22,7 +22,7 @@ class DrugInMovement(Base):
 
     drug_movement_id: Mapped[int] = mapped_column(ForeignKey("drug_movements.id"))
     catalog_drug_id: Mapped[int] = mapped_column(ForeignKey("catalog_drugs.id"))
-    place_of_administration: Mapped[str] 
+    place_of_administration: Mapped[str]
     administration_method: Mapped[str]
 
     packs_amount: Mapped[int]
@@ -30,4 +30,3 @@ class DrugInMovement(Base):
 
     drug_movement: Mapped["DrugMovement"] = relationship(back_populates="catalog_drugs_details")
     catalog_drug: Mapped["CatalogDrug"] = relationship(back_populates="drug_movements_details")
-   

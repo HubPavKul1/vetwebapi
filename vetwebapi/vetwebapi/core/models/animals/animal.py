@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.models.base import Base
 
 if TYPE_CHECKING:
-    from core.models import Company, VetWork, AnimalInVetWork
+    from core.models import AnimalInVetWork, Company, VetWork
 
     from .gender import Gender
     from .species import Species

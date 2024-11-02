@@ -2,6 +2,7 @@ from datetime import date
 
 from pydantic import BaseModel
 
+
 class DateRangeIn(BaseModel):
     date_start: date
     date_end: date
@@ -25,7 +26,8 @@ class DrugReportItemSchema(BaseModel):
     units_spent_disposed: float | None
     packs_rest: int | None
     units_rest: float | None
-    
+
+
 class Report1VetBItemSchema(BaseModel):
     id: int
     diseases: list[str]
@@ -46,10 +48,10 @@ class DrugRestSchema(BaseModel):
     packs_rest: int | None
     units_rest: float | None
 
-    
+
 class DrugReportSchema(BaseModel):
     drugs_report: list[DrugReportItemSchema]
-    
+
 
 class Report1VetBSchema(BaseModel):
     vet1B_report: list[Report1VetBItemSchema]

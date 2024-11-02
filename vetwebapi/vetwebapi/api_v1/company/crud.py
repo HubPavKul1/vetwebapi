@@ -1,10 +1,10 @@
-from sqlalchemy import select
 from operator import and_
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload, with_polymorphic
 
-from core.models import Company, Role, Clinic, Laboratory
+from core.models import Clinic, Company, Laboratory, Role
 
 from .schemas import CompanyIn
 
@@ -77,7 +77,6 @@ async def read_clinics_with_options(session: AsyncSession) -> list[Clinic]:
 
 
 async def read_labs_with_options(session: AsyncSession) -> list[Laboratory]:
-
     stmt = (
         select(Laboratory)
         .options(selectinload(Company.employees))

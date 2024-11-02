@@ -1,11 +1,18 @@
-from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload, selectinload
-
 # from operator import and_, or_
 from datetime import date
 
-from core.models import DrugInMovement, DrugMovement, Operation, Drug, CatalogDrug, DrugDisease
+from sqlalchemy import Float, Integer, Subquery, and_, cast, desc, func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import joinedload, selectinload
+
+from core.models import (
+    CatalogDrug,
+    Drug,
+    DrugDisease,
+    DrugInMovement,
+    DrugMovement,
+    Operation,
+)
 
 from .schemas import DrugInMovementIn, DrugMovementIn
 
@@ -23,7 +30,6 @@ async def create_receipt(session: AsyncSession, body: DrugMovementIn) -> DrugMov
 async def add_drug_to_movement(
     session: AsyncSession, body: DrugInMovementIn, drug_movement_id: int
 ) -> DrugInMovement:
-
     new_drug = DrugInMovement(**body.model_dump())
     new_drug.drug_movement_id = drug_movement_id
     session.add(new_drug)

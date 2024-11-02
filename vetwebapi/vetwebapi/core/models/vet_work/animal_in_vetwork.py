@@ -1,13 +1,14 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, Boolean, UniqueConstraint
+from sqlalchemy import Boolean, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models.base import Base
 
 if TYPE_CHECKING:
-    from .vetwork import VetWork
     from core.models import Animal
+
+    from .vetwork import VetWork
 
 
 class AnimalInVetWork(Base):

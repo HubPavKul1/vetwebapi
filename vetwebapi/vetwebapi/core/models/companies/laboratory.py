@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -18,8 +19,5 @@ class Laboratory(Company):
     vetworks: Mapped[list["VetWork"]] = relationship(
         back_populates="laboratory", cascade="all, delete"
     )
-    
 
     __mapper_args__ = {"polymorphic_identity": "laboratory"}
-
-   

@@ -1,23 +1,22 @@
+from datetime import date, datetime
 from typing import Union
-from datetime import datetime, date
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
 from api_v1.drug.catalog.dependencies import catalog_drug_by_id
-from core.models import CatalogDrug
 from core.database import db_manager
-
+from core.models import CatalogDrug
 
 from . import crud
 from .schemas import (
+    DateRangeIn,
     DrugReportItemSchema,
     DrugReportSchema,
-    DateRangeIn,
-    Report1VetBSchema,
-    Report1VetBItemSchema,
     DrugRestSchema,
+    Report1VetBItemSchema,
+    Report1VetBSchema,
 )
 from .serializers import serialize_drug_in_report, serialize_drug_in_report_1B
 
@@ -64,8 +63,8 @@ async def get_drug_rests(
 @router.get("/test", response_model=SuccessMessage)
 async def get_drugs_report(
     date_start: date,
-    date_end: date, 
-    session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    date_end: date,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[SuccessMessage, dict]:
     body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:

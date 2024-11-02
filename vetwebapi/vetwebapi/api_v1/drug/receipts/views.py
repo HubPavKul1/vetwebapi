@@ -1,5 +1,5 @@
-from typing import Union
 from datetime import date
+from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,17 +7,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api_v1.company.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
 from core.database import db_manager
-from core.models import DrugMovement, DrugInMovement
+from core.models import DrugInMovement, DrugMovement
 
 from . import crud
 from .dependencies import drug_movement_by_id
 from .schemas import (
     DrugInMovementIn,
+    DrugInMovementSchema,
+    DrugMovementDetail,
     DrugMovementIn,
     DrugMovementOut,
     DrugMovements,
-    DrugMovementDetail,
-    DrugInMovementSchema,
 )
 from .serializers import serialize_drug_in_movement, serialize_drug_movement_card
 
@@ -58,8 +58,12 @@ async def get_receipts(
     end = start + per_page
     try:
         receipts: list[DrugMovement] = await crud.read_receipts_with_drugs(session=session)
-        receipt_schemas = [await serialize_drug_movement_card(receipt) for receipt in receipts[start:end]]
-        return DrugMovements(drug_movements=receipt_schemas, total_count=len(receipts), page=page, per_page=per_page)
+        receipt_schemas = [
+            await serialize_drug_movement_card(receipt) for receipt in receipts[start:end]
+        ]
+        return DrugMovements(
+            drug_movements=receipt_schemas, total_count=len(receipts), page=page, per_page=per_page
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

@@ -1,8 +1,7 @@
 from typing import Union
-from loguru import logger
-
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.dependencies import get_pagination_params
@@ -29,24 +28,24 @@ from .animal.crud import (
 from .animal.dependencies import company_animals
 from .animal.schemas import (
     AnimalGroupSchemas,
+    Animals,
     GenderSchemas,
     SpeciesSchemas,
     TypeOfFeedingSchemas,
     UsageTypeSchemas,
-    Animals,
 )
 from .animal.views import router as animal_router
 from .dependencies import company_by_id
-from .employee.crud import read_positions, read_doctors
+from .employee.crud import read_doctors, read_positions
 from .employee.dependencies import company_employees
-from .employee.schemas import PositionSchemas, Employees
+from .employee.schemas import Employees, PositionSchemas
 from .employee.views import router as employee_router
 from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
 from .serializers import (
+    serialize_animals,
     serialize_company_card,
     serialize_company_detail,
     serialize_employees,
-    serialize_animals,
 )
 
 router = APIRouter(prefix="/companies", tags=["Companies"])
@@ -237,7 +236,6 @@ async def get_company_detail(
 async def get_company_detail(
     animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, Animals]:
-
     try:
         animals_schema = await serialize_animals(animals=animals)
         logger.debug("Get company animals")

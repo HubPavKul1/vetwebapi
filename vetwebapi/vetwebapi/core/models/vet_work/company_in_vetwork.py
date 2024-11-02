@@ -6,8 +6,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.models.base import Base
 
 if TYPE_CHECKING:
-    from .vetwork import VetWork
     from core.models import Company
+
+    from .vetwork import VetWork
 
 
 class CompanyInVetWork(Base):
@@ -22,4 +23,4 @@ class CompanyInVetWork(Base):
     company_id: Mapped[int] = mapped_column(ForeignKey("companies.id"))
 
     vetwork: Mapped["VetWork"] = relationship(back_populates="companies_details")
-    company: Mapped["Company"] = relationship(back_populates="vetworks_details" )
+    company: Mapped["Company"] = relationship(back_populates="vetworks_details")

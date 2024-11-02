@@ -13,10 +13,10 @@ if TYPE_CHECKING:
     from .accounting_unit import AccountingUnit
     from .budget import Budget
     from .catalog_drug import CatalogDrug
-    from .drug_manufacturer import DrugManufacturer
     from .disposal_method import DisposalMethod
     from .dosage import Dosage
     from .drug_disease import DrugDisease
+    from .drug_manufacturer import DrugManufacturer
 
 
 class Drug(Base):

@@ -1,16 +1,17 @@
-from sqlalchemy import desc, select, func, cast, Integer, and_, Float, Subquery
-from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime
 
+from sqlalchemy import Float, Integer, Subquery, and_, cast, desc, func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from core.models import (
+    AnimalInVetWork,
+    CatalogDrug,
+    Disease,
+    Drug,
+    DrugDisease,
     DrugInMovement,
     DrugMovement,
-    Drug,
-    CatalogDrug,
     VetWork,
-    AnimalInVetWork,
-    Disease,
-    DrugDisease,
 )
 
 from .schemas import DateRangeIn
@@ -143,7 +144,6 @@ async def read_receipts_ids_before_date_start(
 async def catalog_drugs_received_between_date_range(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
-
     receipt_ids = await read_receipts_ids_between_date_range(session=session, body=body)
 
     query = (
@@ -163,7 +163,6 @@ async def catalog_drugs_received_between_date_range(
 async def catalog_drugs_received_before_date_start(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
-
     receipt_ids = await read_receipts_ids_before_date_start(session=session, body=body)
 
     query = (
@@ -212,7 +211,6 @@ async def read_drug_spent_ids_before_date_start(
 async def catalog_drugs_spent_between_date_range(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
-
     spent_ids = await read_drug_spent_ids_between_date_range(session=session, body=body)
 
     query = (
@@ -232,7 +230,6 @@ async def catalog_drugs_spent_between_date_range(
 async def catalog_drugs_spent_before_date_start(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
-
     spent_ids = await read_drug_spent_ids_before_date_start(session=session, body=body)
 
     query = (

@@ -1,13 +1,14 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, Boolean, UniqueConstraint
+from sqlalchemy import Boolean, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models.base import Base
 
 if TYPE_CHECKING:
-    from .vetwork import VetWork
     from core.models import Employee
+
+    from .vetwork import VetWork
 
 
 class DoctorInVetWork(Base):
@@ -20,7 +21,6 @@ class DoctorInVetWork(Base):
 
     vetwork_id: Mapped[int] = mapped_column(ForeignKey("vetworks.id"))
     employee_id: Mapped[int] = mapped_column(ForeignKey("employees.id"))
-
 
     vetwork: Mapped["VetWork"] = relationship(back_populates="doctors_details")
     doctor: Mapped["Employee"] = relationship(back_populates="vetworks_details")

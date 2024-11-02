@@ -1,8 +1,7 @@
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.ext.asyncio import AsyncSession
 from loguru import logger
-
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1 import router as router_v1
 from api_v1.auth import crud

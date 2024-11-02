@@ -1,8 +1,8 @@
+from pathlib import Path
 from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
-from pathlib import Path
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
@@ -10,16 +10,16 @@ from api_v1.dependencies import get_pagination_params
 from api_v1.drug.dependencies import drug_by_id
 from api_v1.drug.schemas import (
     AccountingUnits,
+    AdministrationMethods,
     Budgets,
+    DisposalMethods,
+    Dosages,
     DrugIn,
     DrugManufacturers,
     DrugNames,
     Drugs,
     DrugSchema,
-    DisposalMethods,
-    Dosages,
     PlacesOfAdministration,
-    AdministrationMethods,
 )
 from core.database import db_manager
 from core.models import Drug

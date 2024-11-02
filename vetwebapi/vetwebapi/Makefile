@@ -13,8 +13,8 @@ test:
 	pytest
 
 lintmain:
-	black --check --diff vetwebapi/main.py
-	isort --check-only --profile black vetwebapi/main.py
+	black --check --diff main.py
+	isort --check-only --profile black main.py
 	flake8 main.py
 	mypy main.py
 
@@ -41,16 +41,16 @@ linttests:
 	mypy tests/
 
 lintfixmain:
-	black vetwebapi/main.py
-	isort --profile black vetwebapi/main.py
+	black main.py
+	isort --profile black main.py
 
 lintfixapi:
-	black vetwebapi/api_v1/
-	isort --profile black vetwebapi/api_v1/
+	black api_v1/
+	isort --profile black api_v1/
 
 lintfixcore:
-	black vetwebapi/core/
-	isort --profile black vetwebapi/core/
+	black core/
+	isort --profile black core/
 
 lintfixtests:
 	black tests/

@@ -1,7 +1,7 @@
-from core.models import DrugMovement, DrugInMovement, Drug
+from core.models import Drug, DrugInMovement, DrugMovement
 
-from .schemas import DrugInMovementSchema, DrugMovementDetail
 from ..serializers import get_disease_names
+from .schemas import DrugInMovementSchema, DrugMovementDetail
 
 
 async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSchema:

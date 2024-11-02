@@ -8,10 +8,10 @@ from ...models import Base
 
 if TYPE_CHECKING:
     # from core.models import Drug
-    from .vetwork import VetWork
     from ..drugs.drug import Drug
     from ..drugs.drug_disease import DrugDisease
     from .disease_in_vetwork import DiseaseInVetWork
+    from .vetwork import VetWork
 
 
 class Disease(Base):

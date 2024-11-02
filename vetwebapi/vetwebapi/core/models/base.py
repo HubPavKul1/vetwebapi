@@ -1,6 +1,6 @@
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
 from typing import Annotated
+
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 intpk = Annotated[int, mapped_column(primary_key=True)]
 
@@ -12,6 +12,4 @@ class BaseNoPk(DeclarativeBase):
 class Base(BaseNoPk):
     __abstract__ = True
 
-    id: Mapped[intpk] 
-
-
+    id: Mapped[intpk]

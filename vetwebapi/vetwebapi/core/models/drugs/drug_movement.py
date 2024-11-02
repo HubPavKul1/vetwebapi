@@ -7,10 +7,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.models.base import Base
 
 if TYPE_CHECKING:
+    from vetwebapi.core.models import VetWork
+
     from .catalog_drug import CatalogDrug
     from .drug_in_movement import DrugInMovement
     from .operation import Operation
-    from vetwebapi.core.models import VetWork
 
 
 class DrugMovement(Base):
@@ -30,10 +31,8 @@ class DrugMovement(Base):
     catalog_drugs_details: Mapped[list["DrugInMovement"]] = relationship(
         back_populates="drug_movement"
     )
-    
-    vetwork: Mapped["VetWork"] = relationship(
-        back_populates="drug_movement", uselist=False
-    )
+
+    vetwork: Mapped["VetWork"] = relationship(back_populates="drug_movement", uselist=False)
 
     def __repr__(self) -> str:
         return f"{self.operation.name}:{self.operation_date}"

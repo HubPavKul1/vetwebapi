@@ -1,5 +1,5 @@
-from typing import Union
 from datetime import date
+from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,17 +7,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api_v1.company.schemas import SuccessMessage
 from core.database import db_manager
 
-
 from . import crud
 from .schemas import (
     DateRangeIn,
-    DiagnosticReportItemSchema,
     DiagnosticReport,
+    DiagnosticReportItemSchema,
     VetWorkReport,
     VetWorkReportSchema,
 )
 from .serializers import serialize_diagnostic, serialize_vetwork
-
 
 router = APIRouter(prefix="/reports")
 

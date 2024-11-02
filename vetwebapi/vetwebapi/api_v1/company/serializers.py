@@ -1,6 +1,6 @@
 from api_v1.company.address.schemas import AddressSchema
-from api_v1.company.animal.schemas import AnimalSchema, Animals
-from api_v1.company.employee.schemas import EmployeeSchema, Employees
+from api_v1.company.animal.schemas import Animals, AnimalSchema
+from api_v1.company.employee.schemas import Employees, EmployeeSchema
 from core.models import Address, Animal, Company, Employee
 
 from .schemas import CompanyCard, CompanyDetail

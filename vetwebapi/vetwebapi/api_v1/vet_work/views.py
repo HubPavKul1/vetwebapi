@@ -1,36 +1,40 @@
+from pathlib import Path
 from typing import Union
 
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from pathlib import Path
 
-from api_v1.dependencies import get_pagination_params
 from api_v1.company.schemas import SuccessMessage
+from api_v1.dependencies import get_pagination_params
 from api_v1.drug.receipts.schemas import DrugInMovementIn
-from core.models import VetWork, AnimalInVetWork, DoctorInVetWork, CompanyInVetWork
+from core.database import db_manager
+from core.models import AnimalInVetWork, CompanyInVetWork, DoctorInVetWork, VetWork
+
+from . import crud
+from .dependencies import (
+    animal_in_vetwork_by_id,
+    company_in_vetwork_by_id,
+    vetwork_by_id,
+)
+from .reports.views import router as report_router
 from .schemas import (
-    Diseases,
-    VetWorkOut,
-    VaccinationIn,
-    VetWorks,
     AnimalInVetWorkIn,
-    CompanyInVetWorkIn,
-    DiagnosticIn,
-    VetWorkDetail,
+    AnimalInVetWorkUpdatePartial,
     BiomaterialFixations,
     BiomaterialPackages,
     Biomaterials,
+    CompanyInVetWorkIn,
+    DiagnosticIn,
     DiagnosticMethods,
-    AnimalInVetWorkUpdatePartial,
+    Diseases,
+    VaccinationIn,
+    VetWorkDetail,
     VetWorkFileOut,
+    VetWorkOut,
+    VetWorks,
 )
-from .serializers import serialize_vetworks, serialize_vetwork_detail
-from .dependencies import vetwork_by_id, animal_in_vetwork_by_id, company_in_vetwork_by_id
-from core.database import db_manager
-
-from . import crud
-from .reports.views import router as report_router
+from .serializers import serialize_vetwork_detail, serialize_vetworks
 
 router = APIRouter(prefix="/vetwork", tags=["VetWork"])
 router.include_router(report_router)
@@ -186,7 +190,6 @@ async def get_vetwork_detail(
     vetwork: VetWork = Depends(vetwork_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorkDetail | dict]:
-
     companies: list[CompanyInVetWork] = await crud.read_companies_in_vetwork(
         session=session, vetwork=vetwork
     )
@@ -284,7 +287,6 @@ async def delete_vetwork_company_route(
 async def get_biomaterial_fixations(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, BiomaterialFixations]:
-
     try:
         biomaterial_fixations = await crud.read_biomaterial_fixations(session=session)
         return BiomaterialFixations(biomaterial_fixations=biomaterial_fixations)
@@ -299,7 +301,6 @@ async def get_biomaterial_fixations(
 async def get_biomaterials(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, Biomaterials]:
-
     try:
         biomaterials = await crud.read_biomaterials(session=session)
         return Biomaterials(biomaterials=biomaterials)
@@ -314,7 +315,6 @@ async def get_biomaterials(
 async def get_biomaterial_packages(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, BiomaterialPackages]:
-
     try:
         biomaterial_packages = await crud.read_biomaterial_packages(session=session)
         return BiomaterialPackages(biomaterial_packages=biomaterial_packages)
@@ -329,7 +329,6 @@ async def get_biomaterial_packages(
 async def get_diagnostic_methods(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, DiagnosticMethods]:
-
     try:
         diagnostic_methods = await crud.read_diagnosic_methods(session=session)
         return DiagnosticMethods(diagnostic_methods=diagnostic_methods)

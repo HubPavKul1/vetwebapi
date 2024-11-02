@@ -16,6 +16,7 @@ class EmployeeSchema(BaseModel):
     patronymic: str
     fullname: str
 
+
 class Employees(BaseModel):
     employees: list[EmployeeSchema]
 

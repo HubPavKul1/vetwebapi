@@ -6,8 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.models.base import Base
 
 if TYPE_CHECKING:
-    from .drug import Drug
     from ..vet_work.disease import Disease
+    from .drug import Drug
 
 
 class DrugDisease(Base):

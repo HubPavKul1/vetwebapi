@@ -1,6 +1,6 @@
 from typing import Union
 
-from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.company.schemas import SuccessMessage
@@ -10,7 +10,7 @@ from core.models import CatalogDrug, DrugInMovement
 
 from . import crud
 from .dependencies import catalog_drug_by_id
-from .schemas import Catalog, CatalogDrugIn, CatalogDrugSchema, CatalogDrugDetails
+from .schemas import Catalog, CatalogDrugDetails, CatalogDrugIn, CatalogDrugSchema
 from .serializers import serialize_catalog_drug, serialize_catalog_drug_details
 
 router = APIRouter(prefix="/catalog")

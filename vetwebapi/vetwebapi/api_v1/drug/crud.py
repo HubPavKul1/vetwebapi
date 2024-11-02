@@ -8,17 +8,16 @@ from sqlalchemy.orm import joinedload, selectinload
 
 from core.models import (
     AccountingUnit,
+    AdministrationMethod,
     Budget,
-    Drug,
-    DrugManufacturer,
     DisposalMethod,
     Dosage,
-    PlaceOfAdministration,
-    AdministrationMethod,
+    Drug,
     DrugDisease,
+    DrugManufacturer,
+    PlaceOfAdministration,
 )
-
-from core.settings import settings, BASE_DIR
+from core.settings import BASE_DIR, settings
 from utils import utils
 
 from .schemas import DrugIn
@@ -68,9 +67,7 @@ async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(.
 async def read_drug_by_id(session: AsyncSession, drug_id: int) -> Drug | None:
     stmt = (
         select(Drug)
-        .options(selectinload(Drug.diseases_details)
-        .joinedload(DrugDisease.disease
-        ))
+        .options(selectinload(Drug.diseases_details).joinedload(DrugDisease.disease))
         .where(Drug.id == drug_id)
     )
     return await session.scalar(stmt)
