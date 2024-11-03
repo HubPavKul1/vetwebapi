@@ -20,7 +20,7 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
 
 async def create_test_companies(session: AsyncSession) -> None:
     companies: list[Company] = [
-        Company(full_name=f"company{i}", short_name=f"comp{i}") for i in range(30)
+        Company(full_name=f"company{i+1}", short_name=f"comp{i+1}") for i in range(30)
     ]
     session.add_all(companies)
     await session.commit()

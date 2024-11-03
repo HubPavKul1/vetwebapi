@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from core.models import Company
+from .company import Company
 
 if TYPE_CHECKING:
     from vetwebapi.core.models import VetWork
