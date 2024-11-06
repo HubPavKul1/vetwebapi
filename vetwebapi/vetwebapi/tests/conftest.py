@@ -13,19 +13,19 @@ from main import app
 test_db_manager = DBManager(url=db_url, echo=True)
 
 
-@pytest.fixture(scope="session")
-async def prepare_db():
-    async with test_db_manager.engine.begin() as conn:
-        assert settings.mode == "test"
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
+# @pytest.fixture(scope="module")
+# async def prepare_db():
+#     async with test_db_manager.engine.begin() as conn:
+#         assert settings.mode == "test"
+#         await conn.run_sync(Base.metadata.drop_all)
+#         await conn.run_sync(Base.metadata.create_all)
 
-    yield test_db_manager.engine
-    async with test_db_manager.engine.begin() as conn:
-        try:
-            await conn.run_sync(Base.metadata.drop_all)
-        finally:
-            await conn.close()
+#     yield test_db_manager.engine
+#     async with test_db_manager.engine.begin() as conn:
+#         try:
+#             await conn.run_sync(Base.metadata.drop_all)
+#         finally:
+#             await conn.close()
 
 
 async def override_async_session() -> AsyncGenerator[AsyncSession, None]:
@@ -51,3 +51,18 @@ async def ac() -> AsyncGenerator[AsyncClient, None]:
         headers={"Content-Type": "application/json", "accept": "application/json"},
     ) as ac:
         yield ac
+
+
+@pytest.fixture
+async def prepare_db():
+    async with test_db_manager.engine.begin() as conn:
+        assert settings.mode == "test"
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+
+    yield test_db_manager.engine
+    async with test_db_manager.engine.begin() as conn:
+        try:
+            await conn.run_sync(Base.metadata.drop_all)
+        finally:
+            await conn.close()

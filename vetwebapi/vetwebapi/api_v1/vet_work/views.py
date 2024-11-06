@@ -12,11 +12,7 @@ from core.database import db_manager
 from core.models import AnimalInVetWork, CompanyInVetWork, DoctorInVetWork, VetWork
 
 from . import crud
-from .dependencies import (
-    animal_in_vetwork_by_id,
-    company_in_vetwork_by_id,
-    vetwork_by_id,
-)
+from .dependencies import animal_in_vetwork_by_id, company_in_vetwork_by_id, vetwork_by_id
 from .reports.views import router as report_router
 from .schemas import (
     AnimalInVetWorkIn,

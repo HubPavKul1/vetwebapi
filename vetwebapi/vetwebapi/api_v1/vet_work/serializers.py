@@ -3,13 +3,7 @@ from api_v1.company.schemas import AddressSchema, CompanyCard
 from api_v1.company.serializers import serialize_address, serialize_employee
 from api_v1.drug.receipts.schemas import DrugInMovementSchema
 from api_v1.drug.receipts.serializers import serialize_drug_in_movement
-from core.models import (
-    AnimalInVetWork,
-    CompanyInVetWork,
-    DoctorInVetWork,
-    DrugInMovement,
-    VetWork,
-)
+from core.models import AnimalInVetWork, CompanyInVetWork, DoctorInVetWork, DrugInMovement, VetWork
 
 from .schemas import AnimalInVetWorkSchema, VetWorkDetail, VetWorks, VetWorkSchema
 

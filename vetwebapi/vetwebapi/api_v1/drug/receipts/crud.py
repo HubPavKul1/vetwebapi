@@ -5,14 +5,7 @@ from sqlalchemy import Float, Integer, Subquery, and_, cast, desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
-from core.models import (
-    CatalogDrug,
-    Drug,
-    DrugDisease,
-    DrugInMovement,
-    DrugMovement,
-    Operation,
-)
+from core.models import CatalogDrug, Drug, DrugDisease, DrugInMovement, DrugMovement, Operation
 
 from .schemas import DrugInMovementIn, DrugMovementIn
 
