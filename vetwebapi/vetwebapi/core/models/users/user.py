@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING
 from fastapi import Depends
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy import ForeignKey, String
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.database import db_manager
@@ -11,6 +10,7 @@ from core.models.base import Base
 
 if TYPE_CHECKING:
     from .role import Role
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class User(Base):
@@ -30,5 +30,5 @@ class User(Base):
         return self.username
 
 
-async def get_user_db(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
+async def get_user_db(session: "AsyncSession" = Depends(db_manager.scope_session_dependency)):
     yield SQLAlchemyUserDatabase(session, User)

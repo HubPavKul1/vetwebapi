@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
@@ -7,6 +8,7 @@ from api_v1 import router as router_v1
 from api_v1.auth import crud
 from core.database import db_manager
 from core.settings import settings
+from core.models.users.create_superuser import create_superuser
 from utils import utils
 
 app = FastAPI()
@@ -36,6 +38,8 @@ async def start(session: AsyncSession = Depends(db_manager.scope_session_depende
     if not await crud.read_roles(session=session):
         await utils.prepare_db(session=session)
         logger.debug("All data have been added!")
+
         return {"message": "All data have been added!"}
+    # await create_superuser()
     logger.debug("Database already prepared!")
     return {"message": "Hello, Dude!!!"}

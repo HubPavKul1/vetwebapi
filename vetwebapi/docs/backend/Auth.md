@@ -1,13 +1,19 @@
 # Аутентификация пользователя
+
 ## Библиотека [FastAPI Users](https://fastapi-users.github.io/fastapi-users/11.0/)
+
 ## Сайты [JWT](https://jwt.io/introduction), [Epoch Converter](https://www.epochconverter.com/)
 
-* ### Установим библиотеку FastAPI Users через poetry
+- ### Установим библиотеку FastAPI Users через poetry
+
 ```
 poetry add 'fastapi-users[sqlalchemy]'
 ```
-## Создадим файлы: 
-* ### core/models/users/role.py
+
+## Создадим файлы:
+
+- ### core/models/users/role.py
+
 ```python
 
 from typing import TYPE_CHECKING
@@ -23,16 +29,17 @@ if TYPE_CHECKING:
 
 class Role(Base):
     __tablename__ = "roles"
-    
+
     name: Mapped[str]
-    
+
     users: Mapped[list["User"]] = relationship(back_populates="role")
-    
+
     def __repr__(self) -> str:
         return self.name
 ```
 
-* ### core/models/users/user.py
+- ### core/models/users/user.py
+
 ```python
 from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey, String
@@ -49,7 +56,7 @@ if TYPE_CHECKING:
 
 class User(Base):
     __tablename__ = "users"
-    
+
     role_id: Mapped[int] = mapped_column(ForeignKey("roles.id", ondelete="CASCADE"))
     username: Mapped[str] = mapped_column(String(10), unique=True)
     email: Mapped[str | None] = mapped_column(String(320), unique=True, index=True)
@@ -57,16 +64,18 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(default=True)
     is_superuser: Mapped[bool] = mapped_column(default=False)
     is_verified: Mapped[bool] = mapped_column(default=False)
-    
+
     role: Mapped["Role"] = relationship(back_populates="users")
-    
+
     def __repr__(self) -> str:
         return self.username
 
 async def get_user_db(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
     yield SQLAlchemyUserDatabase(session, User)
 ```
-* ### core/models/users/auth.py 
+
+- ### core/models/users/auth.py
+
 ```python
 from fastapi_users.authentication import CookieTransport, JWTStrategy, AuthenticationBackend
 
@@ -86,7 +95,9 @@ auth_backend = AuthenticationBackend(
     get_strategy=get_jwt_strategy,
 )
 ```
-* ### core/models/users/manager.py
+
+- ### core/models/users/manager.py
+
 ```python
 from typing import Optional
 
@@ -96,6 +107,7 @@ from fastapi_users import BaseUserManager, IntegerIDMixin, schemas, models, exce
 from .user import User, get_user_db
 
 SECRET = "SECRET"
+# код генерации секретной строки print(secrets.token_hex())
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
@@ -114,8 +126,8 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     #     self, user: User, token: str, request: Optional[Request] = None
     # ):
     #     print(f"Verification requested for user {user.id}. Verification token: {token}")
-    
-    
+
+
     async def create(
         self,
         user_create: schemas.UC,
@@ -160,6 +172,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 async def get_user_manager(user_db=Depends(get_user_db)):
     yield UserManager(user_db)
 ```
+
 ```python
 
     # Файл core/models/__init__.py
@@ -179,9 +192,13 @@ from .users.role import Role
 from .users.auth import auth_backend
 from .users.manager import get_user_manager
 ```
+
 ## Создадим пакет api_v1/auth/
+
 ## Создадим файлы:
-* ### api_v1/auth/views.py
+
+- ### api_v1/auth/views.py
+
 ```python
 from fastapi import APIRouter
 
@@ -207,7 +224,9 @@ router.include_router(
     prefix="/auth",
 )
 ```
-* ### api_v1/auth/schemas.py
+
+- ### api_v1/auth/schemas.py
+
 ```python
 from fastapi_users import schemas
 from pydantic import ConfigDict
@@ -221,9 +240,9 @@ class UserRead(schemas.BaseUser[int]):
     is_active: bool = True
     is_superuser: bool = False
     is_verified: bool = False
-    
+
     model_config = ConfigDict(from_attributes=True)
-    
+
 
 class UserCreate(schemas.BaseUserCreate):
     username: str
@@ -234,7 +253,9 @@ class UserCreate(schemas.BaseUserCreate):
     is_superuser: bool | None = False
     is_verified: bool | None = False
 ```
-* ### api_v1/auth/dependencies.py для доступа к роутам только аутентифицированным пользователям
+
+- ### api_v1/auth/dependencies.py для доступа к роутам только аутентифицированным пользователям
+
 ```python
 from .views import fastapi_users
 
@@ -242,7 +263,9 @@ current_user = fastapi_users.current_user()
 current_active_user = fastapi_users.current_user(active=True)
 current_superuser = fastapi_users.current_user(active=True, superuser=True)
 ```
-* ### Подключим роуты в api_v1/__init__.py
+
+- ### Подключим роуты в api_v1/**init**.py
+
 ```python
 from fastapi import APIRouter, Depends
 

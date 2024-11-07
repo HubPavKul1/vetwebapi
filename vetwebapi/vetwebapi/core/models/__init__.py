@@ -89,14 +89,14 @@ from .users.auth import auth_backend
 from .users.manager import get_user_manager
 from .users.role import Role
 from .users.user import User
+
+# VetWork
 from .vet_work.animal_in_vetwork import AnimalInVetWork
 from .vet_work.biomaterial import Biomaterial
 from .vet_work.biomaterial_fixation import BiomaterialFixation
 from .vet_work.biomaterial_package import BiomaterialPackage
 from .vet_work.company_in_vetwork import CompanyInVetWork
 from .vet_work.diagnostic_method import DiagnosticMethod
-
-# VetWork
 from .vet_work.disease import Disease
 from .vet_work.disease_in_vetwork import DiseaseInVetWork
 from .vet_work.doctor_in_vetwork import DoctorInVetWork
