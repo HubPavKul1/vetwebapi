@@ -1,4 +1,6 @@
 import axios from "axios";
+import { IUserLogin } from "shared/model/BaseInterfaces";
+import { userLoginUrl, userLogoutUrl } from "shared/urls/userUrls";
 
 export const AppService = {
   async getAll(url: string) {
@@ -56,4 +58,14 @@ export const AppService = {
       .catch((err) => console.log(err));
   },
 
+  async login(data: IUserLogin, url = userLoginUrl) {
+    await axios
+      .post(url, data)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  },
+
+  async logout(url = userLogoutUrl) {
+    await axios.post(url);
+  },
 };

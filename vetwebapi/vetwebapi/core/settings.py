@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     postgres_user: str
     postgres_password: str
     postgres_db: str
+
+    su_name: str
+    su_email: str
+    su_pass: str
+
     db_echo: bool = False
 
     @property
