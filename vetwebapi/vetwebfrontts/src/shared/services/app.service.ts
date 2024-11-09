@@ -59,8 +59,14 @@ export const AppService = {
   },
 
   async login(data: IUserLogin) {
+    const requestOptions = {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"},
+      body: {"username": data.username, "password": data.password},
+      
+    }
     await axios
-      .post(userLoginUrl, data)
+      .post(userLoginUrl, requestOptions, {withCredentials: true})
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },

@@ -1,6 +1,5 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { useLogin } from "shared/hooks/useLogin";
-import { CustomButton, IUserLogin } from "shared/index";
+import { CustomButton, IUserLogin, useLogin } from "shared/index";
 import { LoginInputs } from "./ui/LoginInputs";
 
 export function LoginForm() {
