@@ -8,7 +8,7 @@ export function Header() {
       <HeaderWrapper>
         <LogoLink />
         <NavList />
-        <CustomButton className="text-sm btn-nav btn-transform" title="Войти" />
+        <CustomButton className="text-sm btn-nav btn-transform" title="Выйти" />
       </HeaderWrapper>
     </>
   );

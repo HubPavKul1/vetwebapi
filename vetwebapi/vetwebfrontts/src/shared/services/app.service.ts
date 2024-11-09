@@ -58,9 +58,9 @@ export const AppService = {
       .catch((err) => console.log(err));
   },
 
-  async login(data: IUserLogin, url = userLoginUrl) {
+  async login(data: IUserLogin) {
     await axios
-      .post(url, data)
+      .post(userLoginUrl, data)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },
