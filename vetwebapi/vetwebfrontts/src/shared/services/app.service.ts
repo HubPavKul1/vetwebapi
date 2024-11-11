@@ -1,7 +1,6 @@
 import axios from "axios";
 import { IUserLogin } from "shared/model/BaseInterfaces";
 import { userLoginUrl, userLogoutUrl } from "shared/urls/userUrls";
-import * as qs from 'qs';
 
 
 export const AppService = {
@@ -65,7 +64,7 @@ export const AppService = {
     const requestOptions = {
       method: "POST",
       headers: {"Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"},
-      username: qs.stringify({username: data.username, password: data.password}),
+      body: new URLSearchParams({username: data.username, password: data.password}).toString(),
       
     }
     await axios
