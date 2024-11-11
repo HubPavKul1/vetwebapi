@@ -1,6 +1,8 @@
 import axios from "axios";
 import { IUserLogin } from "shared/model/BaseInterfaces";
 import { userLoginUrl, userLogoutUrl } from "shared/urls/userUrls";
+import * as qs from 'qs';
+
 
 export const AppService = {
   async getAll(url: string) {
@@ -59,10 +61,11 @@ export const AppService = {
   },
 
   async login(data: IUserLogin) {
+    
     const requestOptions = {
       method: "POST",
       headers: {"Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"},
-      body: {"username": data.username, "password": data.password},
+      username: qs.stringify({username: data.username, password: data.password}),
       
     }
     await axios
@@ -72,6 +75,6 @@ export const AppService = {
   },
 
   async logout(url = userLogoutUrl) {
-    await axios.post(url);
+    await axios.post(url, {withCredentials: true});
   },
 };

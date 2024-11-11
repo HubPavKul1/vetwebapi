@@ -18,7 +18,7 @@ export function LoginForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} encType="x-www-form-urlencoded">
         <LoginInputs />
         <div className="form-group">
           <CustomButton className="btn-submit" disabled={false} title="Войти" />
