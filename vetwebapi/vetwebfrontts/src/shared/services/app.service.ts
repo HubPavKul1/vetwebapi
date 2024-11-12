@@ -2,10 +2,9 @@ import axios from "axios";
 import { IUserLogin } from "shared/model/BaseInterfaces";
 import { userLoginUrl, userLogoutUrl } from "shared/urls/userUrls";
 
-
 export const AppService = {
   async getAll(url: string) {
-    return await axios.get(url);
+    return await axios.get(url, { withCredentials: true });
   },
 
   async getPagination(url: string, pageNum: number) {
@@ -54,26 +53,30 @@ export const AppService = {
   async uploadFile(url: string, file: FormData) {
     await axios
       .post(url, file)
-
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },
 
   async login(data: IUserLogin) {
-    
-    const requestOptions = {
-      method: "POST",
-      headers: {"Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"},
-      body: new URLSearchParams({username: data.username, password: data.password}).toString(),
-      
-    }
+    // const requestOptions = {
+    //   method: "POST",
+    //   // headers: {
+    //   //   "Content-Type": "application/x-www-form-urlencoded",
+    //   //   accept: "application/json",
+    //   // },
+    //   body: JSON.stringify(data),
+    //   // data: new URLSearchParams({
+    //   //   username: data.username,
+    //   //   password: data.password,
+    //   // }).toString(),
+    // };
     await axios
-      .post(userLoginUrl, requestOptions, {withCredentials: true})
+      .post(userLoginUrl, JSON.stringify(data), { withCredentials: true })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },
 
   async logout(url = userLogoutUrl) {
-    await axios.post(url, {withCredentials: true});
+    await axios.post(url, { withCredentials: true });
   },
 };

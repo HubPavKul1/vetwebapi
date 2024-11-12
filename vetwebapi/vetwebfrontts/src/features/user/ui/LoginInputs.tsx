@@ -12,7 +12,7 @@ import {
 
 export function LoginInputs() {
   const inputItems: FormInputProps<IUserLogin>[] = [
-    { fieldName: "username", placeholder: "Введите e-mail *", type: "text" },
+    { fieldName: "username", placeholder: "Введите e-mail *", type: "email" },
     {
       fieldName: "password",
       placeholder: "Введите пароль *",
