@@ -1,5 +1,5 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { AppService, CustomButton, IUserLogin, useLogin } from "shared/index";
+import { CustomButton, IUserLogin, useLogin } from "shared/index";
 import { LoginInputs } from "./ui/LoginInputs";
 
 export function LoginForm() {
@@ -18,7 +18,7 @@ export function LoginForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <LoginInputs />
         <div className="form-group">
           <CustomButton className="btn-submit" disabled={false} title="Войти" />

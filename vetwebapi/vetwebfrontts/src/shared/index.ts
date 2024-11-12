@@ -30,6 +30,7 @@ export { useCreateItem } from "./hooks/useCreateItem";
 export { useDeleteItem } from "./hooks/useDeleteItem";
 export { useGetData } from "./hooks/useGetData";
 export { useGetAllData } from "./hooks/useGetAllData";
+export { useGetUser } from "./hooks/useGetUser";
 export { useGetDataById } from "./hooks/useGetDataById";
 export { useGetPageData } from "./hooks/useGetPageData";
 export { useUpdateItem } from "./hooks/useUpdateItem";

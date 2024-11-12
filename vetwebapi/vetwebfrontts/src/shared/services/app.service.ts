@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IUserLogin } from "shared/model/BaseInterfaces";
 import { userLoginUrl, userLogoutUrl } from "shared/urls/userUrls";
 
 export const AppService = {
@@ -57,21 +56,9 @@ export const AppService = {
       .catch((err) => console.log(err));
   },
 
-  async login(data: IUserLogin) {
-    // const requestOptions = {
-    //   method: "POST",
-    //   // headers: {
-    //   //   "Content-Type": "application/x-www-form-urlencoded",
-    //   //   accept: "application/json",
-    //   // },
-    //   body: JSON.stringify(data),
-    //   // data: new URLSearchParams({
-    //   //   username: data.username,
-    //   //   password: data.password,
-    //   // }).toString(),
-    // };
+  async login(data: FormData) {
     await axios
-      .post(userLoginUrl, JSON.stringify(data), { withCredentials: true })
+      .postForm(userLoginUrl, data, { withCredentials: true })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },

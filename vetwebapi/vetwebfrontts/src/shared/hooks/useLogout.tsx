@@ -8,7 +8,7 @@ export function useLogout() {
     mutationFn: () => AppService.logout(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getUser"] }),
-        alert("Вы успешно вышли из системы!");
+      alert("Вы успешно вышли из системы!");
     },
   });
 
