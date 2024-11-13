@@ -48,9 +48,20 @@ async def ac() -> AsyncGenerator[AsyncClient, None]:
     async with AsyncClient(
         app=app,
         base_url="http://test",
-        headers={"Content-Type": "application/json", "accept": "application/json"},
+        # headers={"Content-Type": "application/json", "accept": "application/json"},
     ) as ac:
         yield ac
+
+
+@pytest.fixture(scope="session")
+async def ac_form() -> AsyncGenerator[AsyncClient, None]:
+    async with AsyncClient(
+        app=app,
+        base_url="http://test",
+        # headers={"Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"},
+    ) as ac_form:
+
+        yield ac_form
 
 
 @pytest.fixture
