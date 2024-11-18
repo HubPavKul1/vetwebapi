@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import and_, desc, func, select
+from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
@@ -9,7 +9,9 @@ from core.models import CatalogDrug, DrugInMovement
 from .schemas import CatalogDrugIn
 
 
-async def create_catalog_drug(session: AsyncSession, body: CatalogDrugIn) -> CatalogDrug:
+async def create_catalog_drug(
+    session: AsyncSession, body: CatalogDrugIn
+) -> CatalogDrug:
     new_item = CatalogDrug(**body.model_dump())
     session.add(new_item)
     await session.commit()
@@ -64,7 +66,9 @@ async def read_catalog_drug_receipts(
         session=session, catalog_drug=catalog_drug
     )
 
-    return [drug for drug in catalog_drug_detail if drug.drug_movement.operation_id == 1]
+    return [
+        drug for drug in catalog_drug_detail if drug.drug_movement.operation_id == 1
+    ]
 
 
 async def read_catalog_drug_spent(
@@ -74,7 +78,9 @@ async def read_catalog_drug_spent(
         session=session, catalog_drug=catalog_drug
     )
 
-    return [drug for drug in catalog_drug_detail if drug.drug_movement.operation_id == 2]
+    return [
+        drug for drug in catalog_drug_detail if drug.drug_movement.operation_id == 2
+    ]
 
 
 async def delete_catalog_drug(session: AsyncSession, drug: CatalogDrug) -> None:

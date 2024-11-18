@@ -2,7 +2,7 @@ import os
 import shutil
 
 from fastapi import File, UploadFile
-from sqlalchemy import desc, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
@@ -17,7 +17,7 @@ from core.models import (
     DrugManufacturer,
     PlaceOfAdministration,
 )
-from core.settings import BASE_DIR, settings
+from core.settings import settings
 from utils import utils
 
 from .schemas import DrugIn
@@ -35,14 +35,18 @@ async def create_drug(session: AsyncSession, body: DrugIn) -> Drug:
     return new_drug
 
 
-async def add_diseases_to_drug(session: AsyncSession, drug_id: int, diseases: list[int]) -> None:
+async def add_diseases_to_drug(
+    session: AsyncSession, drug_id: int, diseases: list[int]
+) -> None:
     new_relations = [DrugDisease(drug_id=drug_id, disease_id=item) for item in diseases]
     session.add_all(new_relations)
     await session.commit()
 
 
 # Save Files
-async def save_file(session: AsyncSession, drug: Drug, file: UploadFile = File(...)) -> None:
+async def save_file(
+    session: AsyncSession, drug: Drug, file: UploadFile = File(...)
+) -> None:
     filename = await utils.prepare_filename(str(file.filename))
 
     dest = ""
@@ -114,12 +118,16 @@ async def read_dosages(session: AsyncSession) -> list[Dosage]:
     return list(await session.scalars(stmt))
 
 
-async def read_places_of_administration(session: AsyncSession) -> list[PlaceOfAdministration]:
+async def read_places_of_administration(
+    session: AsyncSession,
+) -> list[PlaceOfAdministration]:
     stmt = select(PlaceOfAdministration).order_by(PlaceOfAdministration.name)
     return list(await session.scalars(stmt))
 
 
-async def read_administration_methods(session: AsyncSession) -> list[AdministrationMethod]:
+async def read_administration_methods(
+    session: AsyncSession,
+) -> list[AdministrationMethod]:
     stmt = select(AdministrationMethod).order_by(AdministrationMethod.name)
     return list(await session.scalars(stmt))
 

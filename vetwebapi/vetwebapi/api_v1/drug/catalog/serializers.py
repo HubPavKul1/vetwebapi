@@ -25,6 +25,10 @@ async def serialize_catalog_drug_detail(drug: DrugInMovement) -> CatalogDrugDeta
     )
 
 
-async def serialize_catalog_drug_details(drugs: list[DrugInMovement]) -> CatalogDrugDetails:
-    drugs: list[DrugInMovement] = [await serialize_catalog_drug_detail(drug=drug) for drug in drugs]
+async def serialize_catalog_drug_details(
+    drugs: list[DrugInMovement],
+) -> CatalogDrugDetails:
+    drugs: list[DrugInMovement] = [
+        await serialize_catalog_drug_detail(drug=drug) for drug in drugs
+    ]
     return CatalogDrugDetails(catalog_drugs=drugs)

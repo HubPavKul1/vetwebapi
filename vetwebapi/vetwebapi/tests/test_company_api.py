@@ -55,7 +55,7 @@ async def test_login(ac: AsyncClient):
 # Test GET routes
 async def test_get_companies(ac: AsyncClient):
     response = await ac.get("/api/companies/")
-    assert response.status_code == 200
+    assert response.status_code == 401
 
 
 # async def test_get_company_detail(ac: AsyncClient):

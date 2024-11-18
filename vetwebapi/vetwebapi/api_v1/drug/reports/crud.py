@@ -1,8 +1,7 @@
-from datetime import datetime
-
-from sqlalchemy import Float, Integer, Subquery, and_, cast, desc, func, select
+from sqlalchemy import Float, Integer, Subquery, and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api_v1.schemas import DateRangeIn
 from core.models import (
     AnimalInVetWork,
     CatalogDrug,
@@ -14,12 +13,10 @@ from core.models import (
     VetWork,
 )
 
-from .schemas import DateRangeIn
-
 
 # catalog_drug_info
 async def catalog_drug_info() -> Subquery:
-    query = (
+    return (
         select(
             Drug.name.label("drug_name"),
             Drug.packing.label("packing"),
@@ -33,7 +30,6 @@ async def catalog_drug_info() -> Subquery:
         .join(Drug, Drug.id == CatalogDrug.drug_id)
         .subquery("catalog_drug_info")
     )
-    return query
 
 
 async def drug_diseases(session: AsyncSession, drug_id: int) -> list[str]:
@@ -43,9 +39,7 @@ async def drug_diseases(session: AsyncSession, drug_id: int) -> list[str]:
         .join(DrugDisease, DrugDisease.disease_id == Disease.id)
     )
     result = list(await session.execute(query))
-    diseases: list[str] = [disease[0] for disease in result]
-
-    return diseases
+    return [disease[0] for disease in result]
 
 
 async def catalog_drug_with_diseases(session: AsyncSession) -> Subquery:
@@ -70,19 +64,18 @@ async def read_vetworks_data_between_date_range(body: DateRangeIn) -> Subquery:
     date_start = body.date_start
     date_end = body.date_end
 
-    query = (
+    return (
         select(VetWork.id.label("vetwork_id"), VetWork.drug_movement_id.label("dm_id"))
         .filter(VetWork.vetwork_date.between(date_start, date_end))
         .subquery("vetworks_data_between_date_range")
     )
-    return query
 
 
 # animals count in vetworks
 async def animals_count_in_vetworks_between_date_range(body: DateRangeIn) -> Subquery:
     vetworks = await read_vetworks_data_between_date_range(body=body)
 
-    query = (
+    return (
         select(
             vetworks.c.dm_id.label("dm_id"),
             func.count(AnimalInVetWork.animal_id).label("animals_count"),
@@ -92,14 +85,12 @@ async def animals_count_in_vetworks_between_date_range(body: DateRangeIn) -> Sub
         .subquery("animals count in vetwork")
     )
 
-    return query
-
 
 # animals_count catalog_drugs
 async def animals_count_catalog_drug_id(body: DateRangeIn) -> Subquery:
     animals_count = await animals_count_in_vetworks_between_date_range(body=body)
 
-    query = (
+    return (
         select(
             animals_count.c.animals_count.label("animals_count"),
             DrugInMovement.catalog_drug_id.label("cd_id"),
@@ -107,8 +98,6 @@ async def animals_count_catalog_drug_id(body: DateRangeIn) -> Subquery:
         .join(DrugInMovement, DrugInMovement.drug_movement_id == animals_count.c.dm_id)
         .subquery("animals_count_catalog_drug_id")
     )
-
-    return query
 
 
 # received receipts ids
@@ -146,7 +135,7 @@ async def catalog_drugs_received_between_date_range(
 ) -> Subquery:
     receipt_ids = await read_receipts_ids_between_date_range(session=session, body=body)
 
-    query = (
+    return (
         select(
             DrugInMovement.catalog_drug_id.label("cd_id"),
             func.sum(DrugInMovement.packs_amount).label("packs_received"),
@@ -157,15 +146,13 @@ async def catalog_drugs_received_between_date_range(
         .subquery("catalog_drugs_received_between_date_range")
     )
 
-    return query
-
 
 async def catalog_drugs_received_before_date_start(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
     receipt_ids = await read_receipts_ids_before_date_start(session=session, body=body)
 
-    query = (
+    return (
         select(
             DrugInMovement.catalog_drug_id.label("cd_id"),
             func.sum(DrugInMovement.packs_amount).label("packs_received"),
@@ -175,8 +162,6 @@ async def catalog_drugs_received_before_date_start(
         .group_by(DrugInMovement.catalog_drug_id)
         .subquery("catalog_drugs_received_before_date_start")
     )
-
-    return query
 
 
 # spent drugs queries
@@ -213,7 +198,7 @@ async def catalog_drugs_spent_between_date_range(
 ) -> Subquery:
     spent_ids = await read_drug_spent_ids_between_date_range(session=session, body=body)
 
-    query = (
+    return (
         select(
             DrugInMovement.catalog_drug_id.label("cd_id"),
             func.sum(DrugInMovement.packs_amount).label("packs_spent"),
@@ -224,15 +209,13 @@ async def catalog_drugs_spent_between_date_range(
         .subquery("catalog_drugs_spent_between_date_range")
     )
 
-    return query
-
 
 async def catalog_drugs_spent_before_date_start(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
     spent_ids = await read_drug_spent_ids_before_date_start(session=session, body=body)
 
-    query = (
+    return (
         select(
             DrugInMovement.catalog_drug_id.label("cd_id"),
             func.sum(DrugInMovement.packs_amount).label("packs_spent"),
@@ -243,24 +226,29 @@ async def catalog_drugs_spent_before_date_start(
         .subquery("catalog_drugs_spent_before_date_start")
     )
 
-    return query
-
 
 # catalog_drugs received and spent before date_range
 async def catalog_drugs_received_and_spent_before_date_start(
     session: AsyncSession, body: DateRangeIn
 ) -> Subquery:
-    received_drugs = await catalog_drugs_received_before_date_start(session=session, body=body)
-    spent_drugs = await catalog_drugs_spent_before_date_start(session=session, body=body)
+    received_drugs = await catalog_drugs_received_before_date_start(
+        session=session, body=body
+    )
+    spent_drugs = await catalog_drugs_spent_before_date_start(
+        session=session, body=body
+    )
 
-    query = (
+    return (
         select(
             received_drugs.c.cd_id.label("cd_id"),
             received_drugs.c.packs_received.label("packs_received"),
             received_drugs.c.units_received.label("units_received"),
             spent_drugs.c.packs_spent.label("packs_spent"),
             spent_drugs.c.units_spent.label("units_spent"),
-            (received_drugs.c.packs_received - func.coalesce(spent_drugs.c.packs_spent, 0))
+            (
+                received_drugs.c.packs_received
+                - func.coalesce(spent_drugs.c.packs_spent, 0)
+            )
             .cast(Integer)
             .label("packs_rest"),
         )
@@ -268,16 +256,16 @@ async def catalog_drugs_received_and_spent_before_date_start(
         .subquery("catalog_drugs_received_and_spent_before_date_start")
     )
 
-    return query
 
-
-async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateRangeIn) -> Subquery:
+async def catalog_drug_rest_before_date_start(
+    session: AsyncSession, body: DateRangeIn
+) -> Subquery:
     catalog_drugs_movement = await catalog_drugs_received_and_spent_before_date_start(
         session=session, body=body
     )
     c_d_info = await catalog_drug_info()
 
-    query = (
+    return (
         select(
             c_d_info.c.cd_id.label("cd_id"),
             c_d_info.c.packing,
@@ -286,7 +274,10 @@ async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateR
             catalog_drugs_movement.c.packs_spent,
             catalog_drugs_movement.c.units_spent,
             (
-                (c_d_info.c.packing * func.coalesce(catalog_drugs_movement.c.packs_spent, 0))
+                (
+                    c_d_info.c.packing
+                    * func.coalesce(catalog_drugs_movement.c.packs_spent, 0)
+                )
                 - func.coalesce(catalog_drugs_movement.c.units_spent, 0)
             ).cast(Float),
             catalog_drugs_movement.c.packs_rest.label("packs_rest"),
@@ -294,18 +285,27 @@ async def catalog_drug_rest_before_date_start(session: AsyncSession, body: DateR
             .cast(Float)
             .label("units_rest"),
         )
-        .join(catalog_drugs_movement, catalog_drugs_movement.c.cd_id == c_d_info.c.cd_id)
+        .join(
+            catalog_drugs_movement, catalog_drugs_movement.c.cd_id == c_d_info.c.cd_id
+        )
         .subquery("catalog_drug_rest_before_date_start")
     )
-    return query
 
 
 # catalog_drug_rest
-async def catalog_drug_rest(session: AsyncSession, body: DateRangeIn, drug_id: int) -> tuple:
+async def catalog_drug_rest(
+    session: AsyncSession, body: DateRangeIn, drug_id: int
+) -> tuple:
     c_d_info = await catalog_drug_info()
-    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
-    received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
-    spent_drugs = await catalog_drugs_spent_between_date_range(session=session, body=body)
+    c_d_rest_start = await catalog_drug_rest_before_date_start(
+        session=session, body=body
+    )
+    received_drugs = await catalog_drugs_received_between_date_range(
+        session=session, body=body
+    )
+    spent_drugs = await catalog_drugs_spent_between_date_range(
+        session=session, body=body
+    )
 
     query = (
         select(
@@ -350,11 +350,19 @@ async def catalog_drug_rest(session: AsyncSession, body: DateRangeIn, drug_id: i
 
 
 # catalog_drugs movement main query
-async def catalog_drugs_movement_report(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+async def catalog_drugs_movement_report(
+    session: AsyncSession, body: DateRangeIn
+) -> list[tuple]:
     c_d_info = await catalog_drug_info()
-    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
-    received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
-    spent_drugs = await catalog_drugs_spent_between_date_range(session=session, body=body)
+    c_d_rest_start = await catalog_drug_rest_before_date_start(
+        session=session, body=body
+    )
+    received_drugs = await catalog_drugs_received_between_date_range(
+        session=session, body=body
+    )
+    spent_drugs = await catalog_drugs_spent_between_date_range(
+        session=session, body=body
+    )
 
     query = (
         select(
@@ -407,13 +415,21 @@ async def catalog_drugs_movement_report(session: AsyncSession, body: DateRangeIn
 
 
 # 1 VetB queries
-async def catalog_drugs_movement_for_1vetB(session: AsyncSession, body: DateRangeIn) -> Subquery:
+async def catalog_drugs_movement_for_1vetB(
+    session: AsyncSession, body: DateRangeIn
+) -> Subquery:
     c_d_info = await catalog_drug_info()
-    c_d_rest_start = await catalog_drug_rest_before_date_start(session=session, body=body)
-    received_drugs = await catalog_drugs_received_between_date_range(session=session, body=body)
-    spent_drugs = await catalog_drugs_spent_between_date_range(session=session, body=body)
+    c_d_rest_start = await catalog_drug_rest_before_date_start(
+        session=session, body=body
+    )
+    received_drugs = await catalog_drugs_received_between_date_range(
+        session=session, body=body
+    )
+    spent_drugs = await catalog_drugs_spent_between_date_range(
+        session=session, body=body
+    )
 
-    query = (
+    return (
         select(
             c_d_info.c.cd_id.label("cd_id"),
             c_d_info.c.drug_name.label("drug_name"),
@@ -461,8 +477,6 @@ async def catalog_drugs_movement_for_1vetB(session: AsyncSession, body: DateRang
         .join(spent_drugs, spent_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
         .subquery("catalog_drugs_movement_for_1vetB")
     )
-
-    return query
 
 
 async def report_1B(session: AsyncSession, body: DateRangeIn) -> list[tuple]:

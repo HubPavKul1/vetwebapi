@@ -35,8 +35,12 @@ async def create_gender(session: AsyncSession, species_id: int, name: str) -> in
     return new_gender.id
 
 
-async def create_animal_group(session: AsyncSession, type_of_feeding_id: int, name: str) -> int:
-    new_animal_group = AnimalGroup(type_of_feeding_id=type_of_feeding_id, name=name.capitalize())
+async def create_animal_group(
+    session: AsyncSession, type_of_feeding_id: int, name: str
+) -> int:
+    new_animal_group = AnimalGroup(
+        type_of_feeding_id=type_of_feeding_id, name=name.capitalize()
+    )
     session.add(new_animal_group)
     await session.commit()
     await session.refresh(new_animal_group)
@@ -88,7 +92,9 @@ async def save_animals(
     file.file.close()
 
 
-async def read_company_animals(session: AsyncSession, company_id: int) -> list[Animal | None]:
+async def read_company_animals(
+    session: AsyncSession, company_id: int
+) -> list[Animal | None]:
     stmt = (
         select(Animal)
         .where(and_(Animal.company_id == company_id, Animal.is_active))
@@ -106,7 +112,9 @@ async def read_types_of_feeding(session: AsyncSession) -> list[TypeOfFeeding]:
     return list(await session.scalars(stmt))
 
 
-async def read_animal_groups(session: AsyncSession, type_of_feeding_id: int) -> list[AnimalGroup]:
+async def read_animal_groups(
+    session: AsyncSession, type_of_feeding_id: int
+) -> list[AnimalGroup]:
     stmt = (
         select(AnimalGroup)
         .where(AnimalGroup.type_of_feeding_id == type_of_feeding_id)
@@ -116,7 +124,11 @@ async def read_animal_groups(session: AsyncSession, type_of_feeding_id: int) -> 
 
 
 async def read_species(session: AsyncSession, animal_group_id: int) -> list[Species]:
-    stmt = select(Species).where(Species.animal_group_id == animal_group_id).order_by(Species.name)
+    stmt = (
+        select(Species)
+        .where(Species.animal_group_id == animal_group_id)
+        .order_by(Species.name)
+    )
     return list(await session.scalars(stmt))
 
 

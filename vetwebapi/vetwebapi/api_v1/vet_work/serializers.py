@@ -3,7 +3,13 @@ from api_v1.company.schemas import AddressSchema, CompanyCard
 from api_v1.company.serializers import serialize_address, serialize_employee
 from api_v1.drug.receipts.schemas import DrugInMovementSchema
 from api_v1.drug.receipts.serializers import serialize_drug_in_movement
-from core.models import AnimalInVetWork, CompanyInVetWork, DoctorInVetWork, DrugInMovement, VetWork
+from core.models import (
+    AnimalInVetWork,
+    CompanyInVetWork,
+    DoctorInVetWork,
+    DrugInMovement,
+    VetWork,
+)
 
 from .schemas import AnimalInVetWorkSchema, VetWorkDetail, VetWorks, VetWorkSchema
 
@@ -60,7 +66,9 @@ async def serialize_vetworks(
     vetworks: list[VetWork], total_count: int, page: int, per_page: int
 ) -> VetWorks:
     vetwork_schemas = [await serialize_vetwork(vetwork=vetwork) for vetwork in vetworks]
-    return VetWorks(vetworks=vetwork_schemas, total_count=total_count, page=page, per_page=per_page)
+    return VetWorks(
+        vetworks=vetwork_schemas, total_count=total_count, page=page, per_page=per_page
+    )
 
 
 async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkSchema:
@@ -97,15 +105,21 @@ async def serialize_company_in_vetwork(item: CompanyInVetWork) -> CompanyCard:
     )
 
 
-async def serialize_animals_in_vetwork(items: list[AnimalInVetWork]) -> list[AnimalInVetWorkSchema]:
+async def serialize_animals_in_vetwork(
+    items: list[AnimalInVetWork],
+) -> list[AnimalInVetWorkSchema]:
     return [await serialize_animal_in_vetwork(item) for item in items]
 
 
-async def serialize_companies_in_vetwork(items: list[CompanyInVetWork]) -> list[CompanyCard]:
+async def serialize_companies_in_vetwork(
+    items: list[CompanyInVetWork],
+) -> list[CompanyCard]:
     return [await serialize_company_in_vetwork(item) for item in items]
 
 
-async def serialize_doctors_in_vetwork(items: list[DoctorInVetWork]) -> list[EmployeeSchema]:
+async def serialize_doctors_in_vetwork(
+    items: list[DoctorInVetWork],
+) -> list[EmployeeSchema]:
     return [await serialize_employee(item.doctor) for item in items]
 
 
@@ -123,13 +137,17 @@ async def serialize_vetwork_detail(
     company_schemas = []
     drug_schema = None
     if companies:
-        company_schemas: list[CompanyCard] = await serialize_companies_in_vetwork(items=companies)
-    if animals:
-        animal_schemas: list[AnimalInVetWorkSchema] = await serialize_animals_in_vetwork(
-            items=animals
+        company_schemas: list[CompanyCard] = await serialize_companies_in_vetwork(
+            items=companies
         )
+    if animals:
+        animal_schemas: list[
+            AnimalInVetWorkSchema
+        ] = await serialize_animals_in_vetwork(items=animals)
     if doctors:
-        doctor_schemas: list[EmployeeSchema] = await serialize_doctors_in_vetwork(items=doctors)
+        doctor_schemas: list[EmployeeSchema] = await serialize_doctors_in_vetwork(
+            items=doctors
+        )
     if drug:
         drug_schema: DrugInMovementSchema = await serialize_drug_in_movement(drug)
 

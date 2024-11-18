@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 
+from api_v1.schemas import SuccessMessage
 from .address.schemas import AddressSchema
 from .animal.schemas import AnimalSchema
 from .employee.schemas import EmployeeSchema
@@ -24,10 +25,6 @@ class CompanySchema(CompanyIn):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
-
-
-class SuccessMessage(BaseModel):
-    result: bool = True
 
 
 class CompanyOut(SuccessMessage):

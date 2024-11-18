@@ -56,11 +56,14 @@ router.include_router(employee_router)
 
 @router.post("/", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_company_route(
-    body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: CompanyIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[CompanyOut, dict]:
     try:
         company = await crud.create_company(session=session, body=body)
-        logger.debug("Company with company_id: {company_id} created!", company_id=company.id)
+        logger.debug(
+            "Company with company_id: {company_id} created!", company_id=company.id
+        )
         return CompanyOut(company_id=company.id)
 
     except Exception:
@@ -71,7 +74,9 @@ async def create_company_route(
 
 
 # Create many companies for pagination test
-@router.post("/test", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/test", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED
+)
 async def create_test_companies_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[SuccessMessage, dict]:
@@ -87,11 +92,14 @@ async def create_test_companies_route(
 
 @router.post("/vets", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_clinic_route(
-    body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: CompanyIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[CompanyOut, dict]:
     try:
         company = await crud.create_clinic(session=session, body=body)
-        logger.debug("VetClinic with company_id: {company_id} created!", company_id=company.id)
+        logger.debug(
+            "VetClinic with company_id: {company_id} created!", company_id=company.id
+        )
         return CompanyOut(company_id=company.id)
     except Exception:
         raise HTTPException(
@@ -102,11 +110,14 @@ async def create_clinic_route(
 
 @router.post("/labs", response_model=CompanyOut, status_code=status.HTTP_201_CREATED)
 async def create_lab_route(
-    body: CompanyIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: CompanyIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[CompanyOut, dict]:
     try:
         company = await crud.create_lab(session=session, body=body)
-        logger.debug("Lab with company_id: {company_id} created!", company_id=company.id)
+        logger.debug(
+            "Lab with company_id: {company_id} created!", company_id=company.id
+        )
         return CompanyOut(company_id=company.id)
     except Exception:
         raise HTTPException(
@@ -129,10 +140,15 @@ async def get_companies(
     try:
         companies = await crud.read_companies_with_options(session=session)
         logger.debug("The companies data is obtained from the database!")
-        comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        comp_schemas = [
+            await serialize_company_card(company) for company in companies[start:end]
+        ]
         logger.debug("The companies data serialized!")
         return Companies(
-            companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
+            companies=comp_schemas,
+            total_count=len(companies),
+            page=page,
+            per_page=per_page,
         )
     except Exception:
         raise HTTPException(
@@ -155,10 +171,15 @@ async def get_clinics(
     try:
         companies = await crud.read_clinics_with_options(session=session)
         logger.debug("The vets data is obtained from the database!")
-        comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        comp_schemas = [
+            await serialize_company_card(company) for company in companies[start:end]
+        ]
         logger.debug("The vets data serialized!")
         return Companies(
-            companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
+            companies=comp_schemas,
+            total_count=len(companies),
+            page=page,
+            per_page=per_page,
         )
     except Exception:
         raise HTTPException(
@@ -181,10 +202,15 @@ async def get_labs(
     try:
         companies = await crud.read_labs_with_options(session=session)
         logger.debug("The labs data is obtained from the database!")
-        comp_schemas = [await serialize_company_card(company) for company in companies[start:end]]
+        comp_schemas = [
+            await serialize_company_card(company) for company in companies[start:end]
+        ]
         logger.debug("The labs data serialized!")
         return Companies(
-            companies=comp_schemas, total_count=len(companies), page=page, per_page=per_page
+            companies=comp_schemas,
+            total_count=len(companies),
+            page=page,
+            per_page=per_page,
         )
     except Exception:
         raise HTTPException(
@@ -194,7 +220,9 @@ async def get_labs(
 
 
 @router.delete(
-    "/{company_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+    "/{company_id}/",
+    response_model=SuccessMessage,
+    status_code=status.HTTP_202_ACCEPTED,
 )
 async def delete_company(
     company: Company = Depends(company_by_id),
@@ -222,7 +250,9 @@ async def get_company_detail(
         company_schema = await serialize_company_detail(
             company=company, address=address, employees=employees, animals=animals
         )
-        logger.debug("Got CompanyDetail with company_id: {company_id}", company_id=company.id)
+        logger.debug(
+            "Got CompanyDetail with company_id: {company_id}", company_id=company.id
+        )
         return company_schema
 
     except Exception:
@@ -233,7 +263,7 @@ async def get_company_detail(
 
 
 @router.get("/{company_id}/animals", response_model=Animals)
-async def get_company_detail(
+async def get_company_animals(
     animals: list[Animal | None] = Depends(company_animals),
 ) -> Union[dict, Animals]:
     try:
@@ -279,7 +309,8 @@ async def get_region_districts_route(
 
 @router.get("/districts/{district_id}/cities", response_model=CitySchemas)
 async def get_district_cities_route(
-    district_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    district_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[CitySchemas, dict]:
     try:
         cities = await read_district_cities(session=session, district_id=district_id)
@@ -365,7 +396,8 @@ async def get_usage_types_route(
 
 @router.get("/{type_of_feeding_id}/animal_groups", response_model=AnimalGroupSchemas)
 async def get_animal_groups_route(
-    type_of_feeding_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    type_of_feeding_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[AnimalGroupSchemas, dict]:
     try:
         animal_groups = await read_animal_groups(
@@ -381,7 +413,8 @@ async def get_animal_groups_route(
 
 @router.get("/{animal_group_id}/species", response_model=SpeciesSchemas)
 async def get_species_route(
-    animal_group_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    animal_group_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[SpeciesSchemas, dict]:
     try:
         species = await read_species(session=session, animal_group_id=animal_group_id)
@@ -395,7 +428,8 @@ async def get_species_route(
 
 @router.get("/{species_id}/genders", response_model=GenderSchemas)
 async def get_genders_route(
-    species_id: int, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    species_id: int,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[GenderSchemas, dict]:
     try:
         genders = await read_genders(session=session, species_id=species_id)

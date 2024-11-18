@@ -3,11 +3,6 @@ from datetime import date
 from pydantic import BaseModel
 
 
-class DateRangeIn(BaseModel):
-    date_start: date
-    date_end: date
-
-
 class DrugReportItemSchema(BaseModel):
     id: int
     drug_name: str

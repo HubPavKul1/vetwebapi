@@ -32,7 +32,9 @@ async def operation_by_id(
 ) -> Operation:
     """Получаем объект Операции по id"""
 
-    operation = await crud.read_operation_by_id(session=session, operation_id=operation_id)
+    operation = await crud.read_operation_by_id(
+        session=session, operation_id=operation_id
+    )
     if operation is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

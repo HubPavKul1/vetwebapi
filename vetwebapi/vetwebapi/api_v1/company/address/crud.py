@@ -7,7 +7,9 @@ from .schemas import AddressIn
 
 
 # Create Address
-async def create_address(session: AsyncSession, body: AddressIn, company_id: int) -> None:
+async def create_address(
+    session: AsyncSession, body: AddressIn, company_id: int
+) -> None:
     new_address = Address(**body.model_dump())
     new_address.company_id = company_id
     session.add(new_address)
@@ -45,7 +47,9 @@ async def create_street(session: AsyncSession, name: str, city_id: int) -> None:
 
 
 # Read Address
-async def read_company_address(session: AsyncSession, company_id: int) -> Address | None:
+async def read_company_address(
+    session: AsyncSession, company_id: int
+) -> Address | None:
     stmt = select(Address).where(Address.company_id == company_id)
     return await session.scalar(stmt)
 
@@ -68,8 +72,12 @@ async def read_districts(session: AsyncSession) -> list[District]:
     return list(await session.scalars(stmt))
 
 
-async def read_region_districts(session: AsyncSession, region_id: int) -> list[District]:
-    stmt = select(District).where(District.region_id == region_id).order_by(District.name)
+async def read_region_districts(
+    session: AsyncSession, region_id: int
+) -> list[District]:
+    stmt = (
+        select(District).where(District.region_id == region_id).order_by(District.name)
+    )
     return list(await session.scalars(stmt))
 
 

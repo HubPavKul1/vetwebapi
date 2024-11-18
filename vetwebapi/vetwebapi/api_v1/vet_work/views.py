@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.company.schemas import SuccessMessage
+from api_v1.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
 from api_v1.drug.receipts.schemas import DrugInMovementIn
 from core.database import db_manager

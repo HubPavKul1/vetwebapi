@@ -1,7 +1,5 @@
-import csv
 import os
 import shutil
-from io import StringIO
 from operator import and_
 
 from fastapi import File, UploadFile
@@ -47,7 +45,9 @@ async def create_disease(session: AsyncSession, name: str) -> None:
     await session.commit()
 
 
-async def save_file(session: AsyncSession, vetwork: VetWork, file: UploadFile = File(...)) -> int:
+async def save_file(
+    session: AsyncSession, vetwork: VetWork, file: UploadFile = File(...)
+) -> int:
     has_vetwork_file = await read_vetwork_file(session=session, vetwork=vetwork)
     if has_vetwork_file:
         return 0
@@ -77,8 +77,12 @@ async def create_vetwork(session: AsyncSession, body: VaccinationIn) -> VetWork:
     await session.commit()
     await session.refresh(new_vetwork)
 
-    await add_diseases_in_vetwork(session=session, vetwork_id=new_vetwork.id, diseases=diseases)
-    await add_doctors_in_vetwork(session=session, vetwork_id=new_vetwork.id, doctors=doctors)
+    await add_diseases_in_vetwork(
+        session=session, vetwork_id=new_vetwork.id, diseases=diseases
+    )
+    await add_doctors_in_vetwork(
+        session=session, vetwork_id=new_vetwork.id, doctors=doctors
+    )
     return new_vetwork
 
 
@@ -90,15 +94,21 @@ async def create_diagnostic(session: AsyncSession, body: DiagnosticIn) -> VetWor
     await session.commit()
     await session.refresh(new_vetwork)
 
-    await add_diseases_in_vetwork(session=session, vetwork_id=new_vetwork.id, diseases=diseases)
-    await add_doctors_in_vetwork(session=session, vetwork_id=new_vetwork.id, doctors=doctors)
+    await add_diseases_in_vetwork(
+        session=session, vetwork_id=new_vetwork.id, diseases=diseases
+    )
+    await add_doctors_in_vetwork(
+        session=session, vetwork_id=new_vetwork.id, doctors=doctors
+    )
     return new_vetwork
 
 
 async def add_diseases_in_vetwork(
     session: AsyncSession, vetwork_id: int, diseases: list[int]
 ) -> None:
-    new_relations = [DiseaseInVetWork(vetwork_id=vetwork_id, disease_id=item) for item in diseases]
+    new_relations = [
+        DiseaseInVetWork(vetwork_id=vetwork_id, disease_id=item) for item in diseases
+    ]
     session.add_all(new_relations)
     await session.commit()
 
@@ -106,7 +116,9 @@ async def add_diseases_in_vetwork(
 async def add_doctors_in_vetwork(
     session: AsyncSession, vetwork_id: int, doctors: list[int]
 ) -> None:
-    new_relations = [DoctorInVetWork(vetwork_id=vetwork_id, employee_id=item) for item in doctors]
+    new_relations = [
+        DoctorInVetWork(vetwork_id=vetwork_id, employee_id=item) for item in doctors
+    ]
     session.add_all(new_relations)
     await session.commit()
 
@@ -122,7 +134,9 @@ async def add_company_to_vetwork(
 async def add_animals_to_vetwork(
     session: AsyncSession, vetwork: VetWork, body: list[AnimalInVetWorkIn]
 ) -> None:
-    new_relations = [AnimalInVetWork(**item.model_dump(), vetwork_id=vetwork.id) for item in body]
+    new_relations = [
+        AnimalInVetWork(**item.model_dump(), vetwork_id=vetwork.id) for item in body
+    ]
 
     session.add_all(new_relations)
     await session.commit()
@@ -131,7 +145,9 @@ async def add_animals_to_vetwork(
 async def add_drug_to_vetwork(
     session: AsyncSession, vetwork: VetWork, body: DrugInMovementIn
 ) -> None:
-    new_drug_movement = DrugMovement(operation_id=2, operation_date=vetwork.vetwork_date)
+    new_drug_movement = DrugMovement(
+        operation_id=2, operation_date=vetwork.vetwork_date
+    )
     session.add(new_drug_movement)
     await session.commit()
     await session.refresh(new_drug_movement)
@@ -149,7 +165,9 @@ async def read_diseases(session: AsyncSession) -> list[Disease]:
     return list(await session.scalars(stmt))
 
 
-async def read_vetwork_file(session: AsyncSession, vetwork: VetWork) -> VetWorkFile | None:
+async def read_vetwork_file(
+    session: AsyncSession, vetwork: VetWork
+) -> VetWorkFile | None:
     stmt = select(VetWorkFile).where(VetWorkFile.vetwork_id == vetwork.id)
     return await session.scalar(stmt)
 
@@ -157,7 +175,9 @@ async def read_vetwork_file(session: AsyncSession, vetwork: VetWork) -> VetWorkF
 async def read_vaccinations(session: AsyncSession) -> list[VetWork]:
     stmt = (
         select(VetWork)
-        .options(selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease))
+        .options(
+            selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
+        )
         .where(VetWork.work_type_id == 1)
         .order_by(desc(VetWork.vetwork_date))
     )
@@ -167,7 +187,9 @@ async def read_vaccinations(session: AsyncSession) -> list[VetWork]:
 async def read_diagnostics(session: AsyncSession) -> list[VetWork]:
     stmt = (
         select(VetWork)
-        .options(selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease))
+        .options(
+            selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
+        )
         .where(VetWork.work_type_id == 2)
         .order_by(desc(VetWork.vetwork_date))
     )
@@ -177,13 +199,17 @@ async def read_diagnostics(session: AsyncSession) -> list[VetWork]:
 async def read_vetwork_by_id(session: AsyncSession, vetwork_id: int) -> VetWork | None:
     stmt = (
         select(VetWork)
-        .options(selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease))
+        .options(
+            selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
+        )
         .where(VetWork.id == vetwork_id)
     )
     return await session.scalar(stmt)
 
 
-async def read_animals_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[AnimalInVetWork]:
+async def read_animals_in_vetwork(
+    session: AsyncSession, vetwork: VetWork
+) -> list[AnimalInVetWork]:
     stmt = (
         select(AnimalInVetWork)
         .options(joinedload(AnimalInVetWork.animal))
@@ -196,7 +222,10 @@ async def read_animal_in_vetwork_by_id(
     session: AsyncSession, vetwork: VetWork, animal_id: int
 ) -> AnimalInVetWork | None:
     stmt = select(AnimalInVetWork).where(
-        and_(AnimalInVetWork.vetwork_id == vetwork.id, AnimalInVetWork.animal_id == animal_id)
+        and_(
+            AnimalInVetWork.vetwork_id == vetwork.id,
+            AnimalInVetWork.animal_id == animal_id,
+        )
     )
     return await session.scalar(stmt)
 
@@ -216,12 +245,17 @@ async def read_company_in_vetwork_by_id(
     session: AsyncSession, vetwork: VetWork, company_id: int
 ) -> CompanyInVetWork | None:
     stmt = select(CompanyInVetWork).where(
-        and_(CompanyInVetWork.company_id == company_id, CompanyInVetWork.vetwork_id == vetwork.id)
+        and_(
+            CompanyInVetWork.company_id == company_id,
+            CompanyInVetWork.vetwork_id == vetwork.id,
+        )
     )
     return await session.scalar(stmt)
 
 
-async def read_doctors_in_vetwork(session: AsyncSession, vetwork: VetWork) -> list[DoctorInVetWork]:
+async def read_doctors_in_vetwork(
+    session: AsyncSession, vetwork: VetWork
+) -> list[DoctorInVetWork]:
     stmt = (
         select(DoctorInVetWork)
         .options(joinedload(DoctorInVetWork.doctor))
@@ -230,7 +264,9 @@ async def read_doctors_in_vetwork(session: AsyncSession, vetwork: VetWork) -> li
     return list(await session.scalars(stmt))
 
 
-async def read_drug_in_vetwork(session: AsyncSession, vetwork: VetWork) -> DrugInMovement:
+async def read_drug_in_vetwork(
+    session: AsyncSession, vetwork: VetWork
+) -> DrugInMovement:
     stmt = (
         select(DrugInMovement)
         .options(
@@ -244,7 +280,9 @@ async def read_drug_in_vetwork(session: AsyncSession, vetwork: VetWork) -> DrugI
     return await session.scalar(stmt)
 
 
-async def read_biomaterial_fixations(session: AsyncSession) -> list[BiomaterialFixation]:
+async def read_biomaterial_fixations(
+    session: AsyncSession,
+) -> list[BiomaterialFixation]:
     stmt = select(BiomaterialFixation).order_by(BiomaterialFixation.name)
     return list(await session.scalars(stmt))
 
@@ -294,7 +332,10 @@ async def delete_vetwork_animals(session: AsyncSession, vetwork: VetWork) -> Non
     stmt = select(AnimalInVetWork).where(AnimalInVetWork.vetwork_id == vetwork.id)
     animals: list[AnimalInVetWork] = list(await session.scalars(stmt))
     if len(animals) > 1:
-        [await delete_item_in_vetwork(session=session, item=animal) for animal in animals]
+        [
+            await delete_item_in_vetwork(session=session, item=animal)
+            for animal in animals
+        ]
     elif len(animals) == 1:
         await delete_item_in_vetwork(session=session, item=animals[0])
 
@@ -303,7 +344,10 @@ async def delete_vetwork_companies(session: AsyncSession, vetwork: VetWork) -> N
     stmt = select(CompanyInVetWork).where(CompanyInVetWork.vetwork_id == vetwork.id)
     companies: list[CompanyInVetWorkIn] = list(await session.scalars(stmt))
     if len(companies) > 1:
-        [await delete_item_in_vetwork(session=session, item=company) for company in companies]
+        [
+            await delete_item_in_vetwork(session=session, item=company)
+            for company in companies
+        ]
     elif len(companies) == 1:
         await delete_item_in_vetwork(session=session, item=companies[0])
 
@@ -312,7 +356,10 @@ async def delete_vetwork_diseases(session: AsyncSession, vetwork: VetWork) -> No
     stmt = select(DiseaseInVetWork).where(DiseaseInVetWork.vetwork_id == vetwork.id)
     diseases: list[DiseaseInVetWork] = list(await session.scalars(stmt))
     if len(diseases) > 1:
-        [await delete_item_in_vetwork(session=session, item=disease) for disease in diseases]
+        [
+            await delete_item_in_vetwork(session=session, item=disease)
+            for disease in diseases
+        ]
     elif len(diseases) == 1:
         await delete_item_in_vetwork(session=session, item=diseases[0])
 
@@ -321,7 +368,10 @@ async def delete_vetwork_doctors(session: AsyncSession, vetwork: VetWork) -> Non
     stmt = select(DoctorInVetWork).where(DoctorInVetWork.vetwork_id == vetwork.id)
     doctors: list[DoctorInVetWork] = list(await session.scalars(stmt))
     if len(doctors) > 1:
-        [await delete_item_in_vetwork(session=session, item=doctor) for doctor in doctors]
+        [
+            await delete_item_in_vetwork(session=session, item=doctor)
+            for doctor in doctors
+        ]
     elif len(doctors) == 1:
         await delete_item_in_vetwork(session=session, item=doctors[0])
 
@@ -338,7 +388,11 @@ async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
 
 async def delete_item_in_vetwork(
     session: AsyncSession,
-    item: CompanyInVetWork | AnimalInVetWork | DiseaseInVetWork | DoctorInVetWork | VetWorkFile,
+    item: CompanyInVetWork
+    | AnimalInVetWork
+    | DiseaseInVetWork
+    | DoctorInVetWork
+    | VetWorkFile,
 ) -> None:
     await session.delete(item)
     await session.commit()

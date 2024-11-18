@@ -2,7 +2,7 @@ from operator import and_
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload, selectinload
+from sqlalchemy.orm import selectinload
 
 from core.models import Clinic, Company, Employee, Position
 
@@ -17,7 +17,9 @@ async def create_position(session: AsyncSession, name: str) -> None:
     await session.commit()
 
 
-async def create_employee(session: AsyncSession, body: EmployeeIn, company_id: int) -> None:
+async def create_employee(
+    session: AsyncSession, body: EmployeeIn, company_id: int
+) -> None:
     new_employee = Employee(**body.model_dump())
     new_employee.lastname = new_employee.lastname.capitalize()
     new_employee.firstname = new_employee.firstname.capitalize()
@@ -30,7 +32,9 @@ async def create_employee(session: AsyncSession, body: EmployeeIn, company_id: i
 # Read
 
 
-async def read_company_employees(session: AsyncSession, company_id: int) -> list[Employee | None]:
+async def read_company_employees(
+    session: AsyncSession, company_id: int
+) -> list[Employee | None]:
     stmt = (
         select(Employee)
         .where(and_(Employee.company_id == company_id, Employee.is_active))
@@ -60,7 +64,9 @@ async def read_doctors(session: AsyncSession) -> list[Employee | None]:
     return doctors
 
 
-async def read_employee_by_id(session: AsyncSession, employee_id: int) -> Employee | None:
+async def read_employee_by_id(
+    session: AsyncSession, employee_id: int
+) -> Employee | None:
     return await session.get(Employee, employee_id)
 
 

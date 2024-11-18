@@ -2,7 +2,7 @@ from operator import and_
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload, selectinload, with_polymorphic
+from sqlalchemy.orm import joinedload, selectinload
 
 from core.models import Clinic, Company, Laboratory, Role
 

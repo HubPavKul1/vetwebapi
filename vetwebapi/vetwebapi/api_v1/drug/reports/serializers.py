@@ -26,7 +26,9 @@ async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
     )
 
 
-async def serialize_drug_in_report_1B(session: AsyncSession, item: tuple) -> Report1VetBItemSchema:
+async def serialize_drug_in_report_1B(
+    session: AsyncSession, item: tuple
+) -> Report1VetBItemSchema:
     diseases = await drug_diseases(session=session, drug_id=item[2])
     return Report1VetBItemSchema(
         id=item[0],

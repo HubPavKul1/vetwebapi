@@ -1,4 +1,4 @@
-from core.models import Drug, DrugInMovement, DrugMovement
+from core.models import DrugInMovement, DrugMovement
 
 from ..serializers import get_disease_names
 from .schemas import DrugInMovementSchema, DrugMovementDetail
@@ -26,7 +26,9 @@ async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSche
     )
 
 
-async def serialize_drug_movement_card(drug_movement: DrugMovement) -> DrugMovementDetail:
+async def serialize_drug_movement_card(
+    drug_movement: DrugMovement,
+) -> DrugMovementDetail:
     drugs = drug_movement.catalog_drugs_details
     if drugs:
         drugs = [await serialize_drug_in_movement(drug) for drug in drugs]

@@ -1,11 +1,15 @@
-# from operator import and_, or_
-from datetime import date
-
-from sqlalchemy import Float, Integer, Subquery, and_, cast, desc, func, select
+from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
-from core.models import CatalogDrug, Drug, DrugDisease, DrugInMovement, DrugMovement, Operation
+from core.models import (
+    CatalogDrug,
+    Drug,
+    DrugDisease,
+    DrugInMovement,
+    DrugMovement,
+    Operation,
+)
 
 from .schemas import DrugInMovementIn, DrugMovementIn
 
@@ -31,7 +35,9 @@ async def add_drug_to_movement(
 
 
 # Read
-async def read_operation_by_id(session: AsyncSession, operation_id: int) -> Operation | None:
+async def read_operation_by_id(
+    session: AsyncSession, operation_id: int
+) -> Operation | None:
     return await session.get(Operation, operation_id)
 
 
@@ -87,13 +93,17 @@ async def read_drugs_in_drug_movement(
 async def read_drugs_in_drug_movement_relation(
     session: AsyncSession, drug_movement: DrugInMovement
 ) -> list[DrugInMovement]:
-    stmt = select(DrugInMovement).where(DrugInMovement.drug_movement_id == drug_movement.id)
+    stmt = select(DrugInMovement).where(
+        DrugInMovement.drug_movement_id == drug_movement.id
+    )
 
     return list(await session.scalars(stmt))
 
 
 # Delete
-async def delete_drug_movement(session: AsyncSession, drug_movement: DrugMovement) -> None:
+async def delete_drug_movement(
+    session: AsyncSession, drug_movement: DrugMovement
+) -> None:
     drugs_in_movement = await read_drugs_in_drug_movement_relation(
         session=session, drug_movement=drug_movement
     )
