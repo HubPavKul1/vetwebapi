@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
 from api_v1.drug.dependencies import drug_by_id
 from api_v1.drug.schemas import (
@@ -21,6 +20,7 @@ from api_v1.drug.schemas import (
     DrugSchema,
     PlacesOfAdministration,
 )
+from api_v1.schemas import SuccessMessage
 from core.database import db_manager
 from core.models import Drug
 
@@ -51,7 +51,12 @@ async def upload_drug_file_route(
     drug: Drug = Depends(drug_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    if file.content_type not in ["application/pdf", "image/jpeg", "image/png", "image/jpg"]:
+    if file.content_type not in [
+        "application/pdf",
+        "image/jpeg",
+        "image/png",
+        "image/jpg",
+    ]:
         raise HTTPException(status_code=400, detail="Invalid file type")
     await crud.save_file(session=session, drug=drug, file=file)
 
@@ -70,7 +75,9 @@ async def get_drugs_route(
     try:
         drugs = await crud.read_drugs_with_options(session=session)
         drug_schemas = [await serialize_drug_card(drug) for drug in drugs[start:end]]
-        return Drugs(drugs=drug_schemas, total_count=len(drugs), page=page, per_page=per_page)
+        return Drugs(
+            drugs=drug_schemas, total_count=len(drugs), page=page, per_page=per_page
+        )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -105,7 +112,9 @@ async def get_drug_instruction(drug: Drug = Depends(drug_by_id)):
     return FileResponse(file_path)
 
 
-@router.delete("/{drug_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete(
+    "/{drug_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_drug_route(
     drug: Drug = Depends(drug_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -196,7 +205,9 @@ async def get_places_of_administration_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[PlacesOfAdministration, dict]:
     try:
-        places_of_administration = await crud.read_places_of_administration(session=session)
+        places_of_administration = await crud.read_places_of_administration(
+            session=session
+        )
         return PlacesOfAdministration(places_of_administration=places_of_administration)
     except Exception:
         raise HTTPException(

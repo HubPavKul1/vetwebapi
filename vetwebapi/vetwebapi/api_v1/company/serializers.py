@@ -1,8 +1,8 @@
+from core.models import Address, Animal, Company, Employee
+
 from .address.schemas import AddressSchema
 from .animal.schemas import Animals, AnimalSchema
 from .employee.schemas import Employees, EmployeeSchema
-from core.models import Address, Animal, Company, Employee
-
 from .schemas import CompanyCard, CompanyDetail
 
 
@@ -31,7 +31,9 @@ async def serialize_employee(employee: Employee) -> EmployeeSchema:
 
 async def serialize_employees(employees: list[Employee]) -> Employees:
     return Employees(
-        employees=[await serialize_employee(employee=employee) for employee in employees]
+        employees=[
+            await serialize_employee(employee=employee) for employee in employees
+        ]
     )
 
 
@@ -50,7 +52,9 @@ async def serialize_animal(animal: Animal) -> AnimalSchema:
 
 
 async def serialize_animals(animals: list[Animal]) -> Animals:
-    return Animals(animals=[await serialize_animal(animal=animal) for animal in animals])
+    return Animals(
+        animals=[await serialize_animal(animal=animal) for animal in animals]
+    )
 
 
 # Function to serialize data for company detail page
@@ -62,7 +66,7 @@ async def serialize_company_detail(
 ) -> CompanyDetail:
     emp_schemas: list[EmployeeSchema] = []
     animal_schemas: list[AnimalSchema] = []
-    address_schema: AddressSchema = None
+    address_schema: AddressSchema | None = None
     if employees:
         emp_schemas = [await serialize_employee(employee) for employee in employees]
 
@@ -86,8 +90,8 @@ async def serialize_company_detail(
 async def serialize_company_card(company: Company):
     address = company.addresses
     employees = company.employees
-    address_schema: AddressSchema = None
-    employee_schema: EmployeeSchema = None
+    address_schema: AddressSchema | None = None
+    employee_schema: EmployeeSchema | None = None
     if address:
         address_schema = await serialize_address(address=address)
     if employees:

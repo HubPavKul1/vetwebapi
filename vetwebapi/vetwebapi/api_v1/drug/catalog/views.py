@@ -3,8 +3,8 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
+from api_v1.schemas import SuccessMessage
 from core.database import db_manager
 from core.models import CatalogDrug, DrugInMovement
 
@@ -18,7 +18,8 @@ router = APIRouter(prefix="/catalog")
 
 @router.post("/", response_model=CatalogDrugSchema, status_code=status.HTTP_201_CREATED)
 async def create_catalog_drug(
-    body: CatalogDrugIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: CatalogDrugIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> CatalogDrugSchema:
     catalog_drug = await crud.create_catalog_drug(session=session, body=body)
     return await serialize_catalog_drug(catalog_drug)
@@ -39,7 +40,10 @@ async def get_catalog_drugs(
         drugs = await crud.read_catalog(session=session)
         drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs[start:end]]
         return Catalog(
-            catalog_drugs=drug_schemas, total_count=len(drugs), page=page, per_page=per_page
+            catalog_drugs=drug_schemas,
+            total_count=len(drugs),
+            page=page,
+            per_page=per_page,
         )
     except Exception:
         raise HTTPException(
@@ -49,7 +53,9 @@ async def get_catalog_drugs(
 
 
 @router.get("/overdue", response_model=SuccessMessage)
-async def get_drugs_overdue(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
+async def get_drugs_overdue(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+):
     try:
         await crud.change_drug_activity(session=session)
         return SuccessMessage()
@@ -109,7 +115,9 @@ async def get_catalog_drug_spent(
         )
 
 
-@router.delete("/{id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete(
+    "/{id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_catalog_drug(
     drug: CatalogDrug = Depends(catalog_drug_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

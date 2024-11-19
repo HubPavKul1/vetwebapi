@@ -1,6 +1,7 @@
 from operator import and_
+from typing import Any, Iterable
 
-from sqlalchemy import Integer, Subquery, func, select
+from sqlalchemy import Integer, Select, Subquery, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.schemas import DateRangeIn
@@ -89,7 +90,9 @@ async def animals_data_in_vetwork(vetwork_ids: list[int]) -> Subquery:
     )
 
 
-async def diagnostic_report(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+async def diagnostic_report(
+    session: AsyncSession, body: DateRangeIn
+) -> list[Iterable[tuple[Any, ...]]]:
     vetwork_ids: list[int] = await diagnostic_ids_between_date_range(
         session=session, body=body
     )
@@ -97,7 +100,7 @@ async def diagnostic_report(session: AsyncSession, body: DateRangeIn) -> list[tu
     animals: Subquery = await animals_data_in_vetwork(vetwork_ids=vetwork_ids)
     diseases: Subquery = await diseases_in_vetwork(vetwork_ids=vetwork_ids)
 
-    query = select(
+    query: Select[Any] = select(
         # diseases.c.vetwork_id.label("vetwork_id"),
         animals.c.animal_group.label("animal_group"),
         diseases.c.disease.label("disease"),
@@ -108,7 +111,9 @@ async def diagnostic_report(session: AsyncSession, body: DateRangeIn) -> list[tu
     return list(await session.execute(query))
 
 
-async def vaccination_report(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+async def vaccination_report(
+    session: AsyncSession, body: DateRangeIn
+) -> list[Iterable[tuple[Any, ...]]]:
     vetwork_ids: list[int] = await vaccinations_ids_between_date_range(
         session=session, body=body
     )
@@ -116,7 +121,7 @@ async def vaccination_report(session: AsyncSession, body: DateRangeIn) -> list[t
     animals: Subquery = await animals_data_in_vetwork(vetwork_ids=vetwork_ids)
     diseases: Subquery = await diseases_in_vetwork(vetwork_ids=vetwork_ids)
 
-    query = select(
+    query: Select[Any] = select(
         animals.c.animal_group.label("animal_group"),
         diseases.c.disease.label("disease"),
         animals.c.animals_count.label("animals_count"),

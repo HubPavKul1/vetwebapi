@@ -3,8 +3,8 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
+from api_v1.schemas import SuccessMessage
 from core.database import db_manager
 from core.models import DrugInMovement, DrugMovement
 
@@ -25,7 +25,8 @@ router = APIRouter(prefix="/receipts")
 
 @router.post("/", response_model=DrugMovementOut, status_code=status.HTTP_201_CREATED)
 async def create_receipt_route(
-    body: DrugMovementIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: DrugMovementIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     drug_movement = await crud.create_receipt(session=session, body=body)
     return DrugMovementOut(
@@ -41,7 +42,9 @@ async def add_drug_to_movement_route(
     drug_movement_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
-    await crud.add_drug_to_movement(session=session, body=body, drug_movement_id=drug_movement_id)
+    await crud.add_drug_to_movement(
+        session=session, body=body, drug_movement_id=drug_movement_id
+    )
 
 
 @router.get("/", response_model=DrugMovements)
@@ -56,12 +59,18 @@ async def get_receipts(
     start = (page - 1) * per_page
     end = start + per_page
     try:
-        receipts: list[DrugMovement] = await crud.read_receipts_with_drugs(session=session)
+        receipts: list[DrugMovement] = await crud.read_receipts_with_drugs(
+            session=session
+        )
         receipt_schemas = [
-            await serialize_drug_movement_card(receipt) for receipt in receipts[start:end]
+            await serialize_drug_movement_card(receipt)
+            for receipt in receipts[start:end]
         ]
         return DrugMovements(
-            drug_movements=receipt_schemas, total_count=len(receipts), page=page, per_page=per_page
+            drug_movements=receipt_schemas,
+            total_count=len(receipts),
+            page=page,
+            per_page=per_page,
         )
     except Exception:
         raise HTTPException(
@@ -83,7 +92,9 @@ async def get_receipt(
             await serialize_drug_in_movement(drug) for drug in drugs
         ]
         return DrugMovementDetail(
-            id=drug_movement.id, operation_date=drug_movement.operation_date, drugs=drug_schemas
+            id=drug_movement.id,
+            operation_date=drug_movement.operation_date,
+            drugs=drug_schemas,
         )
     except Exception:
         raise HTTPException(
@@ -93,7 +104,9 @@ async def get_receipt(
 
 
 @router.delete(
-    "/{drug_movement_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+    "/{drug_movement_id}/",
+    response_model=SuccessMessage,
+    status_code=status.HTTP_202_ACCEPTED,
 )
 async def delete_drug_movement(
     drug_movement: DrugMovement = Depends(drug_movement_by_id),

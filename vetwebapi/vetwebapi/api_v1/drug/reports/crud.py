@@ -1,4 +1,6 @@
-from sqlalchemy import Float, Integer, Subquery, and_, func, select
+from typing import Any, Iterable
+
+from sqlalchemy import Float, Integer, Row, Subquery, and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.schemas import DateRangeIn
@@ -42,21 +44,23 @@ async def drug_diseases(session: AsyncSession, drug_id: int) -> list[str]:
     return [disease[0] for disease in result]
 
 
-async def catalog_drug_with_diseases(session: AsyncSession) -> Subquery:
-    catalog_drug = await catalog_drug_info()
-    diseases = await drug_diseases(catalog_drug.c.drug_id)
+# async def catalog_drug_with_diseases(
+#     session: AsyncSession,
+# ) -> list[Iterable[tuple[Any, ...]]]:
+#     catalog_drug = await catalog_drug_info()
+#     diseases = await drug_diseases(session=session, drug_id=int(catalog_drug.c.drug_id))
 
-    query = select(
-        catalog_drug.c.drug_name.label("drug_name"),
-        catalog_drug.c.packing.label("packing"),
-        catalog_drug.c.cd_id.label("cd_id"),
-        catalog_drug.c.batch.label("batch"),
-        catalog_drug.c.control.label("control"),
-        catalog_drug.c.production_date.label("production_date"),
-        catalog_drug.c.expiration_date.label("expiration_date"),
-        diseases.c.disease.label("disease"),
-    )
-    return list(await session.execute(query))
+#     query = select(
+#         catalog_drug.c.drug_name.label("drug_name"),
+#         catalog_drug.c.packing.label("packing"),
+#         catalog_drug.c.cd_id.label("cd_id"),
+#         catalog_drug.c.batch.label("batch"),
+#         catalog_drug.c.control.label("control"),
+#         catalog_drug.c.production_date.label("production_date"),
+#         catalog_drug.c.expiration_date.label("expiration_date"),
+#         # diseases.label("disease"),
+#     )
+#     return list(await session.execute(query))
 
 
 # vetwork between date range
@@ -295,7 +299,7 @@ async def catalog_drug_rest_before_date_start(
 # catalog_drug_rest
 async def catalog_drug_rest(
     session: AsyncSession, body: DateRangeIn, drug_id: int
-) -> tuple:
+) -> Row[Any]:
     c_d_info = await catalog_drug_info()
     c_d_rest_start = await catalog_drug_rest_before_date_start(
         session=session, body=body
@@ -352,7 +356,7 @@ async def catalog_drug_rest(
 # catalog_drugs movement main query
 async def catalog_drugs_movement_report(
     session: AsyncSession, body: DateRangeIn
-) -> list[tuple]:
+) -> list[Iterable[tuple[Any, ...]]]:
     c_d_info = await catalog_drug_info()
     c_d_rest_start = await catalog_drug_rest_before_date_start(
         session=session, body=body
@@ -479,7 +483,9 @@ async def catalog_drugs_movement_for_1vetB(
     )
 
 
-async def report_1B(session: AsyncSession, body: DateRangeIn) -> list[tuple]:
+async def report_1B(
+    session: AsyncSession, body: DateRangeIn
+) -> list[Iterable[tuple[Any, ...]]]:
     c_d_movement = await catalog_drugs_movement_for_1vetB(session=session, body=body)
     animals_count = await animals_count_catalog_drug_id(body=body)
 

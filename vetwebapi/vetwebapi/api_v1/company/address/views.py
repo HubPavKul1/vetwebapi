@@ -30,7 +30,9 @@ async def create_address_route(
         )
 
 
-@router.delete("/{address_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.delete(
+    "/{address_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def delete_address(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
     address: Address = Depends(address_by_id),

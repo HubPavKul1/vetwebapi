@@ -5,14 +5,18 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.schemas import SuccessMessage
 from api_v1.dependencies import get_pagination_params
 from api_v1.drug.receipts.schemas import DrugInMovementIn
+from api_v1.schemas import SuccessMessage
 from core.database import db_manager
 from core.models import AnimalInVetWork, CompanyInVetWork, DoctorInVetWork, VetWork
 
 from . import crud
-from .dependencies import animal_in_vetwork_by_id, company_in_vetwork_by_id, vetwork_by_id
+from .dependencies import (
+    animal_in_vetwork_by_id,
+    company_in_vetwork_by_id,
+    vetwork_by_id,
+)
 from .reports.views import router as report_router
 from .schemas import (
     AnimalInVetWorkIn,
@@ -50,17 +54,23 @@ async def get_diseases_route(
         )
 
 
-@router.post("/vaccinations", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/vaccinations", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED
+)
 async def create_vaccination(
-    body: VaccinationIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: VaccinationIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> VetWorkOut:
     vaccination = await crud.create_vetwork(session=session, body=body)
     return VetWorkOut(id=vaccination.id, vetwork_date=vaccination.vetwork_date)
 
 
-@router.post("/diagnostics", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/diagnostics", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED
+)
 async def create_diagnostic(
-    body: DiagnosticIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
+    body: DiagnosticIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> VetWorkOut:
     diagnostic = await crud.create_diagnostic(session=session, body=body)
     return VetWorkOut(id=diagnostic.id, vetwork_date=diagnostic.vetwork_date)
@@ -195,7 +205,9 @@ async def get_vetwork_detail(
     doctors: list[DoctorInVetWork] = await crud.read_doctors_in_vetwork(
         session=session, vetwork=vetwork
     )
-    drug: DrugInMovementIn = await crud.read_drug_in_vetwork(session=session, vetwork=vetwork)
+    drug: DrugInMovementIn = await crud.read_drug_in_vetwork(
+        session=session, vetwork=vetwork
+    )
     vetwork_file = await crud.read_vetwork_file(session=session, vetwork=vetwork)
     vetwork_file_id = None
     if vetwork_file is not None:
@@ -222,7 +234,9 @@ async def get_vetwork_files(
 
 
 @router.delete(
-    "/{vetwork_id}/", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+    "/{vetwork_id}/",
+    response_model=SuccessMessage,
+    status_code=status.HTTP_202_ACCEPTED,
 )
 async def delete_vetwork_route(
     vetwork: VetWork = Depends(vetwork_by_id),

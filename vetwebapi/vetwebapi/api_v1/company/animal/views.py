@@ -50,7 +50,9 @@ async def delete_animal_route(
         )
 
 
-@router.put("/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.put(
+    "/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def update_animal_api(
     body: AnimalUpdate,
     animal: Animal = Depends(animal_by_id),
@@ -66,14 +68,18 @@ async def update_animal_api(
         )
 
 
-@router.patch("/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED)
+@router.patch(
+    "/{animal_id}", response_model=SuccessMessage, status_code=status.HTTP_202_ACCEPTED
+)
 async def update_animal_api_partial(
     body: AnimalUpdatePartial,
     animal: Animal = Depends(animal_by_id),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.update_animal(session=session, animal=animal, animal_update=body, partial=True)
+        await crud.update_animal(
+            session=session, animal=animal, animal_update=body, partial=True
+        )
         return SuccessMessage()
     except Exception:
         raise HTTPException(
