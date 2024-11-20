@@ -27,6 +27,6 @@ async def employee_by_id(
 async def company_employees(
     company_id: Annotated[int, Path()],
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> list[Employee | None]:
+) -> list[Employee]:
     """Получаем список работников компании"""
     return await read_company_employees(session=session, company_id=company_id)

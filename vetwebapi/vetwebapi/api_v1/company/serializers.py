@@ -59,10 +59,7 @@ async def serialize_animals(animals: list[Animal]) -> Animals:
 
 # Function to serialize data for company detail page
 async def serialize_company_detail(
-    company: Company,
-    address: Address,
-    employees: list[Employee | None],
-    animals: list[Animal | None],
+    company: Company, address: Address, employees: list[Employee], animals: list[Animal]
 ) -> CompanyDetail:
     emp_schemas: list[EmployeeSchema] = []
     animal_schemas: list[AnimalSchema] = []

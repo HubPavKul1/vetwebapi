@@ -34,7 +34,7 @@ async def create_employee(
 
 async def read_company_employees(
     session: AsyncSession, company_id: int
-) -> list[Employee | None]:
+) -> list[Employee]:
     stmt = (
         select(Employee)
         .where(and_(Employee.company_id == company_id, Employee.is_active))
@@ -43,12 +43,12 @@ async def read_company_employees(
     return list(await session.scalars(stmt))
 
 
-async def read_employees(session: AsyncSession) -> list[Employee | None]:
+async def read_employees(session: AsyncSession) -> list[Employee]:
     stmt = select(Employee).where(Employee.is_active).order_by(Employee.lastname)
     return list(await session.scalars(stmt))
 
 
-async def read_doctors(session: AsyncSession) -> list[Employee | None]:
+async def read_doctors(session: AsyncSession) -> list[Employee]:
     stmt = (
         select(Clinic)
         .options(selectinload(Company.employees))

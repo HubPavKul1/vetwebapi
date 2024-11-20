@@ -1,7 +1,7 @@
 from operator import and_
 from typing import Any, Iterable
 
-from sqlalchemy import Integer, Select, Subquery, func, select
+from sqlalchemy import Integer, Result, Select, Subquery, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.schemas import DateRangeIn
@@ -90,9 +90,7 @@ async def animals_data_in_vetwork(vetwork_ids: list[int]) -> Subquery:
     )
 
 
-async def diagnostic_report(
-    session: AsyncSession, body: DateRangeIn
-) -> list[Iterable[tuple[Any, ...]]]:
+async def diagnostic_report(session: AsyncSession, body: DateRangeIn) -> Result[Any]:
     vetwork_ids: list[int] = await diagnostic_ids_between_date_range(
         session=session, body=body
     )
@@ -108,12 +106,10 @@ async def diagnostic_report(
         animals.c.positive_count.label("positive_count"),
     ).join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
 
-    return list(await session.execute(query))
+    return await session.execute(query)
 
 
-async def vaccination_report(
-    session: AsyncSession, body: DateRangeIn
-) -> list[Iterable[tuple[Any, ...]]]:
+async def vaccination_report(session: AsyncSession, body: DateRangeIn) -> Result[Any]:
     vetwork_ids: list[int] = await vaccinations_ids_between_date_range(
         session=session, body=body
     )
@@ -127,4 +123,4 @@ async def vaccination_report(
         animals.c.animals_count.label("animals_count"),
     ).join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
 
-    return list(await session.execute(query))
+    return await session.execute(query)

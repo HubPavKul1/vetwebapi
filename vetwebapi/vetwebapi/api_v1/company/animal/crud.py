@@ -78,10 +78,22 @@ async def save_animals(
         nickname = data_list[3]
         date_of_birth = data_list[4]
         identification = data_list[5]
+
+        species_id = 0
+        usage_type_id = 0
+        gender_id = 0
+
+        if species:
+            species_id = species.id
+        if usage_type:
+            usage_type_id = usage_type.id
+        if gender:
+            gender_id = gender.id
+
         new_animal = AnimalIn(
-            species_id=species.id,
-            usage_type_id=usage_type.id,
-            gender_id=gender.id,
+            species_id=species_id,
+            usage_type_id=usage_type_id,
+            gender_id=gender_id,
             nickname=nickname,
             date_of_birth=date_of_birth,
             identification=identification,
@@ -142,17 +154,17 @@ async def read_usage_types(session: AsyncSession) -> list[UsageType]:
     return list(await session.scalars(stmt))
 
 
-async def read_species_by_name(session: AsyncSession, name: str) -> Species:
+async def read_species_by_name(session: AsyncSession, name: str) -> Species | None:
     stmt = select(Species).where(Species.name.ilike(name))
     return await session.scalar(stmt)
 
 
-async def read_gender_by_name(session: AsyncSession, name: str) -> Gender:
+async def read_gender_by_name(session: AsyncSession, name: str) -> Gender | None:
     stmt = select(Gender).where(Gender.name.ilike(name))
     return await session.scalar(stmt)
 
 
-async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType:
+async def read_usage_type_by_name(session: AsyncSession, name: str) -> UsageType | None:
     stmt = select(UsageType).where(UsageType.name.ilike(name))
     return await session.scalar(stmt)
 

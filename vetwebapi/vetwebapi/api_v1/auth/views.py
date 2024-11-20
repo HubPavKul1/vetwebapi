@@ -5,7 +5,7 @@ from core.models import User, auth_backend, get_user_manager
 
 from .schemas import UserCreate, UserRead
 
-fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])
+fastapi_users = FastAPIUsers(get_user_manager, [auth_backend])
 
 router = APIRouter(tags=["Auth"])
 

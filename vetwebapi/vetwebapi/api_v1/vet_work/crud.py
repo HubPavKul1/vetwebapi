@@ -1,9 +1,10 @@
 import os
 import shutil
 from operator import and_
+from typing import Iterable
 
 from fastapi import File, UploadFile
-from sqlalchemy import desc, select
+from sqlalchemy import ScalarResult, desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
@@ -321,7 +322,9 @@ async def update_animal_in_vetwork(
 
 
 async def remove_vetwork_file(session: AsyncSession, vetwork: VetWork) -> None:
-    vetworkFile: VetWorkFile = await read_vetwork_file(session=session, vetwork=vetwork)
+    vetworkFile: VetWorkFile | None = await read_vetwork_file(
+        session=session, vetwork=vetwork
+    )
     if vetworkFile is not None:
         file_path = os.path.join(settings.media_dir, vetworkFile.file_path)
         os.remove(file_path)
@@ -330,14 +333,14 @@ async def remove_vetwork_file(session: AsyncSession, vetwork: VetWork) -> None:
 
 async def delete_vetwork_animals(session: AsyncSession, vetwork: VetWork) -> None:
     stmt = select(AnimalInVetWork).where(AnimalInVetWork.vetwork_id == vetwork.id)
-    animals: list[AnimalInVetWork] = list(await session.scalars(stmt))
-    if len(animals) > 1:
+    animals: ScalarResult[AnimalInVetWork] = await session.scalars(stmt)
+    if len(list(animals)) > 1:
         [
             await delete_item_in_vetwork(session=session, item=animal)
             for animal in animals
         ]
-    elif len(animals) == 1:
-        await delete_item_in_vetwork(session=session, item=animals[0])
+    elif len(list(animals)) == 1:
+        await delete_item_in_vetwork(session=session, item=animals.first())
 
 
 async def delete_vetwork_companies(session: AsyncSession, vetwork: VetWork) -> None:
@@ -388,11 +391,13 @@ async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
 
 async def delete_item_in_vetwork(
     session: AsyncSession,
-    item: CompanyInVetWork
-    | AnimalInVetWork
-    | DiseaseInVetWork
-    | DoctorInVetWork
-    | VetWorkFile,
+    item: (
+        CompanyInVetWork
+        | AnimalInVetWork
+        | DiseaseInVetWork
+        | DoctorInVetWork
+        | VetWorkFile
+    ),
 ) -> None:
     await session.delete(item)
     await session.commit()
