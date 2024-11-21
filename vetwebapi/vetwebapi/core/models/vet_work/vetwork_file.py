@@ -16,11 +16,15 @@ class VetWorkFile(Base):
 
     __tablename__ = "vetwork_files"
 
-    vetwork_id: Mapped[int] = mapped_column(ForeignKey("vetworks.id", ondelete="CASCADE"))
+    vetwork_id: Mapped[int] = mapped_column(
+        ForeignKey("vetworks.id", ondelete="CASCADE")
+    )
 
     file_path: Mapped[str] = mapped_column(String(300))
 
-    vetwork: Mapped["VetWork"] = relationship(back_populates="vetwork_file", lazy="joined")
+    vetwork: Mapped["VetWork"] = relationship(
+        back_populates="vetwork_file", lazy="joined"
+    )
 
     def create_file_path(self, filename: str) -> str:
         """Create relative path for file"""

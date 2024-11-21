@@ -1,7 +1,7 @@
 import os
 import shutil
 from operator import and_
-from typing import Iterable
+from typing import Any
 
 from fastapi import File, UploadFile
 from sqlalchemy import ScalarResult, desc, select
@@ -335,22 +335,20 @@ async def delete_vetwork_animals(session: AsyncSession, vetwork: VetWork) -> Non
     stmt = select(AnimalInVetWork).where(AnimalInVetWork.vetwork_id == vetwork.id)
     animals: ScalarResult[AnimalInVetWork] = await session.scalars(stmt)
     if len(list(animals)) > 1:
-        [
+        for animal in animals:
             await delete_item_in_vetwork(session=session, item=animal)
-            for animal in animals
-        ]
+
     elif len(list(animals)) == 1:
         await delete_item_in_vetwork(session=session, item=animals.first())
 
 
 async def delete_vetwork_companies(session: AsyncSession, vetwork: VetWork) -> None:
     stmt = select(CompanyInVetWork).where(CompanyInVetWork.vetwork_id == vetwork.id)
-    companies: list[CompanyInVetWorkIn] = list(await session.scalars(stmt))
+    companies: list[CompanyInVetWork] = list(await session.scalars(stmt))
     if len(companies) > 1:
-        [
+        for company in companies:
             await delete_item_in_vetwork(session=session, item=company)
-            for company in companies
-        ]
+
     elif len(companies) == 1:
         await delete_item_in_vetwork(session=session, item=companies[0])
 
@@ -359,10 +357,9 @@ async def delete_vetwork_diseases(session: AsyncSession, vetwork: VetWork) -> No
     stmt = select(DiseaseInVetWork).where(DiseaseInVetWork.vetwork_id == vetwork.id)
     diseases: list[DiseaseInVetWork] = list(await session.scalars(stmt))
     if len(diseases) > 1:
-        [
+        for disease in diseases:
             await delete_item_in_vetwork(session=session, item=disease)
-            for disease in diseases
-        ]
+
     elif len(diseases) == 1:
         await delete_item_in_vetwork(session=session, item=diseases[0])
 
@@ -371,10 +368,9 @@ async def delete_vetwork_doctors(session: AsyncSession, vetwork: VetWork) -> Non
     stmt = select(DoctorInVetWork).where(DoctorInVetWork.vetwork_id == vetwork.id)
     doctors: list[DoctorInVetWork] = list(await session.scalars(stmt))
     if len(doctors) > 1:
-        [
+        for doctor in doctors:
             await delete_item_in_vetwork(session=session, item=doctor)
-            for doctor in doctors
-        ]
+
     elif len(doctors) == 1:
         await delete_item_in_vetwork(session=session, item=doctors[0])
 
@@ -389,15 +385,6 @@ async def delete_vetwork(session: AsyncSession, vetwork: VetWork) -> None:
     await session.commit()
 
 
-async def delete_item_in_vetwork(
-    session: AsyncSession,
-    item: (
-        CompanyInVetWork
-        | AnimalInVetWork
-        | DiseaseInVetWork
-        | DoctorInVetWork
-        | VetWorkFile
-    ),
-) -> None:
+async def delete_item_in_vetwork(session: AsyncSession, item: Any) -> None:
     await session.delete(item)
     await session.commit()

@@ -229,8 +229,8 @@ async def get_vetwork_files(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ):
     file = await crud.read_vetwork_file(session=session, vetwork=vetwork)
-    file_path = Path(f"media/{file.file_path}")
-    return FileResponse(file_path)
+    file_path = Path(f"media/{file.file_path}") if file else ""
+    return FileResponse(str(file_path))
 
 
 @router.delete(
@@ -262,7 +262,7 @@ async def delete_vetwork_animal_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.delete_animal_in_vetwork(session=session, animal=animal)
+        await crud.delete_item_in_vetwork(session=session, item=animal)
         return SuccessMessage()
     except Exception:
         raise HTTPException(
@@ -281,7 +281,7 @@ async def delete_vetwork_company_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[dict, SuccessMessage]:
     try:
-        await crud.delete_company_in_vetwork(session=session, company=company)
+        await crud.delete_item_in_vetwork(session=session, item=company)
         return SuccessMessage()
     except Exception:
         raise HTTPException(

@@ -1,10 +1,13 @@
+from typing import Any
+
+from sqlalchemy import Row
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .crud import drug_diseases
 from .schemas import DrugReportItemSchema, Report1VetBItemSchema
 
 
-async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
+async def serialize_drug_in_report(item: Row[Any]) -> DrugReportItemSchema:
     return DrugReportItemSchema(
         id=item[0],
         drug_name=item[1],
@@ -27,7 +30,7 @@ async def serialize_drug_in_report(item: tuple) -> DrugReportItemSchema:
 
 
 async def serialize_drug_in_report_1B(
-    session: AsyncSession, item: tuple
+    session: AsyncSession, item: Row[Any]
 ) -> Report1VetBItemSchema:
     diseases = await drug_diseases(session=session, drug_id=item[2])
     return Report1VetBItemSchema(

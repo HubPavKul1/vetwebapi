@@ -14,7 +14,9 @@ class Gender(Base):
 
     __tablename__ = "genders"
 
-    species_id: Mapped[int] = mapped_column(ForeignKey("species.id", ondelete="CASCADE"))
+    species_id: Mapped[int] = mapped_column(
+        ForeignKey("species.id", ondelete="CASCADE")
+    )
 
     name: Mapped[str] = mapped_column(String(100))
 

@@ -21,13 +21,17 @@ class Disease(Base):
 
     name: Mapped[str] = mapped_column(String(300))
 
-    drugs: Mapped[list["Drug"]] = relationship(back_populates="diseases", secondary="drug_diseases")
+    drugs: Mapped[list["Drug"]] = relationship(
+        back_populates="diseases", secondary="drug_diseases"
+    )
     drugs_details: Mapped[list["DrugDisease"]] = relationship(back_populates="disease")
 
     vetworks: Mapped[list["VetWork"]] = relationship(
         back_populates="diseases", secondary="diseases_in_vetwork"
     )
-    vetworks_details: Mapped[list["DiseaseInVetWork"]] = relationship(back_populates="disease")
+    vetworks_details: Mapped[list["DiseaseInVetWork"]] = relationship(
+        back_populates="disease"
+    )
 
     def __repr__(self) -> str:
         return self.name

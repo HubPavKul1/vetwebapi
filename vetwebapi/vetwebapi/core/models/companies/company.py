@@ -30,11 +30,15 @@ class Company(BaseNoPk):
     employees: Mapped[list["Employee"]] = relationship(
         back_populates="company", cascade="all, delete", lazy="selectin"
     )
-    animals: Mapped[list["Animal"]] = relationship(back_populates="company", cascade="all, delete")
+    animals: Mapped[list["Animal"]] = relationship(
+        back_populates="company", cascade="all, delete"
+    )
     vetworks: Mapped[list["VetWork"]] = relationship(
         back_populates="companies", secondary="companies_in_vetwork"
     )
-    vetworks_details: Mapped[list["CompanyInVetWork"]] = relationship(back_populates="company")
+    vetworks_details: Mapped[list["CompanyInVetWork"]] = relationship(
+        back_populates="company"
+    )
 
     @property
     def company_slug(self):

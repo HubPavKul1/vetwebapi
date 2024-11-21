@@ -107,7 +107,7 @@ async def delete_drug_movement(
     drugs_in_movement = await read_drugs_in_drug_movement_relation(
         session=session, drug_movement=drug_movement
     )
-
-    [await session.delete(drug) for drug in drugs_in_movement]
+    for drug in drugs_in_movement:
+        await session.delete(drug)
     await session.delete(drug_movement)
     await session.commit()

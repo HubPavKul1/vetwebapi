@@ -1,6 +1,6 @@
-from typing import Any, Iterable
+from typing import Any
 
-from sqlalchemy import Float, Integer, Row, Subquery, and_, func, select
+from sqlalchemy import Float, Integer, Result, Row, Subquery, and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.schemas import DateRangeIn
@@ -356,7 +356,7 @@ async def catalog_drug_rest(
 # catalog_drugs movement main query
 async def catalog_drugs_movement_report(
     session: AsyncSession, body: DateRangeIn
-) -> list[Iterable[tuple[Any, ...]]]:
+) -> Result[Any]:
     c_d_info = await catalog_drug_info()
     c_d_rest_start = await catalog_drug_rest_before_date_start(
         session=session, body=body
@@ -415,7 +415,7 @@ async def catalog_drugs_movement_report(
         .join(spent_drugs, spent_drugs.c.cd_id == c_d_info.c.cd_id, isouter=True)
     )
 
-    return list(await session.execute(query))
+    return await session.execute(query)
 
 
 # 1 VetB queries
@@ -483,9 +483,7 @@ async def catalog_drugs_movement_for_1vetB(
     )
 
 
-async def report_1B(
-    session: AsyncSession, body: DateRangeIn
-) -> list[Iterable[tuple[Any, ...]]]:
+async def report_1B(session: AsyncSession, body: DateRangeIn) -> Result[Any]:
     c_d_movement = await catalog_drugs_movement_for_1vetB(session=session, body=body)
     animals_count = await animals_count_catalog_drug_id(body=body)
 
@@ -504,4 +502,4 @@ async def report_1B(
         c_d_movement.c.units_rest_end.label("units_rest_end"),
     ).join(animals_count, animals_count.c.cd_id == c_d_movement.c.cd_id, isouter=True)
 
-    return list(await session.execute(stmt))
+    return await session.execute(stmt)

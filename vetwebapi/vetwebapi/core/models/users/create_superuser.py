@@ -1,12 +1,13 @@
 import contextlib
 
-from .user import get_user_db, User
-from api_v1.auth.schemas import UserCreate
-from core.settings import settings
-from .manager import get_user_manager, UserManager
 from fastapi_users.exceptions import UserAlreadyExists
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api_v1.auth.schemas import UserCreate
+from core.settings import settings
+
+from .manager import UserManager, get_user_manager
+from .user import User, get_user_db
 
 default_username = settings.su_name
 default_email = settings.su_email
@@ -21,8 +22,7 @@ get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 
 async def create_user(user_manager: UserManager, user_create: UserCreate) -> User:
-    user = await user_manager.create(user_create=user_create, safe=False)
-    return user
+    return await user_manager.create(user_create=user_create, safe=False)
 
 
 async def create_superuser(
@@ -47,7 +47,9 @@ async def create_superuser(
     try:
         async with get_user_db_context(session) as user_db:
             async with get_user_manager_context(user_db) as user_manager:
-                return await create_user(user_manager=user_manager, user_create=user_create)
+                return await create_user(
+                    user_manager=user_manager, user_create=user_create
+                )
     except UserAlreadyExists:
         print(f"User {email} already exists")
         raise

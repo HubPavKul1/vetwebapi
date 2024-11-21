@@ -35,4 +35,4 @@ class CatalogDrug(Base):
     )
 
     def __repr__(self) -> str:
-        return f"{self.drug_id.name} серия:{self.batch}"
+        return f"{self.drug.name} серия:{self.batch}"

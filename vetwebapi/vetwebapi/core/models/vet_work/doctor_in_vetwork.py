@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, ForeignKey, UniqueConstraint
+from sqlalchemy import ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models.base import Base
@@ -16,7 +16,9 @@ class DoctorInVetWork(Base):
 
     __tablename__ = "doctors_in_vetwork"
     __table_args__ = (
-        UniqueConstraint("vetwork_id", "employee_id", name="idx_unique_doctor_in_vetwork"),
+        UniqueConstraint(
+            "vetwork_id", "employee_id", name="idx_unique_doctor_in_vetwork"
+        ),
     )
 
     vetwork_id: Mapped[int] = mapped_column(ForeignKey("vetworks.id"))

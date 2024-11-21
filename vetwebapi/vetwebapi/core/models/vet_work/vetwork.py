@@ -27,7 +27,9 @@ class VetWork(Base):
 
     __tablename__ = "vetworks"
 
-    work_type_id: Mapped[int] = mapped_column(ForeignKey("work_types.id", ondelete="CASCADE"))
+    work_type_id: Mapped[int] = mapped_column(
+        ForeignKey("work_types.id", ondelete="CASCADE")
+    )
     vetwork_date: Mapped[date]
     is_state_assignment: Mapped[bool] = mapped_column(Boolean, default=False)
     is_primary: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -51,10 +53,16 @@ class VetWork(Base):
         ForeignKey("drug_movements.id", ondelete="CASCADE")
     )
 
-    work_type: Mapped["WorkType"] = relationship(back_populates="vetworks", lazy="joined")
+    work_type: Mapped["WorkType"] = relationship(
+        back_populates="vetworks", lazy="joined"
+    )
     clinic: Mapped["Clinic"] = relationship(back_populates="vetworks", lazy="joined")
-    laboratory: Mapped["Laboratory"] = relationship(back_populates="vetworks", lazy="joined")
-    biomaterial: Mapped["Biomaterial"] = relationship(back_populates="vetworks", lazy="joined")
+    laboratory: Mapped["Laboratory"] = relationship(
+        back_populates="vetworks", lazy="joined"
+    )
+    biomaterial: Mapped["Biomaterial"] = relationship(
+        back_populates="vetworks", lazy="joined"
+    )
     biomaterial_package: Mapped["BiomaterialPackage"] = relationship(
         back_populates="vetworks", lazy="joined"
     )

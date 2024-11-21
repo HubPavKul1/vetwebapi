@@ -54,9 +54,13 @@ class Drug(Base):
         back_populates="drugs", lazy="joined"
     )
     budget: Mapped["Budget"] = relationship(back_populates="drugs", lazy="joined")
-    accounting_unit: Mapped["AccountingUnit"] = relationship(back_populates="drugs", lazy="joined")
+    accounting_unit: Mapped["AccountingUnit"] = relationship(
+        back_populates="drugs", lazy="joined"
+    )
     catalog_drugs: Mapped[list["CatalogDrug"]] = relationship(back_populates="drug")
-    disposal_method: Mapped["DisposalMethod"] = relationship(back_populates="drugs", lazy="joined")
+    disposal_method: Mapped["DisposalMethod"] = relationship(
+        back_populates="drugs", lazy="joined"
+    )
     dosage: Mapped["Dosage"] = relationship(back_populates="drugs", lazy="joined")
 
     def image_path(self, filename: str) -> str:

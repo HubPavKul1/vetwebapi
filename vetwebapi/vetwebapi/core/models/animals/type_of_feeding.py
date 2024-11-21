@@ -16,7 +16,9 @@ class TypeOfFeeding(Base):
 
     name: Mapped[str] = mapped_column(String(100))
 
-    animal_groups: Mapped[list["AnimalGroup"]] = relationship(back_populates="type_of_feeding")
+    animal_groups: Mapped[list["AnimalGroup"]] = relationship(
+        back_populates="type_of_feeding"
+    )
 
     def __repr__(self) -> str:
         return self.name

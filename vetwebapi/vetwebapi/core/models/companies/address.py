@@ -15,7 +15,9 @@ class Address(Base):
 
     __tablename__ = "addresses"
 
-    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    company_id: Mapped[int] = mapped_column(
+        ForeignKey("companies.id", ondelete="CASCADE")
+    )
     street_id: Mapped[int] = mapped_column(ForeignKey("streets.id", ondelete="CASCADE"))
     house_number: Mapped[str] = mapped_column(String(5))
     phone_number1: Mapped[str]

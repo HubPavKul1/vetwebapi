@@ -16,7 +16,9 @@ class AnimalInVetWork(Base):
 
     __tablename__ = "animals_in_vetwork"
     __table_args__ = (
-        UniqueConstraint("vetwork_id", "animal_id", name="idx_unique_animal_in_vetwork"),
+        UniqueConstraint(
+            "vetwork_id", "animal_id", name="idx_unique_animal_in_vetwork"
+        ),
     )
 
     vetwork_id: Mapped[int] = mapped_column(ForeignKey("vetworks.id"))

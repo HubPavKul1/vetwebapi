@@ -19,7 +19,9 @@ class District(Base):
     name: Mapped[str] = mapped_column(String(100))
 
     region: Mapped["Region"] = relationship(back_populates="districts")
-    cities: Mapped[list["City"]] = relationship(back_populates="district", cascade="all, delete")
+    cities: Mapped[list["City"]] = relationship(
+        back_populates="district", cascade="all, delete"
+    )
 
     def __repr__(self) -> str:
         return self.name

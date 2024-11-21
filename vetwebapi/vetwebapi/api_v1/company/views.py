@@ -79,10 +79,10 @@ async def create_company_route(
 )
 async def create_test_companies_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[SuccessMessage, dict]:
+) -> SuccessMessage:
     try:
         await crud.create_test_companies(session=session)
-        return SuccessMessage
+        return SuccessMessage()
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -243,8 +243,8 @@ async def delete_company(
 async def get_company_detail(
     company: Company = Depends(company_by_id),
     address: Address = Depends(company_address),
-    employees: list[Employee | None] = Depends(company_employees),
-    animals: list[Animal | None] = Depends(company_animals),
+    employees: list[Employee] = Depends(company_employees),
+    animals: list[Animal] = Depends(company_animals),
 ) -> Union[dict, CompanyDetail]:
     try:
         company_schema = await serialize_company_detail(
@@ -264,7 +264,7 @@ async def get_company_detail(
 
 @router.get("/{company_id}/animals", response_model=Animals)
 async def get_company_animals(
-    animals: list[Animal | None] = Depends(company_animals),
+    animals: list[Animal] = Depends(company_animals),
 ) -> Union[dict, Animals]:
     try:
         animals_schema = await serialize_animals(animals=animals)

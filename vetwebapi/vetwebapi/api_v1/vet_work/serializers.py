@@ -18,19 +18,23 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
     diseases = await get_disease_names(vetwork=vetwork)
 
     if vetwork.work_type_id == 2:
-        laboratory = ""
-        biomaterial = ""
-        biomaterial_fixation = ""
-        biomaterial_package = ""
+        laboratory = vetwork.laboratory.short_name if vetwork.laboratory else ""
+        biomaterial = vetwork.biomaterial.name if vetwork.biomaterial else ""
+        biomaterial_fixation = (
+            vetwork.biomaterial_fixation.name if vetwork.biomaterial_fixation else ""
+        )
+        biomaterial_package = (
+            vetwork.biomaterial_package.name if vetwork.biomaterial_package else ""
+        )
 
-        if vetwork.laboratory:
-            laboratory = vetwork.laboratory.short_name
-        if vetwork.biomaterial:
-            biomaterial = vetwork.biomaterial.name
-        if vetwork.biomaterial_fixation:
-            biomaterial_fixation = vetwork.biomaterial_fixation.name
-        if vetwork.biomaterial_package:
-            biomaterial_package = vetwork.biomaterial_package.name
+        # if vetwork.laboratory:
+        #     laboratory = vetwork.laboratory.short_name
+        # if vetwork.biomaterial:
+        #     biomaterial = vetwork.biomaterial.name
+        # if vetwork.biomaterial_fixation:
+        #     biomaterial_fixation = vetwork.biomaterial_fixation.name
+        # if vetwork.biomaterial_package:
+        #     biomaterial_package = vetwork.biomaterial_package.name
 
         return VetWorkSchema(
             id=vetwork.id,
@@ -90,12 +94,16 @@ async def serialize_animal_in_vetwork(item: AnimalInVetWork) -> AnimalInVetWorkS
 async def serialize_company_in_vetwork(item: CompanyInVetWork) -> CompanyCard:
     address = item.company.addresses
     employees = item.company.employees
-    address_schema: AddressSchema | None = None
-    employee_schema: EmployeeSchema | None = None
-    if address:
-        address_schema = await serialize_address(address=address)
-    if employees:
-        employee_schema = await serialize_employee(employee=employees[0])
+    address_schema: AddressSchema | None = (
+        await serialize_address(address=address) if address else None
+    )
+    employee_schema: EmployeeSchema | None = (
+        await serialize_employee(employee=employees[0]) if employees else None
+    )
+    # if address:
+    #     address_schema = await serialize_address(address=address)
+    # if employees:
+    #     employee_schema = await serialize_employee(employee=employees[0])
     return CompanyCard(
         full_name=item.company.full_name,
         short_name=item.company.short_name,
@@ -132,18 +140,24 @@ async def serialize_vetwork_detail(
     file_id: int | None = None,
 ) -> VetWorkDetail:
     vetwork_schema: VetWorkSchema = await serialize_vetwork(vetwork=vetwork)
-    animal_schemas: list[AnimalInVetWorkSchema] = []
-    doctor_schemas: list[EmployeeSchema] = []
-    company_schemas: list[CompanyCard] = []
+    animal_schemas: list[AnimalInVetWorkSchema] = (
+        await serialize_animals_in_vetwork(items=animals) if animals else []
+    )
+    doctor_schemas: list[EmployeeSchema] = (
+        await serialize_doctors_in_vetwork(items=doctors) if doctors else []
+    )
+    company_schemas: list[CompanyCard] = (
+        await serialize_companies_in_vetwork(items=companies) if companies else []
+    )
     drug_schema: DrugInMovementSchema | None = (
         await serialize_drug_in_movement(drug) if drug else None
     )
-    if companies:
-        company_schemas.extend(await serialize_companies_in_vetwork(items=companies))
-    if animals:
-        animal_schemas.extend((await serialize_animals_in_vetwork(items=animals)))
-    if doctors:
-        doctor_schemas.extend(await serialize_doctors_in_vetwork(items=doctors))
+    # if companies:
+    #     company_schemas.extend(await serialize_companies_in_vetwork(items=companies))
+    # if animals:
+    #     animal_schemas.extend((await serialize_animals_in_vetwork(items=animals)))
+    # if doctors:
+    #     doctor_schemas.extend(await serialize_doctors_in_vetwork(items=doctors))
     # if drug:
     #     drug_schema: DrugInMovementSchema = await serialize_drug_in_movement(drug)
 

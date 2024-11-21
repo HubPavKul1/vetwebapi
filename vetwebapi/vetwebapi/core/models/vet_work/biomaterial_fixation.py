@@ -16,7 +16,9 @@ class BiomaterialFixation(Base):
 
     name: Mapped[str] = mapped_column(String(300))
 
-    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="biomaterial_fixation")
+    vetworks: Mapped[list["VetWork"]] = relationship(
+        back_populates="biomaterial_fixation"
+    )
 
     def __repr__(self) -> str:
         return self.name

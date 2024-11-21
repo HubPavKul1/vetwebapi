@@ -16,7 +16,9 @@ class BiomaterialPackage(Base):
 
     name: Mapped[str] = mapped_column(String(300))
 
-    vetworks: Mapped[list["VetWork"]] = relationship(back_populates="biomaterial_package")
+    vetworks: Mapped[list["VetWork"]] = relationship(
+        back_populates="biomaterial_package"
+    )
 
     def __repr__(self) -> str:
         return self.name

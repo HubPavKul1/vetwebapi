@@ -1,6 +1,7 @@
-from typing import Any, Iterable
+from typing import Any
 
 from sqlalchemy import Row
+
 from .schemas import DiagnosticReportItemSchema, VetWorkReportSchema
 
 

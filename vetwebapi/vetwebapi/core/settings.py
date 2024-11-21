@@ -40,4 +40,6 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
 
-settings = Settings(_env_file=os.path.join(BASE_DIR, ".env"), _env_file_encoding="utf-8")
+settings = Settings(
+    _env_file=os.path.join(BASE_DIR, ".env"), _env_file_encoding="utf-8"
+)

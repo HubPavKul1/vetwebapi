@@ -1,7 +1,8 @@
 from datetime import date, datetime
-from typing import Union
+from typing import Any, Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import Result, Row
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.drug.catalog.dependencies import catalog_drug_by_id
@@ -30,7 +31,7 @@ async def get_drugs_report(
 ) -> Union[DrugReportSchema, dict]:
     body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
-        drugs: list[tuple] = await crud.catalog_drugs_movement_report(
+        drugs: Result[Any] = await crud.catalog_drugs_movement_report(
             session=session, body=body
         )
         drug_schema: list[DrugReportItemSchema] = [
@@ -52,7 +53,7 @@ async def get_drug_rests(
     curDate = datetime.today().date()
     body = DateRangeIn(date_start=curDate, date_end=curDate)
     try:
-        drug_rest: tuple = await crud.catalog_drug_rest(
+        drug_rest: Row[Any] = await crud.catalog_drug_rest(
             session=session, body=body, drug_id=drug.id
         )
         return DrugRestSchema(
@@ -65,24 +66,6 @@ async def get_drug_rests(
         )
 
 
-# @router.get("/test", response_model=SuccessMessage)
-# async def get_drugs_report_test(
-#     date_start: date,
-#     date_end: date,
-#     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-# ) -> Union[SuccessMessage, dict]:
-#     body = DateRangeIn(date_start=date_start, date_end=date_end)
-#     try:
-#         drugs: list[tuple] = await crud.report_1B(session=session, body=body)
-#         # drug_schema: list[DrugReportItemSchema] = [await serialize_drug_in_report(item=drug) for drug in drugs]
-#         return SuccessMessage
-#     except Exception:
-#         raise HTTPException(
-#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#             detail={"result": False, "error_message": "Internal Server Error"},
-#         )
-
-
 @router.get("/1vet_B", response_model=Report1VetBSchema)
 async def vet_1B_report(
     date_start: date,
@@ -91,7 +74,7 @@ async def vet_1B_report(
 ) -> Union[Report1VetBSchema, dict]:
     body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
-        drugs: list[tuple] = await crud.report_1B(session=session, body=body)
+        drugs: Result[Any] = await crud.report_1B(session=session, body=body)
         drug_schema: list[Report1VetBItemSchema] = [
             await serialize_drug_in_report_1B(session=session, item=drug)
             for drug in drugs

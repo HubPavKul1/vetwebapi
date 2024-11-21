@@ -8,7 +8,7 @@ from .user import User, get_user_db
 SECRET = "SECRET"
 
 
-class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
+class UserManager(IntegerIDMixin, BaseUserManager):
     reset_password_token_secret = SECRET
     verification_token_secret = SECRET
 
@@ -26,7 +26,10 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     #     print(f"Verification requested for user {user.id}. Verification token: {token}")
 
     async def create(
-        self, user_create: schemas.UC, safe: bool = False, request: Optional[Request] = None
+        self,
+        user_create: schemas.UC,
+        safe: bool = False,
+        request: Optional[Request] = None,
     ) -> models.UP:
         """
         Create a user in database.
@@ -48,7 +51,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             raise exceptions.UserAlreadyExists()
 
         user_dict = (
-            user_create.create_update_dict() if safe else user_create.create_update_dict_superuser()
+            user_create.create_update_dict()
+            if safe
+            else user_create.create_update_dict_superuser()
         )
         password = user_dict.pop("password")
         user_dict["hashed_password"] = self.password_helper.hash(password)

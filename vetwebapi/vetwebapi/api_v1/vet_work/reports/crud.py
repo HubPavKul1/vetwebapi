@@ -1,5 +1,5 @@
 from operator import and_
-from typing import Any, Iterable
+from typing import Any
 
 from sqlalchemy import Integer, Result, Select, Subquery, func, select
 from sqlalchemy.ext.asyncio import AsyncSession

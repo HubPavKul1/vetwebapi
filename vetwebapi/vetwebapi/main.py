@@ -6,8 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api_v1 import router as router_v1
 from api_v1.auth import crud
 from core.database import db_manager
-from core.settings import settings
 from core.models.users.create_superuser import create_superuser
+from core.settings import settings
 from utils import utils
 
 app = FastAPI()

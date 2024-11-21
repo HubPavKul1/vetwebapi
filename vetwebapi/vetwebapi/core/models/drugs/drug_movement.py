@@ -19,10 +19,14 @@ class DrugMovement(Base):
 
     __tablename__ = "drug_movements"
 
-    operation_id: Mapped[int] = mapped_column(ForeignKey("operations.id", ondelete="CASCADE"))
+    operation_id: Mapped[int] = mapped_column(
+        ForeignKey("operations.id", ondelete="CASCADE")
+    )
     operation_date: Mapped[date]
 
-    operation: Mapped["Operation"] = relationship(back_populates="drug_movement", lazy="joined")
+    operation: Mapped["Operation"] = relationship(
+        back_populates="drug_movement", lazy="joined"
+    )
 
     # Ассоциация с Drug
     catalog_drugs: Mapped[list["CatalogDrug"]] = relationship(
@@ -32,7 +36,9 @@ class DrugMovement(Base):
         back_populates="drug_movement"
     )
 
-    vetwork: Mapped["VetWork"] = relationship(back_populates="drug_movement", uselist=False)
+    vetwork: Mapped["VetWork"] = relationship(
+        back_populates="drug_movement", uselist=False
+    )
 
     def __repr__(self) -> str:
         return f"{self.operation.name}:{self.operation_date}"

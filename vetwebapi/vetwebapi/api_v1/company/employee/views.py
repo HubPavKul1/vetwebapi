@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Any, Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,7 +19,7 @@ async def create_employee_route(
     body: EmployeeIn,
     company_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[dict, SuccessMessage]:
+) -> Any:
     try:
         await crud.create_employee(session=session, body=body, company_id=company_id)
         return SuccessMessage

@@ -233,7 +233,7 @@ async def get_administration_methods_route(
 @router.get("/drug_names", response_model=DrugNames)
 async def get_drug_names_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[AccountingUnits, dict]:
+) -> Union[DrugNames, dict]:
     try:
         drugs = await crud.read_drugs(session=session)
         drug_schemas = [await serialize_drug_name(drug) for drug in drugs]

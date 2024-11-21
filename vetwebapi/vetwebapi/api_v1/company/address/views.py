@@ -22,7 +22,7 @@ async def create_address_route(
 ) -> Union[dict, SuccessMessage]:
     try:
         await crud.create_address(session=session, body=body, company_id=company_id)
-        return SuccessMessage
+        return SuccessMessage()
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
