@@ -44,25 +44,6 @@ async def drug_diseases(session: AsyncSession, drug_id: int) -> list[str]:
     return [disease[0] for disease in result]
 
 
-# async def catalog_drug_with_diseases(
-#     session: AsyncSession,
-# ) -> list[Iterable[tuple[Any, ...]]]:
-#     catalog_drug = await catalog_drug_info()
-#     diseases = await drug_diseases(session=session, drug_id=int(catalog_drug.c.drug_id))
-
-#     query = select(
-#         catalog_drug.c.drug_name.label("drug_name"),
-#         catalog_drug.c.packing.label("packing"),
-#         catalog_drug.c.cd_id.label("cd_id"),
-#         catalog_drug.c.batch.label("batch"),
-#         catalog_drug.c.control.label("control"),
-#         catalog_drug.c.production_date.label("production_date"),
-#         catalog_drug.c.expiration_date.label("expiration_date"),
-#         # diseases.label("disease"),
-#     )
-#     return list(await session.execute(query))
-
-
 # vetwork between date range
 async def read_vetworks_data_between_date_range(body: DateRangeIn) -> Subquery:
     date_start = body.date_start

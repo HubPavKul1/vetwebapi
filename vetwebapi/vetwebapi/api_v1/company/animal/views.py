@@ -30,11 +30,6 @@ async def create_animal_route(
         )
 
 
-# @router.get("/{animal_id}/", response_model=AnimalSchema)
-# async def get_animal(animal: Animal = Depends(animal_by_id)) -> AnimalSchema:
-#     return await serialize_animal(animal=animal)
-
-
 @router.delete("/{animal_id}", status_code=status.HTTP_202_ACCEPTED)
 async def delete_animal_route(
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

@@ -7,4 +7,4 @@ router = APIRouter(tags=["Users"])
 
 @router.get("/users", response_model=SuccessMessage)
 async def get_user():
-    return SuccessMessage
+    return SuccessMessage()

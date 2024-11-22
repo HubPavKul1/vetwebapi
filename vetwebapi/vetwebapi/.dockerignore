@@ -5,6 +5,6 @@ dist/
 yarn-debug.log
 yarn-error.log
 docker/
-vscode/
+.vscode/
 idea/
 DS_Store
