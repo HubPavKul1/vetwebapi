@@ -52,16 +52,16 @@ services:
     networks:
       - network
 
-  test_db:
-    image: postgres:15.3-alpine3.18
-    container_name: "test_db"
-    restart: always
-    env_file:
-      - ./vetwebapi/.test.env
-    ports:
-      - "5433:5432"
-    networks:
-      - network
+  # test_db:
+  #   image: postgres:15.3-alpine3.18
+  #   container_name: "test_db"
+  #   restart: always
+  #   env_file:
+  #     - ./vetwebapi/.test.env
+  #   ports:
+  #     - "5433:5432"
+  #   networks:
+  #     - network
 
 networks:
   network:
