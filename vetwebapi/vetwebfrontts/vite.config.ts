@@ -27,4 +27,11 @@ export default defineConfig({
       entities: "/src/entities",
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler", // or "modern"
+      },
+    },
+  },
 });
