@@ -23,7 +23,7 @@ from .serializers import serialize_drug_in_movement, serialize_drug_movement_car
 router = APIRouter(prefix="/receipts")
 
 
-@router.post("/", response_model=DrugMovementOut, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=DrugMovementOut, status_code=status.HTTP_201_CREATED)
 async def create_receipt_route(
     body: DrugMovementIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -47,7 +47,7 @@ async def add_drug_to_movement_route(
     )
 
 
-@router.get("/", response_model=DrugMovements)
+@router.get("", response_model=DrugMovements)
 async def get_receipts(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

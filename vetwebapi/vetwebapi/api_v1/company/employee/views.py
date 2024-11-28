@@ -14,7 +14,7 @@ from .schemas import EmployeeIn
 router = APIRouter(prefix="/{company_id}/employees")
 
 
-@router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_employee_route(
     body: EmployeeIn,
     company_id: int,

@@ -16,7 +16,7 @@ from .serializers import serialize_catalog_drug, serialize_catalog_drug_details
 router = APIRouter(prefix="/catalog")
 
 
-@router.post("/", response_model=CatalogDrugSchema, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=CatalogDrugSchema, status_code=status.HTTP_201_CREATED)
 async def create_catalog_drug(
     body: CatalogDrugIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
@@ -25,7 +25,7 @@ async def create_catalog_drug(
     return await serialize_catalog_drug(catalog_drug)
 
 
-@router.get("/", response_model=Catalog)
+@router.get("", response_model=Catalog)
 async def get_catalog_drugs(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),

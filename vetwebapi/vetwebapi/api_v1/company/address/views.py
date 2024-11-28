@@ -14,7 +14,7 @@ from .schemas import AddressIn
 router = APIRouter(prefix="/{company_id}/address")
 
 
-@router.post("/", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=SuccessMessage, status_code=status.HTTP_201_CREATED)
 async def create_address_route(
     body: AddressIn,
     company_id: int,

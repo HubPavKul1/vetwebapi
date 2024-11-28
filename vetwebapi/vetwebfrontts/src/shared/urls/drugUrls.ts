@@ -1,18 +1,18 @@
 export const drugsUrl = "/api/drugs";
 export const drugDetailUrl = (id?: number) => {
-  return `/api/drugs/${id}`;
+  return `/api/drugs/${id}/`;
 };
 
 export const drugFileUploadUrl = (id?: number) => {
-  return drugDetailUrl(id) + "/upload/";
+  return drugDetailUrl(id) + "upload";
 };
 
 export const drugImageUrl = (id?: number) => {
-  return drugDetailUrl(id) + "/image";
+  return drugDetailUrl(id) + "image";
 };
 
 export const drugInstructionUrl = (id?: number) => {
-  return drugDetailUrl(id) + "/instruction";
+  return drugDetailUrl(id) + "instruction";
 };
 
 export const drugNamesUrl = drugsUrl + "/drug_names";
@@ -32,18 +32,18 @@ export const drugReportsLink = drugsLink + "/reports";
 // catalog drugs
 export const catalogDrugsUrl = drugsUrl + "/catalog";
 export const catalogDrugDetailUrl = (drugId?: number) => {
-  return catalogDrugsUrl + `/${drugId}`;
+  return catalogDrugsUrl + `/${drugId}/`;
 };
 export const catalogDrugLink = (drugId?: number) => {
   return `/drugs/catalog/${drugId}`;
 };
 
 export const catalogDrugReceiptsUrl = (drugId?: number) => {
-  return catalogDrugDetailUrl(drugId) + "/receipts";
+  return catalogDrugDetailUrl(drugId) + "receipts";
 };
 
 export const catalogDrugSpentUrl = (drugId?: number) => {
-  return catalogDrugDetailUrl(drugId) + "/spent";
+  return catalogDrugDetailUrl(drugId) + "spent";
 };
 
 export const catalogDrugsExpiredUrl = catalogDrugsUrl + "/overdue";
@@ -51,7 +51,7 @@ export const catalogDrugsExpiredUrl = catalogDrugsUrl + "/overdue";
 // drug receipts
 export const drugReceiptsUrl = drugsUrl + "/receipts";
 export const drugReceiptDetailUrl = (receiptId?: number) => {
-  return drugReceiptsUrl + `/${receiptId}`;
+  return drugReceiptsUrl + `/${receiptId}/`;
 };
 
 // create drug selects urls

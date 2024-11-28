@@ -2,7 +2,7 @@ const vetWorkBaseUrl = "/api/vetwork";
 
 export const diseasesUrl = vetWorkBaseUrl + "/diseases";
 export const vetWorkDetailUrl = (vetWorkId?: number) => {
-  return vetWorkBaseUrl + `/${vetWorkId}`;
+  return vetWorkBaseUrl + `/${vetWorkId}/`;
 };
 
 export const diagnosticsUrl = vetWorkBaseUrl + "/diagnostics";
@@ -18,7 +18,7 @@ export const vetWorkReportsLink = "/vetwork/reports";
 
 // vetwork company
 export const vetWorkCompanyUrl = (vetWorkId?: number) => {
-  return vetWorkDetailUrl(vetWorkId) + "/company";
+  return vetWorkDetailUrl(vetWorkId) + "company";
 };
 
 export const vetWorkCompanyDetailUrl = (
@@ -31,14 +31,14 @@ export const vetWorkCompanyDetailUrl = (
 // vetwork animals
 
 export const vetWorkAnimalsUrl = (vetWorkId?: number) => {
-  return vetWorkDetailUrl(vetWorkId) + "/animals/";
+  return vetWorkDetailUrl(vetWorkId) + "animals";
 };
 
 export const vetWorkAnimalDetailUrl = (
   vetWorkId?: number,
   animalId?: number
 ) => {
-  return vetWorkAnimalsUrl(vetWorkId) + `${animalId}`;
+  return vetWorkAnimalsUrl(vetWorkId) + `/${animalId}`;
 };
 
 // vetwork form selects
@@ -50,7 +50,7 @@ export const biomaterialFixationsUrl =
 
 // vetwork drug
 export const vetWorkDrugUrl = (vetWorkId?: number) => {
-  return vetWorkDetailUrl(vetWorkId) + "/drug";
+  return vetWorkDetailUrl(vetWorkId) + "drug";
 };
 
 // vetwork reports
@@ -59,9 +59,9 @@ export const vaccinationsReportUrl = vetWorkBaseUrl + "/reports/vaccinations";
 
 // vetwork files
 export const vetWorkFileUploadUrl = (vetWorkId?: number) => {
-  return vetWorkDetailUrl(vetWorkId) + "/upload";
+  return vetWorkDetailUrl(vetWorkId) + "upload";
 };
 
 export const vetWorkFileUrl = (vetWorkId?: number) => {
-  return vetWorkDetailUrl(vetWorkId) + "/file";
+  return vetWorkDetailUrl(vetWorkId) + "file";
 };

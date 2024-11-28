@@ -6,7 +6,9 @@ from fastapi_users.authentication import (
 
 from core.settings import settings
 
-cookie_transport = CookieTransport(cookie_name="vetwebapi", cookie_max_age=3600)
+cookie_transport = CookieTransport(
+    cookie_name="vetwebapi", cookie_max_age=3600, cookie_secure=False
+)
 
 SECRET = settings.secret
 

@@ -1,10 +1,9 @@
 export const companiesUrl = "/api/companies/";
 export const companyDetailUrl = (id?: number) => {
-  return `/api/companies/${id}`;
+  return `/api/companies/${id}/`;
 };
 export const labsUrl = companiesUrl + "labs";
 export const vetsUrl = companiesUrl + "vets";
-
 
 // company links
 export const companiesLink = "/companies/";
@@ -13,7 +12,6 @@ export const companyLink = (id?: number) => {
 };
 export const vetsLink = companiesLink + "vets";
 export const labsLink = companiesLink + "labs";
-
 
 // Company Address
 
@@ -46,11 +44,11 @@ export const gendersUrl = (speciesId: string) => {
 };
 export const usageTypesUrls = companiesUrl + "usage_types";
 export const uploadAnimalsUrl = (companyId: number) => {
-  return companyDetailUrl(companyId) + "/animals/upload";
+  return companyDetailUrl(companyId) + "animals/upload";
 };
 
 export const companyAnimalsUrl = (companyId: number) => {
-  return companyDetailUrl(companyId) + "/animals";
+  return companyDetailUrl(companyId) + "animals";
 };
 export const companyAnimalUrl = (companyId: number, animalId?: number) => {
   return companyAnimalsUrl(companyId) + `/${animalId}`;
@@ -58,7 +56,7 @@ export const companyAnimalUrl = (companyId: number, animalId?: number) => {
 
 // Company employee
 export const companyEmployeesUrl = (companyId: number) => {
-  return companyDetailUrl(companyId) + "/employees";
+  return companyDetailUrl(companyId) + "employees";
 };
 
 export const positionsUrl = companiesUrl + "positions";

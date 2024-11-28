@@ -36,7 +36,7 @@ router.include_router(catalog_router)
 router.include_router(report_router)
 
 
-@router.post("/", response_model=DrugSchema, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=DrugSchema, status_code=status.HTTP_201_CREATED)
 async def create_drug_route(
     body: DrugIn, session: AsyncSession = Depends(db_manager.scope_session_dependency)
 ) -> DrugSchema:
@@ -45,7 +45,7 @@ async def create_drug_route(
     return await serialize_drug(drug=drug)
 
 
-@router.post("/{drug_id}/upload/", status_code=status.HTTP_201_CREATED)
+@router.post("/{drug_id}/upload", status_code=status.HTTP_201_CREATED)
 async def upload_drug_file_route(
     file: UploadFile,
     drug: Drug = Depends(drug_by_id),
@@ -61,7 +61,7 @@ async def upload_drug_file_route(
     await crud.save_file(session=session, drug=drug, file=file)
 
 
-@router.get("/", response_model=Drugs)
+@router.get("", response_model=Drugs)
 async def get_drugs_route(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
