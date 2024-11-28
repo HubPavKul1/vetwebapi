@@ -47,7 +47,7 @@ async def add_districts(session: AsyncSession) -> list[int]:
     ]
 
 
-async def add_cities(session: AsyncSession) -> tuple[int]:
+async def add_cities(session: AsyncSession) -> tuple[int, int]:
     """Добавляем город Иваново и Кохма в базу данных"""
     districts_ids: list[int] = await add_districts(session=session)
     names = ["Иваново", "Кохма"]
@@ -58,7 +58,7 @@ async def add_cities(session: AsyncSession) -> tuple[int]:
 
 async def fill_street_table(session: AsyncSession) -> None:
     """Заполняем таблицу с улицами"""
-    city_ids: tuple[int] = await add_cities(session=session)
+    city_ids: tuple[int, int] = await add_cities(session=session)
     streets_file_path: str = os.path.join(settings.files_dir, "address", "streets.txt")
 
     await create_street(session=session, city_id=city_ids[1], name="улица Ивановская")
@@ -71,13 +71,15 @@ async def fill_street_table(session: AsyncSession) -> None:
 async def add_roles(session: AsyncSession) -> None:
     """Добавляем роли пользователей в базу данных"""
     names = ["admin", "user"]
-    [await create_role(session=session, name=name) for name in names]
+    for name in names:
+        await create_role(session=session, name=name)
 
 
 async def add_positions(session: AsyncSession) -> None:
     """Добавляем должности работников в базу данных"""
     names = ["ветврач", "ведущий ветврач", "кавалерист", "ИП", "гр", "начальник"]
-    [await create_position(session=session, name=name) for name in names]
+    for name in names:
+        await create_position(session=session, name=name)
 
 
 # Animals
@@ -109,7 +111,8 @@ async def add_animals_group(session: AsyncSession, type_of_feeding_id: int) -> N
 
 async def add_usage_types(session: AsyncSession) -> None:
     names = ["пользовательное", "племенное", "спортивное"]
-    [await create_usage_type(session=session, name=name) for name in names]
+    for name in names:
+        await create_usage_type(session=session, name=name)
 
 
 async def add_horses_species(session: AsyncSession, horse_group_id: int) -> None:
@@ -121,7 +124,7 @@ async def add_horses_species(session: AsyncSession, horse_group_id: int) -> None
     await add_horse_genders(session=session, species_ids=horse_species_ids)
 
 
-async def add_cows_species(session: AsyncSession, cows_group_id: int) -> list[int]:
+async def add_cows_species(session: AsyncSession, cows_group_id: int) -> None:
     names = [
         "Крупный рогатый скот",
         "Як домашний",

@@ -3,9 +3,11 @@ from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
+from core.settings import settings
+
 from .user import User, get_user_db
 
-SECRET = "SECRET"
+SECRET = settings.secret_token
 
 
 class UserManager(IntegerIDMixin, BaseUserManager):

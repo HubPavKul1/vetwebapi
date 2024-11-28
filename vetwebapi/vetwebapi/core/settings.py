@@ -17,7 +17,8 @@ class Settings(BaseSettings):
     db_name: str
     db_host: str
     db_port: int
-    secret: str
+    secret_jwt: str
+    secret_token: str
     mode: str
 
     postgres_user: str

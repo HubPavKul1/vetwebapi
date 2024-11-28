@@ -10,7 +10,7 @@ cookie_transport = CookieTransport(
     cookie_name="vetwebapi", cookie_max_age=3600, cookie_secure=False
 )
 
-SECRET = settings.secret
+SECRET = settings.secret_jwt
 
 
 def get_jwt_strategy() -> JWTStrategy:
