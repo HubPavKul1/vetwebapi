@@ -4,9 +4,11 @@ WORKDIR /src
 COPY ./package.json .
 # COPY ./yarn.lock .
 # RUN npm install
+RUN yarn changeNodeSpace
 RUN yarn install
 
 COPY ./ .
+# RUN yarn changeNodeSpace
 RUN yarn build
 RUN yarn buildProd
 # CMD ["yarn", "dev"]

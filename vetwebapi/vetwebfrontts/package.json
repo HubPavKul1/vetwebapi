@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tailwindcss build -i src/assets/sass/index.css -o public/styles.css --watch",
+    "changeNodeSpace": "node --max-old-space-size=4096",
     "buildProd": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
