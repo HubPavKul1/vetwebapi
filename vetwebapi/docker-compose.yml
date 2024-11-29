@@ -30,13 +30,13 @@ services:
   #   build: ./vetwebfrontts/
   #   ports:
   #     - "80:80"
-  # volumes:
-  #   - ./nginx_from_image.conf:/etc/nginx/nginx.conf
-  # networks:
-  #   - network
-  # depends_on:
-  #   - app
-  #   - frontend
+  #   volumes:
+  #     - ./nginx_from_image.conf:/etc/nginx/nginx.conf
+  #   networks:
+  #     - network
+  #   depends_on:
+  #     - app
+  #     - frontend
 
   db:
     image: postgres:15.3-alpine3.18
