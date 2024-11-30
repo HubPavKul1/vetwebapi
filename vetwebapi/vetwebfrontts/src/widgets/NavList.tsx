@@ -2,7 +2,6 @@ import { CompaniesLink } from "entities/company";
 import { DrugsLink } from "entities/drug";
 import { HomeLink } from "entities/home";
 import { LabsLink } from "entities/lab";
-import { AdminLink } from "entities/user";
 import { VetsLink } from "entities/vetclinic";
 import { VetWorkLink } from "entities/vetWork";
 
@@ -17,7 +16,6 @@ export function NavList() {
           <LabsLink />
           <DrugsLink />
           <VetWorkLink />
-          <AdminLink />
         </ul>
       </nav>
     </>

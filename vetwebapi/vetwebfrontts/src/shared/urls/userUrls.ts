@@ -1,5 +1,7 @@
-export const userLoginUrl = "/api/auth/jwt/login";
+import { baseUrl } from "./baseUrl";
 
-export const userLogoutUrl = "/api/auth/jwt/logout";
+export const userLoginUrl = baseUrl + "/api/auth/jwt/login";
 
-export const userUrl = "/api/users";
+export const userLogoutUrl = baseUrl + "/api/auth/jwt/logout";
+
+export const userUrl = baseUrl + "/api/users";

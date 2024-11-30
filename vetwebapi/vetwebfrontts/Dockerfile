@@ -1,17 +1,12 @@
-FROM node:alpine as builder
+FROM node:alpine AS builder
 WORKDIR /src
 
 COPY ./package.json .
-# COPY ./yarn.lock .
-# RUN npm install
-RUN yarn changeNodeSpace
 RUN yarn install
 
 COPY ./ .
-# RUN yarn changeNodeSpace
 RUN yarn build
 RUN yarn buildProd
-# CMD ["yarn", "dev"]
 
 FROM nginx:stable-alpine
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf

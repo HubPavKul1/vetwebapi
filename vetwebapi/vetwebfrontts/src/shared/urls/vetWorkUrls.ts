@@ -1,4 +1,6 @@
-const vetWorkBaseUrl = "/api/vetwork";
+import { baseUrl } from "./baseUrl";
+
+const vetWorkBaseUrl = baseUrl + "/api/vetwork";
 
 export const diseasesUrl = vetWorkBaseUrl + "/diseases";
 export const vetWorkDetailUrl = (vetWorkId?: number) => {

@@ -1,6 +1,8 @@
-export const drugsUrl = "/api/drugs";
+import { baseUrl } from "./baseUrl";
+
+export const drugsUrl = baseUrl + "/api/drugs";
 export const drugDetailUrl = (id?: number) => {
-  return `/api/drugs/${id}/`;
+  return drugsUrl + `/${id}/`;
 };
 
 export const drugFileUploadUrl = (id?: number) => {
