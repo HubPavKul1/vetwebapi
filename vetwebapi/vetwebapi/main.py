@@ -13,19 +13,14 @@ from utils import utils
 app = FastAPI()
 
 
-logger.add("logs/log_{time:YYYY-MM-DD}.log")
+logger.add("logs/log_{time:YYYY-MM-DD}.log", level="Error")
 
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://192.168.99.101:3000",
-        "http://192.168.99.101:5173",
-        "http://192.168.99.101:8000",
-        "http://localhost",
-        "http://localhost:3000",
-
+        "http://185.239.51.137",
     ],
     allow_credentials=True,
     allow_methods=["*"],
