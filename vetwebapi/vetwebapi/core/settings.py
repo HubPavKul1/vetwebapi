@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     files_dir: str = os.path.join(BASE_DIR, "files")
 
     media_dir: str = os.path.join(BASE_DIR, "media")
+    logs_dir: str = os.path.join(BASE_DIR, "logs")
 
     db_user: str
     db_pass: str

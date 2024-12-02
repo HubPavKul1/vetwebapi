@@ -1,3 +1,4 @@
+import os
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
@@ -13,7 +14,7 @@ from utils import utils
 app = FastAPI()
 
 
-logger.add("logs/log_{time:YYYY-MM-DD}.log", level="ERROR")
+logger.add("logs/log_{time:YYYY-MM-DD}.log", level="DEBUG")
 
 
 app.add_middleware(
@@ -33,6 +34,12 @@ app.include_router(router_v1, prefix=settings.api_v1_prefix)
 
 @app.get("/")
 async def start(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
+    logger.debug(settings.logs_dir, " ++++ ", settings.media_dir)
+    if not os.path.isdir(settings.logs_dir):
+        os.mkdir(settings.logs_dir)
+        logger.debug(settings.logs_dir)
+    if not os.path.isdir(settings.media_dir):
+        os.mkdir(settings.media_dir)
     if not await crud.read_roles(session=session):
         await utils.prepare_db(session=session)
         logger.debug("All data have been added!")
