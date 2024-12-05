@@ -8,7 +8,7 @@ from api_v1 import router as router_v1
 from api_v1.auth import crud
 from core.database import db_manager
 from core.models.users.create_superuser import create_superuser
-from core.settings import settings, BASE_DIR
+from core.settings import settings
 from utils import utils
 
 app = FastAPI()
@@ -35,10 +35,6 @@ app.include_router(router_v1, prefix=settings.api_v1_prefix)
 
 @app.get("/")
 async def start(session: AsyncSession = Depends(db_manager.scope_session_dependency)):
-    if not os.path.isdir(settings.logs_dir):
-        os.mkdir(settings.logs_dir)
-    if not os.path.isdir(settings.media_dir):
-        os.mkdir(settings.media_dir)
     if not await crud.read_roles(session=session):
         await utils.prepare_db(session=session)
         logger.debug("All data have been added!")
@@ -47,5 +43,4 @@ async def start(session: AsyncSession = Depends(db_manager.scope_session_depende
         return {"message": "All data have been added!"}
 
     logger.debug("Database already prepared!")
-    logger.debug(f"BASE_DIR: {BASE_DIR}")
     return {"message": "Hello, Dude!!!"}

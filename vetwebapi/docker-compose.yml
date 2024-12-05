@@ -9,7 +9,9 @@ services:
       - "8000:8000"
     volumes:
       - "./vetwebapi/logs:/vetwebapi/logs:rw"
-      - "./vetwebapi/media:/vetwebapi/media:rw"
+      - "./vetwebapi/media/drugs/images:/vetwebapi/media/drugs/images:rw"
+      - "./vetwebapi/media/drugs/instr:/vetwebapi/media/drugs/instr:rw"
+      - "./vetwebapi/media/vetworks/:/vetwebapi/media/vetworks:rw"
     depends_on:
       - db
     networks:
