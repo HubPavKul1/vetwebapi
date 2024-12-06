@@ -1,4 +1,3 @@
-import os
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
@@ -19,11 +18,7 @@ logger.add("logs/log_{time:YYYY-MM-DD}.log", level="DEBUG")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://185.239.51.137",
-        "http://192.168.99.101:5173",
-    ],
+    allow_origins=["http://localhost:5173", "http://185.239.51.137"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
