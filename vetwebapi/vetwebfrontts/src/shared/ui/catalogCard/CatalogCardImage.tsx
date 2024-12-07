@@ -8,12 +8,12 @@ interface CatalogCardImageProps {
 
 export function CatalogCardImage({ ...props }: CatalogCardImageProps) {
   return (
-    <Link className="h-12" to={props.itemDetailUrl}>
-      <img
-        className="w-24 hover:scale-125 transition-transform"
-        src={props.imgSrc}
-        alt={props.cardTitle}
-      />
-    </Link>
+      <Link to={props.itemDetailUrl}>
+        <img
+          className="w-20 hover:scale-110 transition-transform"
+          src={props.imgSrc}
+          alt={props.cardTitle}
+        />
+      </Link>
   );
 }

@@ -13,7 +13,8 @@ from utils import utils
 app = FastAPI()
 
 
-logger.add("logs/log_{time:YYYY-MM-DD}.log", level="ERROR")
+# logger.add("logs/log_{time:YYYY-MM-DD}.log")
+
 
 
 app.add_middleware(
