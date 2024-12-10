@@ -25,11 +25,6 @@ export function CreateDrugForm({ url, queryKey }: ICreateItemFormInterface) {
       placeholder: "Введите наименование препарата *",
       type: "text",
     },
-    {
-      fieldName: "packing",
-      placeholder: "Введите количество доз во флаконе *",
-      type: "number",
-    },
   ];
 
   const methods = useForm<IDrugCreate>({

@@ -28,6 +28,12 @@ export function CreateCatalogDrugForm({
       placeholder: "Введите контроль препарата *",
       type: "text",
     },
+    {
+      fieldName: "packing",
+      placeholder: "Количество ед. учета во флаконе *",
+      type: "number",
+      step: "any",
+    },
   ];
 
   const methods = useForm<IDrugCatalogCreate>({
@@ -70,6 +76,7 @@ export function CreateCatalogDrugForm({
               register={register}
               fieldName={item.fieldName}
               type={item.type}
+              step={item.step}
               errors={errors}
               rules={{
                 required: fieldRequiredMessage,

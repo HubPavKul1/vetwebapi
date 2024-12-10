@@ -36,7 +36,7 @@ class DrugInMovementSchema(BaseModel):
     administration_method: str | None = None
     place_of_administration: str | None = None
     disposal_method: str
-    packing: int
+    packing: float
 
 
 class DrugMovementDetail(DrugMovementOut):

@@ -10,6 +10,7 @@ async def serialize_catalog_drug(drug: CatalogDrug) -> CatalogDrugSchema:
         name=drug.drug.name,
         batch=drug.batch,
         control=drug.control,
+        packing=drug.packing,
         production_date=drug.production_date,
         expiration_date=drug.expiration_date,
         image=drug.drug.image,

@@ -37,8 +37,6 @@ class Drug(Base):
     dosage_id: Mapped[int] = mapped_column(ForeignKey("dosages.id", ondelete="CASCADE"))
 
     name: Mapped[str] = mapped_column(String(300))
-
-    packing: Mapped[float]
     instruction: Mapped[str | None]
     image: Mapped[str | None]
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)

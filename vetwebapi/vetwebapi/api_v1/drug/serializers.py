@@ -14,7 +14,6 @@ async def serialize_drug(drug: Drug) -> DrugSchema:
         disposal_method=drug.disposal_method.name,
         dosage=drug.dosage.name,
         name=drug.name,
-        packing=drug.packing,
         image=drug.image,
         instruction=drug.instruction,
     )

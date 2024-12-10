@@ -15,18 +15,18 @@ export function DrugReportTableItem({ drug }: DrugReportTableItemProps) {
           convertDateString(drug.expiration_date).shortDate}
       </td>
       <td>тыс.доз</td>
-      <td>{drug.units_start && drug.units_start / 1000}</td>
-      <td>{drug.units_received && drug.units_received / 1000}</td>
+      <td>{drug.units_start}</td>
+      <td>{drug.units_received}</td>
       <td></td>
       <td></td>
       <td></td>
-      <td>{drug.units_spent && drug.units_spent / 1000}</td>
+      <td>{drug.units_spent}</td>
       <td></td>
       <td></td>
       <td></td>
-      <td>{drug.disposed_units && drug.disposed_units / 1000}</td>
-      <td>{drug.units_spent_disposed && drug.units_spent_disposed / 1000}</td>
-      <td>{drug.units_rest && drug.units_rest / 1000}</td>
+      <td>{drug.disposed_units}</td>
+      <td>{drug.units_spent_disposed}</td>
+      <td>{drug.units_rest}</td>
     </tr>
   );
 }

@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: 596213738773
+Revision ID: 4234ebab0cd4
 Revises: 
-Create Date: 2024-09-02 20:24:37.752508
+Create Date: 2024-12-10 15:54:57.918184
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "596213738773"
+revision: str = "4234ebab0cd4"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -187,7 +187,6 @@ def upgrade() -> None:
         sa.Column("disposal_method_id", sa.Integer(), nullable=False),
         sa.Column("dosage_id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=300), nullable=False),
-        sa.Column("packing", sa.Float(), nullable=False),
         sa.Column("instruction", sa.String(), nullable=True),
         sa.Column("image", sa.String(), nullable=True),
         sa.Column("is_active", sa.Boolean(), nullable=False),
@@ -255,6 +254,7 @@ def upgrade() -> None:
         sa.Column("drug_id", sa.Integer(), nullable=False),
         sa.Column("batch", sa.String(length=10), nullable=False),
         sa.Column("control", sa.String(length=10), nullable=False),
+        sa.Column("packing", sa.Float(), nullable=False),
         sa.Column("production_date", sa.Date(), nullable=False),
         sa.Column("expiration_date", sa.Date(), nullable=False),
         sa.Column("is_active", sa.Boolean(), nullable=False),

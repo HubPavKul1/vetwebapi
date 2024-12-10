@@ -8,7 +8,6 @@ export interface IDrugCreate {
   disposal_method_id: number;
   dosage_id: number;
   name: string;
-  packing: number;
   image?: string;
   instruction?: string;
 }
@@ -56,7 +55,6 @@ export interface IDrugDetail {
   budget: string;
   drug_manufacturer: string;
   accounting_unit: string;
-  packing: string;
   image?: string;
   instruction?: string;
 }

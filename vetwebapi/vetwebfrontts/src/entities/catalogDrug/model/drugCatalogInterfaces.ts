@@ -2,6 +2,7 @@ export interface IDrugCatalogCreate {
   drug_id: number;
   batch: string;
   control: string;
+  packing: number;
   production_date: string;
   expiration_date: string;
 }

@@ -20,6 +20,7 @@ class CatalogDrug(Base):
     drug_id: Mapped[int] = mapped_column(ForeignKey("drugs.id", ondelete="CASCADE"))
     batch: Mapped[str] = mapped_column(String(10))
     control: Mapped[str] = mapped_column(String(10))
+    packing: Mapped[float]
     production_date: Mapped[date]
     expiration_date: Mapped[date]
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)

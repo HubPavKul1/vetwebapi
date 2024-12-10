@@ -15,7 +15,7 @@ async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSche
         administration_method=item.administration_method,
         place_of_administration=item.place_of_administration,
         disposal_method=item.catalog_drug.drug.disposal_method.name,
-        packing=item.catalog_drug.drug.packing,
+        packing=item.catalog_drug.packing,
         name=item.catalog_drug.drug.name,
         batch=item.catalog_drug.batch,
         control=item.catalog_drug.control,

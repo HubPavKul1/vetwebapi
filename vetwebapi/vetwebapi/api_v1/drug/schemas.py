@@ -10,7 +10,6 @@ class DrugIn(BaseModel):
     disposal_method_id: int
     dosage_id: int
     name: str
-    packing: int
     image: str | None = None
     instruction: str | None = None
 
@@ -24,7 +23,6 @@ class DrugSchema(BaseModel):
     disposal_method: str
     dosage: str
     name: str
-    packing: int
     image: str | None = None
     instruction: str | None = None
 

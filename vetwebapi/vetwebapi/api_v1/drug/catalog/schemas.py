@@ -7,6 +7,7 @@ class CatalogDrugIn(BaseModel):
     drug_id: int
     batch: str
     control: str
+    packing: float
     production_date: date
     expiration_date: date
 

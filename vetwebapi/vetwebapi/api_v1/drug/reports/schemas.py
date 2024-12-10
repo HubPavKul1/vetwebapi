@@ -10,7 +10,7 @@ class DrugReportItemSchema(BaseModel):
     control: str
     production_date: date
     expiration_date: date
-    packing: int
+    packing: float
     packs_start: int | None
     units_start: int | None
     packs_received: int | None

@@ -21,8 +21,8 @@ async def catalog_drug_info() -> Subquery:
     return (
         select(
             Drug.name.label("drug_name"),
-            Drug.packing.label("packing"),
             Drug.id.label("drug_id"),
+            CatalogDrug.packing.label("packing"),
             CatalogDrug.id.label("cd_id"),
             CatalogDrug.batch.label("batch"),
             CatalogDrug.control.label("control"),

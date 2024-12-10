@@ -16,7 +16,6 @@ app = FastAPI()
 # logger.add("logs/log_{time:YYYY-MM-DD}.log")
 
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://185.239.51.137"],
