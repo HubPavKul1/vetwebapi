@@ -29,6 +29,7 @@ class DrugInMovementSchema(BaseModel):
     control: str
     production_date: date
     expiration_date: date
+    # accounting_unit: str
     packs_amount: int
     units_amount: float
     drug_manufacturer: str

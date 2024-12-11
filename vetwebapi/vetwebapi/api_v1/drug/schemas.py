@@ -19,7 +19,7 @@ class DrugSchema(BaseModel):
     diseases: list[str]
     budget: str
     drug_manufacturer: str
-    accounting_unit: str
+    # accounting_unit: str
     disposal_method: str
     dosage: str
     name: str
