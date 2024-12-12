@@ -13,6 +13,7 @@ from core.models import (
     DrugInMovement,
     DrugMovement,
     VetWork,
+    AccountingUnit,
 )
 
 
@@ -22,6 +23,8 @@ async def catalog_drug_info() -> Subquery:
         select(
             Drug.name.label("drug_name"),
             Drug.id.label("drug_id"),
+            AccountingUnit.id.label("accounting_unit_id"),
+            AccountingUnit.name.label("accounting_unit"),
             CatalogDrug.packing.label("packing"),
             CatalogDrug.id.label("cd_id"),
             CatalogDrug.batch.label("batch"),
@@ -30,6 +33,7 @@ async def catalog_drug_info() -> Subquery:
             CatalogDrug.expiration_date.label("expiration_date"),
         )
         .join(Drug, Drug.id == CatalogDrug.drug_id)
+        .join(AccountingUnit, AccountingUnit.id == Drug.accounting_unit_id)
         .subquery("catalog_drug_info")
     )
 
@@ -353,6 +357,7 @@ async def catalog_drugs_movement_report(
         select(
             c_d_info.c.cd_id.label("cd_id"),
             c_d_info.c.drug_name.label("drug_name"),
+            c_d_info.c.accounting_unit.label("accounting_unit"),
             c_d_info.c.batch.label("batch"),
             c_d_info.c.control.label("control"),
             c_d_info.c.production_date.label("production_date"),
@@ -418,6 +423,7 @@ async def catalog_drugs_movement_for_1vetB(
         select(
             c_d_info.c.cd_id.label("cd_id"),
             c_d_info.c.drug_name.label("drug_name"),
+            c_d_info.c.accounting_unit.label("accounting_unit"),
             c_d_info.c.drug_id.label("drug_id"),
             c_d_info.c.batch.label("batch"),
             c_d_info.c.control.label("control"),
@@ -481,6 +487,7 @@ async def report_1B(session: AsyncSession, body: DateRangeIn) -> Result[Any]:
         c_d_movement.c.disposed_units.label("disposed_units"),
         c_d_movement.c.units_spent_disposed.label("units_spent_disposed"),
         c_d_movement.c.units_rest_end.label("units_rest_end"),
+        c_d_movement.c.accounting_unit.label("accounting_unit"),
     ).join(animals_count, animals_count.c.cd_id == c_d_movement.c.cd_id, isouter=True)
 
     return await session.execute(stmt)

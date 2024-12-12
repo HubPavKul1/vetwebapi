@@ -19,6 +19,7 @@ export interface IDrugInMovement {
   id: number;
   diseases: string[];
   name: string;
+  accounting_unit: string;
   batch: string;
   control: string;
   production_date: string;

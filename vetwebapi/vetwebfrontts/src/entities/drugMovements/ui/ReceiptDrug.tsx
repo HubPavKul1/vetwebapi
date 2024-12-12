@@ -11,6 +11,7 @@ export function ReceiptDrug({ drug }: ReceiptDrugProps) {
   return (
     <tr key={drug.id}>
       <td>{drug.name}</td>
+      <td>{drug.accounting_unit}</td>
       <td>{drug.batch}</td>
       <td>{drug.control}</td>
       <td>{productionDate}</td>

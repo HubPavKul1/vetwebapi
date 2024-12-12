@@ -2,6 +2,7 @@ export interface IDrugReport {
   id: number;
   diseases?: string[];
   drug_name: string;
+  accounting_unit: string;
   batch: string;
   control: string;
   production_date?: string;

@@ -15,7 +15,7 @@ export function DrugInReport({ drug }: DrugInReportProps) {
       ) : (
         <td></td>
       )}
-      <td>доз</td>
+      <td>{drug.accounting_unit}</td>
       {drug.packs_start ? <td>{drug.packs_start}</td> : <td>0</td>}
       {drug.units_start ? <td>{drug.units_start}</td> : <td>0</td>}
       {drug.packs_received ? <td>{drug.packs_received}</td> : <td>0</td>}
@@ -26,7 +26,7 @@ export function DrugInReport({ drug }: DrugInReportProps) {
       <td>{drug.disposed_units}</td>
       <td>{drug.units_spent_disposed}</td>
       {drug.packs_rest ? <td>{drug.packs_rest}</td> : <td>0</td>}
-      {drug.units_rest ? <td>{drug.units_rest}</td> : <td>0</td>}
+      {drug.units_rest ? <td>{drug.units_rest.toFixed(3)}</td> : <td>0</td>}
     </tr>
   );
 }

@@ -21,7 +21,7 @@ async def serialize_drug_in_movement(item: DrugInMovement) -> DrugInMovementSche
         control=item.catalog_drug.control,
         production_date=item.catalog_drug.production_date,
         expiration_date=item.catalog_drug.expiration_date,
-        # accounting_unit=item.catalog_drug.drug.accounting_unit.name,
+        accounting_unit=item.catalog_drug.drug.accounting_unit.name,
         packs_amount=item.packs_amount,
         units_amount=item.units_amount,
     )

@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class DrugReportItemSchema(BaseModel):
     id: int
     drug_name: str
+    accounting_unit: str
     batch: str
     control: str
     production_date: date
@@ -27,6 +28,7 @@ class Report1VetBItemSchema(BaseModel):
     id: int
     diseases: list[str]
     drug_name: str
+    accounting_unit: str
     batch: str
     packing: float
     units_start: float | None
