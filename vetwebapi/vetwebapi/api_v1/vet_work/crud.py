@@ -36,6 +36,7 @@ from .schemas import (
     CompanyInVetWorkIn,
     DiagnosticIn,
     VaccinationIn,
+    TreatmentIn,
 )
 
 
@@ -70,7 +71,7 @@ async def save_file(
     return vetwork_file.id
 
 
-async def create_vetwork(session: AsyncSession, body: VaccinationIn) -> VetWork:
+async def create_vaccination(session: AsyncSession, body: VaccinationIn) -> VetWork:
     diseases = body.diseases
     doctors = body.doctors
     new_vetwork = VetWork(**body.model_dump(exclude={"diseases", "doctors"}))
@@ -88,6 +89,23 @@ async def create_vetwork(session: AsyncSession, body: VaccinationIn) -> VetWork:
 
 
 async def create_diagnostic(session: AsyncSession, body: DiagnosticIn) -> VetWork:
+    diseases = body.diseases
+    doctors = body.doctors
+    new_vetwork = VetWork(**body.model_dump(exclude={"diseases", "doctors"}))
+    session.add(new_vetwork)
+    await session.commit()
+    await session.refresh(new_vetwork)
+
+    await add_diseases_in_vetwork(
+        session=session, vetwork_id=new_vetwork.id, diseases=diseases
+    )
+    await add_doctors_in_vetwork(
+        session=session, vetwork_id=new_vetwork.id, doctors=doctors
+    )
+    return new_vetwork
+
+
+async def create_treatment(session: AsyncSession, body: TreatmentIn) -> VetWork:
     diseases = body.diseases
     doctors = body.doctors
     new_vetwork = VetWork(**body.model_dump(exclude={"diseases", "doctors"}))
@@ -192,6 +210,18 @@ async def read_diagnostics(session: AsyncSession) -> list[VetWork]:
             selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
         )
         .where(VetWork.work_type_id == 2)
+        .order_by(desc(VetWork.vetwork_date))
+    )
+    return list(await session.scalars(stmt))
+
+
+async def read_treatments(session: AsyncSession) -> list[VetWork]:
+    stmt = (
+        select(VetWork)
+        .options(
+            selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
+        )
+        .where(VetWork.work_type_id == 3)
         .order_by(desc(VetWork.vetwork_date))
     )
     return list(await session.scalars(stmt))

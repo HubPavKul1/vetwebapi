@@ -33,6 +33,7 @@ from .schemas import (
     VetWorkFileOut,
     VetWorkOut,
     VetWorks,
+    TreatmentIn,
 )
 from .serializers import serialize_vetwork_detail, serialize_vetworks
 
@@ -61,7 +62,7 @@ async def create_vaccination(
     body: VaccinationIn,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> VetWorkOut:
-    vaccination = await crud.create_vetwork(session=session, body=body)
+    vaccination = await crud.create_vaccination(session=session, body=body)
     return VetWorkOut(id=vaccination.id, vetwork_date=vaccination.vetwork_date)
 
 
@@ -74,6 +75,17 @@ async def create_diagnostic(
 ) -> VetWorkOut:
     diagnostic = await crud.create_diagnostic(session=session, body=body)
     return VetWorkOut(id=diagnostic.id, vetwork_date=diagnostic.vetwork_date)
+
+
+@router.post(
+    "/treatments", response_model=VetWorkOut, status_code=status.HTTP_201_CREATED
+)
+async def create_treatment(
+    body: TreatmentIn,
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> VetWorkOut:
+    treatment = await crud.create_treatment(session=session, body=body)
+    return VetWorkOut(id=treatment.id, vetwork_date=treatment.vetwork_date)
 
 
 @router.post("/{vetwork_id}/drug", status_code=status.HTTP_201_CREATED)
@@ -181,6 +193,32 @@ async def get_diagnostics_route(
         return await serialize_vetworks(
             vetworks=diagnostics[start:end],
             total_count=len(diagnostics),
+            page=page,
+            per_page=per_page,
+        )
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/treatments", response_model=VetWorks)
+async def get_treatments_route(
+    pagination: dict = Depends(get_pagination_params),
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[VetWorks, dict]:
+    page = pagination["page"]
+    per_page = pagination["per_page"]
+
+    # Calculate the start and end indices for slicing the items list
+    start = (page - 1) * per_page
+    end = start + per_page
+    try:
+        treatments = await crud.read_treatments(session=session)
+        return await serialize_vetworks(
+            vetworks=treatments[start:end],
+            total_count=len(treatments),
             page=page,
             per_page=per_page,
         )
