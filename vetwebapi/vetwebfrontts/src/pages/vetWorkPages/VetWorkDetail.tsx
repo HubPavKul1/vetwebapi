@@ -23,12 +23,16 @@ export function VetWorkDetail() {
   const pageTitle =
     data.work_type === WORKTYPES.vaccination
       ? `Вакцинация: ${data.diseases}`
+      : data.work_type === WORKTYPES.treatment
+      ? `Обработка против: ${data.diseases}`
       : `Диагностические исследования на: ${diseases}`;
   const fullPageTitle = `${pageTitle} от ${date.shortDate} г. `;
 
   const imgSrc =
     data.work_type === WORKTYPES.vaccination
       ? "/vetworkBg.jpg"
+      : data.work_type === WORKTYPES.treatment
+      ? "/treatment.jpg"
       : "/diagnostic.jpg";
 
   let dosages = 0;
@@ -49,7 +53,10 @@ export function VetWorkDetail() {
           <Container className="text-center">
             <div className="flex text-left text-lg text-indigo-700 font-bold ">
               <span className="mr-5">Всего голов: {data?.animals?.length}</span>
-              <span>Израсходовано препарата: {dosages.toFixed(3)} доз</span>
+              <span>
+                Израсходовано препарата: {dosages.toFixed(3)}{" "}
+                {data?.drug?.accounting_unit}
+              </span>
             </div>
 
             <h5 className="page-detail-title">Предприятия </h5>

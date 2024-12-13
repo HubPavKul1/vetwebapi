@@ -5,6 +5,7 @@ import { DeleteItem } from "shared/ui/DeleteItem";
 import { IAnimal } from "entities/animal/model/animalInterfaces";
 import { convertDateString } from "shared/helpers";
 import { UpdateAnimalInVetWorkForm } from "features/vetWork/ui/UpdateAnimalInVetWorkForm";
+import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
 
 interface AnimalInVetworkProps {
   animal: IAnimal;
@@ -32,7 +33,7 @@ export function AnimalInVetwork({
       <td>{date_of_birth}</td>
       <td>{animal.nickname}</td>
       <td>{animal.identification}</td>
-      {workType === "вакцинация" && (
+      {workType === WORKTYPES.vaccination && (
         <>
           <td>{animal.dosage}</td>
           <td>
@@ -43,13 +44,14 @@ export function AnimalInVetwork({
                 updateFieldName="dosage"
                 updateFieldType="number"
                 className="form-control"
+                updateFieldStep="any"
               />
             </UpdateItem>
           </td>
         </>
       )}
 
-      {workType === "диагностика" && disease === "туберкулез" && (
+      {workType === WORKTYPES.treatment && (
         <>
           <td>{animal.dosage}</td>
           <td>
@@ -60,13 +62,32 @@ export function AnimalInVetwork({
                 updateFieldName="dosage"
                 updateFieldType="number"
                 className="form-control"
+                updateFieldStep="any"
               />
             </UpdateItem>
           </td>
         </>
       )}
 
-      {workType === "диагностика" && (
+      {workType === WORKTYPES.diagnostic && disease === DISEASES.tbc && (
+        <>
+          <td>{animal.dosage}</td>
+          <td>
+            <UpdateItem>
+              <UpdateAnimalInVetWorkForm
+                animal={animal}
+                updateData={animal.dosage}
+                updateFieldName="dosage"
+                updateFieldType="number"
+                className="form-control"
+                updateFieldStep="any"
+              />
+            </UpdateItem>
+          </td>
+        </>
+      )}
+
+      {workType === WORKTYPES.diagnostic && (
         <>
           <td>
             {animal.is_positive ? (

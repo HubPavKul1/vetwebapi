@@ -2,6 +2,8 @@ export const WORKTYPES = {
   vaccination: "вакцинация",
 
   diagnostic: "диагностика",
+
+  treatment: "обработка",
 };
 
 export const DISEASES = {
@@ -12,6 +14,7 @@ export const VetWorkQueryKeys = {
   vetWorkDetail: "vetwork",
   diagnostics: "diagnostics",
   vaccinations: "vaccinations",
+  treatments: "treatments",
 };
 
 export const BIOMATERIAL = {

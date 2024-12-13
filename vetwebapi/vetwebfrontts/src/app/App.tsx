@@ -16,6 +16,7 @@ import {
   VetWorkPageDetail,
 } from "pages/vetWorkPages";
 import { VetWorkReportMainPage } from "pages/vetWorkPages/reports";
+import { Treatments } from "pages/vetWorkPages/Treatments";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -35,6 +36,7 @@ export function App() {
           <Route path="drugs/catalog/:id" element={<DrugCatalogDetail />} />
           <Route path="vetwork/vaccinations" element={<Vaccinations />} />
           <Route path="vetwork/diagnostics" element={<Diagnostics />} />
+          <Route path="vetwork/treatments" element={<Treatments />} />
           <Route path="vetwork/:id" element={<VetWorkPageDetail />} />
           <Route path="companies/:id" element={<CompanyDetail />} />
           <Route path="drugs/:id" element={<DrugDetail />} />

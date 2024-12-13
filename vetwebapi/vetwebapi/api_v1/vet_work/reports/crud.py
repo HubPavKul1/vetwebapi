@@ -1,4 +1,4 @@
-from operator import and_
+from operator import and_, or_
 from typing import Any
 
 from sqlalchemy import Integer, Result, Select, Subquery, func, select
@@ -31,7 +31,7 @@ async def diagnostic_ids_between_date_range(
     return list(await session.scalars(query))
 
 
-async def vaccinations_ids_between_date_range(
+async def vaccination_treatment_ids_between_date_range(
     session: AsyncSession, body: DateRangeIn
 ) -> list[int]:
     date_start = body.date_start
@@ -40,7 +40,7 @@ async def vaccinations_ids_between_date_range(
     query = select(VetWork.id).filter(
         and_(
             VetWork.vetwork_date.between(date_start, date_end),
-            VetWork.work_type_id == 1,
+            or_(VetWork.work_type_id == 1, VetWork.work_type_id == 3),
         )
     )
     return list(await session.scalars(query))
@@ -109,8 +109,10 @@ async def diagnostic_report(session: AsyncSession, body: DateRangeIn) -> Result[
     return await session.execute(query)
 
 
-async def vaccination_report(session: AsyncSession, body: DateRangeIn) -> Result[Any]:
-    vetwork_ids: list[int] = await vaccinations_ids_between_date_range(
+async def vaccination_treatment_report(
+    session: AsyncSession, body: DateRangeIn
+) -> Result[Any]:
+    vetwork_ids: list[int] = await vaccination_treatment_ids_between_date_range(
         session=session, body=body
     )
 

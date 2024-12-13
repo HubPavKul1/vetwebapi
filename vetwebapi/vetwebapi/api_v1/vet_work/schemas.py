@@ -35,7 +35,7 @@ class VaccinationIn(VetWorkIn):
 
 
 class TreatmentIn(VetWorkIn):
-    work_type: int = 3
+    work_type_id: int = 3
 
 
 class VetWorkOut(BaseModel):

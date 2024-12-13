@@ -8,6 +8,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
 import { IAnimal } from "entities/animal/model/animalInterfaces";
 import { CustomCheckBox } from "shared/index";
+import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
 
 interface AnimalFormItemProps {
   animal: IAnimal;
@@ -67,7 +68,7 @@ export function AnimalFormItem({
             />
           </label>
         </Col>
-        {workType === "вакцинация" && (
+        {workType === WORKTYPES.vaccination && (
           <Col>
             <input
               className="border-2 w-auto text-center"
@@ -80,7 +81,20 @@ export function AnimalFormItem({
           </Col>
         )}
 
-        {disease === "туберкулез" && (
+        {workType === WORKTYPES.treatment && (
+          <Col>
+            <input
+              className="border-2 w-auto text-center"
+              type="number"
+              step="any"
+              id="dosage"
+              placeholder="Доза"
+              {...register("dosage")}
+            />
+          </Col>
+        )}
+
+        {disease === DISEASES.tbc && (
           <Col>
             <input
               className="border-2 w-28 text-center"
@@ -93,7 +107,7 @@ export function AnimalFormItem({
           </Col>
         )}
 
-        {workType === "диагностика" && (
+        {workType === WORKTYPES.diagnostic && (
           <Col className="flex items-center justify-center">
             <CustomCheckBox id="is_positive" register={register} />
           </Col>

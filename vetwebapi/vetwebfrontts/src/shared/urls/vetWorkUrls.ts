@@ -9,10 +9,12 @@ export const vetWorkDetailUrl = (vetWorkId?: number) => {
 
 export const diagnosticsUrl = vetWorkBaseUrl + "/diagnostics";
 export const vaccinationsUrl = vetWorkBaseUrl + "/vaccinations";
+export const treatmentsUrl = vetWorkBaseUrl + "/treatments";
 
 // vetwork links
 export const vaccinationsLink = "/vetwork/vaccinations";
 export const diagnosticsLink = "/vetwork/diagnostics";
+export const treatmentsLink = "/vetwork/treatments";
 export const vetWorkLink = (vetWorkId?: number) => {
   return `/vetwork/${vetWorkId}`;
 };

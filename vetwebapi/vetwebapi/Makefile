@@ -60,4 +60,9 @@ lint:
 	make lintmain
 	make lintapi
 	make lintcore
+
+start:
+	make lint
+	make migrate
+	make startapp
 	

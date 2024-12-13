@@ -99,11 +99,16 @@ export function AddAnimalsToVetWorkForm({
       />
       <Container className="mb-8 text-center">
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
-
+        <Row className="text-left text-indigo-600">
+          <Col md={2}>Выбрано голов:</Col>
+          <Col md={2}>{animalsData.length}</Col>
+          <Col md={4}></Col>
+        </Row>
         <Row className="border border-black font-bold p-2">
           <Col md={4}>Вид животного</Col>
           <Col md={4}>Кличка</Col>
           {workType === WORKTYPES.vaccination && <Col>Дозировка препарата</Col>}
+          {workType === WORKTYPES.treatment && <Col>Дозировка препарата</Col>}
 
           {disease === DISEASES.tbc && <Col>Дозировка препарата</Col>}
 

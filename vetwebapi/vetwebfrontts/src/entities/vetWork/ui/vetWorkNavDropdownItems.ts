@@ -1,5 +1,9 @@
-import { diagnosticsLink, vaccinationsLink, vetWorkReportsLink } from "shared/index";
-
+import {
+  diagnosticsLink,
+  treatmentsLink,
+  vaccinationsLink,
+  vetWorkReportsLink,
+} from "shared/index";
 
 export const vetWorkNavDropdownItems = [
   {
@@ -14,7 +18,7 @@ export const vetWorkNavDropdownItems = [
   },
   {
     id: 3,
-    url: vaccinationsLink,
+    url: treatmentsLink,
     title: "Обработка",
   },
   {

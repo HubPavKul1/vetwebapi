@@ -1,6 +1,6 @@
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload, selectinload, join
+from sqlalchemy.orm import joinedload, selectinload
 
 from core.models import (
     CatalogDrug,

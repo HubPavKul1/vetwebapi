@@ -1,3 +1,5 @@
+import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
+
 export const drugReceiptHeaders = [
   "Наименование продукции",
   "Ед. учета",
@@ -81,7 +83,7 @@ export const companyEmployeesHeaders = [
 export const animalInVetWorkHeaders = (workType: string, disease: string) => {
   let headers = [];
 
-  if (workType === "вакцинация") {
+  if (workType === WORKTYPES.vaccination) {
     headers = [
       "Вид животного",
       "Пол животного",
@@ -95,7 +97,21 @@ export const animalInVetWorkHeaders = (workType: string, disease: string) => {
     return headers;
   }
 
-  if (workType === "диагностика" && disease === "туберкулез") {
+  if (workType === WORKTYPES.treatment) {
+    headers = [
+      "Вид животного",
+      "Пол животного",
+      "Дата рождения",
+      "Кличка",
+      "Идентификация",
+      "Дозировка",
+      "",
+      "",
+    ];
+    return headers;
+  }
+
+  if (workType === WORKTYPES.diagnostic && disease === DISEASES.tbc) {
     headers = [
       "Вид животного",
       "Пол животного",

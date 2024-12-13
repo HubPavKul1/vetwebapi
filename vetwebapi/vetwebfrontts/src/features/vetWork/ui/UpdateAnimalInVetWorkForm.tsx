@@ -17,6 +17,7 @@ interface UpdateAnimalFormProps {
   updateFieldName: "dosage" | "is_positive";
   updateFieldType: "number" | "checkbox";
   className?: string;
+  updateFieldStep?: string;
 }
 
 export function UpdateAnimalInVetWorkForm({
@@ -25,6 +26,7 @@ export function UpdateAnimalInVetWorkForm({
   updateFieldName,
   updateFieldType,
   className,
+  updateFieldStep,
 }: UpdateAnimalFormProps) {
   const { id } = useParams();
   const vetWorkId = Number(id);
@@ -34,6 +36,7 @@ export function UpdateAnimalInVetWorkForm({
       fieldName: updateFieldName,
       id: updateFieldName,
       type: updateFieldType,
+      step: updateFieldStep,
       defaultValue: updateData,
     },
   ];
@@ -74,6 +77,7 @@ export function UpdateAnimalInVetWorkForm({
             register={register}
             fieldName={item.fieldName}
             type={item.type}
+            step={item.step}
             errors={errors}
             defaultValue={item.defaultValue}
           />

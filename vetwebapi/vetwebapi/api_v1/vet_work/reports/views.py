@@ -48,7 +48,9 @@ async def get_vaccination_report(
 ) -> Union[VetWorkReport, dict]:
     body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
-        report: Result[Any] = await crud.vaccination_report(session=session, body=body)
+        report: Result[Any] = await crud.vaccination_treatment_report(
+            session=session, body=body
+        )
         report_schema: list[VetWorkReportSchema] = [
             await serialize_vetwork(item=elem) for elem in report
         ]
