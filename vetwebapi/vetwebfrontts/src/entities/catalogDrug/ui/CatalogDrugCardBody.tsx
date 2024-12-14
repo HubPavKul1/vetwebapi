@@ -67,7 +67,7 @@ export function CatalogDrugCardBody({ ...props }: CatalogDrugCardBodyProps) {
           (data.units_rest && data.units_rest > 0 ? (
             <div>
               <span className="font-bold mr-1">Осталось: </span>{" "}
-              {data.units_rest} доз
+              {data.units_rest.toFixed(4)} доз
             </div>
           ) : (
             <span className="text-red-700 font-bold">Нет в наличии!!!</span>

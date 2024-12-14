@@ -120,7 +120,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
       <Row>
         <Col sm={4}>Остаток биопрепарата в количестве</Col>
         <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {drugRest.toFixed(4)}
+          {Math.abs(drugRest).toFixed(4)}
         </Col>
         <Col>тыс.доз</Col>
         <Col className="pdf-report-underlined mb-2 p-1 text-center">
