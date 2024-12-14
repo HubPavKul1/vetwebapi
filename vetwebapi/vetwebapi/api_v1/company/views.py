@@ -40,7 +40,7 @@ from .employee.crud import read_doctors, read_positions
 from .employee.dependencies import company_employees
 from .employee.schemas import Employees, PositionSchemas
 from .employee.views import router as employee_router
-from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage
+from .schemas import Companies, CompanyDetail, CompanyIn, CompanyOut, SuccessMessage, CompaniesPage
 from .serializers import (
     serialize_animals,
     serialize_company_card,
@@ -126,11 +126,11 @@ async def create_lab_route(
         )
 
 
-@router.get("/", response_model=Companies)
+@router.get("/", response_model=CompaniesPage)
 async def get_companies(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[Companies, dict]:
+) -> Union[CompaniesPage, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
 
@@ -144,7 +144,7 @@ async def get_companies(
             await serialize_company_card(company) for company in companies[start:end]
         ]
         logger.debug("The companies data serialized!")
-        return Companies(
+        return CompaniesPage(
             companies=comp_schemas,
             total_count=len(companies),
             page=page,
@@ -157,11 +157,33 @@ async def get_companies(
         )
 
 
-@router.get("/vets", response_model=Companies)
+@router.get("/all", response_model=Companies)
+async def get_all_companies(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[Companies, dict]:
+
+    try:
+        companies = await crud.read_companies_with_options(session=session)
+        logger.debug("The companies data is obtained from the database!")
+        comp_schemas = [
+            await serialize_company_card(company) for company in companies
+        ]
+        logger.debug("The companies data serialized!")
+        return Companies(
+            companies=comp_schemas,
+        )
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/vets", response_model=CompaniesPage)
 async def get_clinics(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[Companies, dict]:
+) -> Union[CompaniesPage, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
 
@@ -175,7 +197,7 @@ async def get_clinics(
             await serialize_company_card(company) for company in companies[start:end]
         ]
         logger.debug("The vets data serialized!")
-        return Companies(
+        return CompaniesPage(
             companies=comp_schemas,
             total_count=len(companies),
             page=page,
@@ -188,11 +210,11 @@ async def get_clinics(
         )
 
 
-@router.get("/labs", response_model=Companies)
+@router.get("/labs", response_model=CompaniesPage)
 async def get_labs(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[Companies, dict]:
+) -> Union[CompaniesPage, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
 
@@ -206,7 +228,7 @@ async def get_labs(
             await serialize_company_card(company) for company in companies[start:end]
         ]
         logger.debug("The labs data serialized!")
-        return Companies(
+        return CompaniesPage(
             companies=comp_schemas,
             total_count=len(companies),
             page=page,

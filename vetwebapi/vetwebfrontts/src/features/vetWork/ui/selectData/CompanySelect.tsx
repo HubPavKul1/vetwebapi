@@ -3,11 +3,11 @@ import Select from "react-select";
 import { IOption } from "shared/model/FormInterface";
 import { Controller, useFormContext } from "react-hook-form";
 import { useGetData } from "shared/hooks/useGetData";
-import { companiesUrl } from "shared/urls/companyUrls";
+import { companiesAllUrl } from "shared/urls/companyUrls";
 import { ICompany } from "entities/company/model/companyInterfaces";
 
 export function CompanySelect() {
-  const { data, isLoading } = useGetData("companies", companiesUrl);
+  const { data, isLoading } = useGetData("companies", companiesAllUrl);
 
   const { control } = useFormContext();
 

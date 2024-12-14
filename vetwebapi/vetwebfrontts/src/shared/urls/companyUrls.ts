@@ -1,6 +1,7 @@
 import { baseUrl } from "./baseUrl";
 
 export const companiesUrl = baseUrl + "/api/companies/";
+export const companiesAllUrl = companiesUrl + "all";
 export const companyDetailUrl = (id?: number) => {
   return companiesUrl + `${id}/`;
 };
