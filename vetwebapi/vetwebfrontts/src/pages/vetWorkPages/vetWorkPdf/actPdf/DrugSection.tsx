@@ -20,7 +20,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
   let dosage = 0;
   data.animals.map((animal) => (animal.dosage ? (dosage += animal.dosage) : 0));
   const drugPacks = data.drug.packs_amount;
-  const drugRest = (drugPacks * data.drug.packing - dosage) / 1000;
+  const drugRest = drugPacks * data.drug.packing - dosage;
 
   return (
     <>
@@ -92,7 +92,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
         </Col>
         <Col></Col>
         <Col className="pdf-report-underlined mb-2 p-1 text-center">
-          {(dosage / 1000).toFixed(4)}
+          {dosage.toFixed(4)}
         </Col>
         <Col>тыс. доз</Col>
       </Row>

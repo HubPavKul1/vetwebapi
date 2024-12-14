@@ -18,7 +18,7 @@ export default function AnimalsListPDFItem({
       <td>{animal.identification}</td>
       <td>{convertDateString(animal.date_of_birth).year}</td>
       <td></td>
-      <td>{animal.dosage && animal.dosage / 1000}</td>
+      <td>{animal.dosage && animal.dosage}</td>
       <td></td>
     </tr>
   );
