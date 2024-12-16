@@ -9,6 +9,8 @@ import {
   CatalogCardBody,
   DeleteItem,
   CatalogCardFooter,
+  CatalogCardBodySmall,
+  CatalogCardTopSmall,
 } from "shared/index";
 
 interface CatalogCardProps {
@@ -18,6 +20,8 @@ interface CatalogCardProps {
   drugId?: number;
   invQueryName: string;
   isDrugCard?: boolean;
+  isSmallCardBody?: boolean;
+  isSmallCardTop?: boolean;
   children: React.ReactElement | React.ReactNode;
   delUrl: string;
   isDrugInstr?: boolean;
@@ -25,30 +29,56 @@ interface CatalogCardProps {
 export function CatalogCard({ ...props }: CatalogCardProps) {
   return (
     <CatalogCardWrapper>
-      <CatalogCardTop>
-        <Col sm={3}>
-          {props.imgSrc && (
-            <CatalogCardImage
+      {props.isSmallCardTop ? (
+        <CatalogCardTopSmall>
+          <Col sm={3}>
+            {props.imgSrc && (
+              <CatalogCardImage
+                itemDetailUrl={props.itemDetailUrl}
+                cardTitle={props.cardTitle}
+                imgSrc={props.imgSrc}
+              />
+            )}
+          </Col>
+          <Col>
+            <CatalogCardTitle
               itemDetailUrl={props.itemDetailUrl}
               cardTitle={props.cardTitle}
-              imgSrc={props.imgSrc}
             />
-          )}
-          {props.isDrugCard && props.drugId && !props.imgSrc && (
-            <UploadDrugImage
-              drugId={props.drugId}
-              invQueryName={props.invQueryName}
+          </Col>
+        </CatalogCardTopSmall>
+      ) : (
+        <CatalogCardTop>
+          <Col sm={3}>
+            {props.imgSrc && (
+              <CatalogCardImage
+                itemDetailUrl={props.itemDetailUrl}
+                cardTitle={props.cardTitle}
+                imgSrc={props.imgSrc}
+              />
+            )}
+            {props.isDrugCard && props.drugId && !props.imgSrc && (
+              <UploadDrugImage
+                drugId={props.drugId}
+                invQueryName={props.invQueryName}
+              />
+            )}
+          </Col>
+          <Col>
+            <CatalogCardTitle
+              itemDetailUrl={props.itemDetailUrl}
+              cardTitle={props.cardTitle}
             />
-          )}
-        </Col>
-        <Col>
-          <CatalogCardTitle
-            itemDetailUrl={props.itemDetailUrl}
-            cardTitle={props.cardTitle}
-          />
-        </Col>
-      </CatalogCardTop>
-      <CatalogCardBody>{props.children}</CatalogCardBody>
+          </Col>
+        </CatalogCardTop>
+      )}
+
+      {props.isSmallCardBody ? (
+        <CatalogCardBodySmall>{props.children}</CatalogCardBodySmall>
+      ) : (
+        <CatalogCardBody>{props.children}</CatalogCardBody>
+      )}
+
       <CatalogCardFooter>
         <Col sm={8}></Col>
         <Col sm={2}>

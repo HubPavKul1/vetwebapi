@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 .btn-upload,
 .btn-nav,
 .btn-submit,
@@ -232,7 +229,7 @@ body {
 }
 
 .card-title {
-  @apply title-base underline text-sm cursor-pointer hover:text-violet-600 transition-colors;
+  @apply title-base underline text-xs cursor-pointer hover:text-violet-600 transition-colors;
 }
 
 .page-title {
@@ -241,6 +238,10 @@ body {
 
 .text-base {
   @apply m-0 mb-2 text-center text-xs text-black;
+}
+
+.text-card {
+  @apply m-0 mb-1 text-center text-xs text-black;
 }
 /* end title style */
 

@@ -19,6 +19,7 @@ export function ReceiptDrugCard({ ...props }: ReceiptDrugCardProps) {
       invQueryName={invQueryName}
       delUrl={drugReceiptDetailUrl(drugMovement.id)}
       imgSrc={imgSrc}
+      isSmallCardTop
     >
       {drugMovement.drugs &&
         drugMovement.drugs.map((drug) => (

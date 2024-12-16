@@ -1,7 +1,7 @@
 import { useLogout } from "shared/hooks/useLogout";
 import { LogoLink } from "./Logo";
 import { NavList } from "./NavList";
-import { CustomButton, HeaderWrapper } from "shared/index";
+import { HeaderWrapper } from "shared/index";
 import { GiExitDoor } from "react-icons/gi";
 
 export function Header() {

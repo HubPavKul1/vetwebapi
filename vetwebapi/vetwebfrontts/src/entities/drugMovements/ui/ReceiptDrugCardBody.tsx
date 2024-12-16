@@ -7,7 +7,7 @@ interface ReceiptDrugCardBodyProps {
 export function ReceiptDrugCardBody({ ...props }: ReceiptDrugCardBodyProps) {
   const { drug } = props;
   return (
-    <div className="text-base">
+    <div className="text-card">
       {drug.name} (серия: {drug.batch})
     </div>
   );

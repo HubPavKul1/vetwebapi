@@ -43,6 +43,11 @@ export function AddAnimalsToVetWorkForm({
   const compId = Number(companyId);
   const vetWorkId = Number(id);
   const unsetAnimals = useVetWorkAnimalsStore((state) => state.unsetAnimals);
+  let dosageCount = 0;
+  animalsData.length &&
+    animalsData.map((animal: IAnimalInVetworkIn) =>
+      animal.dosage ? (dosageCount += Number(animal.dosage)) : dosageCount
+    );
 
   const {
     reset,
@@ -99,18 +104,18 @@ export function AddAnimalsToVetWorkForm({
       />
       <Container className="mb-8 text-center">
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
-        <Row className="text-left text-indigo-600">
-          <Col md={2}>Выбрано голов:</Col>
-          <Col md={2}>{animalsData.length}</Col>
-          <Col md={4}></Col>
-        </Row>
-        <Row className="border border-black font-bold p-2">
-          <Col md={4}>Вид животного</Col>
+        <div className="text-left text-indigo-600 font-bold fixed top-52 left-32 w-32 bg-white opacity-95">
+          <h5>Голов: {animalsData.length}</h5>
+          <h5>Доз: {dosageCount}</h5>
+        </div>
+        <Row className="border border-black bg-white opacity-100 font-bold p-2">
+          <Col md={1}>N п/п</Col>
+          <Col md={3}>Вид животного</Col>
           <Col md={4}>Кличка</Col>
           {workType === WORKTYPES.vaccination && <Col>Дозировка препарата</Col>}
           {workType === WORKTYPES.treatment && <Col>Дозировка препарата</Col>}
 
-          {disease === DISEASES.tbc && <Col>Дозировка препарата</Col>}
+          {disease === DISEASES.tbc && <Col md={2}>Дозировка препарата</Col>}
 
           {workType === WORKTYPES.diagnostic && (
             <Col>Положительная реакция</Col>
@@ -118,9 +123,10 @@ export function AddAnimalsToVetWorkForm({
           <Col>Выбрать / отменить</Col>
         </Row>
 
-        {unchoosenAnimals.map((animal) => (
+        {unchoosenAnimals.map((animal, index) => (
           <Row key={animal.id} className="border border-black">
             <AnimalFormItem
+              index={index + 1}
               animal={animal}
               setAnimalsData={setAnimalsData}
               animalsData={animalsData}

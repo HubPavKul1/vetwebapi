@@ -36,10 +36,9 @@ export function VetWorkDetail() {
       : "/diagnostic.jpg";
 
   let dosages = 0;
-  const animalsDoses =
-    data.animals &&
+  data.animals &&
     data.animals.map((animal: IAnimalInVetwork) =>
-      animal.dosage ? (dosages += animal.dosage) : (dosages += 0)
+      animal.dosage ? (dosages += animal.dosage) : dosages
     );
   return (
     <>
@@ -54,7 +53,7 @@ export function VetWorkDetail() {
             <div className="flex text-left text-lg text-indigo-700 font-bold ">
               <span className="mr-5">Всего голов: {data?.animals?.length}</span>
               <span>
-                Израсходовано препарата: {dosages.toFixed(3)}{" "}
+                Израсходовано препарата: {dosages.toFixed(4)}{" "}
                 {data?.drug?.accounting_unit}
               </span>
             </div>

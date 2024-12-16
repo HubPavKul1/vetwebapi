@@ -19,8 +19,10 @@ export function VetWorkCard({ ...props }: VetWorkCardProps) {
       invQueryName={invQueryName}
       delUrl={vetWorkDetailUrl(vetWork.id)}
       imgSrc={imgSrc}
+      isSmallCardTop
+      isSmallCardBody
     >
-      <div>{diseases}</div>
+      <div className="text-xs">{diseases}</div>
     </CatalogCard>
   );
 }

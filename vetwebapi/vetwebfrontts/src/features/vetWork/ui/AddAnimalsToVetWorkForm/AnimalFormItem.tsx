@@ -11,6 +11,7 @@ import { CustomCheckBox } from "shared/index";
 import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
 
 interface AnimalFormItemProps {
+  index: number;
   animal: IAnimal;
   setAnimalsData: CallableFunction;
   animalsData: IAnimalInVetworkIn[];
@@ -19,6 +20,7 @@ interface AnimalFormItemProps {
 }
 
 export function AnimalFormItem({
+  index,
   animal,
   setAnimalsData,
   animalsData,
@@ -55,8 +57,9 @@ export function AnimalFormItem({
 
   return (
     <form onSubmit={handleSubmit(addAnimalData)}>
-      <Row className="flex items-center justify-center">
-        <Col md={4}>{animal.species}</Col>
+      <Row className="flex items-center justify-center text-sm h-8">
+        <Col md={1}>{index}</Col>
+        <Col md={3}>{animal.species}</Col>
         <Col md={4}>
           <label htmlFor="animal_id">
             {animal.nickname}
@@ -69,9 +72,9 @@ export function AnimalFormItem({
           </label>
         </Col>
         {workType === WORKTYPES.vaccination && (
-          <Col>
+          <Col md={2}>
             <input
-              className="border-2 w-auto text-center"
+              className="border-2 w-24 text-center"
               type="number"
               step="any"
               id="dosage"
@@ -118,7 +121,7 @@ export function AnimalFormItem({
             <Container className="flex justify-center cursor-pointer p-1">
               <button
                 type="submit"
-                className="hover:scale-125 transition-transform"
+                className="hover:scale-110 transition-transform"
               >
                 <IoIosAddCircleOutline fontSize={30} color="green" />
               </button>
@@ -128,7 +131,7 @@ export function AnimalFormItem({
           <Col>
             <Container className="flex justify-center cursor-pointer p-1">
               <CiCircleRemove
-                className="hover:scale-125 transition-transform"
+                className="hover:scale-110 transition-transform"
                 onClick={() => removeAnimalData(animal.id)}
                 fontSize={30}
                 color="red"
