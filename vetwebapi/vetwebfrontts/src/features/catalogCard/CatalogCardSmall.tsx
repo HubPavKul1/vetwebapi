@@ -1,43 +1,32 @@
-import { UploadDrugImage } from "features/drug/ui/UploadDrugImage";
-import { UploadInstruction } from "features/drug/ui/UploadInstruction";
 import { Col } from "react-bootstrap";
 import {
   CatalogCardTitle,
-  CatalogCardTop,
   CatalogCardWrapper,
   CatalogCardImage,
-  CatalogCardBody,
   DeleteItem,
   CatalogCardFooter,
+  CatalogCardBodySmall,
+  CatalogCardTopSmall,
 } from "shared/index";
 
-interface CatalogCardProps {
+interface CatalogCardSmallProps {
   itemDetailUrl: string;
   cardTitle: string;
   imgSrc?: string;
-  drugId?: number;
   invQueryName: string;
-  isDrugCard?: boolean;
   children: React.ReactElement | React.ReactNode;
   delUrl: string;
-  isDrugInstr?: boolean;
 }
-export function CatalogCard({ ...props }: CatalogCardProps) {
+export function CatalogCardSmall({ ...props }: CatalogCardSmallProps) {
   return (
     <CatalogCardWrapper>
-      <CatalogCardTop>
+      <CatalogCardTopSmall>
         <Col sm={3}>
           {props.imgSrc && (
             <CatalogCardImage
               itemDetailUrl={props.itemDetailUrl}
               cardTitle={props.cardTitle}
               imgSrc={props.imgSrc}
-            />
-          )}
-          {props.isDrugCard && props.drugId && !props.imgSrc && (
-            <UploadDrugImage
-              drugId={props.drugId}
-              invQueryName={props.invQueryName}
             />
           )}
         </Col>
@@ -47,18 +36,13 @@ export function CatalogCard({ ...props }: CatalogCardProps) {
             cardTitle={props.cardTitle}
           />
         </Col>
-      </CatalogCardTop>
-      <CatalogCardBody>{props.children}</CatalogCardBody>
+      </CatalogCardTopSmall>
+
+      <CatalogCardBodySmall>{props.children}</CatalogCardBodySmall>
+
       <CatalogCardFooter>
         <Col sm={8}></Col>
-        <Col sm={2}>
-          {props.isDrugCard && props.drugId && !props.isDrugInstr && (
-            <UploadInstruction
-              drugId={props.drugId}
-              invQueryName={props.invQueryName}
-            />
-          )}
-        </Col>
+        <Col sm={2}></Col>
         <Col sm={2}>
           <DeleteItem
             queryKey={props.invQueryName}

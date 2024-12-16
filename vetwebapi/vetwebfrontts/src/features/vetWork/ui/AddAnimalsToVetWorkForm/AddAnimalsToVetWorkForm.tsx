@@ -104,7 +104,7 @@ export function AddAnimalsToVetWorkForm({
       />
       <Container className="mb-8 text-center">
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
-        <div className="text-left text-indigo-600 font-bold fixed top-52 left-32 w-32 bg-white opacity-95">
+        <div className="px-1 text-center text-blue-800 font-bold fixed top-52 left-48 w-30 bg-slate-50 opacity-95">
           <h5>Голов: {animalsData.length}</h5>
           <h5>Доз: {dosageCount}</h5>
         </div>
