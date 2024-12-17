@@ -97,17 +97,23 @@ export function AddAnimalsToVetWorkForm({
 
   return (
     <Container className="mb-8 p-8">
-      <CustomButton
-        className="btn-upload mb-3"
-        title="Назад"
-        onClick={() => backButtonOnClick()}
-      />
-      <Container className="mb-8 text-center">
+      <Container className="text-center sticky top-0 bg-white">
+        <Row>
+          <Col md={2}>
+            <CustomButton
+              className="btn-upload mb-3"
+              title="Назад"
+              onClick={() => backButtonOnClick()}
+            />
+          </Col>
+          <Col md={10}></Col>
+        </Row>
         <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
-        <div className="px-1 text-center text-blue-800 font-bold fixed top-52 left-48 w-30 bg-slate-50 opacity-95">
+
+        <Row className="text-left text-blue-800 font-bold bg-white">
           <h5>Голов: {animalsData.length}</h5>
           <h5>Доз: {dosageCount}</h5>
-        </div>
+        </Row>
         <Row className="border border-black bg-white opacity-100 font-bold p-2">
           <Col md={1}>N п/п</Col>
           <Col md={3}>Вид животного</Col>
@@ -122,7 +128,8 @@ export function AddAnimalsToVetWorkForm({
           )}
           <Col>Выбрать / отменить</Col>
         </Row>
-
+      </Container>
+      <Container className="mb-8 text-center">
         {unchoosenAnimals.map((animal, index) => (
           <Row key={animal.id} className="border border-black">
             <AnimalFormItem
