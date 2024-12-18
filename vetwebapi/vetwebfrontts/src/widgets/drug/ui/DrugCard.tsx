@@ -21,6 +21,8 @@ export function DrugCard({ ...props }: DrugCardProps) {
       isDrugCard={true}
       drugId={drug.id}
       isDrugInstr={!!drug.instruction}
+      topClassName="card-top"
+      bodyClassName="card-body-small"
     >
       <DrugCardBody
         drugManufacturer={drug.drug_manufacturer}

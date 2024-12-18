@@ -3,7 +3,7 @@ import { IWrapperProps } from "shared/model/WrapperProps";
 
 export function CatalogCardBody({ ...props }: IWrapperProps) {
   return (
-    <Container className="h-28 mb-1">
+    <Container className={props.className}>
       <Row>{props.children}</Row>
     </Container>
   );

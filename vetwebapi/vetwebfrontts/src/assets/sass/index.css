@@ -275,6 +275,28 @@ body {
 .catalog-card {
   @apply p-3 mb-5 border rounded-md shadow-lg hover:scale-105 transition-transform;
 }
+
+.card-section {
+  @apply mb-1;
+}
+
+.card-top {
+  @apply card-section h-24;
+}
+
+.card-top-small {
+  @apply card-section h-12;
+}
+
+.card-body {
+  @apply card-section h-28;
+}
+
+.card-body-small {
+  @apply card-section h-14;
+}
+
+
 /* end card style */
 
 /* menu style */

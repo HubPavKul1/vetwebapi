@@ -1,6 +1,6 @@
 import { CompanyCardBody } from "entities/company";
 import { ICompanyCard } from "entities/company/model/companyInterfaces";
-import { CatalogCard, CatalogCardSmallBody } from "features/index";
+import { CatalogCard } from "features/index";
 import { companyDetailUrl, companyLink } from "shared/index";
 
 interface CompanyCardProps {
@@ -12,12 +12,14 @@ interface CompanyCardProps {
 export function CompanyCard({ ...props }: CompanyCardProps) {
   const { company, invQueryName, imgSrc } = props;
   return (
-    <CatalogCardSmallBody
+    <CatalogCard
       itemDetailUrl={companyLink(company.id)}
       cardTitle={company.short_name}
       invQueryName={invQueryName}
       delUrl={companyDetailUrl(company.id)}
       imgSrc={imgSrc}
+      topClassName="card-top"
+      bodyClassName="card-body-small"
     >
       <CompanyCardBody
         address={company.address && company.address}
@@ -25,6 +27,6 @@ export function CompanyCard({ ...props }: CompanyCardProps) {
         phone2={company.address && `${company.address.phone_number2}`}
         employee={company.employee && company.employee}
       />
-    </CatalogCardSmallBody>
+    </CatalogCard>
   );
 }

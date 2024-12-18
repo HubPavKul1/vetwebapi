@@ -11,6 +11,7 @@ import {
   CatalogCardFooter,
 } from "shared/index";
 
+
 interface CatalogCardProps {
   itemDetailUrl: string;
   cardTitle: string;
@@ -21,11 +22,13 @@ interface CatalogCardProps {
   children: React.ReactElement | React.ReactNode;
   delUrl: string;
   isDrugInstr?: boolean;
+  topClassName?: string;
+  bodyClassName?: string;
 }
 export function CatalogCard({ ...props }: CatalogCardProps) {
   return (
     <CatalogCardWrapper>
-      <CatalogCardTop>
+      <CatalogCardTop className={props.topClassName}>
         <Col sm={3}>
           {props.imgSrc && (
             <CatalogCardImage
@@ -48,7 +51,7 @@ export function CatalogCard({ ...props }: CatalogCardProps) {
           />
         </Col>
       </CatalogCardTop>
-      <CatalogCardBody>{props.children}</CatalogCardBody>
+      <CatalogCardBody className={props.bodyClassName}>{props.children}</CatalogCardBody>
       <CatalogCardFooter>
         <Col sm={8}></Col>
         <Col sm={2}>
