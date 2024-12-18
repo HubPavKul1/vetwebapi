@@ -4,23 +4,25 @@ import styles from "./CustomCheckBox.module.scss";
 
 interface CustomCheckBoxProps {
   labelTitle?: string;
-  id: string;
+  itemId?: string;
+  inputId: string;
   register?: UseFormRegister<TFormValues>;
 }
 
 export function CustomCheckBox({
   labelTitle,
-  id,
+  itemId,
+  inputId,
   register,
 }: CustomCheckBoxProps) {
   return (
-    <div className="pb-3">
-      <label className="" htmlFor={id}>
+    <div>
+      <label htmlFor={itemId}>
         <input
           className={styles.custom_checkbox}
           type="checkbox"
-          id={id}
-          {...(register && register(id))}
+          id={itemId}
+          {...(register && register(inputId))}
         />
         <span className={styles.styled_checkbox}></span>
         {labelTitle}

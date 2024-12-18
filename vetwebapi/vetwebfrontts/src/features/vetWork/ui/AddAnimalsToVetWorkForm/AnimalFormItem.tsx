@@ -112,7 +112,11 @@ export function AnimalFormItem({
 
         {workType === WORKTYPES.diagnostic && (
           <Col className="flex items-center justify-center">
-            <CustomCheckBox id="is_positive" register={register} />
+            <CustomCheckBox
+              inputId="is_positive"
+              itemId={animal.id?.toString()}
+              register={register}
+            />
           </Col>
         )}
 

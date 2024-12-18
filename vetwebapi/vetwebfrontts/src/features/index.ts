@@ -4,5 +4,6 @@ export { AddAnimal } from "./animal/ui/AddAnimal";
 export { CatalogCard } from "./catalogCard/CatalogCard";
 export { CatalogCardSmall } from "./catalogCard/CatalogCardSmall";
 export { CatalogCardSmallTop } from "./catalogCard/CatalogCardSmallTop";
+export { CatalogCardSmallBody } from "./catalogCard/CatalogCardSmallBody";
 export { CreateItem } from "./CreateItem";
 export { ReportForm } from "./ReportForm";

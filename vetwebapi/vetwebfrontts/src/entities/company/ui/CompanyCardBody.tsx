@@ -42,7 +42,7 @@ export function CompanyCardBody({
         </Row>
       </Container>
       <Container className="">
-        <Row className="text-sm">
+        <Row className="text-xs">
           <Col>
             <span>тел.: {phone}</span>
           </Col>

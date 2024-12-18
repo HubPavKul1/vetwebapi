@@ -97,7 +97,7 @@ export function AddAnimalsToVetWorkForm({
 
   return (
     <Container className="mb-8 p-8">
-      <Container className="text-center sticky top-0 bg-white">
+      <Container className="text-center sticky top-0 bg-white z-10">
         <Row>
           <Col md={2}>
             <CustomButton
@@ -112,9 +112,9 @@ export function AddAnimalsToVetWorkForm({
 
         <Row className="text-left text-blue-800 font-bold bg-white">
           <h5>Голов: {animalsData.length}</h5>
-          <h5>Доз: {dosageCount}</h5>
+          <h5>Доз: {dosageCount.toFixed(4)}</h5>
         </Row>
-        <Row className="border border-black bg-white opacity-100 font-bold p-2">
+        <Row className="border border-black bg-gray-400 opacity-100 font-bold p-2">
           <Col md={1}>N п/п</Col>
           <Col md={3}>Вид животного</Col>
           <Col md={4}>Кличка</Col>
@@ -123,15 +123,13 @@ export function AddAnimalsToVetWorkForm({
 
           {disease === DISEASES.tbc && <Col md={2}>Дозировка препарата</Col>}
 
-          {workType === WORKTYPES.diagnostic && (
-            <Col>Положительная реакция</Col>
-          )}
+          {workType === WORKTYPES.diagnostic && <Col>Положительное</Col>}
           <Col>Выбрать / отменить</Col>
         </Row>
       </Container>
       <Container className="mb-8 text-center">
         {unchoosenAnimals.map((animal, index) => (
-          <Row key={animal.id} className="border border-black">
+          <Row key={animal.id} className="border border-black h-auto">
             <AnimalFormItem
               index={index + 1}
               animal={animal}
