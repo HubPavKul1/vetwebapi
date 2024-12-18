@@ -292,6 +292,10 @@ body {
   @apply card-section h-28;
 }
 
+.card-body-md {
+  @apply card-section h-20;
+}
+
 .card-body-small {
   @apply card-section h-14;
 }

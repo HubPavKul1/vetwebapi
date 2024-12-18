@@ -23,7 +23,7 @@ export function CatalogDrugCard({ ...props }: CatalogDrugCardProps) {
       delUrl={catalogDrugDetailUrl(drug.id)}
       imgSrc={!drug.image ? "/drugsCard.jpg" : drugImageUrl(drug.drug_id)}
       topClassName="card-top"
-      bodyClassName="card-body"
+      bodyClassName="card-body-md"
     >
       <CatalogDrugCardBody
         batch={drug.batch}
