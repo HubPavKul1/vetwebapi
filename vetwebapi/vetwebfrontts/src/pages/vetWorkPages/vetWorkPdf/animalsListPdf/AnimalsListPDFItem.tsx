@@ -13,7 +13,7 @@ export default function AnimalsListPDFItem({
   return (
     <tr key={animal.animal_id}>
       <td>{index + 1}</td>
-      <td>{animal.animal_group}</td>
+      <td>{animal.species}</td>
       <td>{animal.nickname}</td>
       <td>{animal.identification}</td>
       <td>{convertDateString(animal.date_of_birth).year}</td>

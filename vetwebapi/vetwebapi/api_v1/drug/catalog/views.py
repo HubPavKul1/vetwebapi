@@ -10,7 +10,13 @@ from core.models import CatalogDrug, DrugInMovement
 
 from . import crud
 from .dependencies import catalog_drug_by_id
-from .schemas import Catalog, CatalogDrugDetails, CatalogDrugIn, CatalogDrugSchema
+from .schemas import (
+    Catalog,
+    CatalogDrugDetails,
+    CatalogDrugIn,
+    CatalogDrugSchema,
+    CatalogDrugs,
+)
 from .serializers import serialize_catalog_drug, serialize_catalog_drug_details
 
 router = APIRouter(prefix="/catalog")
@@ -45,6 +51,22 @@ async def get_catalog_drugs(
             page=page,
             per_page=per_page,
         )
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/all", response_model=CatalogDrugs)
+async def get_catalog_drugs_all(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[CatalogDrugs, dict]:
+
+    try:
+        drugs = await crud.read_catalog(session=session)
+        drug_schemas = [await serialize_catalog_drug(drug) for drug in drugs]
+        return CatalogDrugs(catalog_drugs=drug_schemas)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

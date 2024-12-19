@@ -33,6 +33,7 @@ export const drugReportsLink = drugsLink + "/reports";
 
 // catalog drugs
 export const catalogDrugsUrl = drugsUrl + "/catalog";
+export const catalogDrugsAllUrl = catalogDrugsUrl + "/all";
 export const catalogDrugDetailUrl = (drugId?: number) => {
   return catalogDrugsUrl + `/${drugId}/`;
 };

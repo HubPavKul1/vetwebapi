@@ -18,8 +18,11 @@ class CatalogDrugSchema(CatalogDrugIn):
     image: str | None = None
 
 
-class Catalog(BaseModel):
+class CatalogDrugs(BaseModel):
     catalog_drugs: list[CatalogDrugSchema]
+
+
+class Catalog(CatalogDrugs):
     total_count: int
     page: int
     per_page: int
