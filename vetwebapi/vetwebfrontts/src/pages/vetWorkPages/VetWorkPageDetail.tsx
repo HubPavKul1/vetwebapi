@@ -23,7 +23,7 @@ import useVetWorkCompanyStore from "features/vetWork/stores/useVetWorkCompanySto
 import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalListStore";
 import { VetWorkQueryKeys } from "shared/constants/vetworkConst";
 import useSamplingActStore from "features/vetWork/stores/useSamplingActStore";
-import { SamplingActPDF } from "./vetWorkPdf/samplingAct/SamplingActPdf";
+import { SamplingActPDF } from "./vetWorkPdf/samplingAct/SamplingActPDF";
 
 export function VetWorkPageDetail() {
   const isAct = useActStore((state) => state.isAct);
