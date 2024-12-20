@@ -15,7 +15,7 @@ class DrugMovementOut(DrugMovementIn):
 
 class DrugInMovementIn(BaseModel):
     catalog_drug_id: int
-    packs_amount: int
+    packs_amount: float
     units_amount: float
     place_of_administration: str | None = None
     administration_method: str | None = None
@@ -30,7 +30,7 @@ class DrugInMovementSchema(BaseModel):
     production_date: date
     expiration_date: date
     accounting_unit: str
-    packs_amount: int
+    packs_amount: float
     units_amount: float
     drug_manufacturer: str
     drug_dosage: str

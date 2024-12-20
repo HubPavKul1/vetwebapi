@@ -32,6 +32,7 @@ async def catalog_drug_info() -> Subquery:
             CatalogDrug.production_date.label("production_date"),
             CatalogDrug.expiration_date.label("expiration_date"),
         )
+        .where(CatalogDrug.is_active == True)
         .join(Drug, Drug.id == CatalogDrug.drug_id)
         .join(AccountingUnit, AccountingUnit.id == Drug.accounting_unit_id)
         .subquery("catalog_drug_info")

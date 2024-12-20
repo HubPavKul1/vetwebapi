@@ -31,7 +31,7 @@ class Catalog(CatalogDrugs):
 class CatalogDrugDetail(BaseModel):
     catalog_drug_id: int
     operation_date: date
-    packs_amount: int
+    packs_amount: float
     units_amount: float
 
 

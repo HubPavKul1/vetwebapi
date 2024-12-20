@@ -5,6 +5,7 @@ import {
   OpenFileBtn,
   ReferralAnimalListBtn,
   ReferralBtn,
+  SamplingActBtn,
   TubercActBtn,
   UploadFileMenuItem,
 } from "entities/vetWork";
@@ -44,10 +45,14 @@ export function VetWorkMenuButtonBlock() {
     },
     {
       id: 4,
-      element: !data.file_id && <UploadFileMenuItem vetWorkId={data.id} />,
+      element: data.work_type === WORKTYPES.diagnostic && <SamplingActBtn />,
     },
     {
       id: 5,
+      element: !data.file_id && <UploadFileMenuItem vetWorkId={data.id} />,
+    },
+    {
+      id: 6,
       element: data.file_id && <OpenFileBtn />,
     },
   ];

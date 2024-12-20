@@ -12,15 +12,15 @@ class DrugReportItemSchema(BaseModel):
     production_date: date
     expiration_date: date
     packing: float
-    packs_start: int | None
+    packs_start: float | None
     units_start: float | None
-    packs_received: int | None
+    packs_received: float | None
     units_received: float | None
-    packs_spent: int | None
+    packs_spent: float | None
     units_spent: float | None
     disposed_units: float | None
     units_spent_disposed: float | None
-    packs_rest: int | None
+    packs_rest: float | None
     units_rest: float | None
 
 
@@ -42,7 +42,7 @@ class Report1VetBItemSchema(BaseModel):
 
 class DrugRestSchema(BaseModel):
     id: int
-    packs_rest: int | None
+    packs_rest: float | None
     units_rest: float | None
 
 

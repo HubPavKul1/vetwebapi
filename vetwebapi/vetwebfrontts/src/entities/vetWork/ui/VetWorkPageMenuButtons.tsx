@@ -3,6 +3,7 @@ import useActStore from "features/vetWork/stores/useActStore";
 import useAnimalListStore from "features/vetWork/stores/useAnimalListStore";
 import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalListStore";
 import useReferralStore from "features/vetWork/stores/useReferralStore";
+import useSamplingActStore from "features/vetWork/stores/useSamplingActStore";
 import useVetWorkFileStore from "features/vetWork/stores/useVetWorkFileStore";
 import { PageMenuButton } from "shared/index";
 
@@ -44,6 +45,13 @@ export function AnimalListBtn() {
   const animalListOpen = useAnimalListStore((state) => state.animalListOpen);
 
   return <PageMenuButton title="Опись животных" showContent={animalListOpen} />;
+}
+
+export function SamplingActBtn() {
+  const samplingActOpen = useSamplingActStore((state) => state.samplingActOpen);
+  return (
+    <PageMenuButton title="Акт отбора проб" showContent={samplingActOpen} />
+  );
 }
 
 export function OpenFileBtn() {

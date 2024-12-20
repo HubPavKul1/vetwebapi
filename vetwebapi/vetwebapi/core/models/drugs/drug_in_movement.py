@@ -25,7 +25,7 @@ class DrugInMovement(Base):
     place_of_administration: Mapped[str]
     administration_method: Mapped[str]
 
-    packs_amount: Mapped[int]
+    packs_amount: Mapped[float]
     units_amount: Mapped[float]
 
     drug_movement: Mapped["DrugMovement"] = relationship(
