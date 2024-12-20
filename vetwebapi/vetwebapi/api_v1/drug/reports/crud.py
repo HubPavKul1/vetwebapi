@@ -83,9 +83,11 @@ async def animals_count_catalog_drug_id(body: DateRangeIn) -> Subquery:
     return (
         select(
             animals_count.c.animals_count.label("animals_count"),
+            # func.sum(animals_count.c.animals_count).label("animals_count"),
             DrugInMovement.catalog_drug_id.label("cd_id"),
         )
         .join(DrugInMovement, DrugInMovement.drug_movement_id == animals_count.c.dm_id)
+        # .group_by(DrugInMovement.catalog_drug_id)
         .subquery("animals_count_catalog_drug_id")
     )
 
