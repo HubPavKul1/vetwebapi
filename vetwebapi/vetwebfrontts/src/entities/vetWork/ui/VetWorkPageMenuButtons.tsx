@@ -1,6 +1,7 @@
 import useAccountingActStore from "features/vetWork/stores/useAccountingActStore";
 import useActStore from "features/vetWork/stores/useActStore";
 import useAnimalListStore from "features/vetWork/stores/useAnimalListStore";
+import useBloodActStore from "features/vetWork/stores/useBloodActStore";
 import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalListStore";
 import useReferralStore from "features/vetWork/stores/useReferralStore";
 import useSamplingActStore from "features/vetWork/stores/useSamplingActStore";
@@ -51,6 +52,13 @@ export function SamplingActBtn() {
   const samplingActOpen = useSamplingActStore((state) => state.samplingActOpen);
   return (
     <PageMenuButton title="Акт отбора проб" showContent={samplingActOpen} />
+  );
+}
+
+export function BloodActBtn() {
+  const bloodActOpen = useBloodActStore((state) => state.bloodActOpen);
+  return (
+    <PageMenuButton title="Акт отбора проб крови" showContent={bloodActOpen} />
   );
 }
 

@@ -3,7 +3,7 @@ import { useGetVetWorkData } from "features/vetWork";
 import { Col, Container, Row } from "react-bootstrap";
 import { convertDateString } from "shared/helpers";
 
-export default function AccountingActBody() {
+export function AccountingActBody() {
   const data = useGetVetWorkData();
   if (!data) return;
   if (!data.animals) return;

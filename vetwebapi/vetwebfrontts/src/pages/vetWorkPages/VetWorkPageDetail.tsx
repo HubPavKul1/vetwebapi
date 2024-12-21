@@ -24,6 +24,8 @@ import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnima
 import { VetWorkQueryKeys } from "shared/constants/vetworkConst";
 import useSamplingActStore from "features/vetWork/stores/useSamplingActStore";
 import { SamplingActPDF } from "./vetWorkPdf/samplingAct/SamplingActPDF";
+import useBloodActStore from "features/vetWork/stores/useBloodActStore";
+import { BloodActPDF } from "./vetWorkPdf/bloodActPdf/BloodActPDF";
 
 export function VetWorkPageDetail() {
   const isAct = useActStore((state) => state.isAct);
@@ -39,6 +41,7 @@ export function VetWorkPageDetail() {
   );
 
   const isSamplingAct = useSamplingActStore((state) => state.isSamplingAct);
+  const isBloodAct = useBloodActStore((state) => state.isBloodAct);
   const isVetWorkFile = useVetWorkFileStore((state) => state.isFile);
   const isAnimals = useVetWorkAnimalsStore((state) => state.isAnimals);
   const companyId = useVetWorkCompanyStore((state) => state.companyId);
@@ -71,6 +74,8 @@ export function VetWorkPageDetail() {
     <VetWorkFile />
   ) : isSamplingAct ? (
     <SamplingActPDF />
+  ) : isBloodAct ? (
+    <BloodActPDF />
   ) : isAnimals ? (
     <AddAnimalsToVetWorkForm
       companyId={companyId}

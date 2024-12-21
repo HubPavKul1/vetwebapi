@@ -40,6 +40,7 @@ export interface IVetWorkSchema {
   is_primary: boolean;
   is_state_assignment: boolean;
   clinic: string;
+  laboratory?: string;
   biomaterial?: string;
   biomaterial_fixation?: string;
   biomaterial_package?: string;

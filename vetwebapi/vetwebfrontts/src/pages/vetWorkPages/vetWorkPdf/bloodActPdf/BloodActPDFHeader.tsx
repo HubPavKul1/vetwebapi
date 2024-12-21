@@ -5,7 +5,7 @@ import { NoData } from "shared/index";
 import { convertDateString } from "shared/helpers";
 import { useGetVetWorkData } from "features/vetWork";
 
-export function SamplingActPDFHeader() {
+export function BloodActPDFHeader() {
   const data = useGetVetWorkData();
   if (!data) return;
   const date = convertDateString(data.vetwork_date);
@@ -18,7 +18,7 @@ export function SamplingActPDFHeader() {
       <Row className="mb-5">
         <Col sm={6}></Col>
         <Col>
-          <DrugReportTopText textNumber={4} />
+          <DrugReportTopText textNumber={7} />
         </Col>
       </Row>
       <Row className="text-center text-lg font-bold">
@@ -32,7 +32,7 @@ export function SamplingActPDFHeader() {
       </Row>
       <Row className="text-center">
         <Col></Col>
-        <Col md={6}>отбора проб патологического(биологического) материала</Col>
+        <Col md={6}>отбора проб (образцов) сыворотки крови</Col>
         <Col></Col>
       </Row>
       <Row>

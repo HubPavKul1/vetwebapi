@@ -98,13 +98,16 @@ async def diagnostic_report(session: AsyncSession, body: DateRangeIn) -> Result[
     animals: Subquery = await animals_data_in_vetwork(vetwork_ids=vetwork_ids)
     diseases: Subquery = await diseases_in_vetwork(vetwork_ids=vetwork_ids)
 
-    query: Select[Any] = select(
-        # diseases.c.vetwork_id.label("vetwork_id"),
-        animals.c.animal_group.label("animal_group"),
-        diseases.c.disease.label("disease"),
-        animals.c.animals_count.label("animals_count"),
-        animals.c.positive_count.label("positive_count"),
-    ).join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
+    query: Select[Any] = (
+        select(
+            animals.c.animal_group.label("animal_group"),
+            diseases.c.disease.label("disease"),
+            func.sum(animals.c.animals_count).label("animals_count"),
+            func.sum(animals.c.positive_count).label("positive_count"),
+        )
+        .join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
+        .group_by(animals.c.animal_group, diseases.c.disease)
+    )
 
     return await session.execute(query)
 
@@ -119,10 +122,14 @@ async def vaccination_treatment_report(
     animals: Subquery = await animals_data_in_vetwork(vetwork_ids=vetwork_ids)
     diseases: Subquery = await diseases_in_vetwork(vetwork_ids=vetwork_ids)
 
-    query: Select[Any] = select(
-        animals.c.animal_group.label("animal_group"),
-        diseases.c.disease.label("disease"),
-        animals.c.animals_count.label("animals_count"),
-    ).join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
+    query: Select[Any] = (
+        select(
+            animals.c.animal_group.label("animal_group"),
+            diseases.c.disease.label("disease"),
+            func.sum(animals.c.animals_count).label("animals_count"),
+        )
+        .join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
+        .group_by(animals.c.animal_group, diseases.c.disease)
+    )
 
     return await session.execute(query)

@@ -1,8 +1,9 @@
 import { PDFWrapper } from "shared/ui/PDFWrapper";
 import useSamplingActStore from "features/vetWork/stores/useSamplingActStore";
 import { useGetVetWorkData } from "features/vetWork";
-import { ActPDFFooter } from "../actPdf/ActPDFFooter";
 import { SamplingActPDFHeader } from "./SamplingActPDFHeader";
+import { SamplingActPDFFooter } from "./SamplingActPDFFooter";
+import { SamplingActPDFBody } from "./SamplingActPDFBody";
 
 export function SamplingActPDF() {
   const data = useGetVetWorkData();
@@ -12,7 +13,8 @@ export function SamplingActPDF() {
   return (
     <PDFWrapper closePdf={actClose} filename="act.pdf">
       <SamplingActPDFHeader />
-      <ActPDFFooter />
+      <SamplingActPDFBody />
+      <SamplingActPDFFooter />
     </PDFWrapper>
   );
 }

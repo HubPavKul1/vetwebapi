@@ -2,6 +2,7 @@ import {
   AccountingActBtn,
   ActBtn,
   AnimalListBtn,
+  BloodActBtn,
   OpenFileBtn,
   ReferralAnimalListBtn,
   ReferralBtn,
@@ -45,7 +46,14 @@ export function VetWorkMenuButtonBlock() {
     },
     {
       id: 4,
-      element: data.work_type === WORKTYPES.diagnostic && <SamplingActBtn />,
+      element:
+        data.work_type === WORKTYPES.diagnostic &&
+        data.biomaterial_fixation === "заморозка" ? (
+          <SamplingActBtn />
+        ) : (
+          data.work_type === WORKTYPES.diagnostic &&
+          disease !== DISEASES.tbc && <BloodActBtn />
+        ),
     },
     {
       id: 5,
