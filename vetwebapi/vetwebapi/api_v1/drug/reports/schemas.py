@@ -42,6 +42,7 @@ class Report1VetBItemSchema(BaseModel):
 
 class DrugRestSchema(BaseModel):
     id: int
+    accounting_unit: str
     packs_rest: float | None
     units_rest: float | None
 

@@ -57,7 +57,7 @@ async def get_drug_rests(
             session=session, body=body, drug_id=drug.id
         )
         return DrugRestSchema(
-            id=drug_rest[0], packs_rest=drug_rest[7], units_rest=drug_rest[8]
+            id=drug_rest[0], accounting_unit=drug_rest[9], packs_rest=drug_rest[7], units_rest=drug_rest[8]
         )
     except Exception:
         raise HTTPException(

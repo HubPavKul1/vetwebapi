@@ -23,6 +23,7 @@ export interface IDrugReport {
 
 export interface IDrugRest {
   id: number;
+  accounting_unit: string;
   packs_rest?: number;
   units_rest?: number;
 }

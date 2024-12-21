@@ -331,6 +331,7 @@ async def catalog_drug_rest(
             )
             .cast(Float)
             .label("units_rest_end"),
+            c_d_info.c.accounting_unit.label("accounting_unit"),
         )
         .filter(c_d_info.c.cd_id == drug_id)
         .join(c_d_rest_start, c_d_rest_start.c.cd_id == c_d_info.c.cd_id, isouter=True)
