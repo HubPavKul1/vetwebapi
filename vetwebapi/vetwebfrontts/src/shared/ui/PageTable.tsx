@@ -25,7 +25,7 @@ export function PageTable({ ...props }: PageTableProps) {
         </thead>
         <tbody
           className={clsx(
-            props.isDrugReport ? "table-body-report" : "table-body"
+            props.isPDF ? "table-body-report" : "table-body"
           )}
         >
           {props.tableItems}

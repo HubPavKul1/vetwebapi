@@ -19,7 +19,7 @@ export function ReceiptPDFTable({ data }: ReceiptPDFTableProps) {
           data.drugs?.length &&
           data.drugs.map((drug) => <ReceiptDrug key={drug.id} drug={drug} />)
         }
-        isDrugReport
+        isPDF
       />
     </Container>
   );
