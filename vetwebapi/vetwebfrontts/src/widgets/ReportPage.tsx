@@ -26,7 +26,6 @@ export function ReportPage({ ...props }: ReportPageMainProps) {
             <PageTable
               tableHeaders={tableHeaders}
               tableItems={tableItems}
-              isDrugReport
             />
           </Container>
         </Container>

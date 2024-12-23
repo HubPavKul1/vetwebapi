@@ -4,10 +4,11 @@ import ActTBCHorses from "./ActTBCHorses";
 import ActVaccination from "./ActVaccination";
 import DrugSection from "./DrugSection";
 import ActTBCCows from "./ActTBCCows";
-import { companyDoctorString, convertDateString } from "shared/helpers";
+import { convertDateString } from "shared/helpers";
 import { StateAssignment } from "shared/index";
 
 import { useGetVetWorkData } from "features/vetWork";
+import { ActPDFBodyTop } from "../ActPDFBodyTop";
 
 export function ActPDFBody() {
   const data = useGetVetWorkData();
@@ -21,15 +22,6 @@ export function ActPDFBody() {
   const disease = data.diseases[0].toLowerCase();
   const animal = data.animals[0].animal_group.toLowerCase();
 
-  const doctors = data.doctors.map(
-    (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}, `
-  );
-
-  const companyDoctor = data.companies[0]?.employee && companyDoctorString(
-    data.companies[0].employee,
-    data.companies[0].short_name
-  )
-
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
   );
@@ -39,18 +31,7 @@ export function ActPDFBody() {
 
   return (
     <Container className="mb-5">
-      <Row>
-        <Col sm={2}>Мы, нижеподписавшиеся</Col>
-        <Col className="pdf-report-underlined mb-2 p-1 italic">{doctors}</Col>
-      </Row>
-      <Row>
-        <Col sm={2}>в присутствии</Col>
-        <Col className="pdf-report-underlined p-1 italic">{companyDoctor}</Col>
-      </Row>
-      <Row className="text-sm text-center">
-        <Col sm={3}></Col>
-        <Col>(указать должность, Ф.И.О. представителя хозяйства, фермы)</Col>
-      </Row>
+      <ActPDFBodyTop />
       {disease === "туберкулез" && animal === "лошади" ? (
         <ActTBCHorses data={data} vetworkDate={vetworkDate.shortDate} />
       ) : disease === "туберкулез" && animal === "крупный рогатый скот" ? (
@@ -67,6 +48,5 @@ export function ActPDFBody() {
       <Row>
         <Col sm={6}>Опись на обработанных прилагается.</Col>
       </Row>
-    </Container>
-  );
+    </Container>)
 }

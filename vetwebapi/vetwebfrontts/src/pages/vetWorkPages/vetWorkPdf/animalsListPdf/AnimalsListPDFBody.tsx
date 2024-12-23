@@ -15,6 +15,7 @@ export function AnimalsListPDFBody({ data }: AnimalsListPDFBodyProps) {
   return (
     <Container className="py-10">
       <PageTable
+        isPDF
         tableHeaders={animalListHeaders}
         tableItems={
           data.companies &&

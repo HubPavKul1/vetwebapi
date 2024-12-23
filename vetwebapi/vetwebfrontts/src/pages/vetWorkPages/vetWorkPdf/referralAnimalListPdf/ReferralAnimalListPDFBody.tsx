@@ -19,6 +19,7 @@ export function ReferralAnimalListPDFBody({
   return (
     <Container>
       <PageTable
+        isPDF
         tableHeaders={referralAnimalsHeaders}
         tableItems={data.animals.map((animal, index) => (
           <ReferralAnimalItem animal={animal} index={index} />

@@ -337,9 +337,15 @@ body {
 }
 
 /* table styles */
+
 .table-head th {
   @apply border border-black font-bold text-center;
 }
+
+.page-table-head th {
+  @apply border border-black bg-gray-400 text-center;
+}
+
 
 .table-head-report {
   @apply pb-2 table-head text-xs;
@@ -348,6 +354,7 @@ body {
 .table-body td {
   @apply border border-black text-center;
 }
+
 
 .table-body-report {
   @apply pb-2 table-body text-xs;

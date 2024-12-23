@@ -24,6 +24,7 @@ export function VetWorkReportPDFBody({ ...props }: VetWorkReportPDFBodyProps) {
     <Container className="text-center text-xl">
       <h1 className="mb-3">{title}</h1>
       <PageTable
+        isPDF
         tableHeaders={reportHeaders}
         tableItems={data.map((item, index) => (
           <VetWorkReportItem

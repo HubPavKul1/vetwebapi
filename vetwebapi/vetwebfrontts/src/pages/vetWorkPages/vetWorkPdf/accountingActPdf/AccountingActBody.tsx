@@ -1,7 +1,7 @@
 import { useGetVetWorkData } from "features/vetWork";
 
 import { Col, Container, Row } from "react-bootstrap";
-import { companyDoctorString, convertDateString } from "shared/helpers";
+import { ActPDFBodyTop } from "../ActPDFBodyTop";
 
 export function AccountingActBody() {
   const data = useGetVetWorkData();
@@ -11,19 +11,7 @@ export function AccountingActBody() {
   if (!data.companies) return;
   
 
-  const vetworkDate = convertDateString(data.vetwork_date);
-
   const animal = data.animals[0].animal_group.toLowerCase();
-
-  const doctors = data.doctors.map(
-    (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
-  );
-
-  const companyDoctor = data.companies[0]?.employee && companyDoctorString(
-    data.companies[0].employee,
-    data.companies[0].short_name
-  )
-  
 
   const administrMethod =
     animal !== "лошади" ? "внутрикожно" : "методом офтальмопробы";
@@ -38,18 +26,7 @@ export function AccountingActBody() {
 
   return (
     <Container className="mb-5">
-      <Row className="mb-3">
-        <Col sm={2}>Мы, нижеподписавшиеся</Col>
-        <Col className="pdf-report-underlined p-1 italic">{doctors}</Col>
-      </Row>
-      <Row className="">
-        <Col sm={2}>в присутствии</Col>
-        <Col className="pdf-report-underlined p-1 italic">{companyDoctor}</Col>
-      </Row>
-      <Row className="text-sm text-center mb-3">
-        <Col sm={3}></Col>
-        <Col>(указать должность, Ф.И.О. представителя хозяйства, фермы)</Col>
-      </Row>
+      <ActPDFBodyTop/>
       <Row className="mb-3">
         <Col sm={3}>Составили настоящий акт о том, что</Col>
         <Col className="pdf-report-underlined p-1"></Col>

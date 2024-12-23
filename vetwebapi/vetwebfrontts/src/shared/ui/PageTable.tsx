@@ -4,23 +4,17 @@ import clsx from "clsx";
 interface PageTableProps {
   tableHeaders: string[];
   tableItems?: React.ReactElement | React.ReactNode;
-  isDrugReport?: boolean;
+  isPDF?: boolean;
 }
 
 export function PageTable({ ...props }: PageTableProps) {
-  const tableHeadStyle = props.isDrugReport
-    ? "table-head-report"
-    : "table-head";
-  const tableBodyStyle = props.isDrugReport
-    ? "table-body-report"
-    : "table-body";
-
+  
   return (
     <>
       <Table>
         <thead
           className={clsx(
-            props.isDrugReport ? "table-head-report" : "table-head"
+            props.isPDF ? "table-head-report" : "page-table-head"
           )}
         >
           <tr>
