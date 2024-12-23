@@ -11,7 +11,7 @@ export function ActPDFHeader() {
   const date = convertDateString(data.vetwork_date);
 
   if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.drug) return <NoData title="Данные о препаратах" />;
+  if (!data.drug) return <NoData title="Данные" />;
   if (!data.companies) return <NoData title="Данные о предприятиях" />;
 
   const disease = data.diseases[0].toLowerCase();

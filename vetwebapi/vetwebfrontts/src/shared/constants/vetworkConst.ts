@@ -20,4 +20,5 @@ export const VetWorkQueryKeys = {
 export const BIOMATERIAL = {
   bloodSerum: "сыворотка крови",
   blood: "цельная кровь",
+  pathmaterial: ["труп", "голова", "патматериал", "кусочки селезенки"]
 };

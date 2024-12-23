@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { IVetWorkSchema } from "entities/vetWork/model/vetWorkInterfaces";
-import { NoData, StateAssignment } from "shared/index";
+import { StateAssignment } from "shared/index";
 import { convertDateString } from "shared/helpers";
 import { addressString } from "entities/address/addressHelper";
 
@@ -9,14 +9,11 @@ interface ReferralPDFBodyNoBloodProps {
 }
 
 export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
-  if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.companies?.length) return <NoData title="Данные о предприятиях" />;
+  if (!data.animals) return;
+  if (!data.companies?.length) return;
 
   const date = convertDateString(data.vetwork_date);
 
-  const animals = new Set(
-    data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
-  );
   const diseases = new Set(
     data.diseases.map((disease) => disease.toLowerCase() + ", ")
   );
@@ -106,7 +103,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="font-bold">Дата, время отбора</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
-        <Col className="font-bold">№ акта</Col>
+        <Col sm={2} className="font-bold">№ акта</Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
       {data.is_state_assignment && <StateAssignment />}
@@ -114,7 +111,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="font-bold">Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
-        <Col className="font-bold">вид упаковки</Col>
+        <Col sm={2} className="font-bold">вид упаковки</Col>
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>
       <Row>

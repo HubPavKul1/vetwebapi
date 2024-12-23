@@ -3,7 +3,7 @@ import { useGetVetWorkData } from "features/vetWork";
 import useBloodActStore from "features/vetWork/stores/useBloodActStore";
 import { BloodActPDFHeader } from "./BloodActPDFHeader";
 import { BloodActPDFBody } from "./BloodActPDFBody";
-import { BloodActPDFFooter } from "./BloodActPDFFooter";
+import { ActPDFFooter } from "../ActPDFFooter";
 
 export function BloodActPDF() {
   const data = useGetVetWorkData();
@@ -14,7 +14,7 @@ export function BloodActPDF() {
     <PDFWrapper closePdf={actClose} filename="act.pdf">
       <BloodActPDFHeader />
       <BloodActPDFBody />
-      <BloodActPDFFooter />
+      <ActPDFFooter />
     </PDFWrapper>
   );
 }

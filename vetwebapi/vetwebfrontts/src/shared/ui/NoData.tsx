@@ -7,7 +7,7 @@ interface NoDataProps {
 
 export function NoData({ title }: NoDataProps) {
   const firstWord = title.toUpperCase();
-  const letters = ["и", "ы", "я"];
+  const letters = ["и", "ы", "я", "е"];
   const lastLetter = firstWord.slice(-1).toLowerCase();
 
   return (

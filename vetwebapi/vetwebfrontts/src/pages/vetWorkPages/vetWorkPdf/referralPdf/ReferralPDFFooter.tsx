@@ -9,9 +9,9 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
   if (!data.animals) return;
   if (!data.companies?.length) return;
 
-  const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
+  const doctor = data.doctors[0].fullname;
 
-  const companyDoctor = `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`;
+  const companyDoctor = data.companies[0]?.employee?.fullname;
 
   return (
     <Container>
@@ -128,7 +128,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={5}>Представитель заказчика ознакомлен и согласен:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
         <Col></Col>
-        <Col md={2} className="pdf-report-underlined"></Col>
+        <Col md={2} className="pdf-report-underlined text-center">{companyDoctor}</Col>
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
@@ -144,7 +144,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={5}>Подпись лица, сдавшего пробы, дата:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
         <Col></Col>
-        <Col md={2} className="pdf-report-underlined"></Col>
+        <Col md={2} className="pdf-report-underlined text-center">{doctor}</Col>
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>

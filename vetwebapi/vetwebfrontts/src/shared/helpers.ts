@@ -1,3 +1,6 @@
+import { IEmployee } from "entities/employee";
+import { PhysicalPersons } from "./constants/companyConst";
+
 export const convertDateString = (date: string) => {
   const dateObj: Date = new Date(date);
   const month: string = dateObj.toLocaleString("default", { month: "long" });
@@ -52,4 +55,21 @@ export const timeToExpiration = (date: Date | number) => {
   );
 
   return { result, deltaSeconds };
+};
+
+export const vetworkDoctorsString = (doctors: IEmployee[], clinic: string) => {
+  return doctors.map(
+    (doctor) => `${doctor.position} ${clinic} ${doctor.fullname}`
+  );
+};
+
+export const companyDoctorString = (
+  employee: IEmployee,
+  companyShortName: string
+) => {
+  let companyDoctor = "";
+  !PhysicalPersons.includes(employee.position)
+    ? (companyDoctor = `${employee.position} ${companyShortName} ${employee.fullname}`)
+    : (companyDoctor = `${employee.fullname}`);
+  return companyDoctor;
 };

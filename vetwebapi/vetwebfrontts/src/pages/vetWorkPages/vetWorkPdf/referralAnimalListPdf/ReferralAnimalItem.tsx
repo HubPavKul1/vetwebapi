@@ -10,7 +10,7 @@ export function ReferralAnimalItem({ animal, index }: ReferralAnimalItemProps) {
   return (
     <tr key={animal.animal_id}>
       <td>{index + 1}</td>
-      <td>{animal.animal_group}</td>
+      <td>{animal.species}</td>
       <td>
         {animal.identification !== "нет" && animal.identification + ", "}
         {animal.nickname}

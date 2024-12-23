@@ -4,7 +4,7 @@ import ActTBCHorses from "./ActTBCHorses";
 import ActVaccination from "./ActVaccination";
 import DrugSection from "./DrugSection";
 import ActTBCCows from "./ActTBCCows";
-import { convertDateString } from "shared/helpers";
+import { companyDoctorString, convertDateString } from "shared/helpers";
 import { StateAssignment } from "shared/index";
 
 import { useGetVetWorkData } from "features/vetWork";
@@ -25,10 +25,11 @@ export function ActPDFBody() {
     (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}, `
   );
 
-  const companyDoctor =
-    data.companies[0].employee?.position !== "ИП"
-      ? `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`
-      : `${data.companies[0].employee?.fullname}`;
+  const companyDoctor = data.companies[0]?.employee && companyDoctorString(
+    data.companies[0].employee,
+    data.companies[0].short_name
+  )
+
   const animals = new Set(
     data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
   );

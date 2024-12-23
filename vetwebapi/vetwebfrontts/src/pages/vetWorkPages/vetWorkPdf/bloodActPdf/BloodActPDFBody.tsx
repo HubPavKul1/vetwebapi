@@ -2,7 +2,7 @@ import { addressString } from "entities/address/addressHelper";
 import { useGetVetWorkData } from "features/vetWork";
 
 import { Col, Container, Row } from "react-bootstrap";
-import { convertDateString } from "shared/helpers";
+import { companyDoctorString, convertDateString } from "shared/helpers";
 
 export function BloodActPDFBody() {
   const data = useGetVetWorkData();
@@ -13,16 +13,17 @@ export function BloodActPDFBody() {
   const vetworkDate = convertDateString(data.vetwork_date);
 
   const disease = data.diseases[0].toLowerCase();
-  const animal = data.animals[0].animal_group.toLowerCase();
+  const animal = data.animals[0]?.animal_group?.toLowerCase();
 
   const doctors = data.doctors.map(
     (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
   );
 
-  const companyDoctor =
-    data.companies[0].employee?.position !== "ИП"
-      ? `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`
-      : `${data.companies[0].employee?.fullname}`;
+  const companyDoctor = data.companies[0]?.employee && companyDoctorString(
+      data.companies[0].employee,
+      data.companies[0].short_name
+    )
+  
 
   const companyAddress =
     data.companies[0]?.address && addressString(data.companies[0].address);
@@ -34,7 +35,7 @@ export function BloodActPDFBody() {
       <Row className="mb-3">
         <Col>Наименование юридического лица или ФИО физического лица</Col>
         <Col className="pdf-report-underlined p-1 italic">
-          {data.companies[0].short_name}
+          {data.companies[0]?.short_name}
         </Col>
       </Row>
       <Row className="mb-3">
@@ -59,7 +60,7 @@ export function BloodActPDFBody() {
       </Row>
       <Row className="">
         <Col sm={2}>в присутствии </Col>
-        <Col className="pdf-report-underlined p-1">{companyDoctor}</Col>
+        <Col className="pdf-report-underlined p-1 italic">{companyDoctor}</Col>
       </Row>
       <Row className="text-sm text-center mb-3">
         <Col sm={2}></Col>

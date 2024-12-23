@@ -8,11 +8,12 @@ import { useGetVetWorkData } from "features/vetWork";
 export function AccountingActHeader() {
   const data = useGetVetWorkData();
   if (!data) return;
+  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+  if (!data.animals) return <NoData title="Данные о животных" />;
+  if (!data.drug) return <NoData title="Данные" />;
 
   const date = convertDateString(data.vetwork_date);
-  if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.drug) return <NoData title="Данные о препаратах" />;
-  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+  
 
   const animals = data.animals[0].animal_group.toLowerCase();
 

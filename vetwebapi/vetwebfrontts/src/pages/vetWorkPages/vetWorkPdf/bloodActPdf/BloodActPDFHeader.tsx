@@ -8,10 +8,11 @@ import { useGetVetWorkData } from "features/vetWork";
 export function BloodActPDFHeader() {
   const data = useGetVetWorkData();
   if (!data) return;
-  const date = convertDateString(data.vetwork_date);
+  if (!data.companies) return <NoData title="Данные" />;
+  if (!data.animals) return <NoData title="Данные" />;
 
-  if (!data.animals) return <NoData title="Данные о животных" />;
-  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+  const date = convertDateString(data.vetwork_date);
+  
 
   return (
     <Container className="mb-5">

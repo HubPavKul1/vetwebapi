@@ -4,3 +4,6 @@ export const CompanyQueryKeys = {
   labs: "labs",
   companyDetail: "company",
 };
+
+
+export const PhysicalPersons = ["ИП", "гр", "гр."]

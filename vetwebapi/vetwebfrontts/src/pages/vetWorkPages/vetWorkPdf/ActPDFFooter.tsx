@@ -1,11 +1,18 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useGetVetWorkData } from "features/vetWork";
+import { companyDoctorString, NoData } from "shared/index";
 
-export function SamplingActPDFFooter() {
+export function ActPDFFooter() {
   const data = useGetVetWorkData();
   if (!data) return;
-  if (!data.animals) return;
-  if (!data.companies) return;
+  if (!data.animals) return <NoData title="Данные о животных" />;
+  if (!data.companies) return <NoData title="Данные о предприятиях" />;
+
+  const companyDoctor = data.companies[0]?.employee && companyDoctorString(
+    data.companies[0].employee,
+    data.companies[0].short_name
+  )
+
 
   return (
     <Container className="">
@@ -22,7 +29,7 @@ export function SamplingActPDFFooter() {
       <Row>
         <Col sm={3}></Col>
         <Col sm={2} className="pdf-report-underlined"></Col>
-        <Col sm={4}>{data.companies[0].employee?.fullname}</Col>
+        <Col sm={4}>{companyDoctor}</Col>
       </Row>
     </Container>
   );

@@ -1,7 +1,7 @@
 import { useGetVetWorkData } from "features/vetWork";
 
 import { Col, Container, Row } from "react-bootstrap";
-import { convertDateString } from "shared/helpers";
+import { companyDoctorString, convertDateString } from "shared/helpers";
 
 export function AccountingActBody() {
   const data = useGetVetWorkData();
@@ -9,26 +9,21 @@ export function AccountingActBody() {
   if (!data.animals) return;
   if (!data.drug) return;
   if (!data.companies) return;
+  
 
   const vetworkDate = convertDateString(data.vetwork_date);
 
-  const disease = data.diseases[0].toLowerCase();
   const animal = data.animals[0].animal_group.toLowerCase();
 
   const doctors = data.doctors.map(
     (doctor) => `${doctor.position} ${data.clinic} ${doctor.fullname}`
   );
 
-  const companyDoctor =
-    data.companies[0].employee?.position !== "ИП"
-      ? `${data.companies[0].employee?.position} ${data.companies[0].short_name} ${data.companies[0].employee?.fullname}`
-      : `${data.companies[0].employee?.fullname}`;
-  const animals = new Set(
-    data.animals.map((animal) => animal.animal_group.toLowerCase() + ", ")
-  );
-  const diseases = new Set(
-    data.diseases.map((disease) => disease.toLowerCase() + ", ")
-  );
+  const companyDoctor = data.companies[0]?.employee && companyDoctorString(
+    data.companies[0].employee,
+    data.companies[0].short_name
+  )
+  
 
   const administrMethod =
     animal !== "лошади" ? "внутрикожно" : "методом офтальмопробы";

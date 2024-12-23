@@ -12,7 +12,11 @@ import {
 } from "entities/vetWork";
 import { useGetVetWorkData } from "../hooks/useGetVetWorkData";
 import { Loader, PageMenuButtonsBlock } from "shared/index";
-import { DISEASES, WORKTYPES } from "shared/constants/vetworkConst";
+import {
+  BIOMATERIAL,
+  DISEASES,
+  WORKTYPES,
+} from "shared/constants/vetworkConst";
 
 export function VetWorkMenuButtonBlock() {
   const data = useGetVetWorkData();
@@ -47,8 +51,8 @@ export function VetWorkMenuButtonBlock() {
     {
       id: 4,
       element:
-        data.work_type === WORKTYPES.diagnostic &&
-        data.biomaterial_fixation === "заморозка" ? (
+        data.biomaterial &&
+        BIOMATERIAL.pathmaterial.includes(data.biomaterial) ? (
           <SamplingActBtn />
         ) : (
           data.work_type === WORKTYPES.diagnostic &&
