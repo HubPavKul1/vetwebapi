@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
 import { CompanyCard } from "./ui/CompanyCard";
-import { ICompanyCard } from "entities/company";
+import { companiesFilterButtons, ICompanyCard } from "entities/company";
 import useCompaniesFilter from "features/company/stores/useCompaniesFilter";
 
 interface CompanyCatalogProps {
@@ -23,11 +23,20 @@ export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
     url,
     pageNum
   );
-
+  
   const animalGroup = useCompaniesFilter((state) => state.animalGroup);
+  
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
+
+  const companies = data.companies
+  let filteredCompanies = companies.filter((company: ICompanyCard) => company.animal?.animal_group === animalGroup)
+  if (animalGroup === "Все") {
+    filteredCompanies = companies
+  }
+
+
   return (
     <CatalogPageWrapper
       data={data}
@@ -37,8 +46,9 @@ export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
       createForm={<CreateCompany url={url} queryKey={pageQueryKey} />}
       pageNum={pageNum}
       setPageNum={setPageNum}
+      filterButtons={companiesFilterButtons}
     >
-      {data.companies.map((company: ICompanyCard) => (
+      {companies.map((company: ICompanyCard) => (
         <CompanyCard
           key={company.id}
           company={company}

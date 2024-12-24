@@ -6,13 +6,9 @@ interface DropdownItemProps {
 }
 
 export function DropdownItem({ title }: DropdownItemProps) {
-  //   const setAnimalGroup = useCompaniesFilter((state) =>
-  //     state.setAnimalGroup(title)
-  //   );
+  const setAnimalGroup = useCompaniesFilter((state) => state.setAnimalGroup);
 
   return (
-    <NavDropdown.Item onClick={() => console.log(title)}>
-      {title}
-    </NavDropdown.Item>
+    <NavDropdown.Item onClick={() => setAnimalGroup(title)}>{title}</NavDropdown.Item>
   );
 }

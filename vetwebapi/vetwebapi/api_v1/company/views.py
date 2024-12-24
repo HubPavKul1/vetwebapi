@@ -35,7 +35,7 @@ from .animal.schemas import (
     UsageTypeSchemas,
 )
 from .animal.views import router as animal_router
-from .dependencies import company_by_id, get_animal_group_params
+from .dependencies import company_by_id
 from .employee.crud import read_doctors, read_positions
 from .employee.dependencies import company_employees
 from .employee.schemas import Employees, PositionSchemas
@@ -146,40 +146,6 @@ async def get_companies(
     end = start + per_page
     try:
         companies = await crud.read_companies_with_options(session=session)
-        logger.debug("The companies data is obtained from the database!")
-        comp_schemas = [
-            await serialize_company_card(company) for company in companies[start:end]
-        ]
-        logger.debug("The companies data serialized!")
-        return CompaniesPage(
-            companies=comp_schemas,
-            total_count=len(companies),
-            page=page,
-            per_page=per_page,
-        )
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"result": False, "error_message": "Internal Server Error"},
-        )
-
-
-@router.get("/filter", response_model=CompaniesPage)
-async def get_companies_by_animal_group(
-    animal_group: str = Depends(get_animal_group_params),
-    pagination: dict = Depends(get_pagination_params),
-    session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[CompaniesPage, dict]:
-    page = pagination["page"]
-    per_page = pagination["per_page"]
-
-    # Calculate the start and end indices for slicing the items list
-    start = (page - 1) * per_page
-    end = start + per_page
-    try:
-        companies = await crud.read_companies_with_options_by_animal_group(
-            session=session, animal_group=animal_group
-        )
         logger.debug("The companies data is obtained from the database!")
         comp_schemas = [
             await serialize_company_card(company) for company in companies[start:end]

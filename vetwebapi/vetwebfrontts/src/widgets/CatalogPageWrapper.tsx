@@ -16,6 +16,7 @@ interface CatalogPageWrapperProps {
   children: React.ReactNode | React.ReactElement;
   pageNum: number;
   setPageNum: CallableFunction;
+  filterButtons?: { id: number; title: string }[];
 }
 
 export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
@@ -28,10 +29,25 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
     children,
     pageNum,
     setPageNum,
+    filterButtons,
   } = props;
+
+  
+
   return (
     <PageWrapper>
       <h1 className="page-title">{title}</h1>
+      {/* Вынести в отдельный компонент фильтр  */}
+      <div className="flex justify-start ">
+        {filterButtons?.map((item) => (
+          <button
+            className="border-bottom border-black mr-3 cursor-pointer hover:text-sky-600 active:text-sky-700"
+            key={item.id}
+          >
+            {item.title}
+          </button>
+        ))}
+      </div>
 
       <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
 

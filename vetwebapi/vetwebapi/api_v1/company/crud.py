@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
-from core.models import Clinic, Company, Laboratory, Role, Animal
+from core.models import Clinic, Company, Laboratory, Role
 
 from .schemas import CompanyIn
 
@@ -64,22 +64,6 @@ async def read_companies_with_options(session: AsyncSession) -> list[Company]:
         .where(and_(Company.is_active, Company.type == "company"))
         .order_by(Company.short_name)
     )
-    return list(await session.scalars(stmt))
-
-
-async def read_companies_with_options_by_animal_group(
-    session: AsyncSession, animal_group: str
-) -> list[Company]:
-
-    stmt = (
-        select(Company)
-        .options(selectinload(Company.employees))
-        .options(joinedload(Company.addresses))
-        .options(selectinload(Company.animals))
-        .where(and_(Company.is_active, Company.type == "company"))
-        .order_by(Company.short_name)
-    )
-
     return list(await session.scalars(stmt))
 
 
