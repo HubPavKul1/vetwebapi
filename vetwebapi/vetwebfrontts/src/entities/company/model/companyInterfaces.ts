@@ -11,6 +11,7 @@ export interface ICompany {
 export interface ICompanyCard extends ICompany {
   address?: IAddress;
   employee?: IEmployee;
+  animal?: IAnimal;
 }
 
 export interface ICompanies {

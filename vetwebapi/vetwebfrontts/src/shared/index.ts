@@ -16,6 +16,7 @@ export { CustomCheckBox } from "./ui/CustomCheckBox";
 export { PageWrapper } from "./ui/PageWrapper";
 export { Modal } from "./ui/Modal";
 export { NavDropdownItem } from "./ui/NavDropdownItem";
+export { DropdownItem } from "./ui/DropDownItem";
 export { NavLink } from "./ui/NavLink";
 export * from "./urls/companyUrls";
 export * from "./urls/drugUrls";

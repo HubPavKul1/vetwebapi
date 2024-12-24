@@ -87,12 +87,16 @@ async def serialize_company_detail(
 async def serialize_company_card(company: Company):
     address = company.addresses
     employees = company.employees
+    animals = company.animals
     address_schema: AddressSchema | None = None
     employee_schema: EmployeeSchema | None = None
+    animal_schema: AnimalSchema | None = None
     if address:
         address_schema = await serialize_address(address=address)
     if employees:
         employee_schema = await serialize_employee(employee=employees[0])
+    if animals:
+        animal_schema = await serialize_animal(animal=animals[0])
 
     return CompanyCard(
         id=company.id,
@@ -100,4 +104,5 @@ async def serialize_company_card(company: Company):
         short_name=company.short_name,
         address=address_schema,
         employee=employee_schema,
+        animal=animal_schema,
     )

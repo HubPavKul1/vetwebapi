@@ -1,6 +1,17 @@
-import { NavLink } from "shared/index";
-import { companiesLink } from "shared/urls/companyUrls";
+import { DropdownWrapper } from "shared/ui/DropdownWrapper";
+import { companiesLink, DropdownItem, NavDropdownItem } from "shared/index";
+import { companiesDropDownItems } from "./companiesDropDownItems";
+import { NavDropdown } from "react-bootstrap";
 
 export function CompaniesLink() {
-  return <NavLink url={companiesLink} title="Предприятия" />;
+  return (
+    <li className="navLink">
+      <DropdownWrapper title="Предприятия" id="basic-nav-dropdown">
+        <NavDropdownItem title="Все" url={companiesLink} />
+        {companiesDropDownItems.map((item) => (
+          <DropdownItem key={item.id} title={item.title} />
+        ))}
+      </DropdownWrapper>
+    </li>
+  );
 }

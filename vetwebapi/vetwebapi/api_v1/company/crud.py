@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 
-from core.models import Clinic, Company, Laboratory, Role
+from core.models import Clinic, Company, Laboratory, Role, Animal
 
 from .schemas import CompanyIn
 
@@ -20,7 +20,8 @@ async def create_company(session: AsyncSession, body: CompanyIn) -> Company:
 
 async def create_test_companies(session: AsyncSession) -> None:
     companies: list[Company] = [
-        Company(full_name=f"company{i + 1}", short_name=f"comp{i + 1}") for i in range(30)
+        Company(full_name=f"company{i + 1}", short_name=f"comp{i + 1}")
+        for i in range(30)
     ]
     session.add_all(companies)
     await session.commit()
@@ -59,9 +60,26 @@ async def read_companies_with_options(session: AsyncSession) -> list[Company]:
         select(Company)
         .options(selectinload(Company.employees))
         .options(joinedload(Company.addresses))
+        .options(selectinload(Company.animals))
         .where(and_(Company.is_active, Company.type == "company"))
         .order_by(Company.short_name)
     )
+    return list(await session.scalars(stmt))
+
+
+async def read_companies_with_options_by_animal_group(
+    session: AsyncSession, animal_group: str
+) -> list[Company]:
+
+    stmt = (
+        select(Company)
+        .options(selectinload(Company.employees))
+        .options(joinedload(Company.addresses))
+        .options(selectinload(Company.animals))
+        .where(and_(Company.is_active, Company.type == "company"))
+        .order_by(Company.short_name)
+    )
+
     return list(await session.scalars(stmt))
 
 

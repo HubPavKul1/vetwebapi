@@ -26,6 +26,7 @@ export function CompanyCard({ ...props }: CompanyCardProps) {
         phone={company.address && `${company.address.phone_number1}`}
         phone2={company.address && `${company.address.phone_number2}`}
         employee={company.employee && company.employee}
+        animal={company.animal && company.animal}
       />
     </CatalogCard>
   );

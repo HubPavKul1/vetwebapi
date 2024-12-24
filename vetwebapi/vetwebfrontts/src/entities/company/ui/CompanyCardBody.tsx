@@ -1,5 +1,6 @@
 import { addressString } from "entities/address/addressHelper";
 import { IAddress } from "entities/address/model/addressInterfaces";
+import { IAnimal } from "entities/animal";
 import { employeeString } from "entities/employee/employeeHelper";
 import { IEmployee } from "entities/employee/model/employeeInterfaces";
 import { Col, Container, Row } from "react-bootstrap";
@@ -9,6 +10,7 @@ interface CompanyCardBodyProps {
   phone?: string;
   phone2?: string;
   employee?: IEmployee;
+  animal?: IAnimal;
 }
 
 export function CompanyCardBody({
@@ -16,12 +18,22 @@ export function CompanyCardBody({
   phone,
   phone2,
   employee,
+  animal,
 }: CompanyCardBodyProps) {
   const companyAddress = address ? addressString(address) : "";
   const companyEmployee = employee ? employeeString(employee) : "";
+  const companyAnimalGroup = animal ? animal.animal_group : "";
   return (
     <>
       <Container className="text-base text-left mb-1">
+        <Row>
+          <Col md={2}>
+            <h6>Животные:</h6>
+          </Col>
+          <Col md={10}>
+            <h6>{companyAnimalGroup}</h6>
+          </Col>
+        </Row>
         <Row>
           <Col md={2}>
             <h6 className="underline">Адрес:</h6>

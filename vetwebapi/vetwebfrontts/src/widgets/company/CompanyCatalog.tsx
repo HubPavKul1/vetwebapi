@@ -4,6 +4,7 @@ import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
 import { CompanyCard } from "./ui/CompanyCard";
 import { ICompanyCard } from "entities/company";
+import useCompaniesFilter from "features/company/stores/useCompaniesFilter";
 
 interface CompanyCatalogProps {
   url: string;
@@ -22,6 +23,8 @@ export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
     url,
     pageNum
   );
+
+  const animalGroup = useCompaniesFilter((state) => state.animalGroup);
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;

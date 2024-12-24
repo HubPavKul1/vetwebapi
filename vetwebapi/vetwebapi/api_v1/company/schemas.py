@@ -20,6 +20,7 @@ class CompanyCard(CompanyIn):
     id: int
     address: AddressSchema | None = None
     employee: EmployeeSchema | None = None
+    animal: AnimalSchema | None = None
 
 
 class CompanySchema(CompanyIn):
