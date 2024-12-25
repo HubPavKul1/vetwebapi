@@ -1,4 +1,4 @@
-export const companiesFilterButtons = [
+export const companiesFilterItems = [
   {
     id: 1,
     title: "Все",
