@@ -5,6 +5,7 @@ import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
 import { CreateCatalogDrugForm } from "features/catalogDrug";
 import { CatalogDrugCard } from "widgets/catalogDrug";
 import { IDrugCatalogCard } from "entities/catalogDrug/model/drugCatalogInterfaces";
+import useCatalogDrugFilter from "features/catalogDrug/stores/useCatalogDrugFilter";
 
 export function DrugCatalog() {
   const [pageNum, setPageNum] = useState(1);
@@ -16,9 +17,12 @@ export function DrugCatalog() {
     url,
     pageNum
   );
+  const disease = useCatalogDrugFilter((state) => state.disease);
+  const filter = useCatalogDrugFilter((state) => state.setDisease);
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
+
   return (
     <CatalogPageWrapper
       data={data}

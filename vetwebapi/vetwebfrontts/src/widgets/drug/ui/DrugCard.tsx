@@ -2,7 +2,7 @@ import { drugDetailUrl, drugImageUrl, drugLink } from "shared/urls/drugUrls";
 
 import { IDrugCard } from "entities/drug/model/drugInterfaces";
 import { DrugCardBody } from "entities/drug";
-import { CatalogCard, CatalogCardSmallBody } from "features/index";
+import { CatalogCard } from "features/index";
 
 interface DrugCardProps {
   drug: IDrugCard;

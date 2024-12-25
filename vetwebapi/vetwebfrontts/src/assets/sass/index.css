@@ -223,6 +223,10 @@ body {
   transform: scale(1.1);
 } /*# sourceMappingURL=index.css.map */
 
+.btn-filter {
+  @apply text-center text-indigo-800 font-bold mr-2 px-3 py-1 bg-slate-300 rounded-xl hover:bg-slate-400 transition-colors duration-150 ease-in-out;
+}
+
 /* title style */
 .title-base {
   @apply m-0 mb-5 text-center font-bold text-black;
@@ -339,13 +343,12 @@ body {
 /* table styles */
 
 .table-head th {
-  @apply border border-black font-bold text-center;
+  @apply border border-black font-bold text-center align-top;
 }
 
 .page-table-head th {
-  @apply border border-black bg-gray-400 text-center;
+  @apply border border-black bg-gray-400 text-center align-top;
 }
-
 
 .table-head-report {
   @apply pb-2 table-head text-xs;
@@ -354,7 +357,6 @@ body {
 .table-body td {
   @apply border border-black text-center;
 }
-
 
 .table-body-report {
   @apply pb-2 table-body text-xs;

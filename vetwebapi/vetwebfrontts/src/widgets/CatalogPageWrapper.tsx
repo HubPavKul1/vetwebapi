@@ -6,6 +6,7 @@ import { IDrugs } from "entities/drug";
 import { ICatalogDrugs } from "entities/catalogDrug";
 import { IDrugMovements } from "entities/drugMovements";
 import { IVetworks } from "entities/vetWork";
+import { FilterButton } from "shared/ui/FilterButton";
 
 interface CatalogPageWrapperProps {
   title: string;
@@ -17,6 +18,8 @@ interface CatalogPageWrapperProps {
   pageNum: number;
   setPageNum: CallableFunction;
   filterButtons?: string[];
+  filterFunc?: CallableFunction;
+  cureFilterTitle?: string;
 }
 
 export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
@@ -30,25 +33,25 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
     pageNum,
     setPageNum,
     filterButtons,
+    filterFunc,
+    cureFilterTitle,
   } = props;
-
 
   return (
     <PageWrapper>
       <h1 className="page-title">{title}</h1>
-      {/* Вынести в отдельный компонент фильтр  */}
       <div className="flex justify-start ">
-        {filterButtons?.map((item, index) => (
-          <button
-            className="border-bottom border-black mr-3 cursor-pointer hover:text-sky-600 active:text-sky-700"
-            key={index}
-          >
-            {item}
-          </button>
-        ))}
+        {filterFunc &&
+          filterButtons &&
+          filterButtons.map((item) => (
+            <FilterButton clickFunc={filterFunc} key={item} title={item} />
+          ))}
       </div>
 
       <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
+      <h2 className="text-center text-2xl font-bold underline mb-2">
+        {cureFilterTitle}
+      </h2>
 
       {data.total_count > 0 ? (
         <>

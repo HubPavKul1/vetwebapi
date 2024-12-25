@@ -17,29 +17,32 @@ interface CompanyCatalogProps {
 export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
   const { url, queryKey, title, btnTitle, imgSrc } = props;
   const [pageNum, setPageNum] = useState(1);
+  const animalGroup = useCompaniesFilter((state) => state.animalGroup);
+  const filter = useCompaniesFilter((state) => state.setAnimalGroup);
   const pageQueryKey = `${queryKey}${pageNum}`;
   const { data, isLoading, isError, error } = useGetPageData(
     pageQueryKey,
     url,
     pageNum
   );
-  
-  const animalGroup = useCompaniesFilter((state) => state.animalGroup);
-  
-  
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
 
-  const animalGroups: string[] = data.companies.map((company: ICompanyCard) => company.animal?.animal_group)
-  
+  const animalGroups: string[] = data.companies.map(
+    (company: ICompanyCard) => company.animal?.animal_group
+  );
 
-  const companies = data.companies
-  let filteredCompanies = companies.filter((company: ICompanyCard) => company.animal?.animal_group === animalGroup)
-  if (animalGroup === "Все") {
-    filteredCompanies = companies
+  const uniqueAnimalGroups = ["Все", ...new Set(animalGroups)].filter(
+    (item) => item !== undefined
+  );
+
+  let filteredCompanies = data.companies.filter(
+    (company: ICompanyCard) => company.animal?.animal_group === animalGroup
+  );
+  if (["Все"].includes(animalGroup)) {
+    filteredCompanies = data.companies;
   }
-
 
   return (
     <CatalogPageWrapper
@@ -50,9 +53,11 @@ export function CompanyCatalog({ ...props }: CompanyCatalogProps) {
       createForm={<CreateCompany url={url} queryKey={pageQueryKey} />}
       pageNum={pageNum}
       setPageNum={setPageNum}
-      filterButtons={animalGroups}
+      filterButtons={uniqueAnimalGroups}
+      filterFunc={filter}
+      cureFilterTitle={animalGroup}
     >
-      {companies.map((company: ICompanyCard) => (
+      {filteredCompanies.map((company: ICompanyCard) => (
         <CompanyCard
           key={company.id}
           company={company}

@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
-import { DrugReportTableItem } from "../../../../entities/drugReport/ui/DrugReportTableItem";
 import { IDrugReport } from "entities/drugReport/model/drugReportInterfaces";
+import { DrugReportTableItem } from "entities/drugReport";
 
 interface DrugReportPDFBodyProps {
   data: IDrugReport[];

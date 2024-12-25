@@ -26,14 +26,17 @@ export function CompanyCardBody({
   return (
     <>
       <Container className="text-base text-left mb-1">
-        <Row>
-          <Col md={2}>
-            <h6>Животные:</h6>
-          </Col>
-          <Col md={10}>
-            <h6>{companyAnimalGroup}</h6>
-          </Col>
-        </Row>
+        {companyAnimalGroup && (
+          <Row>
+            <Col md={2}>
+              <h6>Животные:</h6>
+            </Col>
+            <Col md={10}>
+              <h6>{companyAnimalGroup}</h6>
+            </Col>
+          </Row>
+        )}
+
         <Row>
           <Col md={2}>
             <h6 className="underline">Адрес:</h6>
