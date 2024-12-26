@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { AppService } from "shared/services/app.service";
 
-export function useGetPageData(queryKey: string, url: string, pageNum: number) {
+export function useGetPageData(
+  queryKey: string,
+  url: string,
+  pageNum: number,
+  filterId?: number
+) {
   const getData = () => AppService.getPagination(url, pageNum);
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [queryKey],

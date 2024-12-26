@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
 interface ICompaniesFilterState {
-  animalGroup: string;
+  animalGroup: number;
   setAnimalGroup: CallableFunction;
 }
 
 const useCompaniesFilter = create<ICompaniesFilterState>()((set) => ({
-  animalGroup: "",
-  setAnimalGroup: (animalGroup: string) =>
-    set((state) => ({ animalGroup: animalGroup })),
+  animalGroup: 0,
+  setAnimalGroup: (animalGroupId: number) =>
+    set((state) => ({ animalGroup: animalGroupId })),
 }));
 
 export default useCompaniesFilter;

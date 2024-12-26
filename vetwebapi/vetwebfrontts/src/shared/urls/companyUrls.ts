@@ -1,6 +1,9 @@
 import { baseUrl } from "./baseUrl";
 
 export const companiesUrl = baseUrl + "/api/companies/";
+export const filteredCompaniesUrl = (animalGroupId?: number) => {
+  return companiesUrl + `?animal_group_id=${animalGroupId}`;
+};
 export const companiesAllUrl = companiesUrl + "all";
 export const companyDetailUrl = (id?: number) => {
   return companiesUrl + `${id}/`;
@@ -36,6 +39,7 @@ export const addressUrl = (companyId?: string) => {
 // Company Animals
 
 export const typesOfFeedingUrl = companiesUrl + "types_of_feeding";
+export const animalGroupsAllUrl = companiesUrl + "animal_groups";
 export const animalGroupsUrl = (typeOfFeedingId: string) => {
   return companiesUrl + `${typeOfFeedingId}/animal_groups`;
 };

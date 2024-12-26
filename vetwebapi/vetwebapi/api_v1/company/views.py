@@ -24,6 +24,7 @@ from .animal.crud import (
     read_species,
     read_types_of_feeding,
     read_usage_types,
+    read_all_animal_groups,
 )
 from .animal.dependencies import company_animals
 from .animal.schemas import (
@@ -35,7 +36,7 @@ from .animal.schemas import (
     UsageTypeSchemas,
 )
 from .animal.views import router as animal_router
-from .dependencies import company_by_id
+from .dependencies import company_by_id, get_animal_group_id_params
 from .employee.crud import read_doctors, read_positions
 from .employee.dependencies import company_employees
 from .employee.schemas import Employees, PositionSchemas
@@ -137,15 +138,31 @@ async def create_lab_route(
 async def get_companies(
     pagination: dict = Depends(get_pagination_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
+    animal_group_id: dict = Depends(get_animal_group_id_params),
 ) -> Union[CompaniesPage, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
+    animal_group_id = animal_group_id["animal_group_id"]
 
     # Calculate the start and end indices for slicing the items list
     start = (page - 1) * per_page
     end = start + per_page
     try:
-        companies = await crud.read_companies_with_options(session=session)
+        companies = []
+        print("animal>>>", animal_group_id)
+        result = await crud.read_companies_with_options(session=session)
+        if animal_group_id == 0:
+            companies.extend(result)
+        else:
+            companies.extend(
+                [
+                    company
+                    for company in result
+                    if company.animals
+                    and company.animals[0].species.animal_group_id == animal_group_id
+                ]
+            )
+
         logger.debug("The companies data is obtained from the database!")
         comp_schemas = [
             await serialize_company_card(company) for company in companies[start:end]
@@ -428,6 +445,20 @@ async def get_animal_groups_route(
         animal_groups = await read_animal_groups(
             session=session, type_of_feeding_id=type_of_feeding_id
         )
+        return AnimalGroupSchemas(animal_groups=animal_groups)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"result": False, "error_message": "Internal Server Error"},
+        )
+
+
+@router.get("/animal_groups", response_model=AnimalGroupSchemas)
+async def get_all_animal_groups_route(
+    session: AsyncSession = Depends(db_manager.scope_session_dependency),
+) -> Union[AnimalGroupSchemas, dict]:
+    try:
+        animal_groups = await read_all_animal_groups(session=session)
         return AnimalGroupSchemas(animal_groups=animal_groups)
     except Exception:
         raise HTTPException(

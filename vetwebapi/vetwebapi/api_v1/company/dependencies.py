@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import Depends, HTTPException, Path, status
+from fastapi import Depends, HTTPException, Path, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import db_manager
@@ -22,3 +22,7 @@ async def company_by_id(
             detail={"result": False, "error_message": "Company Not Found"},
         )
     return company
+
+
+def get_animal_group_id_params(animal_group_id: int = Query(0)):
+    return {"animal_group_id": animal_group_id}

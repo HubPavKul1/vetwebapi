@@ -1,15 +1,17 @@
+import { IBase } from "shared/model/BaseInterfaces";
+
 interface FilterButtonProps {
-  title: string;
+  item: IBase;
   clickFunc: CallableFunction;
 }
 
-export function FilterButton({ title, clickFunc }: FilterButtonProps) {
+export function FilterButton({ item, clickFunc }: FilterButtonProps) {
   const clickHandler = () => {
-    clickFunc(title);
+    clickFunc(item.id);
   };
   return (
     <button className="btn-filter" onClick={() => clickHandler()}>
-      {title}
+      {item.name}
     </button>
   );
 }

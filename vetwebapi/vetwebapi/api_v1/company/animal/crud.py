@@ -135,6 +135,11 @@ async def read_animal_groups(
     return list(await session.scalars(stmt))
 
 
+async def read_all_animal_groups(session: AsyncSession) -> list[AnimalGroup]:
+    stmt = select(AnimalGroup).order_by(AnimalGroup.name)
+    return list(await session.scalars(stmt))
+
+
 async def read_species(session: AsyncSession, animal_group_id: int) -> list[Species]:
     stmt = (
         select(Species)

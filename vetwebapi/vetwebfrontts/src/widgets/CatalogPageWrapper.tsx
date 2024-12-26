@@ -6,7 +6,6 @@ import { IDrugs } from "entities/drug";
 import { ICatalogDrugs } from "entities/catalogDrug";
 import { IDrugMovements } from "entities/drugMovements";
 import { IVetworks } from "entities/vetWork";
-import { FilterButton } from "shared/ui/FilterButton";
 
 interface CatalogPageWrapperProps {
   title: string;
@@ -17,9 +16,9 @@ interface CatalogPageWrapperProps {
   children: React.ReactNode | React.ReactElement;
   pageNum: number;
   setPageNum: CallableFunction;
-  filterButtons?: string[];
-  filterFunc?: CallableFunction;
-  cureFilterTitle?: string;
+  filterButtons?: React.ReactNode | React.ReactElement;
+  // filterFunc?: CallableFunction;
+  // cureFilterTitle?: string;
 }
 
 export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
@@ -33,25 +32,17 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
     pageNum,
     setPageNum,
     filterButtons,
-    filterFunc,
-    cureFilterTitle,
   } = props;
 
   return (
     <PageWrapper>
       <h1 className="page-title">{title}</h1>
-      <div className="flex justify-start ">
-        {filterFunc &&
-          filterButtons &&
-          filterButtons.map((item) => (
-            <FilterButton clickFunc={filterFunc} key={item} title={item} />
-          ))}
-      </div>
+      <div className="flex justify-start ">{filterButtons}</div>
 
       <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
-      <h2 className="text-center text-2xl font-bold underline mb-2">
+      {/* <h2 className="text-center text-2xl font-bold underline mb-2">
         {cureFilterTitle}
-      </h2>
+      </h2> */}
 
       {data.total_count > 0 ? (
         <>

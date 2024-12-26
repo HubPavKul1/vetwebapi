@@ -4,7 +4,7 @@ import { SpeciesSelect } from "./SpeciesSelect";
 import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "shared/hooks/useGetData";
 import { animalGroupsUrl } from "shared/urls/companyUrls";
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 interface AnimalGroupsSelectProps {
   typeOfFeedingId: string;
