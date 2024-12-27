@@ -191,40 +191,48 @@ async def read_vetwork_file(
     return await session.scalar(stmt)
 
 
-async def read_vaccinations(session: AsyncSession) -> list[VetWork]:
+async def read_vetworks(session: AsyncSession, work_type_id: int) -> list[VetWork]:
+
     stmt = (
         select(VetWork)
         .options(
             selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
         )
-        .where(VetWork.work_type_id == 1)
+        .where(VetWork.work_type_id == work_type_id)
         .order_by(desc(VetWork.vetwork_date))
     )
     return list(await session.scalars(stmt))
 
 
-async def read_diagnostics(session: AsyncSession) -> list[VetWork]:
+async def read_vetworks_by_state_assignment(
+    session: AsyncSession, work_type_id: int, state_assignment: bool
+) -> list[VetWork]:
     stmt = (
         select(VetWork)
         .options(
             selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
         )
-        .where(VetWork.work_type_id == 2)
-        .order_by(desc(VetWork.vetwork_date))
-    )
-    return list(await session.scalars(stmt))
-
-
-async def read_treatments(session: AsyncSession) -> list[VetWork]:
-    stmt = (
-        select(VetWork)
-        .options(
-            selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
+        .where(
+            and_(
+                VetWork.work_type_id == work_type_id,
+                VetWork.is_state_assignment == state_assignment,
+            )
         )
-        .where(VetWork.work_type_id == 3)
         .order_by(desc(VetWork.vetwork_date))
     )
     return list(await session.scalars(stmt))
+
+
+# async def read_treatments(session: AsyncSession) -> list[VetWork]:
+#     stmt = (
+#         select(VetWork)
+#         .options(
+#             selectinload(VetWork.diseases_details).joinedload(DiseaseInVetWork.disease)
+#         )
+#         .where(VetWork.work_type_id == 3)
+#         .order_by(desc(VetWork.vetwork_date))
+#     )
+#     return list(await session.scalars(stmt))
 
 
 async def read_vetwork_by_id(session: AsyncSession, vetwork_id: int) -> VetWork | None:

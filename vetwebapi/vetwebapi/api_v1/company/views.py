@@ -149,7 +149,6 @@ async def get_companies(
     end = start + per_page
     try:
         companies = []
-        print("animal>>>", animal_group_id)
         result = await crud.read_companies_with_options(session=session)
         if animal_group_id == 0:
             companies.extend(result)
@@ -159,7 +158,11 @@ async def get_companies(
                     company
                     for company in result
                     if company.animals
-                    and company.animals[0].species.animal_group_id == animal_group_id
+                    and animal_group_id
+                    in [
+                        item.species.animal_group_id
+                        for item in [animal for animal in company.animals]
+                    ]
                 ]
             )
 

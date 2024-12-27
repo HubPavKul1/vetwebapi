@@ -25,8 +25,8 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
   const inputItems: FormInputProps<IVetworkCreate>[] = [
     { fieldName: "vetwork_date", id: "vetwork_date", type: "date" },
   ];
-  const urlArrey = url.split("/");
-  const vetWorkType = urlArrey[urlArrey.length - 1];
+  const urlArray = url.split("/");
+  const vetWorkType = urlArray[urlArray.length - 1];
 
   const methods = useForm<IVetworkCreate>({
     mode: "onChange",

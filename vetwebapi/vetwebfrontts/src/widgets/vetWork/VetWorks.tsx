@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
 import { VetWorkCard } from "./ui/VetWorkCard";
+import { VetWorkFilterButtons } from "features/vetWork/ui/VetWorkFilterButtons";
 
 interface VetWorksProps {
   url: string;
@@ -25,6 +26,7 @@ export function VetWorks({ ...props }: VetWorksProps) {
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;
+
   return (
     <CatalogPageWrapper
       data={data}
@@ -34,6 +36,7 @@ export function VetWorks({ ...props }: VetWorksProps) {
       createForm={<VetWorkCreateForm url={url} queryKey={pageQueryKey} />}
       pageNum={pageNum}
       setPageNum={setPageNum}
+      // filterButtons={<VetWorkFilterButtons data />}
     >
       {data.vetworks.map((vetWork: IVetWorkSchema) => (
         <VetWorkCard

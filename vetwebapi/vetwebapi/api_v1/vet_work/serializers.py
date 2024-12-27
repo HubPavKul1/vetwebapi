@@ -27,15 +27,6 @@ async def serialize_vetwork(vetwork: VetWork) -> VetWorkSchema:
             vetwork.biomaterial_package.name if vetwork.biomaterial_package else ""
         )
 
-        # if vetwork.laboratory:
-        #     laboratory = vetwork.laboratory.short_name
-        # if vetwork.biomaterial:
-        #     biomaterial = vetwork.biomaterial.name
-        # if vetwork.biomaterial_fixation:
-        #     biomaterial_fixation = vetwork.biomaterial_fixation.name
-        # if vetwork.biomaterial_package:
-        #     biomaterial_package = vetwork.biomaterial_package.name
-
         return VetWorkSchema(
             id=vetwork.id,
             work_type=vetwork.work_type.name,

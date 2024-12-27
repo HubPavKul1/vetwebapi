@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import Depends, HTTPException, Path, status
+from fastapi import Depends, HTTPException, Path, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import db_manager
@@ -52,3 +52,9 @@ async def company_in_vetwork_by_id(
             detail={"result": False, "error_message": "Company Not Found"},
         )
     return company
+
+
+def get_filter_params(
+    disease_id: int = Query(0), state_assignment: bool | None = Query(None)
+):
+    return {"disease_id": disease_id, "state_assignment": state_assignment}

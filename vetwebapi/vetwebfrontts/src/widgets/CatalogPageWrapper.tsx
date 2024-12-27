@@ -17,8 +17,6 @@ interface CatalogPageWrapperProps {
   pageNum: number;
   setPageNum: CallableFunction;
   filterButtons?: React.ReactNode | React.ReactElement;
-  // filterFunc?: CallableFunction;
-  // cureFilterTitle?: string;
 }
 
 export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {

@@ -16,6 +16,7 @@ from .dependencies import (
     animal_in_vetwork_by_id,
     company_in_vetwork_by_id,
     vetwork_by_id,
+    get_filter_params,
 )
 from .reports.views import router as report_router
 from .schemas import (
@@ -154,18 +155,44 @@ async def add_company_to_vetwork_route(
 @router.get("/vaccinations", response_model=VetWorks)
 async def get_vaccinations_route(
     pagination: dict = Depends(get_pagination_params),
+    filter: dict = Depends(get_filter_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
+    disease_id = filter["disease_id"]
+    state_assignment = filter["state_assignment"]
+    work_type_id = 1
 
     # Calculate the start and end indices for slicing the items list
     start = (page - 1) * per_page
     end = start + per_page
+
     try:
-        vaccinations = await crud.read_vaccinations(session=session)
+        if state_assignment is None:
+            vaccinations = await crud.read_vetworks(
+                session=session, work_type_id=work_type_id
+            )
+        else:
+            vaccinations = await crud.read_vetworks_by_state_assignment(
+                session=session,
+                work_type_id=work_type_id,
+                state_assignment=state_assignment,
+            )
+        vaccinations_to_response = []
+        if disease_id == 0:
+            vaccinations_to_response.extend(vaccinations)
+        else:
+            vaccinations_to_response.extend(
+                [
+                    vetwork
+                    for vetwork in vaccinations
+                    if disease_id
+                    in [item.disease.id for item in vetwork.diseases_details]
+                ]
+            )
         return await serialize_vetworks(
-            vetworks=vaccinations[start:end],
+            vetworks=vaccinations_to_response[start:end],
             total_count=len(vaccinations),
             page=page,
             per_page=per_page,
@@ -180,18 +207,43 @@ async def get_vaccinations_route(
 @router.get("/diagnostics", response_model=VetWorks)
 async def get_diagnostics_route(
     pagination: dict = Depends(get_pagination_params),
+    filter: dict = Depends(get_filter_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
+    disease_id = filter["disease_id"]
+    state_assignment = filter["state_assignment"]
+    work_type_id = 2
 
     # Calculate the start and end indices for slicing the items list
     start = (page - 1) * per_page
     end = start + per_page
     try:
-        diagnostics = await crud.read_diagnostics(session=session)
+        if state_assignment is None:
+            diagnostics = await crud.read_vetworks(
+                session=session, work_type_id=work_type_id
+            )
+        else:
+            diagnostics = await crud.read_vetworks_by_state_assignment(
+                session=session,
+                work_type_id=work_type_id,
+                state_assignment=state_assignment,
+            )
+        diagnostics_to_response = []
+        if disease_id == 0:
+            diagnostics_to_response.extend(diagnostics)
+        else:
+            diagnostics_to_response.extend(
+                [
+                    vetwork
+                    for vetwork in diagnostics
+                    if disease_id
+                    in [item.disease.id for item in vetwork.diseases_details]
+                ]
+            )
         return await serialize_vetworks(
-            vetworks=diagnostics[start:end],
+            vetworks=diagnostics_to_response[start:end],
             total_count=len(diagnostics),
             page=page,
             per_page=per_page,
@@ -206,18 +258,43 @@ async def get_diagnostics_route(
 @router.get("/treatments", response_model=VetWorks)
 async def get_treatments_route(
     pagination: dict = Depends(get_pagination_params),
+    filter: dict = Depends(get_filter_params),
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
 ) -> Union[VetWorks, dict]:
     page = pagination["page"]
     per_page = pagination["per_page"]
+    disease_id = filter["disease_id"]
+    state_assignment = filter["state_assignment"]
+    work_type_id = 3
 
     # Calculate the start and end indices for slicing the items list
     start = (page - 1) * per_page
     end = start + per_page
     try:
-        treatments = await crud.read_treatments(session=session)
+        if state_assignment is None:
+            treatments = await crud.read_vetworks(
+                session=session, work_type_id=work_type_id
+            )
+        else:
+            treatments = await crud.read_vetworks_by_state_assignment(
+                session=session,
+                work_type_id=work_type_id,
+                state_assignment=state_assignment,
+            )
+        treatments_to_response = []
+        if disease_id == 0:
+            treatments_to_response.extend(treatments)
+        else:
+            treatments_to_response.extend(
+                [
+                    vetwork
+                    for vetwork in treatments
+                    if disease_id
+                    in [item.disease.id for item in vetwork.diseases_details]
+                ]
+            )
         return await serialize_vetworks(
-            vetworks=treatments[start:end],
+            vetworks=treatments_to_response[start:end],
             total_count=len(treatments),
             page=page,
             per_page=per_page,

@@ -1,9 +1,10 @@
 import { PDFWrapper } from "shared/ui/PDFWrapper";
 import { useGetVetWorkData } from "features/vetWork";
-import useBloodActStore from "features/vetWork/stores/useBloodActStore";
+
 import { BloodActPDFHeader } from "./BloodActPDFHeader";
 import { BloodActPDFBody } from "./BloodActPDFBody";
 import { ActPDFFooter } from "../ActPDFFooter";
+import useBloodActStore from "features/vetWork/stores/useBloodActStore";
 
 export function BloodActPDF() {
   const data = useGetVetWorkData();
