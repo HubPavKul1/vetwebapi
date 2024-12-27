@@ -22,7 +22,7 @@ export function AnimalGroupsFilterButtons() {
         <FilterButton
           key={animalGroup.id}
           item={animalGroup}
-          clickFunc={setAnimaGrouplId}
+          clickFunc={() => setAnimaGrouplId(animalGroup.id)}
           activeId={animalGroupId}
         />
       ))}

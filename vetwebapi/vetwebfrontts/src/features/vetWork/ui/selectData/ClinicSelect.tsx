@@ -29,7 +29,6 @@ export function ClinicSelect() {
       rules={{ required: "Clinic is required!" }}
       render={({
         field: { onChange, value },
-        // fieldState: {error}
       }) => (
         <Select
           className="custom-select w-auto"

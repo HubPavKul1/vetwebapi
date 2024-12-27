@@ -79,7 +79,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
           <div className="flex justify-between mb-0">
             <div className="">
               <label htmlFor="is_state_assignment">
-                Госзадание *
+                Госзадание
                 <CustomInput
                   register={register}
                   errors={errors}
@@ -91,7 +91,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
             </div>
             <div className="">
               <label htmlFor="is_primary">
-                Первичное *
+                Первичное
                 <CustomInput
                   register={register}
                   errors={errors}

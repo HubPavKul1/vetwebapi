@@ -1,23 +1,21 @@
 import { create } from "zustand";
 
-interface IVetWorkFilterState {
+interface IVetWorkFilterStoreState {
   diseaseId: number;
   setDiseaseId: CallableFunction;
   stateAssignment: boolean | undefined;
   setStateAssignment: CallableFunction;
-  setNoStateAssignment: CallableFunction;
   unsetStateAssignment: CallableFunction;
 }
 
-const useVetWorkFilter = create<IVetWorkFilterState>()((set) => ({
+const useVetWorkFilterStore = create<IVetWorkFilterStoreState>()((set) => ({
   diseaseId: 0,
   stateAssignment: undefined,
   setDiseaseId: (diseaseId: number) =>
     set((state) => ({ diseaseId: diseaseId })),
-  setStateAssignment: () => set((state) => ({ stateAssignment: true })),
-  setNoStateAssignment: () => set((state) => ({ stateAssignment: false })),
+  setStateAssignment: (stateAssignment: boolean) =>
+    set((state) => ({ stateAssignment: stateAssignment })),
   unsetStateAssignment: () => set((state) => ({ stateAssignment: undefined })),
-
 }));
 
-export default useVetWorkFilter;
+export default useVetWorkFilterStore;
