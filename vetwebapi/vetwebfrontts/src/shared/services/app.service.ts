@@ -11,17 +11,9 @@ export const AppService = {
   async getPagination(
     url: string,
     pageNum: number,
-    filterId?: number,
-    filterName?: string
   ) {
     return await client.get(url, {
       params: { page: pageNum },
-    });
-  },
-
-  async getFilteredData(url: string, pageNum: number, filterId: number) {
-    return await client.get(url, {
-      params: { page: pageNum, animal_group_id: filterId },
     });
   },
 

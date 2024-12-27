@@ -7,6 +7,7 @@ export function AnimalGroupsFilterButtons() {
     "animal_groups_all",
     animalGroupsAllUrl
   );
+  const animalGroupId = useCompaniesFilter((state) => state.animalGroup);
   const setAnimaGrouplId = useCompaniesFilter((state) => state.setAnimalGroup);
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
@@ -22,6 +23,7 @@ export function AnimalGroupsFilterButtons() {
           key={animalGroup.id}
           item={animalGroup}
           clickFunc={setAnimaGrouplId}
+          activeId={animalGroupId}
         />
       ))}
     </>

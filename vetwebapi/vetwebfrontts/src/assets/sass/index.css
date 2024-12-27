@@ -227,6 +227,10 @@ body {
   @apply text-center text-indigo-800 font-bold mr-2 px-3 py-1 bg-slate-300 rounded-xl hover:bg-slate-400 transition-colors duration-150 ease-in-out;
 }
 
+.btn-filter-active {
+  @apply text-center text-white font-bold mr-2 px-3 py-1 bg-slate-500 rounded-xl hover:bg-slate-400 transition-colors duration-150 ease-in-out border border-blue-950;
+}
+
 /* title style */
 .title-base {
   @apply m-0 mb-5 text-center font-bold text-black;

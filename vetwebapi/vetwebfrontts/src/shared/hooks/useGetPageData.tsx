@@ -5,7 +5,6 @@ export function useGetPageData(
   queryKey: string,
   url: string,
   pageNum: number,
-  filterId?: number
 ) {
   const getData = () => AppService.getPagination(url, pageNum);
   const { data, isLoading, isError, error } = useQuery({
