@@ -38,9 +38,6 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
       <div className="flex justify-start ">{filterButtons}</div>
 
       <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
-      {/* <h2 className="text-center text-2xl font-bold underline mb-2">
-        {cureFilterTitle}
-      </h2> */}
 
       {data.total_count > 0 ? (
         <>

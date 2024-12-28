@@ -1,6 +1,5 @@
 import useCompaniesFilter from "features/company/stores/useCompaniesFilter";
-import { animalGroupsAllUrl, IBase, useGetData } from "shared/index";
-import { FilterButton } from "shared/ui/FilterButton";
+import { allFilterButton, animalGroupsAllUrl, FilterButton, IBase, useGetData } from "shared/index";
 
 export function AnimalGroupsFilterButtons() {
   const { data, isLoading } = useGetData(
@@ -14,7 +13,7 @@ export function AnimalGroupsFilterButtons() {
 
   if (!data.animal_groups) return;
 
-  const animalGroups: IBase[] = [{ id: 0, name: "Все" }, ...data.animal_groups];
+  const animalGroups: IBase[] = [allFilterButton, ...data.animal_groups];
 
   return (
     <>
