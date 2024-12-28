@@ -1,4 +1,4 @@
-import { AnimalGroupsFilterButtons } from "features/animal/ui/AnimalGroupsFilterButtons";
+import { AnimalGroupsFilterItems } from "features/animal/ui/AnimalGroupsFilterItems";
 import useCompaniesFilter from "features/company/stores/useCompaniesFilter";
 import { CompanyQueryKeys } from "shared/constants/companyConst";
 import { filteredCompaniesUrl } from "shared/index";
@@ -16,7 +16,7 @@ export function Companies() {
       url={url}
       queryKey={queryKey}
       imgSrc="/animals.jpg"
-      filterButtons={<AnimalGroupsFilterButtons />}
+      filterButtons={<AnimalGroupsFilterItems />}
     />
   );
 }

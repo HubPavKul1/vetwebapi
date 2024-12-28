@@ -9,7 +9,7 @@ import {
 } from "shared/index";
 import { IOption } from "shared/model/FormInterface";
 
-export function AnimalGroupsFilterButtons() {
+export function AnimalGroupsFilterItems() {
   const { data, isLoading } = useGetData(
     "animal_groups_all",
     animalGroupsAllUrl
