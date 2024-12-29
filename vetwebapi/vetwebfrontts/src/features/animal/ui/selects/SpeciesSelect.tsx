@@ -7,7 +7,7 @@ import { GendersSelect } from "./GendersSelect";
 
 import { useGetData } from "shared/hooks/useGetData";
 import { speciesUrl } from "shared/urls/companyUrls";
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 interface SpeciesSelectProps {
   animalGroupId: string;

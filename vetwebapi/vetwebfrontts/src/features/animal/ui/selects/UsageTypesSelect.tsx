@@ -4,7 +4,7 @@ import { IOption } from "shared/model/FormInterface";
 
 import { useGetData } from "shared/hooks/useGetData";
 import { usageTypesUrls } from "shared/urls/companyUrls";
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 export function UsageTypesSelect() {
   const { data, isLoading } = useGetData("usage_types", usageTypesUrls);

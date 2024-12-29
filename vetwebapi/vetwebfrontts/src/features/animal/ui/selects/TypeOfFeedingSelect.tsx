@@ -2,9 +2,9 @@ import Select, { SingleValue } from "react-select";
 import { AnimalGroupsSelect } from "./AnimalGroupsSelect";
 import { useState } from "react";
 import { IOption } from "shared/model/FormInterface";
-import { IBase } from "shared/model/BaseInterface";
 import { useGetData } from "shared/hooks/useGetData";
 import { typesOfFeedingUrl } from "shared/urls/companyUrls";
+import { IBase } from "shared/index";
 
 export function TypesOfFeedingSelect() {
   const [typeOfFeedingId, setTypeOfFeedingId] = useState<string | undefined>();

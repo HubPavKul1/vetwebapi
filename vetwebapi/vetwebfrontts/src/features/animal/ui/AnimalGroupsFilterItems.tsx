@@ -15,7 +15,7 @@ export function AnimalGroupsFilterItems() {
     animalGroupsAllUrl
   );
   const animalGroupId = useCompaniesFilter((state) => state.animalGroup);
-  const setAnimaGrouplId = useCompaniesFilter((state) => state.setAnimalGroup);
+  const setAnimalGrouplId = useCompaniesFilter((state) => state.setAnimalGroup);
 
   if (isLoading || !data) return <p>Загрузка ...</p>;
 
@@ -35,14 +35,14 @@ export function AnimalGroupsFilterItems() {
   };
 
   const changeHandler = (value: IOption) => {
-    setAnimaGrouplId(value.value);
+    setAnimalGrouplId(value.value);
   };
 
   return (
     <>
       <FilterButton
         item={allFilterButton}
-        clickFunc={() => setAnimaGrouplId(0)}
+        clickFunc={() => setAnimalGrouplId(0)}
         activeId={animalGroupId}
       />
       <AsyncSelect
@@ -50,7 +50,7 @@ export function AnimalGroupsFilterItems() {
         isSearchable
         isClearable
         loadOptions={loadOptions}
-        placeholder="Введите животное"
+        placeholder="Введите группу животного"
         onChange={(newValue) => changeHandler(newValue as IOption)}
       />
     </>

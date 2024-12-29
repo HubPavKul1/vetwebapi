@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { IOption } from "shared/model/FormInterface";
 import { useGetData } from "shared/hooks/useGetData";
 import { gendersUrl } from "shared/urls/companyUrls";
-import { IBase } from "shared/model/BaseInterface";
+import { IBase } from "shared/index";
 
 interface GendersSelectProps {
   speciesId: string;
