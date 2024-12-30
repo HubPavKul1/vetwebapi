@@ -13,6 +13,7 @@ import { CatalogDrugReceipts, CatalogDrugSpent } from "widgets/catalogDrug";
 
 interface DrugCatalogData {
   data: IDrugCatalogCard;
+  isLoading: boolean;
 }
 
 export function DrugCatalogDetail() {

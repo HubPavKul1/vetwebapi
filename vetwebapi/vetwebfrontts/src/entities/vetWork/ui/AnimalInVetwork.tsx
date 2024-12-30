@@ -20,10 +20,6 @@ export function AnimalInVetwork({
 }: AnimalInVetworkProps) {
   const { id } = useParams();
   const vetWorkId = Number(id);
-
-  console.log("WORKTYPE>>>>>", workType);
-  console.log("DESEASE", disease);
-
   const date_of_birth = convertDateString(animal.date_of_birth).shortDate;
 
   return (

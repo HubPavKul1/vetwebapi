@@ -17,8 +17,6 @@ export function DrugCatalog() {
     url,
     pageNum
   );
-  const disease = useCatalogDrugFilter((state) => state.disease);
-  const filter = useCatalogDrugFilter((state) => state.setDisease);
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
   if (isLoading || !data) return <Loader />;

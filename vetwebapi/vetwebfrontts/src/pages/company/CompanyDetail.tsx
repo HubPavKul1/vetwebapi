@@ -30,7 +30,7 @@ export function CompanyDetail() {
   const { isLoading, data, isError, error }: CompanyData = useGetDataById(
     queryKey,
     companyDetailUrl(companyId),
-    id
+    id,
   );
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
