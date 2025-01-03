@@ -39,7 +39,7 @@ export function AnimalGroupsFilterItems() {
   };
 
   return (
-    <>
+    <div className="flex mb-5">
       <FilterButton
         item={allFilterButton}
         clickFunc={() => setAnimalGrouplId(0)}
@@ -53,6 +53,6 @@ export function AnimalGroupsFilterItems() {
         placeholder="Введите группу животного"
         onChange={(newValue) => changeHandler(newValue as IOption)}
       />
-    </>
+    </div>
   );
 }
