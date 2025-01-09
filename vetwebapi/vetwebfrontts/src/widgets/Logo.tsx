@@ -1,4 +1,4 @@
-import vetLogo from "/vetLogo.jpg";
+import vetLogo from "/Logo.svg";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -9,8 +9,8 @@ export function LogoLink() {
         <Link to="/">
           <img
             src={vetLogo}
-            height="50"
-            width="70"
+            height="200"
+            width="200"
             className="rounded-full overflow-hidden hover:scale-105 transition-transform"
             alt="Logo"
           />

@@ -7,8 +7,8 @@ interface FooterWrapperProps {
 
 export function FooterWrapper({ children }: FooterWrapperProps) {
   return (
-    <footer className="mt-auto">
-      <Container className="max-w-full p-8 border  border-t-black bg-gray-300">
+    <footer className="mt-auto  bg-gray-300">
+      <Container className="w-[1180px] p-8 border  border-t-black">
         <Container className="flex justify-end bg-gray-300">
           {children}
         </Container>

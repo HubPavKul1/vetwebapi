@@ -14,10 +14,9 @@
   position: relative;
   outline: none;
   font-weight: 600;
+  font-size: medium;
   text-transform: uppercase;
-  background-color: #dedef0;
-  background: linear-gradient(#dedef0, rgba(164, 164, 242, 0.9));
-  color: rgba(120, 24, 238, 0.6);
+  background-color: #c6c6d3;
   transition: transform 0.5s ease-in-out;
 }
 .btn-upload::after,
@@ -52,6 +51,7 @@
 .btn-submit:active,
 .btn-large:active {
   background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
   transition: background-color 0.5s ease-in-out;
 }
 .btn-upload:active::after,
@@ -186,7 +186,7 @@ body {
 }
 
 .btn-submit {
-  padding: 10px 20px;
+  padding: 15px 25px;
   border-radius: 5px;
   width: 100%;
 }
@@ -241,7 +241,7 @@ body {
 }
 
 .page-title {
-  @apply title-base text-3xl underline;
+  @apply title-base text-3xl;
 }
 
 .text-base {
@@ -381,7 +381,7 @@ body {
 
 /* form styles */
 .text-input {
-  @apply w-full p-2 border border-slate-300 hover:border-slate-400 focus:outline-blue-600 transition-colors rounded-sm text-xs cursor-default;
+  @apply w-full p-2 border border-slate-300 hover:border-slate-400 focus:outline-slate-600 transition-colors rounded-md text-sm cursor-default;
 }
 
 .form-group {

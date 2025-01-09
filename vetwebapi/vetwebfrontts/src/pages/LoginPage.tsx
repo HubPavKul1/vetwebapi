@@ -5,8 +5,8 @@ import { PageWrapper } from "shared/index";
 export function LoginPage() {
   return (
     <PageWrapper>
-      <Row>
-        <Col>
+      <Row sm={1} md={2}>
+        <Col className="mb-5">
           <div>
             <img
               src="/animals.jpg"
@@ -16,9 +16,9 @@ export function LoginPage() {
           </div>
         </Col>
         <Col>
-          <Container>
-            <h1 className="page-title">Вход в систему</h1>
-            <Container className="w-60">
+          <Container className="w-full">
+            <Container className="w-72">
+              <h1 className="page-title">Вход в систему</h1>
               <LoginForm />
             </Container>
           </Container>

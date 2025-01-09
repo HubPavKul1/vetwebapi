@@ -19,7 +19,9 @@ export function LoginForm() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <LoginInputs />
+        <div className="mb-3">
+          <LoginInputs />
+        </div>
         <div className="form-group">
           <CustomButton className="btn-submit" disabled={false} title="Войти" />
         </div>
