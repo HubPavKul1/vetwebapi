@@ -42,6 +42,7 @@ export { useLogin } from "./hooks/useLogin";
 
 export { AppService } from "./services/app.service";
 export { PageMenuWrapper } from "./ui/PageMenuWrapper";
+export { SectionWrapper } from "./ui/SectionWrapper";
 export { PageMenuButtonsBlock } from "./ui/PageMenuButtonsBlock";
 export { PageMenuTop } from "./ui/PageMenuTop";
 export { PageTable } from "./ui/PageTable";

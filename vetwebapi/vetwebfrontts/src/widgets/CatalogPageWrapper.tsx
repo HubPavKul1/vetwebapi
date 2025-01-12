@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import { CustomPagination, NoData, PageWrapper } from "shared/index";
+import { CustomPagination, NoData, PageWrapper, SectionWrapper } from "shared/index";
 import { CreateItem } from "features/CreateItem";
 import { ICompanies } from "entities/company";
 import { IDrugs } from "entities/drug";
@@ -33,7 +33,7 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
   } = props;
 
   return (
-    <PageWrapper>
+    <SectionWrapper>
       <h1 className="page-title">{title}</h1>
       <div className="flex justify-start ">{filterButtons}</div>
 
@@ -60,6 +60,6 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
       ) : (
         <NoData title={title} />
       )}
-    </PageWrapper>
+    </SectionWrapper>
   );
 }

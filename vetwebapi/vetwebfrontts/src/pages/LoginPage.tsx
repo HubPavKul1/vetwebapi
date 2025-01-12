@@ -5,19 +5,20 @@ import { PageWrapper } from "shared/index";
 export function LoginPage() {
   return (
     <PageWrapper>
-      <Row sm={1} md={2}>
+      <Row sm={1} md={2} className="mb-40"></Row>
+      <Row sm={1} md={2} className="items-center">
         <Col className="mb-5">
           <div>
             <img
-              src="/animals.jpg"
+              src="/animalsForSlider2.png"
               alt="animals"
-              className="w-auto h-auto m-auto"
+              className="w-full h-auto m-auto"
             />
           </div>
         </Col>
         <Col>
           <Container className="w-full">
-            <Container className="w-72">
+            <Container className="w-72 ">
               <h1 className="page-title">Вход в систему</h1>
               <LoginForm />
             </Container>

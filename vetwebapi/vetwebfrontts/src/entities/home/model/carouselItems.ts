@@ -23,7 +23,7 @@ export interface ICarouselItem {
 export const carouselItems: ICarouselItem[] = [
   {
     id: 1,
-    imgSrc: "/animalsBg.jpg",
+    imgSrc: "/animalsForSlider.png",
     imgAlt: "Animals",
     title: "Владельцы Животных",
     description: "Информация о хозяйствах и регистрация владельцев животных",
@@ -50,7 +50,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 4,
-    imgSrc: "/drugsBg.jpg",
+    imgSrc: "/vaccinesBg.png",
     imgAlt: "Drugs",
     title: "Справочник биопрепаратов",
     description: "Информация о биопрепаратах",
@@ -59,7 +59,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 5,
-    imgSrc: "/drugsBg.jpg",
+    imgSrc: "/vaccinesBg.png",
     imgAlt: "DrugsCatalog",
     title: "Каталог препаратов",
     description: "Информация об имеющихся биопрепаратах",
@@ -68,7 +68,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 6,
-    imgSrc: "/drugsBg.jpg",
+    imgSrc: "/vaccinesBg.png",
     imgAlt: "DrugReceipts",
     title: "Поступление биопрепаратов",
     description: "Информация о поступлении биопрепаратов",
@@ -77,7 +77,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 7,
-    imgSrc: "/drugsBg.jpg",
+    imgSrc: "/vaccinesBg.png",
     imgAlt: "DrugReports",
     title: "Отчеты по биопрепаратам",
     description: "Отчеты по биопрепаратам",
@@ -86,7 +86,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 8,
-    imgSrc: "/vetworkBg.jpg",
+    imgSrc: "/vaccination.png",
     imgAlt: "Vaccinations",
     title: "Вакцинации",
     description: "Информация о проведенных вакцинациях",
@@ -104,7 +104,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 10,
-    imgSrc: "/vetworkBg.jpg",
+    imgSrc: "/vaccination.png",
     imgAlt: "VetWorkReports",
     title: "Отчеты по ветеринарным мероприятиям",
     description: "Отчеты о проведенных ветеринарных мероприятиях",

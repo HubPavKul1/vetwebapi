@@ -7,7 +7,7 @@ export function VetWorkLink() {
     <li className="navLink">
       <DropdownWrapper title="Работа" id="basic-nav-dropdown">
         {vetWorkNavDropdownItems.map((item) => (
-          <NavDropdownItem key={item.id} url={item.url} title={item.title} />
+          <NavDropdownItem key={item.id} url={item.url} title={item.title}/>
         ))}
       </DropdownWrapper>
     </li>

@@ -233,7 +233,7 @@ body {
 
 /* title style */
 .title-base {
-  @apply m-0 mb-5 text-center font-bold text-black;
+  @apply m-0 mb-5 text-center font-bold text-indigo-900;
 }
 
 .card-title {
@@ -244,7 +244,7 @@ body {
   @apply title-base text-3xl;
 }
 
-.text-base {
+.text-content {
   @apply m-0 mb-2 text-center text-xs text-black;
 }
 
@@ -405,17 +405,17 @@ body {
 }
 
 .navLink {
-  font-weight: 600;
-  color: rgb(0, 0, 0);
+  @apply text-indigo-400 font-medium
+ 
 }
 
 .navLink:focus {
-  outline-offset: 2px;
-  outline: 1px solid rgb(114, 114, 233);
+  @apply outline-offset-1 px-2 outline-violet-600 text-indigo-600 font-semibold
+ 
 }
 
 .navLink:hover {
-  color: rgb(114, 114, 233);
+  @apply text-indigo-600 font-semibold
 }
 
 .navLink::after {

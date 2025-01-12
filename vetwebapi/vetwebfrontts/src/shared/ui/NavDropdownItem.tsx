@@ -8,7 +8,7 @@ interface NavDropdownItemProps {
 
 export function NavDropdownItem({ url, title }: NavDropdownItemProps) {
   return (
-    <NavDropdown.Item as={Link} to={url}>
+    <NavDropdown.Item as={Link} to={url} className="navLink">
       {title}
     </NavDropdown.Item>
   );

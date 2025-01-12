@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function CarouselBox() {
   return (
-    <Carousel variant="dark">
+    <Carousel variant="dark" className="w-auto">
       {carouselItems.map((item) => (
         <CarouselItem key={item.id} className="carousel">
           <Link to={item.url}>
