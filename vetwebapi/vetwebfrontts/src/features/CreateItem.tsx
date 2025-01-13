@@ -11,10 +11,10 @@ interface ICreateItemProps {
 export function CreateItem({ btnTitle, children }: ICreateItemProps) {
   const [modalActive, setModalActive] = useState(false);
   return (
-    <Container className="flex justify-center mb-6">
-      <Container className="flex justify-center max-w-xl">
+    <Container>
+      <Container className="w-auto">
         <CustomButton
-          className="btn-nav text-xl w-full"
+          className="btn-filter"
           title={btnTitle}
           onClick={() => setModalActive(true)}
         />

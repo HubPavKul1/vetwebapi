@@ -1,5 +1,10 @@
 import { Col, Row } from "react-bootstrap";
-import { CustomPagination, NoData, PageWrapper, SectionWrapper } from "shared/index";
+import {
+  CustomPagination,
+  NoData,
+  PageWrapper,
+  SectionWrapper,
+} from "shared/index";
 import { CreateItem } from "features/CreateItem";
 import { ICompanies } from "entities/company";
 import { IDrugs } from "entities/drug";
@@ -35,9 +40,10 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
   return (
     <SectionWrapper>
       <h1 className="page-title">{title}</h1>
-      <div className="flex justify-start ">{filterButtons}</div>
-
-      <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
+      <Row className="mb-2">
+        <Col>{filterButtons}</Col>
+        <Col><CreateItem btnTitle={btnTitle}>{createForm}</CreateItem></Col>
+      </Row>
 
       {data.total_count > 0 ? (
         <>

@@ -112,7 +112,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
           <div className="">
             <DoctorSelect />
           </div>
-          {vetWorkType === "diagnostics" && diseaseId !== 74 && (
+          {vetWorkType.includes("diagnostics") && diseaseId !== 74 && (
             <>
               <div className="">
                 <LabsSelect />
@@ -132,7 +132,7 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
             </>
           )}
 
-          {vetWorkType === "diagnostics" && diseaseId === 74 && (
+          {vetWorkType.includes("diagnostics") && diseaseId === 74 && (
             <>
               <div className="">
                 <DiagnosticMethodsSelect />

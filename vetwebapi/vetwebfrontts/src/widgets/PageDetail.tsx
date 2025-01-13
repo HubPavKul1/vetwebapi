@@ -3,6 +3,7 @@ import {
   PageDetailTitle,
   PageDetailTop,
   PageWrapper,
+  SectionWrapper,
 } from "shared/index";
 
 interface PageDetailProps {
@@ -16,10 +17,10 @@ interface PageDetailProps {
 export function PageDetail({ ...props }: PageDetailProps) {
   const { imgSrc, alt, menu, title, children } = props;
   return (
-    <PageWrapper>
+    <SectionWrapper>
       <PageDetailTop imgSrc={imgSrc} alt={alt} menu={menu} />
       <PageDetailTitle title={title} />
       <PageDetailBody>{children}</PageDetailBody>
-    </PageWrapper>
+    </SectionWrapper>
   );
 }

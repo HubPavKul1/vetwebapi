@@ -16,7 +16,8 @@
   font-weight: 600;
   font-size: medium;
   text-transform: uppercase;
-  background-color: #c6c6d3;
+  background-color: #c7c7d0;
+  border-radius: 5px;
   transition: transform 0.5s ease-in-out;
 }
 .btn-upload::after,
@@ -195,7 +196,7 @@ body {
 }
 
 .btn-nav {
-  padding: 5px 10px;
+  padding: 5px 20px;
   border-radius: 5px;
 }
 .btn-nav > span {
@@ -224,7 +225,7 @@ body {
 } /*# sourceMappingURL=index.css.map */
 
 .btn-filter {
-  @apply text-center text-indigo-800 font-bold mr-2 px-4 py-0.5 bg-slate-300 rounded-xl hover:bg-slate-400 transition-colors duration-150 ease-in-out;
+  @apply w-auto text-center text-indigo-800 font-bold mr-2 px-4 py-2 bg-slate-300 rounded-md hover:bg-slate-400 transition-colors duration-150 ease-in-out;
 }
 
 .btn-filter-active {
@@ -277,11 +278,11 @@ body {
 
 /* card styles */
 .vertical-card {
-  @apply flex flex-col p-3 mb-5 h-full w-full drop-shadow-md hover:scale-105 transition-transform;
+  @apply flex bg-slate-200 flex-col p-3 mb-5 h-full w-full drop-shadow-md hover:scale-105 transition-transform;
 }
 
 .catalog-card {
-  @apply p-3 mb-5 border rounded-md shadow-lg hover:scale-105 transition-transform;
+  @apply p-3 mb-5 bg-slate-200 border rounded-md shadow-lg hover:scale-105 transition-transform;
 }
 
 .card-section {
