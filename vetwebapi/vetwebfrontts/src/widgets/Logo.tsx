@@ -1,4 +1,4 @@
-import vetLogo from "/logoPng.png";
+import vetLogo from "/logo.png";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

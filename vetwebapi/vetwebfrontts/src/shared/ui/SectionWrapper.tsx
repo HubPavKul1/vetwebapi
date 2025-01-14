@@ -5,5 +5,5 @@ interface SectionWrapperProps {
 }
 
 export function SectionWrapper({ children }: SectionWrapperProps) {
-  return <Container className="w-full bg-slate-100 p-5">{children}</Container>;
+  return <Container className="w-full p-5">{children}</Container>;
 }

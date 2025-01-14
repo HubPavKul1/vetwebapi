@@ -2,7 +2,6 @@ import {
   PageDetailBody,
   PageDetailTitle,
   PageDetailTop,
-  PageWrapper,
   SectionWrapper,
 } from "shared/index";
 

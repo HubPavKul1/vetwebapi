@@ -2,21 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn-upload,
+/* .btn-upload,
 .btn-nav,
 .btn-submit,
 .btn-large {
   padding: 0;
   border: none;
-  color: inherit;
+  color: #312e81;
   background-color: transparent;
   cursor: pointer;
   position: relative;
-  outline: none;
   font-weight: 600;
   font-size: medium;
   text-transform: uppercase;
-  background-color: #c7c7d0;
+  background-color: #694ad9;
+  outline: none;
   border-radius: 5px;
   transition: transform 0.5s ease-in-out;
 }
@@ -51,7 +51,7 @@
 .btn-nav:active,
 .btn-submit:active,
 .btn-large:active {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #1d0088;
   color: #fff;
   transition: background-color 0.5s ease-in-out;
 }
@@ -60,7 +60,7 @@
 .btn-submit:active::after,
 .btn-large:active::after {
   opacity: 1;
-}
+} */
 
 .btn-upload-disabled {
   @apply w-full bg-indigo-200 rounded-md cursor-none text-indigo-400 uppercase;
@@ -187,9 +187,10 @@ body {
 }
 
 .btn-submit {
-  padding: 15px 25px;
+  @apply px-10 py-3 w-full bg-inherit border-2 border-indigo-300 rounded-md
+  /* padding: 15px 25px;
   border-radius: 5px;
-  width: 100%;
+  width: 100%; */;
 }
 .btn-submit > span {
   font-size: 1em;
@@ -234,7 +235,7 @@ body {
 
 /* title style */
 .title-base {
-  @apply m-0 mb-5 text-center font-bold text-indigo-900;
+  @apply m-0 mb-5 font-black text-indigo-900 uppercase;
 }
 
 .card-title {
@@ -406,17 +407,15 @@ body {
 }
 
 .navLink {
-  @apply text-indigo-400 font-medium
- 
+  @apply text-indigo-400 font-medium;
 }
 
 .navLink:focus {
-  @apply outline-offset-1 px-2 outline-violet-600 text-indigo-600 font-semibold
- 
+  @apply outline-offset-1 px-2 outline-violet-600 text-indigo-600 font-semibold;
 }
 
 .navLink:hover {
-  @apply text-indigo-600 font-semibold
+  @apply text-indigo-600 font-semibold;
 }
 
 .navLink::after {

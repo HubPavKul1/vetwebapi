@@ -5,5 +5,5 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ children }: PageWrapperProps) {
-  return <Container className="w-full bg-slate-100">{children}</Container>;
+  return <Container className="w-full ">{children}</Container>;
 }

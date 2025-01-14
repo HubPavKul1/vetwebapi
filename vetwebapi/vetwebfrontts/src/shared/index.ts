@@ -1,4 +1,5 @@
-export { CustomButton } from "./ui/CustomButton";
+export { CustomButton } from "./ui/buttons/CustomButton";
+export { ButtonSubmit } from "./ui/buttons/ButtonSubmit";
 export { CustomPagination } from "./ui/CustomPagination";
 export { CustomSelect } from "./ui/CustomSelect";
 export { DropdownWrapper } from "./ui/DropdownWrapper";

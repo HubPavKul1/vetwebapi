@@ -1,4 +1,4 @@
-import { CustomButton } from "./CustomButton";
+import { CustomButton } from "./buttons/CustomButton";
 
 interface PageMenuButtonProps {
   title: string;
