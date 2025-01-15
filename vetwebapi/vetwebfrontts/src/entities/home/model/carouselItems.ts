@@ -41,7 +41,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 3,
-    imgSrc: "/diagnostic.jpg",
+    imgSrc: "/diagnBg.png",
     imgAlt: "Labs",
     title: "Ветеринарные лаборатории",
     description: "Информация о ветеринарных лабораториях",
@@ -95,7 +95,7 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 9,
-    imgSrc: "/diagnostic.jpg",
+    imgSrc: "/diagnBg.png",
     imgAlt: "Diagnostics",
     title: "Диагностические исследования",
     description: "Информация о проведенных диагностических исследованиях",

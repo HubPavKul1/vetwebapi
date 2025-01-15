@@ -257,23 +257,23 @@ body {
 
 /* Carousel styles */
 .carousel {
-  @apply h-[600px];
+  @apply h-[650px] w-full items-center justify-center;
 }
 
 .carousel img {
-  @apply h-full text-center my-0 mx-auto hover:opacity-70 transition-opacity;
+  @apply h-full w-full text-center my-0 mx-auto hover:opacity-70 transition-opacity duration-300 ease-in-out;
 }
 
 .carousel-caption {
-  @apply rounded-md bg-white bg-opacity-50 shadow-md shadow-gray-400;
+  @apply rounded-md bg-slate-50 bg-opacity-50 shadow-md shadow-gray-400;
 }
 
 .carousel-caption h1 {
-  @apply title-base text-6xl;
+  @apply title-base text-4xl uppercase;
 }
 
 .carousel-caption p {
-  @apply text-xl;
+  @apply text-2xl text-slate-800;
 }
 /* end carousel styles */
 

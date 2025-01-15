@@ -1,11 +1,10 @@
 import { LoginForm } from "features/user/LoginForm";
 import { Col, Container, Row } from "react-bootstrap";
-import { PageWrapper } from "shared/index";
+import { PageWrapper, SectionWrapper } from "shared/index";
 
 export function LoginPage() {
   return (
-    <PageWrapper>
-      <Row sm={1} md={2} className="mb-20"></Row>
+    <SectionWrapper>
       <Row sm={1} md={2} className="">
         <Col className="mb-5">
           <div>
@@ -23,6 +22,6 @@ export function LoginPage() {
           </Container>
         </Col>
       </Row>
-    </PageWrapper>
+    </SectionWrapper>
   );
 }

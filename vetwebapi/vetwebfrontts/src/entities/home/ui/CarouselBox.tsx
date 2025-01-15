@@ -2,10 +2,16 @@ import { Carousel, CarouselItem, CarouselCaption } from "react-bootstrap";
 
 import { carouselItems } from "../model/carouselItems";
 import { Link } from "react-router-dom";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 
 export function CarouselBox() {
   return (
-    <Carousel variant="dark" className="w-auto">
+    <Carousel
+      variant="dark"
+      prevIcon={<IoIosArrowDropleft size={50} color="grey" />}
+      nextIcon={<IoIosArrowDropright size={50} color="grey" />}
+      className=""
+    >
       {carouselItems.map((item) => (
         <CarouselItem key={item.id} className="carousel">
           <Link to={item.url}>
