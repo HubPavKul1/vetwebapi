@@ -10,7 +10,7 @@ export function Vets() {
       btnTitle="Добавить ветклинику"
       queryKey={queryKey}
       url={vetsUrl}
-      imgSrc="/gosvet.jpg"
+      imgSrc="/gosvet.png"
     />
   );
 }

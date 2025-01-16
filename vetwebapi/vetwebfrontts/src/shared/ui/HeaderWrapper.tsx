@@ -7,7 +7,7 @@ interface HeaderWrapperProps {
 export function HeaderWrapper({ children }: HeaderWrapperProps) {
   return (
     <>
-      <header className="px-0 py-6 border-b bg-slate-100 bg-opacity-50">
+      <header className="px-0 py-6 border-b bg-slate-300">
         <Container className="w-[1180px] flex items-center ">
           {children}
         </Container>

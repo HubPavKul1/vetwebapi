@@ -5,7 +5,7 @@ import { SectionContent } from "widgets/home";
 export function Home() {
   return (
     <PageWrapper>
-      <section id="#carousel" className="carousel">
+      <section id="#carousel" className="">
         <CarouselBox />
       </section>
       <section id="#home-сontent" className="home-content section-offset">

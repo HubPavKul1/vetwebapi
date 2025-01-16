@@ -1,6 +1,6 @@
 import { LoginForm } from "features/user/LoginForm";
 import { Col, Container, Row } from "react-bootstrap";
-import { PageWrapper, SectionWrapper } from "shared/index";
+import { SectionWrapper } from "shared/index";
 
 export function LoginPage() {
   return (
@@ -8,11 +8,7 @@ export function LoginPage() {
       <Row sm={1} md={2} className="">
         <Col className="mb-5">
           <div>
-            <img
-              src="logo.png"
-              alt="animals"
-              className="w-full h-auto m-auto"
-            />
+            <img src="/logo.png" alt="logo" className="w-full h-auto m-auto" />
           </div>
         </Col>
         <Col>

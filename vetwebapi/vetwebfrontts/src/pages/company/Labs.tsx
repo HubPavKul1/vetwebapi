@@ -10,7 +10,7 @@ export function Labs() {
       btnTitle="Добавить лабораторию"
       queryKey={queryKey}
       url={labsUrl}
-      imgSrc="/diagnostic.jpg"
+      imgSrc="/diagnosticBg.png"
     />
   );
 }

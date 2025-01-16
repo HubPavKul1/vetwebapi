@@ -16,7 +16,7 @@ export function Header() {
         <NavList />
         <GiExitDoor
           size={40}
-          className="cursor-pointer text-indigo-400 hover:text-indigo-600 transition-colors ease-in-out"
+          className="cursor-pointer text-indigo-600 hover:text-indigo-700 transition-colors duration-300 ease-in-out"
           onClick={onClick}
         />
       </HeaderWrapper>

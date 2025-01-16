@@ -15,7 +15,7 @@ export function Companies() {
       btnTitle="Добавить предприятие"
       url={url}
       queryKey={queryKey}
-      imgSrc="/animals.jpg"
+      imgSrc="/animalsBg.png"
       filterButtons={<AnimalGroupsFilterItems />}
     />
   );

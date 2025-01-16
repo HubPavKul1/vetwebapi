@@ -11,12 +11,12 @@ export function HomePageCard({ item }: HomePageCardProps) {
       <Container className="mb-5 h-96">
         <a href={item.url}>
           <Card className="vertical-card">
-            <Container className="w-full h-40 mb-1">
+            <Container className="flex h-40 mb-1 justify-center items-center">
               <Card.Img
                 variant="top"
                 src={item.imgSrc}
                 alt={item.imgAlt}
-                className="w-full h-full"
+                className="h-full w-auto"
               />
             </Container>
             <Card.Body>

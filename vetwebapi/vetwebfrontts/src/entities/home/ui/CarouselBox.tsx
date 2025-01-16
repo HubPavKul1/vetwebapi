@@ -7,13 +7,23 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 export function CarouselBox() {
   return (
     <Carousel
-      variant="dark"
-      prevIcon={<IoIosArrowDropleft size={50} color="grey" />}
-      nextIcon={<IoIosArrowDropright size={50} color="grey" />}
-      className=""
+      data-bs-theme="dark"
+      prevIcon={
+        <IoIosArrowDropleft
+          size={50}
+          className="text-slate-500 rounded-full hover:scale-110 transition-transform duration-300 ease-in-out"
+        />
+      }
+      nextIcon={
+        <IoIosArrowDropright
+          size={50}
+          className="text-slate-500 rounded-full hover:scale-110 transition-transform duration-300 ease-in-out"
+        />
+      }
+      className="carousel"
     >
       {carouselItems.map((item) => (
-        <CarouselItem key={item.id} className="carousel">
+        <CarouselItem key={item.id} className="h-[650px]">
           <Link to={item.url}>
             <img src={item.imgSrc} alt={item.imgAlt} />
           </Link>

@@ -12,10 +12,11 @@ export function CardBodyAnimalGroup({ animal }: CardBodyAnimalGroupProps) {
     <>
       {companyAnimalGroup && (
         <Row>
-          <Col md={2}>
+          <Col md={1}>
             <h6>Животные:</h6>
           </Col>
-          <Col md={10}>
+          <Col md={2}></Col>
+          <Col md={9}>
             <h6>{companyAnimalGroup}</h6>
           </Col>
         </Row>

@@ -3,18 +3,17 @@ import { ICardProps } from "shared/model/CardProps";
 export const contentData: ICardProps[] = [
   {
     id: 1,
-    imgSrc: "/vetis.jpg",
+    imgSrc: "/vetis.png",
     imgAlt: "Mercury",
     cardTitle: "Ветис",
     url: "https://mercury.vetrf.ru/",
-    cardText:
-      `Автоматизированная информационная система «Меркурий» предназначена для электронной сертификации...`,
+    cardText: `Автоматизированная информационная система «Меркурий» предназначена для электронной сертификации...`,
     hasContacts: false,
   },
 
   {
     id: 2,
-    imgSrc: "/rosselhoz.jpg",
+    imgSrc: "/rosselhoz.png",
     imgAlt: "Rosselhosnadzor",
     cardTitle: "Россельхознадзор",
     url: "https://fsvps.gov.ru/?ysclid=lttv13bemt557845175",
@@ -28,7 +27,7 @@ export const contentData: ICardProps[] = [
 
   {
     id: 3,
-    imgSrc: "/gosvet.jpg",
+    imgSrc: "/gosvet.png",
     imgAlt: "OblVetSluzba",
     cardTitle: "Служба ветеринарии Ивановской области",
     url: "https://vet.ivanovoobl.ru/?ysclid=lttvj80rs1450329653",
@@ -41,7 +40,7 @@ export const contentData: ICardProps[] = [
 
   {
     id: 4,
-    imgSrc: "/spbvet.jpg",
+    imgSrc: "/spbvet.png",
     imgAlt: "SpbVet",
     cardTitle: "Ветеринарный Петербург",
     url: "https://spbvet.info/",

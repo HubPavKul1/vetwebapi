@@ -7,7 +7,6 @@ import {
   useGetDataById,
 } from "shared/index";
 
-
 import { CompanyPageMenu, PageDetail } from "widgets/index";
 import { CompanyEmployees } from "entities/employee";
 import { CompanyAnimals } from "entities/animal";
@@ -25,12 +24,12 @@ interface CompanyData {
 export function CompanyDetail() {
   const { id } = useParams();
   const companyId = Number(id);
-  const queryKey = CompanyQueryKeys.companyDetail
+  const queryKey = CompanyQueryKeys.companyDetail;
 
   const { isLoading, data, isError, error }: CompanyData = useGetDataById(
     queryKey,
     companyDetailUrl(companyId),
-    id,
+    id
   );
 
   if (isError) return <ErrorLoadDataMessage error={error} />;
@@ -39,7 +38,7 @@ export function CompanyDetail() {
   return (
     <>
       <PageDetail
-        imgSrc="/animals.jpg"
+        imgSrc="/animalsBg.png"
         alt="animals.jpg"
         menu={<CompanyPageMenu />}
         title={data.full_name}

@@ -12,10 +12,11 @@ export function CardBodyEmployee({ employee }: CardBodyEmployeeProps) {
   return (
     <>
       <Row>
-        <Col md={2}>
-          <h6 className="underline">Персонал:</h6>
+        <Col md={1}>
+          <h6 className="">Персонал:</h6>
         </Col>
-        <Col md={10}>
+        <Col md={2}></Col>
+        <Col md={9}>
           <h6>{companyEmployee}</h6>
         </Col>
       </Row>

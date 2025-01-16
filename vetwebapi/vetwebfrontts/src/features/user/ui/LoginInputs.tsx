@@ -36,7 +36,7 @@ export function LoginInputs() {
           value={value}
           onChange={onChange}
           placeholder={item.placeholder}
-          className="text-input"
+          className="text-input bg-slate-200"
           fieldName={item.fieldName}
           register={register}
           type={item.type}
