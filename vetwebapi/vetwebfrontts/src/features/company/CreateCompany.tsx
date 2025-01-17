@@ -2,7 +2,12 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { CompanyInputs } from "./ui/CompanyInputs";
-import { CustomButton, ICreateItemFormInterface } from "shared/index";
+import {
+  ButtonCreate,
+  ButtonSubmit,
+  CustomButton,
+  ICreateItemFormInterface,
+} from "shared/index";
 import { ICompanyCreate } from "entities/company/model/companyInterfaces";
 
 export function CreateCompany({ url, queryKey }: ICreateItemFormInterface) {
@@ -29,11 +34,7 @@ export function CreateCompany({ url, queryKey }: ICreateItemFormInterface) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CompanyInputs />
         <div className="form-group">
-          <CustomButton
-            className="btn-submit"
-            disabled={false}
-            title="Зарегистрировать"
-          />
+          <ButtonSubmit title="Зарегистрировать" />
         </div>
       </form>
     </FormProvider>

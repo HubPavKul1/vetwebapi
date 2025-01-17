@@ -1,92 +1,80 @@
 @import "./variables";
 @import "./mixins";
 
-
-
 %titleBase {
-    margin: 0;
-	margin-bottom: 15px;
-	text-align: center;
-	font-size: 1.3rem;
-	font-weight: bold;
-    color: $fontColor;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: $fontColor;
 }
 
 %cardTitle {
-    margin: 0;
-	margin-bottom: 15px;
-	text-align: center;
-	font-size: 14px;
-	font-weight: bold;
-    color: $fontColor;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: $fontColor;
 }
 
-
 %textBase {
-    margin: 0;
-	margin-bottom: 10px;
-	text-align: center;
-	font-size: .8em;
-    color: $fontColor;
-
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0.8em;
+  color: $fontColor;
 }
 
 %btn {
-	@include btn-reset;
-    position: relative;
-	outline: none;
-	font-weight: 600;
-	text-transform: uppercase;
-	@include btn-color($btnColor, $btnColor2);
-	color: $btnTitleColor;
-	@include transition(transform);
+  @include btn-reset;
+  position: relative;
+  outline: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  @include btn-color($btnColor, $btnColor2);
+  color: $btnTitleColor;
+  @include transition(transform);
 
-	&::after {
-		content: "";
-		position: absolute;
-		left: -3px;
-		right: -3px;
-		top: -3px;
-		bottom: -3px;
-		border-radius: inherit;
-		border: 1px solid rgba(0, 0, 0, .8);
-		outline: none;
-		opacity: 0;
-	}
+  &::after {
+    content: "";
+    position: absolute;
+    left: -3px;
+    right: -3px;
+    top: -3px;
+    bottom: -3px;
+    border-radius: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    outline: none;
+    opacity: 0;
+  }
 
-	&:focus::after {
-		opacity: 1;
-	
-	}
+  &:focus::after {
+    opacity: 1;
+  }
 
-	&:hover {
-		transform: scale(1.05);
-	}
+  &:hover {
+    transform: scale(1.05);
+  }
 
-	&:active {
-		background-color: rgba(0, 0, 0, .5);
-		@include transition(background-color);
-	}
-	
-	&:active::after {
-		opacity: 1;
-	}
+  &:active {
+    background-color: rgba(0, 0, 0, 0.5);
+    @include transition(background-color);
+  }
 
+  &:active::after {
+    opacity: 1;
+  }
 }
 
-
 %tableHead {
-    border-top: 2px solid gray;
-	border-bottom: 2px solid gray;
-	font-weight: 600;
-	margin-bottom: 10px;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 %tableRow {
-    border-bottom: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
-
-
-
-
-

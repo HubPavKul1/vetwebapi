@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { addressUrl } from "shared/urls/companyUrls";
 import {
-  CustomButton,
+  ButtonSubmit,
   CustomInput,
   fieldRequiredMessage,
   maxLenErrorMessage,
@@ -93,11 +93,7 @@ export function AddAddressForm() {
         ))}
 
         <div className="form-group">
-          <CustomButton
-            className="btn-submit"
-            disabled={false}
-            title="Зарегистрировать"
-          />
+          <ButtonSubmit title="Зарегистрировать" />
         </div>
       </form>
     </FormProvider>

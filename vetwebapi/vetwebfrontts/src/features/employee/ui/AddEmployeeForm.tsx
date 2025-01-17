@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { companyEmployeesUrl } from "shared/urls/companyUrls";
 import {
-  CustomButton,
+  ButtonSubmit,
   CustomInput,
   fieldRequiredMessage,
   maxLenErrorMessage,
@@ -81,11 +81,7 @@ export function AddEmployeeForm() {
         ))}
 
         <div className="form-group">
-          <CustomButton
-            className="btn-submit"
-            disabled={false}
-            title="Зарегистрировать"
-          />
+          <ButtonSubmit title="Зарегистрировать" />
         </div>
       </form>
     </FormProvider>

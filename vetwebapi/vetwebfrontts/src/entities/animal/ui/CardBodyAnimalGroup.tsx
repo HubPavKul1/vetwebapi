@@ -17,7 +17,7 @@ export function CardBodyAnimalGroup({ animal }: CardBodyAnimalGroupProps) {
           </Col>
           <Col md={2}></Col>
           <Col md={9}>
-            <h6>{companyAnimalGroup}</h6>
+            <h6 className="text-sm">{companyAnimalGroup}</h6>
           </Col>
         </Row>
       )}

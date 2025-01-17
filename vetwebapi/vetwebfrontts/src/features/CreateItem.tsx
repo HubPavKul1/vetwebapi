@@ -1,7 +1,7 @@
 import { Modal } from "shared/ui/Modal";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
-import { CustomButton } from "shared/index";
+import { ButtonCreate, CustomButton } from "shared/index";
 
 interface ICreateItemProps {
   btnTitle?: string;
@@ -13,11 +13,7 @@ export function CreateItem({ btnTitle, children }: ICreateItemProps) {
   return (
     <Container>
       <Container className="w-auto">
-        <CustomButton
-          className="btn-filter"
-          title={btnTitle}
-          onClick={() => setModalActive(true)}
-        />
+        <ButtonCreate title={btnTitle} onClick={() => setModalActive(true)} />
       </Container>
 
       <Modal active={modalActive} setActive={setModalActive}>

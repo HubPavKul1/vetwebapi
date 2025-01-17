@@ -17,7 +17,7 @@ export function CardBodyEmployee({ employee }: CardBodyEmployeeProps) {
         </Col>
         <Col md={2}></Col>
         <Col md={9}>
-          <h6>{companyEmployee}</h6>
+          <h6 className="text-sm">{companyEmployee}</h6>
         </Col>
       </Row>
     </>

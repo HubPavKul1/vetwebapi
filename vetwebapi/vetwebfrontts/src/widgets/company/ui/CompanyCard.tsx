@@ -19,7 +19,7 @@ export function CompanyCard({ ...props }: CompanyCardProps) {
       delUrl={companyDetailUrl(company.id)}
       imgSrc={imgSrc}
       topClassName="card-top"
-      bodyClassName="card-body-small"
+      bodyClassName="card-body-md"
     >
       <CompanyCardBody
         address={company.address && company.address}

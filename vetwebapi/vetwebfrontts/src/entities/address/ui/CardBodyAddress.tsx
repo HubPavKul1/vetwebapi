@@ -17,7 +17,7 @@ export function CardBodyAddress({ address }: CardBodyAddressProps) {
         </Col>
         <Col md={2}></Col>
         <Col md={9}>
-          <h6>{companyAddress}</h6>
+          <h6 className="text-sm">{companyAddress}</h6>
         </Col>
       </Row>
     </>

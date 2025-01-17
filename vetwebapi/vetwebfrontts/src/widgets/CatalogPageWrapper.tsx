@@ -41,8 +41,10 @@ export function CatalogPageWrapper({ ...props }: CatalogPageWrapperProps) {
     <SectionWrapper>
       <h1 className="page-title">{title}</h1>
       <Row className="mb-2">
-        <Col>{filterButtons}</Col>
-        <Col><CreateItem btnTitle={btnTitle}>{createForm}</CreateItem></Col>
+        <Col md={8}>{filterButtons}</Col>
+        <Col>
+          <CreateItem btnTitle={btnTitle}>{createForm}</CreateItem>
+        </Col>
       </Row>
 
       {data.total_count > 0 ? (

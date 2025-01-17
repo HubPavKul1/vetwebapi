@@ -63,7 +63,7 @@
 } */
 
 .btn-upload-disabled {
-  @apply w-full bg-indigo-200 rounded-md cursor-none text-indigo-400 uppercase;
+  @apply w-full bg-slate-300 py-2 rounded-md cursor-none text-indigo-400 uppercase;
 }
 
 @font-face {
@@ -213,21 +213,22 @@ body {
   width: 100%;
   text-align: center;
   font-size: 0.7em;
-  background-color: #fff;
+  background-color: inherit;
   border-radius: 5px;
   transition: transform 0.3s ease-in-out;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .btn-default:hover {
   transform: scale(1.1);
 } /*# sourceMappingURL=index.css.map */
 
 .btn-filter {
-  @apply w-auto text-center text-indigo-800 font-bold mr-2 px-4 py-2 bg-slate-300 rounded-md hover:bg-slate-400 transition-colors duration-150 ease-in-out;
+  @apply w-auto text-center font-bold mr-2 px-4 py-2 border border-slate-400 rounded-lg drop-shadow-xl shadow-slate-900 text-sm text-indigo-900 uppercase hover:bg-slate-400 transition-colors duration-300 ease-in-out;
 }
 
 .btn-filter-active {
-  @apply text-center text-white font-bold mr-2 px-4 py-0.5 bg-slate-500 rounded-xl hover:bg-slate-400 transition-colors duration-150 ease-in-out border border-blue-950;
+  @apply w-auto text-center text-indigo-900 uppercase font-bold mr-2 px-4 py-0.5 bg-slate-300 rounded-xl hover:bg-slate-400 transition-colors duration-300 ease-in-out border border-blue-950;
 }
 
 /* title style */
@@ -240,7 +241,7 @@ body {
 }
 
 .page-title {
-  @apply title-base text-3xl;
+  @apply title-base text-3xl text-center;
 }
 
 .text-content {
@@ -311,7 +312,7 @@ body {
 
 /* menu style */
 .page-menu {
-  @apply text-left p-4 mb-5 border rounded-md shadow-md;
+  @apply text-left p-4 mb-5 border rounded-lg shadow-md;
 }
 
 .page-menu-top {
@@ -319,7 +320,7 @@ body {
 }
 
 .page-menu-top h2 {
-  @apply title-base underline text-2xl;
+  @apply text-indigo-900 uppercase font-bold text-2xl mb-2;
 }
 
 .page-menu-top ul {
@@ -331,12 +332,12 @@ body {
 }
 
 .page-menu-item {
-  @apply list-none m-0 mb-4 border-b border-b-black text-2xl hover:text-violet-600 transition-colors;
+  @apply w-full list-none m-0 mb-4 px-10 py-2 rounded-lg shadow-md bg-slate-300 text-2xl text-indigo-900 hover:text-indigo-700 transition-colors;
 }
 /* end menu style */
 
 .page-detail-title {
-  @apply text-center text-lg underline font-bold mb-8;
+  @apply text-center text-lg font-bold mb-8 text-indigo-900;
 }
 
 .form-title {
@@ -396,7 +397,7 @@ body {
 }
 
 .custom-select {
-  @apply mb-2 text-xs;
+  @apply mb-2  bg-slate-200 text-xs;
 }
 
 .error-message {

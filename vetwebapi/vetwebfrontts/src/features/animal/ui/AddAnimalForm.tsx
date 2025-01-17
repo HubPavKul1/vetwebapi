@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { companyAnimalsUrl } from "shared/urls/companyUrls";
 import {
-  CustomButton,
+  ButtonSubmit,
   CustomInput,
   fieldRequiredMessage,
   maxLenErrorMessage,
@@ -101,11 +101,7 @@ export function AddAnimalForm() {
         ))}
 
         <div className="">
-          <CustomButton
-            className="btn-submit"
-            disabled={false}
-            title="Зарегистрировать"
-          />
+          <ButtonSubmit title="Зарегистрировать" />
         </div>
       </form>
     </FormProvider>

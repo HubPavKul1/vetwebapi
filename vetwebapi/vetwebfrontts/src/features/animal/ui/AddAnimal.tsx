@@ -8,7 +8,7 @@ export function AddAnimal() {
   return (
     <MenuItem
       title="Добавить животное"
-      icon={<LiaHorseHeadSolid color="blue" fontSize={30} />}
+      icon={<LiaHorseHeadSolid color="indigo" fontSize={30} />}
     >
       <AddAnimalForm />
       <UploadAnimalForm />

@@ -7,7 +7,7 @@ export function AddAddress() {
   return (
     <MenuItem
       title="Добавить адрес"
-      icon={<BsBuildingAdd color="blue" fontSize={30} />}
+      icon={<BsBuildingAdd color="indigo" fontSize={30} />}
     >
       <AddAddressForm />
     </MenuItem>

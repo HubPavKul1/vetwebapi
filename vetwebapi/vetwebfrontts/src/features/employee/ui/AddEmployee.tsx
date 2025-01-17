@@ -6,7 +6,7 @@ export function AddEmployee() {
   return (
     <MenuItem
       title="Добавить работника"
-      icon={<GrUserManager color="blue" fontSize={30} />}
+      icon={<GrUserManager color="indigo" fontSize={30} />}
     >
       <AddEmployeeForm />
     </MenuItem>

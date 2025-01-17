@@ -7,7 +7,7 @@ interface CompanyAddressProps {
 
 export function CompanyAddress({ address }: CompanyAddressProps) {
   return (
-    <Container className="flex mb-8 text-lg">
+    <Container className="flex mb-8 text-lg text-indigo-900">
       <span className="mr-3">Адрес: </span>
       <span className="mr-3">г. {address.city}</span>
       <span className="mr-3">{address.street}</span>

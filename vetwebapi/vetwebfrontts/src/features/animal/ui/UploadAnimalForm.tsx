@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useUpload } from "shared/hooks/useUpload";
 import { uploadAnimalsUrl } from "shared/urls/companyUrls";
 import clsx from "clsx";
-import { CustomButton } from "shared/index";
+import { ButtonCreate, CustomButton } from "shared/index";
 
 export function UploadAnimalForm() {
   const { id } = useParams();
@@ -39,8 +39,8 @@ export function UploadAnimalForm() {
 
   return (
     <div className="container p-2 ">
-      <div className="container text-md">
-        <label className="btn-default">
+      <div className="container text-md bg-inherit">
+        <label className="btn-default bg-inherit">
           <input className="text-sm" type="file" onChange={selectFile} />
         </label>
       </div>

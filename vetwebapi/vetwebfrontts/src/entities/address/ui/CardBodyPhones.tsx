@@ -8,7 +8,7 @@ interface CardBodyPhonesProps {
 export function CardBodyPhones({ phone, phone2 }: CardBodyPhonesProps) {
   return (
     <>
-      <Row className="text-xs text-left">
+      <Row className="text-sm text-left">
         <Col>
           <span>тел.: {phone}</span>
         </Col>
