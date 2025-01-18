@@ -11,7 +11,7 @@ export function PageDetailContentWrapper({
   children,
 }: PageDetailContentWrapperProps) {
   return (
-    <Container className="text-left mb-8 text-indigo-900">
+    <Container className="p-0 text-left mb-8 text-indigo-900">
       <h1 className="mb-2 text-center text-xl uppercase font-bold">{title}</h1>
       {children}
     </Container>

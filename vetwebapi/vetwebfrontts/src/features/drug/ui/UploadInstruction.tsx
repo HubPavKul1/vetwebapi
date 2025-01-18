@@ -20,7 +20,7 @@ export function UploadInstruction({ ...props }: UploadInstructionProps) {
         accept=".pdf"
         mutationName="drugInstr upload"
         invQueryName={props.invQueryName}
-        iconSrc="/pdf.jpg"
+        iconSrc="/pdf.png"
       />
       <DropdownMessage isOpen={isOpen} message="Загрузите инструкцию!" />
     </Container>

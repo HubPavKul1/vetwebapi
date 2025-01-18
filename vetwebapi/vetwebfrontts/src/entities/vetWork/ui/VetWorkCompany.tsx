@@ -35,33 +35,31 @@ export function VetWorkCompany({
   };
 
   return (
-    <Container key={company.id} className="mb-8 border-b-2 border-b-black">
-      <div>
-        <Row className="title-base underline text-lg">
-          <Col sm={8}>
-            <h5>
-              <Link to={companyLink(company.id)}>{company.full_name}</Link>
-            </h5>
-          </Col>
-          <Col>
-            <ButtonCreate
-              title="Добавить животных"
-              onClick={() => addAnimals(company.id.toString())}
-            />
-          </Col>
-          <Col className=" flex items-center">
-            <DeleteItem
-              queryKeyId={id}
-              url={vetWorkCompanyDetailUrl(vetWorkId, company.id)}
-              queryKey="vetwork"
-              alertMessage={`${company.short_name} успешно удалено!`}
-              size={30}
-            />
-          </Col>
-        </Row>
+    <div key={company.id} className="mb-8 border-b-2 border-slate-400">
+      <Row className="p-0 title-base underline text-lg">
+        <Col sm={8} className="p-0">
+          <h5>
+            <Link to={companyLink(company.id)}>{company.full_name}</Link>
+          </h5>
+        </Col>
+        <Col>
+          <ButtonCreate
+            title="Добавить животных"
+            onClick={() => addAnimals(company.id.toString())}
+          />
+        </Col>
+        <Col className="flex items-center">
+          <DeleteItem
+            queryKeyId={id}
+            url={vetWorkCompanyDetailUrl(vetWorkId, company.id)}
+            queryKey="vetwork"
+            alertMessage={`${company.short_name} успешно удалено!`}
+            size={25}
+          />
+        </Col>
+      </Row>
 
-        {company.address && <CompanyAddress address={company.address} />}
-      </div>
+      {company.address && <CompanyAddress address={company.address} />}
 
       <PageDetailContentWrapper title="Животные">
         <p className="text-indigo-700 text-left">
@@ -75,6 +73,6 @@ export function VetWorkCompany({
           companyId={company.id}
         />
       </PageDetailContentWrapper>
-    </Container>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ import {
   drugImageUrl,
   drugInstructionUrl,
 } from "shared/urls/drugUrls";
-import { ErrorLoadDataMessage } from "shared/index";
+import { ErrorLoadDataMessage, SectionWrapper } from "shared/index";
 import { IDrugDetail } from "entities/drug/model/drugInterfaces";
 import { diseasesString } from "shared/helpers";
 
@@ -34,36 +34,34 @@ export function DrugDetail() {
   const diseases = data && data.diseases && diseasesString(data.diseases);
 
   return (
-    <>
-      <Container>
-        <Row className="p-3 font-bold text-left text-indigo-900">
-          <Col sm={3} className="">
-            <a href={data.image ? drugImageUrl(drugId) : "#"}>
-              <img
-                className="hover:scale-110 transition-transform duration-500 ease-in-out"
-                src={data.image ? drugImageUrl(drugId) : "/vaccinesBg.png"}
-                alt={data.name}
-              />
-            </a>
-          </Col>
+    <SectionWrapper>
+      <Row className="p-3 font-bold text-left text-indigo-900">
+        <Col sm={3} className="">
+          <a href={data.image ? drugImageUrl(drugId) : "#"}>
+            <img
+              className="hover:scale-110 transition-transform duration-500 ease-in-out"
+              src={data.image ? drugImageUrl(drugId) : "/vaccinesBg.png"}
+              alt={data.name}
+            />
+          </a>
+        </Col>
 
-          <Col>
-            <h5 className="text-3xl mb-5">{data.name}</h5>
-            <p className="text-2xl">Производитель: {data.drug_manufacturer}</p>
-            <p className="text-2xl">Заболевания: {diseases}</p>
-          </Col>
-        </Row>
+        <Col>
+          <h5 className="text-3xl mb-5 uppercase">{data.name}</h5>
+          <p className="text-2xl">Производитель: {data.drug_manufacturer}</p>
+          <p className="text-2xl">Заболевания: {diseases}</p>
+        </Col>
+      </Row>
 
-        <Row className="min-h-screen">
-          {data.instruction && (
-            <object
-              type="application/pdf"
-              data={drugInstructionUrl(drugId)}
-              width="100%"
-            ></object>
-          )}
-        </Row>
-      </Container>
-    </>
+      <Row className="min-h-screen">
+        {data.instruction && (
+          <object
+            type="application/pdf"
+            data={drugInstructionUrl(drugId)}
+            width="100%"
+          ></object>
+        )}
+      </Row>
+    </SectionWrapper>
   );
 }

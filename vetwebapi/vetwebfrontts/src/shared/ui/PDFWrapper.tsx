@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { Margin, usePDF } from "react-to-pdf";
-import { CustomButton } from "shared/index";
+import { ButtonCreate, CustomButton } from "shared/index";
 
 interface PDFWrapperProps {
   closePdf: CallableFunction;
@@ -28,16 +28,12 @@ export function PDFWrapper({
   return (
     <Container>
       <div className="flex p-3">
-        <CustomButton
-          className="btn-upload mr-5"
-          title="Открыть PDF"
-          onClick={() => toPDF()}
-        />
-        <CustomButton
-          className="btn-upload mr-5"
-          title="Назад"
-          onClick={onClick}
-        />
+        <div className="w-auto mr-5">
+          <ButtonCreate title="Открыть PDF" onClick={() => toPDF()} />
+        </div>
+        <div className="w-auto">
+          <ButtonCreate title="Назад" onClick={onClick} />
+        </div>
       </div>
 
       <Container className="py-3 px-20 overflow-auto" ref={targetRef}>

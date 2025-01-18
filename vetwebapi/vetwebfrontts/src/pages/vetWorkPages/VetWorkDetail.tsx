@@ -46,7 +46,7 @@ export function VetWorkDetail() {
       animal.dosage ? (dosages += animal.dosage) : dosages
     );
   return (
-    <>
+    
       <PageDetail
         imgSrc={imgSrc ? imgSrc : ""}
         alt={fullPageTitle ? fullPageTitle : ""}
@@ -54,28 +54,26 @@ export function VetWorkDetail() {
         title={fullPageTitle ? fullPageTitle : ""}
       >
         <>
-          <Container>
-            <div className="flex text-left text-lg text-indigo-700 font-bold ">
-              <span className="mr-5">Всего голов: {data?.animals?.length}</span>
-              <span>
-                Израсходовано препарата: {dosages.toFixed(4)}{" "}
-                {data?.drug?.accounting_unit}
-              </span>
-            </div>
+          <div className="mb-3 flex text-left text-lg text-indigo-700 font-bold uppercase">
+            <span className="mr-8">Всего голов: {data?.animals?.length}</span>
+            <span >
+              Израсходовано препарата: {dosages.toFixed(4)}{" "}
+              {data?.drug?.accounting_unit}
+            </span>
+          </div>
 
-            <PageDetailContentWrapper title="Предприятия">
-              {data.companies?.length &&
-                data.companies.map((company: ICompanyCard) => (
-                  <VetWorkCompany
-                    key={company.id}
-                    company={company}
-                    animals={data.animals}
-                    workType={data.work_type.toLowerCase()}
-                    disease={disease}
-                  />
-                ))}
-            </PageDetailContentWrapper>
-          </Container>
+          <PageDetailContentWrapper title="Предприятия">
+            {data.companies?.length &&
+              data.companies.map((company: ICompanyCard) => (
+                <VetWorkCompany
+                  key={company.id}
+                  company={company}
+                  animals={data.animals}
+                  workType={data.work_type.toLowerCase()}
+                  disease={disease}
+                />
+              ))}
+          </PageDetailContentWrapper>
 
           <PageDetailContentWrapper title="Биопрепарат">
             <PageTable
@@ -85,6 +83,5 @@ export function VetWorkDetail() {
           </PageDetailContentWrapper>
         </>
       </PageDetail>
-    </>
   );
 }

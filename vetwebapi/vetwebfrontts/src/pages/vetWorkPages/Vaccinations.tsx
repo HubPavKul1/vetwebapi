@@ -20,7 +20,7 @@ export function Vaccinations() {
   return (
     <VetWorks
       url={url}
-      imgSrc="/vetworkBg.jpg"
+      imgSrc="/vaccination.png"
       title="Вакцинации"
       btnTitle="Добавить вакцинацию"
       queryKey={queryKey}

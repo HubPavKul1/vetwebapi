@@ -96,8 +96,8 @@ export function AddAnimalsToVetWorkForm({
   };
 
   return (
-    <Container className="mb-8 p-8 text-indigo-900">
-      <Container className="text-center sticky top-0 z-10">
+    <Container className="mb-8 text-indigo-900 ">
+      <Container className="pt-8 text-center sticky top-0 z-10 bg-gradient-to-r from-slate-100 to-slate-300">
         <Row>
           <Col md={1}>
             <ButtonCreate title="Назад" onClick={() => backButtonOnClick()} />
