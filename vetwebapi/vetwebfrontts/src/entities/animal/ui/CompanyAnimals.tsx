@@ -1,8 +1,6 @@
-import { Container } from "react-bootstrap";
-
 import { CompanyAnimal } from "./CompanyAnimal";
 import { IAnimal } from "../model/animalInterfaces";
-import { PageTable } from "shared/index";
+import { PageDetailContentWrapper, PageTable } from "shared/index";
 import { companyAnimalsHeaders } from "shared/model/tableHeaders";
 
 interface CompanyAnimalsProps {
@@ -12,9 +10,8 @@ interface CompanyAnimalsProps {
 
 export function CompanyAnimals({ animals, companyId }: CompanyAnimalsProps) {
   return (
-    <Container className="mb-8 text-center">
-      <h5 className="page-detail-title">Животные </h5>
-      <p className="text-left text-blue-700">Всего голов: {animals?.length}</p>
+    <PageDetailContentWrapper title="Животные">
+      <p className="text-left">Всего голов: {animals?.length}</p>
       <PageTable
         tableHeaders={companyAnimalsHeaders}
         tableItems={animals.map((animal) => (
@@ -25,6 +22,6 @@ export function CompanyAnimals({ animals, companyId }: CompanyAnimalsProps) {
           />
         ))}
       />
-    </Container>
+    </PageDetailContentWrapper>
   );
 }

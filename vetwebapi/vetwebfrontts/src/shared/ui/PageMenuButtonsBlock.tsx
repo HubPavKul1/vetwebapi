@@ -3,5 +3,5 @@ interface PageMenuButtonsBlockProps {
 }
 
 export function PageMenuButtonsBlock({ children }: PageMenuButtonsBlockProps) {
-  return <div className="page-menu-buttons">{children}</div>;
+  return <div className="flex flex-col p-1 ">{children}</div>;
 }

@@ -4,6 +4,7 @@ import { Vet1B } from "./Vet1B";
 import { HomeContentWrapper } from "entities/home";
 import { DrugMovementBetweenDateRange } from "widgets/drugReport";
 import useReportStore from "features/vetWork/stores/useReportStore";
+import { Container } from "react-bootstrap";
 
 export function DrugReportMainPage() {
   const dateRange = useReportStore((state) => state.dateRange);
@@ -14,8 +15,10 @@ export function DrugReportMainPage() {
     <>
       {!isReportActive ? (
         <HomeContentWrapper title="Отчеты по биопрепаратам">
-          <DrugMovementBetweenDateRange />
-          <Vet1BMenu />
+          <Container className="w-auto">
+            <DrugMovementBetweenDateRange />
+            <Vet1BMenu />
+          </Container>
         </HomeContentWrapper>
       ) : dateRange && reportData.drugs_report ? (
         <DrugReport />

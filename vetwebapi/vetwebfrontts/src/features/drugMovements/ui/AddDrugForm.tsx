@@ -3,7 +3,12 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { CatalogDrugSelect } from "./CatalogDrugSelect";
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
-import { CustomButton, CustomInput, fieldRequiredMessage } from "shared/index";
+import {
+  ButtonSubmit,
+  CustomButton,
+  CustomInput,
+  fieldRequiredMessage,
+} from "shared/index";
 import { IDrugInMovementIn } from "entities/drugMovements/model/drugMovementInterfaces";
 import { PlaceOfAdministrationSelect } from "features/drug/ui/selectData/PlaceOfAdministrationSelect";
 import { AdministrationMethodSelect } from "features/drug/ui/selectData/AdministrationMethodSelect";
@@ -101,11 +106,7 @@ export function AddDrugForm({ url, queryKey }: AddDrugFormProps) {
           )}
 
           <div className="form-group">
-            <CustomButton
-              className="btn-submit"
-              disabled={false}
-              title="Добавить"
-            />
+            <ButtonSubmit title="Добавить" />
           </div>
         </form>
       </FormProvider>

@@ -1,6 +1,11 @@
 import { CatalogDrugMovement, ICatalogDrugDetails } from "entities/catalogDrug";
 import { useParams } from "react-router-dom";
-import { Loader, PageTable, useGetDataById } from "shared/index";
+import {
+  Loader,
+  PageDetailContentWrapper,
+  PageTable,
+  useGetDataById,
+} from "shared/index";
 import { catalogDrugMovementHeaders } from "shared/model/tableHeaders";
 
 interface CatalogDrugMovementTableProps {
@@ -27,11 +32,9 @@ export function CatalogDrugMovementTable({
   );
 
   if (isLoading || !data) return <Loader />;
-  console.log("DATA>>>>", url);
 
   return (
-    <>
-      <h2 className="text-center text-xl font-bold mb-2">{tableTitle}</h2>
+    <PageDetailContentWrapper title={tableTitle}>
       <PageTable
         tableHeaders={catalogDrugMovementHeaders}
         tableItems={
@@ -41,6 +44,6 @@ export function CatalogDrugMovementTable({
           ))
         }
       />
-    </>
+    </PageDetailContentWrapper>
   );
 }

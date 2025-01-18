@@ -35,7 +35,7 @@ export function DrugReceipts() {
           key={drugMovement.id}
           drugMovement={drugMovement}
           invQueryName={pageQueryKey}
-          imgSrc="/drugsCard.jpg"
+          imgSrc="/vaccinesBg.png"
         />
       ))}
     </CatalogPageWrapper>

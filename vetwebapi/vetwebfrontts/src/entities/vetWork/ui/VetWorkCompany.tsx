@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 
 import { Link, useParams } from "react-router-dom";
-import { CustomButton } from "shared/index";
+import { ButtonCreate, PageDetailContentWrapper } from "shared/index";
 import { IAnimalInVetwork } from "entities/vetWork/model/vetWorkInterfaces";
 import { companyLink } from "shared/urls/companyUrls";
 import { DeleteItem } from "shared/ui/DeleteItem";
@@ -35,7 +35,7 @@ export function VetWorkCompany({
   };
 
   return (
-    <Container key={company.id} className="mb-8 border-b-2 border-b-black ">
+    <Container key={company.id} className="mb-8 border-b-2 border-b-black">
       <div>
         <Row className="title-base underline text-lg">
           <Col sm={8}>
@@ -44,8 +44,7 @@ export function VetWorkCompany({
             </h5>
           </Col>
           <Col>
-            <CustomButton
-              className="btn-nav text-sm"
+            <ButtonCreate
               title="Добавить животных"
               onClick={() => addAnimals(company.id.toString())}
             />
@@ -64,8 +63,7 @@ export function VetWorkCompany({
         {company.address && <CompanyAddress address={company.address} />}
       </div>
 
-      <Container className="text-center">
-        <h5 className="text-lg underline font-bold">Животные </h5>
+      <PageDetailContentWrapper title="Животные">
         <p className="text-indigo-700 text-left">
           Всего голов хозяйства :{" "}
           {animals?.filter((animal) => animal.company_id === company.id).length}
@@ -76,7 +74,7 @@ export function VetWorkCompany({
           animals={animals}
           companyId={company.id}
         />
-      </Container>
+      </PageDetailContentWrapper>
     </Container>
   );
 }

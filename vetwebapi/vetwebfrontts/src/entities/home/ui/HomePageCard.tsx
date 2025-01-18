@@ -10,7 +10,7 @@ export function HomePageCard({ item }: HomePageCardProps) {
     <Col>
       <Container className="mb-5 h-96">
         <a href={item.url}>
-          <Card className="vertical-card">
+          <Card className="flex bg-slate-200 flex-col p-3 mb-5 h-full w-full drop-shadow-md hover:scale-105 transition-transform duration-300 ease-in-out">
             <Container className="flex h-40 mb-1 justify-center items-center">
               <Card.Img
                 variant="top"

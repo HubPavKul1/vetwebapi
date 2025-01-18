@@ -2,7 +2,12 @@ import { Container } from "react-bootstrap";
 
 import { VetWorkCompany } from "entities/vetWork/ui/VetWorkCompany";
 
-import { convertDateString, diseasesString, PageTable } from "shared/index";
+import {
+  convertDateString,
+  diseasesString,
+  PageDetailContentWrapper,
+  PageTable,
+} from "shared/index";
 import { drugReceiptHeaders } from "shared/model/tableHeaders";
 import { PageDetail } from "widgets/PageDetail";
 import { ReceiptDrug } from "entities/drugMovements/ui/ReceiptDrug";
@@ -30,10 +35,10 @@ export function VetWorkDetail() {
 
   const imgSrc =
     data.work_type === WORKTYPES.vaccination
-      ? "/vetworkBg.jpg"
+      ? "/vaccination.png"
       : data.work_type === WORKTYPES.treatment
       ? "/treatment.jpg"
-      : "/diagnostic.jpg";
+      : "/diagnBg.png";
 
   let dosages = 0;
   data.animals &&
@@ -49,7 +54,7 @@ export function VetWorkDetail() {
         title={fullPageTitle ? fullPageTitle : ""}
       >
         <>
-          <Container className="text-center">
+          <Container>
             <div className="flex text-left text-lg text-indigo-700 font-bold ">
               <span className="mr-5">Всего голов: {data?.animals?.length}</span>
               <span>
@@ -58,27 +63,26 @@ export function VetWorkDetail() {
               </span>
             </div>
 
-            <h5 className="page-detail-title">Предприятия </h5>
-            {data.companies?.length &&
-              data.companies.map((company: ICompanyCard) => (
-                <VetWorkCompany
-                  key={company.id}
-                  company={company}
-                  animals={data.animals}
-                  workType={data.work_type.toLowerCase()}
-                  disease={disease}
-                />
-              ))}
+            <PageDetailContentWrapper title="Предприятия">
+              {data.companies?.length &&
+                data.companies.map((company: ICompanyCard) => (
+                  <VetWorkCompany
+                    key={company.id}
+                    company={company}
+                    animals={data.animals}
+                    workType={data.work_type.toLowerCase()}
+                    disease={disease}
+                  />
+                ))}
+            </PageDetailContentWrapper>
           </Container>
 
-          <Container className="text-center">
-            <h5 className="page-detail-title">Биопрепарат </h5>
-
+          <PageDetailContentWrapper title="Биопрепарат">
             <PageTable
               tableHeaders={drugReceiptHeaders}
               tableItems={data.drug && <ReceiptDrug drug={data.drug} />}
             />
-          </Container>
+          </PageDetailContentWrapper>
         </>
       </PageDetail>
     </>

@@ -14,6 +14,7 @@ import { DiagnosticMethodsSelect } from "./selectData/DiagnosticMethodsSelect";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 
 import {
+  ButtonSubmit,
   CustomButton,
   CustomInput,
   fieldRequiredMessage,
@@ -140,12 +141,8 @@ export function VetWorkCreateForm({ url, queryKey }: ICreateItemFormInterface) {
             </>
           )}
 
-          <div className="">
-            <CustomButton
-              className="btn-submit"
-              disabled={false}
-              title="Добавить"
-            />
+          <div>
+            <ButtonSubmit title="Добавить" />
           </div>
         </form>
       </FormProvider>

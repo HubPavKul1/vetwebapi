@@ -5,6 +5,7 @@ import { VaccinationBetweenDateRange } from "./VaccinationBetweenDateRange";
 
 import { HomeContentWrapper } from "entities/home";
 import useReportStore from "features/vetWork/stores/useReportStore";
+import { Container } from "react-bootstrap";
 
 export function VetWorkReportMainPage() {
   const dateRange = useReportStore((state) => state.dateRange);
@@ -15,8 +16,10 @@ export function VetWorkReportMainPage() {
     <>
       {!isReportActive ? (
         <HomeContentWrapper title="Отчеты по противоэпизоотической работе">
-          <DiagnosticBetweenDateRange />
-          <VaccinationBetweenDateRange />
+          <Container className="w-auto">
+            <DiagnosticBetweenDateRange />
+            <VaccinationBetweenDateRange />
+          </Container>
         </HomeContentWrapper>
       ) : dateRange && reportData.diagnostics ? (
         <DiagnosticReport />

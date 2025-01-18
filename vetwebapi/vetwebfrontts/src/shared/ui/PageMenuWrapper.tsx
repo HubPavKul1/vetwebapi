@@ -3,5 +3,9 @@ interface PageMenuWrapperProps {
 }
 
 export function PageMenuWrapper({ children }: PageMenuWrapperProps) {
-  return <div className="page-menu">{children}</div>;
+  return (
+    <div className="text-left px-8 py-4 mb-5 border rounded-lg shadow-md">
+      {children}
+    </div>
+  );
 }

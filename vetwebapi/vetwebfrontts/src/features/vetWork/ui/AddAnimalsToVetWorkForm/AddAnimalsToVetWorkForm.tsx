@@ -13,7 +13,7 @@ import { useGetDataById } from "shared/hooks/useGetDataById";
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import { companyDetailUrl } from "shared/urls/companyUrls";
 import { vetWorkAnimalsUrl } from "shared/urls/vetWorkUrls";
-import { CustomButton } from "shared/index";
+import { ButtonCreate } from "shared/index";
 import { ICompanyDetail } from "entities/company/model/companyInterfaces";
 import { IAnimal } from "entities/animal/model/animalInterfaces";
 import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
@@ -96,21 +96,17 @@ export function AddAnimalsToVetWorkForm({
   };
 
   return (
-    <Container className="mb-8 p-8">
-      <Container className="text-center sticky top-0 bg-white z-10">
+    <Container className="mb-8 p-8 text-indigo-900">
+      <Container className="text-center sticky top-0 z-10">
         <Row>
-          <Col md={2}>
-            <CustomButton
-              className="btn-upload mb-3"
-              title="Назад"
-              onClick={() => backButtonOnClick()}
-            />
+          <Col md={1}>
+            <ButtonCreate title="Назад" onClick={() => backButtonOnClick()} />
           </Col>
-          <Col md={10}></Col>
+          <Col md={11}></Col>
         </Row>
-        <h1 className="mb-8 text-3xl underline">Выберите животных для описи</h1>
+        <h1 className="mb-8 text-3xl uppercase">Выберите животных для описи</h1>
 
-        <Row className="text-left text-blue-800 font-bold bg-white">
+        <Row className="text-left text-blue-800 font-bold">
           <h5>Голов: {animalsData.length}</h5>
           <h5>Доз: {dosageCount.toFixed(4)}</h5>
         </Row>
@@ -142,7 +138,7 @@ export function AddAnimalsToVetWorkForm({
         ))}
       </Container>
       <Container className="w-96">
-        <CustomButton
+        <ButtonCreate
           className="btn-submit"
           disabled={false}
           title="Добавить выбранных животных"

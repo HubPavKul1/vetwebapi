@@ -11,6 +11,7 @@ import { DosageSelect } from "./selectData/DosageSelect";
 
 import { useCreateItem } from "shared/hooks/useCreateItem";
 import {
+  ButtonSubmit,
   CustomButton,
   CustomInput,
   fieldRequiredMessage,
@@ -88,7 +89,7 @@ export function CreateDrugForm({ url, queryKey }: ICreateItemFormInterface) {
           ))}
 
           <div className="">
-            <CustomButton
+            <ButtonSubmit
               className="btn-submit "
               disabled={false}
               title="Добавить"

@@ -21,7 +21,7 @@ export function CatalogDrugCard({ ...props }: CatalogDrugCardProps) {
       cardTitle={drug.name}
       invQueryName={invQueryName}
       delUrl={catalogDrugDetailUrl(drug.id)}
-      imgSrc={!drug.image ? "/drugsCard.jpg" : drugImageUrl(drug.drug_id)}
+      imgSrc={!drug.image ? "/vaccinesBg.png" : drugImageUrl(drug.drug_id)}
       topClassName="card-top"
       bodyClassName="card-body-md"
     >

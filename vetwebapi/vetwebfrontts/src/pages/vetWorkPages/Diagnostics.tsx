@@ -20,7 +20,7 @@ export function Diagnostics() {
   return (
     <VetWorks
       url={url}
-      imgSrc="/diagnostic.jpg"
+      imgSrc="/diagnosticBg.png"
       title="Диагностические исследования"
       btnTitle="Добавить диагностику"
       queryKey={queryKey}

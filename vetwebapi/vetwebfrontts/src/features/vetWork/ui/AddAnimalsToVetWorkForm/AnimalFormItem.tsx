@@ -74,7 +74,7 @@ export function AnimalFormItem({
         {workType === WORKTYPES.vaccination && (
           <Col md={2}>
             <input
-              className="border-2 w-24 text-center"
+              className="border-2 rounded-md w-24 text-center bg-slate-200"
               type="number"
               step="any"
               id="dosage"
@@ -87,7 +87,7 @@ export function AnimalFormItem({
         {workType === WORKTYPES.treatment && (
           <Col>
             <input
-              className="border-2 w-auto text-center"
+              className="border-2 rounded-md w-24 text-center bg-slate-200"
               type="number"
               step="any"
               id="dosage"
@@ -100,7 +100,7 @@ export function AnimalFormItem({
         {disease === DISEASES.tbc && (
           <Col>
             <input
-              className="border-2 w-28 text-center"
+              className="border-2 rounded-md w-24 text-center bg-slate-200"
               type="number"
               step="any"
               id="dosage"

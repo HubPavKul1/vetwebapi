@@ -6,6 +6,7 @@ import { useCreateItem } from "shared/hooks/useCreateItem";
 
 import { DrugSelect } from "./DrugSelect";
 import {
+  ButtonSubmit,
   CustomButton,
   CustomInput,
   fieldRequiredMessage,
@@ -115,11 +116,7 @@ export function CreateCatalogDrugForm({
           </div>
 
           <div className="">
-            <CustomButton
-              className="btn-submit"
-              disabled={false}
-              title="Добавить"
-            />
+            <ButtonSubmit title="Добавить" />
           </div>
         </form>
       </FormProvider>

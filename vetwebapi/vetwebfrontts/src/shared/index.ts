@@ -63,6 +63,7 @@ export { CatalogCardFooter } from "./ui/catalogCard/CatalogCardFooter";
 export { PageDetailBody } from "./ui/pageDetail/PageDetailBody";
 export { PageDetailTitle } from "./ui/pageDetail/PageDetailTitle";
 export { PageDetailTop } from "./ui/pageDetail/PageDetailTop";
+export { PageDetailContentWrapper } from "./ui/pageDetail/PageDetailContentWrapper";
 export { DropdownMessage } from "./ui/DropdownMessage";
 export { PDFWrapper } from "./ui/PDFWrapper";
 export { PageMenuButton } from "./ui/PageMenuButton";

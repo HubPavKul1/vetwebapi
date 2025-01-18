@@ -276,13 +276,6 @@ body {
 /* end carousel styles */
 
 /* card styles */
-.vertical-card {
-  @apply flex bg-slate-200 flex-col p-3 mb-5 h-full w-full drop-shadow-md hover:scale-105 transition-transform duration-300 ease-in-out;
-}
-
-.catalog-card {
-  @apply p-3 mb-5 bg-slate-200 border rounded-md shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out;
-}
 
 .card-section {
   @apply mb-1;
@@ -309,32 +302,6 @@ body {
 }
 
 /* end card style */
-
-/* menu style */
-.page-menu {
-  @apply text-left p-4 mb-5 border rounded-lg shadow-md;
-}
-
-.page-menu-top {
-  @apply flex flex-col items-center w-full;
-}
-
-.page-menu-top h2 {
-  @apply text-indigo-900 uppercase font-bold text-2xl mb-2;
-}
-
-.page-menu-top ul {
-  @apply p-0 flex flex-col;
-}
-
-.page-menu-buttons {
-  @apply flex flex-col p-1;
-}
-
-.page-menu-item {
-  @apply w-full list-none m-0 mb-4 px-10 py-2 rounded-lg shadow-md bg-slate-300 text-2xl text-indigo-900 hover:text-indigo-700 transition-colors;
-}
-/* end menu style */
 
 .page-detail-title {
   @apply text-center text-lg font-bold mb-8 text-indigo-900;

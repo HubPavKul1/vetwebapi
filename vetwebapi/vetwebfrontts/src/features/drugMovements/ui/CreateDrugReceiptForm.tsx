@@ -2,9 +2,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { FormInputProps } from "shared/model/FormInterface";
 
-
 import { useCreateItem } from "shared/hooks/useCreateItem";
-import { CustomButton, CustomInput, fieldRequiredMessage, ICreateItemFormInterface } from "shared/index";
+import {
+  ButtonSubmit,
+  CustomButton,
+  CustomInput,
+  fieldRequiredMessage,
+  ICreateItemFormInterface,
+} from "shared/index";
 import { IDrugMovementCreate } from "entities/drugMovements/model/drugMovementInterfaces";
 
 export function CreateDrugReceiptForm({
@@ -59,11 +64,7 @@ export function CreateDrugReceiptForm({
         />
       ))}
 
-      <CustomButton
-        className="btn-submit"
-        disabled={false}
-        title="Зарегистрировать"
-      />
+      <ButtonSubmit title="Зарегистрировать" />
     </form>
   );
 }

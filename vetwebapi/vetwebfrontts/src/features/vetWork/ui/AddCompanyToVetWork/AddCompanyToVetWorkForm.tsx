@@ -2,7 +2,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
-import { CustomButton } from "shared/index";
+import { ButtonSubmit, CustomButton } from "shared/index";
 import { ICompanyInVetWorkIn } from "entities/company/model/companyInterfaces";
 import { CompanySelect } from "../selectData/CompanySelect";
 
@@ -53,11 +53,7 @@ export function AddCompanyToVetWorkForm({
           </div>
 
           <div className="form-group">
-            <CustomButton
-              className="btn-submit"
-              disabled={false}
-              title="Добавить"
-            />
+            <ButtonSubmit title="Добавить" />
           </div>
         </form>
       </FormProvider>

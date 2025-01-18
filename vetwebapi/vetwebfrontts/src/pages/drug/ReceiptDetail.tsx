@@ -41,7 +41,7 @@ export function ReceiptDetail() {
       {!isReceiptPdf ? (
         <ReportPage
           reportTitle={`Поступление от ${date.shortDate}`}
-          imgSrc="/drugsBg.jpg"
+          imgSrc="/vaccinesBg.png"
           menu={<ReceiptPageMenu url={url} />}
           tableHeaders={drugReceiptHeaders}
           tableItems={

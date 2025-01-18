@@ -7,6 +7,7 @@ import {
   PageDetailBody,
   PageDetailTitle,
   PageWrapper,
+  SectionWrapper,
   useGetDataById,
 } from "shared/index";
 import { CatalogDrugReceipts, CatalogDrugSpent } from "widgets/catalogDrug";
@@ -26,7 +27,7 @@ export function DrugCatalogDetail() {
   );
   if (isLoading || !data) return <Loader />;
   return (
-    <PageWrapper>
+    <SectionWrapper>
       <PageDetailTitle title={`${data.name} (серия ${data.batch})`} />
       <PageDetailBody>
         <Row s={1} md={2}>
@@ -38,6 +39,6 @@ export function DrugCatalogDetail() {
           </Col>
         </Row>
       </PageDetailBody>
-    </PageWrapper>
+    </SectionWrapper>
   );
 }

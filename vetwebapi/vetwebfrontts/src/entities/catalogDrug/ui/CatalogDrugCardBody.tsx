@@ -35,7 +35,7 @@ export function CatalogDrugCardBody({ ...props }: CatalogDrugCardBodyProps) {
   );
 
   return (
-    <Container className="mb-2">
+    <Container className="mb-2  text-indigo-900">
       <Row>
         {diffDays > 0 && 60 > diffDays && (
           <TimeToOverdue expirationDate={expDate} />
