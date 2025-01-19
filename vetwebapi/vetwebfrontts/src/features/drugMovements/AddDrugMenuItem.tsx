@@ -12,7 +12,7 @@ export function AddDrugMenuItem({ ...props }: AddDrugMenuItemProps) {
   return (
     <MenuItem
       title="Добавить препарат"
-      icon={<GiMedicinePills color="blue" fontSize={30} />}
+      icon={<GiMedicinePills color="indigo" fontSize={30} />}
     >
       <AddDrugForm url={url} queryKey={queryKey} />
     </MenuItem>

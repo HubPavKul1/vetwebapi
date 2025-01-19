@@ -31,13 +31,13 @@ export function VetWorkDetail() {
       : data.work_type === WORKTYPES.treatment
       ? `Обработка против: ${data.diseases}`
       : `Диагностические исследования на: ${diseases}`;
-  const fullPageTitle = `${pageTitle} от ${date.shortDate} г. `;
+  const fullPageTitle = `${pageTitle} от ${date.shortDate} `;
 
   const imgSrc =
     data.work_type === WORKTYPES.vaccination
       ? "/vaccination.png"
       : data.work_type === WORKTYPES.treatment
-      ? "/treatment.jpg"
+      ? "/treatment.jpeg"
       : "/diagnBg.png";
 
   let dosages = 0;

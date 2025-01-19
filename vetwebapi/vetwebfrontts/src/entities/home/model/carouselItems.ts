@@ -7,6 +7,7 @@ import {
 } from "shared/urls/drugUrls";
 import {
   diagnosticsLink,
+  treatmentsLink,
   vaccinationsLink,
   vetWorkReportsLink,
 } from "shared/urls/vetWorkUrls";
@@ -104,6 +105,15 @@ export const carouselItems: ICarouselItem[] = [
 
   {
     id: 10,
+    imgSrc: "/treatment.jpeg",
+    imgAlt: "Treatment",
+    title: "Лечебно-профилактические обработки",
+    description: "Информация о проведенных лечебно-профилактических обработках",
+    url: treatmentsLink,
+  },
+
+  {
+    id: 11,
     imgSrc: "/vaccination.png",
     imgAlt: "VetWorkReports",
     title: "Отчеты по ветеринарным мероприятиям",

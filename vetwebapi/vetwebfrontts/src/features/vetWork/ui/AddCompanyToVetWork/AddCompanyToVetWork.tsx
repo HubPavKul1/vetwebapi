@@ -13,7 +13,7 @@ export function AddCompanyToVetWork() {
   return (
     <MenuItem
       title="Добавить предприятие"
-      icon={<BsBuildingAdd color="blue" fontSize={30} />}
+      icon={<BsBuildingAdd color="indigo" fontSize={30} />}
     >
       <AddCompanyToVetWorkForm
         url={vetWorkCompanyUrl(vetWorkId)}

@@ -40,9 +40,9 @@ export function ActPDFBody() {
         <ActVaccination data={data} animals={animals} diseases={diseases} />
       )}
       <Row>
-        <Col></Col>
+        {/* <Col></Col> */}
         <Col sm={7}>{data.is_state_assignment && <StateAssignment />}</Col>
-        <Col></Col>
+        {/* <Col></Col> */}
       </Row>
       <DrugSection data={data} />
       <Row>

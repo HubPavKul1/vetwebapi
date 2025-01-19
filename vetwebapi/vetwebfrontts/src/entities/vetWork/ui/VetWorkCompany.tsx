@@ -36,19 +36,19 @@ export function VetWorkCompany({
 
   return (
     <div key={company.id} className="mb-8 border-b-2 border-slate-400">
-      <Row className="p-0 title-base underline text-lg">
-        <Col sm={8} className="p-0">
-          <h5>
+      <Row className="p-0">
+        <Col sm={9}>
+          <h5 className=" text-indigo-900 uppercase underline text-lg font-bold hover:text-indigo-700 ">
             <Link to={companyLink(company.id)}>{company.full_name}</Link>
           </h5>
         </Col>
-        <Col>
+        <Col sm={2} className="flex justify-end">
           <ButtonCreate
             title="Добавить животных"
             onClick={() => addAnimals(company.id.toString())}
           />
         </Col>
-        <Col className="flex items-center">
+        <Col className="flex items-center justify-end">
           <DeleteItem
             queryKeyId={id}
             url={vetWorkCompanyDetailUrl(vetWorkId, company.id)}

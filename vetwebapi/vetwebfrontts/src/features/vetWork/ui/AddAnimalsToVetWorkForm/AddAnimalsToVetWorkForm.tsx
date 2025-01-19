@@ -102,10 +102,12 @@ export function AddAnimalsToVetWorkForm({
           <Col md={1}>
             <ButtonCreate title="Назад" onClick={() => backButtonOnClick()} />
           </Col>
-          <Col md={11}></Col>
+          <Col md={11}>
+            <h1 className="mb-8 text-3xl uppercase text-center">
+              Выберите животных для описи
+            </h1>
+          </Col>
         </Row>
-        <h1 className="mb-8 text-3xl uppercase">Выберите животных для описи</h1>
-
         <Row className="text-left text-blue-800 font-bold">
           <h5>Голов: {animalsData.length}</h5>
           <h5>Доз: {dosageCount.toFixed(4)}</h5>

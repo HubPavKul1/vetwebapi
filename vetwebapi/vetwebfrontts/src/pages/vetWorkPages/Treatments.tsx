@@ -20,7 +20,7 @@ export function Treatments() {
   return (
     <VetWorks
       url={url}
-      imgSrc="/treatment.jpg"
+      imgSrc="/treatment.jpeg"
       title="Обработки"
       btnTitle="Добавить обработку"
       queryKey={queryKey}
