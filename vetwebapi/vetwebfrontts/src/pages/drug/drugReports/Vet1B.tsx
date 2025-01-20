@@ -21,7 +21,7 @@ export function Vet1B() {
       {!isReportPDF ? (
         <ReportPage
           reportTitle={`Отчет 1-вет В за ${reportDate.quarter} квартал ${reportDate.year} г.`}
-          imgSrc="/drugsBg.jpg"
+          imgSrc="/vaccinesBg.png"
           menu={<ReportMenu />}
           tableHeaders={drugReportHeaders}
           tableItems={drugReport.map((drug) => (

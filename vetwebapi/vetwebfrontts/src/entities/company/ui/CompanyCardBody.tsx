@@ -22,7 +22,7 @@ export function CompanyCardBody({
 }: CompanyCardBodyProps) {
   return (
     <>
-      <Container className="text-base text-left">
+      <Container className="text-indigo-900 text-base text-left">
         <CardBodyAnimalGroup animal={animal} />
         <CardBodyAddress address={address} />
         <CardBodyEmployee employee={employee} />

@@ -26,8 +26,8 @@ export function PDFWrapper({
   };
 
   return (
-    <Container>
-      <div className="flex p-3">
+    <Container className="px-0">
+      <div className="flex py-3">
         <div className="w-auto mr-5">
           <ButtonCreate title="Открыть PDF" onClick={() => toPDF()} />
         </div>
@@ -36,7 +36,7 @@ export function PDFWrapper({
         </div>
       </div>
 
-      <Container className="py-3 px-20 overflow-auto" ref={targetRef}>
+      <Container className="py-3 px-0 overflow-auto" ref={targetRef}>
         {children}
       </Container>
     </Container>

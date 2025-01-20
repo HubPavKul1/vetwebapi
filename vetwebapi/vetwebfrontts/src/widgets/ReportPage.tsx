@@ -21,13 +21,8 @@ export function ReportPage({ ...props }: ReportPageMainProps) {
         alt={reportTitle}
         menu={menu}
       >
-        <Container>
-          <Container>
-            <PageTable
-              tableHeaders={tableHeaders}
-              tableItems={tableItems}
-            />
-          </Container>
+        <Container >
+          <PageTable tableHeaders={tableHeaders} tableItems={tableItems} />
         </Container>
       </PageDetail>
     </>

@@ -10,7 +10,7 @@ interface DrugReportPDFBodyProps {
 
 export function DrugReportPDFBody({ data }: DrugReportPDFBodyProps) {
   return (
-    <Container>
+    <Container className="px-0">
       <Table className="text-sm">
         <thead className="table-head">
           <tr>

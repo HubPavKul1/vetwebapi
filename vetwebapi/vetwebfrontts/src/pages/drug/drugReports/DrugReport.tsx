@@ -21,7 +21,7 @@ export function DrugReport() {
       {!isReportPDF ? (
         <ReportPage
           reportTitle={`Движение биопрепаратов за период с ${date1.shortDate} по ${date2.shortDate}`}
-          imgSrc="/drugsBg.jpg"
+          imgSrc="/vaccinesBg.png"
           menu={<ReportMenu />}
           tableHeaders={drugReportHeaders}
           tableItems={drugReport.map((drug) => (

@@ -22,7 +22,7 @@ export function VetWorkCard({ ...props }: VetWorkCardProps) {
       topClassName="card-top-small"
       bodyClassName="card-body-small"
     >
-      <div className="text-card">{diseases}</div>
+      <div className="m-0 mb-1 text-center text-xs text-indigo-900">{diseases}</div>
     </CatalogCard>
   );
 }

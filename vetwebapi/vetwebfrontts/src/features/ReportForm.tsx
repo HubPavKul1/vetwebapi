@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { AppService } from "shared/services/app.service";
 import {
+  ButtonSubmit,
   CustomButton,
   CustomInput,
   fieldRequiredMessage,
@@ -85,7 +86,7 @@ export function ReportForm({ url }: ReportFormProps) {
           }}
         />
       </div>
-      <CustomButton className="btn-submit" disabled={false} title="Выполнить" />
+      <ButtonSubmit title="Выполнить" />
     </form>
   );
 }

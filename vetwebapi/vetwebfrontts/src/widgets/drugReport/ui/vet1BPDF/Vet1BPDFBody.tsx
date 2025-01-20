@@ -11,7 +11,7 @@ export function Vet1BPDFBody({ data }: Vet1BPDFBodyProps) {
   const rowNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
-    <Container>
+    <Container className="p-0">
       <Table className="report-text">
         <thead className="table-head">
           <tr>

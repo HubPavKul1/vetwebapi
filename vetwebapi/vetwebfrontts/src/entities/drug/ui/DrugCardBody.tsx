@@ -13,7 +13,7 @@ export function DrugCardBody({
   const drugDiseases = diseasesString(diseases);
   return (
     <>
-      <Container className="text-left mb-1">
+      <Container className="text-indigo-900 text-left mb-1">
         <Row>
           <Col md={1}>
             <h6 className="">Производитель:</h6>
@@ -24,7 +24,7 @@ export function DrugCardBody({
           </Col>
         </Row>
       </Container>
-      <Container className="text-left mb-2">
+      <Container className="text-indigo-900 text-left mb-2">
         <Row>
           <Col md={1}>
             <h6 className="">Заболевания:</h6>
