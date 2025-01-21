@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import date
 
 
 class VetWorkReportSchema(BaseModel):
@@ -17,3 +18,16 @@ class DiagnosticReport(BaseModel):
 
 class VetWorkReport(BaseModel):
     vaccinations: list[VetWorkReportSchema]
+
+class CompanyVetWork(BaseModel):
+    company: str
+    company_id: int
+    vetwork_date: date | None = None
+    work_type: str | None = None
+    disease: str | None = None
+    animals_count: float | None = None
+
+class CompanyVetWorks(BaseModel):
+    vetworks: list[CompanyVetWork]
+
+    

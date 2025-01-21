@@ -15,6 +15,7 @@ from core.models import (
     VetWork,
     CompanyInVetWork,
     WorkType,
+    Company,
 )
 
 
@@ -142,11 +143,12 @@ async def get_company_vetworks_by_date_range(
 ) -> Result[Any]:
     query: Select[Any] = (
         select(
+            Company.short_name.label("company"),
             CompanyInVetWork.company_id.label("company_id"),
             VetWork.vetwork_date.label("vetwork_date"),
             WorkType.name.label("work_type"),
             Disease.name.label("disease"),
-            func.count(AnimalInVetWork.animal_id),
+            func.count(AnimalInVetWork.animal_id).label("animals_count"),
         )
         .filter(
             and_(
@@ -158,7 +160,9 @@ async def get_company_vetworks_by_date_range(
         .join(CompanyInVetWork, CompanyInVetWork.vetwork_id == VetWork.id)
         .join(DiseaseInVetWork, DiseaseInVetWork.vetwork_id == VetWork.id)
         .join(Disease, Disease.id == DiseaseInVetWork.disease_id)
+        .join(Company, Company.id == CompanyInVetWork.company_id)
         .group_by(
+            Company.short_name,
             CompanyInVetWork.company_id,
             VetWork.vetwork_date,
             WorkType.name,
@@ -166,4 +170,4 @@ async def get_company_vetworks_by_date_range(
         )
     )
 
-    return await session.execute(query)
+    return list(await session.execute(query))

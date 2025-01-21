@@ -14,8 +14,9 @@ from .schemas import (
     DiagnosticReportItemSchema,
     VetWorkReport,
     VetWorkReportSchema,
+    CompanyVetWorks
 )
-from .serializers import serialize_diagnostic, serialize_vetwork
+from .serializers import serialize_diagnostic, serialize_vetwork, serialize_company_vetworks, serialize_company_vetwork
 
 router = APIRouter(prefix="/reports")
 
@@ -62,24 +63,22 @@ async def get_vaccination_report(
         )
 
 
-@router.get("/vetworks", response_model=SuccessMessage)
+@router.get("/vetworks", response_model=CompanyVetWorks)
 async def get_company_vetworks_by_date_range(
     date_start: date,
     date_end: date,
     company_id: int,
     session: AsyncSession = Depends(db_manager.scope_session_dependency),
-) -> Union[VetWorkReport, dict]:
+) -> Union[CompanyVetWorks, dict]:
 
     body = DateRangeIn(date_start=date_start, date_end=date_end)
     try:
         report: Result[Any] = await crud.get_company_vetworks_by_date_range(
             session=session, body=body, company_id=company_id
         )
-        # report_schema: list[VetWorkReportSchema] = [
-        #     await serialize_vetwork(item=elem) for elem in report
-        # ]
-        print("REPORT>>>", report)
-        return SuccessMessage()
+       
+        report_schema = await serialize_company_vetworks(report)
+        return CompanyVetWorks(vetworks=report_schema)
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
