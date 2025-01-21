@@ -13,6 +13,8 @@ from core.models import (
     DiseaseInVetWork,
     Species,
     VetWork,
+    CompanyInVetWork,
+    WorkType,
 )
 
 
@@ -130,6 +132,38 @@ async def vaccination_treatment_report(
         )
         .join(animals, animals.c.vetwork_id == diseases.c.vetwork_id)
         .group_by(animals.c.animal_group, diseases.c.disease)
+    )
+
+    return await session.execute(query)
+
+
+async def get_company_vetworks_by_date_range(
+    session: AsyncSession, company_id: int, body: DateRangeIn
+) -> Result[Any]:
+    query: Select[Any] = (
+        select(
+            CompanyInVetWork.company_id.label("company_id"),
+            VetWork.vetwork_date.label("vetwork_date"),
+            WorkType.name.label("work_type"),
+            Disease.name.label("disease"),
+            func.count(AnimalInVetWork.animal_id),
+        )
+        .filter(
+            and_(
+                VetWork.vetwork_date.between(body.date_start, body.date_end),
+                CompanyInVetWork.company_id == company_id,
+            )
+        )
+        .join(WorkType, WorkType.id == VetWork.work_type_id)
+        .join(CompanyInVetWork, CompanyInVetWork.vetwork_id == VetWork.id)
+        .join(DiseaseInVetWork, DiseaseInVetWork.vetwork_id == VetWork.id)
+        .join(Disease, Disease.id == DiseaseInVetWork.disease_id)
+        .group_by(
+            CompanyInVetWork.company_id,
+            VetWork.vetwork_date,
+            WorkType.name,
+            Disease.name,
+        )
     )
 
     return await session.execute(query)
