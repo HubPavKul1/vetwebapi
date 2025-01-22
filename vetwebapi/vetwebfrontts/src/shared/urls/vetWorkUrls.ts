@@ -60,6 +60,7 @@ export const vetWorkDrugUrl = (vetWorkId?: number) => {
 // vetwork reports
 export const diagnosticsReportUrl = vetWorkBaseUrl + "/reports/diagnostics";
 export const vaccinationsReportUrl = vetWorkBaseUrl + "/reports/vaccinations";
+export const companyVetWorksUrl = vetWorkBaseUrl + "/reports/vetworks";
 
 // vetwork files
 export const vetWorkFileUploadUrl = (vetWorkId?: number) => {

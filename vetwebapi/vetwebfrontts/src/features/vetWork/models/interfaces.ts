@@ -22,3 +22,18 @@ export interface VetWorkData {
   isError: boolean;
   error: Error;
 }
+
+export interface ICompanyVetWorksIn {
+  company_id: number;
+  date_start: string;
+  date_end: string;
+}
+
+export interface ICompanyVetWorksReport {
+  company: string;
+  company_id: number;
+  vetwork_date: string;
+  work_type: string;
+  disease: string;
+  animals_count: number;
+}

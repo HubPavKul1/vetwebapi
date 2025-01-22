@@ -19,6 +19,7 @@ class DiagnosticReport(BaseModel):
 class VetWorkReport(BaseModel):
     vaccinations: list[VetWorkReportSchema]
 
+
 class CompanyVetWork(BaseModel):
     company: str
     company_id: int
@@ -27,7 +28,6 @@ class CompanyVetWork(BaseModel):
     disease: str | None = None
     animals_count: float | None = None
 
+
 class CompanyVetWorks(BaseModel):
     vetworks: list[CompanyVetWork]
-
-    

@@ -80,6 +80,14 @@ export const companyEmployeesHeaders = [
   "",
 ];
 
+export const companyVetWorksReportHeaders = [
+  "№ п/п",
+  "Дата",
+  "Вид ПЭМ",
+  "Заболевание",
+  "Количество голов",
+];
+
 export const animalInVetWorkHeaders = (workType: string, disease: string) => {
   let headers = [];
 

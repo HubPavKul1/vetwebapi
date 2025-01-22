@@ -91,7 +91,6 @@ async def serialize_company_in_vetwork(item: CompanyInVetWork) -> CompanyCard:
     employee_schema: EmployeeSchema | None = (
         await serialize_employee(employee=employees[0]) if employees else None
     )
-    
     return CompanyCard(
         full_name=item.company.full_name,
         short_name=item.company.short_name,
@@ -140,7 +139,7 @@ async def serialize_vetwork_detail(
     drug_schema: DrugInMovementSchema | None = (
         await serialize_drug_in_movement(drug) if drug else None
     )
-   
+
     return VetWorkDetail(
         **vetwork_schema.model_dump(),
         companies=company_schemas,
@@ -149,5 +148,3 @@ async def serialize_vetwork_detail(
         drug=drug_schema,
         file_id=file_id,
     )
-
-

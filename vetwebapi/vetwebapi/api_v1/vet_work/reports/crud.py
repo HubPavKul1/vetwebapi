@@ -161,6 +161,7 @@ async def get_company_vetworks_by_date_range(
         .join(DiseaseInVetWork, DiseaseInVetWork.vetwork_id == VetWork.id)
         .join(Disease, Disease.id == DiseaseInVetWork.disease_id)
         .join(Company, Company.id == CompanyInVetWork.company_id)
+        .join(AnimalInVetWork, AnimalInVetWork.vetwork_id == VetWork.id)
         .group_by(
             Company.short_name,
             CompanyInVetWork.company_id,
@@ -170,4 +171,4 @@ async def get_company_vetworks_by_date_range(
         )
     )
 
-    return list(await session.execute(query))
+    return await session.execute(query)

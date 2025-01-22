@@ -38,6 +38,17 @@ export const AppService = {
     });
   },
 
+  async createCompanyVetWorksReport(
+    url: string,
+    companyId?: number,
+    dateStart?: Date | string,
+    dateEnd?: Date | string
+  ) {
+    return await client.get(url, {
+      params: { company_id: companyId, date_start: dateStart, date_end: dateEnd },
+    });
+  },
+
   async deleteItem(url: string) {
     await client.delete(url);
   },

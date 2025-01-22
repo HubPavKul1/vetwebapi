@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query";
 import { AppService } from "shared/services/app.service";
 import {
   ButtonSubmit,
-  CustomButton,
   CustomInput,
   fieldRequiredMessage,
   IDateRange,
@@ -50,6 +49,7 @@ export function ReportForm({ url }: ReportFormProps) {
 
   const createDrugReport: SubmitHandler<IDateRange> = (dateRange) => {
     mutate(dateRange);
+    reset();
   };
 
   return (

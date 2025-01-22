@@ -8,7 +8,7 @@ import { IAnimalInVetWorkUpdate } from "entities/vetWork/model/vetWorkInterfaces
 
 import { vetWorkAnimalDetailUrl } from "shared/urls/vetWorkUrls";
 import { useUpdateItemPartial } from "shared/hooks/useUpdateItemPartial";
-import { CustomButton, CustomInput } from "shared/index";
+import { ButtonSubmit, CustomInput } from "shared/index";
 import { IAnimal } from "entities/animal/model/animalInterfaces";
 
 interface UpdateAnimalFormProps {
@@ -84,11 +84,7 @@ export function UpdateAnimalInVetWorkForm({
         ))}
 
         <div className="form-group">
-          <CustomButton
-            className="btn-submit"
-            disabled={false}
-            title="Отправить"
-          />
+          <ButtonSubmit title="Отправить" />
         </div>
       </form>
     </FormProvider>

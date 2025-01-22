@@ -20,7 +20,7 @@ export function DiagnosticReport() {
       {!isReportPDf ? (
         <ReportPage
           reportTitle={`Отчет по диагностическим исследованиям за ${date2.month} ${date2.year}`}
-          imgSrc="/diagnostic.jpg"
+          imgSrc="/diagnBg.png"
           menu={<ReportMenu />}
           tableHeaders={diagnosticHeaders}
           tableItems={diagnosticReport.map((item, index) => (

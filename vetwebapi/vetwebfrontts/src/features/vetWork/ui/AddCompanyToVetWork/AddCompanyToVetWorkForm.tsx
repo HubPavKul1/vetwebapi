@@ -2,7 +2,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 import { useParams } from "react-router-dom";
 import { useCreateItem } from "shared/hooks/useCreateItem";
-import { ButtonSubmit, CustomButton } from "shared/index";
+import { ButtonSubmit } from "shared/index";
 import { ICompanyInVetWorkIn } from "entities/company/model/companyInterfaces";
 import { CompanySelect } from "../selectData/CompanySelect";
 

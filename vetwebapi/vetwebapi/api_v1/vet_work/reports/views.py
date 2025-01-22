@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api_v1.schemas import DateRangeIn, SuccessMessage
+from api_v1.schemas import DateRangeIn
 from core.database import db_manager
 
 from . import crud
@@ -14,9 +14,13 @@ from .schemas import (
     DiagnosticReportItemSchema,
     VetWorkReport,
     VetWorkReportSchema,
-    CompanyVetWorks
+    CompanyVetWorks,
 )
-from .serializers import serialize_diagnostic, serialize_vetwork, serialize_company_vetworks, serialize_company_vetwork
+from .serializers import (
+    serialize_diagnostic,
+    serialize_vetwork,
+    serialize_company_vetworks,
+)
 
 router = APIRouter(prefix="/reports")
 
@@ -76,7 +80,7 @@ async def get_company_vetworks_by_date_range(
         report: Result[Any] = await crud.get_company_vetworks_by_date_range(
             session=session, body=body, company_id=company_id
         )
-       
+
         report_schema = await serialize_company_vetworks(report)
         return CompanyVetWorks(vetworks=report_schema)
     except Exception:

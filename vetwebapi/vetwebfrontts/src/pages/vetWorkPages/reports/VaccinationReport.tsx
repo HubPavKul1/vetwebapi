@@ -19,7 +19,7 @@ export function VaccinationReport() {
       {!isReportPDf ? (
         <ReportPage
           reportTitle={`Отчет по ветеринарно-профилактическим обработкам за ${date2.month} ${date2.year}`}
-          imgSrc="/vetworkBg.jpg"
+          imgSrc="/vaccination.png"
           menu={<ReportMenu />}
           tableHeaders={vaccinationHeaders}
           tableItems={vaccinationReport.map((item, index) => (
