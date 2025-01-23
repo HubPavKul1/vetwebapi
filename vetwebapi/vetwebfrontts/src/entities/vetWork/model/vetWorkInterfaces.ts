@@ -1,7 +1,7 @@
-import { IEmployee } from "entities/employee/model/employeeInterfaces";
-import { IBase } from "../../../shared/model/BaseInterfaces";
-import { ICompanyCard } from "../../company/model/companyInterfaces";
-import { IDrugInMovement } from "entities/drugMovements/model/drugMovementInterfaces";
+import { IBase } from "shared/index";
+import { ICompanyCard } from "entities/company";
+import { IDrugInMovement } from "entities/drugMovements";
+import { IEmployee } from "entities/employee";
 
 export interface IDiseases {
   diseases?: IBase[];

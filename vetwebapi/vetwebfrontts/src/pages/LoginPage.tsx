@@ -5,7 +5,7 @@ import { SectionWrapper } from "shared/index";
 export function LoginPage() {
   return (
     <SectionWrapper>
-      <Row className="mb-32"></Row>
+      <Row sm={1} md={2} className="mb-32"></Row>
       <Row sm={1} md={2}>
         <Col className="mb-5">
           <div>
@@ -13,7 +13,7 @@ export function LoginPage() {
           </div>
         </Col>
         <Col>
-          <Container className="w-80 pt-4">
+          <Container className="w-80 pt-7">
             <h1 className="page-title">Вход в систему</h1>
             <LoginForm />
           </Container>
