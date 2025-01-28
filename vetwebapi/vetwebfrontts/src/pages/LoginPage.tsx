@@ -5,8 +5,8 @@ import { SectionWrapper } from "shared/index";
 export function LoginPage() {
   return (
     <SectionWrapper>
-      <Row sm={1} md={2} className="mb-32"></Row>
-      <Row sm={1} md={2}>
+      <Row xs={1} sm={1} md={1} lg={2} className="mb-32"></Row>
+      <Row xs={1} sm={1} md={1} lg={2}>
         <Col className="mb-5">
           <div>
             <img src="/logo.png" alt="logo" className="w-full h-auto m-auto" />

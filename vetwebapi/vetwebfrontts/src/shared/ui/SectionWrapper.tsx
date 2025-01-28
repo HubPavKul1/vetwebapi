@@ -5,5 +5,7 @@ interface SectionWrapperProps {
 }
 
 export function SectionWrapper({ children }: SectionWrapperProps) {
-  return <Container className="w-full py-5 px-0">{children}</Container>;
+  return (
+    <Container className="w-full h-screen py-5 px-0">{children}</Container>
+  );
 }
