@@ -23,7 +23,7 @@ export function CarouselBox() {
       className="carousel"
     >
       {carouselItems.map((item) => (
-        <CarouselItem key={item.id} className="h-[650px]">
+        <CarouselItem key={item.id} className="w-full h-[650px]">
           <Link to={item.url}>
             <img src={item.imgSrc} alt={item.imgAlt} />
           </Link>
