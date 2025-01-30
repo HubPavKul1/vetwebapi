@@ -77,6 +77,14 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col sm={6} className="pdf-report-underlined"></Col>
       </Row>
       <Row>
+        <Col sm={4}></Col>
+        <Col></Col>
+        <Col></Col>
+        <Col sm={6} className="text-center text-xs">
+          (указать адрес электронной почты)
+        </Col>
+      </Row>
+      <Row>
         <Col sm={5}>Количество необходимых результатов исследований:</Col>
         <Col sm={7} className="pdf-report-underlined"></Col>
       </Row>
@@ -128,23 +136,27 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={5}>Представитель заказчика ознакомлен и согласен:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
         <Col></Col>
-        <Col md={2} className="pdf-report-underlined text-center">{companyDoctor}</Col>
+        <Col md={2} className="pdf-report-underlined text-center"></Col>
         <Col></Col>
-        <Col md={2} className="pdf-report-underlined"></Col>
+        <Col md={2} className="pdf-report-underlined">
+          {companyDoctor}
+        </Col>
       </Row>
       <Row className="text-center text-xs mb-2 ">
         <Col md={5}></Col>
+        <Col md={2}>(должность)</Col>
+        <Col></Col>
         <Col md={2}>(подпись)</Col>
         <Col></Col>
         <Col md={2}>(расшифровка подписи)</Col>
-        <Col></Col>
-        <Col md={2}>(дата)</Col>
       </Row>
       <Row>
         <Col md={5}>Подпись лица, сдавшего пробы, дата:</Col>
         <Col md={2} className="pdf-report-underlined"></Col>
         <Col></Col>
-        <Col md={2} className="pdf-report-underlined text-center">{doctor}</Col>
+        <Col md={2} className="pdf-report-underlined text-center">
+          {doctor}
+        </Col>
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>

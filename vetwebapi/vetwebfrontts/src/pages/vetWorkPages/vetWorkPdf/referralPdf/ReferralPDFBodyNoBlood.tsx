@@ -99,11 +99,17 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col sm={3}>Предположительный диагноз</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
+      <Row className="font-bold mb-3">
+        <Col sm={3}>Место отбора</Col>
+        <Col className="pdf-report-underlined">{companyAddress}</Col>
+      </Row>
       <Row>
         <Col className="font-bold">Дата, время отбора</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
-        <Col sm={2} className="font-bold">№ акта</Col>
+        <Col sm={2} className="font-bold">
+          № акта
+        </Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
       {data.is_state_assignment && <StateAssignment />}
@@ -111,7 +117,9 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="font-bold">Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
-        <Col sm={2} className="font-bold">вид упаковки</Col>
+        <Col sm={2} className="font-bold">
+          Вид упаковки
+        </Col>
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>
       <Row>

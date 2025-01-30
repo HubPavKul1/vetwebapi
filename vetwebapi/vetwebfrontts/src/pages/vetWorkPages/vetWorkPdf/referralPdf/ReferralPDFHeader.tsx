@@ -23,11 +23,10 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
   const companyName = data.companies[0] && data.companies[0].short_name;
   const clinic = data.clinic;
   const companyAddress =
-    data.companies[0].address &&
-    addressString(data.companies[0].address);
+    data.companies[0].address && addressString(data.companies[0].address);
 
   return (
-    <Container className="mb-2">
+    <Container className="mb-5">
       <Row className="mb-7">
         <Col sm={11}></Col>
         <Col>Ф-2{formNumber}</Col>
@@ -77,7 +76,7 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
         <Col></Col>
         <Col sm={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-sm text-center mb-2">
+      <Row className="text-sm text-center mb-10">
         <Col sm={2}>Регистрационный номер заявки</Col>
         <Col></Col>
         <Col sm={2}>Шифр образца</Col>

@@ -23,8 +23,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
   const doctor = `${data.doctors[0].position} ${data.clinic} ${data.doctors[0].fullname}`;
 
   const companyAddress =
-    data.companies[0]?.address &&
-    addressString(data.companies[0].address);
+    data.companies[0]?.address && addressString(data.companies[0].address);
 
   return (
     <Container>
@@ -59,6 +58,12 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
       </Row>
       <Row className="text-center text-xs">
         <Col sm={12}>(фактический / юридический адрес)</Col>
+      </Row>
+      <Row className="mb-3">
+        <Col sm={2}>Место отбора</Col>
+        <Col className="pdf-report-underlined">{companyAddress}</Col>
+        <Col sm={1}></Col>
+        <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row>
         <Col sm={1}>для</Col>
@@ -104,7 +109,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={3}>Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
         <Col></Col>
-        <Col>вид упаковки</Col>
+        <Col>Вид упаковки</Col>
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>
       <Row>
