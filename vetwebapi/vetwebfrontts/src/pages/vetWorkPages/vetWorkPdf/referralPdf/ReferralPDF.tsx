@@ -6,6 +6,7 @@ import { ReferralPDFHeader } from "./ReferralPDFHeader";
 import { useGetVetWorkData } from "features/vetWork";
 import useReferralStore from "features/vetWork/stores/useReferralStore";
 import { BIOMATERIAL } from "shared/constants/vetworkConst";
+import { Container } from "react-bootstrap";
 
 export function ReferralPDF() {
   const data = useGetVetWorkData();
@@ -14,14 +15,16 @@ export function ReferralPDF() {
 
   return (
     <PDFWrapper closePdf={referralClose} filename="referral.pdf">
-      <ReferralPDFHeader data={data} />
-      {data.biomaterial === (BIOMATERIAL.bloodSerum || BIOMATERIAL.blood) ? (
-        <ReferralPDFBody data={data} />
-      ) : (
-        <ReferralPDFBodyNoBlood data={data} />
-      )}
+      <Container className="pl-20 pr-5 py-5">
+        <ReferralPDFHeader data={data} />
+        {data.biomaterial === (BIOMATERIAL.bloodSerum || BIOMATERIAL.blood) ? (
+          <ReferralPDFBody data={data} />
+        ) : (
+          <ReferralPDFBodyNoBlood data={data} />
+        )}
 
-      <ReferralPDFFooter data={data} />
+        <ReferralPDFFooter data={data} />
+      </Container>
     </PDFWrapper>
   );
 }

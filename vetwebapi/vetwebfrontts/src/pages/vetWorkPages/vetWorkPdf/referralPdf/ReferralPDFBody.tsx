@@ -26,18 +26,22 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
     data.companies[0]?.address && addressString(data.companies[0].address);
 
   return (
-    <Container>
+    <Container className="text-lg mb-2">
       <Row className="text-center">
         <Col>Направляется</Col>
         <Col className="pdf-report-underlined">{data.animals.length}</Col>
-        <Col sm={5}>проб крови/сыворотки крови (ненужное зачеркнуть) от</Col>
-        <Col className="pdf-report-underlined">{animals}</Col>
+        <Col sm={6} className="text-lg">
+          проб крови/сыворотки крови (ненужное зачеркнуть) от
+        </Col>
+        <Col sm={3} className="pdf-report-underlined">
+          {animals}
+        </Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col></Col>
         <Col>(количество)</Col>
-        <Col sm={5}></Col>
-        <Col>(вид животных)</Col>
+        <Col sm={6}></Col>
+        <Col sm={3}>(вид животных)</Col>
       </Row>
       <Row>
         <Col sm={2}>принадлежащих</Col>
@@ -45,7 +49,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
           {data.companies[0].full_name}
         </Col>
       </Row>
-      <Row className="text-center text-xs mb-3">
+      <Row className="text-center text-sm mb-3">
         <Col sm={2}></Col>
         <Col sm={10}>
           (наименование хозяйства, предприятия, ФИО владельца животного)
@@ -56,7 +60,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
           {companyAddress}
         </Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col sm={12}>(фактический / юридический адрес)</Col>
       </Row>
       <Row className="mb-3">
@@ -75,17 +79,17 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         </Col>
         <Col className="pdf-report-underlined">{diseases}</Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col sm={1}></Col>
         <Col sm={4}>(вид исследований)</Col>
         <Col sm={2}></Col>
-        <Col>(наименование болезни)</Col>
+        <Col>(наименование заболевания)</Col>
       </Row>
       <Row>
         <Col sm={4}>Хозяйство, бригада, отара, гурт, табун</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col sm={3}></Col>
         <Col>(благополучное, неблагополучное)</Col>
       </Row>
@@ -93,30 +97,32 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={2}>Животное</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col sm={2}></Col>
         <Col>(вакцинировано, указать вакцину, дату вакцинации)</Col>
       </Row>
       <Row>
         <Col sm={3}>Дата, время взятия крови</Col>
-        <Col className="pdf-report-underlined">{date.shortDate}</Col>
-        <Col></Col>
-        <Col>№ акта</Col>
+        <Col sm={3} className="pdf-report-underlined">
+          {date.shortDate}
+        </Col>
+        <Col sm={1}>№ акта</Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
       {data.is_state_assignment && <StateAssignment />}
       <Row>
         <Col sm={3}>Дата, отправки материала</Col>
-        <Col className="pdf-report-underlined">{date.shortDate}</Col>
-        <Col></Col>
-        <Col>Вид упаковки</Col>
+        <Col sm={3} className="pdf-report-underlined">
+          {date.shortDate}
+        </Col>
+        <Col sm={2}>Вид упаковки</Col>
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>
       <Row>
         <Col sm={4}>Материал собран, упакован и отправлен</Col>
         <Col className="pdf-report-underlined">{doctor}</Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col sm={4}></Col>
         <Col>(должность, подпись, ФИО)</Col>
       </Row>

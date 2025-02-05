@@ -23,7 +23,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
     data.companies[0].address && addressString(data.companies[0].address);
 
   return (
-    <Container>
+    <Container className="text-lg mb-3">
       <Row className="font-bold">
         <Col md={3}>Направляется для исключения</Col>
         <Col className="pdf-report-underlined">{diseases}</Col>
@@ -82,32 +82,33 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="font-bold mb-4">
-        <Col sm={2}>Клиническая картина</Col>
+        <Col sm={3}>Клиническая картина</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="pdf-report-underlined mb-2">
         <Col></Col>
       </Row>
       <Row className="font-bold mb-4">
-        <Col sm={4}>Данные патологоанатомического вскрытия</Col>
+        <Col sm={5}>Данные патологоанатомического вскрытия</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row className="pdf-report-underlined mb-2">
         <Col></Col>
       </Row>
-      <Row className="font-bold mb-3">
+      {/* <Row className="font-bold mb-3">
         <Col sm={3}>Предположительный диагноз</Col>
         <Col className="pdf-report-underlined"></Col>
-      </Row>
+      </Row> */}
       <Row className="font-bold mb-3">
         <Col sm={3}>Место отбора</Col>
         <Col className="pdf-report-underlined">{companyAddress}</Col>
       </Row>
       <Row>
-        <Col className="font-bold">Дата, время отбора</Col>
+        <Col sm={3} className="font-bold">
+          Дата, время отбора
+        </Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
-        <Col></Col>
-        <Col sm={2} className="font-bold">
+        <Col sm={1} className="font-bold">
           № акта
         </Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
@@ -116,7 +117,6 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
       <Row>
         <Col className="font-bold">Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
-        <Col></Col>
         <Col sm={2} className="font-bold">
           Вид упаковки
         </Col>

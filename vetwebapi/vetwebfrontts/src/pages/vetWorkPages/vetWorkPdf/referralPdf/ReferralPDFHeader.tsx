@@ -37,14 +37,16 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
         </Col>
         <Col sm={6}>
           <Row>
-            <Col sm={2}>Заказчик</Col>
+            <Col sm={2} className="text-lg">
+              Заказчик
+            </Col>
             <Col sm={10} className="pdf-report-underlined">
               {data.is_state_assignment ? clinic : companyName}
             </Col>
           </Row>
           <Row className="mb-5 text-center text-xs">
             <Col sm={2}></Col>
-            <Col sm={10}>(наименование организации,</Col>
+            <Col sm={10}>(наименование организации или</Col>
           </Row>
           <Row>
             <Col sm={12} className="pdf-report-underlined"></Col>
@@ -68,13 +70,13 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
         </Col>
       </Row>
       <Row>
-        <Col sm={2} className="pdf-report-underlined"></Col>
+        <Col sm={2} className="pdf-report-underlined border-b-4"></Col>
         <Col></Col>
-        <Col sm={2} className="pdf-report-underlined"></Col>
+        <Col sm={2} className="pdf-report-underlined border-b-4"></Col>
         <Col></Col>
-        <Col sm={2} className="pdf-report-underlined"></Col>
+        <Col sm={2} className="pdf-report-underlined border-b-4"></Col>
         <Col></Col>
-        <Col sm={2} className="pdf-report-underlined"></Col>
+        <Col sm={2} className="pdf-report-underlined border-b-4"></Col>
       </Row>
       <Row className="text-sm text-center mb-10">
         <Col sm={2}>Регистрационный номер заявки</Col>

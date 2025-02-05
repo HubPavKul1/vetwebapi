@@ -14,8 +14,8 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
   const companyDoctor = data.companies[0]?.employee?.fullname;
 
   return (
-    <Container>
-      <Row>
+    <Container className="text-lg">
+      <Row className="font-bold">
         <Col sm={3}>Испытания провести согласно:</Col>
         <Col sm={2}>Области аккредитации</Col>
         <Col sm={1}>
@@ -56,7 +56,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
           <div className="w-10 h-10 border-2 border-black"></div>
         </Col>
       </Row>
-      <Row>
+      <Row className="font-bold mb-2">
         <Col sm={12}>
           Прошу оригинал / копию (ненужное зачеркнуть) результата исследования:
         </Col>
@@ -70,30 +70,32 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
       </Row>
       <Row>
         <Col sm={4}>Отправить по электронной почте:</Col>
-        <Col>
+        <Col sm={1}>
           <div className="w-12 h-7 border-2 border-black text-center"></div>
         </Col>
-        <Col></Col>
-        <Col sm={6} className="pdf-report-underlined"></Col>
+
+        <Col className="pdf-report-underlined">gosvetnadsor_ivgor@mail.ru</Col>
       </Row>
       <Row>
         <Col sm={4}></Col>
         <Col></Col>
-        <Col></Col>
-        <Col sm={6} className="text-center text-xs">
+
+        <Col sm={6} className="text-center text-sm">
           (указать адрес электронной почты)
         </Col>
       </Row>
       <Row>
-        <Col sm={5}>Количество необходимых результатов исследований:</Col>
-        <Col sm={7} className="pdf-report-underlined"></Col>
+        <Col sm={7}>
+          Количество необходимых экземпляров результатов исследований:
+        </Col>
+        <Col sm={5} className="pdf-report-underlined"></Col>
       </Row>
       <Row className="font-bold">
         <Col>Заказчик уведомлен и дает свое согласие на: </Col>
       </Row>
       <Row className="mb-3">
         <Col>
-          <p className="text-xs">
+          <p className="text-sm">
             Обработку персональных данных <br />
             Сроки проведения испытаний <br />
             Оплату всех расходов за проведение испытаний <br />
@@ -142,7 +144,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
           {companyDoctor}
         </Col>
       </Row>
-      <Row className="text-center text-xs mb-2 ">
+      <Row className="text-center text-sm mb-2 ">
         <Col md={5}></Col>
         <Col md={2}>(должность)</Col>
         <Col></Col>
@@ -160,7 +162,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-xs mb-2">
+      <Row className="text-center text-sm mb-2">
         <Col md={5}></Col>
         <Col md={2}>(подпись)</Col>
         <Col></Col>
@@ -176,7 +178,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-xs mb-3">
+      <Row className="text-center text-sm mb-3">
         <Col md={5}></Col>
         <Col md={2}>(подпись)</Col>
         <Col></Col>
@@ -194,22 +196,22 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={3}>Забраковано проб (кол-во):</Col>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="mb-2">
+      <Row className="mb-4">
         <Col className="font-bold">Причина браковки проб: </Col>
       </Row>
-      <Row className="mb-3">
+      <Row className="mb-5">
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row>
         <Col className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="mb-3">
+      <Row className="mb-5">
         <Col md={2} className="font-bold">
           Примечание:
         </Col>
         <Col md={10} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="mb-2">
+      <Row className="mb-5">
         <Col className="pdf-report-underlined"></Col>
       </Row>
       <Row>
@@ -221,7 +223,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col md={1}></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-xs mb-2">
+      <Row className="text-center text-sm mb-2">
         <Col md={3}></Col>
         <Col md={2}>(ФИО)</Col>
         <Col md={1}></Col>
@@ -235,7 +237,7 @@ export function ReferralPDFFooter({ data }: ReferralPDFFooterProps) {
         <Col></Col>
         <Col md={2} className="pdf-report-underlined"></Col>
       </Row>
-      <Row className="text-center text-xs">
+      <Row className="text-center text-sm">
         <Col md={5}></Col>
         <Col md={2}>(должность)</Col>
         <Col></Col>
