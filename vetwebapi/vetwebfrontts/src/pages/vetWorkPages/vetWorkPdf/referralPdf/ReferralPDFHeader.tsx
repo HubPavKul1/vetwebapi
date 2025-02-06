@@ -15,11 +15,15 @@ export function ReferralPDFHeader({ data }: ReferralPDFHeaderProps) {
   if (!data.animals) return <NoData title="Данные о животных" />;
 
   const title =
-    data.biomaterial === ("сыворотка крови" || "цельная кровь")
+    data.biomaterial === "сыворотка крови" ||
+    data.biomaterial === "цельная кровь"
       ? "К ПРОБАМ КРОВИ, СЫВОРОТКИ КРОВИ (ненужное зачеркнуть)"
       : "К ПАТОЛОГИЧЕСКОМУ(БИОЛОГИЧЕСКОМУ) МАТЕРИАЛУ";
   const formNumber =
-    data.biomaterial === ("сыворотка крови" || "цельная кровь") ? 1 : 0;
+    data.biomaterial === "сыворотка крови" ||
+    data.biomaterial === "цельная кровь"
+      ? 1
+      : 0;
   const companyName = data.companies[0] && data.companies[0].short_name;
   const clinic = data.clinic;
   const companyAddress =

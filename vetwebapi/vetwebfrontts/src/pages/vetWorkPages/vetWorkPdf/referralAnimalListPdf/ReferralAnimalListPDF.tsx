@@ -3,6 +3,7 @@ import { ReferralAnimalListPDFBody } from "./ReferralAnimalListPDFBody";
 import { ReferralAnimalListPDFHeader } from "./ReferralAnimalListPDFHeader";
 import { useGetVetWorkData } from "features/vetWork";
 import useReferralAnimalListStore from "features/vetWork/stores/useReferralAnimalListStore";
+import { Container } from "react-bootstrap";
 
 export function ReferralAnimalListPDF() {
   const data = useGetVetWorkData();
@@ -15,8 +16,10 @@ export function ReferralAnimalListPDF() {
       closePdf={referralAnimalListClose}
       filename="referralAnimalList.pdf"
     >
-      <ReferralAnimalListPDFHeader data={data} />
-      <ReferralAnimalListPDFBody data={data} />
+      <Container className="pl-20 pr-5 py-5">
+        <ReferralAnimalListPDFHeader data={data} />
+        <ReferralAnimalListPDFBody data={data} />
+      </Container>
     </PDFWrapper>
   );
 }

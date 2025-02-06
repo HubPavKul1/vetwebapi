@@ -8,17 +8,22 @@ interface ReferralAnimalItemProps {
 
 export function ReferralAnimalItem({ animal, index }: ReferralAnimalItemProps) {
   return (
-    <tr key={animal.animal_id}>
-      <td>{index + 1}</td>
-      <td>{animal.species}</td>
-      <td>
+    <tr key={animal.animal_id} className="text-lg">
+      <td className="border border-black text-center">{index + 1}</td>
+      <td className="border border-black text-center">{animal.species}</td>
+      <td className="border border-black text-center">
         {animal.identification !== "нет" && animal.identification + ", "}
         {animal.nickname}
       </td>
-      <td>{animal.gender}</td>
-      <td>{convertDateString(animal.date_of_birth).year}</td>
-      <td></td>
-      <td></td>
+      <td className="border border-black text-center">
+        {animal.gender}, {convertDateString(animal.date_of_birth).year}
+      </td>
+      <td className="border border-black text-center"></td>
+      <td className="border border-black text-center"></td>
+      <td className="border border-black text-center"></td>
+      <td className="border border-black text-center"></td>
+      <td className="border border-black text-center"></td>
+      <td className="border border-black text-center"></td>
     </tr>
   );
 }

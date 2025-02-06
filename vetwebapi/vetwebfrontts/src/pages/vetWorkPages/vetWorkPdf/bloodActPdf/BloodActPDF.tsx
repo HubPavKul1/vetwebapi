@@ -5,6 +5,7 @@ import { BloodActPDFHeader } from "./BloodActPDFHeader";
 import { BloodActPDFBody } from "./BloodActPDFBody";
 import { ActPDFFooter } from "../ActPDFFooter";
 import useBloodActStore from "features/vetWork/stores/useBloodActStore";
+import { Container } from "react-bootstrap";
 
 export function BloodActPDF() {
   const data = useGetVetWorkData();
@@ -13,9 +14,11 @@ export function BloodActPDF() {
 
   return (
     <PDFWrapper closePdf={actClose} filename="act.pdf">
-      <BloodActPDFHeader />
-      <BloodActPDFBody />
-      <ActPDFFooter />
+      <Container className="pl-20 pr-5 py-5">
+        <BloodActPDFHeader />
+        <BloodActPDFBody />
+        <ActPDFFooter />
+      </Container>
     </PDFWrapper>
   );
 }

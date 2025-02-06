@@ -4,6 +4,7 @@ import { useGetVetWorkData } from "features/vetWork";
 import { SamplingActPDFHeader } from "./SamplingActPDFHeader";
 import { SamplingActPDFBody } from "./SamplingActPDFBody";
 import { ActPDFFooter } from "../ActPDFFooter";
+import { Container } from "react-bootstrap";
 
 export function SamplingActPDF() {
   const data = useGetVetWorkData();
@@ -12,9 +13,11 @@ export function SamplingActPDF() {
 
   return (
     <PDFWrapper closePdf={actClose} filename="act.pdf">
-      <SamplingActPDFHeader />
-      <SamplingActPDFBody />
-      <ActPDFFooter />
+      <Container className="pl-20 pr-5 py-5">
+        <SamplingActPDFHeader />
+        <SamplingActPDFBody />
+        <ActPDFFooter />
+      </Container>
     </PDFWrapper>
   );
 }

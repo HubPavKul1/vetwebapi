@@ -40,13 +40,12 @@ export function ActPDFBody() {
         <ActVaccination data={data} animals={animals} diseases={diseases} />
       )}
       <Row>
-        {/* <Col></Col> */}
         <Col sm={7}>{data.is_state_assignment && <StateAssignment />}</Col>
-        {/* <Col></Col> */}
       </Row>
       <DrugSection data={data} />
       <Row>
         <Col sm={6}>Опись на обработанных прилагается.</Col>
       </Row>
-    </Container>)
+    </Container>
+  );
 }

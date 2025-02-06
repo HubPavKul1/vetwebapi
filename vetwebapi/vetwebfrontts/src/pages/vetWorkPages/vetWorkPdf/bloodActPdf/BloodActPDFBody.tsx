@@ -4,6 +4,7 @@ import { useGetVetWorkData } from "features/vetWork";
 import { Col, Container, Row } from "react-bootstrap";
 import { convertDateString } from "shared/helpers";
 import { ActPDFBodyTop } from "../ActPDFBodyTop";
+import { StateAssignment } from "shared/index";
 
 export function BloodActPDFBody() {
   const data = useGetVetWorkData();
@@ -19,15 +20,16 @@ export function BloodActPDFBody() {
   const companyAddress =
     data.companies[0]?.address && addressString(data.companies[0].address);
 
-  console.log(vetworkDate);
-
   return (
-    <Container className="mb-5">
+    <Container className="mb-5 relative">
       <ActPDFBodyTop />
+      <Row>{data.is_state_assignment && <StateAssignment />}</Row>
       <Row className="mb-3">
-        <Col sm={3}>провели отбор проб крови.</Col>
-        <Col sm={1}>по адресу: </Col>
-        <Col className="pdf-report-underlined p-1 italic">{companyAddress}</Col>
+        <Col sm={3}>провели отбор проб крови</Col>
+        <Col sm={2}>по адресу: </Col>
+        <Col sm={7} className="pdf-report-underlined p-1 italic">
+          {companyAddress}
+        </Col>
       </Row>
       <Row>
         <Col sm={2}>В количестве</Col>
@@ -62,7 +64,7 @@ export function BloodActPDFBody() {
         </Col>
       </Row>
       <Row className="mb-3">
-        <Col sm={4}>Для проведения лабораторных исследований на</Col>
+        <Col sm={5}>Для проведения лабораторных исследований на</Col>
         <Col className="pdf-report-underlined p-1 text-center italic">
           {disease}
         </Col>

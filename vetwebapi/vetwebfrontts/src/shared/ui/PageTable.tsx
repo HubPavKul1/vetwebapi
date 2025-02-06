@@ -8,7 +8,6 @@ interface PageTableProps {
 }
 
 export function PageTable({ ...props }: PageTableProps) {
-  
   return (
     <>
       <Table>
@@ -24,9 +23,7 @@ export function PageTable({ ...props }: PageTableProps) {
           </tr>
         </thead>
         <tbody
-          className={clsx(
-            props.isPDF ? "table-body-report" : "table-body"
-          )}
+          className={clsx(props.isPDF ? "table-body-report" : "table-body")}
         >
           {props.tableItems}
         </tbody>
