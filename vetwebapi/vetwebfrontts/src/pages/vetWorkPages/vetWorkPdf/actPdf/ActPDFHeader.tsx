@@ -19,7 +19,7 @@ export function ActPDFHeader() {
 
   return (
     <Container className="mb-5">
-      <Row className="mb-5">
+      <Row className="mb-10">
         <Col sm={6}></Col>
         <Col>
           <DrugReportTopText textNumber={disease !== "туберкулез" ? 6 : 5} />

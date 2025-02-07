@@ -31,6 +31,7 @@ export function ActPDFBody() {
 
   return (
     <Container className="mb-5">
+      {data.is_state_assignment && <StateAssignment />}
       <ActPDFBodyTop />
       {disease === "туберкулез" && animal === "лошади" ? (
         <ActTBCHorses data={data} vetworkDate={vetworkDate.shortDate} />
@@ -40,7 +41,7 @@ export function ActPDFBody() {
         <ActVaccination data={data} animals={animals} diseases={diseases} />
       )}
       <Row>
-        <Col sm={7}>{data.is_state_assignment && <StateAssignment />}</Col>
+        <Col sm={7}></Col>
       </Row>
       <DrugSection data={data} />
       <Row>

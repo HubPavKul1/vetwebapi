@@ -11,7 +11,7 @@ export function ActPDF() {
 
   return (
     <PDFWrapper closePdf={actClose} filename="act.pdf">
-      <Container className="pl-20 pr-5 py-5">
+      <Container className="pl-20 pr-5 py-5 font-serif text-lg">
         <ActPDFHeader />
         <ActPDFBody />
         <ActPDFFooter />

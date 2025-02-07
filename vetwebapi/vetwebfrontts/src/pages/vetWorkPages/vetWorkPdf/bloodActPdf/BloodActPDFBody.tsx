@@ -21,9 +21,9 @@ export function BloodActPDFBody() {
     data.companies[0]?.address && addressString(data.companies[0].address);
 
   return (
-    <Container className="mb-5 relative">
+    <Container className="mb-5">
+      {data.is_state_assignment && <StateAssignment />}
       <ActPDFBodyTop />
-      <Row>{data.is_state_assignment && <StateAssignment />}</Row>
       <Row className="mb-3">
         <Col sm={3}>провели отбор проб крови</Col>
         <Col sm={2}>по адресу: </Col>
@@ -84,7 +84,7 @@ export function BloodActPDFBody() {
         <Col className="pdf-report-underlined p-1 text-center italic"></Col>
       </Row>
       <Row>
-        <Col sm={3}>Дата и время отбора проб(образцов)</Col>
+        <Col sm={4}>Дата и время отбора проб(образцов)</Col>
         <Col className="pdf-report-underlined text-left italic">
           {vetworkDate.shortDate}
         </Col>

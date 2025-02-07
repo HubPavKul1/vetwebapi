@@ -10,12 +10,8 @@ export default function DrugSection({ data }: DrugSectionProps) {
   if (!data.drug) return;
   if (!data.animals) return;
 
-  const productionDate = convertDateString(
-    data.drug.production_date
-  ).shortDate;
-  const expirationDate = convertDateString(
-    data.drug.expiration_date
-  ).shortDate;
+  const productionDate = convertDateString(data.drug.production_date).shortDate;
+  const expirationDate = convertDateString(data.drug.expiration_date).shortDate;
 
   let dosage = 0;
   data.animals.map((animal) => (animal.dosage ? (dosage += animal.dosage) : 0));
@@ -50,7 +46,7 @@ export default function DrugSection({ data }: DrugSectionProps) {
         <Col></Col>
       </Row>
       <Row>
-        <Col>изготовитель</Col>
+        <Col sm={2}>изготовитель</Col>
         <Col sm={4} className="pdf-report-underlined mb-2 p-1 italic">
           {data.drug.drug_manufacturer}
         </Col>
@@ -77,7 +73,6 @@ export default function DrugSection({ data }: DrugSectionProps) {
           </Col>
         </Row>
       )}
-
       <Row className="text-sm text-center">
         <Col></Col>
         <Col sm={8}>(согласно инструкции по применению вакцины)</Col>

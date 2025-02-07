@@ -15,7 +15,7 @@ export function ReferralPDF() {
 
   return (
     <PDFWrapper closePdf={referralClose} filename="referral.pdf">
-      <Container className="pl-20 pr-5 py-5">
+      <Container className="pl-20 pr-5 py-5 font-serif text-lg">
         <ReferralPDFHeader data={data} />
         {data.biomaterial === (BIOMATERIAL.bloodSerum || BIOMATERIAL.blood) ? (
           <ReferralPDFBody data={data} />

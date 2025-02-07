@@ -27,6 +27,7 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
 
   return (
     <Container className="text-lg mb-2">
+      {data.is_state_assignment && <StateAssignment />}
       <Row className="text-center">
         <Col>Направляется</Col>
         <Col className="pdf-report-underlined">{data.animals.length}</Col>
@@ -109,7 +110,6 @@ export function ReferralPDFBody({ data }: ReferralPDFBodyProps) {
         <Col sm={1}>№ акта</Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
-      {data.is_state_assignment && <StateAssignment />}
       <Row>
         <Col sm={3}>Дата, отправки материала</Col>
         <Col sm={3} className="pdf-report-underlined">

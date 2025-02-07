@@ -4,6 +4,7 @@ import { useGetVetWorkData } from "features/vetWork";
 import { Col, Container, Row } from "react-bootstrap";
 import { convertDateString } from "shared/helpers";
 import { ActPDFBodyTop } from "../ActPDFBodyTop";
+import { StateAssignment } from "shared/index";
 
 export function SamplingActPDFBody() {
   const data = useGetVetWorkData();
@@ -22,11 +23,12 @@ export function SamplingActPDFBody() {
   console.log(vetworkDate);
 
   return (
-    <Container className="mb-5">
-      <ActPDFBodyTop/>
+    <Container className="mb-5 text-lg">
+      {data.is_state_assignment && <StateAssignment />}
+      <ActPDFBodyTop />
       <Row className="mb-3">
-        <Col sm={3}>провели отбор проб патматериала.</Col>
-        <Col sm={1}>по адресу: </Col>
+        <Col sm={4}>провели отбор проб патматериала.</Col>
+        <Col sm={2}>по адресу: </Col>
         <Col className="pdf-report-underlined p-1 italic">{companyAddress}</Col>
       </Row>
       <Row>
@@ -74,7 +76,7 @@ export function SamplingActPDFBody() {
         </Col>
       </Row>
       <Row>
-        <Col sm={3}>Дата и время отбора проб(образцов)</Col>
+        <Col sm={4}>Дата и время отбора проб(образцов)</Col>
         <Col className="pdf-report-underlined text-left italic">
           {vetworkDate.shortDate}
         </Col>

@@ -24,8 +24,9 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
 
   return (
     <Container className="text-lg mb-3">
+      {data.is_state_assignment && <StateAssignment />}
       <Row className="font-bold">
-        <Col md={3}>Направляется для исключения</Col>
+        <Col md={4}>Направляется для исключения</Col>
         <Col className="pdf-report-underlined">{diseases}</Col>
       </Row>
       <Row className="text-center text-sm mb-3">
@@ -74,7 +75,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col sm={12}>(фактический / юридический адрес)</Col>
       </Row>
       <Row className="font-bold mb-2">
-        <Col sm={3}>Дата заболевания животного</Col>
+        <Col sm={4}>Дата заболевания животного</Col>
         <Col sm={3} className="pdf-report-underlined"></Col>
         <Col sm={2} className="text-center">
           Дата падежа
@@ -113,7 +114,6 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         </Col>
         <Col className="pdf-report-underlined">{data.id}</Col>
       </Row>
-      {data.is_state_assignment && <StateAssignment />}
       <Row>
         <Col className="font-bold">Дата, отправки материала</Col>
         <Col className="pdf-report-underlined">{date.shortDate}</Col>
@@ -123,7 +123,7 @@ export function ReferralPDFBodyNoBlood({ data }: ReferralPDFBodyNoBloodProps) {
         <Col className="pdf-report-underlined">{data.biomaterial_package}</Col>
       </Row>
       <Row>
-        <Col sm={4} className="font-bold">
+        <Col sm={5} className="font-bold">
           Материал собран, упакован и отправлен
         </Col>
         <Col className="pdf-report-underlined">{doctor}</Col>

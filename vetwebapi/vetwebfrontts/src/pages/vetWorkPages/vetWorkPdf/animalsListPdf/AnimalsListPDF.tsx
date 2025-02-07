@@ -4,6 +4,7 @@ import { AnimalsListPDFFooter } from "./AnimalsListPDFFooter";
 import { AnimalsListPDFHeader } from "./AnimalsListPDFHeader";
 import { useGetVetWorkData } from "features/vetWork";
 import useAnimalListStore from "features/vetWork/stores/useAnimalListStore";
+import { Container } from "react-bootstrap";
 
 export function AnimalsListPDF() {
   const data = useGetVetWorkData();
@@ -12,9 +13,11 @@ export function AnimalsListPDF() {
 
   return (
     <PDFWrapper closePdf={animalListClose} filename="animalsList.pdf">
-      <AnimalsListPDFHeader data={data} />
-      <AnimalsListPDFBody data={data} />
-      <AnimalsListPDFFooter />
+      <Container className="pl-20 pr-5 py-5 font-serif text-lg">
+        <AnimalsListPDFHeader data={data} />
+        <AnimalsListPDFBody data={data} />
+        <AnimalsListPDFFooter />
+      </Container>
     </PDFWrapper>
   );
 }
