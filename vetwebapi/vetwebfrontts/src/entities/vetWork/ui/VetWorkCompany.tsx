@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 import { Link, useParams } from "react-router-dom";
 import { ButtonCreate, PageDetailContentWrapper } from "shared/index";
@@ -11,6 +11,7 @@ import { CompanyAddress } from "entities/address/ui/CompanyAddress";
 import { AnimalsInVetWork } from "./AnimalsInVetWork";
 import useVetWorkAnimalsStore from "features/vetWork/stores/useVetWorkAnimalsStore";
 import useVetWorkCompanyStore from "features/vetWork/stores/useVetWorkCompanyStore";
+import { AnimalGroups } from "shared/constants/companyConst";
 
 interface VetWorkCompanyProps {
   company: ICompanyCard;
@@ -33,6 +34,18 @@ export function VetWorkCompany({
     setAnimals();
     setCompanyId(company_id);
   };
+  const companyAnimals = animals?.filter(
+    (animal) => animal.company_id === company.id
+  );
+  const totalCompanyAnimals = companyAnimals?.length;
+
+  const dogsCount = companyAnimals?.filter(
+    (animal) => animal.animal_group === AnimalGroups.dogs
+  ).length;
+
+  const catsCount = companyAnimals?.filter(
+    (animal) => animal.animal_group === AnimalGroups.cats
+  ).length;
 
   return (
     <div key={company.id} className="mb-8 border-b-2 border-slate-400">
@@ -63,8 +76,11 @@ export function VetWorkCompany({
 
       <PageDetailContentWrapper title="Животные">
         <p className="text-indigo-700 text-left">
-          Всего голов хозяйства :{" "}
-          {animals?.filter((animal) => animal.company_id === company.id).length}
+          Всего голов хозяйства : {totalCompanyAnimals}{" "}
+          {dogsCount != undefined &&
+            dogsCount > 0 &&
+            ` из них собак: ${dogsCount}`}{" "}
+          {catsCount != undefined && catsCount > 0 && `; кошек: ${catsCount}`}{" "}
         </p>
         <AnimalsInVetWork
           workType={workType}

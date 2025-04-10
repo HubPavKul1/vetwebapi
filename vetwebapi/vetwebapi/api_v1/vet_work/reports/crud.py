@@ -1,7 +1,7 @@
 from operator import and_, or_
 from typing import Any
 
-from sqlalchemy import Integer, Result, Select, Subquery, func, select
+from sqlalchemy import Integer, Result, Select, Subquery, func, select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.schemas import DateRangeIn
@@ -169,6 +169,7 @@ async def get_company_vetworks_by_date_range(
             WorkType.name,
             Disease.name,
         )
+        .order_by(desc(VetWork.vetwork_date))
     )
 
     return await session.execute(query)

@@ -5,5 +5,9 @@ export const CompanyQueryKeys = {
   companyDetail: "company",
 };
 
+export const AnimalGroups = {
+  dogs: "Собаки",
+  cats: "Кошки",
+};
 
-export const PhysicalPersons = ["ИП", "гр", "гр."]
+export const PhysicalPersons = ["ИП", "гр", "гр."];
