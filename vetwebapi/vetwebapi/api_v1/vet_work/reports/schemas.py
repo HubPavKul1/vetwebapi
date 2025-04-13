@@ -24,6 +24,7 @@ class CompanyVetWork(BaseModel):
     company: str
     company_id: int
     vetwork_date: date | None = None
+    vetwork_id: int | None = None
     work_type: str | None = None
     disease: str | None = None
     animals_count: float | None = None

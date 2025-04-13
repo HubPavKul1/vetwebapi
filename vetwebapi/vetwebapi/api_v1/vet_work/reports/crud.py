@@ -146,6 +146,7 @@ async def get_company_vetworks_by_date_range(
             Company.short_name.label("company"),
             CompanyInVetWork.company_id.label("company_id"),
             VetWork.vetwork_date.label("vetwork_date"),
+            VetWork.id.label("vetwork_id"),
             WorkType.name.label("work_type"),
             Disease.name.label("disease"),
             func.count(AnimalInVetWork.animal_id).label("animals_count"),
@@ -166,6 +167,7 @@ async def get_company_vetworks_by_date_range(
             Company.short_name,
             CompanyInVetWork.company_id,
             VetWork.vetwork_date,
+            VetWork.id,
             WorkType.name,
             Disease.name,
         )

@@ -5,7 +5,6 @@ import { ErrorLoadDataMessage, Loader, useGetPageData } from "shared/index";
 import { CatalogPageWrapper } from "widgets/CatalogPageWrapper";
 import { VetWorkCard } from "./ui/VetWorkCard";
 import { VetWorkFilterButtons } from "features/vetWork/ui/VetWorkFilterButtons";
-import useVetWorkFilterStore from "features/vetWork/stores/useVetWorkFilterStore";
 
 interface VetWorksProps {
   url: string;

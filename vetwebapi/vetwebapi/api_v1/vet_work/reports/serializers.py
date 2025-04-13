@@ -25,9 +25,10 @@ async def serialize_company_vetwork(row: Row[Any]):
         company=row[0],
         company_id=row[1],
         vetwork_date=row[2],
-        work_type=row[3],
-        disease=row[4],
-        animals_count=row[5],
+        vetwork_id=row[3],
+        work_type=row[4],
+        disease=row[5],
+        animals_count=row[6],
     )
 
 

@@ -33,6 +33,7 @@ export interface ICompanyVetWorksReport {
   company: string;
   company_id: number;
   vetwork_date: string;
+  vetwork_id: number;
   work_type: string;
   disease: string;
   animals_count: number;
